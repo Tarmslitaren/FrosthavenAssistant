@@ -32,6 +32,22 @@ class AutoAddStandeeMenu extends StatefulWidget {
 }
 
 class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
+  static const int _kButtonRowSize = 4;
+  static const double _kButtonSize = 40.0;
+  static const double _kButtonSpacerHeight = 20.0;
+  static const double _kMenuWidth = 250.0;
+  static const double _kHeightBase = 140.0;
+  static const double _kHeightRow2 = 172.0;
+  static const double _kHeightRow3 = 211.0;
+  static const int _kCharIndexMin = 2;
+  static const int _kCharIndexMax = 4;
+  static const int _kBothTypesMultiplier = 2;
+  static const double _kShadowOffset = 1.0;
+  static const double _kShadowBlur = 1.0;
+  static const int _kKillHealth = -10000;
+  static const int _kStandeesRow2Threshold = _kButtonRowSize;
+  static const int _kStandeesRow3Threshold = _kButtonRowSize * 2;
+
   late final GameState _gameState;
   late final Settings _settings;
 
@@ -125,13 +141,13 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
     }
     String text = nr.toString();
     var shadow = Shadow(
-      offset: Offset(1 * scale, 1 * scale),
+      offset: Offset(_kShadowOffset * scale, _kShadowOffset * scale),
       color: Colors.black87,
-      blurRadius: 1,
+      blurRadius: _kShadowBlur,
     );
     return SizedBox(
-      width: 40 * scale,
-      height: 40 * scale,
+      width: _kButtonSize * scale,
+      height: _kButtonSize * scale,
       child: TextButton(
         child: Text(
           text,
@@ -178,7 +194,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                   !initialNormalAdded[currentMonsterIndex]
                       .contains(state.standeeNr)) {
                 _gameState.action(ChangeHealthCommand(
-                    -10000, figureId, monster.id,
+                    _kKillHealth, figureId, monster.id,
                     gameState: _gameState));
 
                 setState(() {
@@ -208,78 +224,31 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
 
   Widget _buildButtonGrid(double scale, Monster monster, bool elite,
       int nrOfStandees, int nrLeft, int nrOfElite, int nrOfNormal) {
-    String text;
-    if (elite) {
-      text = "Add $nrLeft Elite ${monster.type.display}";
-      if (nrLeft > 1) {
-        text = _pluralize(text);
-      }
-    } else {
-      text = "Add $nrLeft Normal ${monster.type.display}";
-      if (nrLeft > 1) {
-        text = _pluralize(text);
-      }
+    String text = elite
+        ? "Add $nrLeft Elite ${monster.type.display}"
+        : "Add $nrLeft Normal ${monster.type.display}";
+    if (nrLeft > 1) {
+      text = _pluralize(text);
     }
+
+    final rows = <Widget>[];
+    for (int start = 1; start <= nrOfStandees; start += _kButtonRowSize) {
+      final end = (start + _kButtonRowSize - 1).clamp(1, nrOfStandees);
+      rows.add(Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: List.generate(
+          end - start + 1,
+          (i) => buildNrButton(start + i, scale, monster, elite, nrOfElite, nrOfNormal),
+        ),
+      ));
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SizedBox(
-          height: 20 * scale,
-        ),
+        SizedBox(height: _kButtonSpacerHeight * scale),
         Text(text, style: getTitleTextStyle(scale)),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            buildNrButton(1, scale, monster, elite, nrOfElite, nrOfNormal),
-            nrOfStandees > 1
-                ? buildNrButton(2, scale, monster, elite, nrOfElite, nrOfNormal)
-                : Container(),
-            nrOfStandees > 2
-                ? buildNrButton(3, scale, monster, elite, nrOfElite, nrOfNormal)
-                : Container(),
-            nrOfStandees > 3
-                ? buildNrButton(4, scale, monster, elite, nrOfElite, nrOfNormal)
-                : Container(),
-          ],
-        ),
-        nrOfStandees > 4
-            ? Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  nrOfStandees > 4
-                      ? buildNrButton(
-                          5, scale, monster, elite, nrOfElite, nrOfNormal)
-                      : Container(),
-                  nrOfStandees > 5
-                      ? buildNrButton(
-                          6, scale, monster, elite, nrOfElite, nrOfNormal)
-                      : Container(),
-                  nrOfStandees > 6
-                      ? buildNrButton(
-                          7, scale, monster, elite, nrOfElite, nrOfNormal)
-                      : Container(),
-                  nrOfStandees > 7
-                      ? buildNrButton(
-                          8, scale, monster, elite, nrOfElite, nrOfNormal)
-                      : Container(),
-                ],
-              )
-            : Container(),
-        nrOfStandees > 8
-            ? Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  nrOfStandees > 8
-                      ? buildNrButton(
-                          9, scale, monster, elite, nrOfElite, nrOfNormal)
-                      : Container(),
-                  nrOfStandees > 9
-                      ? buildNrButton(
-                          10, scale, monster, elite, nrOfElite, nrOfNormal)
-                      : Container(),
-                ],
-              )
-            : Container(),
+        ...rows,
       ],
     );
   }
@@ -287,7 +256,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
   @override
   Widget build(BuildContext context) {
     int characterIndex =
-        GameMethods.getCurrentCharacterAmount().clamp(2, 4) - 2;
+        GameMethods.getCurrentCharacterAmount().clamp(_kCharIndexMin, _kCharIndexMax) - _kCharIndexMin;
 
     return ValueListenableBuilder<int>(
         valueListenable: _gameState.commandIndex,
@@ -377,20 +346,19 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
           }
 
           double scale = getModalMenuScale(context);
-          //4 nrs per row
-          double height = 140;
-          if (nrOfStandees > 4) {
-            height = 172;
+          double height = _kHeightBase;
+          if (nrOfStandees > _kStandeesRow2Threshold) {
+            height = _kHeightRow2;
           }
-          if (nrOfStandees > 8) {
-            height = 211;
+          if (nrOfStandees > _kStandeesRow3Threshold) {
+            height = _kHeightRow3;
           }
           if (nrOfElite > 0 && nrOfNormal > 0) {
-            height *= 2;
+            height *= _kBothTypesMultiplier;
           }
 
           return ModalBackground(
-              width: 250 * scale,
+              width: _kMenuWidth * scale,
               //need to set any width to center content, overridden by dialog default min width.
               height: height * scale,
               child: ValueListenableBuilder<int>(
