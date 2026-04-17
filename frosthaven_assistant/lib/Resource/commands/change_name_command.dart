@@ -11,8 +11,9 @@ class ChangeNameCommand extends Command {
 
   @override
   void execute() {
-    Character? character = _gameState.currentList
-        .firstWhereOrNull((element) => element.id == characterId) as Character?;
+    final match = _gameState.currentList
+        .firstWhereOrNull((element) => element.id == characterId);
+    final Character? character = match is Character ? match : null;
     if (character != null) {
       character.characterState.setDisplay(stateAccess, name);
     }
