@@ -34,6 +34,19 @@ class AddSummonMenu extends StatefulWidget {
 }
 
 class AddSummonMenuState extends State<AddSummonMenu> {
+  static const int _kCustomSummonCount = 4;
+  static const double _kButtonSize = 42.0;
+  static const double _kButtonBorderRadius = 30.0;
+  static const double _kMenuWidth = 336.0;
+  static const double _kMenuHeight = 452.0;
+  static const double _kTopSpacing = 20.0;
+  static const double _kIconSize = 30.0;
+  static const double _kShadowOffset = 1.0;
+  static const double _kShadowBlur = 1.0;
+  static const int _kNrButtonRowSize = 4;
+  static const int _kMinStandeesForNr = 2;
+  static const int _kDefaultHealth = 2;
+
   late final GameState _gameState;
   late final GameData _gameData;
   late final Settings _settings;
@@ -71,7 +84,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
 
     if (!_settings.showCustomContent.value) {
       //-4 because there are 4 custom summons. I know.
-      _summonList.removeRange(_summonList.length - 4, _summonList.length);
+      _summonList.removeRange(_summonList.length - _kCustomSummonCount, _summonList.length);
     }
   }
 
@@ -83,14 +96,14 @@ class AddSummonMenuState extends State<AddSummonMenu> {
       color = _settings.darkMode.value ? Colors.white : Colors.black;
     }
     return SizedBox(
-      width: 42 * scale,
-      height: 42 * scale,
+      width: _kButtonSize * scale,
+      height: _kButtonSize * scale,
       child: Container(
           decoration: BoxDecoration(
               border: Border.all(
                 color: color,
               ),
-              borderRadius: BorderRadius.all(Radius.circular(30 * scale))),
+              borderRadius: BorderRadius.all(Radius.circular(_kButtonBorderRadius * scale))),
           child: IconButton(
             onPressed: () {
               if (!isCurrentlySelected) {
@@ -114,14 +127,14 @@ class AddSummonMenuState extends State<AddSummonMenu> {
     String text = nr.toString();
     bool darkMode = _settings.darkMode.value;
     return SizedBox(
-      width: 42 * scale,
-      height: 42 * scale,
+      width: _kButtonSize * scale,
+      height: _kButtonSize * scale,
       child: Container(
           decoration: BoxDecoration(
               border: Border.all(
                 color: color,
               ),
-              borderRadius: const BorderRadius.all(Radius.circular(30))),
+              borderRadius: BorderRadius.all(Radius.circular(_kButtonBorderRadius))),
           child: TextButton(
             child: Text(
               text,
@@ -148,11 +161,11 @@ class AddSummonMenuState extends State<AddSummonMenu> {
   Widget build(BuildContext context) {
     double scale = getModalMenuScale(context);
     return ModalBackground(
-      width: 336 * scale,
-      height: 452 * scale,
+      width: _kMenuWidth * scale,
+      height: _kMenuHeight * scale,
       child: Column(children: [
         SizedBox(
-          height: 20 * scale,
+          height: _kTopSpacing * scale,
         ),
         Text("Add Summon", style: getTitleTextStyle(scale)),
         Row(
@@ -175,21 +188,11 @@ class AddSummonMenuState extends State<AddSummonMenu> {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            buildNrButton(1, scale),
-            buildNrButton(2, scale),
-            buildNrButton(3, scale),
-            buildNrButton(4, scale),
-          ],
+          children: List.generate(_kNrButtonRowSize, (i) => buildNrButton(i + 1, scale)),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            buildNrButton(5, scale),
-            buildNrButton(6, scale),
-            buildNrButton(7, scale),
-            buildNrButton(8, scale),
-          ],
+          children: List.generate(_kNrButtonRowSize, (i) => buildNrButton(_kNrButtonRowSize + i + 1, scale)),
         ),
         Expanded(
             child: Scrollbar(
@@ -203,7 +206,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                       bool showNr = true;
                       if (model.gfx.isNotEmpty) {
                         gfx = model.gfx;
-                        if (model.standees < 2) {
+                        if (model.standees < _kMinStandeesForNr) {
                           showNr = false;
                         }
                       }
@@ -212,8 +215,8 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                           leading:
                               Stack(alignment: Alignment.center, children: [
                             Image(
-                              height: 30 * scale,
-                              width: 30 * scale,
+                              height: _kIconSize * scale,
+                              width: _kIconSize * scale,
                               image:
                                   AssetImage("assets/images/summon/$gfx.png"),
                             ),
@@ -224,9 +227,9 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                                       color: Colors.white,
                                       shadows: [
                                         Shadow(
-                                          offset: Offset(1 * scale, 1 * scale),
+                                          offset: Offset(_kShadowOffset * scale, _kShadowOffset * scale),
                                           color: Colors.black87,
-                                          blurRadius: 1 * scale,
+                                          blurRadius: _kShadowBlur * scale,
                                         )
                                       ])),
                           ]),
@@ -239,7 +242,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                               if (model.gfx.isNotEmpty) {
                                 gfx = model.gfx;
                               }
-                              if (model.standees < 2 && model.gfx.isNotEmpty) {
+                              if (model.standees < _kMinStandeesForNr && model.gfx.isNotEmpty) {
                                 chosenNr =
                                     0; //don't show on monster box unless standees are numbered
                               }
@@ -248,7 +251,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                                   model.name,
                                   StatCalculator.calculateFormula(
                                           model.health) ??
-                                      2,
+                                      _kDefaultHealth,
                                   model.move,
                                   model.attack,
                                   model.range,
@@ -273,7 +276,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                           });
                     }))),
         SizedBox(
-          height: 20 * scale,
+          height: _kTopSpacing * scale,
         ),
       ]),
     );
