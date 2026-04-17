@@ -8,29 +8,48 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 import '../Resource/state/game_state.dart';
 
 class LootCardWidget extends StatelessWidget {
+  static const double _kCardWidth = 39.0;
+  static const double _kCardHeight = 58.6666;
+  static const double _kBorderRadius = 4.0;
+  static const double _kShadowBlur = 4.0;
+  static const double _kShadowOffsetX = 2.0;
+  static const double _kShadowOffsetY = 4.0;
+  static const double _kShadowTextOffsetX = 0.6;
+  static const double _kShadowTextOffsetY = 0.6;
+  static const double _kShadowTextBlur = 1.0;
+  static const double _kValueFontSize = 30.0;
+  static const double _kSpecialTextFontSize = 25.0;
+  static const double _kEnhancedFontSize = 9.0;
+  static const double _kEnhancedBottom = 5.0;
+  static const int _kAnimationSpeedMs = 350;
+  static const double _kOwnerIconSize = 15.0;
+  static const double _kOwnerIconTop = 2.0;
+  static const double _kOwnerIconRight = 2.0;
+  static const double _kHalfPi = pi / 2;
+
   LootCardWidget({super.key, required this.card, required bool revealed}) {
     this.revealed.value = revealed;
   }
 
-  static Widget buildFront(LootCard card, double scale, bool hasAnimations,
+  static Widget buildFront(LootCard card, double scale, bool _,
       {Settings? settings}) {
     settings = settings ?? getIt<Settings>();
     var shadow = Shadow(
-      offset: Offset(0.6 * scale, 0.6 * scale),
+      offset: Offset(_kShadowTextOffsetX * scale, _kShadowTextOffsetY * scale),
       color: Colors.black87,
-      blurRadius: 1 * scale,
+      blurRadius: _kShadowTextBlur * scale,
     );
     int? value = card.getValue();
 
     return Container(
-        width: 39 * scale,
-        height: 58.6666 * scale,
+        width: _kCardWidth * scale,
+        height: _kCardHeight * scale,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
               color: Colors.black45,
-              blurRadius: 4 * scale,
-              offset: Offset(2 * scale, 4 * scale), // Shadow position
+              blurRadius: _kShadowBlur * scale,
+              offset: Offset(_kShadowOffsetX * scale, _kShadowOffsetY * scale), // Shadow position
             ),
           ],
         ),
@@ -43,7 +62,7 @@ class LootCardWidget extends StatelessWidget {
                 RepaintBoundary(
                     child: ClipRRect(
                   clipBehavior: Clip.hardEdge,
-                  borderRadius: BorderRadius.all(Radius.circular(4.0 * scale)),
+                  borderRadius: BorderRadius.all(Radius.circular(_kBorderRadius * scale)),
                   child: Image(
                     filterQuality: FilterQuality.medium,
                     fit: BoxFit.cover,
@@ -55,7 +74,7 @@ class LootCardWidget extends StatelessWidget {
                     "+$value",
                     style: TextStyle(
                       shadows: [shadow],
-                      fontSize: 30 * scale,
+                      fontSize: _kValueFontSize * scale,
                       color: Colors.white,
                     ),
                   ),
@@ -64,7 +83,7 @@ class LootCardWidget extends StatelessWidget {
                     "1418",
                     style: TextStyle(
                       shadows: [shadow],
-                      fontSize: 25 * scale,
+                      fontSize: _kSpecialTextFontSize * scale,
                       color: Colors.white,
                     ),
                   ),
@@ -73,13 +92,13 @@ class LootCardWidget extends StatelessWidget {
                     "1419",
                     style: TextStyle(
                       shadows: [shadow],
-                      fontSize: 25 * scale,
+                      fontSize: _kSpecialTextFontSize * scale,
                       color: Colors.white,
                     ),
                   ),
                 if (card.enhanced > 0)
                   Positioned(
-                    bottom: 5 * scale,
+                    bottom: _kEnhancedBottom * scale,
                     child: settings.shimmer.value
                         ? RepaintBoundary(
                             child: AnimatedTextKit(
@@ -87,9 +106,9 @@ class LootCardWidget extends StatelessWidget {
                             animatedTexts: [
                               ColorizeAnimatedText(
                                 "Enhanced: ${card.enhanced.toString()}",
-                                speed: const Duration(milliseconds: 350),
+                                speed: const Duration(milliseconds: _kAnimationSpeedMs),
                                 textStyle: TextStyle(
-                                  fontSize: 9 * scale,
+                                  fontSize: _kEnhancedFontSize * scale,
                                 ),
                                 colors: [
                                   Colors.white,
@@ -107,15 +126,15 @@ class LootCardWidget extends StatelessWidget {
                         : Text("Enhanced: ${card.enhanced.toString()}",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 9 * scale,
+                              fontSize: _kEnhancedFontSize * scale,
                             )),
                   ),
                 if (card.owner != "")
                   Positioned(
-                    height: 15 * scale,
-                    width: 15 * scale,
-                    top: 2 * scale,
-                    right: 2 * scale,
+                    height: _kOwnerIconSize * scale,
+                    width: _kOwnerIconSize * scale,
+                    top: _kOwnerIconTop * scale,
+                    right: _kOwnerIconRight * scale,
                     child: Image(
                         fit: BoxFit.scaleDown,
                         color: Colors.black,
@@ -129,19 +148,19 @@ class LootCardWidget extends StatelessWidget {
   static Widget buildRear(double scale) {
     return RepaintBoundary(
         child: Container(
-      width: 39 * scale,
-      height: 58.6666 * scale,
+      width: _kCardWidth * scale,
+      height: _kCardHeight * scale,
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
             color: Colors.black45,
-            blurRadius: 4 * scale,
-            offset: Offset(2 * scale, 4 * scale), // Shadow position
+            blurRadius: _kShadowBlur * scale,
+            offset: Offset(_kShadowOffsetX * scale, _kShadowOffsetY * scale), // Shadow position
           ),
         ],
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(4.0 * scale)),
+        borderRadius: BorderRadius.all(Radius.circular(_kBorderRadius * scale)),
         child: Image(
           fit: BoxFit.fitHeight,
           image: AssetImage("assets/images/loot/back.png"),
@@ -159,7 +178,7 @@ class LootCardWidget extends StatelessWidget {
         animation: rotateAnim,
         child: widget,
         builder: (context, widget) {
-          final value = min(rotateAnim.value, pi / 2);
+          final value = min(rotateAnim.value, _kHalfPi);
           return Transform(
             transform: Matrix4.rotationX(value),
             alignment: Alignment.center,

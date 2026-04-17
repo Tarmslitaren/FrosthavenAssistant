@@ -13,6 +13,72 @@ import 'menus/stat_card_zoom.dart';
 import 'view_models/monster_stat_card_view_model.dart';
 
 class MonsterStatCardWidget extends StatelessWidget {
+  // Card dimensions
+  static const double _kCardWidth = 167.0;
+  static const double _kCardHeight = 93.5;
+  static const double _kBorderRadius = 8.0;
+  static const double _kShadowBlur = 4.0;
+  static const double _kShadowOffsetX = 2.0;
+  static const double _kShadowOffsetY = 4.0;
+  static const double _kShadowTextOffset = 0.4;
+  static const double _kShadowTextBlur = 1.0;
+  static const double _kMargin = 1.6;
+  // Normal layout positions
+  static const double _kTitleTop = 3.5;
+  static const double _kTitleLeft = 2.0;
+  static const double _kTitleFontSize = 11.0;
+  static const double _kLevelLeft = 3.2;
+  static const double _kLevelTop = 3.2;
+  static const double _kLevelFontSize = 14.4;
+  static const double _kStatsFontSize = 12.8;
+  static const double _kStatsLineHeight = 1.2;
+  static const double _kNormalStatsLeft = 64.0;
+  static const double _kNormalStatsTop = 20.8;
+  static const double _kNormalAttribTop = 19.2;
+  static const double _kNormalAttribWidth = 58.4;
+  static const double _kEliteStatsRight = 61.6;
+  static const double _kEliteAttribWidth = 57.6;
+  static const double _kStatIconHeight = 16.0;
+  static const double _kStatIconLeft = 74.8;
+  static const double _kStatIconTopMove = 35.6;
+  static const double _kStatIconTopRange = 66.0;
+  static const double _kConditionLeft = 45.0;
+  static const double _kConditionBottom = 10.0;
+  // Boss layout positions
+  static const double _kBossLevelLeft = 7.0;
+  static const double _kBossLevelTopFh = 0.5;
+  static const double _kBossLevelTopGh = 2.0;
+  static const double _kBossStatsTopFh = 29.4;
+  static const double _kBossStatsTopGh = 30.4;
+  static const double _kBossStatsWidth = 24.0;
+  static const double _kBossAttribMarginRight = 1.0;
+  static const double _kBossContentLeft = 40.0;
+  static const double _kBossContentTop = 16.0;
+  static const double _kBossContentWidth = 128.0;
+  static const double _kBossSpecialWidth = 112.0;
+  static const double _kBossSpecialFontSize = 11.2;
+  static const double _kDividerScaleFactor = 0.15;
+  static const double _kDividerHeight = 1.0;
+  static const double _kDividerWidth = 125.0;
+  static const double _kBossStatIconLeft = 23.5;
+  static const double _kBossStatIconTop = 44.4;
+  static const double _kBossRangeLeft = 24.0;
+  static const double _kBossRangeTop = 74.4;
+  static const double _kBossConditionRight = 10.0;
+  static const double _kBossConditionTop = 1.0;
+  // Widget-level layout
+  static const double _kWidgetWidth = 166.0;
+  static const double _kButtonBottom = 4.0;
+  static const double _kButtonSide = 4.0;
+  static const double _kButtonIconSize = 20.0;
+  static const double _kButtonPadding = 8.0;
+  // Condition list icons
+  static const double _kConditionIconHeight = 11.0;
+  static const double _kImmuneIconHeight = 4.0;
+  static const double _kConditionIconWidth = 14.0;
+  static const double _kImmuneIconLeft = 9.0;
+  static const double _kImmuneIconTop = 3.5;
+
   const MonsterStatCardWidget({
     super.key,
     required this.data,
@@ -62,43 +128,43 @@ class MonsterStatCardWidget extends StatelessWidget {
         child: Stack(
       children: [
         ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(8.0 * scale)),
+          borderRadius: BorderRadius.all(Radius.circular(_kBorderRadius * scale)),
           child: Image(
-            height: 93.5 * scale,
-            width: 167 * scale,
+            height: _kCardHeight * scale,
+            width: _kCardWidth * scale,
             fit: BoxFit.fitHeight,
             image: AssetImage("assets/images/psd/monsterStats-normal.png"),
           ),
         ),
         Positioned(
-            width: 167 * scale,
-            left: 2 * scale,
-            top: 3.5 * scale,
+            width: _kCardWidth * scale,
+            left: _kTitleLeft * scale,
+            top: _kTitleTop * scale,
             child: Text(
               textAlign: TextAlign.center,
               data.type.display,
               style: TextStyle(
                   fontFamily: frosthavenStyle ? 'GermaniaOne' : 'Pirata',
                   color: Colors.white,
-                  fontSize: 11 * scale,
+                  fontSize: _kTitleFontSize * scale,
                   height: 1,
                   shadows: [shadow]),
             )),
         Positioned(
-            left: 3.2 * scale,
-            top: 3.2 * scale,
+            left: _kLevelLeft * scale,
+            top: _kLevelTop * scale,
             child: Text(
               data.level.value.toString(),
               style: TextStyle(
                   fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
                   color: Colors.white,
-                  fontSize: 14.4 * scale,
+                  fontSize: _kLevelFontSize * scale,
                   height: 1,
                   shadows: [shadow]),
             )),
         Positioned(
-          left: 64.0 * scale,
-          top: 20.8 * scale,
+          left: _kNormalStatsLeft * scale,
+          top: _kNormalStatsTop * scale,
           child: Column(
             children: <Widget>[
               Text(health, style: leftStyle),
@@ -111,25 +177,25 @@ class MonsterStatCardWidget extends StatelessWidget {
         ),
         Positioned(
             left: 0.0,
-            top: 19.2 * scale,
-            width: 58.4 * scale,
+            top: _kNormalAttribTop * scale,
+            width: _kNormalAttribWidth * scale,
             child: RepaintBoundary(
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                  LineBuilder.createLines(
-                      normal.attributes,
-                      true,
-                      false,
-                      false,
-                      data,
-                      CrossAxisAlignment.end,
-                      scale,
-                      settings.shimmer.value),
-                ]))),
+              LineBuilder.createLines(
+                  normal.attributes,
+                  true,
+                  false,
+                  false,
+                  data,
+                  CrossAxisAlignment.end,
+                  scale,
+                  settings.shimmer.value),
+            ]))),
         Positioned(
-          right: 61.6 * scale,
-          top: 20.8 * scale,
+          right: _kEliteStatsRight * scale,
+          top: _kNormalStatsTop * scale,
           child: Column(
             children: <Widget>[
               Text(StatCalculator.calculateFormula(elite!.health).toString(),
@@ -144,9 +210,9 @@ class MonsterStatCardWidget extends StatelessWidget {
           ),
         ),
         Positioned(
-          width: 57.6 * scale,
+          width: _kEliteAttribWidth * scale,
           right: 0.0,
-          top: 19.2 * scale,
+          top: _kNormalAttribTop * scale,
           child: RepaintBoundary(
               child: LineBuilder.createLines(
                   elite.attributes,
@@ -160,9 +226,9 @@ class MonsterStatCardWidget extends StatelessWidget {
         ),
         data.type.flying
             ? Positioned(
-                height: 16 * scale,
-                left: 74.8 * scale,
-                top: 35.6 * scale,
+                height: _kStatIconHeight * scale,
+                left: _kStatIconLeft * scale,
+                top: _kStatIconTopMove * scale,
                 child: Image(
                   fit: BoxFit.fitHeight,
                   image: AssetImage(frosthavenStyle
@@ -171,9 +237,9 @@ class MonsterStatCardWidget extends StatelessWidget {
                 ))
             : frosthavenStyle
                 ? Positioned(
-                    height: 16 * scale,
-                    left: 74.8 * scale,
-                    top: 35.6 * scale,
+                    height: _kStatIconHeight * scale,
+                    left: _kStatIconLeft * scale,
+                    top: _kStatIconTopMove * scale,
                     child: const Image(
                       fit: BoxFit.fitHeight,
                       image: AssetImage("assets/images/psd/move-stat_fh.png"),
@@ -181,33 +247,33 @@ class MonsterStatCardWidget extends StatelessWidget {
                 : Container(),
         if (frosthavenStyle)
           Positioned(
-              height: 16 * scale,
-              left: 74.8 * scale,
-              top: 66 * scale,
+              height: _kStatIconHeight * scale,
+              left: _kStatIconLeft * scale,
+              top: _kStatIconTopRange * scale,
               child: const Image(
                 fit: BoxFit.fitHeight,
                 image: AssetImage("assets/images/psd/range-stat_fh.png"),
               )),
         if (data.type.capture)
           Positioned(
-              height: 16 * scale,
-              left: 74.8 * scale,
-              top: 66 * scale,
+              height: _kStatIconHeight * scale,
+              left: _kStatIconLeft * scale,
+              top: _kStatIconTopRange * scale,
               child: const Image(
                 fit: BoxFit.fitHeight,
                 image: AssetImage("assets/images/psd/capture.png"),
               )),
         Positioned(
             //TODO: move position to FH place in corner
-            left: 45 * scale,
-            bottom: 10 * scale,
+            left: _kConditionLeft * scale,
+            bottom: _kConditionBottom * scale,
             child: Column(
               verticalDirection: VerticalDirection.up,
               children: _createConditionList(data, scale, normal),
             )),
         Positioned(
-            right: 45 * scale,
-            bottom: 10 * scale,
+            right: _kConditionLeft * scale,
+            bottom: _kConditionBottom * scale,
             child: Column(
               verticalDirection: VerticalDirection.up,
               children: _createConditionList(data, scale, elite),
@@ -268,7 +334,7 @@ class MonsterStatCardWidget extends StatelessWidget {
     final specialStyle = TextStyle(
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: Colors.yellow,
-        fontSize: 11.2 * scale,
+        fontSize: _kBossSpecialFontSize * scale,
         height: 1,
         shadows: [shadow]);
 
@@ -276,30 +342,30 @@ class MonsterStatCardWidget extends StatelessWidget {
         child: Stack(
       children: [
         ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(8.0 * scale)),
+          borderRadius: BorderRadius.all(Radius.circular(_kBorderRadius * scale)),
           child: Image(
-            height: 93.5 * scale,
-            width: 167 * scale,
+            height: _kCardHeight * scale,
+            width: _kCardWidth * scale,
             fit: BoxFit.fitWidth,
             image: const AssetImage("assets/images/psd/monsterStats-boss.png"),
           ),
         ),
         Positioned(
-            left: 7.0 * scale,
-            top: frosthavenStyle ? 0.5 * scale : 2.0 * scale,
+            left: _kBossLevelLeft * scale,
+            top: frosthavenStyle ? _kBossLevelTopFh * scale : _kBossLevelTopGh * scale,
             child: Text(
               data.level.value.toString(),
               style: TextStyle(
                   fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
                   color: Colors.white,
-                  fontSize: 14.4 * scale,
+                  fontSize: _kLevelFontSize * scale,
                   height: 1,
                   shadows: [shadow]),
             )),
         Positioned(
           left: 0,
-          top: frosthavenStyle ? 29.4 * scale : 30.4 * scale,
-          width: 24 * scale,
+          top: frosthavenStyle ? _kBossStatsTopFh * scale : _kBossStatsTopGh * scale,
+          width: _kBossStatsWidth * scale,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
@@ -309,7 +375,7 @@ class MonsterStatCardWidget extends StatelessWidget {
                 Container(
                     margin: EdgeInsets.only(
                         right: bossAttackAttributes.contains("target")
-                            ? 1 * scale
+                            ? _kBossAttribMarginRight * scale
                             : 0),
                     child: attackAttributes),
                 Text(attack, style: leftStyle)
@@ -320,16 +386,16 @@ class MonsterStatCardWidget extends StatelessWidget {
           ),
         ),
         Positioned(
-            left: 40.0 * scale,
-            top: 16 * scale,
-            width: 128 * scale, //useful or not?
+            left: _kBossContentLeft * scale,
+            top: _kBossContentTop * scale,
+            width: _kBossContentWidth * scale, //useful or not?
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               bossOtherAttributes.isNotEmpty
                   ? Row(children: [
                       Text("    ", style: specialStyle),
                       SizedBox(
-                          width: 112 * scale,
+                          width: _kBossSpecialWidth * scale,
                           child: RepaintBoundary(
                               child: LineBuilder.createLines(
                                   bossOtherAttributes,
@@ -344,10 +410,10 @@ class MonsterStatCardWidget extends StatelessWidget {
                   : Container(),
               if (bossOtherAttributes.isNotEmpty)
                 Image.asset(
-                  scale: 1 / (scale * 0.15),
-                  height: 1 * scale,
+                  scale: 1 / (scale * _kDividerScaleFactor),
+                  height: _kDividerHeight * scale,
                   fit: BoxFit.fill,
-                  width: 125.0 * scale,
+                  width: _kDividerWidth * scale,
                   //actually 40, but some layout might depend on wider size so not changing now
                   filterQuality: FilterQuality.medium,
                   "assets/images/abilities/divider_boss_fh.png",
@@ -361,7 +427,7 @@ class MonsterStatCardWidget extends StatelessWidget {
                             style: specialStyle,
                           ),
                           SizedBox(
-                              width: 112 * scale,
+                              width: _kBossSpecialWidth * scale,
                               child: RepaintBoundary(
                                   child: LineBuilder.createLines(
                                       data.type.levels[data.level.value].boss!
@@ -377,10 +443,10 @@ class MonsterStatCardWidget extends StatelessWidget {
                   : Container(),
               normal.special2.isNotEmpty
                   ? Image.asset(
-                      scale: 1 / (scale * 0.15),
-                      height: 1 * scale,
+                      scale: 1 / (scale * _kDividerScaleFactor),
+                      height: _kDividerHeight * scale,
                       fit: BoxFit.fill,
-                      width: 125.0 * scale,
+                      width: _kDividerWidth * scale,
                       //actually 40, but some layout might depend on wider size so not changing now
                       filterQuality: FilterQuality.medium,
                       "assets/images/abilities/divider_boss_fh.png",
@@ -392,7 +458,7 @@ class MonsterStatCardWidget extends StatelessWidget {
                       children: [
                           Text("2:", style: specialStyle),
                           SizedBox(
-                              width: 112 * scale,
+                              width: _kBossSpecialWidth * scale,
                               child: RepaintBoundary(
                                   child: LineBuilder.createLines(
                                       data.type.levels[data.level.value].boss!
@@ -409,9 +475,9 @@ class MonsterStatCardWidget extends StatelessWidget {
             ])),
         data.type.flying
             ? Positioned(
-                height: 16 * scale,
-                left: 23.5 * scale,
-                top: 44.4 * scale,
+                height: _kStatIconHeight * scale,
+                left: _kBossStatIconLeft * scale,
+                top: _kBossStatIconTop * scale,
                 child: Image(
                   fit: BoxFit.fitHeight,
                   image: AssetImage(frosthavenStyle
@@ -421,9 +487,9 @@ class MonsterStatCardWidget extends StatelessWidget {
               )
             : !frosthavenStyle
                 ? Positioned(
-                    height: 16 * scale,
-                    left: 23.5 * scale,
-                    top: 44.4 * scale,
+                    height: _kStatIconHeight * scale,
+                    left: _kBossStatIconLeft * scale,
+                    top: _kBossStatIconTop * scale,
                     child: const Image(
                       fit: BoxFit.fitHeight,
                       image: AssetImage("assets/images/psd/move-stat.png"),
@@ -432,9 +498,9 @@ class MonsterStatCardWidget extends StatelessWidget {
                 : Container(),
         if (normal.range != 0)
           Positioned(
-              height: 16 * scale,
-              left: 24 * scale,
-              top: 74.4 * scale,
+              height: _kStatIconHeight * scale,
+              left: _kBossRangeLeft * scale,
+              top: _kBossRangeTop * scale,
               child: Image(
                 fit: BoxFit.fitHeight,
                 image: AssetImage(frosthavenStyle
@@ -442,8 +508,8 @@ class MonsterStatCardWidget extends StatelessWidget {
                     : "assets/images/psd/range-stat.png"),
               )),
         Positioned(
-            right: 10 * scale,
-            top: 1 * scale,
+            right: _kBossConditionRight * scale,
+            top: _kBossConditionTop * scale,
             child: Row(
               children: _createConditionList(data, scale, normal),
             )),
@@ -456,29 +522,29 @@ class MonsterStatCardWidget extends StatelessWidget {
     bool frosthavenStyle = GameMethods.isFrosthavenStyle(data.type);
 
     var shadow = Shadow(
-      offset: Offset(0.4 * scale, 0.4 * scale),
+      offset: Offset(_kShadowTextOffset * scale, _kShadowTextOffset * scale),
       color: Colors.black87,
-      blurRadius: 1 * scale,
+      blurRadius: _kShadowTextBlur * scale,
     );
 
     var shadowLeft = Shadow(
-      offset: Offset(0.4 * scale, 0.4 * scale),
+      offset: Offset(_kShadowTextOffset * scale, _kShadowTextOffset * scale),
       color: Colors.black54,
-      blurRadius: 1 * scale,
+      blurRadius: _kShadowTextBlur * scale,
     );
 
     final leftStyle = TextStyle(
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: Colors.black,
-        fontSize: 12.8 * scale,
-        height: 1.2,
+        fontSize: _kStatsFontSize * scale,
+        height: _kStatsLineHeight,
         shadows: [shadowLeft]);
 
     final rightStyle = TextStyle(
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: Colors.white,
-        fontSize: 12.8 * scale,
-        height: 1.2,
+        fontSize: _kStatsFontSize * scale,
+        height: _kStatsLineHeight,
         shadows: [shadow]);
 
     return ValueListenableBuilder<int>(
@@ -491,12 +557,12 @@ class MonsterStatCardWidget extends StatelessWidget {
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black45,
-                    blurRadius: 4 * scale,
-                    offset: Offset(2 * scale, 4 * scale), // Shadow position
+                    blurRadius: _kShadowBlur * scale,
+                    offset: Offset(_kShadowOffsetX * scale, _kShadowOffsetY * scale), // Shadow position
                   ),
                 ],
               ),
-              margin: EdgeInsets.all(1.6 * scale),
+              margin: EdgeInsets.all(_kMargin * scale),
               child: isBoss
                   ? buildBossLayout(
                       data, scale, shadow, leftStyle, frosthavenStyle,
@@ -517,7 +583,7 @@ class MonsterStatCardWidget extends StatelessWidget {
     double scale = getScaleByReference(context);
 
     return SizedBox(
-        width: 166 * scale,
+        width: _kWidgetWidth * scale,
         child: Stack(children: [
           GestureDetector(
               onDoubleTap: () {
@@ -527,18 +593,18 @@ class MonsterStatCardWidget extends StatelessWidget {
                   buildCard(data, scale, viewModel: vm, settings: settings_)),
           if (!vm.isBoss)
             Positioned(
-                bottom: 4 * scale,
-                left: 4 * scale,
+                bottom: _kButtonBottom * scale,
+                left: _kButtonSide * scale,
                 child: SizedBox(
-                    width: 20 * scale + 8,
-                    height: 20 * scale + 8,
+                    width: _kButtonIconSize * scale + _kButtonPadding,
+                    height: _kButtonIconSize * scale + _kButtonPadding,
                     child: ValueListenableBuilder<int>(
                         valueListenable: vm.commandIndex,
                         builder: (context, value, child) {
                           return IconButton(
-                            padding: const EdgeInsets.only(right: 8, top: 8),
+                            padding: EdgeInsets.only(right: _kButtonPadding, top: _kButtonPadding),
                             icon: Image.asset(
-                                height: 20 * scale,
+                                height: _kButtonIconSize * scale,
                                 fit: BoxFit.fitHeight,
                                 color: vm.allStandeesOut
                                     ? Colors.white24
@@ -549,21 +615,21 @@ class MonsterStatCardWidget extends StatelessWidget {
                           );
                         }))),
           Positioned(
-              bottom: 4 * scale,
-              right: 4 * scale,
+              bottom: _kButtonBottom * scale,
+              right: _kButtonSide * scale,
               child: SizedBox(
-                  width: 20 * scale + 8,
-                  height: 20 * scale + 8,
+                  width: _kButtonIconSize * scale + _kButtonPadding,
+                  height: _kButtonIconSize * scale + _kButtonPadding,
                   child: ValueListenableBuilder<int>(
                       valueListenable: vm.commandIndex,
                       builder: (context, value, child) {
                         return IconButton(
-                            padding: const EdgeInsets.only(left: 8, top: 8),
+                            padding: EdgeInsets.only(left: _kButtonPadding, top: _kButtonPadding),
                             icon: Image.asset(
                                 color: vm.allStandeesOut
                                     ? Colors.white24
                                     : Colors.grey,
-                                height: 20 * scale,
+                                height: _kButtonIconSize * scale,
                                 fit: BoxFit.fitHeight,
                                 colorBlendMode: BlendMode.modulate,
                                 'assets/images/psd/add.png'),
@@ -586,12 +652,12 @@ class MonsterStatCardWidget extends StatelessWidget {
         imagePath = "assets/images/abilities/$item$suffix.png";
       }
       Image image = Image(
-        height: 11 * scale,
+        height: _kConditionIconHeight * scale,
         filterQuality: FilterQuality.medium, //needed because of the edges
         image: AssetImage(imagePath),
       );
       Image immuneIcon = Image(
-        height: 4 * scale,
+        height: _kImmuneIconHeight * scale,
         filterQuality: FilterQuality.medium, //needed because of the edges
         image: const AssetImage("assets/images/psd/immune.png"),
       );
@@ -599,12 +665,12 @@ class MonsterStatCardWidget extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           Positioned(left: 0, top: 0, child: image),
-          Positioned(left: 9 * scale, top: 3.5 * scale, child: immuneIcon),
+          Positioned(left: _kImmuneIconLeft * scale, top: _kImmuneIconTop * scale, child: immuneIcon),
         ],
       );
       list.add(SizedBox(
-        width: 14 * scale,
-        height: 11 * scale,
+        width: _kConditionIconWidth * scale,
+        height: _kConditionIconHeight * scale,
         child: stack,
       ));
     }

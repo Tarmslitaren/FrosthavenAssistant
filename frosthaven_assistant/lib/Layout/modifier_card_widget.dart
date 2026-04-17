@@ -8,6 +8,31 @@ import '../Resource/game_methods.dart';
 import '../Resource/state/game_state.dart';
 
 class ModifierCardWidget extends StatelessWidget {
+  static const double _kCardWidth = 58.6666;
+  static const double _kCardHeight = 39.0;
+  static const double _kBorderRadius = 4.0;
+  static const double _kShadowBlur = 4.0;
+  static const double _kShadowOffsetX = 2.0;
+  static const double _kShadowOffsetY = 4.0;
+  // Front layout marker icon positions
+  static const double _kMarkerBgSize = 10.0;
+  static const double _kMarkerBgTopDivisor = 2.0;
+  static const double _kMarkerBgLeft = 3.0;
+  static const double _kMarkerTopNumerator = 53.0;
+  static const double _kMarkerIconSize = 7.5;
+  static const double _kMarkerIconTopNumerator = 55.5;
+  static const double _kMarkerIconLeft = 4.2;
+  // Rear layout class marker positions
+  static const double _kRearMarkerBgSize = 27.0;
+  static const double _kRearMarkerBgTop = 5.5;
+  static const double _kRearMarkerBgLeft = 15.7;
+  static const double _kRearMarkerIconSize = 20.0;
+  static const double _kRearMarkerIconTop = 9.0;
+  static const double _kRearMarkerIconLeft = 19.0;
+  static const double _kAssetScaleDefault = 4.0;
+  static const double _kHalfPi = pi / 2;
+  static const int _kPerkSuffixLength = 2; // length of "-2" suffix
+
   ModifierCardWidget(
       {super.key,
       required this.card,
@@ -17,7 +42,7 @@ class ModifierCardWidget extends StatelessWidget {
   }
 
   static Widget buildFront(
-      ModifierCard card, String name, double scale, double assetScale) {
+      ModifierCard card, String name, double scale, double _) {
     bool allies = name == "allies";
     bool isCharacter = name.isNotEmpty && !allies;
     bool imbue = card.gfx.contains("imbue");
@@ -66,7 +91,7 @@ class ModifierCardWidget extends StatelessWidget {
             : character.characterClass.perks;
         gfx = gfx.substring(1);
         if (gfx.endsWith("-2")) {
-          gfx = gfx.substring(0, gfx.length - 2);
+          gfx = gfx.substring(0, gfx.length - _kPerkSuffixLength);
           final int? index = int.tryParse(gfx);
           if (index != null &&
               index >= 0 &&
@@ -89,21 +114,21 @@ class ModifierCardWidget extends StatelessWidget {
     gfx = "assets/images/attack/$gfx.png";
 
     return RepaintBoundary(child:Container(
-        width: 58.6666 * scale,
-        height: 39 * scale,
+        width: _kCardWidth * scale,
+        height: _kCardHeight * scale,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
               color: Colors.black45,
-              blurRadius: 4 * scale,
-              offset: Offset(2 * scale, 4 * scale), // Shadow position
+              blurRadius: _kShadowBlur * scale,
+              offset: Offset(_kShadowOffsetX * scale, _kShadowOffsetY * scale), // Shadow position
             ),
           ],
         ),
         child: Stack(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(4.0 * scale)),
+              borderRadius: BorderRadius.all(Radius.circular(_kBorderRadius * scale)),
               child: Image(
                 fit: BoxFit.fitHeight,
                 image: AssetImage(gfx),
@@ -111,19 +136,19 @@ class ModifierCardWidget extends StatelessWidget {
             ),
             if (hasExtra)
               Positioned(
-                height: 10 * scale,
-                width: 10 * scale,
-                top: 53 * scale / 2,
-                left: 3 * scale,
+                height: _kMarkerBgSize * scale,
+                width: _kMarkerBgSize * scale,
+                top: _kMarkerTopNumerator * scale / _kMarkerBgTopDivisor,
+                left: _kMarkerBgLeft * scale,
                 child: Image.asset(
                     'assets/images/attack/class-marker-background.png'),
               ),
             if (hasExtra)
               Positioned(
-                height: 7.5 * scale,
-                width: 7.5 * scale,
-                top: 55.5 * scale / 2,
-                left: 4.2 * scale,
+                height: _kMarkerIconSize * scale,
+                width: _kMarkerIconSize * scale,
+                top: _kMarkerIconTopNumerator * scale / _kMarkerBgTopDivisor,
+                left: _kMarkerIconLeft * scale,
                 child: Image(
                   color: Colors.white,
                   image: AssetImage(extraGfx),
@@ -145,21 +170,21 @@ class ModifierCardWidget extends StatelessWidget {
     }
 
     return RepaintBoundary(child:Container(
-        width: 58.6666 * scale,
-        height: 39 * scale,
+        width: _kCardWidth * scale,
+        height: _kCardHeight * scale,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
               color: Colors.black45,
-              blurRadius: 4 * scale,
-              offset: Offset(2 * scale, 4 * scale), // Shadow position
+              blurRadius: _kShadowBlur * scale,
+              offset: Offset(_kShadowOffsetX * scale, _kShadowOffsetY * scale), // Shadow position
             ),
           ],
         ),
         child: Stack(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(4.0 * scale)),
+              borderRadius: BorderRadius.all(Radius.circular(_kBorderRadius * scale)),
               child: Image(
                 fit: BoxFit.fitHeight,
                 image: AssetImage("assets/images/attack/back.png"),
@@ -167,10 +192,10 @@ class ModifierCardWidget extends StatelessWidget {
             ),
             if (hasExtra)
               Positioned(
-                height: 27 * scale,
-                width: 27 * scale,
-                top: 5.5 * scale,
-                left: 15.7 * scale,
+                height: _kRearMarkerBgSize * scale,
+                width: _kRearMarkerBgSize * scale,
+                top: _kRearMarkerBgTop * scale,
+                left: _kRearMarkerBgLeft * scale,
                 child: Image(
                   image: AssetImage(
                       'assets/images/attack/class-marker-background.png'),
@@ -178,10 +203,10 @@ class ModifierCardWidget extends StatelessWidget {
               ),
             if (hasExtra)
               Positioned(
-                height: 20 * scale,
-                width: 20 * scale,
-                top: 9 * scale,
-                left: 19 * scale,
+                height: _kRearMarkerIconSize * scale,
+                width: _kRearMarkerIconSize * scale,
+                top: _kRearMarkerIconTop * scale,
+                left: _kRearMarkerIconLeft * scale,
                 child: Image(
                   color: Colors.white,
                   image: AssetImage(extraGfx),
@@ -201,7 +226,7 @@ class ModifierCardWidget extends StatelessWidget {
         animation: rotateAnim,
         child: widget,
         builder: (context, widget) {
-          final value = min(rotateAnim.value, pi / 2);
+          final value = min(rotateAnim.value, _kHalfPi);
           return Transform(
             transform: Matrix4.rotationX(value),
             alignment: Alignment.center,
@@ -214,7 +239,7 @@ class ModifierCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final userScalingBars = getIt<Settings>().userScalingBars.value;
     return revealed.value
-        ? ModifierCardWidget.buildFront(card, name, userScalingBars, 4)
+        ? ModifierCardWidget.buildFront(card, name, userScalingBars, _kAssetScaleDefault)
         : ModifierCardWidget.buildRear(userScalingBars, name);
   }
 }
