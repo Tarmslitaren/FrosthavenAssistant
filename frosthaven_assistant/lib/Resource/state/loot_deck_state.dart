@@ -2,6 +2,9 @@ part of 'game_state.dart';
 // ignore_for_file: library_private_types_in_public_api
 
 class LootCard {
+  static const int _kHighCharCount = 4;
+  static const int _kLowCharCount = 2;
+
   final String gfx;
   final int id;
   final LootBaseValue baseValue;
@@ -43,12 +46,12 @@ class LootCard {
       value += enhanced;
     }
     int characters = GameMethods.getCurrentCharacterAmount();
-    if (characters >= 4) {
+    if (characters >= _kHighCharCount) {
       return value;
     }
     if (baseValue == LootBaseValue.oneIf4twoIfNot) {
       value++;
-    } else if (characters <= 2 &&
+    } else if (characters <= _kLowCharCount &&
         baseValue == LootBaseValue.oneIf3or4twoIfNot) {
       value++;
     }
@@ -57,6 +60,17 @@ class LootCard {
 }
 
 class LootDeck {
+  static const int _kSpecialCard1418 = 1418;
+  static const int _kSpecialCard1419 = 1419;
+  static const int _kTreasureCardId = 9999;
+  static const int _kMaterialOneCount = 2;
+  static const int _kMaterialTwoCount = 3;
+  static const int _kHerbPoolCount = 2;
+  static const int _kCoin1Count = 12;
+  static const int _kCoin2Count = 6;
+  static const int _kMaterialPoolSize = 8;
+  static const int _kHerbPoolSize = 2;
+
   List<LootCard> _coinPool = [];
   List<LootCard> _lumberPool = [];
   List<LootCard> _hidePool = [];
@@ -239,10 +253,10 @@ class LootDeck {
     List<LootCard> cards = [];
 
     if (_hasCard1419) {
-      _addOtherType(1419, cards, "special 1419");
+      _addOtherType(_kSpecialCard1419, cards, "special 1419");
     }
     if (_hasCard1418) {
-      _addOtherType(1418, cards, "special 1418");
+      _addOtherType(_kSpecialCard1418, cards, "special 1418");
     }
 
     _addCardFromPool(model.arrowvine, _arrowvinePool, cards);
@@ -258,7 +272,7 @@ class LootDeck {
     _addCardFromPool(model.lumber, _lumberPool, cards);
 
     for (int i = 0; i < model.treasure; i++) {
-      _addOtherType(9999, cards, "treasure");
+      _addOtherType(_kTreasureCardId, cards, "treasure");
     }
 
     _drawPile.setList(cards);
@@ -281,7 +295,7 @@ class LootDeck {
 
   void _initMaterialPool(int startId, List<LootCard> list, String gfx) {
     list.clear();
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < _kMaterialOneCount; i++) {
       list.add(LootCard(
           id: startId,
           baseValue: LootBaseValue.one,
@@ -292,7 +306,7 @@ class LootDeck {
           gfx: gfx));
       startId++;
     }
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < _kMaterialTwoCount; i++) {
       list.add(LootCard(
           id: startId,
           baseValue: LootBaseValue.oneIf3or4twoIfNot,
@@ -303,7 +317,7 @@ class LootDeck {
           gfx: gfx));
       startId++;
     }
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < _kMaterialTwoCount; i++) {
       list.add(LootCard(
           id: startId,
           baseValue: LootBaseValue.oneIf4twoIfNot,
@@ -318,7 +332,7 @@ class LootDeck {
 
   void _initHerbPool(int startId, List<LootCard> list, String gfx) {
     list.clear();
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < _kHerbPoolCount; i++) {
       list.add(LootCard(
           id: startId,
           baseValue: LootBaseValue.one,
@@ -345,11 +359,11 @@ class LootDeck {
 
     int id = 1;
 
-    for (int i = 0; i < 12; i++) {
+    for (int i = 0; i < _kCoin1Count; i++) {
       _addOtherType(id, _coinPool, "coin 1");
       id++;
     }
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < _kCoin2Count; i++) {
       _addOtherType(id, _coinPool, "coin 2");
       id++;
     }
@@ -359,21 +373,21 @@ class LootDeck {
     id++;
 
     _initMaterialPool(id, _lumberPool, "lumber");
-    id += 8;
+    id += _kMaterialPoolSize;
     _initMaterialPool(id, _hidePool, "hide");
-    id += 8;
+    id += _kMaterialPoolSize;
     _initMaterialPool(id, _metalPool, "metal");
-    id += 8;
+    id += _kMaterialPoolSize;
     _initHerbPool(id, _arrowvinePool, "arrowvine");
-    id += 2;
+    id += _kHerbPoolSize;
     _initHerbPool(id, _axenutPool, "axenut");
-    id += 2;
+    id += _kHerbPoolSize;
     _initHerbPool(id, _corpsecapPool, "corpsecap");
-    id += 2;
+    id += _kHerbPoolSize;
     _initHerbPool(id, _flamefruitPool, "flamefruit");
-    id += 2;
+    id += _kHerbPoolSize;
     _initHerbPool(id, _snowthistlePool, "snowthistle");
-    id += 2;
+    id += _kHerbPoolSize;
     _initHerbPool(id, _rockrootPool, "rockroot");
   }
 
@@ -381,7 +395,7 @@ class LootDeck {
     if (_hasCard1418 != true) {
       _hasCard1418 = true;
       _drawPile.add(LootCard(
-          id: 1418,
+          id: _kSpecialCard1418,
           lootType: LootType.other,
           baseValue: LootBaseValue.one,
           enhanced: 0,
@@ -395,7 +409,7 @@ class LootDeck {
     if (_hasCard1419 != true) {
       _hasCard1419 = true;
       _drawPile.add(LootCard(
-          id: 1419,
+          id: _kSpecialCard1419,
           lootType: LootType.other,
           baseValue: LootBaseValue.one,
           enhanced: 0,
@@ -406,15 +420,15 @@ class LootDeck {
 
   void removeSpecial1418(_StateModifier _) {
     _hasCard1418 = false;
-    _drawPile.removeWhere((element) => element.id == 1418);
-    _discardPile.removeWhere((element) => element.id == 1418);
+    _drawPile.removeWhere((element) => element.id == _kSpecialCard1418);
+    _discardPile.removeWhere((element) => element.id == _kSpecialCard1418);
     _cardCount.value = _drawPile.size();
   }
 
   void removeSpecial1419(_StateModifier _) {
     _hasCard1419 = false;
-    _drawPile.removeWhere((element) => element.id == 1419);
-    _discardPile.removeWhere((element) => element.id == 1419);
+    _drawPile.removeWhere((element) => element.id == _kSpecialCard1419);
+    _discardPile.removeWhere((element) => element.id == _kSpecialCard1419);
     _cardCount.value = _drawPile.size();
   }
 
