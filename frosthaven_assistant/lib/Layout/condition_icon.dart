@@ -41,6 +41,12 @@ class ConditionIcon extends StatefulWidget {
 
 class ConditionIconState extends State<ConditionIcon>
     with SingleTickerProviderStateMixin {
+  static const double _kShakeAngleDegrees = 30.0;
+  static const double _kDegreesPerRadian = 180.0;
+  static const double _kShakeAngleRad = _kShakeAngleDegrees * math.pi / _kDegreesPerRadian;
+  static const int _kShakeWeightHalf = 2;
+  static const double _kClassTokenIconScale = 0.45;
+
   late final ConditionIconViewModel _vm;
   late final AnimationController _shakeController;
   late final Animation<double> _shakeAngle;
@@ -60,12 +66,12 @@ class ConditionIconState extends State<ConditionIcon>
     );
     _shakeAngle = TweenSequence<double>([
       TweenSequenceItem(
-          tween: Tween(begin: 0.0, end: 30.0 * math.pi / 180.0), weight: 1),
+          tween: Tween(begin: 0.0, end: _kShakeAngleRad), weight: 1),
       TweenSequenceItem(
-          tween: Tween(begin: 30.0 * math.pi / 180.0, end: -30.0 * math.pi / 180.0),
-          weight: 2),
+          tween: Tween(begin: _kShakeAngleRad, end: -_kShakeAngleRad),
+          weight: _kShakeWeightHalf),
       TweenSequenceItem(
-          tween: Tween(begin: -30.0 * math.pi / 180.0, end: 0.0), weight: 1),
+          tween: Tween(begin: -_kShakeAngleRad, end: 0.0), weight: 1),
     ]).animate(_shakeController);
   }
 
@@ -122,7 +128,7 @@ class ConditionIconState extends State<ConditionIcon>
                               image: const AssetImage(
                                   "assets/images/psd/class-token-bg.png")),
                           Image(
-                              height: widget.size * scale * 0.45,
+                              height: widget.size * scale * _kClassTokenIconScale,
                               filterQuality: FilterQuality.medium,
                               image: AssetImage(widget.gfx)),
                         ])
