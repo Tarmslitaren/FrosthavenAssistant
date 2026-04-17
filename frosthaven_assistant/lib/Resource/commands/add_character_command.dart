@@ -12,8 +12,12 @@ class AddCharacterCommand extends Command {
   AddCharacterCommand(this._id, this._edition, this._display, this._level,
       {required GameState gameState})
       : _gameState = gameState {
-    character = CharacterMethods.createCharacter(
-        stateAccess, _id, _edition, _display, _level)!;
+    final created = CharacterMethods.createCharacter(
+        stateAccess, _id, _edition, _display, _level);
+    if (created == null) {
+      throw StateError('AddCharacterCommand: character class not found: $_id (edition: $_edition)');
+    }
+    character = created;
   }
 
   @override
