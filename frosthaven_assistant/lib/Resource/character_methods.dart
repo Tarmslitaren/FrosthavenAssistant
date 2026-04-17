@@ -2,6 +2,22 @@ part of 'state/game_state.dart';
 // ignore_for_file: library_private_types_in_public_api
 
 class CharacterMethods {
+  static const int _kHailPerkIndex = 17;
+  static const int _kPainConduitPerkIndex = 16;
+  static const int _kPainConduitHealthBonus = 5;
+  static const int _kObjectiveInitiative = 99;
+  // Special summon base stats
+  static const int _kBeastHealth = 8;
+  static const int _kBeastMultiplier = 2;
+  static const int _kDomeHealth = 3;
+  static const int _kGlacierHealth = 7;
+  static const int _kJesterHealth = 5;
+  static const int _kSpecialSummonMove = 3;
+  static const int _kSpecialSummonAttack = 2;
+  static const int _kSpecialSummonRange = 0;
+  static const int _kSpecialSummonStandeeNr = 0;
+  static const int _kSpecialSummonInitiative = -1;
+
   static void addPerk(_StateModifier s, Character character, int index, {GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
     final deck = character.characterState.modifierDeck;
@@ -48,15 +64,15 @@ class CharacterMethods {
     }
 
     final className = character.characterClass.name;
-    if (index == 17 && className == "Hail") {
+    if (index == _kHailPerkIndex && className == "Hail") {
       gs.modifierDeck.addHailSpecial(s);
     }
-    if (index == 16 && className == "Pain Conduit") {
+    if (index == _kPainConduitPerkIndex && className == "Pain Conduit") {
       final level = character.characterState.level.value;
       final healthByLevel = character.characterClass.healthByLevel;
       if (level >= 1 && level <= healthByLevel.length) {
         character.characterState._health.value =
-            healthByLevel[level - 1] + 5;
+            healthByLevel[level - 1] + _kPainConduitHealthBonus;
         character.characterState
             .setMaxHealth(s, character.characterState._health.value);
       }
@@ -92,10 +108,10 @@ class CharacterMethods {
     }
 
     final className = character.characterClass.name;
-    if (index == 17 && className == "Hail") {
+    if (index == _kHailPerkIndex && className == "Hail") {
       gs.modifierDeck.removeHailSpecial(s);
     }
-    if (index == 16 && className == "Pain Conduit") {
+    if (index == _kPainConduitPerkIndex && className == "Pain Conduit") {
       final state = character.characterState;
       final characterClass = character.characterClass;
       final level = state.level.value;
@@ -127,8 +143,8 @@ class CharacterMethods {
       character.characterState.setHealth(s, healthByLevel[level - 1]);
 
       if (character.id == "Pain Conduit" &&
-          character.characterState.perkList[16]) {
-        character.characterState.setHealth(s, healthByLevel[level - 1] + 5);
+          character.characterState.perkList[_kPainConduitPerkIndex]) {
+        character.characterState.setHealth(s, healthByLevel[level - 1] + _kPainConduitHealthBonus);
       }
 
       character.characterState
@@ -140,21 +156,21 @@ class CharacterMethods {
       String name = "";
       if (character.id == "Beast Tyrant" || character.id == "Wildfury") {
         //create the bear summon
-        health = 8;
-        multiplier = 2;
+        health = _kBeastHealth;
+        multiplier = _kBeastMultiplier;
         name = "Beast";
       }
       if (character.id == "D.O.M.E.") {
-        health = 3;
+        health = _kDomeHealth;
         name = "Barrier";
       }
       if (character.id == "Glacial Torrent") {
-        health = 7;
+        health = _kGlacierHealth;
         name = "Glacier";
       }
       if (character.id == "Jester Twins") {
         //create the barrier as a summon
-        health = 5;
+        health = _kJesterHealth;
         name = "Jester Twin";
       }
 
@@ -176,8 +192,8 @@ class CharacterMethods {
         item.characterClass.healthByLevel[level - 1];
 
     if (item.characterClass.name == "Pain Conduit") {
-      if (item.characterState.perkList[16]) {
-        item.characterState._health.value += 5;
+      if (item.characterState.perkList[_kPainConduitPerkIndex]) {
+        item.characterState._health.value += _kPainConduitHealthBonus;
       }
     }
 
@@ -206,31 +222,31 @@ class CharacterMethods {
     String name = "";
     if (item.id == "Beast Tyrant" || item.id == "Wildfury") {
       //create the bear summon
-      health = 8;
-      multiplier = 2;
+      health = _kBeastHealth;
+      multiplier = _kBeastMultiplier;
       gfx = item.id == "Beast Tyrant" ? "beast" : "Beast v2";
       name = "Beast";
     }
     if (item.id == "D.O.M.E.") {
-      health = 3;
+      health = _kDomeHealth;
       gfx = "DOM barrier";
       name = "Barrier";
     }
     if (item.id == "Glacial Torrent") {
-      health = 7;
+      health = _kGlacierHealth;
       gfx = "GLA glacier";
       name = "Glacier";
     }
     if (item.id == "Jester Twins") {
       //create the barrier as a summon
-      health = 5;
+      health = _kJesterHealth;
       gfx = "JES twin";
       name = "Jester Twin";
     }
 
     if (name.isNotEmpty) {
-      MonsterInstance summon = MonsterInstance.summon(0, MonsterType.summon,
-          name, health + level * multiplier, 3, 2, 0, gfx, -1);
+      MonsterInstance summon = MonsterInstance.summon(_kSpecialSummonStandeeNr, MonsterType.summon,
+          name, health + level * multiplier, _kSpecialSummonMove, _kSpecialSummonAttack, _kSpecialSummonRange, gfx, _kSpecialSummonInitiative);
       summonList.add(summon);
     }
     item.characterState._notifySummonList();
@@ -277,7 +293,7 @@ class CharacterMethods {
         characterState._level.value = level;
 
         if (GameMethods.isObjectiveOrEscort(characterClass)) {
-          characterState._initiative.value = 99;
+          characterState._initiative.value = _kObjectiveInitiative;
         }
         characterState._health.value = characterClass.healthByLevel[level - 1];
         characterState._maxHealth.value = characterState.health.value;
@@ -298,31 +314,31 @@ class CharacterMethods {
         String name = "";
         if (character.id == "Beast Tyrant" || character.id == "Wildfury") {
           //create the bear summon
-          health = 8;
-          multiplier = 2;
+          health = _kBeastHealth;
+          multiplier = _kBeastMultiplier;
           gfx = character.id == "Beast Tyrant" ? "beast" : "Beast v2";
           name = "Beast";
         }
         if (character.id == "D.O.M.E.") {
-          health = 3;
+          health = _kDomeHealth;
           gfx = "DOM barrier";
           name = "Barrier";
         }
         if (character.id == "Glacial Torrent") {
-          health = 7;
+          health = _kGlacierHealth;
           gfx = "GLA glacier";
           name = "Glacier";
         }
         if (character.id == "Jester Twins") {
           //create the barrier as a summon
-          health = 5;
+          health = _kJesterHealth;
           gfx = "JES twin";
           name = "Jester Twin";
         }
 
         if (name.isNotEmpty) {
-          MonsterInstance summon = MonsterInstance.summon(0, MonsterType.summon,
-              name, health + level * multiplier, 3, 2, 0, gfx, -1);
+          MonsterInstance summon = MonsterInstance.summon(_kSpecialSummonStandeeNr, MonsterType.summon,
+              name, health + level * multiplier, _kSpecialSummonMove, _kSpecialSummonAttack, _kSpecialSummonRange, gfx, _kSpecialSummonInitiative);
           summonList.add(summon);
         }
 
