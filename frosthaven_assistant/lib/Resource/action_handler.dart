@@ -86,11 +86,12 @@ class ActionHandler {
     bool isServer = _settings.server.value;
     bool isClient = _settings.client.value == ClientState.connected;
     if (!isClient) {
-      if (commandIndex.value >= 0 &&
-          _gameSaveStates[commandIndex.value] != null) {
-        _gameSaveStates[commandIndex.value]!.load(
+      if (commandIndex.value >= 0) {
+        final saveState = _gameSaveStates[commandIndex.value];
+        if (saveState != null) {
+        saveState.load(
             _self); //this works as gameSaveStates has one more entry than command list (includes load at start)
-        _gameSaveStates[commandIndex.value]!.saveToDisk(_self);
+        saveState.saveToDisk(_self);
         if (!isServer && !isClient) {
           _commands[commandIndex.value]!
               .onUndo(); //undo only makes sure ui is updated
@@ -108,10 +109,11 @@ class ActionHandler {
                 index: idx,
                 description: _commandDescriptions[idx],
                 eventJson: const NoEvent().toJsonString(),
-                state: _gameSaveStates[idx]!.getState(),
+                state: saveState.getState(),
               ).encode());
             }
           }
+        }
         }
         lastEvent.value = const NoEvent();
         commandIndex.value--;
