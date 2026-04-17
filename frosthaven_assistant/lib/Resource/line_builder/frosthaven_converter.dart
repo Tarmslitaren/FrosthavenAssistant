@@ -3,6 +3,28 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/line_builder/line_builder.dart';
 
 class FrosthavenConverter {
+  static const int _kColorRadix = 16;
+  static const int _kBossStatCardColor = 0x45D2D2D2;
+  static const int _kStatCardColor = 0x9A808080;
+  static const double _kBoxBorderRadius = 6.0;
+  static const double _kBoxPaddingLeft = 2.0;
+  static const double _kBoxPaddingTop = 0.35;
+  static const double _kBoxPaddingRight = 2.5;
+  static const double _kBoxPaddingBottom = 0.2625;
+  static const double _kBoxMarginH = 2.0;
+  static const double _kContainerMargin = 2.0;
+  static const double _kElementImageWidth = 20.0;
+  static const double _kElementTopOffset = -3.0;
+  static const double _kDottedBorderRadius = 10.0;
+  static const double _kDashPattern1 = 1.5;
+  static const double _kDashPattern2 = 0.8;
+  static const double _kStrokeWidth = 0.6;
+  static const double _kPaddingUseLeft = 1.0;
+  static const double _kPaddingNoUseLeft = 3.0;
+  static const double _kPaddingTop2 = 0.25;
+  static const int _kLookback = 2;
+  static const int _kElementPairCount = 2;
+
   static List<String> convertLinesToFH(List<String> lines, bool applyStats) {
     //move lines up when they should
     //add container markers here as well
@@ -37,7 +59,7 @@ class FrosthavenConverter {
             true; //makes sub line gray box not appear straight after a element use
       }
       if (i > 1 &&
-          lines[i - 2].contains("%use") &&
+          lines[i - _kLookback].contains("%use") &&
           (lines[i - 1] == "[r]" ||
               lines[i - 1] == "[s]" ||
               lines[i - 1] == "[c]")) {
@@ -109,7 +131,7 @@ class FrosthavenConverter {
           //make bigger icon and text in element use block
           if (isElementUse &&
               (lines[i - 1].contains("use") ||
-                  (lines[i - 2].contains("use") &&
+                  (lines[i - _kLookback].contains("use") &&
                       lines[i - 1]
                           .contains("[c]"))) // (!lines[i - 2].contains("[c]"))
               &&
@@ -124,7 +146,7 @@ class FrosthavenConverter {
             }
             isReallySubLine = false;
           } else if (isElementUse &&
-              (!lines[i - 2].contains("[c]") &&
+              (!lines[i - _kLookback].contains("[c]") &&
                   !line.startsWith("^all") &&
                   !line.startsWith("^All"))) {
             //isReallySubLine = false; //block useblocks from having straight sublines?
@@ -279,27 +301,14 @@ class FrosthavenConverter {
         decoration: BoxDecoration(
             color: conditional
                 ? Colors.blue
-                : Color(int.parse(bossStatCard ? "45D2D2D2" : "9A808080",
-                    radix: 16)),
-            borderRadius: BorderRadius.all(Radius.circular(6.0 * scale))),
+                : Color(bossStatCard ? _kBossStatCardColor : _kStatCardColor),
+            borderRadius: BorderRadius.all(Radius.circular(_kBoxBorderRadius * scale))),
         padding: EdgeInsets.fromLTRB(
-            2.0 * scale, 0.35 * scale, 2.5 * scale, 0.2625 * scale),
-        margin: EdgeInsets.only(left: 2.0 * scale, right: 2.0 * scale),
+            _kBoxPaddingLeft * scale, _kBoxPaddingTop * scale, _kBoxPaddingRight * scale, _kBoxPaddingBottom * scale),
+        margin: EdgeInsets.only(left: _kBoxMarginH * scale, right: _kBoxMarginH * scale),
         //child: Expanded(
         child: Column(mainAxisSize: MainAxisSize.max, children: [
-          if (list2.isNotEmpty) Row(children: list2.first),
-          if (list2.length > 1)
-            Row(
-              children: list2[1],
-            ),
-          if (list2.length > 2)
-            Row(
-              children: list2[2],
-            ),
-          if (list2.length > 3)
-            Row(
-              children: list2[3],
-            )
+          ...list2.map((row) => Row(children: row))
         ]));
 
     Widget row = Row(
@@ -386,7 +395,7 @@ class FrosthavenConverter {
 
     //sniff the child if it is a element to element thing
     List<String> graphics = getAllImagesInWidget(child);
-    if (graphics.length == 2) {
+    if (graphics.length == _kElementPairCount) {
       if (LineBuilder.isElement(graphics.first) &&
           LineBuilder.isElement(graphics[1])) {
         belongs = false;
@@ -394,7 +403,7 @@ class FrosthavenConverter {
     }
 
     lines.add(Container(
-        margin: EdgeInsets.all(2.0 * scale),
+        margin: EdgeInsets.all(_kContainerMargin * scale),
         //alignment: Alignment.bottomCenter,
         child: Stack(
             clipBehavior: Clip.none,
@@ -402,11 +411,11 @@ class FrosthavenConverter {
             children: [
               if (belongs)
                 Positioned(
-                    top: -3 * scale,
+                    top: _kElementTopOffset * scale,
                     child: Image(
                         fit: BoxFit.fitWidth,
                         filterQuality: FilterQuality.medium,
-                        width: scale * 20,
+                        width: scale * _kElementImageWidth,
                         image: const AssetImage(
                           "assets/images/abilities/element_top.png",
                         ))),
@@ -416,30 +425,28 @@ class FrosthavenConverter {
                     //borderType: BorderType.Rect,
                     //borderType: BorderType.RRect,
 
-                    radius: Radius.circular(10.0 * scale),
+                    radius: Radius.circular(_kDottedBorderRadius * scale),
 
                     //strokeCap: StrokeCap.round,
                     padding: const EdgeInsets.all(0),
                     //these are closer to the real values, but looks bad on small scale
                     //dashPattern: [1.2 * scale, 0.5 * scale], //1.2 && 0.5
                     //strokeWidth: 0.5 * scale, //0.4
-                    dashPattern: [1.5 * scale, 0.8 * scale],
-                    strokeWidth: 0.6 * scale,
+                    dashPattern: [_kDashPattern1 * scale, _kDashPattern2 * scale],
+                    strokeWidth: _kStrokeWidth * scale,
                   ),
                   child: Container(
                       decoration: BoxDecoration(
                           //backgroundBlendMode: BlendMode.softLight,
                           //border: Border.fromBorderSide(BorderSide(style: BorderStyle.solid, color: Colors.white)),
-                          color: Color(int.parse(
-                              bossStatCard ? "45D2D2D2" : "9A808080",
-                              radix: 16)),
+                          color: Color(bossStatCard ? _kBossStatCardColor : _kStatCardColor),
                           borderRadius:
-                              BorderRadius.all(Radius.circular(10.0 * scale))),
+                              BorderRadius.all(Radius.circular(_kDottedBorderRadius * scale))),
                       padding: EdgeInsets.fromLTRB(
-                          elementUse ? 1.0 * scale : 3.0 * scale,
-                          0.25 * scale,
+                          elementUse ? _kPaddingUseLeft * scale : _kPaddingNoUseLeft * scale,
+                          _kPaddingTop2 * scale,
                           rightMargin,
-                          0.2625 * scale),
+                          _kBoxPaddingBottom * scale),
                       //margin: EdgeInsets.only(left: 2 * scale),
                       //child: Expanded(
                       child: child))
