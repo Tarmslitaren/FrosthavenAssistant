@@ -19,6 +19,8 @@ import 'menus/main_menu.dart';
 import 'view_models/main_scaffold_view_model.dart';
 
 class MainScaffold extends StatelessWidget {
+  static const double _kAppBarHeight = 40.0;
+
   const MainScaffold({super.key, this.settings});
 
   // injected for testing
@@ -41,7 +43,7 @@ class MainScaffold extends StatelessWidget {
                   bottomNavigationBar: RepaintBoundary(child: BottomBar()),
                   appBar: PreferredSize(
                       preferredSize: Size(
-                          double.infinity, 40 * settings.userScalingBars.value),
+                          double.infinity, _kAppBarHeight * settings.userScalingBars.value),
                       child: const RepaintBoundary(child: TopBar())),
                   drawer: MainMenu(),
                   body: const RepaintBoundary(child: MainScaffoldBody())));
@@ -83,6 +85,9 @@ class ToastNotifier extends StatelessWidget {
 }
 
 class MainScaffoldBody extends StatelessWidget {
+  static const double _kBarBottom = 4.0;
+  static const double _kBarLeft = 5.0;
+  static const double _kDeckMargin = 4.0;
   const MainScaffoldBody(
       {super.key, this.gameState, this.settings, this.gameData});
 
@@ -131,8 +136,8 @@ class MainScaffoldBody extends StatelessWidget {
 
                                 return Positioned(
                                     width: screenSize.width,
-                                    bottom: barScale * 4,
-                                    left: barScale * 5,
+                                    bottom: barScale * _kBarBottom,
+                                    left: barScale * _kBarLeft,
                                     child: Column(children: [
                                       Row(
                                           mainAxisAlignment: ((!separateRow &&
@@ -158,7 +163,7 @@ class MainScaffoldBody extends StatelessWidget {
                                               if (vm.shouldShowAlliesDeck)
                                                 Container(
                                                     margin: EdgeInsets.only(
-                                                      top: 4 * barScale,
+                                                      top: _kDeckMargin * barScale,
                                                     ),
                                                     child:
                                                         const ModifierDeckWidget(
@@ -169,7 +174,7 @@ class MainScaffoldBody extends StatelessWidget {
                                                   vm.showAmdDeck)
                                                 Container(
                                                     margin: EdgeInsets.only(
-                                                      top: 4 * barScale,
+                                                      top: _kDeckMargin * barScale,
                                                     ),
                                                     child:
                                                         const ModifierDeckWidget(
