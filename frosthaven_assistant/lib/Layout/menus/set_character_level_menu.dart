@@ -28,6 +28,14 @@ class SetCharacterLevelMenu extends StatefulWidget {
 }
 
 class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
+  static const double _kButtonSize = 40.0;
+  static const double _kMenuSize = 240.0;
+  static const double _kTopSpacing = 20.0;
+  static const int _kLevelRow1Count = 5;
+  static const int _kLevelRow2Count = 4;
+  static const int _kMaxHealth = 900;
+  static const double _kNameFieldWidth = 160.0;
+
   late final GameState _gameState;
   final TextEditingController nameController = TextEditingController();
   final FocusNode focusNode = FocusNode();
@@ -66,8 +74,8 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
           String text = nr.toString();
           bool darkMode = getIt<Settings>().darkMode.value;
           return SizedBox(
-            width: 40 * scale,
-            height: 40 * scale,
+            width: _kButtonSize * scale,
+            height: _kButtonSize * scale,
             child: TextButton(
               child: Text(
                 text,
@@ -104,15 +112,15 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
         GameMethods.isObjectiveOrEscort(widget.character.characterClass);
 
     return ModalBackground(
-        width: 240 * scale,
-        height: 240 * scale,
+        width: _kMenuSize * scale,
+        height: _kMenuSize * scale,
         child: Stack(children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 20 * scale,
+                height: _kTopSpacing * scale,
               ),
               ValueListenableBuilder<String>(
                   valueListenable: widget.character.characterState.display,
@@ -127,24 +135,19 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
               if (!isObjective)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    buildLevelButton(1, scale),
-                    buildLevelButton(2, scale),
-                    buildLevelButton(3, scale),
-                    buildLevelButton(4, scale),
-                    buildLevelButton(5, scale),
-                  ],
+                  children: List.generate(
+                    _kLevelRow1Count,
+                    (i) => buildLevelButton(i + 1, scale),
+                  ),
                 ),
               if (!isObjective &&
-                  widget.character.characterClass.healthByLevel.length > 5)
+                  widget.character.characterClass.healthByLevel.length > _kLevelRow1Count)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    buildLevelButton(6, scale),
-                    buildLevelButton(7, scale),
-                    buildLevelButton(8, scale),
-                    buildLevelButton(9, scale),
-                  ],
+                  children: List.generate(
+                    _kLevelRow2Count,
+                    (i) => buildLevelButton(_kLevelRow1Count + i + 1, scale),
+                  ),
                 ),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 CounterButton(
@@ -152,7 +155,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                     command: ChangeMaxHealthCommand(
                         0, widget.character.id, widget.character.id,
                         gameState: _gameState),
-                    maxValue: 900,
+                    maxValue: _kMaxHealth,
                     image: "assets/images/abilities/heal.png",
                     showTotalValue: true,
                     color: Colors.red,
@@ -162,7 +165,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
               ]),
               Text("Change name:", style: getTitleTextStyle(scale)),
               SizedBox(
-                  width: 160,
+                  width: _kNameFieldWidth,
                   child: TextField(
                     controller: nameController,
                     focusNode: focusNode,
