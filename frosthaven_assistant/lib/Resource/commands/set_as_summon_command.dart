@@ -13,12 +13,12 @@ class SetAsSummonCommand extends Command {
 
   @override
   void execute() {
-    FigureState? figure = GameMethods.getFigure(ownerId, figureId);
+    final figure = GameMethods.getFigure(ownerId, figureId);
+    if (figure is! MonsterInstance) return;
     if (summoned) {
-      (figure as MonsterInstance)
-          .setRoundSummoned(stateAccess, _gameState.round.value);
+      figure.setRoundSummoned(stateAccess, _gameState.round.value);
     } else {
-      (figure as MonsterInstance).setRoundSummoned(stateAccess, -1);
+      figure.setRoundSummoned(stateAccess, -1);
     }
     _gameState.updateList.value++;
   }
