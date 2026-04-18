@@ -9,7 +9,7 @@ import 'package:flutter/foundation.dart';
 /// Use [StatValue.fromJson] when parsing JSON — it throws [FormatException] for
 /// values that are neither int nor String, catching data errors at load time
 /// instead of silently producing wrong results at runtime.
-sealed class StatValue { // ignore: prefer-match-file-name
+sealed class StatValue { // ignore: prefer-match-file-name, file contains multiple monster model types
   const StatValue();
 
   static StatValue fromJson(Object? value) {
@@ -93,7 +93,7 @@ class MonsterModel {
     final deck = data['deck'] as String;
     final count = data['count'] as int;
 
-    final levels = data['levels'] as List<dynamic>;
+    final levels = (data['levels'] as List<Object?>).cast<Map<String, dynamic>>();
     List<MonsterLevelModel> monsterLevelDataList = [];
     for (var item in levels) {
       monsterLevelDataList.add(MonsterLevelModel.fromJson(item));
@@ -155,19 +155,19 @@ class MonsterStatsModel {
     }
     List<String> attributes = [];
     if (data.containsKey('attributes')) {
-      attributes = (data['attributes'] as List<dynamic>).cast<String>();
+      attributes = (data['attributes'] as List<Object?>).cast<String>();
     }
     List<String> immunities = [];
     if (data.containsKey('immunities')) {
-      immunities = (data['immunities'] as List<dynamic>).cast<String>();
+      immunities = (data['immunities'] as List<Object?>).cast<String>();
     }
     List<String> special1 = [];
     if (data.containsKey('special1')) {
-      special1 = (data['special1'] as List<dynamic>).cast<String>();
+      special1 = (data['special1'] as List<Object?>).cast<String>();
     }
     List<String> special2 = [];
     if (data.containsKey('special2')) {
-      special2 = (data['special2'] as List<dynamic>).cast<String>();
+      special2 = (data['special2'] as List<Object?>).cast<String>();
     }
     return MonsterStatsModel(health, move, attack, range, attributes,
         immunities, special1, special2);

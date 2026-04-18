@@ -201,26 +201,22 @@ class LineBuilder {
         backgroundColor: debugColors ? Colors.amber : null,
         //0.85,
         shadows: [shadow]);
+    bool isCenterAlignment = alignment == CrossAxisAlignment.center;
+    double centerMidFontSize = frosthavenStyle ? _kMidFontSizeFH : _kMidFontSizeGH;
+    double nonCenterMidFontSize = frosthavenStyle ? _kMidFontSizeGH : _kMidFontSizeGHStat;
+    double midFontSize = isCenterAlignment ? centerMidFontSize : nonCenterMidFontSize;
+    double centerMidLineHeight = frosthavenStyle ? _kLineHeightMidFH : _kLineHeightGH;
+    double midLineHeight = isCenterAlignment ? centerMidLineHeight : _kLineHeightGH;
+    double centerNormalFontSize = frosthavenStyle ? _kNormalFontSizeFH : _kNormalFontSizeGH;
+    double normalFontSize = isCenterAlignment ? centerNormalFontSize : _kNormalFontSizeStat;
     var midStyle = TextStyle(
         backgroundColor: debugColors ? Colors.greenAccent : null,
         leadingDistribution: TextLeadingDistribution.even,
         fontFamily: 'Majalla',
         color: left ? Colors.black : Colors.white,
-        fontSize: ((alignment == CrossAxisAlignment.center
-                ? frosthavenStyle
-                    ? _kMidFontSizeFH //7.52 is closer to physical size, but too hard to see on smaller screens
-                    : _kMidFontSizeGH
-                : frosthavenStyle
-                    ? _kMidFontSizeGH
-                    : _kMidFontSizeGHStat) *
-            scale), //.floorToDouble()+0.5, //not sur eif flooring the mid scale is really the best option. or only happens to work on my android
+        fontSize: midFontSize * scale,
         //sizes are larger on stat cards
-        height: (alignment == CrossAxisAlignment.center
-                ? frosthavenStyle
-                    ? _kLineHeightMidFH //he one problem here: one line no icons -> squished
-                    : _kLineHeightGH
-                : _kLineHeightGH //0.8
-            ),
+        height: midLineHeight,
         // 0.9,
         shadows: [shadow]);
     var normalStyle = TextStyle(
@@ -230,12 +226,7 @@ class LineBuilder {
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: left ? Colors.black : Colors.white,
         backgroundColor: debugColors ? Colors.lightGreen : null,
-        fontSize: (alignment == CrossAxisAlignment.center
-                ? frosthavenStyle
-                    ? _kNormalFontSizeFH
-                    : _kNormalFontSizeGH
-                : _kNormalFontSizeStat) *
-            scale,
+        fontSize: normalFontSize * scale,
         height: frosthavenStyle
             ? _kLineHeightFH
             : _kLineHeightGH, // needs to be at least one for the icon alignment...
@@ -274,14 +265,7 @@ class LineBuilder {
         leadingDistribution: TextLeadingDistribution.even,
         fontFamily: 'Majalla',
         color: left ? Colors.black : Colors.white,
-        fontSize: (alignment == CrossAxisAlignment.center
-                ? frosthavenStyle
-                    ? _kMidFontSizeFH
-                    : _kMidFontSizeGH
-                : frosthavenStyle
-                    ? _kMidFontSizeGH
-                    : _kMidFontSizeGHStat) *
-            scale,
+        fontSize: midFontSize * scale,
         //sizes are larger on stat cards
         height: _kLineHeightSmall,
         // 0.9,

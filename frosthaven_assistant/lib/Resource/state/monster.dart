@@ -78,7 +78,7 @@ class Monster extends ListItemData {
       }
     }
 
-    List<dynamic> instanceList = json["monsterInstances"];
+    List<Object?> instanceList = json["monsterInstances"] as List<Object?>;
 
     _monsterInstances.clear();
     for (Map<String, dynamic> item in instanceList) {

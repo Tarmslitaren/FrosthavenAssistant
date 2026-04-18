@@ -49,6 +49,24 @@ class CharacterWidgetState extends State<CharacterWidget> {
     super.initState();
   }
 
+  Widget _buildCharacterContent(CharacterViewModel vm, Character character,
+      bool isCharacter, Widget inner) {
+    if (vm.isChooseInitiative) {
+      return CharacterWidgetInternal(
+          character: character,
+          isCharacter: isCharacter,
+          characterId: character.id,
+          initPreset: widget.initPreset);
+    }
+    if (vm.showHealthWheel) {
+      return HealthWheelController(
+          figureId: widget.characterId,
+          ownerId: widget.characterId,
+          child: inner);
+    }
+    return inner;
+  }
+
   Widget buildMonsterBoxGrid(double scale, Character character) {
     String displayStartAnimation = "";
 
@@ -127,18 +145,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
                     colorFilter: vm.notGrayScale
                         ? ColorFilter.matrix(identity)
                         : ColorFilter.matrix(grayScale),
-                    child: vm.isChooseInitiative
-                        ? CharacterWidgetInternal(
-                            character: character,
-                            isCharacter: isCharacter,
-                            characterId: character.id,
-                            initPreset: widget.initPreset)
-                        : vm.showHealthWheel
-                            ? HealthWheelController(
-                                figureId: widget.characterId,
-                                ownerId: widget.characterId,
-                                child: inner)
-                            : inner)
+                    child: _buildCharacterContent(
+                        vm, character, isCharacter, inner))
               ]);
             }));
   }

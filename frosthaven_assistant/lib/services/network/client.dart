@@ -109,7 +109,7 @@ class Client {
     _cleanup();
   }
 
-  void onListenError(dynamic error) {
+  void onListenError(Object error) {
     debugPrint('Client error: ${error.toString()}');
     _network.networkMessage.value = "client error: ${error.toString()}";
   }

@@ -1,7 +1,7 @@
 part of 'game_state.dart';
 // ignore_for_file: library_private_types_in_public_api
 
-class LootCard { // ignore: prefer-match-file-name
+class LootCard { // ignore: prefer-match-file-name, file contains multiple loot deck state types
   static const int _kHighCharCount = 4;
   static const int _kLowCharCount = 2;
 
@@ -145,13 +145,13 @@ class LootDeck {
     _initPools();
   }
 
-  LootDeck.fromJson(dynamic lootDeckData) {
+  LootDeck.fromJson(Map<String, dynamic> lootDeckData) {
     updateFromJson(lootDeckData);
   }
 
   /// Updates this deck in-place from [lootDeckData], firing [_cardCount] so
   /// subscribed widgets rebuild automatically.
-  void updateFromJson(dynamic lootDeckData) {
+  void updateFromJson(Map<String, dynamic> lootDeckData) {
     _hasCard1418 = lootDeckData["1418"] as bool;
     _hasCard1419 = lootDeckData["1419"] as bool;
 

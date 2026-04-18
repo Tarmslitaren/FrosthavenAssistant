@@ -3,7 +3,7 @@ import 'package:frosthaven_assistant/services/network/server.dart';
 
 import 'network_info.dart';
 
-enum ClientState { connected, disconnected, connecting } // ignore: prefer-match-file-name
+enum ClientState { connected, disconnected, connecting } // ignore: prefer-match-file-name, file contains network state and enum together
 
 class Network {
   final Server server;

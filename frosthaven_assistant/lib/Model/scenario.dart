@@ -7,7 +7,7 @@ import 'package:frosthaven_assistant/Model/room.dart';
 import '../Resource/game_methods.dart';
 
 @immutable
-class LootDeckModel { // ignore: prefer-match-file-name
+class LootDeckModel { // ignore: prefer-match-file-name, file contains multiple scenario model types
   final int lumber;
   final int hide;
   final int metal;
@@ -59,13 +59,13 @@ class LootDeckModel { // ignore: prefer-match-file-name
 class SpecialRule {
   final String type;
   final String name;
-  final dynamic health;
+  final Object? health;
   final int level;
   final int init;
   final String note;
-  final List<dynamic> list;
+  final List<Object?> list;
   final bool startOfRound;
-  final dynamic condition;
+  final Object? condition;
 
   const SpecialRule(this.type, this.name, this.health, this.level, this.init,
       this.note, this.list, this.startOfRound, this.condition);
@@ -76,11 +76,11 @@ class SpecialRule {
     if (data.containsKey('name')) {
       name = data['name'];
     }
-    dynamic health = "";
+    Object? health = "";
     if (data.containsKey('health')) {
       health = data['health'];
     }
-    dynamic condition = "";
+    Object? condition = "";
     if (data.containsKey('condition')) {
       condition = data['condition'];
     }
@@ -100,9 +100,9 @@ class SpecialRule {
     if (data.containsKey('startOfRound')) {
       startOfRound = data['startOfRound'];
     }
-    List<dynamic> aList = [];
+    List<Object?> aList = [];
     if (data.containsKey('list')) {
-      aList = data['list'];
+      aList = data['list'] as List<Object?>;
     }
     return SpecialRule(
         type, name, health, level, init, note, aList, startOfRound, condition);
@@ -146,14 +146,14 @@ class ScenarioModel {
       String name, Map<String, dynamic> data, RoomsModel? rooms) {
     List<String> monsterList = [];
     if (data.containsKey('monsters')) {
-      final monsters = data['monsters'] as List<dynamic>;
+      final monsters = (data['monsters'] as List<Object?>).cast<String>();
       for (var monster in monsters) {
         monsterList.add(monster);
       }
     }
     List<SpecialRule> rulesList = [];
     if (data.containsKey('special')) {
-      final specialRules = data['special'] as List<dynamic>;
+      final specialRules = (data['special'] as List<Object?>).cast<Map<String, dynamic>>();
       for (var rule in specialRules) {
         rulesList.add(SpecialRule.fromJson(rule));
       }
@@ -234,14 +234,14 @@ class ScenarioModel {
       String name, Map<String, dynamic> data, RoomsModel? rooms) {
     List<String> monsterList = [];
     if (data.containsKey('monsters')) {
-      final monsters = data['monsters'] as List<dynamic>;
+      final monsters = (data['monsters'] as List<Object?>).cast<String>();
       for (var monster in monsters) {
         monsterList.add(monster);
       }
     }
     List<SpecialRule> rulesList = [];
     if (data.containsKey('special')) {
-      final specialRules = data['special'] as List<dynamic>;
+      final specialRules = (data['special'] as List<Object?>).cast<Map<String, dynamic>>();
       for (var rule in specialRules) {
         rulesList.add(SpecialRule.fromJson(rule));
       }

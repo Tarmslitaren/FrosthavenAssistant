@@ -126,6 +126,8 @@ class AddSummonMenuState extends State<AddSummonMenu> {
     Color color = Colors.transparent;
     String text = nr.toString();
     bool darkMode = _settings.darkMode.value;
+    Color selectedTextColor = darkMode ? Colors.white : Colors.black;
+    Color textColor = isCurrentlySelected ? selectedTextColor : Colors.grey;
     return SizedBox(
       width: _kButtonSize * scale,
       height: _kButtonSize * scale,
@@ -140,11 +142,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
               text,
               style: TextStyle(
                   fontSize: kFontSizeTitle * scale,
-                  color: isCurrentlySelected
-                      ? darkMode
-                          ? Colors.white
-                          : Colors.black
-                      : Colors.grey),
+                  color: textColor),
             ),
             onPressed: () {
               if (!isCurrentlySelected) {

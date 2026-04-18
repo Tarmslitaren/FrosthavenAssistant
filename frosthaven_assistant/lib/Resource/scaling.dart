@@ -41,7 +41,7 @@ double _scaleByReference(
   return width / referenceWidth;
 }
 
-extension GlobalPaintBounds on BuildContext { // ignore: prefer-match-file-name
+extension GlobalPaintBounds on BuildContext { // ignore: prefer-match-file-name, file contains scaling utilities and this extension
   Rect? get globalPaintBounds {
     final renderObject =
         findRenderObject(); // Get the RenderObject associated with the widget

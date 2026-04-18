@@ -224,27 +224,26 @@ class MonsterStatCardWidget extends StatelessWidget {
                   scale,
                   settings.shimmer.value)),
         ),
-        data.type.flying
-            ? Positioned(
-                height: _kStatIconHeight * scale,
-                left: _kStatIconLeft * scale,
-                top: _kStatIconTopMove * scale,
-                child: Image(
-                  fit: BoxFit.fitHeight,
-                  image: AssetImage(frosthavenStyle
-                      ? "assets/images/psd/flying-stat_fh.png"
-                      : "assets/images/psd/flying-stat.png"),
-                ))
-            : frosthavenStyle
-                ? Positioned(
-                    height: _kStatIconHeight * scale,
-                    left: _kStatIconLeft * scale,
-                    top: _kStatIconTopMove * scale,
-                    child: const Image(
-                      fit: BoxFit.fitHeight,
-                      image: AssetImage("assets/images/psd/move-stat_fh.png"),
-                    ))
-                : Container(),
+        if (data.type.flying)
+          Positioned(
+              height: _kStatIconHeight * scale,
+              left: _kStatIconLeft * scale,
+              top: _kStatIconTopMove * scale,
+              child: Image(
+                fit: BoxFit.fitHeight,
+                image: AssetImage(frosthavenStyle
+                    ? "assets/images/psd/flying-stat_fh.png"
+                    : "assets/images/psd/flying-stat.png"),
+              )),
+        if (!data.type.flying && frosthavenStyle)
+          Positioned(
+              height: _kStatIconHeight * scale,
+              left: _kStatIconLeft * scale,
+              top: _kStatIconTopMove * scale,
+              child: const Image(
+                fit: BoxFit.fitHeight,
+                image: AssetImage("assets/images/psd/move-stat_fh.png"),
+              )),
         if (frosthavenStyle)
           Positioned(
               height: _kStatIconHeight * scale,
@@ -473,29 +472,26 @@ class MonsterStatCardWidget extends StatelessWidget {
                         ])
                   : Container()
             ])),
-        data.type.flying
-            ? Positioned(
-                height: _kStatIconHeight * scale,
-                left: _kBossStatIconLeft * scale,
-                top: _kBossStatIconTop * scale,
-                child: Image(
-                  fit: BoxFit.fitHeight,
-                  image: AssetImage(frosthavenStyle
-                      ? "assets/images/psd/flying-stat_fh.png"
-                      : "assets/images/psd/flying-stat.png"),
-                ),
-              )
-            : !frosthavenStyle
-                ? Positioned(
-                    height: _kStatIconHeight * scale,
-                    left: _kBossStatIconLeft * scale,
-                    top: _kBossStatIconTop * scale,
-                    child: const Image(
-                      fit: BoxFit.fitHeight,
-                      image: AssetImage("assets/images/psd/move-stat.png"),
-                    ),
-                  )
-                : Container(),
+        if (data.type.flying)
+          Positioned(
+              height: _kStatIconHeight * scale,
+              left: _kBossStatIconLeft * scale,
+              top: _kBossStatIconTop * scale,
+              child: Image(
+                fit: BoxFit.fitHeight,
+                image: AssetImage(frosthavenStyle
+                    ? "assets/images/psd/flying-stat_fh.png"
+                    : "assets/images/psd/flying-stat.png"),
+              )),
+        if (!data.type.flying && !frosthavenStyle)
+          Positioned(
+              height: _kStatIconHeight * scale,
+              left: _kBossStatIconLeft * scale,
+              top: _kBossStatIconTop * scale,
+              child: const Image(
+                fit: BoxFit.fitHeight,
+                image: AssetImage("assets/images/psd/move-stat.png"),
+              )),
         if (normal.range != 0)
           Positioned(
               height: _kStatIconHeight * scale,

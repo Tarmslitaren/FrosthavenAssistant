@@ -88,6 +88,12 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                 }
                 String text = nr.toString();
                 bool darkMode = _settings.darkMode.value;
+                Color shadowColor = isCurrentlySelected && !darkMode
+                    ? Colors.grey
+                    : Colors.black;
+                Color selectedTextColor = darkMode ? Colors.white : Colors.black;
+                Color textColor =
+                    isCurrentlySelected ? selectedTextColor : Colors.grey;
                 return SizedBox(
                   width: SetLevelMenu._kButtonSize * scale,
                   height: SetLevelMenu._kButtonSize * scale,
@@ -106,17 +112,9 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                               shadows: [
                                 Shadow(
                                     offset: Offset(SetLevelMenu._kShadowOffset * scale, SetLevelMenu._kShadowOffset * scale),
-                                    color: isCurrentlySelected
-                                        ? darkMode
-                                            ? Colors.black
-                                            : Colors.grey
-                                        : Colors.black)
+                                    color: shadowColor)
                               ],
-                              color: isCurrentlySelected
-                                  ? darkMode
-                                      ? Colors.white
-                                      : Colors.black
-                                  : Colors.grey),
+                              color: textColor),
                         ),
                         onPressed: () {
                           if (!isCurrentlySelected) {
@@ -181,6 +179,12 @@ class SetLevelMenuState extends State<SetLevelMenu> {
             text = "+$text";
           }
           bool darkMode = _settings.darkMode.value;
+          Color shadowColor = isCurrentlySelected && !darkMode
+              ? Colors.grey
+              : Colors.black;
+          Color selectedTextColor = darkMode ? Colors.white : Colors.black;
+          Color textColor =
+              isCurrentlySelected ? selectedTextColor : Colors.grey;
           return SizedBox(
             width: SetLevelMenu._kButtonSize * scale,
             height: SetLevelMenu._kButtonSize * scale,
@@ -199,17 +203,9 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                         shadows: [
                           Shadow(
                               offset: Offset(SetLevelMenu._kShadowOffset * scale, SetLevelMenu._kShadowOffset * scale),
-                              color: isCurrentlySelected
-                                  ? darkMode
-                                      ? Colors.black
-                                      : Colors.grey
-                                  : Colors.black)
+                              color: shadowColor)
                         ],
-                        color: isCurrentlySelected
-                            ? darkMode
-                                ? Colors.white
-                                : Colors.black
-                            : Colors.grey),
+                        color: textColor),
                   ),
                   onPressed: () {
                     if (!isCurrentlySelected) {

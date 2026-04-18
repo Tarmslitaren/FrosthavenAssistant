@@ -38,16 +38,16 @@ class CharacterClass {
       hidden = data['hidden'] as bool;
     }
     //TODO: color array + gradiantType support
-    final healthByLevel = (data['health'] as List<dynamic>).cast<int>();
+    final healthByLevel = (data['health'] as List<Object?>).cast<int>();
     int radix = 16;
     var colorValue = data['color'];
-    Color color = (colorValue is List<dynamic>)
-        ? Color(int.parse(colorValue.first, radix: radix))
-        : Color(int.parse(colorValue, radix: radix));
+    Color color = (colorValue is List<Object?>)
+        ? Color(int.parse(colorValue.first as String, radix: radix))
+        : Color(int.parse(colorValue as String, radix: radix));
 
     Color colorSecondary = color;
     if (data.containsKey("colorSecondary")) {
-      colorSecondary = (data["colorSecondary"] is List<dynamic>)
+      colorSecondary = (data["colorSecondary"] is List<Object?>)
           ? colorSecondary =
               Color(int.parse(data['colorSecondary'][0], radix: radix))
           : Color(int.parse(data['colorSecondary'], radix: radix));
@@ -63,7 +63,7 @@ class CharacterClass {
 
     List<PerkModel> perkList = [];
     if (data.containsKey('perks')) {
-      final perks = data['perks'] as List<dynamic>;
+      final perks = (data['perks'] as List<Object?>).cast<Map<String, dynamic>>();
       for (final item in perks) {
         perkList.add(PerkModel.fromJson(item));
       }
@@ -71,7 +71,7 @@ class CharacterClass {
 
     List<PerkModel> perkFHList = [];
     if (data.containsKey('perks_fh')) {
-      final perks = data['perks_fh'] as List<dynamic>;
+      final perks = (data['perks_fh'] as List<Object?>).cast<Map<String, dynamic>>();
       for (final item in perks) {
         perkFHList.add(PerkModel.fromJson(item));
       }
@@ -97,7 +97,7 @@ class PerkModel {
 
     List<String> addList = [];
     if (data.containsKey('adds')) {
-      final adds = data['adds'] as List<dynamic>;
+      final adds = (data['adds'] as List<Object?>).cast<String>();
       for (String item in adds) {
         addList.add(item);
       }
@@ -105,7 +105,7 @@ class PerkModel {
 
     List<String> removeList = [];
     if (data.containsKey('removes')) {
-      final removes = data['removes'] as List<dynamic>;
+      final removes = (data['removes'] as List<Object?>).cast<String>();
       for (String item in removes) {
         removeList.add(item);
       }

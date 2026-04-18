@@ -186,7 +186,7 @@ class ListAnimationState extends State<ListAnimation>
     _diff = widget.skipAnimation ? 0 : lastPosition - position;
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      MainListState.lastPositions = positions;
+      MainListState.lastPositions..clear()..addAll(positions);
     });
 
     return RepaintBoundary(
@@ -234,7 +234,7 @@ class MainListState extends State<MainList> {
   List<Widget> _generatedList = [];
   static final scrollController = ScrollController();
 
-  static List<double> lastPositions = [];
+  static final List<double> lastPositions = [];
 
   /// Set to true by [onReorder] so the next [_generateChildren] call skips
   /// the translation animation (the drag widget already animates the move).
@@ -252,7 +252,7 @@ class MainListState extends State<MainList> {
 
     //this does cause a index 0
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      lastPositions = _vm.getItemHeights(context);
+      lastPositions..clear()..addAll(_vm.getItemHeights(context));
     });
   }
 

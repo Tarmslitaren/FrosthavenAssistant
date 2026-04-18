@@ -15,7 +15,7 @@ class ShuffleDrawnAbilityCardCommand extends Command {
     if (monster != null) {
       MonsterAbilityState? deck = GameMethods.getDeck(monster.type.deck);
       deck?.shuffleUnDrawn(stateAccess);
-      AbilityCardsMenuState.revealedList = [];
+      AbilityCardsMenuState.revealedList.clear();
     }
   }
 

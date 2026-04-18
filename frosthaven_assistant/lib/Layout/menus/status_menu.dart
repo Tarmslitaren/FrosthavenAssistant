@@ -133,6 +133,92 @@ class StatusMenuState extends State<StatusMenu> {
     _settings = widget.settings ?? getIt<Settings>();
   }
 
+  Widget _buildExtraConditionRow(
+      {required bool isCharacter,
+      required bool isSummon,
+      required bool hasMireFoot,
+      required bool showCustomContent,
+      required String figureId,
+      required String? ownerId,
+      required List<String> immunities,
+      required double scale}) {
+    if (isCharacter || isSummon) {
+      return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        if (showCustomContent)
+          ConditionButton(
+              condition: Condition.infect,
+              figureId: figureId,
+              ownerId: ownerId,
+              immunities: immunities,
+              scale: scale),
+        if (!isSummon)
+          ConditionButton(
+              condition: Condition.impair,
+              figureId: figureId,
+              ownerId: ownerId,
+              immunities: immunities,
+              scale: scale),
+        if (showCustomContent)
+          ConditionButton(
+              condition: Condition.rupture,
+              figureId: figureId,
+              ownerId: ownerId,
+              immunities: immunities,
+              scale: scale),
+      ]);
+    }
+    if (!hasMireFoot) {
+      return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        if (showCustomContent)
+          ConditionButton(
+              condition: Condition.poison2,
+              figureId: figureId,
+              ownerId: ownerId,
+              immunities: immunities,
+              scale: scale),
+        if (showCustomContent)
+          ConditionButton(
+              condition: Condition.rupture,
+              figureId: figureId,
+              ownerId: ownerId,
+              immunities: immunities,
+              scale: scale),
+      ]);
+    }
+    return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+      ConditionButton(
+          condition: Condition.wound2,
+          figureId: figureId,
+          ownerId: ownerId,
+          immunities: immunities,
+          scale: scale),
+      ConditionButton(
+          condition: Condition.poison2,
+          figureId: figureId,
+          ownerId: ownerId,
+          immunities: immunities,
+          scale: scale),
+      ConditionButton(
+          condition: Condition.poison3,
+          figureId: figureId,
+          ownerId: ownerId,
+          immunities: immunities,
+          scale: scale),
+      ConditionButton(
+          condition: Condition.poison4,
+          figureId: figureId,
+          ownerId: ownerId,
+          immunities: immunities,
+          scale: scale),
+      ConditionButton(
+          condition: Condition.rupture,
+          figureId: figureId,
+          ownerId: ownerId,
+          immunities: immunities,
+          scale: scale),
+    ]);
+  }
+
   Widget buildStackableConditionButtons(
       ValueListenable<int> notifier,
       Condition stackableCondition,
@@ -180,7 +266,8 @@ class StatusMenuState extends State<StatusMenu> {
                           fontSize: kFontSizeBody * scale,
                           shadows: [
                             Shadow(
-                              offset: Offset(StatusMenu._kShadowOffset * scale, StatusMenu._kShadowOffset * scale),
+                              offset: Offset(StatusMenu._kShadowOffset * scale,
+                                  StatusMenu._kShadowOffset * scale),
                               color: Colors.black87,
                               blurRadius: StatusMenu._kShadowBlur * scale,
                             )
@@ -218,8 +305,7 @@ class StatusMenuState extends State<StatusMenu> {
           if (figure is! MonsterInstance) return Container();
           bool isActive = figure.roundSummoned != -1;
           if (isActive) {
-            color =
-                _settings.darkMode.value ? Colors.white : Colors.black;
+            color = _settings.darkMode.value ? Colors.white : Colors.black;
           }
 
           return Container(
@@ -231,7 +317,8 @@ class StatusMenuState extends State<StatusMenu> {
                   border: Border.all(
                     color: color,
                   ),
-                  borderRadius: BorderRadius.all(Radius.circular(StatusMenu._kSummonBorderRadius * scale))),
+                  borderRadius: BorderRadius.all(Radius.circular(
+                      StatusMenu._kSummonBorderRadius * scale))),
               child: IconButton(
                   icon: isActive
                       ? Image(
@@ -350,8 +437,7 @@ class StatusMenuState extends State<StatusMenu> {
     //get id and owner Id
     final characterMatch = _gameState.currentList
         .firstWhereOrNull((item) => item.id == widget.characterId);
-    Character? character =
-        characterMatch is Character ? characterMatch : null;
+    Character? character = characterMatch is Character ? characterMatch : null;
     if (figure is CharacterState && character != null) {
       name = character.characterClass.name;
     }
@@ -395,7 +481,11 @@ class StatusMenuState extends State<StatusMenu> {
                                   Container(
                                       height: StatusMenu._kHeaderHeight * scale,
                                       margin: EdgeInsets.only(
-                                          top: StatusMenu._kConditionMarginTop * scale, right: StatusMenu._kConditionMarginRight * scale),
+                                          top: StatusMenu._kConditionMarginTop *
+                                              scale,
+                                          right: StatusMenu
+                                                  ._kConditionMarginRight *
+                                              scale),
                                       child: ConditionIcon(
                                         Condition.shield,
                                         StatusMenu._kConditionIconSize * scale,
@@ -407,7 +497,11 @@ class StatusMenuState extends State<StatusMenu> {
                                   Container(
                                       height: StatusMenu._kHeaderHeight * scale,
                                       margin: EdgeInsets.only(
-                                          top: StatusMenu._kConditionMarginTop * scale, right: StatusMenu._kConditionMarginRight * scale),
+                                          top: StatusMenu._kConditionMarginTop *
+                                              scale,
+                                          right: StatusMenu
+                                                  ._kConditionMarginRight *
+                                              scale),
                                       child: ConditionIcon(
                                         Condition.retaliate,
                                         StatusMenu._kConditionIconSize * scale,
@@ -417,20 +511,25 @@ class StatusMenuState extends State<StatusMenu> {
                                       )),
                                 Container(
                                     height: StatusMenu._kHeaderHeight * scale,
-                                    margin: EdgeInsets.only(top: StatusMenu._kConditionMarginTop * scale),
+                                    margin: EdgeInsets.only(
+                                        top: StatusMenu._kConditionMarginTop *
+                                            scale),
                                     child: MonsterBox(
                                         figureId: figureId,
                                         ownerId: ownerId,
                                         displayStartAnimation: "",
                                         blockInput: true,
-                                        scale: scale * StatusMenu._kMonsterBoxScale))
+                                        scale: scale *
+                                            StatusMenu._kMonsterBoxScale))
                               ]);
                             }),
                       if (isIceWraith)
                         TextButton(
                             clipBehavior: Clip.hardEdge,
                             style: TextButton.styleFrom(
-                              padding: EdgeInsets.only(right: StatusMenu._kSummonPaddingRight * scale),
+                              padding: EdgeInsets.only(
+                                  right:
+                                      StatusMenu._kSummonPaddingRight * scale),
                             ),
                             onPressed: () {
                               setState(() {
@@ -469,7 +568,8 @@ class StatusMenuState extends State<StatusMenu> {
                       hasXp = true;
 
                       for (var item in _gameState.currentList) {
-                        if (item.id == widget.characterId && item is Character) {
+                        if (item.id == widget.characterId &&
+                            item is Character) {
                           if (GameMethods.isObjectiveOrEscort(
                               item.characterClass)) {
                             hasXp = false;
@@ -499,9 +599,8 @@ class StatusMenuState extends State<StatusMenu> {
                             _settings.showCharacterAMD.value &&
                             isCharacter ||
                         isSummon;
-                    final bool showMonsterAmd =
-                        _settings.showAmdDeck.value &&
-                            (isObjective || (isMonster && !isSummon));
+                    final bool showMonsterAmd = _settings.showAmdDeck.value &&
+                        (isObjective || (isMonster && !isSummon));
                     final bool showAmd = showCharacterAmd || showMonsterAmd;
 
                     final isAlly = deck.name == "allies";
@@ -561,7 +660,9 @@ class StatusMenuState extends State<StatusMenu> {
                         SizedBox(height: hasXp ? StatusMenu._kTopSpacing : 0),
                         SizedBox(
                             //todo? why this?
-                            height: !showCharacterAmd || isSummon ? StatusMenu._kTopSpacing : 0),
+                            height: !showCharacterAmd || isSummon
+                                ? StatusMenu._kTopSpacing
+                                : 0),
                         if (showAmd)
                           CounterButton(
                               notifier: deck.getRemovable("bless"),
@@ -574,7 +675,9 @@ class StatusMenuState extends State<StatusMenu> {
                               figureId: figureId,
                               ownerId: ownerId,
                               scale: scale),
-                        SizedBox(height: showCharacterAmd ? StatusMenu._kTopSpacing : 0),
+                        SizedBox(
+                            height:
+                                showCharacterAmd ? StatusMenu._kTopSpacing : 0),
                         if ((canBeCursed && showMonsterAmd) || showCharacterAmd)
                           CounterButton(
                               notifier: deck.getRemovable("curse"),
@@ -646,8 +749,7 @@ class StatusMenuState extends State<StatusMenu> {
                           CounterButton(
                               notifier: deck.getRemovable("vi-empower"),
                               command: ChangeEmpowerCommand.deck(
-                                  deck, "vi-empower",
-                                  gameState: _gameState),
+                                  deck, "vi-empower", gameState: _gameState),
                               maxValue: StatusMenu._kMaxBlessCurse,
                               image: "assets/images/abilities/empower.png",
                               extraImage: hasMoreThanOneEmpower
@@ -664,8 +766,7 @@ class StatusMenuState extends State<StatusMenu> {
                           CounterButton(
                               notifier: deck.getRemovable("vi-gr-empower"),
                               command: ChangeEmpowerCommand.deck(
-                                  deck, "vi-gr-empower",
-                                  gameState: _gameState),
+                                  deck, "vi-gr-empower", gameState: _gameState),
                               maxValue: StatusMenu._kMaxVimthreaderGrEmpower,
                               image:
                                   "assets/images/abilities/greater-empower.png",
@@ -681,8 +782,7 @@ class StatusMenuState extends State<StatusMenu> {
                           CounterButton(
                               notifier: deck.getRemovable("vi-enfeeble"),
                               command: ChangeEnfeebleCommand.deck(
-                                  deck, "vi-enfeeble",
-                                  gameState: _gameState),
+                                  deck, "vi-enfeeble", gameState: _gameState),
                               maxValue: StatusMenu._kMaxBlessCurse,
                               image: "assets/images/abilities/enfeeble.png",
                               extraImage: hasMoreThanOneEnfeeble
@@ -717,8 +817,7 @@ class StatusMenuState extends State<StatusMenu> {
                           CounterButton(
                               notifier: deck.getRemovable("li-enfeeble"),
                               command: ChangeEnfeebleCommand.deck(
-                                  deck, "li-enfeeble",
-                                  gameState: _gameState),
+                                  deck, "li-enfeeble", gameState: _gameState),
                               maxValue: StatusMenu._kMaxLifespeakerEnfeeble,
                               image: "assets/images/abilities/enfeeble.png",
                               extraImage: hasMoreThanOneEnfeeble
@@ -749,7 +848,8 @@ class StatusMenuState extends State<StatusMenu> {
                               figureId,
                               ownerId,
                               scale),
-                        SizedBox(height: canBeCursed ? StatusMenu._kTopSpacing : 0),
+                        SizedBox(
+                            height: canBeCursed ? StatusMenu._kTopSpacing : 0),
                         Row(
                           children: [
                             SizedBox(
@@ -798,9 +898,13 @@ class StatusMenuState extends State<StatusMenu> {
                                       color: Colors.white,
                                       shadows: [
                                         Shadow(
-                                          offset: Offset(StatusMenu._kShadowOffset * scale, StatusMenu._kShadowOffset * scale),
+                                          offset: Offset(
+                                              StatusMenu._kShadowOffset * scale,
+                                              StatusMenu._kShadowOffset *
+                                                  scale),
                                           color: Colors.black87,
-                                          blurRadius: StatusMenu._kShadowBlur * scale,
+                                          blurRadius:
+                                              StatusMenu._kShadowBlur * scale,
                                         )
                                       ])),
                           ],
@@ -878,88 +982,15 @@ class StatusMenuState extends State<StatusMenu> {
                           scale: scale),
                     ],
                   ),
-                  isCharacter || isSummon
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            if (showCustomContent)
-                              ConditionButton(
-                                  condition: Condition.infect,
-                                  figureId: figureId,
-                                  ownerId: ownerId,
-                                  immunities: immunities,
-                                  scale: scale),
-                            if (!isSummon)
-                              ConditionButton(
-                                  condition: Condition.impair,
-                                  figureId: figureId,
-                                  ownerId: ownerId,
-                                  immunities: immunities,
-                                  scale: scale),
-                            if (showCustomContent)
-                              ConditionButton(
-                                  condition: Condition.rupture,
-                                  figureId: figureId,
-                                  ownerId: ownerId,
-                                  immunities: immunities,
-                                  scale: scale),
-                          ],
-                        )
-                      : !hasMireFoot
-                          ? Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                if (showCustomContent)
-                                  ConditionButton(
-                                      condition: Condition.poison2,
-                                      figureId: figureId,
-                                      ownerId: ownerId,
-                                      immunities: immunities,
-                                      scale: scale),
-                                if (showCustomContent)
-                                  ConditionButton(
-                                      condition: Condition.rupture,
-                                      figureId: figureId,
-                                      ownerId: ownerId,
-                                      immunities: immunities,
-                                      scale: scale),
-                              ],
-                            )
-                          : Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                ConditionButton(
-                                    condition: Condition.wound2,
-                                    figureId: figureId,
-                                    ownerId: ownerId,
-                                    immunities: immunities,
-                                    scale: scale),
-                                ConditionButton(
-                                    condition: Condition.poison2,
-                                    figureId: figureId,
-                                    ownerId: ownerId,
-                                    immunities: immunities,
-                                    scale: scale),
-                                ConditionButton(
-                                    condition: Condition.poison3,
-                                    figureId: figureId,
-                                    ownerId: ownerId,
-                                    immunities: immunities,
-                                    scale: scale),
-                                ConditionButton(
-                                    condition: Condition.poison4,
-                                    figureId: figureId,
-                                    ownerId: ownerId,
-                                    immunities: immunities,
-                                    scale: scale),
-                                ConditionButton(
-                                    condition: Condition.rupture,
-                                    figureId: figureId,
-                                    ownerId: ownerId,
-                                    immunities: immunities,
-                                    scale: scale),
-                              ],
-                            ),
+                  _buildExtraConditionRow(
+                      isCharacter: isCharacter,
+                      isSummon: isSummon,
+                      hasMireFoot: hasMireFoot,
+                      showCustomContent: showCustomContent,
+                      figureId: figureId,
+                      ownerId: ownerId,
+                      immunities: immunities,
+                      scale: scale),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

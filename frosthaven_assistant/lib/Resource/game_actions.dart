@@ -7,7 +7,7 @@ import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
-class DrawOrNextRoundResult { // ignore: prefer-match-file-name
+class DrawOrNextRoundResult { // ignore: prefer-match-file-name, file contains multiple game action types
   const DrawOrNextRoundResult._({this.blockedMessage});
 
   final String? blockedMessage;

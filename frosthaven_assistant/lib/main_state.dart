@@ -15,7 +15,7 @@ import 'Layout/main_scaffold.dart';
 import 'Model/campaign.dart';
 import 'main.dart';
 
-class DataLoadedNotification extends Notification {
+class DataLoadedNotification extends Notification { // ignore: prefer-match-file-name, companion type for MainState in same file
   final CampaignModel data;
 
   const DataLoadedNotification({required this.data});

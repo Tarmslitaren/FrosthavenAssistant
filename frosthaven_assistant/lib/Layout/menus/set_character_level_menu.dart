@@ -73,6 +73,8 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
               nr == widget.character.characterState.level.value;
           String text = nr.toString();
           bool darkMode = getIt<Settings>().darkMode.value;
+          Color selectedTextColor = darkMode ? Colors.white : Colors.black;
+          Color textColor = isCurrentlySelected ? selectedTextColor : Colors.grey;
           return SizedBox(
             width: _kButtonSize * scale,
             height: _kButtonSize * scale,
@@ -90,9 +92,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                         blurRadius: 1 * scale,
                       ),
                     ],
-                    color: isCurrentlySelected
-                        ? (darkMode ? Colors.white : Colors.black)
-                        : Colors.grey),
+                    color: textColor),
               ),
               onPressed: () {
                 if (!isCurrentlySelected) {

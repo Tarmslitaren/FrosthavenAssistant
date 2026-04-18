@@ -116,6 +116,36 @@ class ConditionButton extends StatelessWidget {
                 .color;
           }
 
+          Widget inactiveIcon = isCharacter
+              ? Stack(alignment: Alignment.center, children: [
+                  Image(
+                      color: classColor,
+                      colorBlendMode: BlendMode.modulate,
+                      height: _kIconSize * scale,
+                      filterQuality: FilterQuality.medium,
+                      image: const AssetImage(
+                          "assets/images/psd/class-token-bg.png")),
+                  Image(
+                      height: (_kIconSize * scale * _kClassTokenScale),
+                      width: (_kIconSize * scale * _kClassTokenScale),
+                      image: AssetImage(imagePath),
+                      filterQuality: FilterQuality.medium),
+                ])
+              : Image.asset(
+                  filterQuality: FilterQuality.medium,
+                  //needed because of the edges
+                  height: _kIconSize * scale,
+                  width: _kIconSize * scale,
+                  imagePath);
+          Widget enabledIcon = isActive
+              ? ConditionIcon(
+                  condition,
+                  _kIconSize * scale,
+                  owner!,
+                  figure,
+                  scale: scale,
+                )
+              : inactiveIcon;
           return Container(
               width: _kButtonSize * scale,
               height: _kButtonSize * scale,
@@ -128,35 +158,7 @@ class ConditionButton extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(_kBorderRadius * scale))),
               child: IconButton(
                 icon: enabled
-                    ? isActive
-                        ? ConditionIcon(
-                            condition,
-                            _kIconSize * scale,
-                            owner!,
-                            figure,
-                            scale: scale,
-                          )
-                        : isCharacter
-                            ? Stack(alignment: Alignment.center, children: [
-                                Image(
-                                    color: classColor,
-                                    colorBlendMode: BlendMode.modulate,
-                                    height: _kIconSize * scale,
-                                    filterQuality: FilterQuality.medium,
-                                    image: const AssetImage(
-                                        "assets/images/psd/class-token-bg.png")),
-                                Image(
-                                    height: (_kIconSize * scale * _kClassTokenScale),
-                                    width: (_kIconSize * scale * _kClassTokenScale),
-                                    image: AssetImage(imagePath),
-                                    filterQuality: FilterQuality.medium),
-                              ])
-                            : Image.asset(
-                                filterQuality: FilterQuality.medium,
-                                //needed because of the edges
-                                height: _kIconSize * scale,
-                                width: _kIconSize * scale,
-                                imagePath)
+                    ? enabledIcon
                     : Stack(
                         alignment: Alignment.center,
                         children: [

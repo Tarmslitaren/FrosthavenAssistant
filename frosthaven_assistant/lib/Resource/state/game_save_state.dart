@@ -23,8 +23,8 @@ class GameSaveState {
         }
 
         if (data.containsKey('scenarioSectionsAdded')) {
-          List<dynamic> scenarioSectionsAdded =
-              data['scenarioSectionsAdded'] as List;
+          List<Object?> scenarioSectionsAdded =
+              data['scenarioSectionsAdded'] as List<Object?>;
           gameState._scenarioSectionsAdded.clear();
           for (var item in scenarioSectionsAdded) {
             gameState._scenarioSectionsAdded.add(item);
@@ -228,7 +228,7 @@ class GameSaveState {
     gameState._lootDeck.updateFromJson(data["lootDeck"]);
   }
 
-  void _loadModifierDeck(String identifier, var data, GameState gameState) {
+  void _loadModifierDeck(String identifier, Map<String, dynamic> data, GameState gameState) {
     final modifierDeckData = data[identifier] as Map<String, dynamic>;
     if (identifier == 'modifierDeck') {
       gameState._modifierDeck.updateFromJson(modifierDeckData);

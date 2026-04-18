@@ -74,11 +74,8 @@ class MonsterStatCardViewModel {
 
     final nrOfStandees = monster.monsterInstances.length;
     final maxStandees = monster.type.count;
-    final type = isBossStandee
-        ? MonsterType.boss
-        : left
-            ? MonsterType.normal
-            : MonsterType.elite;
+    MonsterType nonBossType = left ? MonsterType.normal : MonsterType.elite;
+    final type = isBossStandee ? MonsterType.boss : nonBossType;
 
     if (nrOfStandees == maxStandees - 1) {
       MonsterMethods.addStandee(null, monster, type, false);

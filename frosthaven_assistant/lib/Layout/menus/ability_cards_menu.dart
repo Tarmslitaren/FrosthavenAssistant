@@ -38,18 +38,18 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
   static const int _kMaxRevealButtons = 8;
 
   late final GameState _gameState;
-  static List<MonsterAbilityCardModel> revealedList = [];
+  static final List<MonsterAbilityCardModel> revealedList = [];
 
   @override
   initState() {
     super.initState();
     _gameState = widget.gameState ?? getIt<GameState>();
-    revealedList = [];
+    revealedList.clear();
   }
 
   void markAsOpen(int revealed) {
     setState(() {
-      revealedList = [];
+      revealedList.clear();
       var drawPile =
           widget.monsterAbilityState.drawPileContents.reversed.toList();
       for (int i = 0; i < revealed; i++) {

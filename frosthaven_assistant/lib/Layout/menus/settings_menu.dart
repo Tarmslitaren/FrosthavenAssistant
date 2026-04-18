@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 
@@ -467,7 +468,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                                 ClientState.connecting,
                                         title: Text(connectionText),
                                         value: connected,
-                                        onChanged: (bool? value) async {
+                                        onChanged: (bool? value) {
                                           if (settings.client.value !=
                                               ClientState.connected) {
                                             setState(() {
@@ -478,9 +479,10 @@ class SettingsMenuState extends State<SettingsMenu> {
                                               settings.lastKnownConnection =
                                                   _serverTextController.text;
                                             });
-                                            await _client.connect(
-                                                _serverTextController.text);
-                                            settings.saveToDisk();
+                                            unawaited(_client.connect(
+                                                _serverTextController.text)
+                                              ..whenComplete(
+                                                  settings.saveToDisk));
                                           } else {
                                             setState(() {
                                               _client.disconnect(null);

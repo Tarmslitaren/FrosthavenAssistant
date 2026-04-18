@@ -10,7 +10,7 @@ import 'package:frosthaven_assistant/Model/room.dart';
 import 'package:frosthaven_assistant/Model/scenario.dart';
 
 @immutable
-class CampaignModel {
+class CampaignModel { // ignore: prefer-match-file-name, file name reflects campaign data domain
   const CampaignModel(
       {required this.edition,
       required this.monsterAbilities,
@@ -28,7 +28,7 @@ class CampaignModel {
     // note the explicit cast to String
     // this is required if robust lint rules are enabled
     final edition = data['edition'] as String;
-    final monsterAbilities = data['monsterAbilities'] as List<dynamic>;
+    final monsterAbilities = (data['monsterAbilities'] as List<Object?>).cast<Map<String, dynamic>>();
     List<MonsterAbilityDeckModel> deckDataList = [];
     for (var item in monsterAbilities) {
       deckDataList.add(MonsterAbilityDeckModel.fromJson(item, edition));
@@ -41,7 +41,7 @@ class CampaignModel {
     }
 
     List<CharacterClass> characterDataList = [];
-    final classes = data['classes'] as List<dynamic>;
+    final classes = (data['classes'] as List<Object?>).cast<Map<String, dynamic>>();
     for (var item in classes) {
       characterDataList.add(CharacterClass.fromJson(item));
     }
