@@ -158,11 +158,9 @@ class ScenarioMethods {
         if (scenarioData != null) {
           monsters = scenarioData.monsters;
           specialRules = scenarioData.specialRules.toList();
-          if (initMessage.isNotEmpty && scenarioData.initMessage.isNotEmpty) {
-            initMessage += "\n\n${scenarioData.initMessage}";
-          } else {
-            initMessage += scenarioData.initMessage;
-          }
+          initMessage += initMessage.isNotEmpty && scenarioData.initMessage.isNotEmpty
+              ? "\n\n${scenarioData.initMessage}"
+              : scenarioData.initMessage;
           final monsterStandees = scenarioData.monsterStandees;
           roomMonsterData =
               monsterStandees != null ? monsterStandees.toList() : [];
@@ -264,11 +262,9 @@ class ScenarioMethods {
           for (int round in item.list) {
             //minus 1 means always
             if (round == _kRound1 || round == _kTimerAlways) {
-              if (initMessage.isNotEmpty) {
-                initMessage += "\n\n${item.note}";
-              } else {
-                initMessage += item.note;
-              }
+              initMessage += initMessage.isNotEmpty
+                  ? "\n\n${item.note}"
+                  : item.note;
             }
           }
         }

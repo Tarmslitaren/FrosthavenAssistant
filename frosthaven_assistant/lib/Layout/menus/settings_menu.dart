@@ -467,25 +467,25 @@ class SettingsMenuState extends State<SettingsMenu> {
                                                 ClientState.connecting,
                                         title: Text(connectionText),
                                         value: connected,
-                                        onChanged: (bool? value) {
-                                          setState(() {
-                                            if (settings.client.value !=
-                                                ClientState.connected) {
+                                        onChanged: (bool? value) async {
+                                          if (settings.client.value !=
+                                              ClientState.connected) {
+                                            setState(() {
                                               settings.client.value =
                                                   ClientState.connecting;
                                               settings.lastKnownPort =
                                                   _portTextController.text;
-                                              _client
-                                                  .connect(_serverTextController
-                                                      .text)
-                                                  .then((value) => null);
                                               settings.lastKnownConnection =
                                                   _serverTextController.text;
-                                              settings.saveToDisk();
-                                            } else {
+                                            });
+                                            await _client.connect(
+                                                _serverTextController.text);
+                                            settings.saveToDisk();
+                                          } else {
+                                            setState(() {
                                               _client.disconnect(null);
-                                            }
-                                          });
+                                            });
+                                          }
                                         });
                                   }),
 

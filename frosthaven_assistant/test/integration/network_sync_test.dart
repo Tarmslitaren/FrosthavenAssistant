@@ -142,7 +142,7 @@ Future<void> _setUpServer() async {
 
   _serverGameState.init();
   await getIt<GameData>().loadData('assets/testData/');
-  await _serverGameState.load();
+  _serverGameState.load();
 
   // Start server on loopback, port 0 (OS assigns a free port).
   // startServerInternal loops forever — do NOT await it.

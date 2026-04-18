@@ -132,10 +132,10 @@ class MainMenuViewModel {
     _gameState.updateAllUI();
   }
 
-  void toggleClientConnection() {
+  Future<void> toggleClientConnection() async {
     if (_settings.client.value != ClientState.connected) {
       _settings.client.value = ClientState.connecting;
-      _client.connect(_settings.lastKnownConnection).then((value) => null);
+      await _client.connect(_settings.lastKnownConnection);
       _settings.saveToDisk();
     } else {
       _client.disconnect(null);

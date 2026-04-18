@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/services/network/client.dart';
@@ -49,9 +51,8 @@ class NetworkUIState extends State<NetworkUI> {
                   if (_settings.client.value != ClientState.connected &&
                       _settings.lastKnownConnection != "") {
                     _settings.client.value = ClientState.connecting;
-                    _client
-                        .connect(_settings.lastKnownConnection)
-                        .then((value) => null);
+                    unawaited(
+                        _client.connect(_settings.lastKnownConnection));
                     _settings.saveToDisk();
                   }
                 });

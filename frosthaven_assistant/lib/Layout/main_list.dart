@@ -218,7 +218,7 @@ class MainListState extends State<MainList> {
     }
   }
 
-  static void scrollToPosition(int index) {
+  static void scrollToPosition(int _) {
     //TODO: implement
   }
 

@@ -9,18 +9,12 @@ class RoomMonsterData {
 
   factory RoomMonsterData.fromJson(Map<String, dynamic> data, String key) {
     String name = key;
-    List<int> normal = [];
-    if (data.containsKey('normal')) {
-      normal = data['normal'].cast<int>();
-    } else {
-      normal = [0, 0, 0];
-    }
-    List<int> elite = [];
-    if (data.containsKey('elite')) {
-      elite = data['elite'].cast<int>();
-    } else {
-      elite = [0, 0, 0];
-    }
+    List<int> normal = data.containsKey('normal')
+        ? data['normal'].cast<int>()
+        : [0, 0, 0];
+    List<int> elite = data.containsKey('elite')
+        ? data['elite'].cast<int>()
+        : [0, 0, 0];
 
     return RoomMonsterData(name, normal, elite);
   }

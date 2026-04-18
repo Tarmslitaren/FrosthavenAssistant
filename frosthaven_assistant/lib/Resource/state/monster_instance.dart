@@ -11,11 +11,9 @@ class MonsterInstance extends FigureState {
     move = 0; //only used for summons
     attack = 0;
     range = 0;
-    if (summoned) {
-      _roundSummoned = (gameState ?? getIt<GameState>()).round.value;
-    } else {
-      _roundSummoned = -1;
-    }
+    _roundSummoned = summoned
+        ? (gameState ?? getIt<GameState>()).round.value
+        : -1;
   }
 
   MonsterInstance.summon(
@@ -39,7 +37,7 @@ class MonsterInstance extends FigureState {
 
   late final int standeeNr;
 
-  void setType(_StateModifier stateModifier, MonsterType value) {
+  void setType(_StateModifier _, MonsterType value) {
     _type = value;
   }
 
@@ -54,7 +52,7 @@ class MonsterInstance extends FigureState {
   late final int range;
 
   int get roundSummoned => _roundSummoned;
-  void setRoundSummoned(_StateModifier stateModifier, int value) {
+  void setRoundSummoned(_StateModifier _, int value) {
     _roundSummoned = value;
   }
 
@@ -156,11 +154,8 @@ class MonsterInstance extends FigureState {
     move = json["move"];
     attack = json["attack"];
     range = json["range"];
-    if (json.containsKey("roundSummoned")) {
-      _roundSummoned = json["roundSummoned"];
-    } else {
-      _roundSummoned = -1;
-    }
+    _roundSummoned =
+        json.containsKey("roundSummoned") ? json["roundSummoned"] : -1;
     _chill.value = json["chill"];
     if (json.containsKey("plague")) {
       _plague.value = json["plague"];

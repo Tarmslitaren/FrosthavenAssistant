@@ -102,7 +102,7 @@ void openDialogWithDismissOption(
 const double _kDraggableElevation = 6.0;
 
 Widget defaultBuildDraggableFeedback(
-    BuildContext context, BoxConstraints constraints, Widget child) {
+    BuildContext _, BoxConstraints constraints, Widget child) {
   return Transform(
     transform: Matrix4.rotationZ(0),
     alignment: FractionalOffset.topLeft,
@@ -167,29 +167,27 @@ void showToast(BuildContext context, String text) {
   }
 }
 
-void showToastSticky(BuildContext context, String text,
-    {GameState? gameState}) {
+Future<void> showToastSticky(BuildContext context, String text,
+    {GameState? gameState}) async {
   if (context.mounted) {
-    ScaffoldMessenger.of(context)
+    await ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(
           duration: const Duration(days: 1),
           backgroundColor: Colors.teal,
           content: createToastContent(context, text),
         ))
-        .closed
-        .then((value) {
-      if ((gameState ?? getIt<GameState>()).toastMessage.value == text) {
-        GameUtilMethods.setToastMessage("");
-      }
-    });
+        .closed;
+    if ((gameState ?? getIt<GameState>()).toastMessage.value == text) {
+      GameUtilMethods.setToastMessage("");
+    }
   }
 }
 
-void showErrorToastStickyWithRetry(
+Future<void> showErrorToastStickyWithRetry(
     BuildContext context, String text, Function() retry,
-    {GameState? gameState}) {
+    {GameState? gameState}) async {
   ScaffoldMessenger.of(context).clearSnackBars();
-  ScaffoldMessenger.of(context)
+  await ScaffoldMessenger.of(context)
       .showSnackBar(SnackBar(
         duration: const Duration(days: 1),
         backgroundColor: Colors.redAccent,
@@ -210,10 +208,8 @@ void showErrorToastStickyWithRetry(
           ],
         ),
       ))
-      .closed
-      .then((value) {
-    if ((gameState ?? getIt<GameState>()).toastMessage.value == text) {
-      GameUtilMethods.setToastMessage("");
-    }
-  });
+      .closed;
+  if ((gameState ?? getIt<GameState>()).toastMessage.value == text) {
+    GameUtilMethods.setToastMessage("");
+  }
 }

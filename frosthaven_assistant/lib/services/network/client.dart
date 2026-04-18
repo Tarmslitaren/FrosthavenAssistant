@@ -38,25 +38,24 @@ class Client {
     try {
       int port = int.parse(_settings.lastKnownPort);
       debugPrint("port nr: ${port.toString()}");
-      await _connection.connect(address, port).then((Socket socket) {
-        runZonedGuarded(() {
-          _settings.client.value = ClientState.connected;
-          String info =
-              'Client Connected to: ${socket.remoteAddress.address}:${socket.remotePort}';
-          debugPrint(info);
-          _gameState.clearLocalCommands();
-          _network.networkMessage.value = info;
-          if (Platform.isAndroid || Platform.isIOS) {
-            _settings.connectClientOnStartup = true;
-          }
-          _settings.saveToDisk();
-          _send("init version:${_network.server.serverVersion}");
-          _sendPing();
-          _listen();
-        }, (error, stack) {
-          debugPrint('Client zone error: $error\n$stack');
-          _network.networkMessage.value = 'Client error: $error';
-        });
+      final socket = await _connection.connect(address, port);
+      runZonedGuarded(() {
+        _settings.client.value = ClientState.connected;
+        String info =
+            'Client Connected to: ${socket.remoteAddress.address}:${socket.remotePort}';
+        debugPrint(info);
+        _gameState.clearLocalCommands();
+        _network.networkMessage.value = info;
+        if (Platform.isAndroid || Platform.isIOS) {
+          _settings.connectClientOnStartup = true;
+        }
+        _settings.saveToDisk();
+        _send("init version:${_network.server.serverVersion}");
+        _sendPing();
+        _listen();
+      }, (error, stack) {
+        debugPrint('Client zone error: $error\n$stack');
+        _network.networkMessage.value = 'Client error: $error';
       });
     } catch (error) {
       debugPrint("client error: $error");

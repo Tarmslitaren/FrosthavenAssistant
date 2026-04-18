@@ -202,7 +202,7 @@ class FrosthavenConverter {
   }
 
   static bool shouldOverflow(
-      bool frosthavenStyle, String iconToken, bool mainLine) {
+      bool frosthavenStyle, String iconToken) {
     return /*!mainLine &&*/ frosthavenStyle &&
         ((iconToken == "pierce" ||
             iconToken == "brittle" ||
@@ -229,7 +229,6 @@ class FrosthavenConverter {
   static void buildFHStyleBackgrounds(
       List<Widget> lines,
       List<Widget> lastLineTextPartList,
-      TextAlign textAlign,
       MainAxisAlignment rowMainAxisAlignment,
       double scale,
       bool isInRow,

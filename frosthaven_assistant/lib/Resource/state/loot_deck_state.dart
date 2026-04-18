@@ -155,18 +155,13 @@ class LootDeck {
     _hasCard1418 = lootDeckData["1418"] as bool;
     _hasCard1419 = lootDeckData["1419"] as bool;
 
-    if (lootDeckData.containsKey('addedCards')) {
-      _addedCards = List<int>.from(lootDeckData['addedCards'] as List);
-    } else {
-      _addedCards = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-    }
+    _addedCards = lootDeckData.containsKey('addedCards')
+        ? List<int>.from(lootDeckData['addedCards'] as List)
+        : [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-    if (lootDeckData.containsKey('enhancements')) {
-      _enhancements =
-          Map<String, int>.from(lootDeckData['enhancements'] as Map);
-    } else {
-      _enhancements = {};
-    }
+    _enhancements = lootDeckData.containsKey('enhancements')
+        ? Map<String, int>.from(lootDeckData['enhancements'] as Map)
+        : {};
 
     _initPools();
 
@@ -512,7 +507,7 @@ class LootDeck {
     _shuffle();
   }
 
-  void addEnhancement(_StateModifier _, int id, int value, String identifier,
+  void addEnhancement(_StateModifier _, int id, int value,
       {GameState? gameState, GameData? gameData}) {
     _enhancements[id.toString()] = value;
     //reset loot deck

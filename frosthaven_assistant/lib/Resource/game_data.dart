@@ -41,9 +41,8 @@ class GameData {
       editionList.add(item);
 
       List<RoomsModel> roomData = [];
-      await fetchRoomData(item, root).then((value) {
-        if (value != null) roomData.addAll(value.roomData);
-      });
+      final roomDataResult = await fetchRoomData(item, root);
+      if (roomDataResult != null) roomData.addAll(roomDataResult.roomData);
 
       await fetchCampaignData(item, root, map, roomData);
     }

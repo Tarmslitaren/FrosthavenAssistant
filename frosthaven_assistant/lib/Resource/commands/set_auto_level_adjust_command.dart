@@ -15,10 +15,8 @@ class SetAutoLevelAdjustCommand extends Command {
 
   @override
   String describe() {
-    if (on) {
-      return "turn automatic level updated on";
-    } else {
-      return "turn automatic level updated off";
-    }
+    return on
+        ? "turn automatic level updated on"
+        : "turn automatic level updated off";
   }
 }

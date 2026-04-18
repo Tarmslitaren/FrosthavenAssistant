@@ -349,7 +349,6 @@ class LineBuilder {
         FrosthavenConverter.buildFHStyleBackgrounds(
             lines,
             lastLineTextPartListRowContent,
-            textAlign,
             rowMainAxisAlignment,
             scale,
             isInRow,
@@ -720,7 +719,7 @@ class LineBuilder {
                 imagePath = "assets/images/abilities/$iconGfx$imageSuffix.png";
               }
               bool overflow = FrosthavenConverter.shouldOverflow(
-                  frosthavenStyle, iconGfx, mainLine);
+                  frosthavenStyle, iconGfx);
               double heightMod = mainLine
                   ? _kHeightModMainLine
                   : _kSubLineHeightMod; //to make sub line conditions have larger size and overflow on FH style

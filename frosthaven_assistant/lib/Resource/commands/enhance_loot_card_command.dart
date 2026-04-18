@@ -11,7 +11,7 @@ class EnhanceLootCardCommand extends Command {
 
   @override
   void execute() {
-    _gameState.lootDeck.addEnhancement(stateAccess, id, value, resourceType);
+    _gameState.lootDeck.addEnhancement(stateAccess, id, value);
   }
 
   @override

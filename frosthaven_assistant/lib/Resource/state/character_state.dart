@@ -123,7 +123,7 @@ class CharacterState extends FigureState {
   /// Updates all fields in-place from [json], firing [ValueNotifier] listeners
   /// so subscribed widgets rebuild automatically. Preserves object identity so
   /// existing [ValueListenableBuilder] subscriptions remain valid.
-  void updateFromJson(String id, Map<String, dynamic> json) {
+  void updateFromJson(String _, Map<String, dynamic> json) {
     _initiative.value = json['initiative'] as int;
     _xp.value = json['xp'] as int;
     _chill.value = json['chill'] as int;

@@ -78,12 +78,9 @@ class SetLevelMenuState extends State<SetLevelMenu> {
           return ValueListenableBuilder<int>(
               valueListenable: _gameState.level,
               builder: (context, value, child) {
-                bool isCurrentlySelected;
-                if (widget.monster != null) {
-                  isCurrentlySelected = nr == widget.monster!.level.value;
-                } else {
-                  isCurrentlySelected = nr == _gameState.level.value;
-                }
+                bool isCurrentlySelected = widget.monster != null
+                    ? nr == widget.monster!.level.value
+                    : nr == _gameState.level.value;
                 bool isRecommended = GameMethods.getRecommendedLevel() == nr;
                 Color color = Colors.transparent;
                 if (isRecommended) {

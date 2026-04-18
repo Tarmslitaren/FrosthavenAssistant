@@ -224,31 +224,28 @@ void main() {
 
     for (final token in knownOverflowTokens) {
       test('frosthavenStyle=true, token="$token" → true', () {
-        expect(FrosthavenConverter.shouldOverflow(true, token, true), isTrue);
-        expect(FrosthavenConverter.shouldOverflow(true, token, false), isTrue);
+        expect(FrosthavenConverter.shouldOverflow(true, token), isTrue);
       });
     }
 
     test('frosthavenStyle=false always returns false', () {
       for (final token in knownOverflowTokens) {
-        expect(FrosthavenConverter.shouldOverflow(false, token, true), isFalse);
+        expect(FrosthavenConverter.shouldOverflow(false, token), isFalse);
       }
     });
 
     test('unknown token returns false even in frosthavenStyle=true', () {
-      expect(FrosthavenConverter.shouldOverflow(true, 'attack', true), isFalse);
-      expect(FrosthavenConverter.shouldOverflow(true, 'move', true), isFalse);
-      expect(FrosthavenConverter.shouldOverflow(true, '', true), isFalse);
+      expect(FrosthavenConverter.shouldOverflow(true, 'attack'), isFalse);
+      expect(FrosthavenConverter.shouldOverflow(true, 'move'), isFalse);
+      expect(FrosthavenConverter.shouldOverflow(true, ''), isFalse);
     });
 
     test('token containing "poison" returns true (contains check)', () {
-      expect(FrosthavenConverter.shouldOverflow(true, 'acid-poison', true),
-          isTrue);
+      expect(FrosthavenConverter.shouldOverflow(true, 'acid-poison'), isTrue);
     });
 
     test('token containing "wound" returns true (contains check)', () {
-      expect(FrosthavenConverter.shouldOverflow(true, 'wound-infect', true),
-          isTrue);
+      expect(FrosthavenConverter.shouldOverflow(true, 'wound-infect'), isTrue);
     });
   });
 

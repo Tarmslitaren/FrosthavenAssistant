@@ -23,14 +23,14 @@ Future<void> setUpGame() async {
   //initialize game
   gameState.init();
   await getIt<GameData>().loadData("assets/testData/");
-  await gameState.load();
+  gameState.load();
 }
 
 void checkSaveState() async {
   String state = gameState.toString();
   int nrStates = gameState.gameSaveStates.length;
   gameState.save();
-  await gameState.load();
+  gameState.load();
   String newState = gameState.toString();
   assert(gameState.gameSaveStates.length ==
       nrStates + 2); //for some reason a null state is added on load.

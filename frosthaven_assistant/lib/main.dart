@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -86,6 +87,19 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  static Future<void> _initializeApp() async {
+    try {
+      await getIt<GameData>().loadData("assets/data/");
+      getIt<GameState>().load();
+      await getIt<Settings>().init();
+      loading.value = false;
+    } catch (error, stack) {
+      Sentry.captureException(error, stackTrace: stack);
+      debugPrint('Init failed: $error');
+      loading.value = false;
+    }
+  }
+
   // This widget is the root of the application.
   @override
   Widget build(BuildContext context) {
@@ -97,16 +111,7 @@ class MyApp extends StatelessWidget {
     try {
       //initialize game
       getIt<GameState>().init();
-      getIt<GameData>()
-          .loadData("assets/data/")
-          .then((value) => getIt<GameState>().load())
-          .then((value) => getIt<Settings>().init())
-          .then((_) { loading.value = false; })
-          .catchError((Object error, StackTrace stack) {
-            Sentry.captureException(error, stackTrace: stack);
-            debugPrint('Init failed: $error');
-            loading.value = false;
-          });
+      unawaited(_initializeApp());
     } catch (error, stack) {
       Sentry.captureException(error, stackTrace: stack);
       debugPrint('Init failed: $error');

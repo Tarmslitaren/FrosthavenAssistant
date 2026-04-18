@@ -118,11 +118,11 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
     return ValueListenableBuilder<Object>(
         valueListenable: _vm.modelData,
         builder: (context, value, child) {
-          return _buildContent(context);
+          return _buildContent();
         });
   }
 
-  Widget _buildContent(BuildContext context) {
+  Widget _buildContent() {
     bool isAnimating = false;
     //is not doing anything now. in case flip animation is added
 

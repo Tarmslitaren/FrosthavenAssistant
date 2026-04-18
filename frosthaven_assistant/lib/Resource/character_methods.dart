@@ -185,7 +185,7 @@ class CharacterMethods {
     ScenarioMethods.applyDifficulty(s);
   }
 
-  static void resetCharacter(_StateModifier s, Character item, {GameState? gameState}) {
+  static void resetCharacter(_StateModifier s, Character item) {
     item.characterState._initiative.value = 0;
     final level = item.characterState.level.value;
     item.characterState._health.value =
