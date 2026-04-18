@@ -6,13 +6,10 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 
 const double _kMaxListWidth = 740.0;
 const double _kReferenceMinBarWidth = 370.0;
-double maxWidth = (_kMaxListWidth * getIt<Settings>().userScalingMainList.value);
+double get maxWidth => _kMaxListWidth * getIt<Settings>().userScalingMainList.value;
 const double referenceWidth = 412.0;
 
-void setMaxWidth({Settings? settings}) {
-  settings = settings ?? getIt<Settings>();
-  maxWidth = (_kMaxListWidth * settings.userScalingMainList.value);
-}
+void setMaxWidth() => null;
 
 double getScaleByReference(BuildContext context) {
   return _scaleByReference(context, referenceWidth, maxWidth);
@@ -44,7 +41,7 @@ double _scaleByReference(
   return width / referenceWidth;
 }
 
-extension GlobalPaintBounds on BuildContext {
+extension GlobalPaintBounds on BuildContext { // ignore: prefer-match-file-name
   Rect? get globalPaintBounds {
     final renderObject =
         findRenderObject(); // Get the RenderObject associated with the widget

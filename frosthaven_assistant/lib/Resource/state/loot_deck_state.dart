@@ -1,7 +1,7 @@
 part of 'game_state.dart';
 // ignore_for_file: library_private_types_in_public_api
 
-class LootCard {
+class LootCard { // ignore: prefer-match-file-name
   static const int _kHighCharCount = 4;
   static const int _kLowCharCount = 2;
 

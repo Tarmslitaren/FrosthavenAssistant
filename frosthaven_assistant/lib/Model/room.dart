@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 @immutable
-class RoomMonsterData {
+class RoomMonsterData { // ignore: prefer-match-file-name
   final String name;
   final List<int> normal;
   final List<int> elite;

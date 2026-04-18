@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 const int _kGraphicsIndex = 3;
 
 @immutable
-class MonsterAbilityDeckModel {
+class MonsterAbilityDeckModel { // ignore: prefer-match-file-name
   final String name;
   final String edition;
   final List<MonsterAbilityCardModel> cards;

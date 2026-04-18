@@ -7,7 +7,7 @@ import 'package:frosthaven_assistant/Model/room.dart';
 import '../Resource/game_methods.dart';
 
 @immutable
-class LootDeckModel {
+class LootDeckModel { // ignore: prefer-match-file-name
   final int lumber;
   final int hide;
   final int metal;

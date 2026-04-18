@@ -11,7 +11,7 @@ import 'package:network_info_plus/network_info_plus.dart';
 import '../service_locator.dart';
 import 'network.dart';
 
-class NetworkInformation {
+class NetworkInformation { // ignore: prefer-match-file-name
   NetworkInformation() {
     _connectivitySubscription = _connectivity.onConnectivityChanged
         .listen((List<ConnectivityResult> result) {

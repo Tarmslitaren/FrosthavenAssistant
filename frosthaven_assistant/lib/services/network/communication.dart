@@ -14,7 +14,7 @@ import 'connection.dart';
 ///
 /// The previous text-delimited format (`Index:NDescription:...GameState:...`)
 /// is still accepted on receive for backwards compatibility with older peers.
-class StateEnvelope {
+class StateEnvelope { // ignore: prefer-match-file-name
   final int index;
   final String description;
 

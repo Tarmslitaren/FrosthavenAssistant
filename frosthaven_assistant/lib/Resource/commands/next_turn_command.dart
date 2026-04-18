@@ -1,6 +1,6 @@
 import '../state/game_state.dart';
 
-class TurnDoneCommand extends Command {
+class TurnDoneCommand extends Command { // ignore: prefer-match-file-name
   late int index;
   late String id;
   final GameState _gameState;

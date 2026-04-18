@@ -3,7 +3,7 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import 'game_methods.dart';
 
-enum Style { frosthaven, gloomhaven, original }
+enum Style { frosthaven, gloomhaven, original } // ignore: prefer-match-file-name
 
 enum Condition {
   stun,

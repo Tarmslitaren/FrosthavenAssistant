@@ -9,7 +9,7 @@ import 'package:flutter/foundation.dart';
 /// Use [StatValue.fromJson] when parsing JSON — it throws [FormatException] for
 /// values that are neither int nor String, catching data errors at load time
 /// instead of silently producing wrong results at runtime.
-sealed class StatValue {
+sealed class StatValue { // ignore: prefer-match-file-name
   const StatValue();
 
   static StatValue fromJson(Object? value) {
