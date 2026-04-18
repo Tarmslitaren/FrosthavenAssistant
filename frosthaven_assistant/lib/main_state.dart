@@ -42,8 +42,8 @@ class MainState extends State<MyHomePage>
         log("app in resumed");
         rebuildAllChildren(
             context); //might be a bit performance heavy, but ensures app state visually up to date with server.
-        if (_network.clientDisconnectedWhileInBackground == true ||
-            (_settings.connectClientOnStartup == true
+        if (_network.clientDisconnectedWhileInBackground ||
+            (_settings.connectClientOnStartup
             //todo: reevaluate if this is a good idea: might be good to do an actual check, since this boo might be wrong
             // && _settings.client.value == ClientState.disconnected
             )) {
@@ -99,7 +99,7 @@ class MainState extends State<MyHomePage>
         if (kDebugMode) {
           print("keyboard visible $visible");
         }
-        if (!visible && _settings.fullScreen.value == true) {
+        if (!visible && _settings.fullScreen.value) {
           _settings.setFullscreen(true);
         }
       });
@@ -113,7 +113,6 @@ class MainState extends State<MyHomePage>
 
   @override
   void onWindowFocus() {
-    // Make sure to call once.
-    setState(() {});
+    setState(() => null);
   }
 }

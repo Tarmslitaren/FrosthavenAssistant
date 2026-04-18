@@ -106,10 +106,9 @@ class Communication {
 
   String dataFrom(String message) {
     final valid = isValid(message);
-    var data = valid
+    return valid
         ? message.substring(beginning.length, message.length - end.length)
         : "";
-    return data;
   }
 
   bool isValid(String message) {

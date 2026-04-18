@@ -33,7 +33,7 @@ class IceWraithChangeFormCommand extends Command {
 
   @override
   String describe() {
-    if (isElite == false) {
+    if (!isElite) {
       return "Ice Wraith turn normal";
     }
     return "Ice Wraith turn elite";

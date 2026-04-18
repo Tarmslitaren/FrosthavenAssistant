@@ -302,7 +302,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                     ),
                   ]),
                   Container(
-                    margin: const EdgeInsets.only(left: _kSearchPadding, right: _kSearchPadding),
+                    margin: const EdgeInsets.symmetric(horizontal: _kSearchPadding),
                     child: KeyboardListener(
                         //needed to trigger onEditingComplete on enter
                         //TODO: add this to the other menus

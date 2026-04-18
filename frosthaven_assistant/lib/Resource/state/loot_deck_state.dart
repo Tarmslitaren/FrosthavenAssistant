@@ -392,7 +392,7 @@ class LootDeck {
   }
 
   void addSpecial1418(_StateModifier _) {
-    if (_hasCard1418 != true) {
+    if (!_hasCard1418) {
       _hasCard1418 = true;
       _drawPile.add(LootCard(
           id: _kSpecialCard1418,
@@ -406,7 +406,7 @@ class LootDeck {
   }
 
   void addSpecial1419(_StateModifier _) {
-    if (_hasCard1419 != true) {
+    if (!_hasCard1419) {
       _hasCard1419 = true;
       _drawPile.add(LootCard(
           id: _kSpecialCard1419,
@@ -449,63 +449,63 @@ class LootDeck {
     if (identifier == "hide") {
       var pool = _getAvailableCards(_hidePool);
       if (pool.isNotEmpty) {
-        _drawPile.add(pool[0]);
-        _addedCards[0]++;
+        _drawPile.add(pool.first);
+        _addedCards[0] = _addedCards.first + 1;
       }
     }
     if (identifier == "lumber") {
       var pool = _getAvailableCards(_lumberPool);
       if (pool.isNotEmpty) {
-        _drawPile.add(pool[0]);
+        _drawPile.add(pool.first);
         _addedCards[1]++;
       }
     }
     if (identifier == "metal") {
       var pool = _getAvailableCards(_metalPool);
       if (pool.isNotEmpty) {
-        _drawPile.add(pool[0]);
+        _drawPile.add(pool.first);
         _addedCards[2]++;
       }
     }
     if (identifier == "arrowvine") {
       var pool = _getAvailableCards(_arrowvinePool);
       if (pool.isNotEmpty) {
-        _drawPile.add(pool[0]);
+        _drawPile.add(pool.first);
         _addedCards[3]++;
       }
     }
     if (identifier == "axenut") {
       var pool = _getAvailableCards(_axenutPool);
       if (pool.isNotEmpty) {
-        _drawPile.add(pool[0]);
+        _drawPile.add(pool.first);
         _addedCards[4]++;
       }
     }
     if (identifier == "corpsecap") {
       var pool = _getAvailableCards(_corpsecapPool);
       if (pool.isNotEmpty) {
-        _drawPile.add(pool[0]);
+        _drawPile.add(pool.first);
         _addedCards[5]++;
       }
     }
     if (identifier == "flamefruit") {
       var pool = _getAvailableCards(_flamefruitPool);
       if (pool.isNotEmpty) {
-        _drawPile.add(pool[0]);
+        _drawPile.add(pool.first);
         _addedCards[6]++;
       }
     }
     if (identifier == "rockroot") {
       var pool = _getAvailableCards(_rockrootPool);
       if (pool.isNotEmpty) {
-        _drawPile.add(pool[0]);
+        _drawPile.add(pool.first);
         _addedCards[7]++;
       }
     }
     if (identifier == "snowthistle") {
       var pool = _getAvailableCards(_snowthistlePool);
       if (pool.isNotEmpty) {
-        _drawPile.add(pool[0]);
+        _drawPile.add(pool.first);
         _addedCards[8]++;
       }
     }

@@ -310,12 +310,12 @@ class ScenarioMethods {
                         if (item != null) {
                           //merge
                           List<int> normal = [
-                            item.normal[0] + spawnItem.normal[0],
+                            item.normal.first + spawnItem.normal.first,
                             item.normal[1] + spawnItem.normal[1],
                             item.normal[2] + spawnItem.normal[2]
                           ];
                           List<int> elite = [
-                            item.elite[0] + spawnItem.elite[0],
+                            item.elite.first + spawnItem.elite.first,
                             item.elite[1] + spawnItem.elite[1],
                             item.elite[2] + spawnItem.elite[2]
                           ];

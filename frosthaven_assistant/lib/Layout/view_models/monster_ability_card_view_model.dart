@@ -19,7 +19,7 @@ class MonsterAbilityCardViewModel {
 
   final Monster monster;
   final GameState _gameState;
-  // ignore: unused_field
+  // ignore: unused_field - reserved for future settings-dependent logic
   final Settings _settings;
 
   // Notifier the widget subscribes to

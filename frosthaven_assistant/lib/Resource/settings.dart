@@ -133,27 +133,26 @@ class Settings {
       windowManager.ensureInitialized();
 
       // Use it only after calling `hiddenWindowAtLaunch`
-      windowManager.waitUntilReadyToShow().then((_) async {
-        // Hide window title bar
-        if (fullscreen) {
-          await windowManager.setTitleBarStyle(TitleBarStyle.hidden);
-          await windowManager.setFullScreen(true);
-          await windowManager.center();
-          await windowManager.show();
-          await windowManager.setSkipTaskbar(false);
-          await windowManager
-              .setPosition(const Offset(0, 0)); //weird this was needed
-          await windowManager.show();
-        } else {
-          await windowManager.setTitleBarStyle(TitleBarStyle.normal);
-          await windowManager.setFullScreen(false);
-          await windowManager.center();
-          await windowManager.show();
-          await windowManager.setSkipTaskbar(false);
-          await windowManager.focus();
-          await windowManager.setAlwaysOnTop(false);
-        }
-      });
+      await windowManager.waitUntilReadyToShow();
+      // Hide window title bar
+      if (fullscreen) {
+        await windowManager.setTitleBarStyle(TitleBarStyle.hidden);
+        await windowManager.setFullScreen(true);
+        await windowManager.center();
+        await windowManager.show();
+        await windowManager.setSkipTaskbar(false);
+        await windowManager
+            .setPosition(const Offset(0, 0)); //weird this was needed
+        await windowManager.show();
+      } else {
+        await windowManager.setTitleBarStyle(TitleBarStyle.normal);
+        await windowManager.setFullScreen(false);
+        await windowManager.center();
+        await windowManager.show();
+        await windowManager.setSkipTaskbar(false);
+        await windowManager.focus();
+        await windowManager.setAlwaysOnTop(false);
+      }
     } else {
       //android:
       //to hide ui top and bottom on android

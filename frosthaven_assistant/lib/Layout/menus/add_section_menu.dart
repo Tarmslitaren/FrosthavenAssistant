@@ -113,7 +113,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
                     height: 20,
                   ),
                   Container(
-                    margin: const EdgeInsets.only(left: 10, right: 10),
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
                     child: TextField(
                       controller: _controller,
                       keyboardType: _settings.softNumpadInput.value

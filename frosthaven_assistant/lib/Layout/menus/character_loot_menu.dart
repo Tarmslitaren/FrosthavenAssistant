@@ -64,7 +64,7 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
     if (amount == 0) {
       return Container();
     }
-    ListTile listTile = ListTile(
+    return ListTile(
         contentPadding: const EdgeInsets.only(left: _kContentPaddingLeft),
         minVerticalPadding: 0,
         minLeadingWidth: 0,
@@ -87,8 +87,6 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
               "$amount",
               style: kHeadingStyle,
             )));
-
-    return listTile;
   }
 
   Widget buildCharacterLootWidget(String characterId, String characterName) {

@@ -227,7 +227,7 @@ class ScenarioModel {
         lootDeck: lootDeck,
         initMessage: initMessage,
         sections: sectionList,
-        monsterStandees: rooms?.roomData[0].monsterData);
+        monsterStandees: rooms?.roomData.first.monsterData);
   }
 
   factory ScenarioModel.sectionFromJson(

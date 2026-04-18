@@ -83,10 +83,10 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
       if (b.hidden && !a.hidden) {
         return -1;
       }
-      if (a.levels[0].boss != null && b.levels[0].boss == null) {
+      if (a.levels.first.boss != null && b.levels.first.boss == null) {
         return 1;
       }
-      if (b.levels[0].boss != null && a.levels[0].boss == null) {
+      if (b.levels.first.boss != null && a.levels.first.boss == null) {
         return -1;
       }
       return a.name.compareTo(b.name);
@@ -96,8 +96,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
   // This function is called whenever the text field changes
   void _runFilter(String enteredKeyword) {
     _setCampaign(_currentCampaign);
-    if (enteredKeyword.isEmpty) {
-    } else {
+    if (enteredKeyword.isNotEmpty) {
       _foundMonsters = _foundMonsters
           .where((user) =>
               user.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
@@ -105,7 +104,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
     }
 
     // Refresh the UI
-    setState(() {});
+    setState(() => _foundMonsters = _foundMonsters);
   }
 
   bool _monsterAlreadyAdded(String id) {
@@ -123,16 +122,16 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
     _foundMonsters = _allMonsters.toList();
     if (campaign != "All") {
       _foundMonsters.removeWhere((monster) => monster.edition != campaign);
-    } else if (_settings.showCustomContent.value == false) {
+    } else if (!_settings.showCustomContent.value) {
       _foundMonsters.removeWhere(
           (monster) => GameMethods.isCustomCampaign(monster.edition));
     }
 
     if (!_showSpecial) {
-      _foundMonsters.removeWhere((element) => element.hidden == true);
+      _foundMonsters.removeWhere((element) => element.hidden);
     }
     if (!_showBoss) {
-      _foundMonsters.removeWhere((element) => element.levels[0].boss != null);
+      _foundMonsters.removeWhere((element) => element.levels.first.boss != null);
     }
 
     sortMonsters(_foundMonsters);
@@ -146,7 +145,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
     for (String item in _gameData.editions) {
       if (item != "na") {
         if (!GameMethods.isCustomCampaign(item) ||
-            _settings.showCustomContent.value == true) {
+            _settings.showCustomContent.value) {
           retVal.add(DropdownMenuItem<String>(value: item, child: Text(item)));
         }
       }
@@ -203,7 +202,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                   });
                 }),
             Container(
-              margin: const EdgeInsets.only(left: AddMonsterMenu._kSearchMarginH, right: AddMonsterMenu._kSearchMarginH),
+              margin: const EdgeInsets.symmetric(horizontal: AddMonsterMenu._kSearchMarginH),
               child: TextField(
                 onChanged: (value) => _runFilter(value),
                 decoration: const InputDecoration(

@@ -47,7 +47,7 @@ class SectionListViewModel {
     }
 
     // When autoAddStandees is off, filter out sections with only room data
-    if (_settings.autoAddStandees.value == false) {
+    if (!_settings.autoAddStandees.value) {
       list = list?.where((element) {
         return element.specialRules.isNotEmpty ||
             element.initMessage.isNotEmpty ||

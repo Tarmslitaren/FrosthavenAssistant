@@ -56,7 +56,7 @@ class SaveCharacterMenuState extends State<SaveCharacterMenu> {
                 children: [
                   Container(
                       height: _kHeaderHeight,
-                      margin: const EdgeInsets.only(left: _kHeaderPadding, right: _kHeaderPadding),
+                      margin: const EdgeInsets.symmetric(horizontal: _kHeaderPadding),
                       child: Text('Load, Save or Delete Characters.',
                           style: getTitleTextStyle(1, forceBlack: true))),
                   const Text(

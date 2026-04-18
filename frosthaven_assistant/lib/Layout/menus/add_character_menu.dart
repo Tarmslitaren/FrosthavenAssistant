@@ -168,7 +168,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
     openDialog(context, SetCharacterLevelMenu(character: command.character));
 
     //update UI to disable added character
-    setState(() {});
+    setState(() => _foundCharacters = _foundCharacters);
   }
 
   bool _characterAlreadyAdded(CharacterClass newCharacter) {
@@ -206,7 +206,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(left: 10, right: 10),
+              margin: const EdgeInsets.symmetric(horizontal: 10),
               child: TextField(
                 onChanged: (value) => _runFilter(value),
                 decoration: const InputDecoration(

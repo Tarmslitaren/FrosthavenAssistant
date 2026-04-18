@@ -153,7 +153,7 @@ class LineBuilder {
       final CrossAxisAlignment alignment,
       final double scale,
       final bool animate) {
-    bool isBossStatCard = monster?.type.levels[0].boss != null &&
+    bool isBossStatCard = monster?.type.levels.first.boss != null &&
         alignment == CrossAxisAlignment.start;
 
     String imageSuffix = "";
@@ -236,13 +236,9 @@ class LineBuilder {
                     : _kNormalFontSizeGH
                 : _kNormalFontSizeStat) *
             scale,
-        height: (alignment == CrossAxisAlignment.center)
-            ? frosthavenStyle
-                ? _kLineHeightFH
-                : _kLineHeightGH //need a little more than 1 to align the icons? why?
-            : frosthavenStyle
-                ? _kLineHeightFH
-                : _kLineHeightGH, // needs to be at least one for the icon alignment...
+        height: frosthavenStyle
+            ? _kLineHeightFH
+            : _kLineHeightGH, // needs to be at least one for the icon alignment...
         //height is really low for gh style due to text not being center aligned in font - so to force to center the height is reduced. this is a shitty solution to a shitty problem.
         // 0.84,
 
@@ -287,7 +283,7 @@ class LineBuilder {
                     : _kMidFontSizeGHStat) *
             scale,
         //sizes are larger on stat cards
-        height: (alignment == CrossAxisAlignment.center ? _kLineHeightSmall : _kLineHeightSmall),
+        height: _kLineHeightSmall,
         // 0.9,
         shadows: [shadow]);
 
@@ -670,10 +666,6 @@ class LineBuilder {
             } else {
               double height = _getIconHeight(
                   iconToken, styleToUse.fontSize!, frosthavenStyle);
-              if (frosthavenStyle &&
-                  styleToUse == midStyle &&
-                  !FrosthavenConverter.shouldOverflow(
-                      true, iconToken, false)) {}
               if (addText) {
                 String? iconTokenText = tokens[iconToken];
                 if (frosthavenStyle) {

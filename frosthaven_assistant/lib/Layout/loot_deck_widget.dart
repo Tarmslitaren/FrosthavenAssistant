@@ -241,7 +241,8 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                           Radius.circular(LootDeckWidgetState
                                                   ._kDiscardBorderRadius *
                                               userScalingBars)),
-                                      border: Border.all(color: Colors.white70),
+                                      border: Border.fromBorderSide(
+                                          const BorderSide(color: Colors.white70)),
                                       color: Color(_kTransparentBlack),
                                     ),
                                   ),

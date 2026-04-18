@@ -145,12 +145,6 @@ class FrosthavenConverter {
               retVal.removeLast();
             }
             isReallySubLine = false;
-          } else if (isElementUse &&
-              (!lines[i - _kLookback].contains("[c]") &&
-                  !line.startsWith("^all") &&
-                  !line.startsWith("^All"))) {
-            //isReallySubLine = false; //block useblocks from having straight sublines?
-            //hope this doesn't come back to bite me (flame demon 77) - it does savvas lavaflow 51
           }
           line = "!$line";
           line = line.replaceFirst("Self", "self");
@@ -160,8 +154,6 @@ class FrosthavenConverter {
 
           if (retVal.last == "[subLineStart]") {
             retVal.last = "![subLineStart]";
-          } else {
-            //line = "!^ " + line.substring(2); //adding space
           }
         } else {
           //if not right aligned, then not really a subline after all
@@ -176,11 +168,9 @@ class FrosthavenConverter {
           retVal.add("!^[lineBreak]");
         }
         line = "!$line";
-      } else if (line.startsWith("!") ||
-          line.startsWith("*") ||
-          line.startsWith("^")) {
-        //ignore
-      } else {
+      } else if (!line.startsWith("!") &&
+          !line.startsWith("*") &&
+          !line.startsWith("^")) {
         // if(line != "[c]" && line != "[r]"){
         if (!isSubLine && !line.contains("%use%")) {
           isSubLine = true;

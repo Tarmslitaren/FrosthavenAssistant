@@ -206,17 +206,13 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                                   ? darkMode
                                       ? Colors.black
                                       : Colors.grey
-                                  : darkMode
-                                      ? Colors.black
-                                      : Colors.black)
+                                  : Colors.black)
                         ],
                         color: isCurrentlySelected
                             ? darkMode
                                 ? Colors.white
                                 : Colors.black
-                            : darkMode
-                                ? Colors.grey
-                                : Colors.grey),
+                            : Colors.grey),
                   ),
                   onPressed: () {
                     if (!isCurrentlySelected) {

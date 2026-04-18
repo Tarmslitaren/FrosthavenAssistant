@@ -44,7 +44,7 @@ class SpecialUnlocksMenu extends StatelessWidget {
                     height: 10,
                   ),
                   Container(
-                    margin: const EdgeInsets.only(left: 10, right: 10),
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
                     child: Text('Special Unlocks',
                         style: getTitleTextStyle(1, forceBlack: true)),
                   ),

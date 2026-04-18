@@ -133,8 +133,8 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                                       },
                                       child: Text(
                                           _gameState.lootDeck.hasCard1418
-                                              ? "Remove card _kCard1418"
-                                              : "Add card _kCard1418"),
+                                              ? "Remove card $_kCard1418"
+                                              : "Add card $_kCard1418"),
                                     ),
                                     TextButton(
                                       onPressed: () {
@@ -154,8 +154,8 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                                       },
                                       child: Text(
                                           _gameState.lootDeck.hasCard1419
-                                              ? "Remove card _kCard1419"
-                                              : "Add card _kCard1419"),
+                                              ? "Remove card $_kCard1419"
+                                              : "Add card $_kCard1419"),
                                     ),
                                     TextButton(
                                       onPressed: () {

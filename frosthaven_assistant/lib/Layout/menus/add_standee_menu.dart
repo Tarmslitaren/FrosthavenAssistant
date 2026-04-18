@@ -61,7 +61,7 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
   }
 
   Widget buildNrButton(final int nr, final double scale) {
-    bool boss = widget.monster.type.levels[0].boss != null;
+    bool boss = widget.monster.type.levels.first.boss != null;
     MonsterType type = MonsterType.normal;
     Color color = Colors.white;
 

@@ -52,7 +52,7 @@ class CampaignModel {
       //find right room if exists
 
       RoomsModel? rooms = roomsData.firstWhereOrNull(
-          (element) => element.scenarioName == key.substring(1).split(" ")[0]);
+          (element) => element.scenarioName == key.substring(1).split(" ").first);
       scenarioMap[key] = ScenarioModel.fromJson(key, scenarios[key], rooms);
     }
 

@@ -28,6 +28,6 @@ class RemoveCharacterCommand extends Command {
     if (names.length > 1) {
       return "Remove all characters";
     }
-    return "Remove ${names[0].id}";
+    return "Remove ${names.first.id}";
   }
 }

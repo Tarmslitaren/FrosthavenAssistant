@@ -150,18 +150,18 @@ class Parser {
 
       int x;
       int startPos = pos;
-      int asciiValue = ch.codeUnits[0];
+      int asciiValue = ch.codeUnits.first;
       if (eat('(')) {
         // parentheses
         x = parseExpression()!;
         if (!eat(')')) throw Exception("Missing ')'");
-      } else if (asciiValue >= '0'.codeUnits[0] &&
-          asciiValue <= '9'.codeUnits[0]) {
+      } else if (asciiValue >= '0'.codeUnits.first &&
+          asciiValue <= '9'.codeUnits.first) {
         // numbers
-        while ((asciiValue >= '0'.codeUnits[0] &&
-            asciiValue <= '9'.codeUnits[0])) {
+        while ((asciiValue >= '0'.codeUnits.first &&
+            asciiValue <= '9'.codeUnits.first)) {
           nextChar();
-          asciiValue = ch.codeUnits[0];
+          asciiValue = ch.codeUnits.first;
         }
         x = int.parse(str.substring(startPos, pos));
       } else {

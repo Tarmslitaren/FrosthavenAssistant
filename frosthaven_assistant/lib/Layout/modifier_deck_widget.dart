@@ -278,7 +278,8 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                             borderRadius: BorderRadius.all(Radius.circular(
                                 ModifierDeckWidgetState._kDiscardBorderRadius *
                                     userScalingBars)),
-                            border: Border.all(color: Colors.white70),
+                            border: Border.fromBorderSide(
+                                const BorderSide(color: Colors.white70)),
                             color: Color(
                                 ModifierDeckWidgetState._kTransparentBlack),
                           ),

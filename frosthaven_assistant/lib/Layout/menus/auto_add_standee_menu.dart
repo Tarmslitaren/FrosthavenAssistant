@@ -175,8 +175,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
             setState(() {
               if (currentEliteAdded == nrOfElite &&
                   currentNormalAdded == nrOfNormal) {
-                if (currentMonsterIndex + 1 >= widget.monsterData.length) {
-                } else {
+                if (currentMonsterIndex + 1 < widget.monsterData.length) {
                   currentMonsterIndex++; //next set
                   currentEliteAdded = 0;
                   currentNormalAdded = 0;

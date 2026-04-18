@@ -326,8 +326,7 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
 
           return InkWell(
               onTap: () {
-                _vm.openDeckMenu(context);
-                setState(() {});
+                setState(() => _vm.openDeckMenu(context));
               },
               onDoubleTap: () {
                 if (showFront) {

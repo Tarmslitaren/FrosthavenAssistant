@@ -149,11 +149,11 @@ class Server extends GameServer {
   @override
   void sendPing() {
     if (serverSocket != null &&
-        _settings.server.value != false &&
-        _pinging == false) {
+        _settings.server.value &&
+        !_pinging) {
       _pinging = true;
       Future.delayed(const Duration(seconds: 20), () {
-        if (serverSocket == null || _settings.server.value == false) {
+        if (serverSocket == null || !_settings.server.value) {
           _pinging = false;
         } else {
           send("ping");
@@ -181,7 +181,7 @@ class Server extends GameServer {
 
   static const int _defaultPort = 4567;
 
-  Future<void> startServer() async {
+  void startServer() {
     final int port =
         int.tryParse(_settings.lastKnownPort) ?? _defaultPort;
     startServerInternal(InternetAddress.anyIPv6.address, port);

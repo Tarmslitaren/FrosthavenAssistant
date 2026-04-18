@@ -72,10 +72,10 @@ class Client {
   void _sendPing() {
     if (_connection.established() &&
         _settings.client.value == ClientState.connected &&
-        _pinging == false) {
+        !_pinging) {
       _pinging = true;
       Future.delayed(const Duration(seconds: 12), () {
-        if (_serverResponsive == true) {
+        if (_serverResponsive) {
           _communication.sendToAll("ping");
           _serverResponsive = false; //set back to true when get response
           _pinging = false;
@@ -103,7 +103,7 @@ class Client {
 
   void onListenDone() {
     debugPrint('Lost connection to server.');
-    if (_serverResponsive != false) {
+    if (_serverResponsive) {
       _network.networkMessage.value = "Lost connection to server";
     }
     _connection.removeAll();
@@ -159,7 +159,7 @@ class Client {
     } else if (message.startsWith("Index:")) {
       // Legacy text format: "Index:NDescription:textEvent:{...}GameState:state"
       List<String> messageParts1 = message.split("Description:");
-      String indexString = messageParts1[0].substring("Index:".length);
+      String indexString = messageParts1.first.substring("Index:".length);
       final String afterDescription = messageParts1[1];
 
       GameEvent event = const NoEvent();
@@ -218,7 +218,7 @@ class Client {
     _leftOverMessage = "";
     _pinging = false;
 
-    if (_network.appInBackground == true) {
+    if (_network.appInBackground) {
       _network.clientDisconnectedWhileInBackground = true;
     }
     _serverResponsive = true;

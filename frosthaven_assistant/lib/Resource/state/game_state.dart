@@ -205,7 +205,7 @@ class GameState extends ActionHandler {
     addSaveState(state); //do this from action handler instead
   }
 
-  Future<void> load() async {
+  void load() {
     GameSaveState state = GameSaveState();
     state.loadFromDisk(this);
     addSaveState(
@@ -247,9 +247,7 @@ abstract class Command {
   //private class so only this class and it's children is allowed to change state
   _StateModifier stateAccess = _StateModifier();
   void execute();
-  void onUndo() {
-    //todo: remove this when update hacks fixed
-  }
+  void onUndo() => null;
   String describe();
 
   /// The [GameEvent] this command produces. Defaults to [NoEvent].

@@ -60,9 +60,6 @@ class NetworkInformation {
             break;
           }
         }
-        if (wifiIPv6.value != "") {
-          //break;
-        }
       }
     }
     if (wifiIPv6.value == "") {
