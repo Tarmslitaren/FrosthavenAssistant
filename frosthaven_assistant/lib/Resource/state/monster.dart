@@ -81,7 +81,7 @@ class Monster extends ListItemData {
     List<Object?> instanceList = json["monsterInstances"] as List<Object?>;
 
     _monsterInstances.clear();
-    for (Map<String, dynamic> item in instanceList) {
+    for (Map<String, dynamic> item in instanceList.cast<Map<String, dynamic>>()) {
       var instance = MonsterInstance.fromJson(item);
       _monsterInstances.add(instance);
     }

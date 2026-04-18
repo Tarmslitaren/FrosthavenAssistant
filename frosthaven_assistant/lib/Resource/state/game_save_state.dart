@@ -27,7 +27,7 @@ class GameSaveState {
               data['scenarioSectionsAdded'] as List<Object?>;
           gameState._scenarioSectionsAdded.clear();
           for (var item in scenarioSectionsAdded) {
-            gameState._scenarioSectionsAdded.add(item);
+            gameState._scenarioSectionsAdded.add(item as String);
           }
         }
 

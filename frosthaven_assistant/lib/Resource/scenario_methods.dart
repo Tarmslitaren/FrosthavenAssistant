@@ -201,7 +201,7 @@ class ScenarioMethods {
       }
       if (item.type == "Objective") {
         if (item.condition == "" ||
-            StatCalculator.evaluateCondition(item.condition)) {
+            StatCalculator.evaluateCondition(item.condition as Object)) {
           Character? objective = CharacterMethods.createCharacter(
               s, "Objective", null, item.name, gs.level.value + 1);
           final health =
@@ -228,7 +228,7 @@ class ScenarioMethods {
       }
       if (item.type == "Escort") {
         if (item.condition == "" ||
-            StatCalculator.evaluateCondition(item.condition)) {
+            StatCalculator.evaluateCondition(item.condition as Object)) {
           final objective = CharacterMethods.createCharacter(
               s, "Escort", null, item.name, gs.level.value + 1);
           if (objective != null) {
@@ -259,7 +259,7 @@ class ScenarioMethods {
       //special case for start of round and round is 1
       if (!section) {
         if (item.type == "Timer" && item.startOfRound) {
-          for (int round in item.list) {
+          for (int round in item.list.cast<int>()) {
             //minus 1 means always
             if (round == _kRound1 || round == _kTimerAlways) {
               initMessage += initMessage.isNotEmpty
@@ -282,7 +282,7 @@ class ScenarioMethods {
     //in case of spawns at round 1 start of round, add to roomMonsterData
     for (var rule in specialRules) {
       if (rule.type == "Timer" && rule.startOfRound) {
-        for (int round in rule.list) {
+        for (int round in rule.list.cast<int>()) {
           //minus 1 means always
           if (round == 1 || round == -1) {
             if ((settings ?? getIt<Settings>()).autoAddSpawns.value) {

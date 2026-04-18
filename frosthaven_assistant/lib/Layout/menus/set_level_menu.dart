@@ -1,4 +1,3 @@
-// ignore_for_file: avoid-returning-widgets, file uses widget helper methods for level/difficulty buttons and legend
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/counter_button.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
@@ -72,153 +71,6 @@ class SetLevelMenuState extends State<SetLevelMenu> {
     _settings = widget.settings ?? getIt<Settings>();
   }
 
-  Widget buildLevelButton(int nr, double scale) {
-    return ValueListenableBuilder<bool>(
-        valueListenable: _gameState.solo,
-        builder: (context, value, child) {
-          return ValueListenableBuilder<int>(
-              valueListenable: _gameState.level,
-              builder: (context, value, child) {
-                bool isCurrentlySelected = widget.monster != null
-                    ? nr == widget.monster!.level.value
-                    : nr == _gameState.level.value;
-                bool isRecommended = GameMethods.getRecommendedLevel() == nr;
-                Color color = Colors.transparent;
-                if (isRecommended) {
-                  color = Colors.grey;
-                }
-                String text = nr.toString();
-                bool darkMode = _settings.darkMode.value;
-                Color shadowColor = isCurrentlySelected && !darkMode
-                    ? Colors.grey
-                    : Colors.black;
-                Color selectedTextColor = darkMode ? Colors.white : Colors.black;
-                Color textColor =
-                    isCurrentlySelected ? selectedTextColor : Colors.grey;
-                return SizedBox(
-                  width: SetLevelMenu._kButtonSize * scale,
-                  height: SetLevelMenu._kButtonSize * scale,
-                  child: Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                            color: color,
-                          ),
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(SetLevelMenu._kButtonBorderRadius * scale))),
-                      child: TextButton(
-                        child: Text(
-                          text,
-                          style: TextStyle(
-                              fontSize: kFontSizeTitle * scale,
-                              shadows: [
-                                Shadow(
-                                    offset: Offset(SetLevelMenu._kShadowOffset * scale, SetLevelMenu._kShadowOffset * scale),
-                                    color: shadowColor)
-                              ],
-                              color: textColor),
-                        ),
-                        onPressed: () {
-                          if (!isCurrentlySelected) {
-                            String? monsterId = widget.monster?.id;
-                            _gameState.action(SetLevelCommand(nr, monsterId));
-                          }
-                          Navigator.pop(context);
-                        },
-                      )),
-                );
-              });
-        });
-  }
-
-  Widget createLegend(String name, String gfx, String value, double scale) {
-    var shadow = Shadow(
-      offset: Offset(SetLevelMenu._kShadowOffset * scale, SetLevelMenu._kShadowOffset * scale),
-      color: Colors.black87,
-      blurRadius: SetLevelMenu._kShadowBlur * scale,
-    );
-    var textStyleLevelWidget = TextStyle(
-        color: Colors.white,
-        overflow: TextOverflow.fade,
-        fontSize: kFontSizeTitle * scale,
-        shadows: [shadow]);
-    double height = SetLevelMenu._kLegendImageHeight * scale;
-    if (gfx.contains("level")) {
-      height = SetLevelMenu._kLegendLevelImageHeight * scale;
-    }
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        SizedBox(
-          width: SetLevelMenu._kLegendSpacer * scale,
-        ),
-        Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: SetLevelMenu._kBoxShadowAlpha),
-                  spreadRadius: SetLevelMenu._kBoxShadowSpread,
-                  blurRadius: SetLevelMenu._kBoxShadowBlur,
-                ),
-              ],
-            ),
-            child: Image(height: height, image: AssetImage(gfx))),
-        Text(value, style: textStyleLevelWidget),
-        Text(" ($name)", style: textStyleLevelWidget),
-      ],
-    );
-  }
-
-  Widget buildDifficultyButton(int nr, double scale) {
-    return ValueListenableBuilder<int>(
-        valueListenable: _gameState.difficulty,
-        builder: (context, value, child) {
-          bool isCurrentlySelected = nr == _gameState.difficulty.value;
-          Color color = Colors.transparent;
-          String text = nr.toString();
-          if (nr > 0) {
-            text = "+$text";
-          }
-          bool darkMode = _settings.darkMode.value;
-          Color shadowColor = isCurrentlySelected && !darkMode
-              ? Colors.grey
-              : Colors.black;
-          Color selectedTextColor = darkMode ? Colors.white : Colors.black;
-          Color textColor =
-              isCurrentlySelected ? selectedTextColor : Colors.grey;
-          return SizedBox(
-            width: SetLevelMenu._kButtonSize * scale,
-            height: SetLevelMenu._kButtonSize * scale,
-            child: Container(
-                decoration: BoxDecoration(
-                    border: Border.all(
-                      color: color,
-                    ),
-                    borderRadius:
-                        BorderRadius.all(Radius.circular(SetLevelMenu._kButtonBorderRadius * scale))),
-                child: TextButton(
-                  child: Text(
-                    text,
-                    style: TextStyle(
-                        fontSize: kFontSizeTitle * scale,
-                        shadows: [
-                          Shadow(
-                              offset: Offset(SetLevelMenu._kShadowOffset * scale, SetLevelMenu._kShadowOffset * scale),
-                              color: shadowColor)
-                        ],
-                        color: textColor),
-                  ),
-                  onPressed: () {
-                    if (!isCurrentlySelected) {
-                      _gameState.action(SetDifficultyCommand(nr,
-                          gameState: _gameState));
-                    }
-                  },
-                )),
-          );
-        });
-  }
-
   @override
   Widget build(BuildContext context) {
     String title = "Set Scenario Level";
@@ -277,7 +129,12 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
                     SetLevelMenu._kLevelRowSize,
-                    (i) => buildLevelButton(SetLevelMenu._kLevelMin + i, scale),
+                    (i) => _LevelButton( // ignore: avoid-returning-widgets, widget generator lambda
+                        nr: SetLevelMenu._kLevelMin + i,
+                        scale: scale,
+                        monster: widget.monster,
+                        gameState: _gameState,
+                        settings: _settings),
                   ),
                 ),
               if (!isSummon)
@@ -285,7 +142,12 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
                     SetLevelMenu._kLevelRowSize,
-                    (i) => buildLevelButton(SetLevelMenu._kLevelRow2Start + i, scale),
+                    (i) => _LevelButton( // ignore: avoid-returning-widgets, widget generator lambda
+                        nr: SetLevelMenu._kLevelRow2Start + i,
+                        scale: scale,
+                        monster: widget.monster,
+                        gameState: _gameState,
+                        settings: _settings),
                   ),
                 ),
               if (widget.figure == null)
@@ -332,7 +194,11 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                   Text("Difficulty:", style: getSmallTextStyle(scale)),
                   ...List.generate(
                     SetLevelMenu._kDifficultyCount,
-                    (i) => buildDifficultyButton(SetLevelMenu._kDifficultyMin + i, scale),
+                    (i) => _DifficultyButton( // ignore: avoid-returning-widgets, widget generator lambda
+                        nr: SetLevelMenu._kDifficultyMin + i,
+                        scale: scale,
+                        gameState: _gameState,
+                        settings: _settings),
                   ),
                 ]),
               if (widget.figure != null)
@@ -354,29 +220,229 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    createLegend(
-                        "trap damage",
-                        "assets/images/psd/traps-fh.png",
-                        ": ${GameMethods.getTrapValue()}",
-                        scale),
-                    createLegend(
-                        "hazardous terrain damage",
-                        "assets/images/psd/hazard-fh.png",
-                        ": ${GameMethods.getHazardValue()}",
-                        scale),
-                    createLegend("experience added", "assets/images/psd/xp.png",
-                        ": +${GameMethods.getXPValue()}", scale),
-                    createLegend(
-                        "gold coin value",
-                        "assets/images/psd/coins-fh.png",
-                        ": x${GameMethods.getCoinValue()}",
-                        scale),
-                    createLegend("level", "assets/images/psd/level.png",
-                        ": ${_gameState.level.value}", scale),
+                    _LevelLegend(
+                        name: "trap damage",
+                        gfx: "assets/images/psd/traps-fh.png",
+                        value: ": ${GameMethods.getTrapValue()}",
+                        scale: scale),
+                    _LevelLegend(
+                        name: "hazardous terrain damage",
+                        gfx: "assets/images/psd/hazard-fh.png",
+                        value: ": ${GameMethods.getHazardValue()}",
+                        scale: scale),
+                    _LevelLegend(
+                        name: "experience added",
+                        gfx: "assets/images/psd/xp.png",
+                        value: ": +${GameMethods.getXPValue()}",
+                        scale: scale),
+                    _LevelLegend(
+                        name: "gold coin value",
+                        gfx: "assets/images/psd/coins-fh.png",
+                        value: ": x${GameMethods.getCoinValue()}",
+                        scale: scale),
+                    _LevelLegend(
+                        name: "level",
+                        gfx: "assets/images/psd/level.png",
+                        value: ": ${_gameState.level.value}",
+                        scale: scale),
                   ],
                 )
             ],
           ),
         ]));
+  }
+}
+
+class _LevelButton extends StatelessWidget {
+  const _LevelButton({
+    required this.nr,
+    required this.scale,
+    required this.monster,
+    required this.gameState,
+    required this.settings,
+  });
+
+  final int nr;
+  final double scale;
+  final Monster? monster;
+  final GameState gameState;
+  final Settings settings;
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<bool>(
+        valueListenable: gameState.solo,
+        builder: (context, value, child) {
+          return ValueListenableBuilder<int>(
+              valueListenable: gameState.level,
+              builder: (context, value, child) {
+                bool isCurrentlySelected = monster != null
+                    ? nr == monster!.level.value
+                    : nr == gameState.level.value;
+                bool isRecommended = GameMethods.getRecommendedLevel() == nr;
+                Color color = Colors.transparent;
+                if (isRecommended) {
+                  color = Colors.grey;
+                }
+                String text = nr.toString();
+                bool darkMode = settings.darkMode.value;
+                Color shadowColor = isCurrentlySelected && !darkMode
+                    ? Colors.grey
+                    : Colors.black;
+                Color selectedTextColor = darkMode ? Colors.white : Colors.black;
+                Color textColor =
+                    isCurrentlySelected ? selectedTextColor : Colors.grey;
+                return SizedBox(
+                  width: SetLevelMenu._kButtonSize * scale,
+                  height: SetLevelMenu._kButtonSize * scale,
+                  child: Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                            color: color,
+                          ),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(SetLevelMenu._kButtonBorderRadius * scale))),
+                      child: TextButton(
+                        child: Text(
+                          text,
+                          style: TextStyle(
+                              fontSize: kFontSizeTitle * scale,
+                              shadows: [
+                                Shadow(
+                                    offset: Offset(SetLevelMenu._kShadowOffset * scale, SetLevelMenu._kShadowOffset * scale),
+                                    color: shadowColor)
+                              ],
+                              color: textColor),
+                        ),
+                        onPressed: () {
+                          if (!isCurrentlySelected) {
+                            String? monsterId = monster?.id;
+                            gameState.action(SetLevelCommand(nr, monsterId));
+                          }
+                          Navigator.pop(context);
+                        },
+                      )),
+                );
+              });
+        });
+  }
+}
+
+class _DifficultyButton extends StatelessWidget {
+  const _DifficultyButton({
+    required this.nr,
+    required this.scale,
+    required this.gameState,
+    required this.settings,
+  });
+
+  final int nr;
+  final double scale;
+  final GameState gameState;
+  final Settings settings;
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<int>(
+        valueListenable: gameState.difficulty,
+        builder: (context, value, child) {
+          bool isCurrentlySelected = nr == gameState.difficulty.value;
+          Color color = Colors.transparent;
+          String text = nr.toString();
+          if (nr > 0) {
+            text = "+$text";
+          }
+          bool darkMode = settings.darkMode.value;
+          Color shadowColor = isCurrentlySelected && !darkMode
+              ? Colors.grey
+              : Colors.black;
+          Color selectedTextColor = darkMode ? Colors.white : Colors.black;
+          Color textColor =
+              isCurrentlySelected ? selectedTextColor : Colors.grey;
+          return SizedBox(
+            width: SetLevelMenu._kButtonSize * scale,
+            height: SetLevelMenu._kButtonSize * scale,
+            child: Container(
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: color,
+                    ),
+                    borderRadius:
+                        BorderRadius.all(Radius.circular(SetLevelMenu._kButtonBorderRadius * scale))),
+                child: TextButton(
+                  child: Text(
+                    text,
+                    style: TextStyle(
+                        fontSize: kFontSizeTitle * scale,
+                        shadows: [
+                          Shadow(
+                              offset: Offset(SetLevelMenu._kShadowOffset * scale, SetLevelMenu._kShadowOffset * scale),
+                              color: shadowColor)
+                        ],
+                        color: textColor),
+                  ),
+                  onPressed: () {
+                    if (!isCurrentlySelected) {
+                      gameState.action(SetDifficultyCommand(nr,
+                          gameState: gameState));
+                    }
+                  },
+                )),
+          );
+        });
+  }
+}
+
+class _LevelLegend extends StatelessWidget {
+  const _LevelLegend({
+    required this.name,
+    required this.gfx,
+    required this.value,
+    required this.scale,
+  });
+
+  final String name;
+  final String gfx;
+  final String value;
+  final double scale;
+
+  @override
+  Widget build(BuildContext context) {
+    var shadow = Shadow(
+      offset: Offset(SetLevelMenu._kShadowOffset * scale, SetLevelMenu._kShadowOffset * scale),
+      color: Colors.black87,
+      blurRadius: SetLevelMenu._kShadowBlur * scale,
+    );
+    var textStyleLevelWidget = TextStyle(
+        color: Colors.white,
+        overflow: TextOverflow.fade,
+        fontSize: kFontSizeTitle * scale,
+        shadows: [shadow]);
+    double height = SetLevelMenu._kLegendImageHeight * scale;
+    if (gfx.contains("level")) {
+      height = SetLevelMenu._kLegendLevelImageHeight * scale;
+    }
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: SetLevelMenu._kLegendSpacer * scale,
+        ),
+        Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: SetLevelMenu._kBoxShadowAlpha),
+                  spreadRadius: SetLevelMenu._kBoxShadowSpread,
+                  blurRadius: SetLevelMenu._kBoxShadowBlur,
+                ),
+              ],
+            ),
+            child: Image(height: height, image: AssetImage(gfx))),
+        Text(value, style: textStyleLevelWidget),
+        Text(" ($name)", style: textStyleLevelWidget),
+      ],
+    );
   }
 }

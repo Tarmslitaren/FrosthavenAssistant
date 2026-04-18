@@ -51,7 +51,7 @@ class NextRoundCommand extends Command {
 
     for (var rule in _gameState.scenarioSpecialRules) {
       if (rule.type == "Timer" && !rule.startOfRound) {
-        for (int round in rule.list) {
+        for (int round in rule.list.cast<int>()) {
           //minus 1 means always
           if (round == _gameState.round.value || round == -1) {
             if (_settings.showReminders.value) {
@@ -67,7 +67,7 @@ class NextRoundCommand extends Command {
     //start of next round is now
     for (var rule in _gameState.scenarioSpecialRules) {
       if (rule.type == "Timer" && rule.startOfRound) {
-        for (int round in rule.list) {
+        for (int round in rule.list.cast<int>()) {
           //minus 1 means always
           final toastMessage = _gameState.toastMessage.value;
           if (round - 1 == _gameState.round.value || round == -1) {

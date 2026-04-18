@@ -214,7 +214,7 @@ class MonsterMethods {
         }
       }
       if (rule.type == "Allies") {
-        for (String item in rule.list) {
+        for (String item in rule.list.cast<String>()) {
           alliedMonsters.add(item);
         }
       }

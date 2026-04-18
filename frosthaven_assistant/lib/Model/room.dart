@@ -46,7 +46,7 @@ class RoomsModel {
   factory RoomsModel.fromJson(List<Object?> sectionData, String scenarioName) {
     List<RoomModel> roomList = [];
     for (var value in sectionData) {
-      roomList.add(RoomModel.fromJson(value));
+      roomList.add(RoomModel.fromJson(value as Map<String, dynamic>));
     }
 
     return RoomsModel(scenarioName, roomList);
