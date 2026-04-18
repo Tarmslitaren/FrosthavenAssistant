@@ -43,38 +43,6 @@ class SetLootOwnerMenuState extends State<SetLootOwnerMenu> {
     _settings = widget.settings ?? getIt<Settings>();
   }
 
-  Widget buildCharacterButton(Character character) {
-    return Column(children: [
-      const SizedBox(
-        height: SetLootOwnerMenu._kRowSpacing,
-      ),
-      TextButton(
-          onPressed: () {
-            _gameState.action(
-                SetLootOwnerCommand(character.characterClass.id, widget.card));
-            Navigator.pop(context);
-          },
-          child: Row(children: [
-            Image(
-              filterQuality: FilterQuality.medium,
-              height: SetLootOwnerMenu._kIconSize,
-              width: SetLootOwnerMenu._kIconSize,
-              fit: BoxFit.contain,
-              color: _settings.darkMode.value
-                  ? Colors.white
-                  : Colors.black,
-              image: AssetImage(
-                  "assets/images/class-icons/${character.characterClass.name}.png"),
-            ),
-            const SizedBox(
-              width: SetLootOwnerMenu._kRowSpacing,
-            ),
-            Text(character.characterState.display.value,
-                textAlign: TextAlign.center, style: getTitleTextStyle(1))
-          ]))
-    ]);
-  }
-
   @override
   Widget build(BuildContext context) {
     List<Character> characters = GameMethods.getCurrentCharacters();
@@ -91,8 +59,52 @@ class SetLootOwnerMenuState extends State<SetLootOwnerMenu> {
           ),
           ...List.generate(
             characters.length,
-            (i) => buildCharacterButton(characters[i]), // ignore: avoid-returning-widgets, widget generator lambda
+            (i) => _CharacterButton( // ignore: avoid-returning-widgets, widget generator lambda
+                character: characters[i],
+                card: widget.card,
+                gameState: _gameState,
+                settings: _settings),
           ),
         ]));
+  }
+}
+
+class _CharacterButton extends StatelessWidget {
+  const _CharacterButton({
+    required this.character,
+    required this.card,
+    required this.gameState,
+    required this.settings,
+  });
+
+  final Character character;
+  final LootCard card;
+  final GameState gameState;
+  final Settings settings;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      const SizedBox(height: SetLootOwnerMenu._kRowSpacing),
+      TextButton(
+          onPressed: () {
+            gameState.action(SetLootOwnerCommand(character.characterClass.id, card));
+            Navigator.pop(context);
+          },
+          child: Row(children: [
+            Image(
+              filterQuality: FilterQuality.medium,
+              height: SetLootOwnerMenu._kIconSize,
+              width: SetLootOwnerMenu._kIconSize,
+              fit: BoxFit.contain,
+              color: settings.darkMode.value ? Colors.white : Colors.black,
+              image: AssetImage(
+                  "assets/images/class-icons/${character.characterClass.name}.png"),
+            ),
+            const SizedBox(width: SetLootOwnerMenu._kRowSpacing),
+            Text(character.characterState.display.value,
+                textAlign: TextAlign.center, style: getTitleTextStyle(1))
+          ]))
+    ]);
   }
 }

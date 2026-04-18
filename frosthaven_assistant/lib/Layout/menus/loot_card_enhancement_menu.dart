@@ -1,4 +1,3 @@
-// ignore_for_file: avoid-returning-widgets, file uses widget helper methods for loot card layout sections
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/enhance_loot_card_command.dart';
@@ -50,69 +49,6 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
     super.initState();
   }
 
-  Widget createCounterButton(LootCard card) {
-    return Container(
-      padding: const EdgeInsets.all(LootCardEnhancementMenu._kCounterPadding),
-      decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(LootCardEnhancementMenu._kCounterBorderRadius)),
-          color: Theme.of(context).colorScheme.secondary),
-      child: Row(
-        children: [
-          InkWell(
-              onTap: () {
-                setState(() {
-                  if (card.enhanced > 0) {
-                    _gameState.action(EnhanceLootCardCommand(
-                        card.id, card.enhanced - 1, card.gfx, gameState: _gameState));
-                  }
-                });
-              },
-              child: const Icon(Icons.remove, color: Colors.white, size: LootCardEnhancementMenu._kIconSize)),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: LootCardEnhancementMenu._kCounterPadding),
-            padding: const EdgeInsets.symmetric(horizontal: LootCardEnhancementMenu._kValuePaddingH, vertical: LootCardEnhancementMenu._kValuePaddingV),
-            decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(LootCardEnhancementMenu._kValueBorderRadius)), color: Colors.white),
-            child: Text(
-              card.enhanced.toString(),
-              style: const TextStyle(color: Colors.black, fontSize: kFontSizeTitle),
-            ),
-          ),
-          InkWell(
-              onTap: () {
-                setState(() {
-                  _gameState.action(EnhanceLootCardCommand(
-                      card.id, card.enhanced + 1, card.gfx, gameState: _gameState));
-                });
-              },
-              child: const Icon(
-                Icons.add,
-                color: Colors.white,
-                size: LootCardEnhancementMenu._kIconSize,
-              )),
-        ],
-      ),
-    );
-  }
-
-  Widget _createHeader(String type, String amount) {
-    return Row(
-      children: [
-        Image(
-          filterQuality: FilterQuality.medium,
-          height: LootCardEnhancementMenu._kHeaderImageSize,
-          width: LootCardEnhancementMenu._kHeaderImageSize,
-          fit: BoxFit.contain,
-          image: AssetImage("assets/images/loot/${type}_icon.png"),
-        ),
-        Text(
-          "$type $amount",
-          style: kBodyStyle,
-        ),
-      ],
-    );
-  }
-
   LootCard? getCardFromIndex(String type, int index) {
     if (type == "lumber") {
       return _gameState.lootDeck.lumberPool[index];
@@ -147,34 +83,24 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
     return null;
   }
 
-  Widget _buildRow(String type, int start, int count) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: List.generate(
-        count,
-        (i) => createCounterButton(getCardFromIndex(type, start + i)!),
-      ),
-    );
-  }
-
   List<Widget> _buildMaterialSection(String type) {
     return [
-      _createHeader(type, "1"),
-      _buildRow(type, 0, LootCardEnhancementMenu._kMaterial1Count),
+      _LootTypeHeader(type: type, amount: "1"),
+      _LootCardRow(type: type, start: 0, count: LootCardEnhancementMenu._kMaterial1Count, gameState: _gameState, getCard: getCardFromIndex),
       const Divider(),
-      _createHeader(type, "2 for 2 characters"),
-      _buildRow(type, LootCardEnhancementMenu._kMaterial2x2Start, LootCardEnhancementMenu._kMaterial2x2Count),
+      _LootTypeHeader(type: type, amount: "2 for 2 characters"),
+      _LootCardRow(type: type, start: LootCardEnhancementMenu._kMaterial2x2Start, count: LootCardEnhancementMenu._kMaterial2x2Count, gameState: _gameState, getCard: getCardFromIndex),
       const Divider(),
-      _createHeader(type, "2 for 2-3 characters"),
-      _buildRow(type, LootCardEnhancementMenu._kMaterial2x3Start, LootCardEnhancementMenu._kMaterial2x3Count),
+      _LootTypeHeader(type: type, amount: "2 for 2-3 characters"),
+      _LootCardRow(type: type, start: LootCardEnhancementMenu._kMaterial2x3Start, count: LootCardEnhancementMenu._kMaterial2x3Count, gameState: _gameState, getCard: getCardFromIndex),
       const Divider(),
     ];
   }
 
   List<Widget> _buildHerbSection(String type) {
     return [
-      _createHeader(type, ""),
-      _buildRow(type, 0, LootCardEnhancementMenu._kHerbCount),
+      _LootTypeHeader(type: type, amount: ""),
+      _LootCardRow(type: type, start: 0, count: LootCardEnhancementMenu._kHerbCount, gameState: _gameState, getCard: getCardFromIndex),
       const Divider(),
     ];
   }
@@ -182,7 +108,7 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
   List<Widget> _buildCoinRows(int start, int rows) {
     final result = <Widget>[];
     for (var row = 0; row < rows; row++) {
-      result.add(_buildRow("coin", start + row * LootCardEnhancementMenu._kCoinRowSize, LootCardEnhancementMenu._kCoinRowSize));
+      result.add(_LootCardRow(type: "coin", start: start + row * LootCardEnhancementMenu._kCoinRowSize, count: LootCardEnhancementMenu._kCoinRowSize, gameState: _gameState, getCard: getCardFromIndex));
       if (row < rows - 1) {
         result.add(const SizedBox(height: LootCardEnhancementMenu._kCoinRowSpacing));
       }
@@ -219,14 +145,14 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                           ..._buildHerbSection("flamefruit"),
                           ..._buildHerbSection("rockroot"),
                           ..._buildHerbSection("snowthistle"),
-                          _createHeader("coin", "1"),
+                          _LootTypeHeader(type: "coin", amount: "1"),
                           ..._buildCoinRows(0, LootCardEnhancementMenu._kCoin1Rows),
                           const Divider(),
-                          _createHeader("coin", "2"),
+                          _LootTypeHeader(type: "coin", amount: "2"),
                           ..._buildCoinRows(LootCardEnhancementMenu._kCoin2Start, LootCardEnhancementMenu._kCoin2Rows),
                           const Divider(),
-                          _createHeader("coin", "3"),
-                          _buildRow("coin", LootCardEnhancementMenu._kCoin3Start, LootCardEnhancementMenu._kCoin3Count),
+                          _LootTypeHeader(type: "coin", amount: "3"),
+                          _LootCardRow(type: "coin", start: LootCardEnhancementMenu._kCoin3Start, count: LootCardEnhancementMenu._kCoin3Count, gameState: _gameState, getCard: getCardFromIndex),
                         ]),
                       ),
                       const SizedBox(
@@ -248,5 +174,111 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                             Navigator.pop(context);
                           }))
                 ]))));
+  }
+}
+
+class _LootTypeHeader extends StatelessWidget {
+  const _LootTypeHeader({required this.type, required this.amount});
+
+  final String type;
+  final String amount;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Image(
+          filterQuality: FilterQuality.medium,
+          height: LootCardEnhancementMenu._kHeaderImageSize,
+          width: LootCardEnhancementMenu._kHeaderImageSize,
+          fit: BoxFit.contain,
+          image: AssetImage("assets/images/loot/${type}_icon.png"),
+        ),
+        Text(
+          "$type $amount",
+          style: kBodyStyle,
+        ),
+      ],
+    );
+  }
+}
+
+class _LootCardRow extends StatelessWidget {
+  const _LootCardRow({
+    required this.type,
+    required this.start,
+    required this.count,
+    required this.gameState,
+    required this.getCard,
+  });
+
+  final String type;
+  final int start;
+  final int count;
+  final GameState gameState;
+  final LootCard? Function(String, int) getCard;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: List.generate(
+        count,
+        (i) => _EnhancementCounterButton( // ignore: avoid-returning-widgets, widget generator lambda
+            card: getCard(type, start + i)!, gameState: gameState),
+      ),
+    );
+  }
+}
+
+class _EnhancementCounterButton extends StatelessWidget {
+  const _EnhancementCounterButton({required this.card, required this.gameState});
+
+  final LootCard card;
+  final GameState gameState;
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<int>(
+        valueListenable: gameState.commandIndex,
+        builder: (context, _, child) {
+          return Container(
+            padding: const EdgeInsets.all(LootCardEnhancementMenu._kCounterPadding),
+            decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(LootCardEnhancementMenu._kCounterBorderRadius)),
+                color: Theme.of(context).colorScheme.secondary),
+            child: Row(
+              children: [
+                InkWell(
+                    onTap: () {
+                      if (card.enhanced > 0) {
+                        gameState.action(EnhanceLootCardCommand(
+                            card.id, card.enhanced - 1, card.gfx, gameState: gameState));
+                      }
+                    },
+                    child: const Icon(Icons.remove, color: Colors.white, size: LootCardEnhancementMenu._kIconSize)),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: LootCardEnhancementMenu._kCounterPadding),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: LootCardEnhancementMenu._kValuePaddingH,
+                      vertical: LootCardEnhancementMenu._kValuePaddingV),
+                  decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(LootCardEnhancementMenu._kValueBorderRadius)),
+                      color: Colors.white),
+                  child: Text(
+                    card.enhanced.toString(),
+                    style: const TextStyle(color: Colors.black, fontSize: kFontSizeTitle),
+                  ),
+                ),
+                InkWell(
+                    onTap: () {
+                      gameState.action(EnhanceLootCardCommand(
+                          card.id, card.enhanced + 1, card.gfx, gameState: gameState));
+                    },
+                    child: const Icon(Icons.add, color: Colors.white, size: LootCardEnhancementMenu._kIconSize)),
+              ],
+            ),
+          );
+        });
   }
 }

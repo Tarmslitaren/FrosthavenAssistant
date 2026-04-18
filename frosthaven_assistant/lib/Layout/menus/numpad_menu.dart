@@ -34,27 +34,14 @@ class NumpadMenuState extends State<NumpadMenu> {
     super.initState();
   }
 
-  Widget buildNrButton(int nr, double scale) {
-    return SizedBox(
-      width: _kButtonSize * scale,
-      height: _kButtonSize * scale,
-      child: TextButton(
-        child: Text(
-          nr.toString(),
-          style: getTitleTextStyle(scale),
-        ),
-        onPressed: () {
-          text += nr.toString();
-          widget.controller.text = text;
-          widget.onChange?.call(text);
-
-          if (text.length >= widget.maxLength) {
-            Navigator.pop(context);
-          }
-          FocusManager.instance.primaryFocus?.unfocus();
-        },
-      ),
-    );
+  void _handlePress(int nr, BuildContext context) {
+    text += nr.toString();
+    widget.controller.text = text;
+    widget.onChange?.call(text);
+    if (text.length >= widget.maxLength) {
+      Navigator.pop(context);
+    }
+    FocusManager.instance.primaryFocus?.unfocus();
   }
 
   @override
@@ -76,18 +63,53 @@ class NumpadMenuState extends State<NumpadMenu> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
                     _kNumpadColCount,
-                    (colIdx) => buildNrButton(rowIdx * _kNumpadColCount + colIdx + 1, scale), // ignore: avoid-returning-widgets, widget generator lambda
+                    (colIdx) => _NrButton( // ignore: avoid-returning-widgets, widget generator lambda
+                        nr: rowIdx * _kNumpadColCount + colIdx + 1,
+                        scale: scale,
+                        onPressed: () => _handlePress(rowIdx * _kNumpadColCount + colIdx + 1, context)),
                   ),
                 ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  buildNrButton(0, scale), // ignore: avoid-returning-widgets, widget helper method
+                  _NrButton(
+                      nr: 0,
+                      scale: scale,
+                      onPressed: () => _handlePress(0, context)),
                 ],
               ),
             ],
           ),
         ]));
+  }
+}
+
+class _NrButton extends StatelessWidget {
+  const _NrButton({
+    required this.nr,
+    required this.scale,
+    required this.onPressed,
+  });
+
+  final int nr;
+  final double scale;
+  final VoidCallback onPressed;
+
+  static const double _kButtonSize = 40.0;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: _kButtonSize * scale,
+      height: _kButtonSize * scale,
+      child: TextButton(
+        onPressed: onPressed,
+        child: Text(
+          nr.toString(),
+          style: getTitleTextStyle(scale),
+        ),
+      ),
+    );
   }
 }

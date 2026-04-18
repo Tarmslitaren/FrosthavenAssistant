@@ -65,45 +65,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
     focusNode.addListener(_focusNodeListener);
   }
 
-  Widget buildLevelButton(int nr, double scale) {
-    return ValueListenableBuilder<int>(
-        valueListenable: _gameState.commandIndex,
-        builder: (context, value, child) {
-          bool isCurrentlySelected =
-              nr == widget.character.characterState.level.value;
-          String text = nr.toString();
-          bool darkMode = getIt<Settings>().darkMode.value;
-          Color selectedTextColor = darkMode ? Colors.white : Colors.black;
-          Color textColor = isCurrentlySelected ? selectedTextColor : Colors.grey;
-          return SizedBox(
-            width: _kButtonSize * scale,
-            height: _kButtonSize * scale,
-            child: TextButton(
-              child: Text(
-                text,
-                style: TextStyle(
-                    fontSize: kFontSizeTitle * scale,
-                    shadows: [
-                      Shadow(
-                        offset: Offset(1 * scale, 1 * scale),
-                        color: isCurrentlySelected
-                            ? Colors.black54
-                            : Colors.black87,
-                        blurRadius: 1 * scale,
-                      ),
-                    ],
-                    color: textColor),
-              ),
-              onPressed: () {
-                if (!isCurrentlySelected) {
-                  _gameState.action(
-                      SetCharacterLevelCommand(nr, widget.character.id));
-                }
-              },
-            ),
-          );
-        });
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +99,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
                     _kLevelRow1Count,
-                    (i) => buildLevelButton(i + 1, scale), // ignore: avoid-returning-widgets, widget generator lambda
+                    (i) => _LevelButton(nr: i + 1, scale: scale, character: widget.character, gameState: _gameState), // ignore: avoid-returning-widgets, widget generator lambda
                   ),
                 ),
               if (!isObjective &&
@@ -146,7 +108,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
                     _kLevelRow2Count,
-                    (i) => buildLevelButton(_kLevelRow1Count + i + 1, scale), // ignore: avoid-returning-widgets, widget generator lambda
+                    (i) => _LevelButton(nr: _kLevelRow1Count + i + 1, scale: scale, character: widget.character, gameState: _gameState), // ignore: avoid-returning-widgets, widget generator lambda
                   ),
                 ),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -182,5 +144,60 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
             ],
           ),
         ]));
+  }
+}
+
+class _LevelButton extends StatelessWidget {
+  const _LevelButton({
+    required this.nr,
+    required this.scale,
+    required this.character,
+    required this.gameState,
+  });
+
+  final int nr;
+  final double scale;
+  final Character character;
+  final GameState gameState;
+
+  static const double _kButtonSize = 40.0;
+  static const double _kShadowOffset = 1.0;
+  static const double _kShadowBlur = 1.0;
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<int>(
+        valueListenable: gameState.commandIndex,
+        builder: (context, value, child) {
+          bool isCurrentlySelected = nr == character.characterState.level.value;
+          String text = nr.toString();
+          bool darkMode = getIt<Settings>().darkMode.value;
+          Color selectedTextColor = darkMode ? Colors.white : Colors.black;
+          Color textColor = isCurrentlySelected ? selectedTextColor : Colors.grey;
+          return SizedBox(
+            width: _kButtonSize * scale,
+            height: _kButtonSize * scale,
+            child: TextButton(
+              child: Text(
+                text,
+                style: TextStyle(
+                    fontSize: kFontSizeTitle * scale,
+                    shadows: [
+                      Shadow(
+                        offset: Offset(_kShadowOffset * scale, _kShadowOffset * scale),
+                        color: isCurrentlySelected ? Colors.black54 : Colors.black87,
+                        blurRadius: _kShadowBlur * scale,
+                      ),
+                    ],
+                    color: textColor),
+              ),
+              onPressed: () {
+                if (!isCurrentlySelected) {
+                  gameState.action(SetCharacterLevelCommand(nr, character.id));
+                }
+              },
+            ),
+          );
+        });
   }
 }

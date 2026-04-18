@@ -112,103 +112,61 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
     }
   }
 
-  Widget buildNrButton(final int nr, final double scale, Monster monster,
-      bool elite, int nrOfElite, int nrOfNormal) {
-    bool boss = monster.type.levels.first.boss != null;
-    MonsterType type = MonsterType.normal;
-    Color color = Colors.white;
-
-    if (elite) {
-      color = Colors.yellow;
-      type = MonsterType.elite;
-    }
-
-    if (boss) {
-      color = Colors.red;
-      type = MonsterType.boss;
-    }
-    bool isOut = false;
+  bool _isStandeeOut(int nr, Monster monster, bool elite, int nrOfElite, int nrOfNormal) {
     for (var item in monster.monsterInstances) {
       if (item.standeeNr == nr ||
           (elite && nrOfElite <= currentEliteAdded) ||
           (!elite && nrOfNormal <= currentNormalAdded)) {
-        isOut = true;
-        break;
+        return true;
       }
     }
-    if (isOut) {
-      color = Colors.grey;
-    }
-    String text = nr.toString();
-    var shadow = Shadow(
-      offset: Offset(_kShadowOffset * scale, _kShadowOffset * scale),
-      color: Colors.black87,
-      blurRadius: _kShadowBlur,
-    );
-    return SizedBox(
-      width: _kButtonSize * scale,
-      height: _kButtonSize * scale,
-      child: TextButton(
-        child: Text(
-          text,
-          style: TextStyle(
-            color: color,
-            fontSize: kFontSizeTitle * scale,
-            shadows: [shadow],
-          ),
-        ),
-        onPressed: () {
-          if (!isOut) {
-            _gameState.action(AddStandeeCommand(
-                nr, null, monster.id, type, addAsSummon,
-                gameState: _gameState));
-            if (elite) {
-              setState(() {
-                currentEliteAdded++;
-              });
-            } else {
-              setState(() {
-                currentNormalAdded++;
-              });
-            }
+    return false;
+  }
 
-            setState(() {
-              if (currentEliteAdded == nrOfElite &&
-                  currentNormalAdded == nrOfNormal) {
-                if (currentMonsterIndex + 1 < widget.monsterData.length) {
-                  currentMonsterIndex++; //next set
-                  currentEliteAdded = 0;
-                  currentNormalAdded = 0;
-                }
-              }
-            });
-          } else {
-            String figureId = GameMethods.getFigureIdFromNr(monster.id, nr);
-            if (figureId.isNotEmpty) {
-              MonsterInstance state =
-                  GameMethods.getFigure(monster.id, figureId)
-                      as MonsterInstance;
-              if (!initialEliteAdded[currentMonsterIndex]
-                      .contains(state.standeeNr) &&
-                  !initialNormalAdded[currentMonsterIndex]
-                      .contains(state.standeeNr)) {
-                _gameState.action(ChangeHealthCommand(
-                    _kKillHealth, figureId, monster.id,
-                    gameState: _gameState));
-
-                setState(() {
-                  if (state.type == MonsterType.elite) {
-                    currentEliteAdded--;
-                  } else {
-                    currentNormalAdded--;
-                  }
-                });
-              }
-            }
+  void _handleStandeePress(int nr, Monster monster, MonsterType type,
+      bool elite, bool isOut, int nrOfElite, int nrOfNormal) {
+    if (!isOut) {
+      _gameState.action(AddStandeeCommand(
+          nr, null, monster.id, type, addAsSummon,
+          gameState: _gameState));
+      if (elite) {
+        setState(() {
+          currentEliteAdded++;
+        });
+      } else {
+        setState(() {
+          currentNormalAdded++;
+        });
+      }
+      setState(() {
+        if (currentEliteAdded == nrOfElite && currentNormalAdded == nrOfNormal) {
+          if (currentMonsterIndex + 1 < widget.monsterData.length) {
+            currentMonsterIndex++;
+            currentEliteAdded = 0;
+            currentNormalAdded = 0;
           }
-        },
-      ),
-    );
+        }
+      });
+    } else {
+      String figureId = GameMethods.getFigureIdFromNr(monster.id, nr);
+      if (figureId.isNotEmpty) {
+        MonsterInstance state =
+            GameMethods.getFigure(monster.id, figureId) as MonsterInstance;
+        if (!initialEliteAdded[currentMonsterIndex].contains(state.standeeNr) &&
+            !initialNormalAdded[currentMonsterIndex].contains(state.standeeNr)) {
+          _gameState.action(ChangeHealthCommand(
+              _kKillHealth, figureId, monster.id,
+              gameState: _gameState));
+          setState(() {
+            if (state.type == MonsterType.elite) {
+              currentEliteAdded--;
+            } else {
+              currentNormalAdded--;
+            }
+          });
+        }
+      }
+    }
   }
 
   String _pluralize(String text) {
@@ -237,7 +195,18 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: List.generate(
           end - start + 1,
-          (i) => buildNrButton(start + i, scale, monster, elite, nrOfElite, nrOfNormal), // ignore: avoid-returning-widgets, widget generator lambda
+          (i) { // ignore: avoid-returning-widgets, widget generator lambda
+            final nr = start + i;
+            bool boss = monster.type.levels.first.boss != null;
+            MonsterType type = elite ? MonsterType.elite : (boss ? MonsterType.boss : MonsterType.normal);
+            Color color = elite ? Colors.yellow : (boss ? Colors.red : Colors.white);
+            bool isOut = _isStandeeOut(nr, monster, elite, nrOfElite, nrOfNormal);
+            if (isOut) color = Colors.grey;
+            return _StandeeNrButton(
+              nr: nr, scale: scale, color: color,
+              onPressed: () => _handleStandeePress(nr, monster, type, elite, isOut, nrOfElite, nrOfNormal),
+            );
+          },
         ),
       ));
     }
@@ -422,5 +391,47 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                     ]);
                   }));
         });
+  }
+}
+
+class _StandeeNrButton extends StatelessWidget {
+  const _StandeeNrButton({
+    required this.nr,
+    required this.scale,
+    required this.color,
+    required this.onPressed,
+  });
+
+  final int nr;
+  final double scale;
+  final Color color;
+  final VoidCallback onPressed;
+
+  static const double _kButtonSize = 40.0;
+  static const double _kShadowOffset = 1.0;
+  static const double _kShadowBlur = 1.0;
+
+  @override
+  Widget build(BuildContext context) {
+    var shadow = Shadow(
+      offset: Offset(_kShadowOffset * scale, _kShadowOffset * scale),
+      color: Colors.black87,
+      blurRadius: _kShadowBlur,
+    );
+    return SizedBox(
+      width: _kButtonSize * scale,
+      height: _kButtonSize * scale,
+      child: TextButton(
+        onPressed: onPressed,
+        child: Text(
+          nr.toString(),
+          style: TextStyle(
+            color: color,
+            fontSize: kFontSizeTitle * scale,
+            shadows: [shadow],
+          ),
+        ),
+      ),
+    );
   }
 }

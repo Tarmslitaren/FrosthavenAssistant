@@ -133,91 +133,6 @@ class StatusMenuState extends State<StatusMenu> {
     _settings = widget.settings ?? getIt<Settings>();
   }
 
-  Widget _buildExtraConditionRow(
-      {required bool isCharacter,
-      required bool isSummon,
-      required bool hasMireFoot,
-      required bool showCustomContent,
-      required String figureId,
-      required String? ownerId,
-      required List<String> immunities,
-      required double scale}) {
-    if (isCharacter || isSummon) {
-      return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        if (showCustomContent)
-          ConditionButton(
-              condition: Condition.infect,
-              figureId: figureId,
-              ownerId: ownerId,
-              immunities: immunities,
-              scale: scale),
-        if (!isSummon)
-          ConditionButton(
-              condition: Condition.impair,
-              figureId: figureId,
-              ownerId: ownerId,
-              immunities: immunities,
-              scale: scale),
-        if (showCustomContent)
-          ConditionButton(
-              condition: Condition.rupture,
-              figureId: figureId,
-              ownerId: ownerId,
-              immunities: immunities,
-              scale: scale),
-      ]);
-    }
-    if (!hasMireFoot) {
-      return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        if (showCustomContent)
-          ConditionButton(
-              condition: Condition.poison2,
-              figureId: figureId,
-              ownerId: ownerId,
-              immunities: immunities,
-              scale: scale),
-        if (showCustomContent)
-          ConditionButton(
-              condition: Condition.rupture,
-              figureId: figureId,
-              ownerId: ownerId,
-              immunities: immunities,
-              scale: scale),
-      ]);
-    }
-    return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-      ConditionButton(
-          condition: Condition.wound2,
-          figureId: figureId,
-          ownerId: ownerId,
-          immunities: immunities,
-          scale: scale),
-      ConditionButton(
-          condition: Condition.poison2,
-          figureId: figureId,
-          ownerId: ownerId,
-          immunities: immunities,
-          scale: scale),
-      ConditionButton(
-          condition: Condition.poison3,
-          figureId: figureId,
-          ownerId: ownerId,
-          immunities: immunities,
-          scale: scale),
-      ConditionButton(
-          condition: Condition.poison4,
-          figureId: figureId,
-          ownerId: ownerId,
-          immunities: immunities,
-          scale: scale),
-      ConditionButton(
-          condition: Condition.rupture,
-          figureId: figureId,
-          ownerId: ownerId,
-          immunities: immunities,
-          scale: scale),
-    ]);
-  }
 
   Widget buildStackableConditionButtons(
       ValueListenable<int> notifier,
@@ -291,59 +206,6 @@ class StatusMenuState extends State<StatusMenu> {
     ]);
   }
 
-  Widget buildSummonButton(String figureId, String? ownerId, double scale) {
-    String imagePath = "assets/images/summon/green.png";
-    return ValueListenableBuilder<int>(
-        valueListenable: _gameState.commandIndex,
-        builder: (context, value, child) {
-          Color color = Colors.transparent;
-          FigureState? figure = GameMethods.getFigure(ownerId, figureId);
-          if (figure == null) {
-            return Container();
-          }
-
-          if (figure is! MonsterInstance) return Container();
-          bool isActive = figure.roundSummoned != -1;
-          if (isActive) {
-            color = _settings.darkMode.value ? Colors.white : Colors.black;
-          }
-
-          return Container(
-              width: StatusMenu._kActionButtonSize * scale,
-              height: StatusMenu._kActionButtonSize * scale,
-              padding: EdgeInsets.zero,
-              margin: EdgeInsets.all(StatusMenu._kSummonMargin * scale),
-              decoration: BoxDecoration(
-                  border: Border.all(
-                    color: color,
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(
-                      StatusMenu._kSummonBorderRadius * scale))),
-              child: IconButton(
-                  icon: isActive
-                      ? Image(
-                          height: StatusMenu._kSummonIconSize * scale,
-                          filterQuality: FilterQuality.medium,
-                          image: AssetImage(imagePath))
-                      : Image.asset(
-                          filterQuality: FilterQuality.medium,
-                          //needed because of the edges
-                          height: StatusMenu._kSummonIconSize * scale,
-                          width: StatusMenu._kSummonIconSize * scale,
-                          imagePath),
-                  onPressed: () {
-                    if (!isActive) {
-                      _gameState.action(SetAsSummonCommand(
-                          true, figureId, ownerId,
-                          gameState: _gameState));
-                    } else {
-                      _gameState.action(SetAsSummonCommand(
-                          false, figureId, ownerId,
-                          gameState: _gameState));
-                    }
-                  }));
-        });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -982,7 +844,7 @@ class StatusMenuState extends State<StatusMenu> {
                           scale: scale),
                     ],
                   ),
-                  _buildExtraConditionRow( // ignore: avoid-returning-widgets, widget helper method for condition row
+                  _ExtraConditionRow(
                       isCharacter: isCharacter,
                       isSummon: isSummon,
                       hasMireFoot: hasMireFoot,
@@ -1059,7 +921,7 @@ class StatusMenuState extends State<StatusMenu> {
                               ownerId: ownerId,
                               immunities: immunities,
                               scale: scale),
-                        buildSummonButton(figureId, ownerId, scale) // ignore: avoid-returning-widgets, widget helper method
+                        _SummonButton(figureId: figureId, ownerId: ownerId, scale: scale, gameState: _gameState, settings: _settings)
                       ],
                     ),
                 ],
@@ -1067,5 +929,169 @@ class StatusMenuState extends State<StatusMenu> {
             ])
           ]))
     ]);
+  }
+}
+
+class _ExtraConditionRow extends StatelessWidget {
+  const _ExtraConditionRow({
+    required this.isCharacter,
+    required this.isSummon,
+    required this.hasMireFoot,
+    required this.showCustomContent,
+    required this.figureId,
+    required this.ownerId,
+    required this.immunities,
+    required this.scale,
+  });
+
+  final bool isCharacter;
+  final bool isSummon;
+  final bool hasMireFoot;
+  final bool showCustomContent;
+  final String figureId;
+  final String? ownerId;
+  final List<String> immunities;
+  final double scale;
+
+  @override
+  Widget build(BuildContext context) {
+    if (isCharacter || isSummon) {
+      return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        if (showCustomContent)
+          ConditionButton(
+              condition: Condition.infect,
+              figureId: figureId,
+              ownerId: ownerId,
+              immunities: immunities,
+              scale: scale),
+        if (!isSummon)
+          ConditionButton(
+              condition: Condition.impair,
+              figureId: figureId,
+              ownerId: ownerId,
+              immunities: immunities,
+              scale: scale),
+        if (showCustomContent)
+          ConditionButton(
+              condition: Condition.rupture,
+              figureId: figureId,
+              ownerId: ownerId,
+              immunities: immunities,
+              scale: scale),
+      ]);
+    }
+    if (!hasMireFoot) {
+      return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        if (showCustomContent)
+          ConditionButton(
+              condition: Condition.poison2,
+              figureId: figureId,
+              ownerId: ownerId,
+              immunities: immunities,
+              scale: scale),
+        if (showCustomContent)
+          ConditionButton(
+              condition: Condition.rupture,
+              figureId: figureId,
+              ownerId: ownerId,
+              immunities: immunities,
+              scale: scale),
+      ]);
+    }
+    return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+      ConditionButton(
+          condition: Condition.wound2,
+          figureId: figureId,
+          ownerId: ownerId,
+          immunities: immunities,
+          scale: scale),
+      ConditionButton(
+          condition: Condition.poison2,
+          figureId: figureId,
+          ownerId: ownerId,
+          immunities: immunities,
+          scale: scale),
+      ConditionButton(
+          condition: Condition.poison3,
+          figureId: figureId,
+          ownerId: ownerId,
+          immunities: immunities,
+          scale: scale),
+      ConditionButton(
+          condition: Condition.poison4,
+          figureId: figureId,
+          ownerId: ownerId,
+          immunities: immunities,
+          scale: scale),
+      ConditionButton(
+          condition: Condition.rupture,
+          figureId: figureId,
+          ownerId: ownerId,
+          immunities: immunities,
+          scale: scale),
+    ]);
+  }
+}
+
+class _SummonButton extends StatelessWidget {
+  const _SummonButton({
+    required this.figureId,
+    required this.ownerId,
+    required this.scale,
+    required this.gameState,
+    required this.settings,
+  });
+
+  final String figureId;
+  final String? ownerId;
+  final double scale;
+  final GameState gameState;
+  final Settings settings;
+
+  static const String _kImagePath = "assets/images/summon/green.png";
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<int>(
+        valueListenable: gameState.commandIndex,
+        builder: (context, value, child) {
+          Color color = Colors.transparent;
+          FigureState? figure = GameMethods.getFigure(ownerId, figureId);
+          if (figure == null) {
+            return Container();
+          }
+
+          if (figure is! MonsterInstance) return Container();
+          bool isActive = figure.roundSummoned != -1;
+          if (isActive) {
+            color = settings.darkMode.value ? Colors.white : Colors.black;
+          }
+
+          return Container(
+              width: StatusMenu._kActionButtonSize * scale,
+              height: StatusMenu._kActionButtonSize * scale,
+              padding: EdgeInsets.zero,
+              margin: EdgeInsets.all(StatusMenu._kSummonMargin * scale),
+              decoration: BoxDecoration(
+                  border: Border.all(color: color),
+                  borderRadius: BorderRadius.all(
+                      Radius.circular(StatusMenu._kSummonBorderRadius * scale))),
+              child: IconButton(
+                  icon: isActive
+                      ? Image(
+                          height: StatusMenu._kSummonIconSize * scale,
+                          filterQuality: FilterQuality.medium,
+                          image: const AssetImage(_kImagePath))
+                      : Image.asset(
+                          filterQuality: FilterQuality.medium,
+                          height: StatusMenu._kSummonIconSize * scale,
+                          width: StatusMenu._kSummonIconSize * scale,
+                          _kImagePath),
+                  onPressed: () {
+                    gameState.action(SetAsSummonCommand(
+                        !isActive, figureId, ownerId,
+                        gameState: gameState));
+                  }));
+        });
   }
 }

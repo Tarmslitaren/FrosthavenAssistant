@@ -1,4 +1,3 @@
-// ignore_for_file: avoid-returning-widgets, file uses widget helper methods for summon color/number buttons
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
 import 'package:frosthaven_assistant/Model/summon_model.dart';
@@ -89,76 +88,10 @@ class AddSummonMenuState extends State<AddSummonMenu> {
     }
   }
 
-  Widget buildGraphicButton(String summonGfx, double scale) {
-    bool isCurrentlySelected;
-    isCurrentlySelected = summonGfx == chosenGfx;
-    Color color = Colors.transparent;
-    if (isCurrentlySelected) {
-      color = _settings.darkMode.value ? Colors.white : Colors.black;
-    }
-    return SizedBox(
-      width: _kButtonSize * scale,
-      height: _kButtonSize * scale,
-      child: Container(
-          decoration: BoxDecoration(
-              border: Border.all(
-                color: color,
-              ),
-              borderRadius: BorderRadius.all(Radius.circular(_kButtonBorderRadius * scale))),
-          child: IconButton(
-            onPressed: () {
-              if (!isCurrentlySelected) {
-                setState(() {
-                  chosenGfx = summonGfx;
-                });
-              }
-            },
-            icon: Image.asset(
-              'assets/images/summon/$summonGfx.png',
-              cacheHeight: kMonsterImageCacheHeight,
-            ),
-          )),
-    );
-  }
-
-  Widget buildNrButton(int nr, double scale) {
-    bool isCurrentlySelected;
-    isCurrentlySelected = nr == chosenNr;
-    Color color = Colors.transparent;
-    String text = nr.toString();
-    bool darkMode = _settings.darkMode.value;
-    Color selectedTextColor = darkMode ? Colors.white : Colors.black;
-    Color textColor = isCurrentlySelected ? selectedTextColor : Colors.grey;
-    return SizedBox(
-      width: _kButtonSize * scale,
-      height: _kButtonSize * scale,
-      child: Container(
-          decoration: BoxDecoration(
-              border: Border.all(
-                color: color,
-              ),
-              borderRadius: BorderRadius.all(Radius.circular(_kButtonBorderRadius))),
-          child: TextButton(
-            child: Text(
-              text,
-              style: TextStyle(
-                  fontSize: kFontSizeTitle * scale,
-                  color: textColor),
-            ),
-            onPressed: () {
-              if (!isCurrentlySelected) {
-                setState(() {
-                  chosenNr = nr;
-                });
-              }
-            },
-          )),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     double scale = getModalMenuScale(context);
+    bool darkMode = _settings.darkMode.value;
     return ModalBackground(
       width: _kMenuWidth * scale,
       height: _kMenuHeight * scale,
@@ -170,28 +103,32 @@ class AddSummonMenuState extends State<AddSummonMenu> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            buildGraphicButton("blue", scale),
-            buildGraphicButton("green", scale),
-            buildGraphicButton("yellow", scale),
-            buildGraphicButton("orange", scale),
+            _SummonGraphicButton(summonGfx: "blue", scale: scale, isSelected: chosenGfx == "blue", darkMode: darkMode, onPressed: () => setState(() { chosenGfx = "blue"; })),
+            _SummonGraphicButton(summonGfx: "green", scale: scale, isSelected: chosenGfx == "green", darkMode: darkMode, onPressed: () => setState(() { chosenGfx = "green"; })),
+            _SummonGraphicButton(summonGfx: "yellow", scale: scale, isSelected: chosenGfx == "yellow", darkMode: darkMode, onPressed: () => setState(() { chosenGfx = "yellow"; })),
+            _SummonGraphicButton(summonGfx: "orange", scale: scale, isSelected: chosenGfx == "orange", darkMode: darkMode, onPressed: () => setState(() { chosenGfx = "orange"; })),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            buildGraphicButton("white", scale),
-            buildGraphicButton("purple", scale),
-            buildGraphicButton("pink", scale),
-            buildGraphicButton("red", scale),
+            _SummonGraphicButton(summonGfx: "white", scale: scale, isSelected: chosenGfx == "white", darkMode: darkMode, onPressed: () => setState(() { chosenGfx = "white"; })),
+            _SummonGraphicButton(summonGfx: "purple", scale: scale, isSelected: chosenGfx == "purple", darkMode: darkMode, onPressed: () => setState(() { chosenGfx = "purple"; })),
+            _SummonGraphicButton(summonGfx: "pink", scale: scale, isSelected: chosenGfx == "pink", darkMode: darkMode, onPressed: () => setState(() { chosenGfx = "pink"; })),
+            _SummonGraphicButton(summonGfx: "red", scale: scale, isSelected: chosenGfx == "red", darkMode: darkMode, onPressed: () => setState(() { chosenGfx = "red"; })),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(_kNrButtonRowSize, (i) => buildNrButton(i + 1, scale)),
+          children: List.generate(_kNrButtonRowSize, (i) => _SummonNrButton( // ignore: avoid-returning-widgets, widget generator lambda
+              nr: i + 1, scale: scale, isSelected: chosenNr == i + 1, darkMode: darkMode,
+              onPressed: () => setState(() { chosenNr = i + 1; }))),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(_kNrButtonRowSize, (i) => buildNrButton(_kNrButtonRowSize + i + 1, scale)),
+          children: List.generate(_kNrButtonRowSize, (i) => _SummonNrButton( // ignore: avoid-returning-widgets, widget generator lambda
+              nr: _kNrButtonRowSize + i + 1, scale: scale, isSelected: chosenNr == _kNrButtonRowSize + i + 1, darkMode: darkMode,
+              onPressed: () => setState(() { chosenNr = _kNrButtonRowSize + i + 1; }))),
         ),
         Expanded(
             child: Scrollbar(
@@ -278,6 +215,85 @@ class AddSummonMenuState extends State<AddSummonMenu> {
           height: _kTopSpacing * scale,
         ),
       ]),
+    );
+  }
+}
+
+class _SummonGraphicButton extends StatelessWidget {
+  const _SummonGraphicButton({
+    required this.summonGfx,
+    required this.scale,
+    required this.isSelected,
+    required this.darkMode,
+    required this.onPressed,
+  });
+
+  final String summonGfx;
+  final double scale;
+  final bool isSelected;
+  final bool darkMode;
+  final VoidCallback onPressed;
+
+  static const double _kButtonSize = 42.0;
+  static const double _kButtonBorderRadius = 30.0;
+
+  @override
+  Widget build(BuildContext context) {
+    Color color = isSelected ? (darkMode ? Colors.white : Colors.black) : Colors.transparent;
+    return SizedBox(
+      width: _kButtonSize * scale,
+      height: _kButtonSize * scale,
+      child: Container(
+          decoration: BoxDecoration(
+              border: Border.all(color: color),
+              borderRadius: BorderRadius.all(Radius.circular(_kButtonBorderRadius * scale))),
+          child: IconButton(
+            onPressed: isSelected ? null : onPressed,
+            icon: Image.asset(
+              'assets/images/summon/$summonGfx.png',
+              cacheHeight: kMonsterImageCacheHeight,
+            ),
+          )),
+    );
+  }
+}
+
+class _SummonNrButton extends StatelessWidget {
+  const _SummonNrButton({
+    required this.nr,
+    required this.scale,
+    required this.isSelected,
+    required this.darkMode,
+    required this.onPressed,
+  });
+
+  final int nr;
+  final double scale;
+  final bool isSelected;
+  final bool darkMode;
+  final VoidCallback onPressed;
+
+  static const double _kButtonSize = 42.0;
+  static const double _kButtonBorderRadius = 30.0;
+
+  @override
+  Widget build(BuildContext context) {
+    Color selectedTextColor = darkMode ? Colors.white : Colors.black;
+    Color textColor = isSelected ? selectedTextColor : Colors.grey;
+    return SizedBox(
+      width: _kButtonSize * scale,
+      height: _kButtonSize * scale,
+      child: Container(
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.transparent),
+              borderRadius: BorderRadius.all(Radius.circular(_kButtonBorderRadius))),
+          child: TextButton(
+            onPressed: isSelected ? null : onPressed,
+            child: Text(
+              nr.toString(),
+              style: TextStyle(fontSize: kFontSizeTitle * scale, color: textColor),
+            ),
+          )),
     );
   }
 }
