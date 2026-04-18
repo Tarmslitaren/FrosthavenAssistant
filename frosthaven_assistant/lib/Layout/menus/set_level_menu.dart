@@ -1,3 +1,4 @@
+// ignore_for_file: avoid-returning-widgets, file uses widget helper methods for level/difficulty buttons and legend
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/counter_button.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';

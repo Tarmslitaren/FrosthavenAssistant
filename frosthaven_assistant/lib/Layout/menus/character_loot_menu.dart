@@ -113,7 +113,7 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
                 style: kTitleStyle,
               )
             ]),
-        ..._kLootNames.map((name) => createListTile(name, characterId)),
+        ..._kLootNames.map((name) => createListTile(name, characterId)), // ignore: avoid-returning-widgets, widget generator lambda
       ]),
     );
   }
@@ -136,7 +136,7 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
                         height: _kTopSpacing,
                       ),
                       for (Character character in characters)
-                        buildCharacterLootWidget(character.characterClass.id,
+                        buildCharacterLootWidget(character.characterClass.id, // ignore: avoid-returning-widgets, widget helper method
                             character.characterState.display.value),
                       const SizedBox(
                         height: kMenuCloseButtonSpacing,

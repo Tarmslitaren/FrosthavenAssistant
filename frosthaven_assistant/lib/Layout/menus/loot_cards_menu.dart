@@ -73,7 +73,7 @@ class LootCardsMenuState extends State<LootCardsMenu> {
             padding: EdgeInsets.zero,
             crossAxisCount:
                 max(_kMinColumns, (screenWidth / _kItemMaxWidth).ceil()),
-            children: generateList(list).reversed.toList(),
+            children: generateList(list).reversed.toList(), // ignore: avoid-returning-widgets, widget list from helper method
           ),
         ));
   }

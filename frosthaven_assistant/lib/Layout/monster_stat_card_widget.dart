@@ -1,3 +1,4 @@
+// ignore_for_file: avoid-returning-widgets, file uses static widget builder methods for stat card layouts
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';

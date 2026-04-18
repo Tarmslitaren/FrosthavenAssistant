@@ -298,7 +298,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                       key: UniqueKey(),
                       title: Text(
                           "Current Campaign: ${_gameState.currentCampaign.value}"),
-                      children: buildCampaignButtons(),
+                      children: buildCampaignButtons(), // ignore: avoid-returning-widgets, widget list from helper method
                     ),
                   ]),
                   Container(

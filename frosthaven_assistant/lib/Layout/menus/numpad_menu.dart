@@ -76,14 +76,14 @@ class NumpadMenuState extends State<NumpadMenu> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
                     _kNumpadColCount,
-                    (colIdx) => buildNrButton(rowIdx * _kNumpadColCount + colIdx + 1, scale),
+                    (colIdx) => buildNrButton(rowIdx * _kNumpadColCount + colIdx + 1, scale), // ignore: avoid-returning-widgets, widget generator lambda
                   ),
                 ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  buildNrButton(0, scale),
+                  buildNrButton(0, scale), // ignore: avoid-returning-widgets, widget helper method
                 ],
               ),
             ],

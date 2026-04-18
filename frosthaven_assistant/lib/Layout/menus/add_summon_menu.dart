@@ -1,3 +1,4 @@
+// ignore_for_file: avoid-returning-widgets, file uses widget helper methods for summon color/number buttons
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
 import 'package:frosthaven_assistant/Model/summon_model.dart';

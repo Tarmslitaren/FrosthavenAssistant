@@ -137,7 +137,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
                     _kLevelRow1Count,
-                    (i) => buildLevelButton(i + 1, scale),
+                    (i) => buildLevelButton(i + 1, scale), // ignore: avoid-returning-widgets, widget generator lambda
                   ),
                 ),
               if (!isObjective &&
@@ -146,7 +146,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
                     _kLevelRow2Count,
-                    (i) => buildLevelButton(_kLevelRow1Count + i + 1, scale),
+                    (i) => buildLevelButton(_kLevelRow1Count + i + 1, scale), // ignore: avoid-returning-widgets, widget generator lambda
                   ),
                 ),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [

@@ -145,13 +145,13 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
                             gameState: _gameState));
                       });
                     },
-                    children: generateList(list, allOpen),
+                    children: generateList(list, allOpen), // ignore: avoid-returning-widgets, widget list from helper method
                   )
                 : ListView(
                     clipBehavior: Clip.none,
                     controller: ScrollController(),
                     padding: EdgeInsets.zero,
-                    children: generateList(list, allOpen).reversed.toList(),
+                    children: generateList(list, allOpen).reversed.toList(), // ignore: avoid-returning-widgets, widget list from helper method
                   )));
   }
 

@@ -111,7 +111,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
     );
 
     List<Widget> positionals =
-        _buildGraphicPositionals(scale, card.graphicPositional);
+        _buildGraphicPositionals(scale, card.graphicPositional); // ignore: avoid-returning-widgets, widget list from private helper
 
     return RepaintBoundary(
         child: Container(

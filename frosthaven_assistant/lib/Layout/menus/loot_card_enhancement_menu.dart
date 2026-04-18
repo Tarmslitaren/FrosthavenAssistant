@@ -1,3 +1,4 @@
+// ignore_for_file: avoid-returning-widgets, file uses widget helper methods for loot card layout sections
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/enhance_loot_card_command.dart';

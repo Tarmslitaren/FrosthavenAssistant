@@ -237,7 +237,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: List.generate(
           end - start + 1,
-          (i) => buildNrButton(start + i, scale, monster, elite, nrOfElite, nrOfNormal),
+          (i) => buildNrButton(start + i, scale, monster, elite, nrOfElite, nrOfNormal), // ignore: avoid-returning-widgets, widget generator lambda
         ),
       ));
     }

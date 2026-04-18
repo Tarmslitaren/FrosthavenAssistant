@@ -982,7 +982,7 @@ class StatusMenuState extends State<StatusMenu> {
                           scale: scale),
                     ],
                   ),
-                  _buildExtraConditionRow(
+                  _buildExtraConditionRow( // ignore: avoid-returning-widgets, widget helper method for condition row
                       isCharacter: isCharacter,
                       isSummon: isSummon,
                       hasMireFoot: hasMireFoot,
@@ -1059,7 +1059,7 @@ class StatusMenuState extends State<StatusMenu> {
                               ownerId: ownerId,
                               immunities: immunities,
                               scale: scale),
-                        buildSummonButton(figureId, ownerId, scale)
+                        buildSummonButton(figureId, ownerId, scale) // ignore: avoid-returning-widgets, widget helper method
                       ],
                     ),
                 ],

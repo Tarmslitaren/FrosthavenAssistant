@@ -91,7 +91,7 @@ class SetLootOwnerMenuState extends State<SetLootOwnerMenu> {
           ),
           ...List.generate(
             characters.length,
-            (i) => buildCharacterButton(characters[i]),
+            (i) => buildCharacterButton(characters[i]), // ignore: avoid-returning-widgets, widget generator lambda
           ),
         ]));
   }

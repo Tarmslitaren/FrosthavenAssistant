@@ -101,7 +101,7 @@ void openDialogWithDismissOption(
 //used to get transparent background when dragging in re-orderable widgets
 const double _kDraggableElevation = 6.0;
 
-Widget defaultBuildDraggableFeedback(
+Widget defaultBuildDraggableFeedback( // ignore: avoid-returning-widgets, top-level utility function for draggable feedback
     BuildContext _, BoxConstraints constraints, Widget child) {
   return Transform(
     transform: Matrix4.rotationZ(0),
@@ -149,7 +149,7 @@ bool hasGHVersion(String name) {
 
 const TextStyle toastTextStyle =
     TextStyle(fontFamily: "markazi", fontSize: kFontSizeToast);
-GestureDetector createToastContent(BuildContext context, String text) {
+GestureDetector createToastContent(BuildContext context, String text) { // ignore: avoid-returning-widgets, top-level utility function for toast content
   return GestureDetector(
     onTap: () {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
