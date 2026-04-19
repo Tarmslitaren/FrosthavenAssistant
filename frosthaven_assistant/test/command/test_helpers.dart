@@ -1,4 +1,4 @@
-// ignore_for_file: no-magic-number, avoid-late-keyword
+// ignore_for_file: no-magic-number, avoid-late-keyword, avoid-top-level-members-in-tests
 
 import 'dart:convert';
 
@@ -26,7 +26,7 @@ Future<void> setUpGame() async {
   gameState.load();
 }
 
-void checkSaveState() async {
+void checkSaveState() {
   String state = gameState.toString();
   int nrStates = gameState.gameSaveStates.length;
   gameState.save();

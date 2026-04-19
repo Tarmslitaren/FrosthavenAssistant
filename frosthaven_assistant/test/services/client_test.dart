@@ -1,3 +1,5 @@
+// ignore_for_file: missing-test-assertion
+
 import 'dart:async';
 
 import 'package:fluent_assertions/fluent_assertions.dart';
@@ -29,15 +31,14 @@ const _address = '127.0.0.1';
       as: Symbol('MockValueNotifierClientState'))
 ])
 final _connection = MockConnection();
-final _gameState = GameState(
-    communication: _communication);
+final _gameState = GameState(communication: _communication);
 final _communication = MockCommunication();
 final _network = MockNetwork();
 final _settings = MockSettings();
 final _valueNotifierString = MockValueNotifierString();
 final _valueNotifierClientState = MockValueNotifierClientState();
 
-List<String> log = [];
+List<String> _log = [];
 
 void main() {
   setUpAll(() {
@@ -49,22 +50,22 @@ void main() {
     _getIt.registerFactory<Settings>(() => _settings);
   });
 
-  test('connect creates client connection with server', overridePrint(() async {
+  test('connect creates client connection with server', _overridePrint(() {
     // arrange
     when(_network.networkMessage).thenReturn(_valueNotifierString);
     when(_settings.client).thenReturn(_valueNotifierClientState);
 
     // act
-    await _sut.connect(_address);
+    _sut.connect(_address);
 
     // assert
-    log.any((element) => element.contains('port nr: 0')).shouldBeTrue();
+    _log.any((element) => element.contains('port nr: 0')).shouldBeTrue();
   }));
 }
 
-void Function() overridePrint(void Function() testFn) => () {
+void Function() _overridePrint(void Function() testFn) => () {
       var spec = ZoneSpecification(print: (_, __, ___, String msg) {
-        log.add(msg);
+        _log.add(msg);
       });
       return Zone.current.fork(specification: spec).run<void>(testFn);
     };

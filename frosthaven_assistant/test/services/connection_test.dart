@@ -1,3 +1,5 @@
+// ignore_for_file: missing-test-assertion
+
 import 'dart:io';
 
 import 'package:fluent_assertions/fluent_assertions.dart';

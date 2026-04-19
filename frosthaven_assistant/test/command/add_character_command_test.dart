@@ -8,7 +8,7 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import 'test_helpers.dart';
 
-void tests() {
+void _tests() {
   String oldState = gameState.toString();
   AddCharacterCommand command = AddCharacterCommand(
       "Hatchet", "Jaws of the Lion", "Arnold", 9,
@@ -16,26 +16,24 @@ void tests() {
   command.execute();
 
   test("added ok", () {
-    assert(gameState.currentList.first is Character);
-    assert((gameState.currentList.first as Character)
-            .characterState
-            .display
-            .value ==
+    expect(gameState.currentList.first is Character, true);
+    expect(
+        (gameState.currentList.first as Character).characterState.display.value,
         "Arnold");
-    assert(gameState.currentList.first.id == "Hatchet");
-    assert((gameState.currentList.first as Character).characterClass.name ==
+    expect(gameState.currentList.first.id, "Hatchet");
+    expect((gameState.currentList.first as Character).characterClass.name,
         "Hatchet");
-    assert(gameState.currentList.length == 1);
+    expect(gameState.currentList.length, 1);
     Character brute = GameMethods.getCurrentCharacters().first;
-    assert(brute.characterState.display.value == "Arnold");
-    assert(brute.characterState.level.value == 9);
-    assert(gameState.unlockedClasses.first == "Hatchet");
+    expect(brute.characterState.display.value, "Arnold");
+    expect(brute.characterState.level.value, 9);
+    expect(gameState.unlockedClasses.first, "Hatchet");
     checkNoSideEffects(["currentList", "unlockedClasses"], oldState);
     checkSaveState();
   });
 
   test("description is ok", () {
-    assert(command.describe() == "Add Hatchet");
+    expect(command.describe(), "Add Hatchet");
     //assert(_gameState.commands.last?.describe() == "Add Hatchet");
   });
 
@@ -44,5 +42,5 @@ void tests() {
 
 Future<void> main() async {
   await setUpGame();
-  tests();
+  _tests();
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer-match-file-name
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/CharacterWidget/character_background_widget.dart';
@@ -6,14 +8,14 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:mockito/mockito.dart';
 
 // Mocks
-class MockCharacter extends Mock implements Character {
+class _MockCharacter extends Mock implements Character {
   @override
   final CharacterClass characterClass;
 
-  MockCharacter(this.characterClass);
+  _MockCharacter(this.characterClass);
 }
 
-class MockCharacterClass extends Mock implements CharacterClass {
+class _MockCharacterClass extends Mock implements CharacterClass {
   @override
   final String name;
   @override
@@ -21,7 +23,7 @@ class MockCharacterClass extends Mock implements CharacterClass {
   @override
   final Color colorSecondary;
 
-  MockCharacterClass(this.name, this.color, this.colorSecondary);
+  _MockCharacterClass(this.name, this.color, this.colorSecondary);
 }
 
 void main() {
@@ -29,8 +31,8 @@ void main() {
     testWidgets('shows correct background for Shattersong',
         (WidgetTester tester) async {
       final mockCharacterClass =
-          MockCharacterClass('Shattersong', Colors.blue, Colors.green);
-      final mockCharacter = MockCharacter(mockCharacterClass);
+          _MockCharacterClass('Shattersong', Colors.blue, Colors.green);
+      final mockCharacter = _MockCharacter(mockCharacterClass);
 
       await tester.pumpWidget(
         MaterialApp(
@@ -50,8 +52,8 @@ void main() {
     testWidgets('shows correct background for Rimehearth',
         (WidgetTester tester) async {
       final mockCharacterClass =
-          MockCharacterClass('Rimehearth', Colors.blue, Colors.green);
-      final mockCharacter = MockCharacter(mockCharacterClass);
+          _MockCharacterClass('Rimehearth', Colors.blue, Colors.green);
+      final mockCharacter = _MockCharacter(mockCharacterClass);
 
       await tester.pumpWidget(
         MaterialApp(
@@ -71,8 +73,8 @@ void main() {
     testWidgets('shows correct background for Elementalist',
         (WidgetTester tester) async {
       final mockCharacterClass =
-          MockCharacterClass('Elementalist', Colors.blue, Colors.green);
-      final mockCharacter = MockCharacter(mockCharacterClass);
+          _MockCharacterClass('Elementalist', Colors.blue, Colors.green);
+      final mockCharacter = _MockCharacter(mockCharacterClass);
 
       await tester.pumpWidget(
         MaterialApp(
@@ -92,8 +94,8 @@ void main() {
     testWidgets('shows correct background for other characters',
         (WidgetTester tester) async {
       final mockCharacterClass =
-          MockCharacterClass('Blinkblade', Colors.red, Colors.yellow);
-      final mockCharacter = MockCharacter(mockCharacterClass);
+          _MockCharacterClass('Blinkblade', Colors.red, Colors.yellow);
+      final mockCharacter = _MockCharacter(mockCharacterClass);
 
       await tester.pumpWidget(
         MaterialApp(

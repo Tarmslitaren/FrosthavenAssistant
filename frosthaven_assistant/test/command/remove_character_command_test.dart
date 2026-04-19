@@ -8,7 +8,7 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import 'test_helpers.dart';
 
-void tests() {
+void _tests() {
   String oldState = gameState.toString();
   AddCharacterCommand("Hatchet", "Jaws of the Lion", "Arnold", 9,
           gameState: getIt<GameState>())
@@ -17,8 +17,8 @@ void tests() {
           gameState: getIt<GameState>())
       .execute();
   test("removed ok", () {
-    assert(gameState.currentList.isEmpty);
-    assert(gameState.unlockedClasses.first == "Hatchet");
+    expect(gameState.currentList.isEmpty, true);
+    expect(gameState.unlockedClasses.first, "Hatchet");
 
     checkNoSideEffects(["unlockedClasses"], oldState);
     checkSaveState();
@@ -27,5 +27,5 @@ void tests() {
 
 Future<void> main() async {
   await setUpGame();
-  tests();
+  _tests();
 }
