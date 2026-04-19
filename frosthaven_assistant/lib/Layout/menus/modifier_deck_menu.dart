@@ -173,17 +173,11 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                           gameState: _gameState));
                     });
                   },
-                  children: generateList(
-                      list,
-                      allOpen, // ignore: avoid-returning-widgets, list-returning helper for ListView children
-                      name),
+                  children: generateList(list, allOpen, name),
                 )
               : ListView(
                   controller: ScrollController(),
-                  children: generateList(list, allOpen,
-                          name) // ignore: avoid-returning-widgets, list-returning helper for ListView children
-                      .reversed
-                      .toList(),
+                  children: generateList(list, allOpen, name).reversed.toList(),
                 ),
         ));
   }

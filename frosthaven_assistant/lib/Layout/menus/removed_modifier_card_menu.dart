@@ -74,9 +74,7 @@ class RemovedModifierCardMenuState extends State<RemovedModifierCardMenu> {
           width: screenWidth * _kListWidthRatio,
           child: ListView(
             controller: ScrollController(),
-            children: generateList(list, widget.name)
-                .reversed
-                .toList(), // ignore: avoid-returning-widgets, list-returning helper for ListView children
+            children: generateList(list, widget.name).reversed.toList(),
           ),
         ));
   }

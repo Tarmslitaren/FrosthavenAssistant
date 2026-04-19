@@ -238,11 +238,12 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                       key: UniqueKey(),
                       title: Text(
                           "Current Campaign: ${_gameState.currentCampaign.value}"),
-                      children: buildCampaignButtons(), // ignore: avoid-returning-widgets, list-returning helper for Column children
+                      children: buildCampaignButtons(),
                     ),
                   ]),
                   Container(
-                    margin: const EdgeInsets.symmetric(horizontal: _kSearchPadding),
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: _kSearchPadding),
                     child: KeyboardListener(
                         //needed to trigger onEditingComplete on enter
                         //TODO: add this to the other menus
@@ -288,8 +289,14 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                                 itemCount: _foundScenarios.length,
                                 itemBuilder: (context, index) =>
                                     _gameState.currentCampaign.value == "Solo"
-                                        ? _SoloTile(name: _foundScenarios[index], gameState: _gameState, gameData: _gameData)
-                                        : _ScenarioTile(name: _foundScenarios[index], gameState: _gameState, settings: _settings)))
+                                        ? _SoloTile(
+                                            name: _foundScenarios[index],
+                                            gameState: _gameState,
+                                            gameData: _gameData)
+                                        : _ScenarioTile(
+                                            name: _foundScenarios[index],
+                                            gameState: _gameState,
+                                            settings: _settings)))
                         : const Text(
                             'No results found',
                             style: kHeadingStyle,
@@ -342,9 +349,11 @@ class _SoloTile extends StatelessWidget {
 
     String text = strings[_kSoloTextIndex];
     for (String key in gameData.modelData.value.keys) {
-      for (CharacterClass character in gameData.modelData.value[key]!.characters) {
+      for (CharacterClass character
+          in gameData.modelData.value[key]!.characters) {
         if (character.name == characterName) {
-          if (character.hidden && !gameState.unlockedClasses.contains(character.id)) {
+          if (character.hidden &&
+              !gameState.unlockedClasses.contains(character.id)) {
             text = "???";
           }
           break;
@@ -382,7 +391,8 @@ class _ScenarioTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String title = settings.showScenarioNames.value ? name : name.split(' ').first;
+    String title =
+        settings.showScenarioNames.value ? name : name.split(' ').first;
     return ListTile(
       title: Text(title, style: kTitleStyle),
       onTap: () {

@@ -37,7 +37,8 @@ class SettingsMenu extends StatefulWidget {
   static const double _kCloseButtonWidth = 100.0;
   static const double _kCloseButtonHeight = 40.0;
 
-  const SettingsMenu({super.key, this.gameState, this.network, this.client, this.settings});
+  const SettingsMenu(
+      {super.key, this.gameState, this.network, this.client, this.settings});
 
   final GameState? gameState;
   final Network? network;
@@ -82,7 +83,8 @@ class SettingsMenuState extends State<SettingsMenu> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double referenceMinBarWidth = SettingsMenu._kBarWidthBase * SettingsMenu._kBarWidthMultiplier;
+    double referenceMinBarWidth =
+        SettingsMenu._kBarWidthBase * SettingsMenu._kBarWidthMultiplier;
     double maxBarScale = screenWidth / referenceMinBarWidth;
 
     return Card(
@@ -97,7 +99,8 @@ class SettingsMenuState extends State<SettingsMenu> {
                         height: SettingsMenu._kTopSpacing,
                       ),
                       Container(
-                          constraints: const BoxConstraints(maxWidth: SettingsMenu._kMaxWidth),
+                          constraints: const BoxConstraints(
+                              maxWidth: SettingsMenu._kMaxWidth),
                           child: Column(
                             children: [
                               const Text(
@@ -121,7 +124,8 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.softNumpadInput.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.softNumpadInput.value = value!;
+                                      settings.softNumpadInput.value =
+                                          value ?? false;
                                       settings.saveToDisk();
                                     });
                                   }),
@@ -130,7 +134,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.noInit.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.noInit.value = value!;
+                                      settings.noInit.value = value ?? false;
                                       settings.saveToDisk();
                                     });
                                   }),
@@ -139,7 +143,8 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.expireConditions.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.expireConditions.value = value!;
+                                      settings.expireConditions.value =
+                                          value ?? false;
                                       settings.saveToDisk();
                                     });
                                   }),
@@ -148,8 +153,10 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.noStandees.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      _gameState.action(
-                                          TrackStandeesCommand(!value!, gameState: _gameState, settings: settings));
+                                      _gameState.action(TrackStandeesCommand(
+                                          !(value ?? false),
+                                          gameState: _gameState,
+                                          settings: settings));
                                       settings.saveToDisk();
                                     });
                                   }),
@@ -158,7 +165,8 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.autoAddStandees.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.autoAddStandees.value = value!;
+                                      settings.autoAddStandees.value =
+                                          value ?? false;
                                       settings.saveToDisk();
                                       _gameState.updateList.value++;
                                     });
@@ -168,7 +176,8 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.autoAddSpawns.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.autoAddSpawns.value = value!;
+                                      settings.autoAddSpawns.value =
+                                          value ?? false;
                                       settings.saveToDisk();
                                       _gameState.updateList.value++;
                                     });
@@ -178,7 +187,8 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.randomStandees.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.randomStandees.value = value!;
+                                      settings.randomStandees.value =
+                                          value ?? false;
                                       settings.saveToDisk();
                                     });
                                   }),
@@ -187,7 +197,8 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.noCalculation.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.noCalculation.value = value!;
+                                      settings.noCalculation.value =
+                                          value ?? false;
                                       settings.saveToDisk();
                                       _gameState.updateList.value++;
                                     });
@@ -197,7 +208,8 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.hideLootDeck.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.hideLootDeck.value = value!;
+                                      settings.hideLootDeck.value =
+                                          value ?? false;
                                       settings.saveToDisk();
                                       _gameState.updateAllUI();
                                     });
@@ -207,7 +219,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.shimmer.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.shimmer.value = value!;
+                                      settings.shimmer.value = value ?? false;
                                       settings.saveToDisk();
                                       _gameState.updateAllUI();
                                     });
@@ -220,7 +232,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   onChanged: (bool? value) {
                                     setState(() {
                                       settings.fhHazTerrainCalcInOGGloom.value =
-                                          value!;
+                                          value ?? false;
                                       settings.saveToDisk();
                                       _gameState.updateAllUI();
                                     });
@@ -228,13 +240,13 @@ class SettingsMenuState extends State<SettingsMenu> {
                               CheckboxListTile(
                                   title: const Text(
                                       "Use Ally Attack Modifier Deck in OG Gloomhaven"),
-                                  value: _gameState
-                                      .allyDeckInOGGloom
-                                      .value,
+                                  value: _gameState.allyDeckInOGGloom.value,
                                   onChanged: (bool? value) {
                                     setState(() {
                                       _gameState.action(
-                                          SetAllyDeckInOgGloomCommand(value!, gameState: _gameState));
+                                          SetAllyDeckInOgGloomCommand(
+                                              value ?? false,
+                                              gameState: _gameState));
                                       _gameState.updateAllUI();
                                     });
                                   }),
@@ -244,7 +256,8 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.showScenarioNames.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.showScenarioNames.value = value!;
+                                      settings.showScenarioNames.value =
+                                          value ?? false;
                                       settings.saveToDisk();
                                       _gameState.updateAllUI();
                                     });
@@ -256,7 +269,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   onChanged: (bool? value) {
                                     setState(() {
                                       settings.showBattleGoalReminder.value =
-                                          value!;
+                                          value ?? false;
                                       settings.saveToDisk();
                                     });
                                   }),
@@ -265,7 +278,8 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.showCustomContent.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.showCustomContent.value = value!;
+                                      settings.showCustomContent.value =
+                                          value ?? false;
                                       settings.saveToDisk();
                                       _gameState.updateAllUI();
                                     });
@@ -277,7 +291,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   onChanged: (bool? value) {
                                     setState(() {
                                       settings.showSectionsInMainView.value =
-                                          value!;
+                                          value ?? false;
                                       settings.saveToDisk();
                                       _gameState.updateAllUI();
                                     });
@@ -288,7 +302,8 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.showReminders.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.showReminders.value = value!;
+                                      settings.showReminders.value =
+                                          value ?? false;
                                       settings.saveToDisk();
                                       _gameState.updateAllUI();
                                     });
@@ -299,7 +314,8 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.showAmdDeck.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.showAmdDeck.value = value!;
+                                      settings.showAmdDeck.value =
+                                          value ?? false;
                                       if (!settings.showAmdDeck.value) {
                                         //disable also character amd
                                         settings.showCharacterAMD.value = false;
@@ -314,7 +330,8 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.showCharacterAMD.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.showCharacterAMD.value = value!;
+                                      settings.showCharacterAMD.value =
+                                          value ?? false;
                                       if (settings.showCharacterAMD.value) {
                                         //enable also monster amd
                                         settings.showAmdDeck.value = true;
@@ -329,7 +346,8 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.enableHeathWheel.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.enableHeathWheel.value = value!;
+                                      settings.enableHeathWheel.value =
+                                          value ?? false;
                                       settings.saveToDisk();
                                       _gameState.updateAllUI();
                                     });
@@ -340,15 +358,16 @@ class SettingsMenuState extends State<SettingsMenu> {
                                     value: settings.fullScreen.value,
                                     onChanged: (bool? value) {
                                       setState(() {
-                                        settings.setFullscreen(value!);
+                                        settings.setFullscreen(value ?? false);
                                         settings.saveToDisk();
                                       });
                                     }),
                               Container(
                                 constraints: const BoxConstraints(
                                     minWidth: double.infinity),
-                                padding:
-                                    const EdgeInsets.only(left: SettingsMenu._kLabelPaddingLeft, top: SettingsMenu._kLabelPaddingTop),
+                                padding: const EdgeInsets.only(
+                                    left: SettingsMenu._kLabelPaddingLeft,
+                                    top: SettingsMenu._kLabelPaddingTop),
                                 alignment: Alignment.bottomLeft,
                                 child: const Text("Main List Scaling:"),
                               ),
@@ -367,13 +386,15 @@ class SettingsMenuState extends State<SettingsMenu> {
                               Container(
                                 constraints: const BoxConstraints(
                                     minWidth: double.infinity),
-                                padding:
-                                    const EdgeInsets.only(left: SettingsMenu._kLabelPaddingLeft, top: SettingsMenu._kLabelPaddingTop),
+                                padding: const EdgeInsets.only(
+                                    left: SettingsMenu._kLabelPaddingLeft,
+                                    top: SettingsMenu._kLabelPaddingTop),
                                 alignment: Alignment.bottomLeft,
                                 child: const Text("App Bar Scaling:"),
                               ),
                               Slider(
-                                min: min(SettingsMenu._kBarScaleMin, maxBarScale),
+                                min: min(
+                                    SettingsMenu._kBarScaleMin, maxBarScale),
                                 max: min(maxBarScale, SettingsMenu._kScaleMax),
                                 value: min(settings.userScalingBars.value,
                                     maxBarScale),
@@ -402,9 +423,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                               settings.style.value =
                                                   Style.frosthaven;
                                               settings.saveToDisk();
-                                              _gameState
-                                                  .updateList
-                                                  .value++;
+                                              _gameState.updateList.value++;
                                             });
                                           }),
                                       const Text('Frosthaven')
@@ -420,9 +439,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                               settings.style.value =
                                                   Style.original;
                                               settings.saveToDisk();
-                                              _gameState
-                                                  .updateList
-                                                  .value++;
+                                              _gameState.updateList.value++;
                                             });
                                           }),
                                       const Text('Original')
@@ -488,7 +505,8 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   }),
 
                               Container(
-                                margin: const EdgeInsets.only(top: SettingsMenu._kLabelPaddingTop),
+                                margin: const EdgeInsets.only(
+                                    top: SettingsMenu._kLabelPaddingTop),
                                 width: SettingsMenu._kInputWidth,
                                 //height: SettingsMenu._kInputHeight,
                                 child: TextField(
@@ -501,7 +519,8 @@ class SettingsMenuState extends State<SettingsMenu> {
                               ),
 
                               Container(
-                                margin: const EdgeInsets.only(top: SettingsMenu._kTopSpacing),
+                                margin: const EdgeInsets.only(
+                                    top: SettingsMenu._kTopSpacing),
                                 width: SettingsMenu._kInputWidth,
                                 height: SettingsMenu._kInputHeight,
                                 child: TextField(
@@ -529,14 +548,10 @@ class SettingsMenuState extends State<SettingsMenu> {
                                             settings.lastKnownHostIP =
                                                 "(${_network.networkInfo.wifiIPv6.value})";
                                             settings.saveToDisk();
-                                            _network
-                                                .server
-                                                .startServer();
+                                            _network.server.startServer();
                                           } else {
                                             //close server
-                                            _network
-                                                .server
-                                                .stopServer(null);
+                                            _network.server.stopServer(null);
                                           }
                                         });
                                   }),
@@ -550,15 +565,12 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       child: DropdownButtonHideUnderline(
                                           child: DropdownButton(
                                               value: _network
+                                                  .networkInfo.wifiIPv6.value,
+                                              items: getIPList(),
+                                              onChanged: (value) => _network
                                                   .networkInfo
                                                   .wifiIPv6
-                                                  .value,
-                                              items: getIPList(),
-                                              onChanged: (value) =>
-                                                  _network
-                                                      .networkInfo
-                                                      .wifiIPv6
-                                                      .value = value!)),
+                                                  .value = value ?? "")),
                                     );
                                   }),
                               ValueListenableBuilder<String>(
@@ -569,12 +581,11 @@ class SettingsMenuState extends State<SettingsMenu> {
                                         width: SettingsMenu._kInputWidth,
                                         height: SettingsMenu._kDropdownHeight,
                                         child: Text(_network
-                                            .networkInfo
-                                            .outgoingIPv6
-                                            .value));
+                                            .networkInfo.outgoingIPv6.value));
                                   }),
                               Container(
-                                margin: const EdgeInsets.only(top: SettingsMenu._kTopSpacing),
+                                margin: const EdgeInsets.only(
+                                    top: SettingsMenu._kTopSpacing),
                                 width: SettingsMenu._kInputWidth,
                                 height: SettingsMenu._kInputHeight,
                                 child: TextField(

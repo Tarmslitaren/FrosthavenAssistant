@@ -373,7 +373,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                                           : Colors.black),
                                   onChanged: (bool? newValue) {
                                     setState(() {
-                                      addAsSummon = newValue!;
+                                      addAsSummon = newValue ?? false;
                                     });
                                   },
                                   value: addAsSummon,

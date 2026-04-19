@@ -8,7 +8,6 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 import '../Resource/state/game_state.dart';
 
 class LootCardWidget extends StatelessWidget {
-  // ignore: prefer-match-file-name, file contains multiple related loot types
   static const double _kCardWidth = 39.0;
   static const double _kCardHeight = 58.6666;
   static const double _kBorderRadius = 4.0;

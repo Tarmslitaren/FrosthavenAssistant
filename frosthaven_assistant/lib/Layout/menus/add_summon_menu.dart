@@ -9,7 +9,7 @@ import '../../Resource/commands/add_standee_command.dart';
 import '../../Resource/enums.dart';
 import '../../Resource/game_data.dart';
 import '../../Resource/settings.dart';
-import '../../Resource/stat_calculatorce/settings.dart';
+import '../../Resource/stat_calculator.dart';
 import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 

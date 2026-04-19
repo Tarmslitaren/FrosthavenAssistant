@@ -45,7 +45,6 @@ class CounterButtonState extends State<CounterButton> {
   CounterButtonViewModel get _vm => _vmInstance ??= CounterButtonViewModel();
   final totalChangeValue = ValueNotifier<int>(0);
 
-
   @override
   Widget build(BuildContext context) {
     final FigureState? figure =
@@ -54,7 +53,8 @@ class CounterButtonState extends State<CounterButton> {
       //in case it dies and was removed from the list
       return Container();
     }
-    return RepaintBoundary(child:Row(mainAxisSize: MainAxisSize.min, children: [
+    return RepaintBoundary(
+        child: Row(mainAxisSize: MainAxisSize.min, children: [
       SizedBox(
           width: kButtonSize * widget.scale,
           height: kButtonSize * widget.scale,
@@ -96,6 +96,7 @@ class CounterButtonState extends State<CounterButton> {
               colorBlendMode: BlendMode.modulate,
               fit: BoxFit.contain,
               filterQuality: FilterQuality.medium,
+              // ignore: avoid-non-null-assertion, obviously not null here
               image: AssetImage(widget.extraImage!),
             ),
           ),

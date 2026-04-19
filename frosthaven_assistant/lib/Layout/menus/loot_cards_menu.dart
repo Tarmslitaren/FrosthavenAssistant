@@ -12,7 +12,7 @@ import '../../Resource/commands/remove__special_loot_card_command.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
-import '../loot_card.dart';
+import '../loot_card_widget.dart';
 import 'add_loot_card_menu.dart';
 
 class LootCardsMenu extends StatefulWidget {
@@ -67,9 +67,7 @@ class LootCardsMenuState extends State<LootCardsMenu> {
             padding: EdgeInsets.zero,
             crossAxisCount:
                 max(_kMinColumns, (screenWidth / _kItemMaxWidth).ceil()),
-            children: generateList(list)
-                .reversed
-                .toList(), // ignore: avoid-returning-widgets, list-returning helper for ListView children
+            children: generateList(list).reversed.toList(),
           ),
         ));
   }

@@ -225,30 +225,30 @@ class _MonsterStatNormalLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final settings_ = settings ?? getIt<Settings>();
-    MonsterStatsModel normal = data.type.levels[data.level.value].normal!;
+    MonsterStatsModel? normal = data.type.levels[data.level.value].normal;
     MonsterStatsModel? elite = data.type.levels[data.level.value].elite;
 
     bool noCalculationSetting = settings_.noCalculation.value;
 
-    String health = normal.health.toString();
+    String? health = normal?.health.toString();
     if (!noCalculationSetting) {
-      int? healthValue = StatCalculator.calculateFormula(normal.health);
+      int? healthValue = StatCalculator.calculateFormula(normal?.health ?? 0);
       if (healthValue != null) {
         health = healthValue.toString();
       }
     }
 
-    String move = normal.move.toString();
+    String? move = normal?.move.toString();
     if (!noCalculationSetting) {
-      int? moveValue = StatCalculator.calculateFormula(normal.move);
+      int? moveValue = StatCalculator.calculateFormula(normal?.move ?? 0);
       if (moveValue != null) {
         move = moveValue.toString();
       }
     }
 
-    String attack = normal.attack.toString();
+    String? attack = normal?.attack.toString();
     if (!noCalculationSetting) {
-      int? attackValue = StatCalculator.calculateFormula(normal.attack);
+      int? attackValue = StatCalculator.calculateFormula(normal?.attack ?? 0);
       if (attackValue != null) {
         attack = attackValue.toString();
       }
@@ -299,10 +299,10 @@ class _MonsterStatNormalLayout extends StatelessWidget {
           top: MonsterStatCardWidget._kNormalStatsTop * scale,
           child: Column(
             children: <Widget>[
-              Text(health, style: leftStyle),
-              Text(move, style: leftStyle),
-              Text(attack, style: leftStyle),
-              Text(normal.range != 0 ? normal.range.toString() : "-",
+              Text(health ?? "", style: leftStyle),
+              Text(move ?? "", style: leftStyle),
+              Text(attack ?? "", style: leftStyle),
+              Text(normal?.range != 0 ? normal?.range.toString() ?? "" : "-",
                   style: leftStyle),
             ],
           ),
@@ -316,7 +316,7 @@ class _MonsterStatNormalLayout extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                   LineBuilder.createLines(
-                      normal.attributes,
+                      normal?.attributes ?? [],
                       true,
                       false,
                       false,
@@ -330,13 +330,17 @@ class _MonsterStatNormalLayout extends StatelessWidget {
           top: MonsterStatCardWidget._kNormalStatsTop * scale,
           child: Column(
             children: <Widget>[
-              Text(StatCalculator.calculateFormula(elite!.health).toString(),
+              Text(
+                  StatCalculator.calculateFormula(elite?.health ?? 0)
+                      .toString(),
                   style: rightStyle),
-              Text(StatCalculator.calculateFormula(elite.move).toString(),
+              Text(StatCalculator.calculateFormula(elite?.move ?? 0).toString(),
                   style: rightStyle),
-              Text(StatCalculator.calculateFormula(elite.attack).toString(),
+              Text(
+                  StatCalculator.calculateFormula(elite?.attack ?? 0)
+                      .toString(),
                   style: rightStyle),
-              Text(elite.range != 0 ? elite.range.toString() : "-",
+              Text(elite?.range != 0 ? elite?.range.toString() ?? "" : "-",
                   style: rightStyle),
             ],
           ),
@@ -347,7 +351,7 @@ class _MonsterStatNormalLayout extends StatelessWidget {
           top: MonsterStatCardWidget._kNormalAttribTop * scale,
           child: RepaintBoundary(
               child: LineBuilder.createLines(
-                  elite.attributes,
+                  elite?.attributes ?? [],
                   false,
                   false,
                   false,
@@ -401,7 +405,7 @@ class _MonsterStatNormalLayout extends StatelessWidget {
             child: Column(
               verticalDirection: VerticalDirection.up,
               children: MonsterStatCardWidget._createConditionList(
-                  data, scale, normal),
+                  data, scale, normal!),
             )),
         Positioned(
             right: MonsterStatCardWidget._kConditionLeft * scale,
@@ -409,7 +413,7 @@ class _MonsterStatNormalLayout extends StatelessWidget {
             child: Column(
               verticalDirection: VerticalDirection.up,
               children: MonsterStatCardWidget._createConditionList(
-                  data, scale, elite),
+                  data, scale, elite!),
             ))
       ],
     ));
@@ -440,25 +444,25 @@ class MonsterStatBossLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     final settings_ = settings ?? getIt<Settings>();
     bool noCalculationSetting = settings_.noCalculation.value;
-    MonsterStatsModel normal = data.type.levels[data.level.value].boss!;
+    MonsterStatsModel? normal = data.type.levels[data.level.value].boss;
 
-    String health = normal.health.toString();
+    String? health = normal?.health.toString();
     if (!noCalculationSetting) {
-      int? healthValue = StatCalculator.calculateFormula(normal.health);
+      int? healthValue = StatCalculator.calculateFormula(normal?.health ?? 0);
       if (healthValue != null) {
         health = healthValue.toString();
       }
     }
-    health = viewModel.resolveBossHealth(health);
+    health = viewModel.resolveBossHealth(health ?? "0");
 
-    String attack = normal.attack.toString();
-    String move = normal.move.toString();
+    String? attack = normal?.attack.toString();
+    String? move = normal?.move.toString();
     if (!noCalculationSetting) {
-      int? moveValue = StatCalculator.calculateFormula(normal.move);
+      int? moveValue = StatCalculator.calculateFormula(normal?.move ?? 0);
       if (moveValue != null) {
         move = moveValue.toString();
       }
-      int? attackValue = StatCalculator.calculateFormula(normal.attack);
+      int? attackValue = StatCalculator.calculateFormula(normal?.attack ?? 0);
       if (attackValue != null) {
         attack = attackValue.toString();
       }
@@ -467,7 +471,7 @@ class MonsterStatBossLayout extends StatelessWidget {
     String bossAttackAttributes = "";
     List<String> bossOtherAttributes = [];
 
-    for (String item in normal.attributes) {
+    for (String item in normal?.attributes ?? []) {
       if (frosthavenStyle &&
           !bossAttackAttributes.contains("target") &&
           (item.startsWith('%wound%') ||
@@ -528,7 +532,7 @@ class MonsterStatBossLayout extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
               Text(health, style: leftStyle),
-              Text(move, style: leftStyle),
+              Text(move ?? "0", style: leftStyle),
               Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                 Container(
                     margin: EdgeInsets.only(
@@ -537,9 +541,9 @@ class MonsterStatBossLayout extends StatelessWidget {
                                 scale
                             : 0),
                     child: attackAttributes),
-                Text(attack, style: leftStyle)
+                Text(attack ?? "0", style: leftStyle)
               ]),
-              Text(normal.range != 0 ? normal.range.toString() : "",
+              Text(normal?.range != 0 ? normal?.range.toString() ?? " " : "",
                   style: leftStyle),
             ],
           ),
@@ -578,7 +582,7 @@ class MonsterStatBossLayout extends StatelessWidget {
                   filterQuality: FilterQuality.medium,
                   "assets/images/abilities/divider_boss_fh.png",
                 ),
-              normal.special1.isNotEmpty
+              normal?.special1.isNotEmpty ?? false
                   ? Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -591,8 +595,9 @@ class MonsterStatBossLayout extends StatelessWidget {
                                   scale,
                               child: RepaintBoundary(
                                   child: LineBuilder.createLines(
-                                      data.type.levels[data.level.value].boss!
-                                          .special1,
+                                      data.type.levels[data.level.value].boss
+                                              ?.special1 ??
+                                          [],
                                       false,
                                       !noCalculationSetting,
                                       false,
@@ -602,7 +607,7 @@ class MonsterStatBossLayout extends StatelessWidget {
                                       false))),
                         ])
                   : Container(),
-              normal.special2.isNotEmpty
+              normal?.special2.isNotEmpty ?? false
                   ? Image.asset(
                       scale: 1 /
                           (scale * MonsterStatCardWidget._kDividerScaleFactor),
@@ -613,7 +618,7 @@ class MonsterStatBossLayout extends StatelessWidget {
                       "assets/images/abilities/divider_boss_fh.png",
                     )
                   : Container(),
-              normal.special2.isNotEmpty
+              normal?.special2.isNotEmpty ?? false
                   ? Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -623,8 +628,9 @@ class MonsterStatBossLayout extends StatelessWidget {
                                   scale,
                               child: RepaintBoundary(
                                   child: LineBuilder.createLines(
-                                      data.type.levels[data.level.value].boss!
-                                          .special2,
+                                      data.type.levels[data.level.value].boss
+                                              ?.special2 ??
+                                          [],
                                       false,
                                       !noCalculationSetting,
                                       false,
@@ -655,7 +661,7 @@ class MonsterStatBossLayout extends StatelessWidget {
                 fit: BoxFit.fitHeight,
                 image: AssetImage("assets/images/psd/move-stat.png"),
               )),
-        if (normal.range != 0)
+        if (normal?.range != 0)
           Positioned(
               height: MonsterStatCardWidget._kStatIconHeight * scale,
               left: MonsterStatCardWidget._kBossRangeLeft * scale,
@@ -671,7 +677,7 @@ class MonsterStatBossLayout extends StatelessWidget {
             top: MonsterStatCardWidget._kBossConditionTop * scale,
             child: Row(
               children: MonsterStatCardWidget._createConditionList(
-                  data, scale, normal),
+                  data, scale, normal!),
             )),
       ],
     ));

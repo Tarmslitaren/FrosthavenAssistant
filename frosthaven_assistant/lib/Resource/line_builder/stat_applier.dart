@@ -103,7 +103,8 @@ class StatApplier {
             break;
           }
         }
-        if (formula.length > _kMinFormulaLength && lastToken.isNotEmpty || formula.length > _kMinFormulaLengthLong) {
+        if (formula.length > _kMinFormulaLength && lastToken.isNotEmpty ||
+            formula.length > _kMinFormulaLengthLong) {
           //this disallows a single digit or C,L. single C or L could be part of regular text
           //for a formula to work (outside of plain C or L) it must either be modifying a token value or be 3+ chars long
 
@@ -278,7 +279,8 @@ class StatApplier {
         }
       }
     } else if (lastToken == "move") {
-      normalValue = StatCalculator.calculateFormula(normal?.move ?? StatValue.zero) ?? 0;
+      normalValue =
+          StatCalculator.calculateFormula(normal?.move ?? StatValue.zero) ?? 0;
       if (elite != null) {
         eliteValue = StatCalculator.calculateFormula(elite.move) ?? 0;
       }
@@ -344,7 +346,7 @@ class StatApplier {
       retVal.add(newStartOfLine);
 
       int eliteResult =
-          StatCalculator.calculateFormula("$formula+$eliteValue")!;
+          StatCalculator.calculateFormula("$formula+$eliteValue") ?? 0;
       if (eliteResult < _kResultFloor) {
         eliteResult = _kResultFloor;
       }

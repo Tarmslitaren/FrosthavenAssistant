@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frosthaven_assistant/Layout/loot_card.dart';
+import 'package:frosthaven_assistant/Layout/loot_card_widget.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../command/test_helpers.dart';

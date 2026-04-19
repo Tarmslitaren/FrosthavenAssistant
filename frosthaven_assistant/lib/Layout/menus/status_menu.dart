@@ -236,12 +236,14 @@ class StatusMenuState extends State<StatusMenu> {
     }
 
     String name = "";
-    String? ownerId = "";
-    if (widget.monsterId != null) {
-      name = widget.monsterId!; //this is no good
-      ownerId = widget.monsterId;
-    } else if (widget.characterId != null) {
-      name = widget.characterId!; //now this is no good either...
+    String ownerId = "";
+    final monsterId = widget.monsterId;
+    final characterId = widget.characterId;
+    if (monsterId != null) {
+      name = monsterId; //this is no good
+      ownerId = monsterId;
+    } else if (characterId != null) {
+      name = characterId; //now this is no good either...
       ownerId = name;
     }
 
@@ -441,9 +443,9 @@ class StatusMenuState extends State<StatusMenu> {
                       }
                     }
 
-                    if (isSummon) {
-                      deck = GameMethods.getModifierDeck(
-                          widget.characterId!, _gameState);
+                    if (isSummon && characterId != null) {
+                      deck =
+                          GameMethods.getModifierDeck(characterId, _gameState);
                     }
 
                     bool canBeCursed = true;
@@ -732,11 +734,12 @@ class StatusMenuState extends State<StatusMenu> {
                                       colorBlendMode: BlendMode.multiply,
                                       'assets/images/psd/level.png'),
                                   onPressed: () {
-                                    if (figure is CharacterState) {
+                                    if (figure is CharacterState &&
+                                        character != null) {
                                       openDialog(
                                         context,
                                         SetCharacterLevelMenu(
-                                            character: character!),
+                                            character: character),
                                       );
                                     } else {
                                       openDialog(

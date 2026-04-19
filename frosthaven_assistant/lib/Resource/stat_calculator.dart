@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-non-null-assertion
+
 import 'package:flutter/foundation.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
@@ -65,7 +67,7 @@ class Parser {
   int? parse() {
     try {
       nextChar();
-      int x = parseCondition()!;
+      int? x = parseCondition();
       if (pos < str.length) {
         if (kDebugMode) {
           print("Unexpected: $ch");
@@ -148,12 +150,12 @@ class Parser {
       if (eat('+')) return parseFactor(); // unary plus
       if (eat('-')) return -parseFactor()!; // unary minus
 
-      int x;
+      int? x;
       int startPos = pos;
       int asciiValue = ch.codeUnits.first;
       if (eat('(')) {
         // parentheses
-        x = parseExpression()!;
+        x = parseExpression();
         if (!eat(')')) throw Exception("Missing ')'");
       } else if (asciiValue >= '0'.codeUnits.first &&
           asciiValue <= '9'.codeUnits.first) {

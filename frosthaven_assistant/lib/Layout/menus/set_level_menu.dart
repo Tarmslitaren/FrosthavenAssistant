@@ -70,9 +70,10 @@ class SetLevelMenuState extends State<SetLevelMenu> {
   @override
   Widget build(BuildContext context) {
     String title = "Set Scenario Level";
-    if (widget.monster != null) {
-      String name = widget.monster!.type.display;
-      if (widget.monster!.type.display.endsWith("y")) {
+    final monster = widget.monster;
+    if (monster != null) {
+      String name = monster.type.display;
+      if (monster.type.display.endsWith("y")) {
         name = "${name.substring(0, name.length - 1)}ie";
       }
       title = "Set $name's level";
@@ -86,9 +87,9 @@ class SetLevelMenuState extends State<SetLevelMenu> {
     String name = "";
     String ownerId = "";
     String figureId = "";
-    if (widget.monster != null) {
-      name = widget.monster!.type.display;
-      ownerId = widget.monster!.id;
+    if (monster != null) {
+      name = monster.type.display;
+      ownerId = widget.monster?.id ?? "";
     } else if (widget.figure is CharacterState) {
       figureId = (widget.figure as CharacterState).display.value;
       ownerId = name;
@@ -99,7 +100,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
       String gfx = (widget.figure as MonsterInstance).gfx;
       figureId = name + gfx + nr.toString();
       if (widget.characterId != null) {
-        ownerId = widget.characterId!;
+        ownerId = widget.characterId ?? "";
       }
     }
 
@@ -108,6 +109,8 @@ class SetLevelMenuState extends State<SetLevelMenu> {
     bool darkMode = _settings.darkMode.value;
 
     double scale = getModalMenuScale(context);
+
+    final figure = widget.figure;
 
     return ModalBackground(
         width: SetLevelMenu._kMenuWidth * scale,
@@ -148,7 +151,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                         settings: _settings),
                   ),
                 ),
-              if (widget.figure == null)
+              if (figure == null)
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Text("Solo:", style: getSmallTextStyle(scale)),
                   ValueListenableBuilder<bool>(
@@ -160,13 +163,14 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                           side: BorderSide(
                               color: darkMode ? Colors.white : Colors.black),
                           onChanged: (bool? newValue) {
-                            _gameState.action(SetSoloCommand(newValue!));
+                            _gameState
+                                .action(SetSoloCommand(newValue ?? false));
                           },
                           value: _gameState.solo.value,
                         );
                       })
                 ]),
-              if (widget.figure == null)
+              if (figure == null)
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Text("Automatic Scenario Level:",
                       style: getSmallTextStyle(scale)),
@@ -180,14 +184,14 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                               color: darkMode ? Colors.white : Colors.black),
                           onChanged: (bool? newValue) {
                             _gameState.action(SetAutoLevelAdjustCommand(
-                                newValue!,
+                                newValue ?? false,
                                 gameState: _gameState));
                           },
                           value: _gameState.autoScenarioLevel.value,
                         );
                       })
                 ]),
-              if (widget.figure == null)
+              if (figure == null)
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Text("Difficulty:", style: getSmallTextStyle(scale)),
                   ...List.generate(
@@ -199,10 +203,10 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                         settings: _settings),
                   ),
                 ]),
-              if (widget.figure != null)
+              if (figure != null)
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   CounterButton(
-                      notifier: widget.figure!.maxHealth,
+                      notifier: figure.maxHealth,
                       command: ChangeMaxHealthCommand(0, figureId, ownerId,
                           gameState: _gameState),
                       maxValue: SetLevelMenu._kMaxHealth,
@@ -275,7 +279,7 @@ class _LevelButton extends StatelessWidget {
               valueListenable: gameState.level,
               builder: (context, value, child) {
                 bool isCurrentlySelected = monster != null
-                    ? nr == monster!.level.value
+                    ? nr == monster?.level.value
                     : nr == gameState.level.value;
                 bool isRecommended = GameMethods.getRecommendedLevel() == nr;
                 Color color = Colors.transparent;

@@ -7,7 +7,7 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
-import 'loot_card.dart';
+import 'loot_card_widget.dart';
 
 class LootDeckWidget extends StatefulWidget {
   const LootDeckWidget({

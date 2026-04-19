@@ -128,7 +128,8 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
       _foundMonsters.removeWhere((element) => element.hidden);
     }
     if (!_showBoss) {
-      _foundMonsters.removeWhere((element) => element.levels.first.boss != null);
+      _foundMonsters
+          .removeWhere((element) => element.levels.first.boss != null);
     }
 
     sortMonsters(_foundMonsters);
@@ -163,7 +164,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
               DropdownButtonHideUnderline(
                   child: DropdownButton(
                       value: _currentCampaign,
-                      items: buildEditionDroopDownMenuItems(), // ignore: avoid-returning-widgets, returns List<DropdownMenuItem> for DropdownButton items
+                      items: buildEditionDroopDownMenuItems(),
                       onChanged: (value) {
                         if (value is String) {
                           setState(() {
@@ -177,7 +178,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                 value: _showBoss,
                 onChanged: (bool? value) {
                   setState(() {
-                    _showBoss = value!;
+                    _showBoss = value ?? false;
                     _runFilter("");
                   });
                 }),
@@ -186,7 +187,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                 value: _showSpecial,
                 onChanged: (bool? value) {
                   setState(() {
-                    _showSpecial = value!;
+                    _showSpecial = value ?? false;
                     _runFilter("");
                   });
                 }),
@@ -195,11 +196,12 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                 value: _addAsAlly,
                 onChanged: (bool? value) {
                   setState(() {
-                    _addAsAlly = value!;
+                    _addAsAlly = value ?? false;
                   });
                 }),
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: AddMonsterMenu._kSearchMarginH),
+              margin: const EdgeInsets.symmetric(
+                  horizontal: AddMonsterMenu._kSearchMarginH),
               child: TextField(
                 onChanged: (value) => _runFilter(value),
                 decoration: const InputDecoration(

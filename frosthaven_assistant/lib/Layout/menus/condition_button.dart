@@ -90,7 +90,9 @@ class ConditionButton extends StatelessWidget {
               height: 0,
             );
           }
-          ListItemData? owner;
+
+          //todo: fix this logic (move to viewmodel))
+          ListItemData owner = ListItemData();
           for (var item in gameState.currentList) {
             if (item.id == ownerId) {
               owner = item;
@@ -100,8 +102,7 @@ class ConditionButton extends StatelessWidget {
 
           bool isActive = _isConditionActive(condition, figure);
           if (isActive) {
-            color =
-                settings.darkMode.value ? Colors.white : Colors.black;
+            color = settings.darkMode.value ? Colors.white : Colors.black;
           }
 
           bool isCharacter = condition.name.contains("character");
@@ -141,7 +142,7 @@ class ConditionButton extends StatelessWidget {
               ? ConditionIcon(
                   condition,
                   _kIconSize * scale,
-                  owner!,
+                  owner,
                   figure,
                   scale: scale,
                 )
@@ -155,7 +156,8 @@ class ConditionButton extends StatelessWidget {
                   border: Border.all(
                     color: color,
                   ),
-                  borderRadius: BorderRadius.all(Radius.circular(_kBorderRadius * scale))),
+                  borderRadius: BorderRadius.all(
+                      Radius.circular(_kBorderRadius * scale))),
               child: IconButton(
                 icon: enabled
                     ? enabledIcon
@@ -188,10 +190,12 @@ class ConditionButton extends StatelessWidget {
                     ? () {
                         if (!isActive) {
                           gameState.action(AddConditionCommand(
-                              condition, figureId, ownerId, gameState: gameState));
+                              condition, figureId, ownerId,
+                              gameState: gameState));
                         } else {
                           gameState.action(RemoveConditionCommand(
-                              condition, figureId, ownerId, gameState: gameState));
+                              condition, figureId, ownerId,
+                              gameState: gameState));
                         }
                       }
                     : null,

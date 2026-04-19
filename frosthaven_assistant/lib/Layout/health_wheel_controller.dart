@@ -31,11 +31,11 @@ class HealthWheelControllerState extends State<HealthWheelController> {
 
   OverlayEntry? entry;
   HealthWheelControllerViewModel? _vmInstance;
-  HealthWheelControllerViewModel get _vm => _vmInstance ??= HealthWheelControllerViewModel(gameState: widget.gameState);
+  HealthWheelControllerViewModel get _vm => _vmInstance ??=
+      HealthWheelControllerViewModel(gameState: widget.gameState);
 
   final wheelDelta = ValueNotifier<double>(0);
   final wheelTimeDelta = ValueNotifier<int>(0);
-
 
   @override
   void dispose() {
@@ -55,8 +55,13 @@ class HealthWheelControllerState extends State<HealthWheelController> {
   void showOverlay(String figureId, double scale, BuildContext context) {
     final figure = GameMethods.getFigure(widget.ownerId, widget.figureId);
     if (figure == null) return;
-    double dx = context.globalPaintBounds!.topCenter.dx - _kOverlayXOffset * scale;
-    double dy = context.globalPaintBounds!.topCenter.dy - _kOverlayYOffset * scale;
+    final bounds = context.globalPaintBounds;
+    double dx = 0;
+    double dy = 0;
+    if (bounds != null) {
+      dx = bounds.topCenter.dx - _kOverlayXOffset * scale;
+      dy = bounds.topCenter.dy - _kOverlayYOffset * scale;
+    }
     var selectHealthWheel = SelectHealthWheel(
         key: UniqueKey(),
         data: figure,
@@ -64,7 +69,8 @@ class HealthWheelControllerState extends State<HealthWheelController> {
         ownerId: widget.ownerId,
         delta: wheelDelta,
         time: wheelTimeDelta);
-    entry = OverlayEntry(
+
+    final overlayEntry = OverlayEntry(
         builder: (context) => Positioned(
             left: dx,
             top: dy,
@@ -73,7 +79,8 @@ class HealthWheelControllerState extends State<HealthWheelController> {
             child:
                 Material(color: Colors.transparent, child: selectHealthWheel)));
     final overlay = Overlay.of(context);
-    overlay.insert(entry!);
+    entry = overlayEntry;
+    overlay.insert(overlayEntry);
   }
 
   @override
@@ -94,14 +101,15 @@ class HealthWheelControllerState extends State<HealthWheelController> {
         },
         onHorizontalDragUpdate: (DragUpdateDetails details) {
           int timeDiff = 0;
-          if (lastTimeStamp != null) {
-            timeDiff = details.sourceTimeStamp!.inMicroseconds - lastTimeStamp!;
+          final lastTime = lastTimeStamp;
+          if (lastTime != null) {
+            timeDiff = details.sourceTimeStamp?.inMicroseconds ?? 0 - lastTime;
           }
 
           wheelTimeDelta.value = timeDiff;
           wheelDelta.value = details.delta.dx;
 
-          lastTimeStamp = details.sourceTimeStamp!.inMicroseconds;
+          lastTimeStamp = details.sourceTimeStamp?.inMicroseconds;
         },
         onHorizontalDragEnd: (details) {
           //close scrollview and run changeHeath command
