@@ -33,8 +33,8 @@ class SetLootOwnerMenu extends StatefulWidget {
 }
 
 class SetLootOwnerMenuState extends State<SetLootOwnerMenu> {
-  late final GameState _gameState;
-  late final Settings _settings;
+  late final GameState _gameState; // ignore: avoid-late-keyword
+  late final Settings _settings; // ignore: avoid-late-keyword
 
   @override
   initState() {

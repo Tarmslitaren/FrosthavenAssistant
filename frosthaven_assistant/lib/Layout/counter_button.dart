@@ -41,7 +41,7 @@ class CounterButton extends StatefulWidget {
 }
 
 class CounterButtonState extends State<CounterButton> {
-  late final CounterButtonViewModel _vm;
+  late final CounterButtonViewModel _vm; // ignore: avoid-late-keyword
   final totalChangeValue = ValueNotifier<int>(0);
 
   @override
@@ -100,7 +100,7 @@ class CounterButtonState extends State<CounterButton> {
               colorBlendMode: BlendMode.modulate,
               fit: BoxFit.contain,
               filterQuality: FilterQuality.medium,
-              image: AssetImage(widget.extraImage!),
+              image: AssetImage(widget.extraImage!), // ignore: avoid-non-null-assertion
             ),
           ),
         ValueListenableBuilder<int>(

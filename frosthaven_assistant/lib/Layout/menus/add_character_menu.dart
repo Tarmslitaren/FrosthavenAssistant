@@ -36,11 +36,11 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
   // This list holds the data for the list view
   List<CharacterClass> _foundCharacters = [];
   final List<CharacterClass> _allCharacters = [];
-  late CharacterClass bs;
-  late CharacterClass vq;
-  late final GameState _gameState;
-  late final Settings _settings;
-  late final GameData _gameData;
+  late CharacterClass bs; // ignore: avoid-late-keyword
+  late CharacterClass vq; // ignore: avoid-late-keyword
+  late final GameState _gameState; // ignore: avoid-late-keyword
+  late final Settings _settings; // ignore: avoid-late-keyword
+  late final GameData _gameData; // ignore: avoid-late-keyword
   final ScrollController _scrollController = ScrollController();
 
   int compareEditions(String a, String b) {
@@ -74,7 +74,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
     // at the beginning, all users are shown
     final data = _gameData.modelData.value;
     for (String key in data.keys) {
-      _allCharacters.addAll(data[key]!.characters);
+      _allCharacters.addAll(data[key]!.characters); // ignore: avoid-non-null-assertion
     }
 
     for (var item in _allCharacters) {

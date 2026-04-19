@@ -81,7 +81,7 @@ class Settings {
     saves.value[saveName] = (gameState ?? getIt<GameState>()).toString();
     Map<String, String> newMap = {};
     for (String key in saves.value.keys) {
-      newMap[key] = saves.value[key]!;
+      newMap[key] = saves.value[key]!; // ignore: avoid-non-null-assertion
     }
     saves.value = newMap;
     saveToDisk();
@@ -91,7 +91,7 @@ class Settings {
     saves.value.remove(saveName);
     Map<String, String> newMap = {};
     for (String key in saves.value.keys) {
-      newMap[key] = saves.value[key]!;
+      newMap[key] = saves.value[key]!; // ignore: avoid-non-null-assertion
     }
     saves.value = newMap;
     saveToDisk();
@@ -109,7 +109,7 @@ class Settings {
     characterSaves.value['$saveName\n${character.id}'] = character.toSave();
     Map<String, String> newMap = {};
     for (String key in characterSaves.value.keys) {
-      newMap[key] = characterSaves.value[key]!;
+      newMap[key] = characterSaves.value[key]!; // ignore: avoid-non-null-assertion
     }
     characterSaves.value = newMap;
     saveToDisk();
@@ -119,7 +119,7 @@ class Settings {
     characterSaves.value.remove(saveId);
     Map<String, String> newMap = {};
     for (String key in characterSaves.value.keys) {
-      newMap[key] = characterSaves.value[key]!;
+      newMap[key] = characterSaves.value[key]!; // ignore: avoid-non-null-assertion
     }
     characterSaves.value = newMap;
     saveToDisk();

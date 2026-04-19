@@ -245,15 +245,15 @@ class FrosthavenConverter {
     for (int i = 0; i < lastLineTextPartList.length; i++) {
       Widget part = lastLineTextPartList[i];
       if (part is Container) {
-        if (part.child! is Text &&
-            (part.child as Text).data!.contains("[subLineStart]")) {
+        if (part.child! is Text && // ignore: avoid-non-null-assertion
+            (part.child as Text).data!.contains("[subLineStart]")) { // ignore: avoid-non-null-assertion
           list1 = lastLineTextPartList.sublist(0, i);
           List<Widget> tempSpanList = [];
           for (int j = i + 1; j < lastLineTextPartList.length; j++) {
             Widget part2 = lastLineTextPartList[j];
             if (part2 is Container &&
                 part2.child is Text &&
-                (part2.child as Text).data!.contains("[lineBreak]")) {
+                (part2.child as Text).data!.contains("[lineBreak]")) { // ignore: avoid-non-null-assertion
               list2.add(tempSpanList.toList());
               tempSpanList.clear();
             } else {
@@ -265,7 +265,7 @@ class FrosthavenConverter {
       }
       if (part is Container &&
           part.child is Text &&
-          (part.child as Text).data!.contains("[conditionalStart]")) {
+          (part.child as Text).data!.contains("[conditionalStart]")) { // ignore: avoid-non-null-assertion
         conditional = true;
         list1 = lastLineTextPartList.sublist(0, i);
         List<Widget> tempSpanList = [];
@@ -273,7 +273,7 @@ class FrosthavenConverter {
           Widget part2 = lastLineTextPartList[j];
           if (part2 is Container &&
               part2.child is Text &&
-              (part2.child as Text).data!.contains("[lineBreak]")) {
+              (part2.child as Text).data!.contains("[lineBreak]")) { // ignore: avoid-non-null-assertion
             list2.add(tempSpanList.toList());
             tempSpanList.clear();
           } else {
@@ -342,9 +342,9 @@ class FrosthavenConverter {
         retVal.addAll(getAllImagesInWidget(item));
       }
     } else if (widget is Container && widget.child != null) {
-      retVal.addAll(getAllImagesInWidget(widget.child!));
+      retVal.addAll(getAllImagesInWidget(widget.child!)); // ignore: avoid-non-null-assertion
     } else if (widget is Image) {
-      retVal.add(widget.semanticLabel!);
+      retVal.add(widget.semanticLabel!); // ignore: avoid-non-null-assertion
     }
 
     return retVal;
@@ -361,9 +361,9 @@ class FrosthavenConverter {
         retVal += getAllTextInWidget(item);
       }
     } else if (widget is Container && widget.child != null) {
-      retVal += getAllTextInWidget(widget.child!);
+      retVal += getAllTextInWidget(widget.child!); // ignore: avoid-non-null-assertion
     } else if (widget is Text) {
-      retVal += widget.data!;
+      retVal += widget.data!; // ignore: avoid-non-null-assertion
     }
 
     return retVal;
@@ -376,7 +376,7 @@ class FrosthavenConverter {
       belongs = false;
     } else {
       if (lines.last is Image) {
-        if ((lines.last as Image).semanticLabel!.contains("divider")) {
+        if ((lines.last as Image).semanticLabel!.contains("divider")) { // ignore: avoid-non-null-assertion
           belongs = false;
         }
       }

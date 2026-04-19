@@ -53,7 +53,7 @@ extension GlobalPaintBounds on BuildContext { // ignore: prefer-match-file-name,
       final offset =
           Offset(translation.x, translation.y); // Convert translation to Offset
 
-      return renderObject!.paintBounds
+      return renderObject!.paintBounds // ignore: avoid-non-null-assertion
           .shift(offset); // Shift the paint bounds by the offset
     } else {
       return null;

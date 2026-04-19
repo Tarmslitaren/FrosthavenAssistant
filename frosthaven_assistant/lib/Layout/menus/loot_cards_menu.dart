@@ -37,7 +37,7 @@ class LootCardsMenuState extends State<LootCardsMenu> {
   static const int _kCard1418 = 1418;
   static const int _kCard1419 = 1419;
 
-  late final GameState _gameState;
+  late final GameState _gameState; // ignore: avoid-late-keyword
   final scrollController = ScrollController();
 
   @override
@@ -237,7 +237,7 @@ class Item extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     double scale = min(_kMaxScale, screenWidth / _kItemMaxWidth);
 
-    late final Widget child;
+    late final Widget child; // ignore: avoid-late-keyword
 
     child = LootCardFront(card: data, scale: scale);
 

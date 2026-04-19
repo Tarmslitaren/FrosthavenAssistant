@@ -53,10 +53,10 @@ class CharacterWidgetInternal extends StatefulWidget {
 }
 
 class CharacterInternalWidgetState extends State<CharacterWidgetInternal> {
-  late final CharacterWidgetInternalViewModel _vm;
+  late final CharacterWidgetInternalViewModel _vm; // ignore: avoid-late-keyword
   bool isCharacter = true;
   final _initTextFieldController = TextEditingController();
-  late List<MonsterInstance> lastList = [];
+  late List<MonsterInstance> lastList = []; // ignore: avoid-late-keyword
   final _focusNode = FocusNode();
 
   @override

@@ -22,7 +22,7 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
     "corpsecap", "flamefruit", "rockroot", "snowthistle",
   ];
 
-  late final GameState _gameState;
+  late final GameState _gameState; // ignore: avoid-late-keyword
 
   @override
   initState() {

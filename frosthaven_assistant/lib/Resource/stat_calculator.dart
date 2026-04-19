@@ -42,7 +42,7 @@ class StatCalculator {
 
 class Parser {
   int pos = -1;
-  late String ch;
+  late String ch; // ignore: avoid-late-keyword
   String str;
 
   Parser(this.str);
@@ -65,7 +65,7 @@ class Parser {
   int? parse() {
     try {
       nextChar();
-      int x = parseCondition()!;
+      int x = parseCondition()!; // ignore: avoid-non-null-assertion
       if (pos < str.length) {
         if (kDebugMode) {
           print("Unexpected: $ch");
@@ -89,14 +89,14 @@ class Parser {
 
   int? parseCondition() {
     try {
-      int x = parseExpression()!;
+      int x = parseExpression()!; // ignore: avoid-non-null-assertion
       for (;;) {
         if (eat('<')) {
-          x = x < parseExpression()! ? 1 : 0;
+          x = x < parseExpression()! ? 1 : 0; // ignore: avoid-non-null-assertion
         } else if (eat('>')) {
-          x = x > parseExpression()! ? 1 : 0;
+          x = x > parseExpression()! ? 1 : 0; // ignore: avoid-non-null-assertion
         } else if (eat('=')) {
-          x = x == parseExpression()! ? 1 : 0;
+          x = x == parseExpression()! ? 1 : 0; // ignore: avoid-non-null-assertion
         } else {
           return x;
         }
@@ -108,12 +108,12 @@ class Parser {
 
   int? parseExpression() {
     try {
-      int x = parseTerm()!;
+      int x = parseTerm()!; // ignore: avoid-non-null-assertion
       for (;;) {
         if (eat('+')) {
-          x += parseTerm()!;
+          x += parseTerm()!; // ignore: avoid-non-null-assertion
         } else if (eat('-')) {
-          x -= parseTerm()!;
+          x -= parseTerm()!; // ignore: avoid-non-null-assertion
         } else {
           return x;
         }
@@ -125,15 +125,15 @@ class Parser {
 
   int? parseTerm() {
     try {
-      int x = parseFactor()!;
+      int x = parseFactor()!; // ignore: avoid-non-null-assertion
       for (;;) {
-        if (eat('*')) x *= parseFactor()!; // multiplication
+        if (eat('*')) x *= parseFactor()!; // multiplication // ignore: avoid-non-null-assertion
         if (eat('x')) {
-          x *= parseFactor()!; // multiplication
+          x *= parseFactor()!; // multiplication // ignore: avoid-non-null-assertion
         } else if (eat('/')) {
-          x = (x / parseFactor()!).ceil();
+          x = (x / parseFactor()!).ceil(); // ignore: avoid-non-null-assertion
         } else if (eat('d')) {
-          x = (x / parseFactor()!).floor();
+          x = (x / parseFactor()!).floor(); // ignore: avoid-non-null-assertion
         } else {
           return x;
         }
@@ -146,14 +146,14 @@ class Parser {
   int? parseFactor() {
     try {
       if (eat('+')) return parseFactor(); // unary plus
-      if (eat('-')) return -parseFactor()!; // unary minus
+      if (eat('-')) return -parseFactor()!; // unary minus // ignore: avoid-non-null-assertion
 
       int x;
       int startPos = pos;
       int asciiValue = ch.codeUnits.first;
       if (eat('(')) {
         // parentheses
-        x = parseExpression()!;
+        x = parseExpression()!; // ignore: avoid-non-null-assertion
         if (!eat(')')) throw Exception("Missing ')'");
       } else if (asciiValue >= '0'.codeUnits.first &&
           asciiValue <= '9'.codeUnits.first) {

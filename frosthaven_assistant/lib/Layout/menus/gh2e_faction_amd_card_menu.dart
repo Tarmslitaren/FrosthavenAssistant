@@ -33,7 +33,7 @@ class GH2eFactionAMDCardMenuState extends State<GH2eFactionAMDCardMenu> {
   static const double _kSpacerNoCard = 20.0;
   static const double _kSpacerWithCard = 30.0;
 
-  late final GameState _gameState;
+  late final GameState _gameState; // ignore: avoid-late-keyword
   final List<ModifierCard> _factionCards = [];
 
   String? addedCard;

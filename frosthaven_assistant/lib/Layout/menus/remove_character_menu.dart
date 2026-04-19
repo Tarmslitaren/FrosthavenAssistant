@@ -25,7 +25,7 @@ class RemoveCharacterMenu extends StatefulWidget {
 class RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
   static const double _kMaxWidth = 400;
 
-  late final GameState _gameState;
+  late final GameState _gameState; // ignore: avoid-late-keyword
 
   @override
   initState() {

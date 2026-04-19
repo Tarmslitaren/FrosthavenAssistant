@@ -2,8 +2,8 @@ import '../state/game_state.dart';
 
 class SetScenarioCommand extends Command {
   final GameState _gameState;
-  late final String _scenario;
-  late final bool _section;
+  final String _scenario;
+  final bool _section;
 
   SetScenarioCommand(this._scenario, this._section,
       {required GameState gameState})

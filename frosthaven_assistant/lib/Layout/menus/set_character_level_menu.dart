@@ -36,7 +36,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
   static const int _kMaxHealth = 900;
   static const double _kNameFieldWidth = 160.0;
 
-  late final GameState _gameState;
+  late final GameState _gameState; // ignore: avoid-late-keyword
   final TextEditingController nameController = TextEditingController();
   final FocusNode focusNode = FocusNode();
 

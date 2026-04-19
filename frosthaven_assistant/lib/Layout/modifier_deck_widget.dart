@@ -53,7 +53,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   static const int _kDiscardThirdFromEnd = 3;
   static const int _kDiscardSecondFromEnd = 2;
 
-  late final ModifierDeckViewModel _vm;
+  late final ModifierDeckViewModel _vm; // ignore: avoid-late-keyword
   bool _animationsEnabled = false;
 
   @override
@@ -378,9 +378,9 @@ class _ModifierSlideAnimationWidget extends StatefulWidget {
 class _ModifierSlideAnimationWidgetState
     extends State<_ModifierSlideAnimationWidget>
     with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-  late final Animation<Offset> _translation;
-  late final Animation<double> _rotation;
+  late final AnimationController _controller; // ignore: avoid-late-keyword
+  late final Animation<Offset> _translation; // ignore: avoid-late-keyword
+  late final Animation<double> _rotation; // ignore: avoid-late-keyword
 
   @override
   void initState() {
@@ -478,10 +478,10 @@ class _ModifierDrawAnimationWidgetState
   static const double _kAnimWeightPause = 2;
   static const double _kTwoPI = math.pi * 2;
 
-  late final AnimationController _controller;
-  late final Animation<Offset> _translation;
-  late final Animation<double> _scale;
-  late final Animation<double> _rotation;
+  late final AnimationController _controller; // ignore: avoid-late-keyword
+  late final Animation<Offset> _translation; // ignore: avoid-late-keyword
+  late final Animation<double> _scale; // ignore: avoid-late-keyword
+  late final Animation<double> _rotation; // ignore: avoid-late-keyword
 
   @override
   void initState() {

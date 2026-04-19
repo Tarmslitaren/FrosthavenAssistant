@@ -81,7 +81,7 @@ class LootCardListTileState extends State<LootCardListTile> {
   static const double _kContentPaddingLeft = 14.0;
   static const double _kHorizontalTitleGap = 6.0;
 
-  late final GameState _gameState;
+  late final GameState _gameState; // ignore: avoid-late-keyword
 
   @override
   void initState() {

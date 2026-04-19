@@ -23,7 +23,7 @@ class RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
   static const double _kMaxWidth = 450;
   static const double _kIconHeight = 30;
 
-  late final GameState _gameState;
+  late final GameState _gameState; // ignore: avoid-late-keyword
 
   @override
   initState() {

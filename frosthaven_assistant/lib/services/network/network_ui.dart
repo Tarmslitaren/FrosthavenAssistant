@@ -21,9 +21,9 @@ class NetworkUI extends StatefulWidget {
 }
 
 class NetworkUIState extends State<NetworkUI> {
-  late final Network _network;
-  late final Settings _settings;
-  late final Client _client;
+  late final Network _network; // ignore: avoid-late-keyword
+  late final Settings _settings; // ignore: avoid-late-keyword
+  late final Client _client; // ignore: avoid-late-keyword
 
   @override
   initState() {

@@ -34,10 +34,10 @@ class AnimatedContainerButtonState extends State<ElementButton> {
   static const double _kBoxShadowBlur = 4.0;
   static const double _kIconScale = 0.65;
 
-  late final ElementButtonViewModel _vm;
-  late double _height;
-  late Color _color;
-  late BorderRadiusGeometry _borderRadius;
+  late final ElementButtonViewModel _vm; // ignore: avoid-late-keyword
+  late double _height; // ignore: avoid-late-keyword
+  late Color _color; // ignore: avoid-late-keyword
+  late BorderRadiusGeometry _borderRadius; // ignore: avoid-late-keyword
 
   @override
   void initState() {

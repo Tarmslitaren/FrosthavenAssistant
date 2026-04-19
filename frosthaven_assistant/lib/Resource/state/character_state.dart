@@ -13,7 +13,7 @@ class CharacterState extends FigureState {
   final List<MonsterInstance> _summonList = [];
   final _summonListNotifier =
       ValueNotifier<BuiltList<MonsterInstance>>(BuiltList.of([]));
-  late final ModifierDeck _modifierDeck;
+  late final ModifierDeck _modifierDeck; // ignore: avoid-late-keyword
 
   ValueListenable<String> get display => _display;
   ValueListenable<int> get initiative => _initiative;

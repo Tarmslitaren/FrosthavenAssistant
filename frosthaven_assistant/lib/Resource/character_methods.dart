@@ -284,7 +284,7 @@ class CharacterMethods {
     final gd = gameData ?? getIt<GameData>();
     final modelData = gd.modelData.value;
     for (String key in modelData.keys) {
-      characters.addAll(modelData[key]!.characters);
+      characters.addAll(modelData[key]!.characters); // ignore: avoid-non-null-assertion
     }
     for (CharacterClass characterClass in characters) {
       if (characterClass.id == id &&

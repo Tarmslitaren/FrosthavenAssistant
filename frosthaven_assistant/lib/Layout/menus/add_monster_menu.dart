@@ -36,13 +36,13 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
   // This list holds the data for the list view
   List<MonsterModel> _foundMonsters = [];
   final List<MonsterModel> _allMonsters = [];
-  late final GameState _gameState;
-  late final GameData _gameData;
-  late final Settings _settings;
+  late final GameState _gameState; // ignore: avoid-late-keyword
+  late final GameData _gameData; // ignore: avoid-late-keyword
+  late final Settings _settings; // ignore: avoid-late-keyword
   bool _addAsAlly = false;
   bool _showSpecial = false;
   bool _showBoss = true;
-  late String _currentCampaign;
+  late String _currentCampaign; // ignore: avoid-late-keyword
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -52,7 +52,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
     _gameData = widget.gameData ?? getIt<GameData>();
     // at the beginning, all users are shown
     for (String key in _gameData.modelData.value.keys) {
-      _allMonsters.addAll(_gameData.modelData.value[key]!.monsters.values);
+      _allMonsters.addAll(_gameData.modelData.value[key]!.monsters.values); // ignore: avoid-non-null-assertion
     }
     _currentCampaign = _gameState.currentCampaign.value;
     _setCampaign(_currentCampaign);
@@ -180,7 +180,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                 value: _showBoss,
                 onChanged: (bool? value) {
                   setState(() {
-                    _showBoss = value!;
+                    _showBoss = value!; // ignore: avoid-non-null-assertion
                     _runFilter("");
                   });
                 }),
@@ -189,7 +189,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                 value: _showSpecial,
                 onChanged: (bool? value) {
                   setState(() {
-                    _showSpecial = value!;
+                    _showSpecial = value!; // ignore: avoid-non-null-assertion
                     _runFilter("");
                   });
                 }),
@@ -198,7 +198,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                 value: _addAsAlly,
                 onChanged: (bool? value) {
                   setState(() {
-                    _addAsAlly = value!;
+                    _addAsAlly = value!; // ignore: avoid-non-null-assertion
                   });
                 }),
             Container(

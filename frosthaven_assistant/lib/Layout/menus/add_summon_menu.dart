@@ -47,9 +47,9 @@ class AddSummonMenuState extends State<AddSummonMenu> {
   static const int _kMinStandeesForNr = 2;
   static const int _kDefaultHealth = 2;
 
-  late final GameState _gameState;
-  late final GameData _gameData;
-  late final Settings _settings;
+  late final GameState _gameState; // ignore: avoid-late-keyword
+  late final GameData _gameData; // ignore: avoid-late-keyword
+  late final Settings _settings; // ignore: avoid-late-keyword
   int chosenNr = 1;
   String chosenGfx = "blue";
 

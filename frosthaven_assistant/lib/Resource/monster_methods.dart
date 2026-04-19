@@ -26,7 +26,7 @@ class MonsterMethods {
     Map<String, MonsterModel> monsters = {};
     final modelData = gd.modelData.value;
     for (String key in modelData.keys) {
-      monsters.addAll(modelData[key]!.monsters);
+      monsters.addAll(modelData[key]!.monsters); // ignore: avoid-non-null-assertion
     }
     level ??= (gameState ?? getIt<GameState>()).level.value;
     return Monster(name, level, isAlly);

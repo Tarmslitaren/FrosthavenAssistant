@@ -29,7 +29,7 @@ class SaveCharacterMenuState extends State<SaveCharacterMenu> {
 
   // This list holds the data for the list view
   final List<String> _saves = [];
-  late final Settings _settings;
+  late final Settings _settings; // ignore: avoid-late-keyword
   final ScrollController _scrollController = ScrollController();
   final List<Character> _characters = GameMethods.getCurrentCharacters();
 

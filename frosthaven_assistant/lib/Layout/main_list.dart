@@ -50,7 +50,7 @@ class Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
-    late final Widget child;
+    late final Widget child; // ignore: avoid-late-keyword
     double height;
     double listWidth = getMainListWidth(context);
     if (data is Character) {
@@ -129,8 +129,8 @@ class ListAnimation extends StatefulWidget {
 
 class ListAnimationState extends State<ListAnimation>
     with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-  late final CurvedAnimation _curved;
+  late final AnimationController _controller; // ignore: avoid-late-keyword
+  late final CurvedAnimation _curved; // ignore: avoid-late-keyword
   double _diff = 0;
 
   @override
@@ -230,7 +230,7 @@ class MainListState extends State<MainList> {
 
   static MainListViewModel? _staticVm;
 
-  late final MainListViewModel _vm;
+  late final MainListViewModel _vm; // ignore: avoid-late-keyword
   List<Widget> _generatedList = [];
   static final scrollController = ScrollController();
 

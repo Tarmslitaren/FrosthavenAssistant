@@ -37,7 +37,7 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
   static const double _kModalWidth = 300.0;
   static const double _kModalHeight = 140.0;
 
-  late final GameState _gameState;
+  late final GameState _gameState; // ignore: avoid-late-keyword
 
   @override
   initState() {

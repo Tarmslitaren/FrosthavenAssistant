@@ -70,7 +70,7 @@ class TokenApplier {
               if (LineBuilder.tokens[iconToken] != null) {
                 RegExp regEx = RegExp(
                     r"(?=.*[a-z])"); //black versions exist for all tokens containing lower case letters
-                if (regEx.hasMatch(LineBuilder.tokens[iconToken]!)) {
+                if (regEx.hasMatch(LineBuilder.tokens[iconToken]!)) { // ignore: avoid-non-null-assertion
                   iconGfx += "_black";
                 }
               }

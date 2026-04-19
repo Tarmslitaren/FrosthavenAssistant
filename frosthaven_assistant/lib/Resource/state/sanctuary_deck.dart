@@ -4,8 +4,8 @@ part of 'game_state.dart';
 class SanctuaryDeck {
   static const int _kCardTypeCount = 5;
 
-  late final CardStack<ModifierCard> _multPile = CardStack<ModifierCard>();
-  late final CardStack<ModifierCard> _flipPile = CardStack<ModifierCard>();
+  final CardStack<ModifierCard> _multPile = CardStack<ModifierCard>();
+  final CardStack<ModifierCard> _flipPile = CardStack<ModifierCard>();
 
   SanctuaryDeck() {
     //build deck

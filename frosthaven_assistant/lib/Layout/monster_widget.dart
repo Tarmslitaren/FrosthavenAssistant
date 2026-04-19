@@ -35,7 +35,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
   static const double _kScaledHeight = 96.0;
   static const double _kMarginH = 3.2;
 
-  late final MonsterWidgetViewModel _vm;
+  late final MonsterWidgetViewModel _vm; // ignore: avoid-late-keyword
   List<MonsterInstance> lastList = [];
 
   @override

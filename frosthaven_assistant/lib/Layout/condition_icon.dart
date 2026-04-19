@@ -33,7 +33,7 @@ class ConditionIcon extends StatefulWidget {
   final GameState? gameState;
   // injected for testing
   final Settings? settings;
-  late final String gfx;
+  late final String gfx; // ignore: avoid-late-keyword
 
   @override
   ConditionIconState createState() => ConditionIconState();
@@ -48,9 +48,9 @@ class ConditionIconState extends State<ConditionIcon>
   static const double _kShakeWeightHalf = 2;
   static const double _kClassTokenIconScale = 0.45;
 
-  late final ConditionIconViewModel _vm;
-  late final AnimationController _shakeController;
-  late final Animation<double> _shakeAngle;
+  late final ConditionIconViewModel _vm; // ignore: avoid-late-keyword
+  late final AnimationController _shakeController; // ignore: avoid-late-keyword
+  late final Animation<double> _shakeAngle; // ignore: avoid-late-keyword
 
   final animate = ValueNotifier<bool>(false);
 

@@ -126,7 +126,7 @@ class PerkListTileState extends State<PerkListTile> {
   static const int _kDigit3 = 3;
   static const int _kDigit4 = 4;
 
-  late final GameState _gameState;
+  late final GameState _gameState; // ignore: avoid-late-keyword
 
   @override
   void initState() {

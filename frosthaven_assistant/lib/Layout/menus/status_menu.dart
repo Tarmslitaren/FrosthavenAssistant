@@ -122,8 +122,8 @@ class StatusMenu extends StatefulWidget {
 }
 
 class StatusMenuState extends State<StatusMenu> {
-  late final GameState _gameState;
-  late final Settings _settings;
+  late final GameState _gameState; // ignore: avoid-late-keyword
+  late final Settings _settings; // ignore: avoid-late-keyword
 
   @override
   initState() {
@@ -242,10 +242,10 @@ class StatusMenuState extends State<StatusMenu> {
     String name = "";
     String? ownerId = "";
     if (widget.monsterId != null) {
-      name = widget.monsterId!; //this is no good
+      name = widget.monsterId!; //this is no good // ignore: avoid-non-null-assertion
       ownerId = widget.monsterId;
     } else if (widget.characterId != null) {
-      name = widget.characterId!; //now this is no good either...
+      name = widget.characterId!; //now this is no good either... // ignore: avoid-non-null-assertion
       ownerId = name;
     }
 
@@ -284,12 +284,12 @@ class StatusMenuState extends State<StatusMenu> {
           final monsterData = monster.type.levels[monster.level.value];
 
           if (figure.type == MonsterType.normal) {
-            immunities = monsterData.normal!.immunities;
+            immunities = monsterData.normal!.immunities; // ignore: avoid-non-null-assertion
           } else if (figure.type == MonsterType.elite) {
-            immunities = monsterData.elite!.immunities;
+            immunities = monsterData.elite!.immunities; // ignore: avoid-non-null-assertion
             isElite = true;
           } else if (figure.type == MonsterType.boss) {
-            immunities = monsterData.boss!.immunities;
+            immunities = monsterData.boss!.immunities; // ignore: avoid-non-null-assertion
           }
         }
       }
@@ -447,7 +447,7 @@ class StatusMenuState extends State<StatusMenu> {
 
                     if (isSummon) {
                       deck = GameMethods.getModifierDeck(
-                          widget.characterId!, _gameState);
+                          widget.characterId!, _gameState); // ignore: avoid-non-null-assertion
                     }
 
                     bool canBeCursed = true;
@@ -740,7 +740,7 @@ class StatusMenuState extends State<StatusMenu> {
                                       openDialog(
                                         context,
                                         SetCharacterLevelMenu(
-                                            character: character!),
+                                            character: character!), // ignore: avoid-non-null-assertion
                                       );
                                     } else {
                                       openDialog(

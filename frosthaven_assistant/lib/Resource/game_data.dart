@@ -9,10 +9,10 @@ import '../Model/room.dart';
 import '../Model/summon_model.dart';
 
 class GameData {
-  late final BuiltList<String> editions;
+  late final BuiltList<String> editions; // ignore: avoid-late-keyword
   final modelData =
       ValueNotifier<Map<String, CampaignModel>>({}); //todo: make map immutable
-  late final BuiltList<SummonModel> itemSummonData;
+  late final BuiltList<SummonModel> itemSummonData; // ignore: avoid-late-keyword
 
   Future<void> loadData(String root) async {
     rootBundle.evict('${root}summon.json');

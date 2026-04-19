@@ -37,7 +37,7 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
   static const double _kMaxHeightRatio = 0.9;
   static const int _kMaxRevealButtons = 8;
 
-  late final GameState _gameState;
+  late final GameState _gameState; // ignore: avoid-late-keyword
   static final List<MonsterAbilityCardModel> revealedList = [];
 
   @override

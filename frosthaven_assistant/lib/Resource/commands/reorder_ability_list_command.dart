@@ -1,9 +1,9 @@
 import '../state/game_state.dart';
 
 class ReorderAbilityListCommand extends Command {
-  late final int newIndex;
-  late final int oldIndex;
-  late final String deck;
+  final int newIndex;
+  final int oldIndex;
+  final String deck;
   final GameState _gameState;
 
   ReorderAbilityListCommand(this.deck, this.newIndex, this.oldIndex,

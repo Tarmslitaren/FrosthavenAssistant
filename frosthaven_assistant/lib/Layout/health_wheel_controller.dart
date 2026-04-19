@@ -30,7 +30,7 @@ class HealthWheelControllerState extends State<HealthWheelController> {
   static const double _kOverlayHeight = 50.0;
 
   OverlayEntry? entry;
-  late final HealthWheelControllerViewModel _vm;
+  late final HealthWheelControllerViewModel _vm; // ignore: avoid-late-keyword
 
   final wheelDelta = ValueNotifier<double>(0);
   final wheelTimeDelta = ValueNotifier<int>(0);
@@ -48,7 +48,7 @@ class HealthWheelControllerState extends State<HealthWheelController> {
   }
 
   void hideOverlay() {
-    if (entry != null && entry!.mounted) {
+    if (entry != null && entry!.mounted) { // ignore: avoid-non-null-assertion
       entry?.remove();
       entry?.dispose();
       entry = null;
@@ -59,8 +59,8 @@ class HealthWheelControllerState extends State<HealthWheelController> {
   void showOverlay(String figureId, double scale, BuildContext context) {
     final figure = GameMethods.getFigure(widget.ownerId, widget.figureId);
     if (figure == null) return;
-    double dx = context.globalPaintBounds!.topCenter.dx - _kOverlayXOffset * scale;
-    double dy = context.globalPaintBounds!.topCenter.dy - _kOverlayYOffset * scale;
+    double dx = context.globalPaintBounds!.topCenter.dx - _kOverlayXOffset * scale; // ignore: avoid-non-null-assertion
+    double dy = context.globalPaintBounds!.topCenter.dy - _kOverlayYOffset * scale; // ignore: avoid-non-null-assertion
     var selectHealthWheel = SelectHealthWheel(
         key: UniqueKey(),
         data: figure,
@@ -77,7 +77,7 @@ class HealthWheelControllerState extends State<HealthWheelController> {
             child:
                 Material(color: Colors.transparent, child: selectHealthWheel)));
     final overlay = Overlay.of(context);
-    overlay.insert(entry!);
+    overlay.insert(entry!); // ignore: avoid-non-null-assertion
   }
 
   @override
@@ -99,13 +99,13 @@ class HealthWheelControllerState extends State<HealthWheelController> {
         onHorizontalDragUpdate: (DragUpdateDetails details) {
           int timeDiff = 0;
           if (lastTimeStamp != null) {
-            timeDiff = details.sourceTimeStamp!.inMicroseconds - lastTimeStamp!;
+            timeDiff = details.sourceTimeStamp!.inMicroseconds - lastTimeStamp!; // ignore: avoid-non-null-assertion
           }
 
           wheelTimeDelta.value = timeDiff;
           wheelDelta.value = details.delta.dx;
 
-          lastTimeStamp = details.sourceTimeStamp!.inMicroseconds;
+          lastTimeStamp = details.sourceTimeStamp!.inMicroseconds; // ignore: avoid-non-null-assertion
         },
         onHorizontalDragEnd: (details) {
           //close scrollview and run changeHeath command

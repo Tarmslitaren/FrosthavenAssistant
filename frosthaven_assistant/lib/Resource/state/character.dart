@@ -2,8 +2,8 @@ part of 'game_state.dart';
 // ignore_for_file: library_private_types_in_public_api
 
 class Character extends ListItemData {
-  late final CharacterState characterState;
-  late final CharacterClass characterClass;
+  late final CharacterState characterState; // ignore: avoid-late-keyword
+  late final CharacterClass characterClass; // ignore: avoid-late-keyword
 
   Character(this.characterState, this.characterClass) {
     id = GameMethods.isObjectiveOrEscort(characterClass)
@@ -108,7 +108,7 @@ class Character extends ListItemData {
   CharacterClass? _getClass(String id, String? edition, {GameData? gameData}) {
     final modelData = (gameData ?? getIt<GameData>()).modelData.value;
     for (String key in modelData.keys) {
-      final item = modelData[key]!.characters.firstWhereOrNull((item) {
+      final item = modelData[key]!.characters.firstWhereOrNull((item) { // ignore: avoid-non-null-assertion
         return item.id == id && (edition == null || edition == item.edition);
       });
       if (item != null) {

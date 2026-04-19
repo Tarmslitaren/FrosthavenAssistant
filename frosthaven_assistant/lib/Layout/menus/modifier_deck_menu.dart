@@ -79,8 +79,8 @@ class ModifierDeckMenu extends StatefulWidget {
 }
 
 class ModifierDeckMenuState extends State<ModifierDeckMenu> {
-  late final GameState _gameState;
-  late final Settings _settings;
+  late final GameState _gameState; // ignore: avoid-late-keyword
+  late final Settings _settings; // ignore: avoid-late-keyword
   final scrollController = ScrollController();
 
   bool isRevealed(ModifierCard item) {
@@ -158,8 +158,10 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
               ? ReorderableColumn(
                   needsLongPressDraggable: true,
                   scrollController: scrollController,
-                  scrollAnimationDuration: const Duration(milliseconds: ModifierDeckMenu._kReorderAnimationMs),
-                  reorderAnimationDuration: const Duration(milliseconds: ModifierDeckMenu._kReorderAnimationMs),
+                  scrollAnimationDuration: const Duration(
+                      milliseconds: ModifierDeckMenu._kReorderAnimationMs),
+                  reorderAnimationDuration: const Duration(
+                      milliseconds: ModifierDeckMenu._kReorderAnimationMs),
                   buildDraggableFeedback: defaultBuildDraggableFeedback,
                   onReorder: (index, dropIndex) {
                     setState(() {
@@ -171,11 +173,14 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                           gameState: _gameState));
                     });
                   },
-                  children: generateList(list, allOpen, name), // ignore: avoid-returning-widgets, list-returning helper for ListView children
+                  children: generateList(list, allOpen,
+                      name), // ignore: avoid-returning-widgets, list-returning helper for ListView children
                 )
               : ListView(
                   controller: ScrollController(),
-                  children: generateList(list, allOpen, name).reversed.toList(), // ignore: avoid-returning-widgets, list-returning helper for ListView children
+                  children: generateList(list, allOpen, name)
+                      .reversed
+                      .toList(), // ignore: avoid-returning-widgets, list-returning helper for ListView children
                 ),
         ));
   }
@@ -280,19 +285,23 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
           return Container(
               constraints: BoxConstraints(
                   maxWidth: screenSize.width,
-                  maxHeight: screenSize.height * ModifierDeckMenu._kMaxHeightRatio),
+                  maxHeight:
+                      screenSize.height * ModifierDeckMenu._kMaxHeightRatio),
               child: Card(
                   color: Colors.transparent,
                   child: Stack(children: [
                     Column(mainAxisSize: MainAxisSize.max, children: [
                       Container(
                           width: screenSize.width, //need some width to fill out
-                          margin: const EdgeInsets.all(ModifierDeckMenu._kHeaderMargin),
+                          margin: const EdgeInsets.all(
+                              ModifierDeckMenu._kHeaderMargin),
                           decoration: const BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(ModifierDeckMenu._kHeaderBorderRadius),
-                                  topRight: Radius.circular(ModifierDeckMenu._kHeaderBorderRadius))),
+                                  topLeft: Radius.circular(
+                                      ModifierDeckMenu._kHeaderBorderRadius),
+                                  topRight: Radius.circular(
+                                      ModifierDeckMenu._kHeaderBorderRadius))),
                           child: Wrap(
                               crossAxisAlignment: WrapCrossAlignment.center,
                               runSpacing: 0,
@@ -384,7 +393,10 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       imbuement > 0 ? "Remove Imbue" : "Imbue",
                                     ),
                                   ),
-                                if (imbuement != ModifierDeckMenu._kAdvancedImbuementLevel && monsterDeck)
+                                if (imbuement !=
+                                        ModifierDeckMenu
+                                            ._kAdvancedImbuementLevel &&
+                                    monsterDeck)
                                   TextButton(
                                     onPressed: () {
                                       _gameState.action(AMDImbue2Command(
@@ -396,8 +408,8 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                     characterHail != null)
                                   TextButton(
                                     onPressed: () {
-                                      _gameState
-                                          .action(AddPerkCommand("Hail", ModifierDeckMenu._kHailPerkIndex));
+                                      _gameState.action(AddPerkCommand("Hail",
+                                          ModifierDeckMenu._kHailPerkIndex));
                                     },
                                     child: Text(
                                       hasHailPerk
@@ -409,8 +421,10 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                     !_settings.showCharacterAMD.value)
                                   TextButton(
                                     onPressed: () {
-                                      _gameState.action(
-                                          AddPerkCommand("Cassandra", ModifierDeckMenu._kCassandraPerkIndex));
+                                      _gameState.action(AddPerkCommand(
+                                          "Cassandra",
+                                          ModifierDeckMenu
+                                              ._kCassandraPerkIndex));
                                     },
                                     child: Text(
                                       hasCassandraPerk
@@ -451,13 +465,11 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                           ? _gameState.action(
                                               RemoveCSSanctuaryDonationCommand(
                                                   widget.name,
-                                                  gameState:
-                                                      _gameState))
+                                                  gameState: _gameState))
                                           : _gameState.action(
                                               DonateCSSanctuaryCommand(
                                                   widget.name,
-                                                  gameState:
-                                                      _gameState));
+                                                  gameState: _gameState));
                                     },
                                     child: Text(donatedCS
                                         ? "Remove\nDonation"
@@ -470,8 +482,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                             _gameState.action(
                                                 RemoveCSPartyCardCommand(
                                                     widget.name,
-                                                    gameState:
-                                                        _gameState));
+                                                    gameState: _gameState));
                                           },
                                           child: Text("Remove\nParty Card:"),
                                         )
@@ -481,8 +492,12 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                           children: [
                                               Text("Add Party\n Card:"),
                                               ...List.generate(
-                                                ModifierDeckMenu._kPartyButtonCount,
-                                                (i) => _PartyButton(nr: i + 1, gameState: _gameState, name: widget.name), // ignore: avoid-returning-widgets, widget generator lambda
+                                                ModifierDeckMenu
+                                                    ._kPartyButtonCount,
+                                                (i) => _PartyButton(
+                                                    nr: i + 1,
+                                                    gameState: _gameState,
+                                                    name: widget.name),
                                               ), //todo: make own menu for this, just like for gh2e special
                                             ]),
                                 if (isCharacter &&
@@ -559,7 +574,8 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       command: ChangeEnfeebleCommand.deck(
                                           deck, "in-enfeeble",
                                           gameState: _gameState),
-                                      maxValue: ModifierDeckMenu._kMaxBlessCurse,
+                                      maxValue:
+                                          ModifierDeckMenu._kMaxBlessCurse,
                                       image:
                                           "assets/images/abilities/enfeeble_old.png",
                                       extraImage: hasMoreThanOneEnfeeble
@@ -577,7 +593,8 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       command: ChangeEmpowerCommand.deck(
                                           deck, "in-empower",
                                           gameState: _gameState),
-                                      maxValue: ModifierDeckMenu._kMaxBlessCurse,
+                                      maxValue:
+                                          ModifierDeckMenu._kMaxBlessCurse,
                                       image:
                                           "assets/images/abilities/empower_old.png",
                                       extraImage: hasMoreThanOneEmpower
@@ -594,7 +611,8 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       command: ChangeEmpowerCommand.deck(
                                           deck, "rm-empower",
                                           gameState: _gameState),
-                                      maxValue: ModifierDeckMenu._kMaxRuinmawEmpower,
+                                      maxValue:
+                                          ModifierDeckMenu._kMaxRuinmawEmpower,
                                       image:
                                           "assets/images/abilities/empower_old.png",
                                       extraImage: hasMoreThanOneEmpower
@@ -612,7 +630,8 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       command: ChangeEmpowerCommand.deck(
                                           deck, "vi-empower",
                                           gameState: _gameState),
-                                      maxValue: ModifierDeckMenu._kMaxBlessCurse,
+                                      maxValue:
+                                          ModifierDeckMenu._kMaxBlessCurse,
                                       image:
                                           "assets/images/abilities/empower.png",
                                       extraImage: hasMoreThanOneEmpower
@@ -631,7 +650,8 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       command: ChangeEmpowerCommand.deck(
                                           deck, "vi-gr-empower",
                                           gameState: _gameState),
-                                      maxValue: ModifierDeckMenu._kMaxVimthreaderGrEmpower,
+                                      maxValue: ModifierDeckMenu
+                                          ._kMaxVimthreaderGrEmpower,
                                       image:
                                           "assets/images/abilities/greater-empower.png",
                                       showTotalValue: true,
@@ -646,7 +666,8 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       command: ChangeEnfeebleCommand.deck(
                                           deck, "vi-enfeeble",
                                           gameState: _gameState),
-                                      maxValue: ModifierDeckMenu._kMaxBlessCurse,
+                                      maxValue:
+                                          ModifierDeckMenu._kMaxBlessCurse,
                                       image:
                                           "assets/images/abilities/enfeeble.png",
                                       extraImage: hasMoreThanOneEnfeeble
@@ -664,7 +685,8 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       command: ChangeEnfeebleCommand.deck(
                                           deck, "vi-gr-enfeeble",
                                           gameState: _gameState),
-                                      maxValue: ModifierDeckMenu._kMaxVimthreaderGrEmpower,
+                                      maxValue: ModifierDeckMenu
+                                          ._kMaxVimthreaderGrEmpower,
                                       image:
                                           "assets/images/abilities/greater-enfeeble.png",
                                       showTotalValue: true,
@@ -681,7 +703,9 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       command: ChangeEnfeebleCommand.deck(
                                           deck, "li-enfeeble",
                                           gameState: _gameState),
-                                      maxValue: ModifierDeckMenu._kMaxLifespeakerEnfeeble,
+                                      maxValue:
+                                          ModifierDeckMenu
+                                              ._kMaxLifespeakerEnfeeble,
                                       image:
                                           "assets/images/abilities/enfeeble.png",
                                       extraImage: hasMoreThanOneEnfeeble
@@ -709,8 +733,13 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                   "   Reveal\n    cards:",
                                 ),
                                 ...List.generate(
-                                  min(drawPile.length + 1, ModifierDeckMenu._kMaxRevealButtonNr + 1),
-                                  (i) => _RevealButton(nrOfButtons: drawPile.length, nr: i, gameState: _gameState, name: widget.name), // ignore: avoid-returning-widgets, widget generator lambda
+                                  min(drawPile.length + 1,
+                                      ModifierDeckMenu._kMaxRevealButtonNr + 1),
+                                  (i) => _RevealButton(
+                                      nrOfButtons: drawPile.length,
+                                      nr: i,
+                                      gameState: _gameState,
+                                      name: widget.name),
                                 ),
                               ])),
                       Flexible(
@@ -718,18 +747,21 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          buildList(drawPile, true, false, widget.name), // ignore: avoid-returning-widgets, list-returning helper for Row children
-                          buildList(discardPile, false, true, widget.name) // ignore: avoid-returning-widgets, list-returning helper for Row children
+                          buildList(drawPile, true, false, widget.name),
+                          buildList(discardPile, false, true, widget.name)
                         ],
                       )),
                       Container(
                         height: ModifierDeckMenu._kFooterHeight,
-                        margin: const EdgeInsets.all(ModifierDeckMenu._kHeaderMargin),
+                        margin: const EdgeInsets.all(
+                            ModifierDeckMenu._kHeaderMargin),
                         decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(ModifierDeckMenu._kHeaderBorderRadius),
-                                bottomRight: Radius.circular(ModifierDeckMenu._kHeaderBorderRadius))),
+                                bottomLeft: Radius.circular(
+                                    ModifierDeckMenu._kHeaderBorderRadius),
+                                bottomRight: Radius.circular(
+                                    ModifierDeckMenu._kHeaderBorderRadius))),
                       ),
                     ]),
                     Positioned(
@@ -771,12 +803,18 @@ class Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    double scale = max((screenSize.height / (ModifierDeckMenu._kItemBaseHeight * ModifierDeckMenu._kItemHeightCount)), 1);
+    double scale = max(
+        (screenSize.height /
+            (ModifierDeckMenu._kItemBaseHeight *
+                ModifierDeckMenu._kItemHeightCount)),
+        1);
     final Widget child = revealed
         ? ModifierCardFront(card: data, name: name, scale: scale)
         : ModifierCardRear(scale: scale, name: name);
 
-    return Container(margin: EdgeInsets.all(ModifierDeckMenu._kItemMarginMultiplier * scale), child: child);
+    return Container(
+        margin: EdgeInsets.all(ModifierDeckMenu._kItemMarginMultiplier * scale),
+        child: child);
   }
 }
 
@@ -801,8 +839,8 @@ class _RevealButton extends StatelessWidget {
         child: TextButton(
           child: Text(text),
           onPressed: () {
-            gameState.action(AMDRevealCommand(
-                amount: nr, name: name, gameState: gameState));
+            gameState.action(
+                AMDRevealCommand(amount: nr, name: name, gameState: gameState));
           },
         ));
   }
@@ -826,8 +864,8 @@ class _PartyButton extends StatelessWidget {
         child: TextButton(
           child: Text(nr.toString()),
           onPressed: () {
-            gameState.action(AddCSPartyCardCommand(name, 1,
-                gameState: gameState));
+            gameState
+                .action(AddCSPartyCardCommand(name, 1, gameState: gameState));
           },
         ));
   }

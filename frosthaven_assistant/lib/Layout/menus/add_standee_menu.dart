@@ -47,8 +47,8 @@ class AddStandeeMenu extends StatefulWidget {
 }
 
 class AddStandeeMenuState extends State<AddStandeeMenu> {
-  late final GameState _gameState;
-  late final Settings _settings;
+  late final GameState _gameState; // ignore: avoid-late-keyword
+  late final Settings _settings; // ignore: avoid-late-keyword
 
   bool addAsSummon = false;
 
@@ -136,7 +136,7 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
                                 : Colors.black),
                         onChanged: (bool? newValue) {
                           setState(() {
-                            addAsSummon = newValue!;
+                            addAsSummon = newValue!; // ignore: avoid-non-null-assertion
                           });
                         },
                         value: addAsSummon,

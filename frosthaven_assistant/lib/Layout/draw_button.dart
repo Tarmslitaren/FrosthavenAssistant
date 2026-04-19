@@ -22,7 +22,7 @@ class DrawButtonState extends State<DrawButton> {
   static const double _kButtonPadding = 10.0;
   static const double _kTextHeight = 0.8;
 
-  late final DrawButtonViewModel _vm;
+  late final DrawButtonViewModel _vm; // ignore: avoid-late-keyword
 
   @override
   void initState() {

@@ -23,9 +23,9 @@ class DataLoadedNotification extends Notification { // ignore: prefer-match-file
 
 class MainState extends State<MyHomePage>
     with WindowListener, WidgetsBindingObserver {
-  late final Network _network;
-  late final Settings _settings;
-  late final Client _client;
+  late final Network _network; // ignore: avoid-late-keyword
+  late final Settings _settings; // ignore: avoid-late-keyword
+  late final Client _client; // ignore: avoid-late-keyword
 
   @override
   void dispose() {

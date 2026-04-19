@@ -20,7 +20,7 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
   static const double _kDeckBaseHeight = 39.0;
   static const double _kDeckMargin = 4.0;
 
-  late final CharacterAmdsViewModel _vm;
+  late final CharacterAmdsViewModel _vm; // ignore: avoid-late-keyword
   _OpenState _openStateUserIntentPlayTurns = _OpenState.oneOpen;
   _OpenState _openStateUserIntentChooseInit = _OpenState.allOpen;
   _OpenState _lastState = _OpenState.noOpen;
@@ -205,7 +205,7 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
                           ? Container(
                               margin: EdgeInsets.only(top: _kDeckMargin * barScale),
                               child: ModifierDeckWidget(
-                                  name: currentCharacter!.id))
+                                  name: currentCharacter!.id)) // ignore: avoid-non-null-assertion
                           : Column(
                               children: _vm.charsWithPerks
                                   .map((item) => Container(

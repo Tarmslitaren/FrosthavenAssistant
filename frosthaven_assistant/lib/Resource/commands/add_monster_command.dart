@@ -5,13 +5,13 @@ class AddMonsterCommand extends Command {
   final String _name;
   final int? _level;
   final bool _isAlly;
-  late Monster monster;
+  late Monster monster; // ignore: avoid-late-keyword
 
   AddMonsterCommand(this._name, this._level, this._isAlly,
       {required GameState gameState})
       : _gameState = gameState {
     monster =
-        MonsterMethods.createMonster(stateAccess, _name, _level, _isAlly)!;
+        MonsterMethods.createMonster(stateAccess, _name, _level, _isAlly)!; // ignore: avoid-non-null-assertion
   }
 
   @override

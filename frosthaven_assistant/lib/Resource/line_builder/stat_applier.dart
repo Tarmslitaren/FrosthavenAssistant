@@ -157,7 +157,7 @@ class StatApplier {
       }
       data = boss;
     } else {
-      data = isElite ? elite! : normal!;
+      data = isElite ? elite! : normal!; // ignore: avoid-non-null-assertion
     }
     for (String item in data.attributes) {
       //remove size modifiers (only used for immobilize since it's so long it overflows.)
@@ -230,7 +230,7 @@ class StatApplier {
     MonsterStatsModel? normal = level.boss ?? level.normal;
     MonsterStatsModel? elite = level.elite;
     if (lastToken == "attack") {
-      int? calc = StatCalculator.calculateFormula(normal!.attack);
+      int? calc = StatCalculator.calculateFormula(normal!.attack); // ignore: avoid-non-null-assertion
       if (calc != null) {
         normalValue = calc;
       } else {
@@ -269,15 +269,15 @@ class StatApplier {
       }
     } else if (lastToken == "range") {
       if (normal?.range != _kRangeZero) {
-        normalValue = normal!.range;
+        normalValue = normal!.range; // ignore: avoid-non-null-assertion
         if (elite != null) {
           eliteValue = elite.range;
         }
       }
     } else if (lastToken == "move") {
-      normalValue = StatCalculator.calculateFormula(normal!.move)!;
+      normalValue = StatCalculator.calculateFormula(normal!.move)!; // ignore: avoid-non-null-assertion
       if (elite != null) {
-        eliteValue = eliteValue = StatCalculator.calculateFormula(elite.move)!;
+        eliteValue = eliteValue = StatCalculator.calculateFormula(elite.move)!; // ignore: avoid-non-null-assertion
       }
     } else if (lastToken == "shield") {
       int? value = normalTokens["shield"];
@@ -321,7 +321,7 @@ class StatApplier {
           newStartOfLine += "|$item";
           //add nr if applicable
           String key = item.substring(1, item.length - 1);
-          int value = normalTokens[key]!;
+          int value = normalTokens[key]!; // ignore: avoid-non-null-assertion
           if (value > 0) {
             newStartOfLine += "$value";
           }
@@ -341,7 +341,7 @@ class StatApplier {
       retVal.add(newStartOfLine);
 
       int eliteResult =
-          StatCalculator.calculateFormula("$formula+$eliteValue")!;
+          StatCalculator.calculateFormula("$formula+$eliteValue")!; // ignore: avoid-non-null-assertion
       if (eliteResult < _kResultFloor) {
         eliteResult = _kResultFloor;
       }
@@ -351,7 +351,7 @@ class StatApplier {
 
         //add nr if applicable
         String key = item.substring(1, item.length - 1);
-        int value = eliteTokens[key]!;
+        int value = eliteTokens[key]!; // ignore: avoid-non-null-assertion
         if (value > 0) {
           eliteString += "$value";
         }

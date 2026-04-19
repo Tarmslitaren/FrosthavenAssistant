@@ -105,7 +105,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
 }
 
 class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
-  late final MonsterAbilityCardViewModel _vm;
+  late final MonsterAbilityCardViewModel _vm; // ignore: avoid-late-keyword
 
   @override
   void initState() {
@@ -151,7 +151,7 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                 duration: const Duration(milliseconds: MonsterAbilityCardWidget._kAnimationDurationMs),
                 transitionBuilder: _transitionBuilder,
                 layoutBuilder: (widget, list) => Stack(
-                  children: [widget!, ...list],
+                  children: [widget!, ...list], // ignore: avoid-non-null-assertion
                 ),
                 child: showFront && card != null
                     ? MonsterAbilityCardFront(

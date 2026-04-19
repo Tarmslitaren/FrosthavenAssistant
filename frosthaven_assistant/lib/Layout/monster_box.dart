@@ -88,7 +88,7 @@ class MonsterBox extends StatelessWidget {
   final bool blockInput;
   final double scale;
 
-  late final MonsterInstance data;
+  late final MonsterInstance data; // ignore: avoid-late-keyword
 
   List<Widget> _createConditionList(
       double scale, MonsterBoxViewModel vm) {

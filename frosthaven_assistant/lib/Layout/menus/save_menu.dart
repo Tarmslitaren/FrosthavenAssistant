@@ -28,8 +28,8 @@ class SaveMenuState extends State<SaveMenu> {
 
   // This list holds the data for the list view
   final List<String> _saves = [];
-  late final Settings _settings;
-  late final GameState _gameState;
+  late final Settings _settings; // ignore: avoid-late-keyword
+  late final GameState _gameState; // ignore: avoid-late-keyword
   final ScrollController _scrollController = ScrollController();
 
   @override

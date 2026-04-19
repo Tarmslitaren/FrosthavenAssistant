@@ -3,7 +3,7 @@ import '../state/game_state.dart';
 class BadOmenCommand extends Command {
   static const int _kBadOmenIncrement = 6;
 
-  late final bool allies;
+  final bool allies;
   final GameState _gameState;
 
   BadOmenCommand(this.allies, {required GameState gameState})

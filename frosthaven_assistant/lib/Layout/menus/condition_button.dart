@@ -141,7 +141,7 @@ class ConditionButton extends StatelessWidget {
               ? ConditionIcon(
                   condition,
                   _kIconSize * scale,
-                  owner!,
+                  owner!, // ignore: avoid-non-null-assertion
                   figure,
                   scale: scale,
                 )

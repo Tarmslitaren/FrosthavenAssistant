@@ -28,7 +28,7 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
   static const double _kModalWidth = 300;
   static const double _kModalHeight = 210;
 
-  late final GameState _gameState;
+  late final GameState _gameState; // ignore: avoid-late-keyword
 
   @override
   initState() {

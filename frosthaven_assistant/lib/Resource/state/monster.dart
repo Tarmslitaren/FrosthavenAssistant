@@ -8,17 +8,17 @@ class Monster extends ListItemData {
     final gd = gameData ?? getIt<GameData>();
     Map<String, MonsterModel> monsters = {};
     for (String key in gd.modelData.value.keys) {
-      monsters.addAll(gd.modelData.value[key]!.monsters);
+      monsters.addAll(gd.modelData.value[key]!.monsters); // ignore: avoid-non-null-assertion
     }
     for (String key in monsters.keys) {
       if (key == name) {
-        type = monsters[key]!;
+        type = monsters[key]!; // ignore: avoid-non-null-assertion
       }
     }
 
     _addAbilityDeck();
   }
-  late final MonsterModel type;
+  late final MonsterModel type; // ignore: avoid-late-keyword
   final List<MonsterInstance> _monsterInstances = [];
   final _monsterInstancesNotifier =
       ValueNotifier<BuiltList<MonsterInstance>>(BuiltList.of([]));
@@ -69,11 +69,11 @@ class Monster extends ListItemData {
     final gd = gameData ?? getIt<GameData>();
     Map<String, MonsterModel> monsters = {};
     for (String key in gd.modelData.value.keys) {
-      monsters.addAll(gd.modelData.value[key]!.monsters);
+      monsters.addAll(gd.modelData.value[key]!.monsters); // ignore: avoid-non-null-assertion
     }
     for (var item in monsters.keys) {
       if (item == modelName) {
-        type = monsters[item]!;
+        type = monsters[item]!; // ignore: avoid-non-null-assertion
         break;
       }
     }

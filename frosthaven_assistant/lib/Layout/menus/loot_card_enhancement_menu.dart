@@ -41,7 +41,7 @@ class LootCardEnhancementMenu extends StatefulWidget {
 }
 
 class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
-  late final GameState _gameState;
+  late final GameState _gameState; // ignore: avoid-late-keyword
 
   @override
   initState() {
@@ -248,7 +248,7 @@ class _LootCardRow extends StatelessWidget {
       children: List.generate(
         count,
         (i) => _EnhancementCounterButton( // ignore: avoid-returning-widgets, widget generator lambda
-            card: getCard(type, start + i)!, gameState: gameState),
+            card: getCard(type, start + i)!, gameState: gameState), // ignore: avoid-non-null-assertion
       ),
     );
   }

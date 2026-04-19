@@ -34,7 +34,7 @@ class RemovedModifierCardMenuState extends State<RemovedModifierCardMenu> {
   static const double _kCloseButtonLeft = 20.0;
   static const double _kItemMargin = 2.0;
 
-  late final GameState _gameState;
+  late final GameState _gameState; // ignore: avoid-late-keyword
   final scrollController = ScrollController();
 
   List<Widget> generateList(List<ModifierCard> inputList, String name) {

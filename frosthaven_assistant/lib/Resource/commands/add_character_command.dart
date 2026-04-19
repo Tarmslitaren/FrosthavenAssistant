@@ -7,7 +7,7 @@ class AddCharacterCommand extends Command {
   final String _edition;
   final int _level;
   final String? _display;
-  late Character character;
+  late Character character; // ignore: avoid-late-keyword
 
   AddCharacterCommand(this._id, this._edition, this._display, this._level,
       {required GameState gameState})

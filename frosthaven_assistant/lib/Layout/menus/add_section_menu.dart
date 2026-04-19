@@ -31,9 +31,9 @@ class AddSectionMenuState extends State<AddSectionMenu> {
   static const int _kNumpadMaxLength = 3;
   // This list holds the data for the list view
   List<String> _foundScenarios = [];
-  late final GameState _gameState;
-  late final Settings _settings;
-  late final GameData _gameData;
+  late final GameState _gameState; // ignore: avoid-late-keyword
+  late final Settings _settings; // ignore: avoid-late-keyword
+  late final GameData _gameData; // ignore: avoid-late-keyword
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
 
@@ -69,14 +69,14 @@ class AddSectionMenuState extends State<AddSectionMenu> {
     List<String> results = [];
     if (enteredKeyword.isEmpty) {
       // if the search field is empty or only contains white-space, we'll display all
-      results = _gameData.modelData.value[_gameState.currentCampaign.value]!
-          .scenarios[_gameState.scenario.value]!.sections
+      results = _gameData.modelData.value[_gameState.currentCampaign.value]! // ignore: avoid-non-null-assertion
+          .scenarios[_gameState.scenario.value]!.sections // ignore: avoid-non-null-assertion
           .map((e) => e.name)
           .toList();
       results = results.where((element) => !element.contains("spawn")).toList();
     } else {
-      results = _gameData.modelData.value[_gameState.currentCampaign.value]!
-          .scenarios[_gameState.scenario.value]!.sections
+      results = _gameData.modelData.value[_gameState.currentCampaign.value]! // ignore: avoid-non-null-assertion
+          .scenarios[_gameState.scenario.value]!.sections // ignore: avoid-non-null-assertion
           .map((e) => e.name)
           .toList()
           .where((user) =>

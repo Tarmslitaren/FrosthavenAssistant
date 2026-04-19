@@ -1,8 +1,8 @@
 import '../state/game_state.dart';
 
 class SetLevelCommand extends Command {
-  late final int level;
-  late final String? monsterId;
+  final int level;
+  final String? monsterId;
 
   SetLevelCommand(this.level, this.monsterId);
 

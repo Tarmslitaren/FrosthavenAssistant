@@ -123,7 +123,7 @@ class LineBuilder {
 
   //get rid of this if it doesn't really help
   static double getTopPaddingForStyle(TextStyle style) {
-    double height = style.fontSize!;
+    double height = style.fontSize!; // ignore: avoid-non-null-assertion
     bool markazi = style.fontFamily == "Markazi";
 
     if (!markazi && style.height == _kLineHeightGH) {
@@ -602,7 +602,7 @@ class LineBuilder {
             if (left) {
               RegExp regEx = RegExp(
                   r"(?=.*[a-z])"); //black versions exist for all tokens containing lower case letters
-              if (regEx.hasMatch(tokens[iconToken]!)) {
+              if (regEx.hasMatch(tokens[iconToken]!)) { // ignore: avoid-non-null-assertion
                 iconGfx += "_black";
               }
             }
@@ -622,16 +622,16 @@ class LineBuilder {
                       lastImage,
                       Positioned(
                           width: frosthavenStyle
-                              ? styleToUse.fontSize! * _kUseFHWidthRatio + scale * _kUseFHWidthAdd
-                              : styleToUse.fontSize! * _kUseGHRatio,
+                              ? styleToUse.fontSize! * _kUseFHWidthRatio + scale * _kUseFHWidthAdd // ignore: avoid-non-null-assertion
+                              : styleToUse.fontSize! * _kUseGHRatio, // ignore: avoid-non-null-assertion
                           bottom: 0,
                           left: frosthavenStyle ? _kUseLeft * scale : 0.0,
                           //why left?!
 
                           child: Image(
                             height: frosthavenStyle
-                                ? styleToUse.fontSize! * _kUseFHHeightRatio
-                                : styleToUse.fontSize! * _kUseGHRatio,
+                                ? styleToUse.fontSize! * _kUseFHHeightRatio // ignore: avoid-non-null-assertion
+                                : styleToUse.fontSize! * _kUseGHRatio, // ignore: avoid-non-null-assertion
                             fit: BoxFit.fitHeight,
                             filterQuality: FilterQuality.medium,
                             semanticLabel: iconGfx,
@@ -648,7 +648,7 @@ class LineBuilder {
                       style: normalStyle)));
             } else {
               double height = _getIconHeight(
-                  iconToken, styleToUse.fontSize!, frosthavenStyle);
+                  iconToken, styleToUse.fontSize!, frosthavenStyle); // ignore: avoid-non-null-assertion
               if (addText) {
                 String? iconTokenText = tokens[iconToken];
                 if (frosthavenStyle) {

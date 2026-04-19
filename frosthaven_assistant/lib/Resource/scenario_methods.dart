@@ -105,8 +105,8 @@ class ScenarioMethods {
       if (scenario != "custom") {
         LootDeckModel? lootDeckModel = gd
             .modelData
-            .value[gs.currentCampaign.value]!
-            .scenarios[scenario]!
+            .value[gs.currentCampaign.value]! // ignore: avoid-non-null-assertion
+            .scenarios[scenario]! // ignore: avoid-non-null-assertion
             .lootDeck;
         lootDeckModel != null
             ? gs._lootDeck = LootDeck(lootDeckModel, gs.lootDeck)

@@ -75,7 +75,7 @@ class GameState extends ActionHandler {
   final Map<Elements, ElementState> _elementState = HashMap();
   Set<String> _unlockedClasses = {};
 
-  late LootDeck _lootDeck = LootDeck.empty(); //loot deck for current scenario
+  late LootDeck _lootDeck = LootDeck.empty(); //loot deck for current scenario // ignore: avoid-late-keyword
   final ModifierDeck _modifierDeck = ModifierDeck("");
   final ModifierDeck _modifierDeckAllies = ModifierDeck("allies");
   SanctuaryDeck _sanctuaryDeck = SanctuaryDeck();

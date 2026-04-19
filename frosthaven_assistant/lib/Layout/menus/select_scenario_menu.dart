@@ -36,9 +36,9 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
 
   // This list holds the data for the list view
   List<String> _foundScenarios = [];
-  late final GameState _gameState;
-  late final GameData _gameData;
-  late final Settings _settings;
+  late final GameState _gameState; // ignore: avoid-late-keyword
+  late final GameData _gameData; // ignore: avoid-late-keyword
+  late final Settings _settings; // ignore: avoid-late-keyword
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
 
@@ -90,7 +90,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
       _gameState.action(SetCampaignCommand(campaign));
     }
     _foundScenarios =
-        modelData[_gameState.currentCampaign.value]!.scenarios.keys.toList();
+        modelData[_gameState.currentCampaign.value]!.scenarios.keys.toList(); // ignore: avoid-non-null-assertion
 
     //special hack for solo BladeSwarm and Vanquisher
     if (campaign == "Solo" || campaign == "Trail of Ashes") {
@@ -152,12 +152,12 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
     final String campaign = _gameState.currentCampaign.value;
     if (enteredKeyword.isEmpty) {
       // if the search field is empty or only contains white-space, we'll display all
-      results = _gameData.modelData.value[campaign]!.scenarios.keys.toList();
+      results = _gameData.modelData.value[campaign]!.scenarios.keys.toList(); // ignore: avoid-non-null-assertion
       if (campaign != "Solo") {
         results.insert(0, "custom");
       }
     } else {
-      results = _gameData.modelData.value[campaign]!.scenarios.keys
+      results = _gameData.modelData.value[campaign]!.scenarios.keys // ignore: avoid-non-null-assertion
           .toList()
           .where((user) =>
               user.toLowerCase().contains(enteredKeyword.toLowerCase()))
@@ -345,7 +345,7 @@ class _SoloTile extends StatelessWidget {
 
     String text = strings[_kSoloTextIndex];
     for (String key in gameData.modelData.value.keys) {
-      for (CharacterClass character in gameData.modelData.value[key]!.characters) {
+      for (CharacterClass character in gameData.modelData.value[key]!.characters) { // ignore: avoid-non-null-assertion
         if (character.name == characterName) {
           if (character.hidden && !gameState.unlockedClasses.contains(character.id)) {
             text = "???";

@@ -45,11 +45,11 @@ class SelectHealthWheelState extends State<SelectHealthWheel> {
   static const double _kSelectedFontSize = 18.0;
   static const double _kUnselectedFontSize = 16.0;
 
-  late int selected;
-  late final FixedExtentScrollController scrollController;
-  late final GameState _gameState;
+  late int selected; // ignore: avoid-late-keyword
+  late final FixedExtentScrollController scrollController; // ignore: avoid-late-keyword
+  late final GameState _gameState; // ignore: avoid-late-keyword
   double currentScrollOffset = 0;
-  late int itemIndex;
+  late int itemIndex; // ignore: avoid-late-keyword
   final double itemExtent = 25;
   bool scrollInited = false;
 

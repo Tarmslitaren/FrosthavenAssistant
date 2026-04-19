@@ -48,12 +48,12 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
   static const int _kStandeesRow2Threshold = _kButtonRowSize;
   static const int _kStandeesRow3Threshold = _kButtonRowSize * 2;
 
-  late final GameState _gameState;
-  late final Settings _settings;
+  late final GameState _gameState; // ignore: avoid-late-keyword
+  late final Settings _settings; // ignore: avoid-late-keyword
 
   bool addAsSummon = false;
   int currentMonsterIndex = 0;
-  late final int startCommandIndex;
+  late final int startCommandIndex; // ignore: avoid-late-keyword
 
   List<List<int>> initialEliteAdded = [];
   List<List<int>> initialNormalAdded = [];
@@ -367,7 +367,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                                           : Colors.black),
                                   onChanged: (bool? newValue) {
                                     setState(() {
-                                      addAsSummon = newValue!;
+                                      addAsSummon = newValue!; // ignore: avoid-non-null-assertion
                                     });
                                   },
                                   value: addAsSummon,
