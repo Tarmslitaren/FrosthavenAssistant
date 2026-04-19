@@ -6,6 +6,7 @@ import 'package:frosthaven_assistant/Layout/top_bar.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../Model/campaign.dart';
+import '../Model/room.dart';
 import '../Resource/game_data.dart';
 import '../Resource/scaling.dart';
 import '../Resource/settings.dart';
@@ -15,6 +16,7 @@ import 'bottom_bar.dart';
 import 'character_amds_widget.dart';
 import 'loot_deck_widget.dart';
 import 'main_list.dart';
+import 'menus/auto_add_standee_menu.dart';
 import 'menus/main_menu.dart';
 import 'view_models/main_scaffold_view_model.dart';
 
@@ -29,7 +31,6 @@ class MainScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final settings = this.settings ?? getIt<Settings>();
-    setupMoreGetIt(context);
 
     return ValueListenableBuilder<double>(
         valueListenable: settings.userScalingBars,
@@ -84,6 +85,33 @@ class ToastNotifier extends StatelessWidget {
   }
 }
 
+class AutoAddDialogTrigger extends StatelessWidget {
+  const AutoAddDialogTrigger({super.key, this.gameState});
+
+  final GameState? gameState;
+
+  @override
+  Widget build(BuildContext context) {
+    final gameState = this.gameState ?? getIt<GameState>();
+    return ValueListenableBuilder<List<RoomMonsterData>?>(
+        valueListenable: gameState.pendingAutoAddDialog,
+        builder: (context, monsterData, child) {
+          if (monsterData != null) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (context.mounted) {
+                gameState.pendingAutoAddDialog.value = null;
+                openDialogWithDismissOption(
+                    context,
+                    AutoAddStandeeMenu(monsterData: monsterData),
+                    false);
+              }
+            });
+          }
+          return const SizedBox(width: 0, height: 0);
+        });
+  }
+}
+
 class MainScaffoldBody extends StatelessWidget {
   static const double _kBarBottom = 4.0;
   static const double _kBarLeft = 5.0;
@@ -114,6 +142,7 @@ class MainScaffoldBody extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 )),
               const ToastNotifier(),
+              const AutoAddDialogTrigger(),
               ValueListenableBuilder<Map<String, CampaignModel>>(
                   valueListenable: vm.modelData,
                   builder: (context, value, child) {

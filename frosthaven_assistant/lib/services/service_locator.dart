@@ -25,8 +25,3 @@ void setupGetIt() {
   getIt.registerLazySingleton<Connection>(() => Connection());
   getIt.registerLazySingleton<Client>(() => Client());
 }
-
-void setupMoreGetIt(BuildContext context) {
-  getIt.allowReassignment = true;
-  getIt.registerLazySingleton<BuildContext>(() => context);
-}

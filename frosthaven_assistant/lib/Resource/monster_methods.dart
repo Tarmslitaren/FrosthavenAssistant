@@ -340,14 +340,7 @@ class MonsterMethods {
         }
       } else {
         if (roomMonsterData.isNotEmpty) {
-          if (getIt.isRegistered<BuildContext>()) {
-            openDialogWithDismissOption(
-                getIt<BuildContext>(),
-                AutoAddStandeeMenu(
-                  monsterData: roomMonsterData,
-                ),
-                false);
-          }
+          gs.pendingAutoAddDialog.value = roomMonsterData;
         }
       }
     }

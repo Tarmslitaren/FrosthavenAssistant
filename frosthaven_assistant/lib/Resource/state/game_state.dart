@@ -8,11 +8,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
-import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Layout/main_list.dart';
-import '../../Layout/menus/auto_add_standee_menu.dart';
 import '../../Model/character_class.dart';
 import '../../Model/monster.dart';
 import '../../Model/monster_ability.dart';
@@ -64,6 +62,7 @@ class GameState extends ActionHandler {
   final _scenario = ValueNotifier<String>("");
   final _toastMessage = ValueNotifier<String>("");
   final _showAllyDeck = ValueNotifier<bool>(false);
+  final pendingAutoAddDialog = ValueNotifier<List<RoomMonsterData>?>(null);
 
   List<String> _scenarioSectionsAdded = [];
   List<SpecialRule> _scenarioSpecialRules = [];

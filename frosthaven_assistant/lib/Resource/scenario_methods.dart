@@ -395,9 +395,7 @@ class ScenarioMethods {
     if (initMessage.isNotEmpty && (settings ?? getIt<Settings>()).showReminders.value) {
       gs._toastMessage.value += initMessage;
     } else {
-      if (getIt.isRegistered<BuildContext>()) {
-        ScaffoldMessenger.of(getIt<BuildContext>()).hideCurrentSnackBar();
-      }
+      gs._toastMessage.value = "";
     }
   }
 }

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
@@ -13,21 +13,6 @@ void main() {
     test('loading notifier is initialized as ValueNotifier<bool>',
         () {
       expect(loading, isA<ValueNotifier<bool>>());
-    });
-
-    testWidgets('setupMoreGetIt registers BuildContext',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Builder(
-            builder: (context) {
-              setupMoreGetIt(context);
-              return const SizedBox();
-            },
-          ),
-        ),
-      );
-      expect(find.byType(MaterialApp), findsOneWidget);
     });
   });
 }
