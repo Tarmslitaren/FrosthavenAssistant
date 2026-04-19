@@ -326,9 +326,9 @@ class StatusMenuState extends State<StatusMenu> {
                       Text(name,
                           style: getTitleTextStyle(getModalMenuScale(context))),
                       if (figure is MonsterInstance)
-                        ValueListenableBuilder<int>(
-                            valueListenable: _gameState.updateList,
-                            builder: (context, value, child) {
+                        ListenableBuilder(
+                            listenable: _gameState.updateList,
+                            builder: (context, child) {
                               //handle case when health is changed to zero: don't instantiate monster box
                               if (GameMethods.getFigure(ownerId, figureId) ==
                                   null) {

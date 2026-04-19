@@ -37,10 +37,10 @@ abstract class ChangeStatCommand extends Command {
               }
               if (roundState == RoundState.playTurns) {
                 Future.delayed(const Duration(milliseconds: 600), () {
-                  gameState.updateList.value++;
+                  gameState.updateList.notify();
                 });
               } else {
-                gameState.updateList.value++;
+                gameState.updateList.notify();
               }
             }
             break;
@@ -49,7 +49,7 @@ abstract class ChangeStatCommand extends Command {
       } else if (item is Character) {
         //handle character death
         if (item.characterState.health.value <= 0) {
-          gameState.updateList.value++;
+          gameState.updateList.notify();
         }
 
         //handle summon death
@@ -65,13 +65,13 @@ abstract class ChangeStatCommand extends Command {
               if (item.characterState.summonList.isEmpty) {
                 if (gameState.roundState.value == RoundState.playTurns) {
                   Future.delayed(const Duration(milliseconds: 600), () {
-                    gameState.updateList.value++;
+                    gameState.updateList.notify();
                   });
                 } else {
-                  gameState.updateList.value++;
+                  gameState.updateList.notify();
                 }
               } else {
-                gameState.updateList.value++;
+                gameState.updateList.notify();
               }
               break;
             }
@@ -83,7 +83,7 @@ abstract class ChangeStatCommand extends Command {
 
   @override
   void onUndo() {
-    gameState.updateList.value++;
+    gameState.updateList.notify();
   }
 
   @override

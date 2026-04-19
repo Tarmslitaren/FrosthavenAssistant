@@ -96,7 +96,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
         setState(() {
           WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-            _gameState.updateList.value++;
+            _gameState.updateList.notify();
           });
 
           currentMonsterIndex++; //next set

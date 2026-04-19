@@ -15,7 +15,6 @@ class MonsterWidget extends StatefulWidget {
 
   final Monster data;
   final GameState? gameState;
-  final updateList = ValueNotifier<int>(0);
 
   @override
   MonsterWidgetState createState() => MonsterWidgetState();
@@ -143,9 +142,9 @@ class MonsterWidgetState extends State<MonsterWidget> {
     double scale = getScaleByReference(context);
     double height = scale * _kScaledHeight;
 
-    return ValueListenableBuilder<int>(
-        valueListenable: _vm.updateList,
-        builder: (context, value, child) {
+    return ListenableBuilder(
+        listenable: _vm.updateList,
+        builder: (context, child) {
           return RepaintBoundary(
               child: Column(mainAxisSize: MainAxisSize.max, children: [
             ColorFiltered(

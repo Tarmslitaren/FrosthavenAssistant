@@ -140,7 +140,7 @@ class GameState {
 
   ValueNotifier<int> get commandIndex => _actionHandler.commandIndex;
   ValueNotifier<GameEvent> get lastEvent => _actionHandler.lastEvent;
-  ValueNotifier<int> get updateList => _actionHandler.updateList;
+  ListUpdateNotifier get updateList => _actionHandler.updateList;
   int get maxUndo => _actionHandler.maxUndo;
   List<Command?> get commands => _actionHandler.commands;
   List<String> get commandDescriptions => _actionHandler.commandDescriptions;
@@ -252,7 +252,7 @@ class GameState {
   /// `updateList` so that all existing subscribers remain notified.
   void _notifyCurrentList() {
     _currentListNotifier.value = BuiltList.of(_currentList);
-    updateList.value++;
+    updateList.notify();
   }
 
   /// Fires `monsterInstancesNotifier` / `summonListNotifier` on every item in

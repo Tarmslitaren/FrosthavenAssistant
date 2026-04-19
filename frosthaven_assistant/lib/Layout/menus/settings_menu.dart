@@ -168,7 +168,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       settings.autoAddStandees.value =
                                           value ?? false;
                                       settings.saveToDisk();
-                                      _gameState.updateList.value++;
+                                      _gameState.updateList.notify();
                                     });
                                   }),
                               CheckboxListTile(
@@ -179,7 +179,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       settings.autoAddSpawns.value =
                                           value ?? false;
                                       settings.saveToDisk();
-                                      _gameState.updateList.value++;
+                                      _gameState.updateList.notify();
                                     });
                                   }),
                               CheckboxListTile(
@@ -200,7 +200,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       settings.noCalculation.value =
                                           value ?? false;
                                       settings.saveToDisk();
-                                      _gameState.updateList.value++;
+                                      _gameState.updateList.notify();
                                     });
                                   }),
                               CheckboxListTile(
@@ -423,7 +423,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                               settings.style.value =
                                                   Style.frosthaven;
                                               settings.saveToDisk();
-                                              _gameState.updateList.value++;
+                                              _gameState.updateList.notify();
                                             });
                                           }),
                                       const Text('Frosthaven')
@@ -439,7 +439,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                               settings.style.value =
                                                   Style.original;
                                               settings.saveToDisk();
-                                              _gameState.updateList.value++;
+                                              _gameState.updateList.notify();
                                             });
                                           }),
                                       const Text('Original')

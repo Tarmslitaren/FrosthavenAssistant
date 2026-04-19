@@ -9,6 +9,12 @@ import '../services/service_locator.dart';
 import 'game_event.dart';
 import 'state/game_state.dart';
 
+/// A bare ChangeNotifier that exposes [notify] so callers outside this class
+/// can fire listeners without needing a meaningful value.
+class ListUpdateNotifier extends ChangeNotifier {
+  void notify() => notifyListeners();
+}
+
 class ActionHandler {
   final commandIndex = ValueNotifier<int>(-1);
   final List<Command?> _commands = [];
@@ -52,7 +58,7 @@ class ActionHandler {
 
   final int maxUndo = 250;
 
-  final updateList = ValueNotifier<int>(0);
+  final updateList = ListUpdateNotifier();
 
   final GameState _gameState;
   final Communication _communication;
@@ -73,7 +79,7 @@ class ActionHandler {
   Network get _network => _networkOverride ?? getIt<Network>();
 
   void updateAllUI() {
-    updateList.value++;
+    updateList.notify();
     _gameState.notifyAllMonsterInstances();
   }
 

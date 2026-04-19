@@ -20,12 +20,12 @@ class SetAsSummonCommand extends Command {
     } else {
       figure.setRoundSummoned(stateAccess, -1);
     }
-    _gameState.updateList.value++;
+    _gameState.updateList.notify();
   }
 
   @override
   void onUndo() {
-    _gameState.updateList.value++;
+    _gameState.updateList.notify();
   }
 
   @override

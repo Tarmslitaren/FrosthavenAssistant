@@ -8,6 +8,6 @@ class HealthWheelControllerViewModel {
   final GameState _gameState;
 
   void triggerListUpdate() {
-    _gameState.updateList.value++;
+    _gameState.updateList.notify();
   }
 }

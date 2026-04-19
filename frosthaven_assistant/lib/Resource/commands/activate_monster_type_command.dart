@@ -36,16 +36,16 @@ class ActivateMonsterTypeCommand extends Command {
     }
     if (_gameState.roundState.value == RoundState.playTurns) {
       Future.delayed(const Duration(milliseconds: 600), () {
-        _gameState.updateList.value++;
+        _gameState.updateList.notify();
       });
     } else {
-      _gameState.updateList.value++;
+      _gameState.updateList.notify();
     }
   }
 
   @override
   void onUndo() {
-    _gameState.updateList.value++;
+    _gameState.updateList.notify();
   }
 
   @override

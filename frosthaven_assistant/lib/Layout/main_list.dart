@@ -381,9 +381,9 @@ class MainListState extends State<MainList> {
   }
 
   Widget buildList() {
-    return ValueListenableBuilder<int>(
-        valueListenable: _vm.updateList,
-        builder: (context, value, child) {
+    return ListenableBuilder(
+        listenable: _vm.updateList,
+        builder: (context, child) {
           double width = getMainListWidth(context);
           final screenSize = MediaQuery.of(context).size;
           bool canFit2Columns = screenSize.width >= width * _kTwoColumns;

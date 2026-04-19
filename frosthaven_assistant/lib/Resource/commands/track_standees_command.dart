@@ -19,7 +19,7 @@ class TrackStandeesCommand extends Command {
 
   @override
   void onUndo() {
-    _gameState.updateList.value++;
+    _gameState.updateList.notify();
   }
 
   @override
@@ -45,6 +45,6 @@ class TrackStandeesCommand extends Command {
         }
       }
     }
-    _gameState.updateList.value++;
+    _gameState.updateList.notify();
   }
 }

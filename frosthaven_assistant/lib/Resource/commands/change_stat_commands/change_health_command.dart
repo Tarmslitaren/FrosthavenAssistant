@@ -20,7 +20,7 @@ class ChangeHealthCommand extends ChangeStatCommand {
       final newValue = figure.health.value;
       if (previousValue <= 0 && newValue > 0) {
         //un death
-        gameState.updateList.value++;
+        gameState.updateList.notify();
       }
 
       if (newValue <= 0) {

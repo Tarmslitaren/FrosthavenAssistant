@@ -14,7 +14,7 @@ class MonsterWidgetViewModel {
   final GameState _gameState;
 
   // Notifiers the widget subscribes to
-  ValueListenable<int> get updateList => _gameState.updateList;
+  Listenable get updateList => _gameState.updateList;
   ValueListenable<BuiltList<MonsterInstance>> get monsterInstancesNotifier =>
       monster.monsterInstancesNotifier;
 

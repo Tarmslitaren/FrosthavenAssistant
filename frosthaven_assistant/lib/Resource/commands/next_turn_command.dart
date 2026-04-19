@@ -14,7 +14,7 @@ class TurnDoneCommand extends Command { // ignore: prefer-match-file-name, file 
         break;
       }
     }
-    _gameState.updateList.value++;
+    _gameState.updateList.notify();
   }
 
   @override
@@ -24,7 +24,7 @@ class TurnDoneCommand extends Command { // ignore: prefer-match-file-name, file 
 
   @override
   void onUndo() {
-    _gameState.updateList.value++;
+    _gameState.updateList.notify();
   }
 
   @override

@@ -21,7 +21,7 @@ class IceWraithChangeFormCommand extends Command {
     } else {
       figure.setType(stateAccess, MonsterType.elite);
     }
-    _gameState.updateList.value++;
+    _gameState.updateList.notify();
     /*for (var item in getIt<GameState>().currentList) {
       if (item.id == ownerId && item is Monster) {
         var newList = item.monsterInstances.value;

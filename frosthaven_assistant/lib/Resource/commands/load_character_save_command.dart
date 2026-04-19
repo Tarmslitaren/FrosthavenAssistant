@@ -27,7 +27,7 @@ class LoadCharacterSaveCommand extends Command {
     CharacterMethods.resetCharacter(stateAccess, character);
     RoundMethods.addToMainList(stateAccess, 0, character);
     ScenarioMethods.applyDifficulty(stateAccess);
-    _gameState.updateList.value++;
+    _gameState.updateList.notify();
     ScenarioMethods.unlockClass(stateAccess, character.characterClass.id);
   }
 

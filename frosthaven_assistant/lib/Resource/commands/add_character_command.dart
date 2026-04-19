@@ -37,7 +37,7 @@ class AddCharacterCommand extends Command {
 
   @override
   void onUndo() {
-    _gameState.updateList.value++;
+    _gameState.updateList.notify();
   }
 
   @override

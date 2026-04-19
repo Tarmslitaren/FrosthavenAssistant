@@ -32,13 +32,13 @@ class RemoveConditionCommand extends Command {
       }
 
       figure.removeFromConditionsPreviousTurn(stateAccess, condition);
-      _gameState.updateList.value++;
+      _gameState.updateList.notify();
     }
   }
 
   @override
   void onUndo() {
-    _gameState.updateList.value++;
+    _gameState.updateList.notify();
   }
 
   @override

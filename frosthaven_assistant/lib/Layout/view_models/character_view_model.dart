@@ -20,7 +20,7 @@ class CharacterViewModel {
   final Settings _settings;
 
   // Notifiers the widget subscribes to
-  ValueListenable<int> get updateList => _gameState.updateList;
+  Listenable get updateList => _gameState.updateList;
   ValueListenable<BuiltList<MonsterInstance>> get summonListNotifier =>
       character.characterState.summonListNotifier;
 

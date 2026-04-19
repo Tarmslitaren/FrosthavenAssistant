@@ -41,13 +41,13 @@ class AddConditionCommand extends Command {
           }
         }
       }
-      _gameState.updateList.value++;
+      _gameState.updateList.notify();
     }
   }
 
   @override
   void onUndo() {
-    _gameState.updateList.value++;
+    _gameState.updateList.notify();
   }
 
   @override

@@ -31,7 +31,7 @@ class MainListViewModel {
       _gameData.modelData;
   ValueListenable<double> get userScalingMainList =>
       _settings.userScalingMainList;
-  ValueListenable<int> get updateList => _gameState.updateList;
+  Listenable get updateList => _gameState.updateList;
   ValueListenable<BuiltList<ListItemData>> get currentListNotifier =>
       _gameState.currentListNotifier;
 

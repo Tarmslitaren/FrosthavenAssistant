@@ -112,9 +112,9 @@ class CharacterWidgetState extends State<CharacterWidget> {
 
     return InkWell(
         onTap: () => vm.openStatusMenu(context),
-        child: ValueListenableBuilder<int>(
-            valueListenable: vm.updateList,
-            builder: (context, value, child) {
+        child: ListenableBuilder(
+            listenable: vm.updateList,
+            builder: (context, child) {
               final double scale = getScaleByReference(context);
 
               Widget inner = PhysicalShape(
