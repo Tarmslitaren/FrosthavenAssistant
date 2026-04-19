@@ -16,6 +16,8 @@ import '../../Model/monster.dart';
 import '../../Model/monster_ability.dart';
 import '../../Model/room.dart';
 import '../../Model/scenario.dart';
+import '../../services/network/communication.dart';
+import '../../services/network/network.dart';
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../card_stack.dart';
@@ -46,8 +48,8 @@ part "sanctuary_deck.dart";
 
 // ignore_for_file: library_private_types_in_public_api
 
-class GameState extends ActionHandler {
-  //TODO: put action handler in own place
+class GameState {
+  late final ActionHandler _actionHandler;
 
   //state
   final _currentCampaign = ValueNotifier<String>("Jaws of the Lion");
@@ -112,10 +114,37 @@ class GameState extends ActionHandler {
   SanctuaryDeck get sanctuaryDeck => _sanctuaryDeck;
 
   GameState({
-    required super.communication,
-    super.settings,
-    super.network,
-  });
+    required Communication communication,
+    Settings? settings,
+    Network? network,
+  }) {
+    _actionHandler = ActionHandler(
+      gameState: this,
+      communication: communication,
+      settings: settings,
+      network: network,
+    );
+  }
+
+  // ActionHandler delegation — public API preserved for all callers
+  void action(Command command) => _actionHandler.action(command);
+  void undo() => _actionHandler.undo();
+  void redo() => _actionHandler.redo();
+  void updateAllUI() => _actionHandler.updateAllUI();
+  Command getCurrent() => _actionHandler.getCurrent();
+  void resetCommandHistory() => _actionHandler.resetCommandHistory();
+  void clearLocalCommands() => _actionHandler.clearLocalCommands();
+  void insertReceivedDescription(int index, String description) =>
+      _actionHandler.insertReceivedDescription(index, description);
+  void addSaveState(GameSaveState state) => _actionHandler.addSaveState(state);
+
+  ValueNotifier<int> get commandIndex => _actionHandler.commandIndex;
+  ValueNotifier<GameEvent> get lastEvent => _actionHandler.lastEvent;
+  ValueNotifier<int> get updateList => _actionHandler.updateList;
+  int get maxUndo => _actionHandler.maxUndo;
+  List<Command?> get commands => _actionHandler.commands;
+  List<String> get commandDescriptions => _actionHandler.commandDescriptions;
+  List<GameSaveState?> get gameSaveStates => _actionHandler.gameSaveStates;
 
   void init() {
     _elementState[Elements.fire] = ElementState.inert;
@@ -201,7 +230,7 @@ class GameState extends ActionHandler {
   void save() {
     GameSaveState state = GameSaveState();
     state.saveToDisk(this);
-    addSaveState(state); //do this from action handler instead
+    addSaveState(state);
   }
 
   void load() {

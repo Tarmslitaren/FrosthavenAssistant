@@ -54,28 +54,27 @@ class ActionHandler {
 
   final updateList = ValueNotifier<int>(0);
 
+  final GameState _gameState;
   final Communication _communication;
   final Settings? _settingsOverride;
   final Network? _networkOverride;
 
   ActionHandler({
+    required GameState gameState,
     required Communication communication,
     Settings? settings,
     Network? network,
-  })  : _communication = communication,
+  })  : _gameState = gameState,
+        _communication = communication,
         _settingsOverride = settings,
         _networkOverride = network;
 
   Settings get _settings => _settingsOverride ?? getIt<Settings>();
   Network get _network => _networkOverride ?? getIt<Network>();
 
-  GameState get _self => this as GameState;
-
   void updateAllUI() {
-    _self.updateList.value++;
-    _self.notifyAllMonsterInstances();
-    //try to update card widget here if needed
-    //try to update element buttons here if needed
+    updateList.value++;
+    _gameState.notifyAllMonsterInstances();
   }
 
   Command getCurrent() {
@@ -91,31 +90,30 @@ class ActionHandler {
       if (commandIndex.value >= 0) {
         final saveState = _gameSaveStates[commandIndex.value];
         if (saveState != null) {
-        saveState.load(
-            _self); //this works as gameSaveStates has one more entry than command list (includes load at start)
-        saveState.saveToDisk(_self);
-        if (!isServer && !isClient) {
-          _commands[commandIndex.value]
-              ?.onUndo(); //undo only makes sure ui is updated
-        } else {
-          updateAllUI();
-          //run generic update all function instead, as commands list is not retained
+          saveState.load(_gameState);
+          saveState.saveToDisk(_gameState);
+          if (!isServer && !isClient) {
+            _commands[commandIndex.value]
+                ?.onUndo(); //undo only makes sure ui is updated
+          } else {
+            updateAllUI();
+            //run generic update all function instead, as commands list is not retained
 
-          //send last game state if connected
-          if (isServer) {
-            final idx = commandIndex.value;
-            if (idx >= 0 && idx < _commandDescriptions.length) {
-              log('server sends, undo index: $idx, description:${_commandDescriptions[idx]}');
-              //should send a special undo message? yes
-              _network.server.send(StateEnvelope(
-                index: idx,
-                description: _commandDescriptions[idx],
-                eventJson: const NoEvent().toJsonString(),
-                state: saveState.getState(),
-              ).encode());
+            //send last game state if connected
+            if (isServer) {
+              final idx = commandIndex.value;
+              if (idx >= 0 && idx < _commandDescriptions.length) {
+                log('server sends, undo index: $idx, description:${_commandDescriptions[idx]}');
+                //should send a special undo message? yes
+                _network.server.send(StateEnvelope(
+                  index: idx,
+                  description: _commandDescriptions[idx],
+                  eventJson: const NoEvent().toJsonString(),
+                  state: saveState.getState(),
+                ).encode());
+              }
             }
           }
-        }
         }
         lastEvent.value = const NoEvent();
         commandIndex.value--;
@@ -136,8 +134,8 @@ class ActionHandler {
         final nextState =
             (nextIdx < _gameSaveStates.length) ? _gameSaveStates[nextIdx] : null;
         if (nextState == null) return; // save state evicted by maxUndo
-        nextState.load(_self);
-        nextState.saveToDisk(_self);
+        nextState.load(_gameState);
+        nextState.saveToDisk(_gameState);
         //also run generic update ui function
         updateAllUI();
       } else {
@@ -194,7 +192,7 @@ class ActionHandler {
       _gameSaveStates.removeRange(commandIndex.value + 1, _gameSaveStates.length);
     }
 
-    _self.save(); //save after each action
+    _gameState.save(); //save after each action
 
     //send last game state if connected
     String description = command.describe();
@@ -205,7 +203,7 @@ class ActionHandler {
         index: commandIndex.value,
         description: description,
         eventJson: eventJson,
-        state: _self.toString(),
+        state: _gameState.toString(),
       ).encode());
     } else if (isClient) {
       log('client sends, index: ${commandIndex.value}, description:$description');
@@ -213,7 +211,7 @@ class ActionHandler {
         index: commandIndex.value,
         description: description,
         eventJson: eventJson,
-        state: _self.toString(),
+        state: _gameState.toString(),
       ).encode());
     }
 
