@@ -118,27 +118,29 @@ class MonsterInstance extends FigureState {
     _health.value = maxHealth.value;
   }
 
+  Map<String, dynamic> toJson() => {
+        'health': health.value,
+        'maxHealth': maxHealth.value,
+        'level': level.value,
+        'standeeNr': standeeNr,
+        'move': move,
+        'attack': attack,
+        'range': range,
+        'name': name,
+        'gfx': gfx,
+        'roundSummoned': roundSummoned,
+        'type': type.index,
+        'chill': chill.value,
+        'plague': plague.value,
+        'conditions': conditions.value.map((c) => c.index).toList(),
+        'conditionsAddedThisTurn':
+            _conditionsAddedThisTurn.map((c) => c.index).toList(),
+        'conditionsAddedPreviousTurn':
+            _conditionsAddedPreviousTurn.map((c) => c.index).toList(),
+      };
+
   @override
-  String toString() {
-    return '{'
-        '"health": ${health.value}, '
-        '"maxHealth": ${maxHealth.value}, '
-        '"level": ${level.value}, '
-        '"standeeNr": $standeeNr, '
-        '"move": $move, '
-        '"attack": $attack, '
-        '"range": $range, '
-        '"name": "$name", '
-        '"gfx": "$gfx", '
-        '"roundSummoned": $roundSummoned, '
-        '"type": ${type.index}, '
-        '"chill": ${chill.value}, '
-        '"plague": ${plague.value}, '
-        '"conditions": ${conditions.value.toString()}, '
-        '"conditionsAddedThisTurn": ${_conditionsAddedThisTurn.toList().toString()}, '
-        '"conditionsAddedPreviousTurn": ${_conditionsAddedPreviousTurn.toList().toString()} '
-        '}';
-  }
+  String toString() => json.encode(toJson());
 
   MonsterInstance.fromJson(Map<String, dynamic> json) {
     standeeNr = json["standeeNr"];

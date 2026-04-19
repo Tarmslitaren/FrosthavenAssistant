@@ -55,13 +55,13 @@ class SanctuaryDeck {
     }
   }
 
+  Map<String, dynamic> toJson() => {
+        'multPile': _multPile.getList().map((c) => c.toJson()).toList(),
+        'flipPile': _flipPile.getList().map((c) => c.toJson()).toList(),
+      };
+
   @override
-  String toString() {
-    return '{'
-        '"multPile": ${_multPile.toString()}, '
-        '"flipPile": ${_flipPile.toString()} '
-        '}';
-  }
+  String toString() => json.encode(toJson());
 
   void _initDeck() {
     _multPile.clear();

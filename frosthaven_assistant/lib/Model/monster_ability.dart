@@ -84,11 +84,8 @@ class MonsterAbilityCardModel {
   const MonsterAbilityCardModel(this.title, this.nr, this.shuffle,
       this.initiative, this.lines, this.deck, this.graphicPositional);
 
+  Map<String, dynamic> toJson() => {'nr': nr, 'deck': deck};
+
   @override
-  String toString() {
-    return '{'
-        '"nr": $nr, '
-        '"deck": "$deck" ' //todo: is this really needed? bloats the save states
-        '}';
-  }
+  String toString() => '{"nr": $nr, "deck": "$deck" }';
 }

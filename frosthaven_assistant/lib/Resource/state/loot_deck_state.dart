@@ -22,17 +22,17 @@ class LootCard { // ignore: prefer-match-file-name, file contains multiple loot 
     _enhanced = enhanced;
   }
 
+  Map<String, dynamic> toJson() => {
+        'gfx': gfx,
+        'owner': owner,
+        'id': id,
+        'enhanced': enhanced,
+        'baseValue': baseValue.index,
+        'lootType': lootType.index,
+      };
+
   @override
-  String toString() {
-    return '{'
-        '"gfx": "$gfx", '
-        '"owner": "$owner", '
-        '"id": $id, '
-        '"enhanced": $enhanced, '
-        '"baseValue": ${baseValue.index}, '
-        '"lootType": ${lootType.index} '
-        '}';
-  }
+  String toString() => json.encode(toJson());
 
   int? getValue() {
     int value = 1;
@@ -540,17 +540,17 @@ class LootDeck {
     _cardCount.value = _drawPile.size();
   }
 
+  Map<String, dynamic> toJson() => {
+        'drawPile': _drawPile.getList().map((c) => c.toJson()).toList(),
+        'discardPile': _discardPile.getList().map((c) => c.toJson()).toList(),
+        'addedCards': _addedCards,
+        'enhancements': _enhancements,
+        '1418': _hasCard1418,
+        '1419': _hasCard1419,
+      };
+
   @override
-  String toString() {
-    return '{'
-        '"drawPile": ${_drawPile.toString()}, '
-        '"discardPile": ${_discardPile.toString()}, '
-        '"addedCards": ${_addedCards.toString()}, '
-        '"enhancements": ${json.encode(_enhancements)}, '
-        '"1418": $_hasCard1418, '
-        '"1419": $_hasCard1419 '
-        '}';
-  }
+  String toString() => json.encode(toJson());
 }
 
 enum LootType { materiel, other }

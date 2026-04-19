@@ -512,20 +512,20 @@ class ModifierDeck {
     }
   }
 
+  Map<String, dynamic> toJson() => {
+        'addedMinusOnes': _addedMinusOnes.value,
+        'imbuement': _imbuement.value,
+        'badOmen': _badOmen.value,
+        'corrosiveSpew': _corrosiveSpew.value,
+        'revealed': _revealedCount.value,
+        'cassandra': _cassandraSpecial.value,
+        'drawPile': _drawPile.getList().map((c) => c.toJson()).toList(),
+        'removedPile': _removedPile.getList().map((c) => c.toJson()).toList(),
+        'discardPile': _discardPile.getList().map((c) => c.toJson()).toList(),
+      };
+
   @override
-  String toString() {
-    return '{'
-        '"addedMinusOnes": ${_addedMinusOnes.value.toString()}, '
-        '"imbuement": ${_imbuement.value.toString()}, '
-        '"badOmen": ${_badOmen.value.toString()}, '
-        '"corrosiveSpew": ${_corrosiveSpew.value.toString()}, '
-        '"revealed": ${_revealedCount.value.toString()}, '
-        '"cassandra": ${_cassandraSpecial.value.toString()}, '
-        '"drawPile": ${_drawPile.toString()}, '
-        '"removedPile": ${_removedPile.toString()}, '
-        '"discardPile": ${_discardPile.toString()} '
-        '}';
-  }
+  String toString() => json.encode(toJson());
 
   void _initListeners() {
     for (var item in _removables.keys) {
@@ -706,10 +706,8 @@ class ModifierCard {
 
   ModifierCard(this.type, this.gfx);
 
+  Map<String, dynamic> toJson() => {'gfx': gfx};
+
   @override
-  String toString() {
-    return '{'
-        '"gfx": "$gfx" '
-        '}';
-  }
+  String toString() => '{"gfx": "$gfx" }';
 }

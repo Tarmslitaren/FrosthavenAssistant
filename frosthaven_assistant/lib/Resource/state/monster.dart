@@ -168,18 +168,19 @@ class Monster extends ListItemData {
   }
 
   @override
-  String toString() {
-    return '{'
-        '"id": "$id", '
-        '"turnState": ${turnState.value.index}, '
-        '"isActive": $isActive, '
-        '"type": "${type.name}", '
-        '"monsterInstances": ${_monsterInstances.toString()}, '
-        '"isAlly": $isAlly, '
-        '"v": $_version, '
-        '"level": ${level.value} '
-        '}';
-  }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'turnState': turnState.value.index,
+        'isActive': isActive,
+        'type': type.name,
+        'monsterInstances': _monsterInstances.map((m) => m.toJson()).toList(),
+        'isAlly': isAlly,
+        'v': _version,
+        'level': level.value,
+      };
+
+  @override
+  String toString() => json.encode(toJson());
 
   void _addAbilityDeck({GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();

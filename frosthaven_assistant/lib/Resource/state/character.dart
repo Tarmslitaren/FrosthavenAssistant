@@ -93,15 +93,16 @@ class Character extends ListItemData {
   }
 
   @override
-  String toString() {
-    return '{'
-        '"id": "$id", '
-        '"turnState": ${turnState.value.index}, '
-        '"characterState": ${characterState.toString()}, '
-        '"characterClass": "${characterClass.id}", '
-        '"edition": "${characterClass.edition}" '
-        '}';
-  }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'turnState': turnState.value.index,
+        'characterState': characterState.toJson(),
+        'characterClass': characterClass.id,
+        'edition': characterClass.edition,
+      };
+
+  @override
+  String toString() => json.encode(toJson());
 
   static CharacterClass? _getClassStatic(String id, String? edition, {GameData? gameData}) {
     final modelData = (gameData ?? getIt<GameData>()).modelData.value;

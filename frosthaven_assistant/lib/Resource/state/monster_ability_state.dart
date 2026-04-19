@@ -78,13 +78,13 @@ class MonsterAbilityState {
     _lastRoundDrawn = (gameState ?? getIt<GameState>()).totalRounds.value;
   }
 
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'drawPile': _drawPile.getList().map((c) => c.toJson()).toList(),
+        'discardPile': _discardPile.getList().map((c) => c.toJson()).toList(),
+        'lastRoundDrawn': lastRoundDrawn,
+      };
+
   @override
-  String toString() {
-    return '{'
-        '"name": "$name", '
-        '"drawPile": ${_drawPile.toString()}, '
-        '"discardPile": ${_discardPile.toString()}, '
-        '"lastRoundDrawn": $lastRoundDrawn '
-        '}';
-  }
+  String toString() => json.encode(toJson());
 }

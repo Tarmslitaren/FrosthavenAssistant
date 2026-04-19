@@ -9,4 +9,6 @@ class ListItemData {
   void setTurnState(_StateModifier _, TurnsState value) {
     _turnState.value = value;
   }
+
+  Map<String, dynamic> toJson() => {};
 }

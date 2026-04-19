@@ -223,23 +223,25 @@ class CharacterState extends FigureState {
         '}';
   }
 
+  Map<String, dynamic> toJson() => {
+        'initiative': initiative.value,
+        'health': health.value,
+        'maxHealth': maxHealth.value,
+        'level': level.value,
+        'xp': xp.value,
+        'chill': chill.value,
+        'display': display.value,
+        'modifierDeck': _modifierDeck.toJson(),
+        'summonList': _summonList.map((s) => s.toJson()).toList(),
+        'useFHPerks': useFHPerks.value,
+        'perkList': List<bool>.from(_perkList),
+        'conditions': _conditions.value.map((c) => c.index).toList(),
+        'conditionsAddedThisTurn':
+            _conditionsAddedThisTurn.map((c) => c.index).toList(),
+        'conditionsAddedPreviousTurn':
+            _conditionsAddedPreviousTurn.map((c) => c.index).toList(),
+      };
+
   @override
-  String toString() {
-    return '{'
-        '"initiative": ${initiative.value}, '
-        '"health": ${health.value}, '
-        '"maxHealth": ${maxHealth.value}, '
-        '"level": ${level.value}, '
-        '"xp": ${xp.value}, '
-        '"chill": ${chill.value}, '
-        '"display": ${jsonEncode(display.value)}, '
-        '"modifierDeck": ${_modifierDeck.toString()}, '
-        '"summonList": ${_summonList.toString()}, '
-        '"useFHPerks": ${jsonEncode(useFHPerks.value)}, '
-        '"perkList": ${_perkList.toString()}, '
-        '"conditions": ${_conditions.value.toString()}, '
-        '"conditionsAddedThisTurn": ${conditionsAddedThisTurn.toList().toString()}, '
-        '"conditionsAddedPreviousTurn": ${conditionsAddedPreviousTurn.toList().toString()} '
-        '}';
-  }
+  String toString() => json.encode(toJson());
 }

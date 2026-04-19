@@ -209,7 +209,7 @@ void main() {
 
       expect(pushed, isNotNull);
       expect(pushed!.index, equals(_serverGameState.commandIndex.value));
-      expect(pushed.state, contains('"level": 3'));
+      expect(pushed.state, contains('"level":3'));
     });
 
     test('client action is forwarded to other connected clients', () async {

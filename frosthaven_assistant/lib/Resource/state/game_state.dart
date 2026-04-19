@@ -191,41 +191,44 @@ class GameState {
     _toastMessage.value = value;
   }
 
-  @override
-  String toString() {
-    Map<String, int> elements = {};
-    for (var key in elementState.keys) {
-      final state = elementState[key];
+  Map<String, dynamic> toJson() {
+    final Map<String, int> elements = {};
+    for (var key in _elementState.keys) {
+      final state = _elementState[key];
       if (state != null) {
         elements[key.index.toString()] = state.index;
       }
     }
-
-    return '{'
-        '"level": ${_level.value}, '
-        '"solo": ${_solo.value}, '
-        '"autoScenarioLevel": ${_autoScenarioLevel.value}, '
-        '"difficulty": ${_difficulty.value}, '
-        '"roundState": ${_roundState.value.index}, '
-        '"round": ${_round.value}, '
-        '"totalRounds": ${_totalRounds.value}, '
-        '"scenario": "${_scenario.value}", '
-        '"toastMessage": ${jsonEncode(_toastMessage.value)}, '
-        '"scenarioSpecialRules": ${_scenarioSpecialRules.toString()}, '
-        '"scenarioSectionsAdded": ${json.encode(_scenarioSectionsAdded)}, '
-        '"currentCampaign": "${_currentCampaign.value}", '
-        '"currentList": ${_currentList.toString()}, '
-        '"currentAbilityDecks": ${_currentAbilityDecks.toString()}, '
-        '"sanctuaryDeck": ${_sanctuaryDeck.toString()}, '
-        '"modifierDeck": ${_modifierDeck.toString()}, '
-        '"modifierDeckAllies": ${_modifierDeckAllies.toString()}, '
-        '"lootDeck": ${_lootDeck.toString()}, ' //does this work if null?
-        '"unlockedClasses": ${jsonEncode(unlockedClasses.toList())}, '
-        '"showAllyDeck": ${showAllyDeck.value}, '
-        '"allyDeckInOGGloom": ${allyDeckInOGGloom.value}, '
-        '"elementState": ${json.encode(elements)} '
-        '}';
+    return {
+      'level': _level.value,
+      'solo': _solo.value,
+      'autoScenarioLevel': _autoScenarioLevel.value,
+      'difficulty': _difficulty.value,
+      'roundState': _roundState.value.index,
+      'round': _round.value,
+      'totalRounds': _totalRounds.value,
+      'scenario': _scenario.value,
+      'toastMessage': _toastMessage.value,
+      'scenarioSpecialRules':
+          _scenarioSpecialRules.map((r) => r.toJson()).toList(),
+      'scenarioSectionsAdded': _scenarioSectionsAdded,
+      'currentCampaign': _currentCampaign.value,
+      'currentList': _currentList.map((item) => item.toJson()).toList(),
+      'currentAbilityDecks':
+          _currentAbilityDecks.map((d) => d.toJson()).toList(),
+      'sanctuaryDeck': _sanctuaryDeck.toJson(),
+      'modifierDeck': _modifierDeck.toJson(),
+      'modifierDeckAllies': _modifierDeckAllies.toJson(),
+      'lootDeck': _lootDeck.toJson(),
+      'unlockedClasses': unlockedClasses.toList(),
+      'showAllyDeck': showAllyDeck.value,
+      'allyDeckInOGGloom': allyDeckInOGGloom.value,
+      'elementState': elements,
+    };
   }
+
+  @override
+  String toString() => json.encode(toJson());
 
   void save() {
     GameSaveState state = GameSaveState();

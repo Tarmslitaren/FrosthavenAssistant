@@ -108,21 +108,20 @@ class SpecialRule {
         type, name, health, level, init, note, aList, startOfRound, condition);
   }
 
-  //is this used at all?
+  Map<String, dynamic> toJson() => {
+        'type': type,
+        'note': note,
+        'name': name,
+        'health': health.toString(),
+        'condition': condition.toString(),
+        'init': init,
+        'level': level,
+        'startOfRound': startOfRound,
+        'list': list,
+      };
+
   @override
-  String toString() {
-    return '{'
-        '"type": "$type", '
-        '"note": ${jsonEncode(note)}, ' //need json encode if note can have escape chars ( i.e. \n )
-        '"name": "$name", '
-        '"health": "$health", '
-        '"condition": "$condition", '
-        '"init": $init, '
-        '"level": $level, '
-        '"startOfRound": ${startOfRound.toString()}, '
-        '"list": ${jsonEncode(list)} '
-        '}';
-  }
+  String toString() => json.encode(toJson());
 }
 
 //can't be immutable since merging other data late
