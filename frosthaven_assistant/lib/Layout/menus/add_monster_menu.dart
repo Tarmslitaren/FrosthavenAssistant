@@ -166,7 +166,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
               DropdownButtonHideUnderline(
                   child: DropdownButton(
                       value: _currentCampaign,
-                      items: buildEditionDroopDownMenuItems(), // ignore: avoid-returning-widgets, widget list from helper method
+                      items: buildEditionDroopDownMenuItems(), // ignore: avoid-returning-widgets, returns List<DropdownMenuItem> for DropdownButton items
                       onChanged: (value) {
                         if (value is String) {
                           setState(() {

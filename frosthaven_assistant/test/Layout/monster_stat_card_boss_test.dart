@@ -30,8 +30,12 @@ Future<void> _pumpBoss(WidgetTester tester, Monster monster,
     height: 1.2,
   );
 
-  final widget = MonsterStatCardWidget.buildBossLayout(
-      monster, 1.0, shadow, leftStyle, frosthavenStyle,
+  final widget = MonsterStatBossLayout(
+      data: monster,
+      scale: 1.0,
+      shadow: shadow,
+      leftStyle: leftStyle,
+      frosthavenStyle: frosthavenStyle,
       viewModel:
           MonsterStatCardViewModel(monster, gameState: getIt<GameState>()));
 

@@ -94,35 +94,6 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
     return false;
   }
 
-  Widget buildRevealButton(int nrOfButtons, int nr) {
-    String text = "All";
-    if (nr < nrOfButtons) {
-      text = nr.toString();
-    }
-    return SizedBox(
-        width: ModifierDeckMenu._kRevealButtonWidth,
-        child: TextButton(
-          child: Text(text),
-          onPressed: () {
-            _gameState.action(AMDRevealCommand(
-                amount: nr, name: widget.name, gameState: _gameState));
-          },
-        ));
-  }
-
-  Widget buildPartyButton(int nr) {
-    String text = nr.toString();
-    return SizedBox(
-        width: ModifierDeckMenu._kRevealButtonWidth,
-        child: TextButton(
-          child: Text(text),
-          onPressed: () {
-            _gameState.action(AddCSPartyCardCommand(widget.name, 1,
-                gameState: _gameState));
-          },
-        ));
-  }
-
   List<Widget> generateList(
       List<ModifierCard> inputList, bool allOpen, String name) {
     List<Widget> list = [];
@@ -511,7 +482,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                               Text("Add Party\n Card:"),
                                               ...List.generate(
                                                 ModifierDeckMenu._kPartyButtonCount,
-                                                (i) => buildPartyButton(i + 1),
+                                                (i) => _PartyButton(nr: i + 1, gameState: _gameState, name: widget.name), // ignore: avoid-returning-widgets, widget generator lambda
                                               ), //todo: make own menu for this, just like for gh2e special
                                             ]),
                                 if (isCharacter &&
@@ -739,7 +710,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                 ),
                                 ...List.generate(
                                   min(drawPile.length + 1, ModifierDeckMenu._kMaxRevealButtonNr + 1),
-                                  (i) => buildRevealButton(drawPile.length, i),
+                                  (i) => _RevealButton(nrOfButtons: drawPile.length, nr: i, gameState: _gameState, name: widget.name), // ignore: avoid-returning-widgets, widget generator lambda
                                 ),
                               ])),
                       Flexible(
@@ -747,8 +718,8 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          buildList(drawPile, true, false, widget.name),
-                          buildList(discardPile, false, true, widget.name)
+                          buildList(drawPile, true, false, widget.name), // ignore: avoid-returning-widgets, list-returning helper for Row children
+                          buildList(discardPile, false, true, widget.name) // ignore: avoid-returning-widgets, list-returning helper for Row children
                         ],
                       )),
                       Container(
@@ -806,5 +777,58 @@ class Item extends StatelessWidget {
         : ModifierCardRear(scale: scale, name: name);
 
     return Container(margin: EdgeInsets.all(ModifierDeckMenu._kItemMarginMultiplier * scale), child: child);
+  }
+}
+
+class _RevealButton extends StatelessWidget {
+  const _RevealButton({
+    required this.nrOfButtons,
+    required this.nr,
+    required this.gameState,
+    required this.name,
+  });
+
+  final int nrOfButtons;
+  final int nr;
+  final GameState gameState;
+  final String name;
+
+  @override
+  Widget build(BuildContext context) {
+    String text = nr < nrOfButtons ? nr.toString() : "All";
+    return SizedBox(
+        width: ModifierDeckMenu._kRevealButtonWidth,
+        child: TextButton(
+          child: Text(text),
+          onPressed: () {
+            gameState.action(AMDRevealCommand(
+                amount: nr, name: name, gameState: gameState));
+          },
+        ));
+  }
+}
+
+class _PartyButton extends StatelessWidget {
+  const _PartyButton({
+    required this.nr,
+    required this.gameState,
+    required this.name,
+  });
+
+  final int nr;
+  final GameState gameState;
+  final String name;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+        width: ModifierDeckMenu._kRevealButtonWidth,
+        child: TextButton(
+          child: Text(nr.toString()),
+          onPressed: () {
+            gameState.action(AddCSPartyCardCommand(name, 1,
+                gameState: gameState));
+          },
+        ));
   }
 }

@@ -138,14 +138,14 @@ class CharacterWidgetState extends State<CharacterWidget> {
                   child: ValueListenableBuilder<BuiltList<MonsterInstance>>(
                       valueListenable: vm.summonListNotifier,
                       builder: (context, value, child) {
-                        return buildMonsterBoxGrid(scale, character);
+                        return buildMonsterBoxGrid(scale, character); // ignore: avoid-returning-widgets, internal layout helper
                       }),
                 ),
                 ColorFiltered(
                     colorFilter: vm.notGrayScale
                         ? ColorFilter.matrix(identity)
                         : ColorFilter.matrix(grayScale),
-                    child: _buildCharacterContent(
+                    child: _buildCharacterContent( // ignore: avoid-returning-widgets, internal layout helper
                         vm, character, isCharacter, inner))
               ]);
             }));

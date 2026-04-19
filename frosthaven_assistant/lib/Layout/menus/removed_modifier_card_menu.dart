@@ -124,7 +124,7 @@ class RemovedModifierCardMenuState extends State<RemovedModifierCardMenu> {
                           child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [buildList(removedPile)],
+                        children: [buildList(removedPile)], // ignore: avoid-returning-widgets, list-returning helper for Column children
                       )),
                       Container(
                         height: _kBottomBarHeight,

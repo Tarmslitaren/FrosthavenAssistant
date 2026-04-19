@@ -118,7 +118,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
     return ValueListenableBuilder<Object>(
         valueListenable: _vm.modelData,
         builder: (context, value, child) {
-          return _buildContent();
+          return _buildContent(); // ignore: avoid-returning-widgets, internal layout helper
         });
   }
 
@@ -249,7 +249,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                   discardPileSize >
                                           LootDeckWidgetState
                                               ._kDiscardShowThirdMinSize
-                                      ? _buildStayAnimation(
+                                      ? _buildStayAnimation( // ignore: avoid-returning-widgets, animation helper
                                           RotationTransition(
                                               turns: AlwaysStoppedAnimation(
                                                   LootDeckWidgetState
@@ -264,7 +264,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                           userScalingBars)
                                       : Container(),
                                   discardPileSize > 1
-                                      ? _buildSlideAnimation(
+                                      ? _buildSlideAnimation( // ignore: avoid-returning-widgets, animation helper
                                           RotationTransition(
                                               turns: AlwaysStoppedAnimation(
                                                   LootDeckWidgetState
@@ -280,7 +280,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                           userScalingBars)
                                       : Container(),
                                   deck.discardPileIsNotEmpty
-                                      ? _buildDrawAnimation(
+                                      ? _buildDrawAnimation( // ignore: avoid-returning-widgets, animation helper
                                           LootCardWidget(
                                             key:
                                                 Key(discardPileSize.toString()),

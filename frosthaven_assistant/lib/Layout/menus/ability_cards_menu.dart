@@ -196,7 +196,7 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
                                       ),
                                       ...List.generate(
                                         min(drawPile.length, _kMaxRevealButtons),
-                                        (i) => buildRevealButton(drawPile.length, i + 1),
+                                        (i) => buildRevealButton(drawPile.length, i + 1), // ignore: avoid-returning-widgets, widget generator lambda
                                       ),
                                       TextButton(
                                         onPressed: () {
@@ -241,8 +241,8 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          buildList(drawPile, true, false),
-                          buildList(discardPile, false, true)
+                          buildList(drawPile, true, false), // ignore: avoid-returning-widgets, list-returning helper for Row children
+                          buildList(discardPile, false, true) // ignore: avoid-returning-widgets, list-returning helper for Row children
                         ],
                       )),
                       Container(

@@ -29,9 +29,6 @@ class SelectScenarioMenu extends StatefulWidget {
 }
 
 class SelectScenarioMenuState extends State<SelectScenarioMenu> {
-  static const int _kSoloNameIndex = 0;
-  static const int _kSoloTextIndex = 1;
-  static const double _kIconSize = 30.0;
   static const double _kCardMargin = 2.0;
   static const double _kSearchPadding = 10.0;
   static const int _kNumpadMaxLength = 3;
@@ -202,60 +199,6 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
     });
   }
 
-  Widget buildSoloTile(String name) {
-    List<String> strings = name.split(':');
-    strings[0] = strings.first.replaceFirst(" ", "Å");
-    String nameAndCampaign = strings.first.split("Å")[1];
-    String characterName = nameAndCampaign.split("/")[_kSoloNameIndex];
-    String edition = nameAndCampaign.split("/")[_kSoloTextIndex];
-
-    String text = strings[_kSoloTextIndex];
-    for (String key in _gameData.modelData.value.keys) {
-      for (CharacterClass character
-          in _gameData.modelData.value[key]!.characters) {
-        if (character.name == characterName) {
-          if (character.hidden &&
-              !_gameState.unlockedClasses.contains(character.id)) {
-            text = "???";
-          }
-          break;
-        }
-      }
-    }
-
-    return ListTile(
-      leading: Image(
-        height: _kIconSize,
-        width: _kIconSize,
-        fit: BoxFit.scaleDown,
-        image: AssetImage("assets/images/class-icons/$characterName.png"),
-      ),
-      title: Text(text, style: kTitleStyle),
-      trailing: Text("($edition)", softWrap: true, style: kSubtitleStyle),
-      onTap: () {
-        Navigator.pop(context);
-        _gameState
-            .action(SetScenarioCommand(name, false, gameState: _gameState));
-      },
-    );
-  }
-
-  Widget buildTile(String name) {
-    String title = name;
-    if (!_settings.showScenarioNames.value) {
-      title = name.split(' ').first;
-    }
-
-    return ListTile(
-      title: Text(title, style: kTitleStyle),
-      onTap: () {
-        Navigator.pop(context);
-        _gameState
-            .action(SetScenarioCommand(name, false, gameState: _gameState));
-      },
-    );
-  }
-
   List<Widget> buildCampaignButtons() {
     List<Widget> retVal = [];
     for (String item in _gameData.editions) {
@@ -298,7 +241,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                       key: UniqueKey(),
                       title: Text(
                           "Current Campaign: ${_gameState.currentCampaign.value}"),
-                      children: buildCampaignButtons(), // ignore: avoid-returning-widgets, widget list from helper method
+                      children: buildCampaignButtons(), // ignore: avoid-returning-widgets, list-returning helper for Column children
                     ),
                   ]),
                   Container(
@@ -348,8 +291,8 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                                 itemCount: _foundScenarios.length,
                                 itemBuilder: (context, index) =>
                                     _gameState.currentCampaign.value == "Solo"
-                                        ? buildSoloTile(_foundScenarios[index])
-                                        : buildTile(_foundScenarios[index])))
+                                        ? _SoloTile(name: _foundScenarios[index], gameState: _gameState, gameData: _gameData)
+                                        : _ScenarioTile(name: _foundScenarios[index], gameState: _gameState, settings: _settings)))
                         : const Text(
                             'No results found',
                             style: kHeadingStyle,
@@ -374,5 +317,81 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                         Navigator.pop(context);
                       }))
             ])));
+  }
+}
+
+class _SoloTile extends StatelessWidget {
+  static const int _kSoloNameIndex = 0;
+  static const int _kSoloTextIndex = 1;
+  static const double _kIconSize = 30.0;
+
+  const _SoloTile({
+    required this.name,
+    required this.gameState,
+    required this.gameData,
+  });
+
+  final String name;
+  final GameState gameState;
+  final GameData gameData;
+
+  @override
+  Widget build(BuildContext context) {
+    List<String> strings = name.split(':');
+    strings[0] = strings.first.replaceFirst(" ", "Å");
+    String nameAndCampaign = strings.first.split("Å")[1];
+    String characterName = nameAndCampaign.split("/")[_kSoloNameIndex];
+    String edition = nameAndCampaign.split("/")[_kSoloTextIndex];
+
+    String text = strings[_kSoloTextIndex];
+    for (String key in gameData.modelData.value.keys) {
+      for (CharacterClass character in gameData.modelData.value[key]!.characters) {
+        if (character.name == characterName) {
+          if (character.hidden && !gameState.unlockedClasses.contains(character.id)) {
+            text = "???";
+          }
+          break;
+        }
+      }
+    }
+
+    return ListTile(
+      leading: Image(
+        height: _kIconSize,
+        width: _kIconSize,
+        fit: BoxFit.scaleDown,
+        image: AssetImage("assets/images/class-icons/$characterName.png"),
+      ),
+      title: Text(text, style: kTitleStyle),
+      trailing: Text("($edition)", softWrap: true, style: kSubtitleStyle),
+      onTap: () {
+        Navigator.pop(context);
+        gameState.action(SetScenarioCommand(name, false, gameState: gameState));
+      },
+    );
+  }
+}
+
+class _ScenarioTile extends StatelessWidget {
+  const _ScenarioTile({
+    required this.name,
+    required this.gameState,
+    required this.settings,
+  });
+
+  final String name;
+  final GameState gameState;
+  final Settings settings;
+
+  @override
+  Widget build(BuildContext context) {
+    String title = settings.showScenarioNames.value ? name : name.split(' ').first;
+    return ListTile(
+      title: Text(title, style: kTitleStyle),
+      onTap: () {
+        Navigator.pop(context);
+        gameState.action(SetScenarioCommand(name, false, gameState: gameState));
+      },
+    );
   }
 }

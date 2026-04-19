@@ -1,4 +1,3 @@
-// ignore_for_file: avoid-returning-widgets, file uses static widget builder methods for stat card layouts
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
@@ -91,485 +90,6 @@ class MonsterStatCardWidget extends StatelessWidget {
   final GameState? gameState;
   final Settings? settings;
 
-  static Widget buildNormalLayout(Monster data, double scale, Shadow shadow,
-      TextStyle leftStyle, TextStyle rightStyle, bool frosthavenStyle,
-      {Settings? settings}) {
-    settings = settings ?? getIt<Settings>();
-    MonsterStatsModel normal = data.type.levels[data.level.value].normal!;
-    MonsterStatsModel? elite = data.type.levels[data.level.value].elite;
-
-    bool noCalculationSetting = settings.noCalculation.value;
-
-    //normal stats calculated:
-    String health = normal.health.toString();
-    if (!noCalculationSetting) {
-      int? healthValue = StatCalculator.calculateFormula(normal.health);
-      if (healthValue != null) {
-        health = healthValue.toString();
-      }
-    }
-
-    String move = normal.move.toString();
-    if (!noCalculationSetting) {
-      int? moveValue = StatCalculator.calculateFormula(normal.move);
-      if (moveValue != null) {
-        move = moveValue.toString();
-      }
-    }
-
-    String attack = normal.attack.toString();
-    if (!noCalculationSetting) {
-      int? attackValue = StatCalculator.calculateFormula(normal.attack);
-      if (attackValue != null) {
-        attack = attackValue.toString();
-      }
-    }
-
-    return RepaintBoundary(
-        child: Stack(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(_kBorderRadius * scale)),
-          child: Image(
-            height: _kCardHeight * scale,
-            width: _kCardWidth * scale,
-            fit: BoxFit.fitHeight,
-            image: AssetImage("assets/images/psd/monsterStats-normal.png"),
-          ),
-        ),
-        Positioned(
-            width: _kCardWidth * scale,
-            left: _kTitleLeft * scale,
-            top: _kTitleTop * scale,
-            child: Text(
-              textAlign: TextAlign.center,
-              data.type.display,
-              style: TextStyle(
-                  fontFamily: frosthavenStyle ? 'GermaniaOne' : 'Pirata',
-                  color: Colors.white,
-                  fontSize: _kTitleFontSize * scale,
-                  height: 1,
-                  shadows: [shadow]),
-            )),
-        Positioned(
-            left: _kLevelLeft * scale,
-            top: _kLevelTop * scale,
-            child: Text(
-              data.level.value.toString(),
-              style: TextStyle(
-                  fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
-                  color: Colors.white,
-                  fontSize: _kLevelFontSize * scale,
-                  height: 1,
-                  shadows: [shadow]),
-            )),
-        Positioned(
-          left: _kNormalStatsLeft * scale,
-          top: _kNormalStatsTop * scale,
-          child: Column(
-            children: <Widget>[
-              Text(health, style: leftStyle),
-              Text(move, style: leftStyle),
-              Text(attack, style: leftStyle),
-              Text(normal.range != 0 ? normal.range.toString() : "-",
-                  style: leftStyle),
-            ],
-          ),
-        ),
-        Positioned(
-            left: 0.0,
-            top: _kNormalAttribTop * scale,
-            width: _kNormalAttribWidth * scale,
-            child: RepaintBoundary(
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-              LineBuilder.createLines(
-                  normal.attributes,
-                  true,
-                  false,
-                  false,
-                  data,
-                  CrossAxisAlignment.end,
-                  scale,
-                  settings.shimmer.value),
-            ]))),
-        Positioned(
-          right: _kEliteStatsRight * scale,
-          top: _kNormalStatsTop * scale,
-          child: Column(
-            children: <Widget>[
-              Text(StatCalculator.calculateFormula(elite!.health).toString(),
-                  style: rightStyle),
-              Text(StatCalculator.calculateFormula(elite.move).toString(),
-                  style: rightStyle),
-              Text(StatCalculator.calculateFormula(elite.attack).toString(),
-                  style: rightStyle),
-              Text(elite.range != 0 ? elite.range.toString() : "-",
-                  style: rightStyle),
-            ],
-          ),
-        ),
-        Positioned(
-          width: _kEliteAttribWidth * scale,
-          right: 0.0,
-          top: _kNormalAttribTop * scale,
-          child: RepaintBoundary(
-              child: LineBuilder.createLines(
-                  elite.attributes,
-                  false,
-                  false,
-                  false,
-                  data,
-                  CrossAxisAlignment.start,
-                  scale,
-                  settings.shimmer.value)),
-        ),
-        if (data.type.flying)
-          Positioned(
-              height: _kStatIconHeight * scale,
-              left: _kStatIconLeft * scale,
-              top: _kStatIconTopMove * scale,
-              child: Image(
-                fit: BoxFit.fitHeight,
-                image: AssetImage(frosthavenStyle
-                    ? "assets/images/psd/flying-stat_fh.png"
-                    : "assets/images/psd/flying-stat.png"),
-              )),
-        if (!data.type.flying && frosthavenStyle)
-          Positioned(
-              height: _kStatIconHeight * scale,
-              left: _kStatIconLeft * scale,
-              top: _kStatIconTopMove * scale,
-              child: const Image(
-                fit: BoxFit.fitHeight,
-                image: AssetImage("assets/images/psd/move-stat_fh.png"),
-              )),
-        if (frosthavenStyle)
-          Positioned(
-              height: _kStatIconHeight * scale,
-              left: _kStatIconLeft * scale,
-              top: _kStatIconTopRange * scale,
-              child: const Image(
-                fit: BoxFit.fitHeight,
-                image: AssetImage("assets/images/psd/range-stat_fh.png"),
-              )),
-        if (data.type.capture)
-          Positioned(
-              height: _kStatIconHeight * scale,
-              left: _kStatIconLeft * scale,
-              top: _kStatIconTopRange * scale,
-              child: const Image(
-                fit: BoxFit.fitHeight,
-                image: AssetImage("assets/images/psd/capture.png"),
-              )),
-        Positioned(
-            //TODO: move position to FH place in corner
-            left: _kConditionLeft * scale,
-            bottom: _kConditionBottom * scale,
-            child: Column(
-              verticalDirection: VerticalDirection.up,
-              children: _createConditionList(data, scale, normal),
-            )),
-        Positioned(
-            right: _kConditionLeft * scale,
-            bottom: _kConditionBottom * scale,
-            child: Column(
-              verticalDirection: VerticalDirection.up,
-              children: _createConditionList(data, scale, elite),
-            ))
-      ],
-    ));
-  }
-
-  static Widget buildBossLayout(Monster data, double scale, Shadow shadow,
-      TextStyle leftStyle, bool frosthavenStyle,
-      {required MonsterStatCardViewModel viewModel, Settings? settings}) {
-    settings = settings ?? getIt<Settings>();
-    bool noCalculationSetting = settings.noCalculation.value;
-    MonsterStatsModel normal = data.type.levels[data.level.value].boss!;
-    //normal stats calculated:
-    String health = normal.health.toString();
-    if (!noCalculationSetting) {
-      int? healthValue = StatCalculator.calculateFormula(normal.health);
-      if (healthValue != null) {
-        health = healthValue.toString();
-      }
-    }
-    health = viewModel.resolveBossHealth(health);
-
-    String attack = normal.attack.toString();
-    String move = normal.move.toString();
-    if (!noCalculationSetting) {
-      int? moveValue = StatCalculator.calculateFormula(normal.move);
-      if (moveValue != null) {
-        move = moveValue.toString();
-      }
-      int? attackValue = StatCalculator.calculateFormula(normal.attack);
-      if (attackValue != null) {
-        attack = attackValue.toString();
-      }
-    }
-
-    String bossAttackAttributes = "";
-    List<String> bossOtherAttributes = [];
-
-    for (String item in normal.attributes) {
-      if (frosthavenStyle &&
-          !bossAttackAttributes.contains("target") &&
-          (item.startsWith('%wound%') ||
-              item.startsWith('%poison%') ||
-              item.startsWith("%brittle%"))) {
-        bossAttackAttributes += item;
-      } else if (frosthavenStyle && item.startsWith("%target%")) {
-        bossAttackAttributes += "^$item";
-      } else {
-        bossOtherAttributes.add(item);
-      }
-    }
-
-    Widget attackAttributes = LineBuilder.createLines([bossAttackAttributes],
-        true, false, false, data, CrossAxisAlignment.start, scale, false);
-
-    final specialStyle = TextStyle(
-        fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
-        color: Colors.yellow,
-        fontSize: _kBossSpecialFontSize * scale,
-        height: 1,
-        shadows: [shadow]);
-
-    return RepaintBoundary(
-        child: Stack(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(_kBorderRadius * scale)),
-          child: Image(
-            height: _kCardHeight * scale,
-            width: _kCardWidth * scale,
-            fit: BoxFit.fitWidth,
-            image: const AssetImage("assets/images/psd/monsterStats-boss.png"),
-          ),
-        ),
-        Positioned(
-            left: _kBossLevelLeft * scale,
-            top: frosthavenStyle ? _kBossLevelTopFh * scale : _kBossLevelTopGh * scale,
-            child: Text(
-              data.level.value.toString(),
-              style: TextStyle(
-                  fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
-                  color: Colors.white,
-                  fontSize: _kLevelFontSize * scale,
-                  height: 1,
-                  shadows: [shadow]),
-            )),
-        Positioned(
-          left: 0,
-          top: frosthavenStyle ? _kBossStatsTopFh * scale : _kBossStatsTopGh * scale,
-          width: _kBossStatsWidth * scale,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
-              Text(health, style: leftStyle),
-              Text(move, style: leftStyle),
-              Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                Container(
-                    margin: EdgeInsets.only(
-                        right: bossAttackAttributes.contains("target")
-                            ? _kBossAttribMarginRight * scale
-                            : 0),
-                    child: attackAttributes),
-                Text(attack, style: leftStyle)
-              ]),
-              Text(normal.range != 0 ? normal.range.toString() : "",
-                  style: leftStyle),
-            ],
-          ),
-        ),
-        Positioned(
-            left: _kBossContentLeft * scale,
-            top: _kBossContentTop * scale,
-            width: _kBossContentWidth * scale, //useful or not?
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              bossOtherAttributes.isNotEmpty
-                  ? Row(children: [
-                      Text("    ", style: specialStyle),
-                      SizedBox(
-                          width: _kBossSpecialWidth * scale,
-                          child: RepaintBoundary(
-                              child: LineBuilder.createLines(
-                                  bossOtherAttributes,
-                                  false,
-                                  false,
-                                  false,
-                                  data,
-                                  CrossAxisAlignment.start,
-                                  scale,
-                                  settings.shimmer.value))),
-                    ])
-                  : Container(),
-              if (bossOtherAttributes.isNotEmpty)
-                Image.asset(
-                  scale: 1 / (scale * _kDividerScaleFactor),
-                  height: _kDividerHeight * scale,
-                  fit: BoxFit.fill,
-                  width: _kDividerWidth * scale,
-                  //actually 40, but some layout might depend on wider size so not changing now
-                  filterQuality: FilterQuality.medium,
-                  "assets/images/abilities/divider_boss_fh.png",
-                ),
-              normal.special1.isNotEmpty
-                  ? Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                          Text(
-                            "1:",
-                            style: specialStyle,
-                          ),
-                          SizedBox(
-                              width: _kBossSpecialWidth * scale,
-                              child: RepaintBoundary(
-                                  child: LineBuilder.createLines(
-                                      data.type.levels[data.level.value].boss!
-                                          .special1,
-                                      false,
-                                      !noCalculationSetting,
-                                      false,
-                                      data,
-                                      CrossAxisAlignment.start,
-                                      scale,
-                                      false))),
-                        ])
-                  : Container(),
-              normal.special2.isNotEmpty
-                  ? Image.asset(
-                      scale: 1 / (scale * _kDividerScaleFactor),
-                      height: _kDividerHeight * scale,
-                      fit: BoxFit.fill,
-                      width: _kDividerWidth * scale,
-                      //actually 40, but some layout might depend on wider size so not changing now
-                      filterQuality: FilterQuality.medium,
-                      "assets/images/abilities/divider_boss_fh.png",
-                    )
-                  : Container(),
-              normal.special2.isNotEmpty
-                  ? Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                          Text("2:", style: specialStyle),
-                          SizedBox(
-                              width: _kBossSpecialWidth * scale,
-                              child: RepaintBoundary(
-                                  child: LineBuilder.createLines(
-                                      data.type.levels[data.level.value].boss!
-                                          .special2,
-                                      false,
-                                      !noCalculationSetting,
-                                      false,
-                                      data,
-                                      CrossAxisAlignment.start,
-                                      scale,
-                                      false))),
-                        ])
-                  : Container()
-            ])),
-        if (data.type.flying)
-          Positioned(
-              height: _kStatIconHeight * scale,
-              left: _kBossStatIconLeft * scale,
-              top: _kBossStatIconTop * scale,
-              child: Image(
-                fit: BoxFit.fitHeight,
-                image: AssetImage(frosthavenStyle
-                    ? "assets/images/psd/flying-stat_fh.png"
-                    : "assets/images/psd/flying-stat.png"),
-              )),
-        if (!data.type.flying && !frosthavenStyle)
-          Positioned(
-              height: _kStatIconHeight * scale,
-              left: _kBossStatIconLeft * scale,
-              top: _kBossStatIconTop * scale,
-              child: const Image(
-                fit: BoxFit.fitHeight,
-                image: AssetImage("assets/images/psd/move-stat.png"),
-              )),
-        if (normal.range != 0)
-          Positioned(
-              height: _kStatIconHeight * scale,
-              left: _kBossRangeLeft * scale,
-              top: _kBossRangeTop * scale,
-              child: Image(
-                fit: BoxFit.fitHeight,
-                image: AssetImage(frosthavenStyle
-                    ? "assets/images/psd/range-stat_fh.png"
-                    : "assets/images/psd/range-stat.png"),
-              )),
-        Positioned(
-            right: _kBossConditionRight * scale,
-            top: _kBossConditionTop * scale,
-            child: Row(
-              children: _createConditionList(data, scale, normal),
-            )),
-      ],
-    ));
-  }
-
-  static Widget buildCard(Monster data, double scale,
-      {required MonsterStatCardViewModel viewModel, Settings? settings}) {
-    bool frosthavenStyle = GameMethods.isFrosthavenStyle(data.type);
-
-    var shadow = Shadow(
-      offset: Offset(_kShadowTextOffset * scale, _kShadowTextOffset * scale),
-      color: Colors.black87,
-      blurRadius: _kShadowTextBlur * scale,
-    );
-
-    var shadowLeft = Shadow(
-      offset: Offset(_kShadowTextOffset * scale, _kShadowTextOffset * scale),
-      color: Colors.black54,
-      blurRadius: _kShadowTextBlur * scale,
-    );
-
-    final leftStyle = TextStyle(
-        fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
-        color: Colors.black,
-        fontSize: _kStatsFontSize * scale,
-        height: _kStatsLineHeight,
-        shadows: [shadowLeft]);
-
-    final rightStyle = TextStyle(
-        fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
-        color: Colors.white,
-        fontSize: _kStatsFontSize * scale,
-        height: _kStatsLineHeight,
-        shadows: [shadow]);
-
-    return ValueListenableBuilder<int>(
-        valueListenable: data.level,
-        builder: (context, value, child) {
-          bool isBoss = data.type.levels[data.level.value].boss != null;
-
-          return Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black45,
-                    blurRadius: _kShadowBlur * scale,
-                    offset: Offset(_kShadowOffsetX * scale, _kShadowOffsetY * scale), // Shadow position
-                  ),
-                ],
-              ),
-              margin: EdgeInsets.all(_kMargin * scale),
-              child: isBoss
-                  ? buildBossLayout(
-                      data, scale, shadow, leftStyle, frosthavenStyle,
-                      viewModel: viewModel, settings: settings)
-                  : buildNormalLayout(data, scale, shadow, leftStyle,
-                      rightStyle, frosthavenStyle,
-                      settings: settings));
-        });
-  }
-
   final Monster data;
 
   @override
@@ -586,8 +106,8 @@ class MonsterStatCardWidget extends StatelessWidget {
               onDoubleTap: () {
                 openDialog(context, StatCardZoom(monster: data));
               },
-              child:
-                  buildCard(data, scale, viewModel: vm, settings: settings_)),
+              child: MonsterStatCardView(
+                  data: data, scale: scale, viewModel: vm, settings: settings_)),
           if (!vm.isBoss)
             Positioned(
                 bottom: _kButtonBottom * scale,
@@ -672,5 +192,545 @@ class MonsterStatCardWidget extends StatelessWidget {
       ));
     }
     return list;
+  }
+}
+
+class _MonsterStatNormalLayout extends StatelessWidget {
+  const _MonsterStatNormalLayout({
+    required this.data,
+    required this.scale,
+    required this.shadow,
+    required this.leftStyle,
+    required this.rightStyle,
+    required this.frosthavenStyle,
+    this.settings,
+  });
+
+  final Monster data;
+  final double scale;
+  final Shadow shadow;
+  final TextStyle leftStyle;
+  final TextStyle rightStyle;
+  final bool frosthavenStyle;
+  final Settings? settings;
+
+  @override
+  Widget build(BuildContext context) {
+    final settings_ = settings ?? getIt<Settings>();
+    MonsterStatsModel normal = data.type.levels[data.level.value].normal!;
+    MonsterStatsModel? elite = data.type.levels[data.level.value].elite;
+
+    bool noCalculationSetting = settings_.noCalculation.value;
+
+    String health = normal.health.toString();
+    if (!noCalculationSetting) {
+      int? healthValue = StatCalculator.calculateFormula(normal.health);
+      if (healthValue != null) {
+        health = healthValue.toString();
+      }
+    }
+
+    String move = normal.move.toString();
+    if (!noCalculationSetting) {
+      int? moveValue = StatCalculator.calculateFormula(normal.move);
+      if (moveValue != null) {
+        move = moveValue.toString();
+      }
+    }
+
+    String attack = normal.attack.toString();
+    if (!noCalculationSetting) {
+      int? attackValue = StatCalculator.calculateFormula(normal.attack);
+      if (attackValue != null) {
+        attack = attackValue.toString();
+      }
+    }
+
+    return RepaintBoundary(
+        child: Stack(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(MonsterStatCardWidget._kBorderRadius * scale)),
+          child: Image(
+            height: MonsterStatCardWidget._kCardHeight * scale,
+            width: MonsterStatCardWidget._kCardWidth * scale,
+            fit: BoxFit.fitHeight,
+            image: const AssetImage("assets/images/psd/monsterStats-normal.png"),
+          ),
+        ),
+        Positioned(
+            width: MonsterStatCardWidget._kCardWidth * scale,
+            left: MonsterStatCardWidget._kTitleLeft * scale,
+            top: MonsterStatCardWidget._kTitleTop * scale,
+            child: Text(
+              textAlign: TextAlign.center,
+              data.type.display,
+              style: TextStyle(
+                  fontFamily: frosthavenStyle ? 'GermaniaOne' : 'Pirata',
+                  color: Colors.white,
+                  fontSize: MonsterStatCardWidget._kTitleFontSize * scale,
+                  height: 1,
+                  shadows: [shadow]),
+            )),
+        Positioned(
+            left: MonsterStatCardWidget._kLevelLeft * scale,
+            top: MonsterStatCardWidget._kLevelTop * scale,
+            child: Text(
+              data.level.value.toString(),
+              style: TextStyle(
+                  fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
+                  color: Colors.white,
+                  fontSize: MonsterStatCardWidget._kLevelFontSize * scale,
+                  height: 1,
+                  shadows: [shadow]),
+            )),
+        Positioned(
+          left: MonsterStatCardWidget._kNormalStatsLeft * scale,
+          top: MonsterStatCardWidget._kNormalStatsTop * scale,
+          child: Column(
+            children: <Widget>[
+              Text(health, style: leftStyle),
+              Text(move, style: leftStyle),
+              Text(attack, style: leftStyle),
+              Text(normal.range != 0 ? normal.range.toString() : "-",
+                  style: leftStyle),
+            ],
+          ),
+        ),
+        Positioned(
+            left: 0.0,
+            top: MonsterStatCardWidget._kNormalAttribTop * scale,
+            width: MonsterStatCardWidget._kNormalAttribWidth * scale,
+            child: RepaintBoundary(
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+              LineBuilder.createLines(
+                  normal.attributes,
+                  true,
+                  false,
+                  false,
+                  data,
+                  CrossAxisAlignment.end,
+                  scale,
+                  settings_.shimmer.value),
+            ]))),
+        Positioned(
+          right: MonsterStatCardWidget._kEliteStatsRight * scale,
+          top: MonsterStatCardWidget._kNormalStatsTop * scale,
+          child: Column(
+            children: <Widget>[
+              Text(StatCalculator.calculateFormula(elite!.health).toString(),
+                  style: rightStyle),
+              Text(StatCalculator.calculateFormula(elite.move).toString(),
+                  style: rightStyle),
+              Text(StatCalculator.calculateFormula(elite.attack).toString(),
+                  style: rightStyle),
+              Text(elite.range != 0 ? elite.range.toString() : "-",
+                  style: rightStyle),
+            ],
+          ),
+        ),
+        Positioned(
+          width: MonsterStatCardWidget._kEliteAttribWidth * scale,
+          right: 0.0,
+          top: MonsterStatCardWidget._kNormalAttribTop * scale,
+          child: RepaintBoundary(
+              child: LineBuilder.createLines(
+                  elite.attributes,
+                  false,
+                  false,
+                  false,
+                  data,
+                  CrossAxisAlignment.start,
+                  scale,
+                  settings_.shimmer.value)),
+        ),
+        if (data.type.flying)
+          Positioned(
+              height: MonsterStatCardWidget._kStatIconHeight * scale,
+              left: MonsterStatCardWidget._kStatIconLeft * scale,
+              top: MonsterStatCardWidget._kStatIconTopMove * scale,
+              child: Image(
+                fit: BoxFit.fitHeight,
+                image: AssetImage(frosthavenStyle
+                    ? "assets/images/psd/flying-stat_fh.png"
+                    : "assets/images/psd/flying-stat.png"),
+              )),
+        if (!data.type.flying && frosthavenStyle)
+          Positioned(
+              height: MonsterStatCardWidget._kStatIconHeight * scale,
+              left: MonsterStatCardWidget._kStatIconLeft * scale,
+              top: MonsterStatCardWidget._kStatIconTopMove * scale,
+              child: const Image(
+                fit: BoxFit.fitHeight,
+                image: AssetImage("assets/images/psd/move-stat_fh.png"),
+              )),
+        if (frosthavenStyle)
+          Positioned(
+              height: MonsterStatCardWidget._kStatIconHeight * scale,
+              left: MonsterStatCardWidget._kStatIconLeft * scale,
+              top: MonsterStatCardWidget._kStatIconTopRange * scale,
+              child: const Image(
+                fit: BoxFit.fitHeight,
+                image: AssetImage("assets/images/psd/range-stat_fh.png"),
+              )),
+        if (data.type.capture)
+          Positioned(
+              height: MonsterStatCardWidget._kStatIconHeight * scale,
+              left: MonsterStatCardWidget._kStatIconLeft * scale,
+              top: MonsterStatCardWidget._kStatIconTopRange * scale,
+              child: const Image(
+                fit: BoxFit.fitHeight,
+                image: AssetImage("assets/images/psd/capture.png"),
+              )),
+        Positioned(
+            //TODO: move position to FH place in corner
+            left: MonsterStatCardWidget._kConditionLeft * scale,
+            bottom: MonsterStatCardWidget._kConditionBottom * scale,
+            child: Column(
+              verticalDirection: VerticalDirection.up,
+              children: MonsterStatCardWidget._createConditionList(data, scale, normal), // ignore: avoid-returning-widgets, list-returning helper for Stack/Column children
+            )),
+        Positioned(
+            right: MonsterStatCardWidget._kConditionLeft * scale,
+            bottom: MonsterStatCardWidget._kConditionBottom * scale,
+            child: Column(
+              verticalDirection: VerticalDirection.up,
+              children: MonsterStatCardWidget._createConditionList(data, scale, elite), // ignore: avoid-returning-widgets, list-returning helper for Stack/Column children
+            ))
+      ],
+    ));
+  }
+}
+
+class MonsterStatBossLayout extends StatelessWidget {
+  const MonsterStatBossLayout({
+    super.key,
+    required this.data,
+    required this.scale,
+    required this.shadow,
+    required this.leftStyle,
+    required this.frosthavenStyle,
+    required this.viewModel,
+    this.settings,
+  });
+
+  final Monster data;
+  final double scale;
+  final Shadow shadow;
+  final TextStyle leftStyle;
+  final bool frosthavenStyle;
+  final MonsterStatCardViewModel viewModel;
+  final Settings? settings;
+
+  @override
+  Widget build(BuildContext context) {
+    final settings_ = settings ?? getIt<Settings>();
+    bool noCalculationSetting = settings_.noCalculation.value;
+    MonsterStatsModel normal = data.type.levels[data.level.value].boss!;
+
+    String health = normal.health.toString();
+    if (!noCalculationSetting) {
+      int? healthValue = StatCalculator.calculateFormula(normal.health);
+      if (healthValue != null) {
+        health = healthValue.toString();
+      }
+    }
+    health = viewModel.resolveBossHealth(health);
+
+    String attack = normal.attack.toString();
+    String move = normal.move.toString();
+    if (!noCalculationSetting) {
+      int? moveValue = StatCalculator.calculateFormula(normal.move);
+      if (moveValue != null) {
+        move = moveValue.toString();
+      }
+      int? attackValue = StatCalculator.calculateFormula(normal.attack);
+      if (attackValue != null) {
+        attack = attackValue.toString();
+      }
+    }
+
+    String bossAttackAttributes = "";
+    List<String> bossOtherAttributes = [];
+
+    for (String item in normal.attributes) {
+      if (frosthavenStyle &&
+          !bossAttackAttributes.contains("target") &&
+          (item.startsWith('%wound%') ||
+              item.startsWith('%poison%') ||
+              item.startsWith("%brittle%"))) {
+        bossAttackAttributes += item;
+      } else if (frosthavenStyle && item.startsWith("%target%")) {
+        bossAttackAttributes += "^$item";
+      } else {
+        bossOtherAttributes.add(item);
+      }
+    }
+
+    Widget attackAttributes = LineBuilder.createLines([bossAttackAttributes],
+        true, false, false, data, CrossAxisAlignment.start, scale, false);
+
+    final specialStyle = TextStyle(
+        fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
+        color: Colors.yellow,
+        fontSize: MonsterStatCardWidget._kBossSpecialFontSize * scale,
+        height: 1,
+        shadows: [shadow]);
+
+    return RepaintBoundary(
+        child: Stack(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(MonsterStatCardWidget._kBorderRadius * scale)),
+          child: Image(
+            height: MonsterStatCardWidget._kCardHeight * scale,
+            width: MonsterStatCardWidget._kCardWidth * scale,
+            fit: BoxFit.fitWidth,
+            image: const AssetImage("assets/images/psd/monsterStats-boss.png"),
+          ),
+        ),
+        Positioned(
+            left: MonsterStatCardWidget._kBossLevelLeft * scale,
+            top: frosthavenStyle ? MonsterStatCardWidget._kBossLevelTopFh * scale : MonsterStatCardWidget._kBossLevelTopGh * scale,
+            child: Text(
+              data.level.value.toString(),
+              style: TextStyle(
+                  fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
+                  color: Colors.white,
+                  fontSize: MonsterStatCardWidget._kLevelFontSize * scale,
+                  height: 1,
+                  shadows: [shadow]),
+            )),
+        Positioned(
+          left: 0,
+          top: frosthavenStyle ? MonsterStatCardWidget._kBossStatsTopFh * scale : MonsterStatCardWidget._kBossStatsTopGh * scale,
+          width: MonsterStatCardWidget._kBossStatsWidth * scale,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              Text(health, style: leftStyle),
+              Text(move, style: leftStyle),
+              Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                Container(
+                    margin: EdgeInsets.only(
+                        right: bossAttackAttributes.contains("target")
+                            ? MonsterStatCardWidget._kBossAttribMarginRight * scale
+                            : 0),
+                    child: attackAttributes),
+                Text(attack, style: leftStyle)
+              ]),
+              Text(normal.range != 0 ? normal.range.toString() : "",
+                  style: leftStyle),
+            ],
+          ),
+        ),
+        Positioned(
+            left: MonsterStatCardWidget._kBossContentLeft * scale,
+            top: MonsterStatCardWidget._kBossContentTop * scale,
+            width: MonsterStatCardWidget._kBossContentWidth * scale,
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              bossOtherAttributes.isNotEmpty
+                  ? Row(children: [
+                      Text("    ", style: specialStyle),
+                      SizedBox(
+                          width: MonsterStatCardWidget._kBossSpecialWidth * scale,
+                          child: RepaintBoundary(
+                              child: LineBuilder.createLines(
+                                  bossOtherAttributes,
+                                  false,
+                                  false,
+                                  false,
+                                  data,
+                                  CrossAxisAlignment.start,
+                                  scale,
+                                  settings_.shimmer.value))),
+                    ])
+                  : Container(),
+              if (bossOtherAttributes.isNotEmpty)
+                Image.asset(
+                  scale: 1 / (scale * MonsterStatCardWidget._kDividerScaleFactor),
+                  height: MonsterStatCardWidget._kDividerHeight * scale,
+                  fit: BoxFit.fill,
+                  width: MonsterStatCardWidget._kDividerWidth * scale,
+                  filterQuality: FilterQuality.medium,
+                  "assets/images/abilities/divider_boss_fh.png",
+                ),
+              normal.special1.isNotEmpty
+                  ? Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                          Text(
+                            "1:",
+                            style: specialStyle,
+                          ),
+                          SizedBox(
+                              width: MonsterStatCardWidget._kBossSpecialWidth * scale,
+                              child: RepaintBoundary(
+                                  child: LineBuilder.createLines(
+                                      data.type.levels[data.level.value].boss!
+                                          .special1,
+                                      false,
+                                      !noCalculationSetting,
+                                      false,
+                                      data,
+                                      CrossAxisAlignment.start,
+                                      scale,
+                                      false))),
+                        ])
+                  : Container(),
+              normal.special2.isNotEmpty
+                  ? Image.asset(
+                      scale: 1 / (scale * MonsterStatCardWidget._kDividerScaleFactor),
+                      height: MonsterStatCardWidget._kDividerHeight * scale,
+                      fit: BoxFit.fill,
+                      width: MonsterStatCardWidget._kDividerWidth * scale,
+                      filterQuality: FilterQuality.medium,
+                      "assets/images/abilities/divider_boss_fh.png",
+                    )
+                  : Container(),
+              normal.special2.isNotEmpty
+                  ? Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                          Text("2:", style: specialStyle),
+                          SizedBox(
+                              width: MonsterStatCardWidget._kBossSpecialWidth * scale,
+                              child: RepaintBoundary(
+                                  child: LineBuilder.createLines(
+                                      data.type.levels[data.level.value].boss!
+                                          .special2,
+                                      false,
+                                      !noCalculationSetting,
+                                      false,
+                                      data,
+                                      CrossAxisAlignment.start,
+                                      scale,
+                                      false))),
+                        ])
+                  : Container()
+            ])),
+        if (data.type.flying)
+          Positioned(
+              height: MonsterStatCardWidget._kStatIconHeight * scale,
+              left: MonsterStatCardWidget._kBossStatIconLeft * scale,
+              top: MonsterStatCardWidget._kBossStatIconTop * scale,
+              child: Image(
+                fit: BoxFit.fitHeight,
+                image: AssetImage(frosthavenStyle
+                    ? "assets/images/psd/flying-stat_fh.png"
+                    : "assets/images/psd/flying-stat.png"),
+              )),
+        if (!data.type.flying && !frosthavenStyle)
+          Positioned(
+              height: MonsterStatCardWidget._kStatIconHeight * scale,
+              left: MonsterStatCardWidget._kBossStatIconLeft * scale,
+              top: MonsterStatCardWidget._kBossStatIconTop * scale,
+              child: const Image(
+                fit: BoxFit.fitHeight,
+                image: AssetImage("assets/images/psd/move-stat.png"),
+              )),
+        if (normal.range != 0)
+          Positioned(
+              height: MonsterStatCardWidget._kStatIconHeight * scale,
+              left: MonsterStatCardWidget._kBossRangeLeft * scale,
+              top: MonsterStatCardWidget._kBossRangeTop * scale,
+              child: Image(
+                fit: BoxFit.fitHeight,
+                image: AssetImage(frosthavenStyle
+                    ? "assets/images/psd/range-stat_fh.png"
+                    : "assets/images/psd/range-stat.png"),
+              )),
+        Positioned(
+            right: MonsterStatCardWidget._kBossConditionRight * scale,
+            top: MonsterStatCardWidget._kBossConditionTop * scale,
+            child: Row(
+              children: MonsterStatCardWidget._createConditionList(data, scale, normal), // ignore: avoid-returning-widgets, list-returning helper for Stack/Row children
+            )),
+      ],
+    ));
+  }
+}
+
+class MonsterStatCardView extends StatelessWidget {
+  const MonsterStatCardView({
+    super.key,
+    required this.data,
+    required this.scale,
+    required this.viewModel,
+    this.settings,
+  });
+
+  final Monster data;
+  final double scale;
+  final MonsterStatCardViewModel viewModel;
+  final Settings? settings;
+
+  @override
+  Widget build(BuildContext context) {
+    bool frosthavenStyle = GameMethods.isFrosthavenStyle(data.type);
+
+    var shadow = Shadow(
+      offset: Offset(MonsterStatCardWidget._kShadowTextOffset * scale, MonsterStatCardWidget._kShadowTextOffset * scale),
+      color: Colors.black87,
+      blurRadius: MonsterStatCardWidget._kShadowTextBlur * scale,
+    );
+
+    var shadowLeft = Shadow(
+      offset: Offset(MonsterStatCardWidget._kShadowTextOffset * scale, MonsterStatCardWidget._kShadowTextOffset * scale),
+      color: Colors.black54,
+      blurRadius: MonsterStatCardWidget._kShadowTextBlur * scale,
+    );
+
+    final leftStyle = TextStyle(
+        fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
+        color: Colors.black,
+        fontSize: MonsterStatCardWidget._kStatsFontSize * scale,
+        height: MonsterStatCardWidget._kStatsLineHeight,
+        shadows: [shadowLeft]);
+
+    final rightStyle = TextStyle(
+        fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
+        color: Colors.white,
+        fontSize: MonsterStatCardWidget._kStatsFontSize * scale,
+        height: MonsterStatCardWidget._kStatsLineHeight,
+        shadows: [shadow]);
+
+    return ValueListenableBuilder<int>(
+        valueListenable: data.level,
+        builder: (context, value, child) {
+          bool isBoss = data.type.levels[data.level.value].boss != null;
+
+          return Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black45,
+                    blurRadius: MonsterStatCardWidget._kShadowBlur * scale,
+                    offset: Offset(MonsterStatCardWidget._kShadowOffsetX * scale, MonsterStatCardWidget._kShadowOffsetY * scale),
+                  ),
+                ],
+              ),
+              margin: EdgeInsets.all(MonsterStatCardWidget._kMargin * scale),
+              child: isBoss
+                  ? MonsterStatBossLayout(
+                      data: data,
+                      scale: scale,
+                      shadow: shadow,
+                      leftStyle: leftStyle,
+                      frosthavenStyle: frosthavenStyle,
+                      viewModel: viewModel,
+                      settings: settings)
+                  : _MonsterStatNormalLayout(
+                      data: data,
+                      scale: scale,
+                      shadow: shadow,
+                      leftStyle: leftStyle,
+                      rightStyle: rightStyle,
+                      frosthavenStyle: frosthavenStyle,
+                      settings: settings));
+        });
   }
 }

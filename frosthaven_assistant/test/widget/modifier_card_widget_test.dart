@@ -41,7 +41,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ModifierCardWidget.buildFront(card, '', 1.0, 1),
+            body: ModifierCardFront(card: card, name: '', scale: 1.0),
           ),
         ),
       );
@@ -57,7 +57,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ModifierCardWidget.buildFront(card, '', 1.0, 1),
+            body: ModifierCardFront(card: card, name: '', scale: 1.0),
           ),
         ),
       );
@@ -73,7 +73,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ModifierCardWidget.buildFront(card, 'allies', 1.0, 1),
+            body: ModifierCardFront(card: card, name: 'allies', scale: 1.0),
           ),
         ),
       );

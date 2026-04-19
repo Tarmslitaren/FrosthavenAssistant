@@ -54,75 +54,28 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
 
   @override
   initState() {
-    // at the beginning, all items are shown
     super.initState();
     _gameState = widget.gameState ?? getIt<GameState>();
     _settings = widget.settings ?? getIt<Settings>();
   }
 
-  Widget buildNrButton(final int nr, final double scale) {
+  @override
+  Widget build(BuildContext context) {
     bool boss = widget.monster.type.levels.first.boss != null;
     MonsterType type = MonsterType.normal;
-    Color color = Colors.white;
+    Color baseColor = Colors.white;
 
     if (widget.elite) {
-      color = Colors.yellow;
+      baseColor = Colors.yellow;
       type = MonsterType.elite;
     }
-
     if (boss) {
-      color = Colors.red;
+      baseColor = Colors.red;
       type = MonsterType.boss;
     }
 
-    if (_gameState.currentCampaign.value == "Buttons and Bugs") {
-      color = AddStandeeMenu._kBnBColors[nr] ?? color;
-    }
-
-    bool isOut = false;
-    for (var item in widget.monster.monsterInstances) {
-      if (item.standeeNr == nr) {
-        isOut = true;
-        break;
-      }
-    }
-    if (isOut) {
-      color = Colors.grey;
-    }
-    String text = nr.toString();
-    var shadow = Shadow(
-      offset: Offset(AddStandeeMenu._kShadowOffset * scale, AddStandeeMenu._kShadowOffset * scale),
-      color: Colors.black87,
-      blurRadius: AddStandeeMenu._kShadowBlur,
-    );
-    return SizedBox(
-      width: AddStandeeMenu._kButtonSize * scale,
-      height: AddStandeeMenu._kButtonSize * scale,
-      child: TextButton(
-        child: Text(
-          text,
-          style: TextStyle(
-            color: color,
-            fontSize: kFontSizeTitle * scale,
-            shadows: [shadow],
-          ),
-        ),
-        onPressed: () {
-          if (!isOut) {
-            _gameState.action(AddStandeeCommand(
-                nr, null, widget.monster.id, type, addAsSummon,
-                gameState: _gameState));
-          }
-        },
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
     int nrOfStandees = widget.monster.type.count;
     double scale = getModalMenuScale(context);
-    //4 nrs per row
     double height = AddStandeeMenu._kHeightOneRow;
     if (nrOfStandees > AddStandeeMenu._kRow1Max) {
       height = AddStandeeMenu._kHeightTwoRows;
@@ -132,7 +85,6 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
     }
     return ModalBackground(
         width: AddStandeeMenu._kMenuWidth * scale,
-        //need to set any width to center content, overridden by dialog default min width.
         height: height * scale,
         child: Stack(children: [
           ValueListenableBuilder<int>(
@@ -141,19 +93,34 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(
-                      height: AddStandeeMenu._kTopSpacing * scale,
-                    ),
+                    SizedBox(height: AddStandeeMenu._kTopSpacing * scale),
                     Text("Add Standee Nr", style: getTitleTextStyle(scale)),
                     ...List.generate(
                       (nrOfStandees + AddStandeeMenu._kRow1Max - 1) ~/ AddStandeeMenu._kRow1Max,
-                      (rowIdx) => Row(
+                      (rowIdx) => Row( // ignore: avoid-returning-widgets, widget generator lambda
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: List.generate(
                           AddStandeeMenu._kRow1Max,
-                          (colIdx) {
+                          (colIdx) { // ignore: avoid-returning-widgets, widget generator lambda
                             final nr = rowIdx * AddStandeeMenu._kRow1Max + colIdx + 1;
-                            return nr <= nrOfStandees ? buildNrButton(nr, scale) : Container();
+                            if (nr > nrOfStandees) return Container();
+                            bool isOut = widget.monster.monsterInstances
+                                .any((item) => item.standeeNr == nr);
+                            Color color = isOut
+                                ? Colors.grey
+                                : (_gameState.currentCampaign.value == "Buttons and Bugs"
+                                    ? (AddStandeeMenu._kBnBColors[nr] ?? baseColor)
+                                    : baseColor);
+                            return _StandeeNrButton(
+                              nr: nr,
+                              scale: scale,
+                              color: color,
+                              onPressed: isOut
+                                  ? null
+                                  : () => _gameState.action(AddStandeeCommand(
+                                      nr, null, widget.monster.id, type, addAsSummon,
+                                      gameState: _gameState)),
+                            );
                           },
                         ),
                       ),
@@ -179,5 +146,43 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
                 );
               }),
         ]));
+  }
+}
+
+class _StandeeNrButton extends StatelessWidget {
+  const _StandeeNrButton({
+    required this.nr,
+    required this.scale,
+    required this.color,
+    required this.onPressed,
+  });
+
+  final int nr;
+  final double scale;
+  final Color color;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    var shadow = Shadow(
+      offset: Offset(AddStandeeMenu._kShadowOffset * scale, AddStandeeMenu._kShadowOffset * scale),
+      color: Colors.black87,
+      blurRadius: AddStandeeMenu._kShadowBlur,
+    );
+    return SizedBox(
+      width: AddStandeeMenu._kButtonSize * scale,
+      height: AddStandeeMenu._kButtonSize * scale,
+      child: TextButton(
+        onPressed: onPressed,
+        child: Text(
+          nr.toString(),
+          style: TextStyle(
+            color: color,
+            fontSize: kFontSizeTitle * scale,
+            shadows: [shadow],
+          ),
+        ),
+      ),
+    );
   }
 }

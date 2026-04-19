@@ -39,7 +39,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: LootCardWidget.buildFront(card, 1.0, false),
+            body: LootCardFront(card: card, scale: 1.0),
           ),
         ),
       );
@@ -54,7 +54,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: LootCardWidget.buildFront(card, 1.0, false),
+            body: LootCardFront(card: card, scale: 1.0),
           ),
         ),
       );
@@ -71,7 +71,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: LootCardWidget.buildFront(card, 1.0, false),
+            body: LootCardFront(card: card, scale: 1.0),
           ),
         ),
       );
@@ -88,7 +88,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: LootCardWidget.buildFront(card, 1.0, false),
+            body: LootCardFront(card: card, scale: 1.0),
           ),
         ),
       );
@@ -104,7 +104,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: LootCardWidget.buildFront(card, 1.0, false),
+            body: LootCardFront(card: card, scale: 1.0),
           ),
         ),
       );
@@ -120,7 +120,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: LootCardWidget.buildFront(card, 1.0, false),
+            body: LootCardFront(card: card, scale: 1.0),
           ),
         ),
       );
@@ -136,7 +136,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: LootCardWidget.buildFront(card, 1.0, false),
+            body: LootCardFront(card: card, scale: 1.0),
           ),
         ),
       );
@@ -153,7 +153,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: LootCardWidget.buildRear(1.0),
+            body: LootCardRear(scale: 1.0),
           ),
         ),
       );

@@ -691,7 +691,7 @@ class StatusMenuState extends State<StatusMenu> {
                               ownerId: "unknown",
                               scale: scale),
                         if (hasPlagueHerald && isMonster)
-                          buildStackableConditionButtons(
+                          buildStackableConditionButtons( // ignore: avoid-returning-widgets, tightly-coupled state helper
                               figure.plague,
                               Condition.plague,
                               StatusMenu._kMaxPlague,
@@ -701,7 +701,7 @@ class StatusMenuState extends State<StatusMenu> {
                               ownerId,
                               scale),
                         if (showCustomContent)
-                          buildStackableConditionButtons(
+                          buildStackableConditionButtons( // ignore: avoid-returning-widgets, tightly-coupled state helper
                               figure.chill,
                               Condition.chill,
                               StatusMenu._kMaxChill,

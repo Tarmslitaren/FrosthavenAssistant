@@ -134,7 +134,7 @@ class CharacterHealthInnerWidget extends StatelessWidget {
           valueListenable: character.characterState.conditions,
           builder: (context, value, child) {
             return Row(
-              children: createConditionList(scale),
+              children: createConditionList(scale), // ignore: avoid-returning-widgets, list-returning helper for Row children
             );
           }),
     ]);

@@ -45,7 +45,9 @@ class StatCardZoom extends StatelessWidget {
       child: SizedBox(
           width: cardWidth * scale * zoomValue,
           height: cardHeight * scale * zoomValue,
-          child: MonsterStatCardWidget.buildCard(monster, scaling,
+          child: MonsterStatCardView(
+              data: monster,
+              scale: scaling,
               viewModel: MonsterStatCardViewModel(monster))),
     );
   }

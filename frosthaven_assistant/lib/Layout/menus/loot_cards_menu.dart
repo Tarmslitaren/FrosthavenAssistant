@@ -195,7 +195,7 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                                 ),
                               ])),
                       Flexible(
-                          fit: FlexFit.tight, child: buildList(discardPile)),
+                          fit: FlexFit.tight, child: buildList(discardPile)), // ignore: avoid-returning-widgets, list-returning helper
                       Container(
                         height: _kBottomBarHeight,
                         margin: const EdgeInsets.all(_kItemMargin),

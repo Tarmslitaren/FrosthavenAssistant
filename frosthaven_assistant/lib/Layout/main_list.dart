@@ -274,7 +274,7 @@ class MainListState extends State<MainList> {
                     return ValueListenableBuilder<double>(
                         valueListenable: _vm.userScalingMainList,
                         builder: (context, value, child) {
-                          return buildList();
+                          return buildList(); // ignore: avoid-returning-widgets, internal layout helper
                         });
                   }));
         });
@@ -419,7 +419,7 @@ class MainListState extends State<MainList> {
                                       _vm.reorderItem(oldIndex, newIndex);
                                     });
                                   },
-                                  children: _generateChildren(),
+                                  children: _generateChildren(), // ignore: avoid-returning-widgets, list-returning helper for ReorderableListView children
                                 ),
                               ))))));
         });
