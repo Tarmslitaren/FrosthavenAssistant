@@ -145,8 +145,8 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
               child: AnimatedSwitcher(
                 duration: const Duration(milliseconds: MonsterAbilityCardWidget._kAnimationDurationMs),
                 transitionBuilder: _transitionBuilder,
-                layoutBuilder: (widget, list) => Stack(
-                  children: [widget!, ...list],
+                layoutBuilder: (currentWidget, list) => Stack(
+                  children: [if (currentWidget != null) currentWidget, ...list],
                 ),
                 child: showFront && card != null
                     ? MonsterAbilityCardFront(

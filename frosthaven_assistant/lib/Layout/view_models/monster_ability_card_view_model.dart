@@ -40,7 +40,11 @@ class MonsterAbilityCardViewModel {
 
   int get deckSize => GameMethods.getDeck(monster.type.deck)?.drawPileSize ?? 0;
 
-  MonsterAbilityState get deck => GameMethods.getDeck(monster.type.deck)!;
+  MonsterAbilityState get deck {
+    final d = GameMethods.getDeck(monster.type.deck);
+    if (d == null) throw StateError('Ability deck not found: ${monster.type.deck}');
+    return d;
+  }
 
   void openDeckMenu(BuildContext context) {
     openDialog(

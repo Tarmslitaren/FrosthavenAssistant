@@ -67,10 +67,11 @@ class TokenApplier {
 
               bool hasOldVersion = hasGHVersion(iconGfx);
 
-              if (LineBuilder.tokens[iconToken] != null) {
+              final tokenValue = LineBuilder.tokens[iconToken];
+              if (tokenValue != null) {
                 RegExp regEx = RegExp(
                     r"(?=.*[a-z])"); //black versions exist for all tokens containing lower case letters
-                if (regEx.hasMatch(LineBuilder.tokens[iconToken]!)) {
+                if (regEx.hasMatch(tokenValue)) {
                   iconGfx += "_black";
                 }
               }

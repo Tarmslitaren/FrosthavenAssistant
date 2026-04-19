@@ -157,7 +157,9 @@ class StatApplier {
       }
       data = boss;
     } else {
-      data = isElite ? elite! : normal!;
+      final effectiveData = isElite ? elite : normal;
+      if (effectiveData == null) return map;
+      data = effectiveData;
     }
     for (String item in data.attributes) {
       //remove size modifiers (only used for immobilize since it's so long it overflows.)
@@ -230,7 +232,8 @@ class StatApplier {
     MonsterStatsModel? normal = level.boss ?? level.normal;
     MonsterStatsModel? elite = level.elite;
     if (lastToken == "attack") {
-      int? calc = StatCalculator.calculateFormula(normal!.attack);
+      if (normal == null) return [];
+      int? calc = StatCalculator.calculateFormula(normal.attack);
       if (calc != null) {
         normalValue = calc;
       } else {
@@ -269,15 +272,15 @@ class StatApplier {
       }
     } else if (lastToken == "range") {
       if (normal?.range != _kRangeZero) {
-        normalValue = normal!.range;
+        normalValue = normal?.range ?? 0;
         if (elite != null) {
           eliteValue = elite.range;
         }
       }
     } else if (lastToken == "move") {
-      normalValue = StatCalculator.calculateFormula(normal!.move)!;
+      normalValue = StatCalculator.calculateFormula(normal?.move ?? StatValue.zero) ?? 0;
       if (elite != null) {
-        eliteValue = eliteValue = StatCalculator.calculateFormula(elite.move)!;
+        eliteValue = StatCalculator.calculateFormula(elite.move) ?? 0;
       }
     } else if (lastToken == "shield") {
       int? value = normalTokens["shield"];
@@ -321,7 +324,7 @@ class StatApplier {
           newStartOfLine += "|$item";
           //add nr if applicable
           String key = item.substring(1, item.length - 1);
-          int value = normalTokens[key]!;
+          int value = normalTokens[key] ?? 0;
           if (value > 0) {
             newStartOfLine += "$value";
           }

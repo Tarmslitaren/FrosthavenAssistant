@@ -200,7 +200,7 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
                           ? Container(
                               margin: EdgeInsets.only(top: _kDeckMargin * barScale),
                               child: ModifierDeckWidget(
-                                  name: currentCharacter!.id))
+                                  name: currentCharacter?.id ?? ''))
                           : Column(
                               children: _vm.charsWithPerks
                                   .map((item) => Container(

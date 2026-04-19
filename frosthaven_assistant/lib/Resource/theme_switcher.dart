@@ -10,7 +10,9 @@ class ThemeSwitcher extends InheritedWidget {
   });
 
   static ThemeSwitcherWidgetState of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<ThemeSwitcher>()!.data;
+    final switcher = context.dependOnInheritedWidgetOfExactType<ThemeSwitcher>();
+    if (switcher == null) throw FlutterError('ThemeSwitcher not found in widget tree');
+    return switcher.data;
   }
 
   final ThemeSwitcherWidgetState data;

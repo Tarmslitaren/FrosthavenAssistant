@@ -49,11 +49,12 @@ extension GlobalPaintBounds on BuildContext { // ignore: prefer-match-file-name,
         ?.getTransformTo(null)
         .getTranslation(); // Get its transformation matrix and extract translation
 
-    if (translation != null && renderObject?.paintBounds != null) {
+    final ro = renderObject;
+    if (translation != null && ro != null) {
       final offset =
           Offset(translation.x, translation.y); // Convert translation to Offset
 
-      return renderObject!.paintBounds
+      return ro.paintBounds
           .shift(offset); // Shift the paint bounds by the offset
     } else {
       return null;

@@ -103,11 +103,8 @@ class ScenarioMethods {
 
       //loot deck init
       if (scenario != "custom") {
-        LootDeckModel? lootDeckModel = gd
-            .modelData
-            .value[gs.currentCampaign.value]!
-            .scenarios[scenario]!
-            .lootDeck;
+        final campaignModel = gd.modelData.value[gs.currentCampaign.value];
+        LootDeckModel? lootDeckModel = campaignModel?.scenarios[scenario]?.lootDeck;
         lootDeckModel != null
             ? gs._lootDeck = LootDeck(lootDeckModel, gs.lootDeck)
             : gs._lootDeck = LootDeck.from(gs.lootDeck);

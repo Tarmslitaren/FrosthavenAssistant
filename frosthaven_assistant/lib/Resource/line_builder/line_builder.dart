@@ -123,7 +123,7 @@ class LineBuilder {
 
   //get rid of this if it doesn't really help
   static double getTopPaddingForStyle(TextStyle style) {
-    double height = style.fontSize!;
+    double height = style.fontSize ?? 0.0;
     bool markazi = style.fontFamily == "Markazi";
 
     if (!markazi && style.height == _kLineHeightGH) {
@@ -602,7 +602,8 @@ class LineBuilder {
             if (left) {
               RegExp regEx = RegExp(
                   r"(?=.*[a-z])"); //black versions exist for all tokens containing lower case letters
-              if (regEx.hasMatch(tokens[iconToken]!)) {
+              final tokenVal = tokens[iconToken];
+              if (tokenVal != null && regEx.hasMatch(tokenVal)) {
                 iconGfx += "_black";
               }
             }
@@ -622,16 +623,16 @@ class LineBuilder {
                       lastImage,
                       Positioned(
                           width: frosthavenStyle
-                              ? styleToUse.fontSize! * _kUseFHWidthRatio + scale * _kUseFHWidthAdd
-                              : styleToUse.fontSize! * _kUseGHRatio,
+                              ? (styleToUse.fontSize ?? 0.0) * _kUseFHWidthRatio + scale * _kUseFHWidthAdd
+                              : (styleToUse.fontSize ?? 0.0) * _kUseGHRatio,
                           bottom: 0,
                           left: frosthavenStyle ? _kUseLeft * scale : 0.0,
                           //why left?!
 
                           child: Image(
                             height: frosthavenStyle
-                                ? styleToUse.fontSize! * _kUseFHHeightRatio
-                                : styleToUse.fontSize! * _kUseGHRatio,
+                                ? (styleToUse.fontSize ?? 0.0) * _kUseFHHeightRatio
+                                : (styleToUse.fontSize ?? 0.0) * _kUseGHRatio,
                             fit: BoxFit.fitHeight,
                             filterQuality: FilterQuality.medium,
                             semanticLabel: iconGfx,
@@ -648,7 +649,7 @@ class LineBuilder {
                       style: normalStyle)));
             } else {
               double height = _getIconHeight(
-                  iconToken, styleToUse.fontSize!, frosthavenStyle);
+                  iconToken, styleToUse.fontSize ?? 0.0, frosthavenStyle);
               if (addText) {
                 String? iconTokenText = tokens[iconToken];
                 if (frosthavenStyle) {

@@ -245,15 +245,15 @@ class FrosthavenConverter {
     for (int i = 0; i < lastLineTextPartList.length; i++) {
       Widget part = lastLineTextPartList[i];
       if (part is Container) {
-        if (part.child! is Text &&
-            (part.child as Text).data!.contains("[subLineStart]")) {
+        final partText = part.child is Text ? (part.child as Text).data : null;
+        if (partText != null && partText.contains("[subLineStart]")) {
           list1 = lastLineTextPartList.sublist(0, i);
           List<Widget> tempSpanList = [];
           for (int j = i + 1; j < lastLineTextPartList.length; j++) {
             Widget part2 = lastLineTextPartList[j];
             if (part2 is Container &&
                 part2.child is Text &&
-                (part2.child as Text).data!.contains("[lineBreak]")) {
+                ((part2.child as Text).data ?? '').contains("[lineBreak]")) {
               list2.add(tempSpanList.toList());
               tempSpanList.clear();
             } else {
@@ -262,25 +262,23 @@ class FrosthavenConverter {
           }
           list2.add(tempSpanList);
         }
-      }
-      if (part is Container &&
-          part.child is Text &&
-          (part.child as Text).data!.contains("[conditionalStart]")) {
-        conditional = true;
-        list1 = lastLineTextPartList.sublist(0, i);
-        List<Widget> tempSpanList = [];
-        for (int j = i + 1; j < lastLineTextPartList.length; j++) {
-          Widget part2 = lastLineTextPartList[j];
-          if (part2 is Container &&
-              part2.child is Text &&
-              (part2.child as Text).data!.contains("[lineBreak]")) {
-            list2.add(tempSpanList.toList());
-            tempSpanList.clear();
-          } else {
-            tempSpanList.add(lastLineTextPartList[j]);
+        if (partText != null && partText.contains("[conditionalStart]")) {
+          conditional = true;
+          list1 = lastLineTextPartList.sublist(0, i);
+          List<Widget> tempSpanList = [];
+          for (int j = i + 1; j < lastLineTextPartList.length; j++) {
+            Widget part2 = lastLineTextPartList[j];
+            if (part2 is Container &&
+                part2.child is Text &&
+                ((part2.child as Text).data ?? '').contains("[lineBreak]")) {
+              list2.add(tempSpanList.toList());
+              tempSpanList.clear();
+            } else {
+              tempSpanList.add(lastLineTextPartList[j]);
+            }
           }
+          list2.add(tempSpanList);
         }
-        list2.add(tempSpanList);
       }
     }
 
@@ -342,9 +340,10 @@ class FrosthavenConverter {
         retVal.addAll(getAllImagesInWidget(item));
       }
     } else if (widget is Container && widget.child != null) {
-      retVal.addAll(getAllImagesInWidget(widget.child!));
+      retVal.addAll(getAllImagesInWidget(widget.child ?? const SizedBox.shrink()));
     } else if (widget is Image) {
-      retVal.add(widget.semanticLabel!);
+      final label = widget.semanticLabel;
+      if (label != null) retVal.add(label);
     }
 
     return retVal;
@@ -361,9 +360,9 @@ class FrosthavenConverter {
         retVal += getAllTextInWidget(item);
       }
     } else if (widget is Container && widget.child != null) {
-      retVal += getAllTextInWidget(widget.child!);
+      retVal += getAllTextInWidget(widget.child ?? const SizedBox.shrink());
     } else if (widget is Text) {
-      retVal += widget.data!;
+      retVal += widget.data ?? '';
     }
 
     return retVal;
@@ -376,7 +375,7 @@ class FrosthavenConverter {
       belongs = false;
     } else {
       if (lines.last is Image) {
-        if ((lines.last as Image).semanticLabel!.contains("divider")) {
+        if (((lines.last as Image).semanticLabel ?? '').contains("divider")) {
           belongs = false;
         }
       }

@@ -12,9 +12,11 @@ class Monster extends ListItemData {
   static MonsterModel _findType(String name, GameData? gameData) {
     final gd = gameData ?? getIt<GameData>();
     for (final key in gd.modelData.value.keys) {
-      final monsters = gd.modelData.value[key]!.monsters;
-      if (monsters.containsKey(name)) {
-        return monsters[name]!;
+      final campaign = gd.modelData.value[key];
+      if (campaign == null) continue;
+      if (campaign.monsters.containsKey(name)) {
+        final model = campaign.monsters[name];
+        if (model != null) return model;
       }
     }
     throw StateError('Monster model not found: $name');

@@ -44,7 +44,7 @@ class HealthWheelControllerState extends State<HealthWheelController> {
   }
 
   void hideOverlay() {
-    if (entry != null && entry!.mounted) {
+    if (entry?.mounted == true) {
       entry?.remove();
       entry?.dispose();
       entry = null;

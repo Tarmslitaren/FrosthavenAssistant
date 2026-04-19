@@ -146,10 +146,8 @@ class ModifierDeck {
   }
 
   ValueListenable<int> getRemovable(String id) {
-    if (_removables[id] == null) {
-      _removables[id] = ValueNotifier<int>(0);
-    }
-    return _removables[id]!;
+    _removables[id] ??= ValueNotifier<int>(0);
+    return _removables[id] ?? ValueNotifier<int>(0);
   }
 
   void moveCardToRemovedPile(_StateModifier s, String gfx) {
@@ -532,10 +530,10 @@ class ModifierDeck {
   void _initListeners() {
     for (var item in _removables.keys) {
       _removables[item]?.removeListener(() {
-        _handleRemovableCards(_removables[item]!, item);
+        final r = _removables[item]; if (r != null) _handleRemovableCards(r, item);
       });
       _removables[item]?.addListener(() {
-        _handleRemovableCards(_removables[item]!, item);
+        final r = _removables[item]; if (r != null) _handleRemovableCards(r, item);
       });
     }
   }

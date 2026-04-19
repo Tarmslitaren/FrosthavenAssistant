@@ -4,7 +4,9 @@ class GameSaveState {
   String? _savedState;
 
   String getState() {
-    return _savedState!;
+    final state = _savedState;
+    if (state == null) throw StateError('GameSaveState: no saved state');
+    return state;
   }
 
   void save(GameState gameState) {
@@ -14,7 +16,7 @@ class GameSaveState {
   void load(GameState gameState) {
     if (_savedState != null) {
       try {
-        var data = json.decode(_savedState!) as Map<String, dynamic>;
+        var data = json.decode(_savedState ?? '') as Map<String, dynamic>;
 
         gameState._level.value = data['level'] as int;
         gameState._scenario.value = data['scenario']; // as String;
@@ -188,7 +190,7 @@ class GameSaveState {
     try {
       final prefs = await SharedPreferences.getInstance();
       // save
-      await prefs.setString(sharedPrefsKey, _savedState!);
+      await prefs.setString(sharedPrefsKey, _savedState ?? '');
     } catch (error) {
       if (kDebugMode) {
         print(error);

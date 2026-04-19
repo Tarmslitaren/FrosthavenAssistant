@@ -79,7 +79,9 @@ class ActionHandler {
   }
 
   Command getCurrent() {
-    return _commands[commandIndex.value]!;
+    final cmd = _commands[commandIndex.value];
+    if (cmd == null) throw StateError('No command at index ${commandIndex.value}');
+    return cmd;
   }
 
   void undo() {
@@ -93,8 +95,8 @@ class ActionHandler {
             _self); //this works as gameSaveStates has one more entry than command list (includes load at start)
         saveState.saveToDisk(_self);
         if (!isServer && !isClient) {
-          _commands[commandIndex.value]!
-              .onUndo(); //undo only makes sure ui is updated
+          _commands[commandIndex.value]
+              ?.onUndo(); //undo only makes sure ui is updated
         } else {
           updateAllUI();
           //run generic update all function instead, as commands list is not retained

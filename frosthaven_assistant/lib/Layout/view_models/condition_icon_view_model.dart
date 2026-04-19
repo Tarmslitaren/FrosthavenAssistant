@@ -28,8 +28,9 @@ class ConditionIconViewModel {
         gs.gameSaveStates[gs.gameSaveStates.length - offset] == null) {
       return null;
     }
-    final oldSave =
-        gs.gameSaveStates[gs.gameSaveStates.length - offset]!.getState();
+    final savedEntry = gs.gameSaveStates[gs.gameSaveStates.length - offset];
+    if (savedEntry == null) return null;
+    final oldSave = savedEntry.getState();
     oldState.loadFromData(oldSave);
     return oldState;
   }

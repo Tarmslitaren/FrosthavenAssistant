@@ -106,7 +106,7 @@ class Character extends ListItemData {
   static CharacterClass? _getClassStatic(String id, String? edition, {GameData? gameData}) {
     final modelData = (gameData ?? getIt<GameData>()).modelData.value;
     for (String key in modelData.keys) {
-      final item = modelData[key]!.characters.firstWhereOrNull((item) {
+      final item = modelData[key]?.characters.firstWhereOrNull((item) {
         return item.id == id && (edition == null || edition == item.edition);
       });
       if (item != null) {

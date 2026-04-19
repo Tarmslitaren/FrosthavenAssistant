@@ -280,9 +280,7 @@ class LootDeck {
     cards.add(LootCard(
       id: id,
       baseValue: LootBaseValue.one,
-      enhanced: _enhancements[id.toString()] != null
-          ? _enhancements[id.toString()]!
-          : 0,
+      enhanced: _enhancements[id.toString()] ?? 0,
       lootType: LootType.other,
       gfx: gfx,
     ));
@@ -294,9 +292,7 @@ class LootDeck {
       list.add(LootCard(
           id: startId,
           baseValue: LootBaseValue.one,
-          enhanced: _enhancements[startId.toString()] != null
-              ? _enhancements[startId.toString()]!
-              : 0,
+          enhanced: _enhancements[startId.toString()] ?? 0,
           lootType: LootType.materiel,
           gfx: gfx));
       startId++;
@@ -305,9 +301,7 @@ class LootDeck {
       list.add(LootCard(
           id: startId,
           baseValue: LootBaseValue.oneIf3or4twoIfNot,
-          enhanced: _enhancements[startId.toString()] != null
-              ? _enhancements[startId.toString()]!
-              : 0,
+          enhanced: _enhancements[startId.toString()] ?? 0,
           lootType: LootType.materiel,
           gfx: gfx));
       startId++;
@@ -316,9 +310,7 @@ class LootDeck {
       list.add(LootCard(
           id: startId,
           baseValue: LootBaseValue.oneIf4twoIfNot,
-          enhanced: _enhancements[startId.toString()] != null
-              ? _enhancements[startId.toString()]!
-              : 0,
+          enhanced: _enhancements[startId.toString()] ?? 0,
           lootType: LootType.materiel,
           gfx: gfx));
       startId++;
@@ -331,9 +323,7 @@ class LootDeck {
       list.add(LootCard(
           id: startId,
           baseValue: LootBaseValue.one,
-          enhanced: _enhancements[startId.toString()] != null
-              ? _enhancements[startId.toString()]!
-              : 0,
+          enhanced: _enhancements[startId.toString()] ?? 0,
           lootType: LootType.materiel,
           gfx: gfx));
       startId++;
