@@ -93,192 +93,6 @@ class MonsterAbilityCardWidget extends StatefulWidget {
     return list;
   }
 
-  static Widget buildFront(MonsterAbilityCardModel? card, Monster data,
-      double scale, bool calculateAll,
-      {Settings? settings}) {
-    settings = settings ?? getIt<Settings>();
-    bool frosthavenStyle = GameMethods.isFrosthavenStyle(data.type);
-
-    String initText = card!.initiative.toString();
-    if (initText.length == 1) {
-      initText = "0$initText";
-    }
-
-    var shadow = Shadow(
-      offset: Offset(_kShadowTextOffsetX * scale, _kShadowTextOffsetY * scale),
-      color: Colors.black87,
-      blurRadius: _kShadowTextBlur * scale,
-    );
-
-    List<Widget> positionals =
-        _buildGraphicPositionals(scale, card.graphicPositional); // ignore: avoid-returning-widgets, widget list from private helper
-
-    return RepaintBoundary(
-        child: Container(
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black45,
-                  blurRadius: _kShadowBlur * scale,
-                  offset: Offset(_kShadowOffsetX * scale, _kShadowOffsetY * scale), // Shadow position
-                ),
-              ],
-            ),
-            key: const ValueKey<int>(1),
-            margin: EdgeInsets.all(_kMargin * scale),
-            width: _kCardWidth * scale,
-            height: _kCardHeight * scale,
-            child: Stack(
-              clipBehavior: Clip.none, //if text overflows it still visible
-
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(_kBorderRadius * scale)),
-                  child: Image(
-                    fit: BoxFit.fill,
-                    height: _kCardImageHeight * scale,
-                    width: _kCardWidth * scale,
-                    image: AssetImage(frosthavenStyle
-                        ? "assets/images/psd/monsterAbility-front_fh.png"
-                        : "assets/images/psd/monsterAbility-front.png"),
-                  ),
-                ),
-                Positioned(
-                    top: frosthavenStyle ? _kTitleTopFh * scale : 0,
-                    child: SizedBox(
-                      height: _kTitleAreaHeight * scale,
-                      width: _kCardWidth * scale, //needed for line breaks in lines
-
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Text(
-                            card.title,
-                            style: TextStyle(
-                                fontFamily:
-                                    frosthavenStyle ? "GermaniaOne" : 'Pirata',
-                                color: Colors.white,
-                                fontSize:
-                                    frosthavenStyle ? _kTitleFontSizeFh * scale : _kTitleFontSizeGh * scale,
-                                shadows: [shadow]),
-                          ),
-                        ],
-                      ),
-                    )),
-                Positioned(
-                    left: _kInitLeft * scale,
-                    top: _kInitTop * scale,
-                    child: Text(
-                      textAlign: TextAlign.center,
-                      initText,
-                      style: TextStyle(
-                          fontFamily:
-                              frosthavenStyle ? "GermaniaOne" : 'Pirata',
-                          color: Colors.white,
-                          fontSize: frosthavenStyle ? _kInitFontSizeFh * scale : _kInitFontSizeGh * scale,
-                          shadows: [shadow]),
-                    )),
-                Positioned(
-                    left: _kCardNrLeft * scale,
-                    bottom: _kCardNrBottom * scale,
-                    child: Text(
-                      card.nr.toString(),
-                      style: TextStyle(
-                          fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
-                          color: Colors.white,
-                          fontSize: _kCardNrFontSize * scale,
-                          shadows: [shadow]),
-                    )),
-                card.shuffle
-                    ? Positioned(
-                        left: _kShuffleLeft * scale,
-                        bottom: _kShuffleBottom * scale,
-                        child: Image(
-                          height: _kShuffleBaseHeight * _kShuffleHeightFactor * scale,
-                          fit: BoxFit.cover,
-                          image: const AssetImage(
-                              "assets/images/abilities/shuffle.png"),
-                        ))
-                    : Container(),
-
-                //add graphic positionals here
-                if (positionals.isNotEmpty) positionals.first,
-                if (positionals.length > 1) positionals[1],
-                if (positionals.length > _kGfxIndex2) positionals[_kGfxIndex2],
-                if (positionals.length > _kGfxIndex3) positionals[_kGfxIndex3],
-
-                Positioned(
-                  top: _kLinesTop * scale,
-                  //alignment: Alignment.center,
-                  child: SizedBox(
-                    height: _kTitleAreaHeight * scale,
-                    width: _kCardWidth * scale, //needed for line breaks in lines
-                    child: LineBuilder.createLines(
-                        card.lines,
-                        false,
-                        !settings.noCalculation.value,
-                        calculateAll,
-                        data,
-                        CrossAxisAlignment.center,
-                        scale,
-                        false),
-                  ),
-                )
-              ],
-            )));
-  }
-
-  static Widget buildRear(double scale, int size, Monster monster) {
-    bool frosthavenStyle = GameMethods.isFrosthavenStyle(monster.type);
-    return Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black45,
-              blurRadius: _kShadowBlur * scale,
-              offset: Offset(_kShadowOffsetX * scale, _kShadowOffsetY * scale), // Shadow position
-            ),
-          ],
-        ),
-        key: const ValueKey<int>(0),
-        margin: EdgeInsets.all(_kMargin * scale),
-        width: _kCardWidth * scale, //this evaluates to same space as front somehow.
-        height: _kCardHeight * scale,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(_kBorderRadius * scale)),
-              child: Image(
-                fit: BoxFit.fitHeight,
-                height: _kCardRearImageHeight * scale,
-                image: AssetImage(frosthavenStyle
-                    ? "assets/images/psd/MonsterAbility-back_fh.png"
-                    : "assets/images/psd/MonsterAbility-back.png"),
-              ),
-            ),
-            size >= 0
-                ? Positioned(
-                    right: _kRearDeckSizeRight * scale,
-                    bottom: 0,
-                    child: Text(
-                      size.toString(),
-                      style: TextStyle(
-                          fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
-                          color: Colors.white,
-                          fontSize: _kRearDeckSizeFontSize * scale,
-                          shadows: [
-                            Shadow(
-                                offset: Offset(_kRearShadowOffset, _kRearShadowOffset), color: Colors.black)
-                          ]),
-                    ))
-                : Container(),
-          ],
-        ));
-  }
-
   final Monster data;
 
   final GameState? gameState;
@@ -300,7 +114,7 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
     super.initState();
   }
 
-  Widget _transitionBuilder(Widget widget, Animation<double> animation) {
+  Widget _transitionBuilder(Widget widget, Animation<double> animation) { // ignore: avoid-returning-widgets, required AnimatedSwitcher callback signature
     final rotateAnim = Tween(begin: pi, end: 0.0).animate(animation);
     return AnimatedBuilder(
         animation: rotateAnim,
@@ -340,11 +154,226 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                   children: [widget!, ...list],
                 ),
                 child: showFront && card != null
-                    ? MonsterAbilityCardWidget.buildFront(
-                        card, widget.data, scale, false)
-                    : MonsterAbilityCardWidget.buildRear(
-                        scale, _vm.deckSize, widget.data),
+                    ? MonsterAbilityCardFront(
+                        card: card, data: widget.data, scale: scale, calculateAll: false)
+                    : MonsterAbilityCardRear(
+                        scale: scale, size: _vm.deckSize, monster: widget.data),
               ));
         });
+  }
+}
+
+class MonsterAbilityCardFront extends StatelessWidget {
+  const MonsterAbilityCardFront({
+    super.key,
+    required this.card,
+    required this.data,
+    required this.scale,
+    required this.calculateAll,
+    this.settings,
+  });
+
+  final MonsterAbilityCardModel card;
+  final Monster data;
+  final double scale;
+  final bool calculateAll;
+  final Settings? settings;
+
+  @override
+  Widget build(BuildContext context) {
+    final settings_ = settings ?? getIt<Settings>();
+    bool frosthavenStyle = GameMethods.isFrosthavenStyle(data.type);
+
+    String initText = card.initiative.toString();
+    if (initText.length == 1) {
+      initText = "0$initText";
+    }
+
+    var shadow = Shadow(
+      offset: Offset(MonsterAbilityCardWidget._kShadowTextOffsetX * scale, MonsterAbilityCardWidget._kShadowTextOffsetY * scale),
+      color: Colors.black87,
+      blurRadius: MonsterAbilityCardWidget._kShadowTextBlur * scale,
+    );
+
+    List<Widget> positionals =
+        MonsterAbilityCardWidget._buildGraphicPositionals(scale, card.graphicPositional); // ignore: avoid-returning-widgets, returns List<Widget> accessed by index for Stack children
+
+    return RepaintBoundary(
+        child: Container(
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black45,
+                  blurRadius: MonsterAbilityCardWidget._kShadowBlur * scale,
+                  offset: Offset(MonsterAbilityCardWidget._kShadowOffsetX * scale, MonsterAbilityCardWidget._kShadowOffsetY * scale), // Shadow position
+                ),
+              ],
+            ),
+            key: const ValueKey<int>(1),
+            margin: EdgeInsets.all(MonsterAbilityCardWidget._kMargin * scale),
+            width: MonsterAbilityCardWidget._kCardWidth * scale,
+            height: MonsterAbilityCardWidget._kCardHeight * scale,
+            child: Stack(
+              clipBehavior: Clip.none, //if text overflows it still visible
+
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(MonsterAbilityCardWidget._kBorderRadius * scale)),
+                  child: Image(
+                    fit: BoxFit.fill,
+                    height: MonsterAbilityCardWidget._kCardImageHeight * scale,
+                    width: MonsterAbilityCardWidget._kCardWidth * scale,
+                    image: AssetImage(frosthavenStyle
+                        ? "assets/images/psd/monsterAbility-front_fh.png"
+                        : "assets/images/psd/monsterAbility-front.png"),
+                  ),
+                ),
+                Positioned(
+                    top: frosthavenStyle ? MonsterAbilityCardWidget._kTitleTopFh * scale : 0,
+                    child: SizedBox(
+                      height: MonsterAbilityCardWidget._kTitleAreaHeight * scale,
+                      width: MonsterAbilityCardWidget._kCardWidth * scale, //needed for line breaks in lines
+
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Text(
+                            card.title,
+                            style: TextStyle(
+                                fontFamily:
+                                    frosthavenStyle ? "GermaniaOne" : 'Pirata',
+                                color: Colors.white,
+                                fontSize:
+                                    frosthavenStyle ? MonsterAbilityCardWidget._kTitleFontSizeFh * scale : MonsterAbilityCardWidget._kTitleFontSizeGh * scale,
+                                shadows: [shadow]),
+                          ),
+                        ],
+                      ),
+                    )),
+                Positioned(
+                    left: MonsterAbilityCardWidget._kInitLeft * scale,
+                    top: MonsterAbilityCardWidget._kInitTop * scale,
+                    child: Text(
+                      textAlign: TextAlign.center,
+                      initText,
+                      style: TextStyle(
+                          fontFamily:
+                              frosthavenStyle ? "GermaniaOne" : 'Pirata',
+                          color: Colors.white,
+                          fontSize: frosthavenStyle ? MonsterAbilityCardWidget._kInitFontSizeFh * scale : MonsterAbilityCardWidget._kInitFontSizeGh * scale,
+                          shadows: [shadow]),
+                    )),
+                Positioned(
+                    left: MonsterAbilityCardWidget._kCardNrLeft * scale,
+                    bottom: MonsterAbilityCardWidget._kCardNrBottom * scale,
+                    child: Text(
+                      card.nr.toString(),
+                      style: TextStyle(
+                          fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
+                          color: Colors.white,
+                          fontSize: MonsterAbilityCardWidget._kCardNrFontSize * scale,
+                          shadows: [shadow]),
+                    )),
+                card.shuffle
+                    ? Positioned(
+                        left: MonsterAbilityCardWidget._kShuffleLeft * scale,
+                        bottom: MonsterAbilityCardWidget._kShuffleBottom * scale,
+                        child: Image(
+                          height: MonsterAbilityCardWidget._kShuffleBaseHeight * MonsterAbilityCardWidget._kShuffleHeightFactor * scale,
+                          fit: BoxFit.cover,
+                          image: const AssetImage(
+                              "assets/images/abilities/shuffle.png"),
+                        ))
+                    : Container(),
+
+                //add graphic positionals here
+                if (positionals.isNotEmpty) positionals.first,
+                if (positionals.length > 1) positionals[1],
+                if (positionals.length > MonsterAbilityCardWidget._kGfxIndex2) positionals[MonsterAbilityCardWidget._kGfxIndex2],
+                if (positionals.length > MonsterAbilityCardWidget._kGfxIndex3) positionals[MonsterAbilityCardWidget._kGfxIndex3],
+
+                Positioned(
+                  top: MonsterAbilityCardWidget._kLinesTop * scale,
+                  child: SizedBox(
+                    height: MonsterAbilityCardWidget._kTitleAreaHeight * scale,
+                    width: MonsterAbilityCardWidget._kCardWidth * scale, //needed for line breaks in lines
+                    child: LineBuilder.createLines(
+                        card.lines,
+                        false,
+                        !settings_.noCalculation.value,
+                        calculateAll,
+                        data,
+                        CrossAxisAlignment.center,
+                        scale,
+                        false),
+                  ),
+                )
+              ],
+            )));
+  }
+}
+
+class MonsterAbilityCardRear extends StatelessWidget {
+  const MonsterAbilityCardRear({
+    super.key,
+    required this.scale,
+    required this.size,
+    required this.monster,
+  });
+
+  final double scale;
+  final int size;
+  final Monster monster;
+
+  @override
+  Widget build(BuildContext context) {
+    bool frosthavenStyle = GameMethods.isFrosthavenStyle(monster.type);
+    return Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black45,
+              blurRadius: MonsterAbilityCardWidget._kShadowBlur * scale,
+              offset: Offset(MonsterAbilityCardWidget._kShadowOffsetX * scale, MonsterAbilityCardWidget._kShadowOffsetY * scale), // Shadow position
+            ),
+          ],
+        ),
+        key: const ValueKey<int>(0),
+        margin: EdgeInsets.all(MonsterAbilityCardWidget._kMargin * scale),
+        width: MonsterAbilityCardWidget._kCardWidth * scale,
+        height: MonsterAbilityCardWidget._kCardHeight * scale,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(MonsterAbilityCardWidget._kBorderRadius * scale)),
+              child: Image(
+                fit: BoxFit.fitHeight,
+                height: MonsterAbilityCardWidget._kCardRearImageHeight * scale,
+                image: AssetImage(frosthavenStyle
+                    ? "assets/images/psd/MonsterAbility-back_fh.png"
+                    : "assets/images/psd/MonsterAbility-back.png"),
+              ),
+            ),
+            size >= 0
+                ? Positioned(
+                    right: MonsterAbilityCardWidget._kRearDeckSizeRight * scale,
+                    bottom: 0,
+                    child: Text(
+                      size.toString(),
+                      style: TextStyle(
+                          fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
+                          color: Colors.white,
+                          fontSize: MonsterAbilityCardWidget._kRearDeckSizeFontSize * scale,
+                          shadows: [
+                            Shadow(
+                                offset: Offset(MonsterAbilityCardWidget._kRearShadowOffset, MonsterAbilityCardWidget._kRearShadowOffset), color: Colors.black)
+                          ]),
+                    ))
+                : Container(),
+          ],
+        ));
   }
 }

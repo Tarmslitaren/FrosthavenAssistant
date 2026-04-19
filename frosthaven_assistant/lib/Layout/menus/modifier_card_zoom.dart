@@ -29,6 +29,6 @@ class ModifierCardZoom extends StatelessWidget {
         child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [ModifierCardWidget.buildFront(card, name, scale, 1)]));
+            children: [ModifierCardFront(card: card, name: name, scale: scale)]));
   }
 }

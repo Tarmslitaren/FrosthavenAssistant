@@ -145,13 +145,13 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
                             gameState: _gameState));
                       });
                     },
-                    children: generateList(list, allOpen), // ignore: avoid-returning-widgets, widget list from helper method
+                    children: generateList(list, allOpen), // ignore: avoid-returning-widgets, list-returning helper for ReorderableListView/ListView children
                   )
                 : ListView(
                     clipBehavior: Clip.none,
                     controller: ScrollController(),
                     padding: EdgeInsets.zero,
-                    children: generateList(list, allOpen).reversed.toList(), // ignore: avoid-returning-widgets, widget list from helper method
+                    children: generateList(list, allOpen).reversed.toList(), // ignore: avoid-returning-widgets, list-returning helper for ReorderableListView/ListView children
                   )));
   }
 
@@ -299,7 +299,7 @@ class Item extends StatelessWidget {
     }
 
     return revealed
-        ? MonsterAbilityCardWidget.buildFront(data, monsterData, scale, true)
-        : MonsterAbilityCardWidget.buildRear(scale, -1, monsterData);
+        ? MonsterAbilityCardFront(card: data, data: monsterData, scale: scale, calculateAll: true)
+        : MonsterAbilityCardRear(scale: scale, size: -1, monster: monsterData);
   }
 }

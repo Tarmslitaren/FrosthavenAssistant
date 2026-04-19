@@ -60,7 +60,7 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (widget.revealed)
-            ModifierCardWidget.buildFront(card, widget.name, scale, 1),
+            ModifierCardFront(card: card, name: widget.name, scale: scale),
           const SizedBox(
             height: _kSpacing,
           ),

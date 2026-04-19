@@ -59,7 +59,6 @@ class ModifierDeckMenu extends StatefulWidget {
   static const double _kNameLeftPos = 20.0;
   static const double _kItemHeightCount = 12.0;
   static const double _kItemBaseHeight = 40.0;
-  static const double _kCardScale = 2.5;
   static const double _kItemMarginMultiplier = 2.0;
 
   const ModifierDeckMenu({
@@ -201,11 +200,11 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                           gameState: _gameState));
                     });
                   },
-                  children: generateList(list, allOpen, name), // ignore: avoid-returning-widgets, widget list from helper method
+                  children: generateList(list, allOpen, name), // ignore: avoid-returning-widgets, list-returning helper for ListView children
                 )
               : ListView(
                   controller: ScrollController(),
-                  children: generateList(list, allOpen, name).reversed.toList(), // ignore: avoid-returning-widgets, widget list from helper method
+                  children: generateList(list, allOpen, name).reversed.toList(), // ignore: avoid-returning-widgets, list-returning helper for ListView children
                 ),
         ));
   }
@@ -803,8 +802,8 @@ class Item extends StatelessWidget {
     var screenSize = MediaQuery.of(context).size;
     double scale = max((screenSize.height / (ModifierDeckMenu._kItemBaseHeight * ModifierDeckMenu._kItemHeightCount)), 1);
     final Widget child = revealed
-        ? ModifierCardWidget.buildFront(data, name, scale, ModifierDeckMenu._kCardScale)
-        : ModifierCardWidget.buildRear(scale, name);
+        ? ModifierCardFront(card: data, name: name, scale: scale)
+        : ModifierCardRear(scale: scale, name: name);
 
     return Container(margin: EdgeInsets.all(ModifierDeckMenu._kItemMarginMultiplier * scale), child: child);
   }

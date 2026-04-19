@@ -73,7 +73,7 @@ class LootCardsMenuState extends State<LootCardsMenu> {
             padding: EdgeInsets.zero,
             crossAxisCount:
                 max(_kMinColumns, (screenWidth / _kItemMaxWidth).ceil()),
-            children: generateList(list).reversed.toList(), // ignore: avoid-returning-widgets, widget list from helper method
+            children: generateList(list).reversed.toList(), // ignore: avoid-returning-widgets, list-returning helper for ListView children
           ),
         ));
   }
@@ -239,7 +239,7 @@ class Item extends StatelessWidget {
 
     late final Widget child;
 
-    child = LootCardWidget.buildFront(data, scale, false);
+    child = LootCardFront(card: data, scale: scale);
 
     return Container(
         margin: EdgeInsets.all(_kItemMargin * scale),

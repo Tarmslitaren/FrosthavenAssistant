@@ -91,7 +91,7 @@ class GH2eFactionAMDCardMenuState extends State<GH2eFactionAMDCardMenu> {
                                 ? ColorFilter.matrix(identity)
                                 : ColorFilter.matrix(grayScale),
                         child:
-                            ModifierCardWidget.buildFront(item, "", scale, 1))),
+                            ModifierCardFront(card: item, name: "", scale: scale))),
             ],
           ),
           const SizedBox(

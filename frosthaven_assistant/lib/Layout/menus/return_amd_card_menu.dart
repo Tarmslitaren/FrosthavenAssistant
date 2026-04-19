@@ -56,7 +56,7 @@ class RemoveAMDCardMenuState extends State<ReturnAMDCardMenu> {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ModifierCardWidget.buildFront(card, widget.name, scale, 1),
+          ModifierCardFront(card: card, name: widget.name, scale: scale),
           const SizedBox(
             height: _kTopSpacing,
           ),

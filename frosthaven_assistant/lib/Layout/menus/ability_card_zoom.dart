@@ -52,8 +52,8 @@ class AbilityCardZoom extends StatelessWidget {
       child: SizedBox(
           width: _kCardWidth * scale * zoomValue,
           height: _kCardHeight * scale * zoomValue,
-          child: MonsterAbilityCardWidget.buildFront(
-              card, monster, scaling, calculateAll)),
+          child: MonsterAbilityCardFront(
+              card: card, data: monster, scale: scaling, calculateAll: calculateAll)),
     );
   }
 }

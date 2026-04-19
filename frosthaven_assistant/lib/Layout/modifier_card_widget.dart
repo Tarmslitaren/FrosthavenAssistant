@@ -29,7 +29,6 @@ class ModifierCardWidget extends StatelessWidget {
   static const double _kRearMarkerIconSize = 20.0;
   static const double _kRearMarkerIconTop = 9.0;
   static const double _kRearMarkerIconLeft = 19.0;
-  static const double _kAssetScaleDefault = 4.0;
   static const double _kHalfPi = pi / 2;
   static const int _kPerkSuffixLength = 2; // length of "-2" suffix
 
@@ -41,8 +40,48 @@ class ModifierCardWidget extends StatelessWidget {
     this.revealed.value = revealed;
   }
 
-  static Widget buildFront(
-      ModifierCard card, String name, double scale, double _) {
+  final ModifierCard card;
+  final revealed = ValueNotifier<bool>(false);
+  final String name;
+
+  Widget transitionBuilder(Widget widget, Animation<double> animation) { // ignore: avoid-returning-widgets, required AnimatedSwitcher callback signature
+    final rotateAnim = Tween(begin: pi, end: 0.0).animate(animation);
+    return AnimatedBuilder(
+        animation: rotateAnim,
+        child: widget,
+        builder: (context, widget) {
+          final value = min(rotateAnim.value, _kHalfPi);
+          return Transform(
+            transform: Matrix4.rotationX(value),
+            alignment: Alignment.center,
+            child: widget,
+          );
+        });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final userScalingBars = getIt<Settings>().userScalingBars.value;
+    return revealed.value
+        ? ModifierCardFront(card: card, name: name, scale: userScalingBars)
+        : ModifierCardRear(scale: userScalingBars, name: name);
+  }
+}
+
+class ModifierCardFront extends StatelessWidget {
+  const ModifierCardFront({
+    super.key,
+    required this.card,
+    required this.name,
+    required this.scale,
+  });
+
+  final ModifierCard card;
+  final String name;
+  final double scale;
+
+  @override
+  Widget build(BuildContext context) {
     bool allies = name == "allies";
     bool isCharacter = name.isNotEmpty && !allies;
     bool imbue = card.gfx.contains("imbue");
@@ -91,7 +130,7 @@ class ModifierCardWidget extends StatelessWidget {
             : character.characterClass.perks;
         gfx = gfx.substring(1);
         if (gfx.endsWith("-2")) {
-          gfx = gfx.substring(0, gfx.length - _kPerkSuffixLength);
+          gfx = gfx.substring(0, gfx.length - ModifierCardWidget._kPerkSuffixLength);
           final int? index = int.tryParse(gfx);
           if (index != null &&
               index >= 0 &&
@@ -113,22 +152,22 @@ class ModifierCardWidget extends StatelessWidget {
 
     gfx = "assets/images/attack/$gfx.png";
 
-    return RepaintBoundary(child:Container(
-        width: _kCardWidth * scale,
-        height: _kCardHeight * scale,
+    return RepaintBoundary(child: Container(
+        width: ModifierCardWidget._kCardWidth * scale,
+        height: ModifierCardWidget._kCardHeight * scale,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
               color: Colors.black45,
-              blurRadius: _kShadowBlur * scale,
-              offset: Offset(_kShadowOffsetX * scale, _kShadowOffsetY * scale), // Shadow position
+              blurRadius: ModifierCardWidget._kShadowBlur * scale,
+              offset: Offset(ModifierCardWidget._kShadowOffsetX * scale, ModifierCardWidget._kShadowOffsetY * scale), // Shadow position
             ),
           ],
         ),
         child: Stack(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(_kBorderRadius * scale)),
+              borderRadius: BorderRadius.all(Radius.circular(ModifierCardWidget._kBorderRadius * scale)),
               child: Image(
                 fit: BoxFit.fitHeight,
                 image: AssetImage(gfx),
@@ -136,19 +175,19 @@ class ModifierCardWidget extends StatelessWidget {
             ),
             if (hasExtra)
               Positioned(
-                height: _kMarkerBgSize * scale,
-                width: _kMarkerBgSize * scale,
-                top: _kMarkerTopNumerator * scale / _kMarkerBgTopDivisor,
-                left: _kMarkerBgLeft * scale,
+                height: ModifierCardWidget._kMarkerBgSize * scale,
+                width: ModifierCardWidget._kMarkerBgSize * scale,
+                top: ModifierCardWidget._kMarkerTopNumerator * scale / ModifierCardWidget._kMarkerBgTopDivisor,
+                left: ModifierCardWidget._kMarkerBgLeft * scale,
                 child: Image.asset(
                     'assets/images/attack/class-marker-background.png'),
               ),
             if (hasExtra)
               Positioned(
-                height: _kMarkerIconSize * scale,
-                width: _kMarkerIconSize * scale,
-                top: _kMarkerIconTopNumerator * scale / _kMarkerBgTopDivisor,
-                left: _kMarkerIconLeft * scale,
+                height: ModifierCardWidget._kMarkerIconSize * scale,
+                width: ModifierCardWidget._kMarkerIconSize * scale,
+                top: ModifierCardWidget._kMarkerIconTopNumerator * scale / ModifierCardWidget._kMarkerBgTopDivisor,
+                left: ModifierCardWidget._kMarkerIconLeft * scale,
                 child: Image(
                   color: Colors.white,
                   image: AssetImage(extraGfx),
@@ -157,8 +196,20 @@ class ModifierCardWidget extends StatelessWidget {
           ],
         )));
   }
+}
 
-  static Widget buildRear(double scale, String name) {
+class ModifierCardRear extends StatelessWidget {
+  const ModifierCardRear({
+    super.key,
+    required this.scale,
+    required this.name,
+  });
+
+  final double scale;
+  final String name;
+
+  @override
+  Widget build(BuildContext context) {
     bool allies = name == "allies";
     bool isCharacter = name.isNotEmpty && !allies;
     bool hasExtra = isCharacter || allies;
@@ -169,33 +220,33 @@ class ModifierCardWidget extends StatelessWidget {
       extraGfx = 'assets/images/class-icons/$name.png';
     }
 
-    return RepaintBoundary(child:Container(
-        width: _kCardWidth * scale,
-        height: _kCardHeight * scale,
+    return RepaintBoundary(child: Container(
+        width: ModifierCardWidget._kCardWidth * scale,
+        height: ModifierCardWidget._kCardHeight * scale,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
               color: Colors.black45,
-              blurRadius: _kShadowBlur * scale,
-              offset: Offset(_kShadowOffsetX * scale, _kShadowOffsetY * scale), // Shadow position
+              blurRadius: ModifierCardWidget._kShadowBlur * scale,
+              offset: Offset(ModifierCardWidget._kShadowOffsetX * scale, ModifierCardWidget._kShadowOffsetY * scale), // Shadow position
             ),
           ],
         ),
         child: Stack(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(_kBorderRadius * scale)),
+              borderRadius: BorderRadius.all(Radius.circular(ModifierCardWidget._kBorderRadius * scale)),
               child: Image(
                 fit: BoxFit.fitHeight,
-                image: AssetImage("assets/images/attack/back.png"),
+                image: const AssetImage("assets/images/attack/back.png"),
               ),
             ),
             if (hasExtra)
               Positioned(
-                height: _kRearMarkerBgSize * scale,
-                width: _kRearMarkerBgSize * scale,
-                top: _kRearMarkerBgTop * scale,
-                left: _kRearMarkerBgLeft * scale,
+                height: ModifierCardWidget._kRearMarkerBgSize * scale,
+                width: ModifierCardWidget._kRearMarkerBgSize * scale,
+                top: ModifierCardWidget._kRearMarkerBgTop * scale,
+                left: ModifierCardWidget._kRearMarkerBgLeft * scale,
                 child: Image(
                   image: AssetImage(
                       'assets/images/attack/class-marker-background.png'),
@@ -203,10 +254,10 @@ class ModifierCardWidget extends StatelessWidget {
               ),
             if (hasExtra)
               Positioned(
-                height: _kRearMarkerIconSize * scale,
-                width: _kRearMarkerIconSize * scale,
-                top: _kRearMarkerIconTop * scale,
-                left: _kRearMarkerIconLeft * scale,
+                height: ModifierCardWidget._kRearMarkerIconSize * scale,
+                width: ModifierCardWidget._kRearMarkerIconSize * scale,
+                top: ModifierCardWidget._kRearMarkerIconTop * scale,
+                left: ModifierCardWidget._kRearMarkerIconLeft * scale,
                 child: Image(
                   color: Colors.white,
                   image: AssetImage(extraGfx),
@@ -214,32 +265,5 @@ class ModifierCardWidget extends StatelessWidget {
               ),
           ],
         )));
-  }
-
-  final ModifierCard card;
-  final revealed = ValueNotifier<bool>(false);
-  final String name;
-
-  Widget transitionBuilder(Widget widget, Animation<double> animation) {
-    final rotateAnim = Tween(begin: pi, end: 0.0).animate(animation);
-    return AnimatedBuilder(
-        animation: rotateAnim,
-        child: widget,
-        builder: (context, widget) {
-          final value = min(rotateAnim.value, _kHalfPi);
-          return Transform(
-            transform: Matrix4.rotationX(value),
-            alignment: Alignment.center,
-            child: widget,
-          );
-        });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final userScalingBars = getIt<Settings>().userScalingBars.value;
-    return revealed.value
-        ? ModifierCardWidget.buildFront(card, name, userScalingBars, _kAssetScaleDefault)
-        : ModifierCardWidget.buildRear(userScalingBars, name);
   }
 }
