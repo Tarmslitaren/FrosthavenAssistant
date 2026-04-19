@@ -240,7 +240,7 @@ class MonsterBox extends StatelessWidget {
                                       alignment: WrapAlignment.center,
                                       crossAxisAlignment:
                                           WrapCrossAlignment.center,
-                                      children: _createConditionList(
+                                      children: _createConditionList( // ignore: avoid-returning-widgets, list-returning helper for Wrap children
                                           scale, vm),
                                     ));
                               }),
@@ -295,7 +295,7 @@ class MonsterBox extends StatelessWidget {
               builder: (context, value, child) {
                 final alive = vm.isAlive;
                 final double offset = -_kAnimationOffset * scale;
-                final child = _buildInternal(scale, width, vm);
+                final child = _buildInternal(scale, width, vm); // ignore: avoid-returning-widgets, internal layout helper
 
                 if (displayStartAnimation != figureId) {
                   return TweenAnimationBuilder<Offset>(

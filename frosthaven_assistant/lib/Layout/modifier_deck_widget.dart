@@ -133,7 +133,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
     return ValueListenableBuilder<Object>(
         valueListenable: _vm.modelData,
         builder: (context, value, child) {
-          return _buildContent();
+          return _buildContent(); // ignore: avoid-returning-widgets, internal layout helper
         });
   }
 
@@ -287,7 +287,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                         discardPileSize >
                                 ModifierDeckWidgetState
                                     ._kDiscardShowThirdMinSize
-                            ? _buildStayAnimation(
+                            ? _buildStayAnimation( // ignore: avoid-returning-widgets, animation helper
                                 RotationTransition(
                                     turns: const AlwaysStoppedAnimation(
                                         ModifierDeckWidgetState
@@ -303,7 +303,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                 userScalingBars)
                             : Container(),
                         discardPileSize > 1
-                            ? _buildSlideAnimation(
+                            ? _buildSlideAnimation( // ignore: avoid-returning-widgets, animation helper
                                 RotationTransition(
                                     turns: const AlwaysStoppedAnimation(
                                         ModifierDeckWidgetState
@@ -320,7 +320,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                 userScalingBars)
                             : Container(),
                         deck.discardPileIsNotEmpty
-                            ? _buildDrawAnimation(
+                            ? _buildDrawAnimation( // ignore: avoid-returning-widgets, animation helper
                                 ModifierCardWidget(
                                   name: deck.name,
                                   key: Key(widgetKey),

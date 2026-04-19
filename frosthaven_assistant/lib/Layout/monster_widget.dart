@@ -158,8 +158,8 @@ class MonsterWidgetState extends State<MonsterWidget> {
                               onTap: () {
                                 _vm.endTurn();
                               },
-                              child: _buildImagePart(height, scale))
-                          : _buildImagePart(height, scale),
+                              child: _buildImagePart(height, scale)) // ignore: avoid-returning-widgets, internal layout helper
+                          : _buildImagePart(height, scale), // ignore: avoid-returning-widgets, internal layout helper
                       RepaintBoundary(
                           child: MonsterAbilityCardWidget(data: widget.data)),
                       RepaintBoundary(
@@ -173,7 +173,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
               child: ValueListenableBuilder<BuiltList<MonsterInstance>>(
                   valueListenable: _vm.monsterInstancesNotifier,
                   builder: (context, value, child) {
-                    return _buildMonsterBoxGrid(scale);
+                    return _buildMonsterBoxGrid(scale); // ignore: avoid-returning-widgets, internal layout helper
                   }),
             ),
           ]));

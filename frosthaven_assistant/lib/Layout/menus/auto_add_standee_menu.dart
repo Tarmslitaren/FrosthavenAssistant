@@ -336,7 +336,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                       Column(
                         children: [
                           if (nrOfElite > 0)
-                            _buildButtonGrid(
+                            _buildButtonGrid( // ignore: avoid-returning-widgets, internal layout helper
                                 scale,
                                 monster,
                                 true,
@@ -345,7 +345,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                                 nrOfElite,
                                 nrOfNormal),
                           if (nrOfNormal > 0)
-                            _buildButtonGrid(
+                            _buildButtonGrid( // ignore: avoid-returning-widgets, internal layout helper
                                 scale,
                                 monster,
                                 false,
