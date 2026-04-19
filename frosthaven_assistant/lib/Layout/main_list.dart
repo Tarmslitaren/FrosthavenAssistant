@@ -50,7 +50,7 @@ class Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
-    late final Widget child; // ignore: avoid-late-keyword
+    Widget child = const SizedBox.shrink();
     double height;
     double listWidth = getMainListWidth(context);
     if (data is Character) {
@@ -129,22 +129,22 @@ class ListAnimation extends StatefulWidget {
 
 class ListAnimationState extends State<ListAnimation>
     with SingleTickerProviderStateMixin {
-  late final AnimationController _controller; // ignore: avoid-late-keyword
-  late final CurvedAnimation _curved; // ignore: avoid-late-keyword
+  AnimationController? _controller;
+  CurvedAnimation? _curved;
   double _diff = 0;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
+    final ctrl = AnimationController(
       duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
-    _curved =
-        CurvedAnimation(parent: _controller, curve: Curves.linearToEaseOut);
+    _controller = ctrl;
+    _curved = CurvedAnimation(parent: ctrl, curve: Curves.linearToEaseOut);
     // Start animation after first build has computed _diff.
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (_diff != 0 && mounted) _controller.forward(from: 0.0);
+      if (_diff != 0 && mounted) ctrl.forward(from: 0.0);
     });
   }
 
@@ -155,15 +155,15 @@ class ListAnimationState extends State<ListAnimation>
         oldWidget.lastIndex != widget.lastIndex) {
       // build() will run before the callback fires, so _diff will be current.
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (_diff != 0 && mounted) _controller.forward(from: 0.0);
+        if (_diff != 0 && mounted) _controller?.forward(from: 0.0);
       });
     }
   }
 
   @override
   void dispose() {
-    _curved.dispose();
-    _controller.dispose();
+    _curved?.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 
@@ -189,11 +189,14 @@ class ListAnimationState extends State<ListAnimation>
       MainListState.lastPositions..clear()..addAll(positions);
     });
 
+    final curved = _curved;
+    if (curved == null) return widget.child;
+
     return RepaintBoundary(
       child: AnimatedBuilder(
-        animation: _curved,
+        animation: curved,
         builder: (context, child) => Transform.translate(
-          offset: Offset(0, (1 - _curved.value) * _diff),
+          offset: Offset(0, (1 - curved.value) * _diff),
           child: child,
         ),
         child: widget.child,
@@ -230,7 +233,12 @@ class MainListState extends State<MainList> {
 
   static MainListViewModel? _staticVm;
 
-  late final MainListViewModel _vm; // ignore: avoid-late-keyword
+  MainListViewModel? _vmInstance;
+  MainListViewModel get _vm => _vmInstance ??= MainListViewModel(
+      gameState: widget.gameState,
+      gameData: widget.gameData,
+      settings: widget.settings,
+    );
   List<Widget> _generatedList = [];
   static final scrollController = ScrollController();
 
@@ -243,11 +251,6 @@ class MainListState extends State<MainList> {
   @override
   void initState() {
     super.initState();
-    _vm = MainListViewModel(
-      gameState: widget.gameState,
-      gameData: widget.gameData,
-      settings: widget.settings,
-    );
     _staticVm = _vm;
 
     //this does cause a index 0

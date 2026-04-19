@@ -28,13 +28,8 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
   static const double _kModalWidth = 300;
   static const double _kModalHeight = 210;
 
-  late final GameState _gameState; // ignore: avoid-late-keyword
+  GameState get _gameState => widget.gameState ?? getIt<GameState>();
 
-  @override
-  initState() {
-    super.initState();
-    _gameState = widget.gameState ?? getIt<GameState>();
-  }
 
   @override
   Widget build(BuildContext context) {

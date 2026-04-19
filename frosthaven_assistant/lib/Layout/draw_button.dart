@@ -22,13 +22,9 @@ class DrawButtonState extends State<DrawButton> {
   static const double _kButtonPadding = 10.0;
   static const double _kTextHeight = 0.8;
 
-  late final DrawButtonViewModel _vm; // ignore: avoid-late-keyword
+  DrawButtonViewModel? _vmInstance;
+  DrawButtonViewModel get _vm => _vmInstance ??= DrawButtonViewModel(gameState: widget.gameState);
 
-  @override
-  void initState() {
-    super.initState();
-    _vm = DrawButtonViewModel(gameState: widget.gameState);
-  }
 
   void _onPressed() {
     final blockedMessage = _vm.runAction();

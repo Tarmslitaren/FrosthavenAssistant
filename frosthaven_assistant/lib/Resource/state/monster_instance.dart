@@ -35,28 +35,28 @@ class MonsterInstance extends FigureState {
     return name + gfx + standeeNr.toString();
   }
 
-  late final int standeeNr; // ignore: avoid-late-keyword
+  int standeeNr = 0;
 
   void setType(_StateModifier _, MonsterType value) {
     _type = value;
   }
 
   MonsterType get type => _type;
-  late MonsterType _type; //can't be fina due to ice wraith special // ignore: avoid-late-keyword
-  late final String name; // ignore: avoid-late-keyword
-  late final String gfx; // ignore: avoid-late-keyword
+  MonsterType _type = MonsterType.normal; //can't be final due to ice wraith special
+  String name = '';
+  String gfx = '';
 
   //summon stats. not used currently
-  late final int move; // ignore: avoid-late-keyword
-  late final int attack; // ignore: avoid-late-keyword
-  late final int range; // ignore: avoid-late-keyword
+  int move = 0;
+  int attack = 0;
+  int range = 0;
 
   int get roundSummoned => _roundSummoned;
   void setRoundSummoned(_StateModifier _, int value) {
     _roundSummoned = value;
   }
 
-  late int _roundSummoned; // ignore: avoid-late-keyword
+  int _roundSummoned = -1;
 
   void _setLevel(Monster monster, {GameState? gameState}) {
     StatValue newHealthValue = const IntStatValue(

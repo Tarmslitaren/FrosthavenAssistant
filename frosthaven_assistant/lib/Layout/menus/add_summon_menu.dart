@@ -47,9 +47,9 @@ class AddSummonMenuState extends State<AddSummonMenu> {
   static const int _kMinStandeesForNr = 2;
   static const int _kDefaultHealth = 2;
 
-  late final GameState _gameState; // ignore: avoid-late-keyword
-  late final GameData _gameData; // ignore: avoid-late-keyword
-  late final Settings _settings; // ignore: avoid-late-keyword
+  GameState get _gameState => widget.gameState ?? getIt<GameState>();
+  GameData get _gameData => widget.gameData ?? getIt<GameData>();
+  Settings get _settings => widget.settings ?? getIt<Settings>();
   int chosenNr = 1;
   String chosenGfx = "blue";
 
@@ -60,9 +60,6 @@ class AddSummonMenuState extends State<AddSummonMenu> {
   initState() {
     // at the beginning, all items are shown
     super.initState();
-    _gameState = widget.gameState ?? getIt<GameState>();
-    _gameData = widget.gameData ?? getIt<GameData>();
-    _settings = widget.settings ?? getIt<Settings>();
 
     //populate the summon list
     for (var item in widget.character.characterClass.summons) {

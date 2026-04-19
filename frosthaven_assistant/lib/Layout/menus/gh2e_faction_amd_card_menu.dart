@@ -33,14 +33,13 @@ class GH2eFactionAMDCardMenuState extends State<GH2eFactionAMDCardMenu> {
   static const double _kSpacerNoCard = 20.0;
   static const double _kSpacerWithCard = 30.0;
 
-  late final GameState _gameState; // ignore: avoid-late-keyword
+  GameState get _gameState => widget.gameState ?? getIt<GameState>();
   final List<ModifierCard> _factionCards = [];
 
   String? addedCard;
 
   @override
   initState() {
-    _gameState = widget.gameState ?? getIt<GameState>();
     super.initState();
     _factionCards.clear();
     _factionCards.addAll(GameMethods.getFactionCards(widget.faction));

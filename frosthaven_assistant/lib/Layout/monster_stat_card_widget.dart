@@ -217,7 +217,7 @@ class _MonsterStatNormalLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final settings_ = settings ?? getIt<Settings>();
-    MonsterStatsModel normal = data.type.levels[data.level.value].normal!; // ignore: avoid-non-null-assertion
+    MonsterStatsModel normal = data.type.levels[data.level.value].normal!;
     MonsterStatsModel? elite = data.type.levels[data.level.value].elite;
 
     bool noCalculationSetting = settings_.noCalculation.value;
@@ -320,7 +320,7 @@ class _MonsterStatNormalLayout extends StatelessWidget {
           top: MonsterStatCardWidget._kNormalStatsTop * scale,
           child: Column(
             children: <Widget>[
-              Text(StatCalculator.calculateFormula(elite!.health).toString(), // ignore: avoid-non-null-assertion
+              Text(StatCalculator.calculateFormula(elite!.health).toString(),
                   style: rightStyle),
               Text(StatCalculator.calculateFormula(elite.move).toString(),
                   style: rightStyle),
@@ -428,7 +428,7 @@ class MonsterStatBossLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     final settings_ = settings ?? getIt<Settings>();
     bool noCalculationSetting = settings_.noCalculation.value;
-    MonsterStatsModel normal = data.type.levels[data.level.value].boss!; // ignore: avoid-non-null-assertion
+    MonsterStatsModel normal = data.type.levels[data.level.value].boss!;
 
     String health = normal.health.toString();
     if (!noCalculationSetting) {
@@ -570,7 +570,7 @@ class MonsterStatBossLayout extends StatelessWidget {
                               width: MonsterStatCardWidget._kBossSpecialWidth * scale,
                               child: RepaintBoundary(
                                   child: LineBuilder.createLines(
-                                      data.type.levels[data.level.value].boss! // ignore: avoid-non-null-assertion
+                                      data.type.levels[data.level.value].boss!
                                           .special1,
                                       false,
                                       !noCalculationSetting,
@@ -600,7 +600,7 @@ class MonsterStatBossLayout extends StatelessWidget {
                               width: MonsterStatCardWidget._kBossSpecialWidth * scale,
                               child: RepaintBoundary(
                                   child: LineBuilder.createLines(
-                                      data.type.levels[data.level.value].boss! // ignore: avoid-non-null-assertion
+                                      data.type.levels[data.level.value].boss!
                                           .special2,
                                       false,
                                       !noCalculationSetting,

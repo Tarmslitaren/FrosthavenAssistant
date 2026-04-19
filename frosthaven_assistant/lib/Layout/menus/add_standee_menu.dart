@@ -47,17 +47,11 @@ class AddStandeeMenu extends StatefulWidget {
 }
 
 class AddStandeeMenuState extends State<AddStandeeMenu> {
-  late final GameState _gameState; // ignore: avoid-late-keyword
-  late final Settings _settings; // ignore: avoid-late-keyword
+  GameState get _gameState => widget.gameState ?? getIt<GameState>();
+  Settings get _settings => widget.settings ?? getIt<Settings>();
 
   bool addAsSummon = false;
 
-  @override
-  initState() {
-    super.initState();
-    _gameState = widget.gameState ?? getIt<GameState>();
-    _settings = widget.settings ?? getIt<Settings>();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +130,7 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
                                 : Colors.black),
                         onChanged: (bool? newValue) {
                           setState(() {
-                            addAsSummon = newValue!; // ignore: avoid-non-null-assertion
+                            addAsSummon = newValue!;
                           });
                         },
                         value: addAsSummon,

@@ -105,14 +105,9 @@ class MonsterAbilityCardWidget extends StatefulWidget {
 }
 
 class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
-  late final MonsterAbilityCardViewModel _vm; // ignore: avoid-late-keyword
-
-  @override
-  void initState() {
-    _vm = MonsterAbilityCardViewModel(widget.data,
-        gameState: widget.gameState, settings: widget.settings);
-    super.initState();
-  }
+  MonsterAbilityCardViewModel? _vmInstance;
+  MonsterAbilityCardViewModel get _vm => _vmInstance ??= MonsterAbilityCardViewModel(
+      widget.data, gameState: widget.gameState, settings: widget.settings);
 
   Widget _transitionBuilder(Widget widget, Animation<double> animation) { // ignore: avoid-returning-widgets, required AnimatedSwitcher callback signature
     final rotateAnim = Tween(begin: pi, end: 0.0).animate(animation);
@@ -151,7 +146,7 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                 duration: const Duration(milliseconds: MonsterAbilityCardWidget._kAnimationDurationMs),
                 transitionBuilder: _transitionBuilder,
                 layoutBuilder: (widget, list) => Stack(
-                  children: [widget!, ...list], // ignore: avoid-non-null-assertion
+                  children: [widget!, ...list],
                 ),
                 child: showFront && card != null
                     ? MonsterAbilityCardFront(

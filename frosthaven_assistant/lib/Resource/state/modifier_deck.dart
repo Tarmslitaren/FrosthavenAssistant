@@ -149,7 +149,7 @@ class ModifierDeck {
     if (_removables[id] == null) {
       _removables[id] = ValueNotifier<int>(0);
     }
-    return _removables[id]!; // ignore: avoid-non-null-assertion
+    return _removables[id]!;
   }
 
   void moveCardToRemovedPile(_StateModifier s, String gfx) {
@@ -532,10 +532,10 @@ class ModifierDeck {
   void _initListeners() {
     for (var item in _removables.keys) {
       _removables[item]?.removeListener(() {
-        _handleRemovableCards(_removables[item]!, item); // ignore: avoid-non-null-assertion
+        _handleRemovableCards(_removables[item]!, item);
       });
       _removables[item]?.addListener(() {
-        _handleRemovableCards(_removables[item]!, item); // ignore: avoid-non-null-assertion
+        _handleRemovableCards(_removables[item]!, item);
       });
     }
   }

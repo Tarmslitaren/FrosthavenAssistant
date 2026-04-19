@@ -37,7 +37,7 @@ class NetworkInformation { // ignore: prefer-match-file-name, file name uses sho
 
   ConnectivityResult? _connectionStatus;
   final Connectivity _connectivity = Connectivity();
-  late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription; // ignore: avoid-late-keyword
+  StreamSubscription<List<ConnectivityResult>>? _connectivitySubscription;
 
   final Set<String> wifiIPv6List = {};
   final wifiIPv6 = ValueNotifier<String>("");

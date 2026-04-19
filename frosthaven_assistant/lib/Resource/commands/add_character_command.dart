@@ -7,7 +7,7 @@ class AddCharacterCommand extends Command {
   final String _edition;
   final int _level;
   final String? _display;
-  late Character character; // ignore: avoid-late-keyword
+  Character? character;
 
   AddCharacterCommand(this._id, this._edition, this._display, this._level,
       {required GameState gameState})
@@ -22,15 +22,17 @@ class AddCharacterCommand extends Command {
 
   @override
   void execute() {
+    final char = character;
+    if (char == null) return;
     //add new character on top of list
-    RoundMethods.addToMainList(stateAccess, 0, character);
+    RoundMethods.addToMainList(stateAccess, 0, char);
 
-    if (!GameMethods.isObjectiveOrEscort(character.characterClass)) {
+    if (!GameMethods.isObjectiveOrEscort(char.characterClass)) {
       ScenarioMethods.applyDifficulty(stateAccess);
     }
 
     RoundMethods.updateForSpecialRules(stateAccess);
-    ScenarioMethods.unlockClass(stateAccess, character.characterClass.id);
+    ScenarioMethods.unlockClass(stateAccess, char.characterClass.id);
   }
 
   @override

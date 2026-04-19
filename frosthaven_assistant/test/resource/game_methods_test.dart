@@ -605,37 +605,37 @@ void main() async {
 
     group('isObjectiveOrEscort', () {
       test('should return true for Objective', () {
-        final characterClass = AddCharacterCommand(
+        final cmd = AddCharacterCommand(
             "Objective", "na", "whatever", 1,
             gameState: getIt<GameState>());
         String oldState = gameState.toString();
         expect(
             GameMethods.isObjectiveOrEscort(
-                characterClass.character.characterClass),
+                cmd.character!.characterClass),
             isTrue);
         checkNoSideEffects([], oldState);
       });
 
       test('should return true for Escort', () {
-        final characterClass = AddCharacterCommand(
+        final cmd = AddCharacterCommand(
             "Escort", "na", "whatever", 1,
             gameState: getIt<GameState>());
         String oldState = gameState.toString();
         expect(
             GameMethods.isObjectiveOrEscort(
-                characterClass.character.characterClass),
+                cmd.character!.characterClass),
             isTrue);
         checkNoSideEffects([], oldState);
       });
 
       test('should return false for other characters', () {
-        final characterClass = AddCharacterCommand(
+        final cmd = AddCharacterCommand(
             "Blinkblade", "Frosthaven", "whatever", 1,
             gameState: getIt<GameState>());
         String oldState = gameState.toString();
         expect(
             GameMethods.isObjectiveOrEscort(
-                characterClass.character.characterClass),
+                cmd.character!.characterClass),
             isFalse);
         checkNoSideEffects([], oldState);
       });

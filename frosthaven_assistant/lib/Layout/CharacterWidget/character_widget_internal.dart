@@ -53,17 +53,17 @@ class CharacterWidgetInternal extends StatefulWidget {
 }
 
 class CharacterInternalWidgetState extends State<CharacterWidgetInternal> {
-  late final CharacterWidgetInternalViewModel _vm; // ignore: avoid-late-keyword
+  CharacterWidgetInternalViewModel? _vmInstance;
+  CharacterWidgetInternalViewModel get _vm => _vmInstance ??= CharacterWidgetInternalViewModel(
+      widget.character, gameState: widget.gameState, settings: widget.settings);
   bool isCharacter = true;
   final _initTextFieldController = TextEditingController();
-  late List<MonsterInstance> lastList = []; // ignore: avoid-late-keyword
+  List<MonsterInstance> lastList = [];
   final _focusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
-    _vm = CharacterWidgetInternalViewModel(widget.character,
-        gameState: widget.gameState, settings: widget.settings);
     final character = widget.character;
     lastList = character.characterState.summonList.toList();
 

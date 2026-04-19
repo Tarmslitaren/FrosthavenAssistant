@@ -60,23 +60,21 @@ class SetLevelMenu extends StatefulWidget {
 }
 
 class SetLevelMenuState extends State<SetLevelMenu> {
-  late final GameState _gameState; // ignore: avoid-late-keyword
-  late final Settings _settings; // ignore: avoid-late-keyword
+  GameState get _gameState => widget.gameState ?? getIt<GameState>();
+  Settings get _settings => widget.settings ?? getIt<Settings>();
 
   @override
   initState() {
     // at the beginning, all items are shown
     super.initState();
-    _gameState = widget.gameState ?? getIt<GameState>();
-    _settings = widget.settings ?? getIt<Settings>();
   }
 
   @override
   Widget build(BuildContext context) {
     String title = "Set Scenario Level";
     if (widget.monster != null) {
-      String name = widget.monster!.type.display; // ignore: avoid-non-null-assertion
-      if (widget.monster!.type.display.endsWith("y")) { // ignore: avoid-non-null-assertion
+      String name = widget.monster!.type.display;
+      if (widget.monster!.type.display.endsWith("y")) {
         name = "${name.substring(0, name.length - 1)}ie";
       }
       title = "Set $name's level";
@@ -91,8 +89,8 @@ class SetLevelMenuState extends State<SetLevelMenu> {
     String ownerId = "";
     String figureId = "";
     if (widget.monster != null) {
-      name = widget.monster!.type.display; // ignore: avoid-non-null-assertion
-      ownerId = widget.monster!.id; // ignore: avoid-non-null-assertion
+      name = widget.monster!.type.display;
+      ownerId = widget.monster!.id;
     } else if (widget.figure is CharacterState) {
       figureId = (widget.figure as CharacterState).display.value;
       ownerId = name;
@@ -103,7 +101,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
       String gfx = (widget.figure as MonsterInstance).gfx;
       figureId = name + gfx + nr.toString();
       if (widget.characterId != null) {
-        ownerId = widget.characterId!; // ignore: avoid-non-null-assertion
+        ownerId = widget.characterId!;
       }
     }
 
@@ -162,7 +160,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                           side: BorderSide(
                               color: darkMode ? Colors.white : Colors.black),
                           onChanged: (bool? newValue) {
-                            _gameState.action(SetSoloCommand(newValue!)); // ignore: avoid-non-null-assertion
+                            _gameState.action(SetSoloCommand(newValue!));
                           },
                           value: _gameState.solo.value,
                         );
@@ -182,7 +180,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                               color: darkMode ? Colors.white : Colors.black),
                           onChanged: (bool? newValue) {
                             _gameState.action(SetAutoLevelAdjustCommand(
-                                newValue!, // ignore: avoid-non-null-assertion
+                                newValue!,
                                 gameState: _gameState));
                           },
                           value: _gameState.autoScenarioLevel.value,
@@ -204,7 +202,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
               if (widget.figure != null)
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   CounterButton(
-                      notifier: widget.figure!.maxHealth, // ignore: avoid-non-null-assertion
+                      notifier: widget.figure!.maxHealth,
                       command: ChangeMaxHealthCommand(0, figureId, ownerId,
                           gameState: _gameState),
                       maxValue: SetLevelMenu._kMaxHealth,
@@ -277,7 +275,7 @@ class _LevelButton extends StatelessWidget {
               valueListenable: gameState.level,
               builder: (context, value, child) {
                 bool isCurrentlySelected = monster != null
-                    ? nr == monster!.level.value // ignore: avoid-non-null-assertion
+                    ? nr == monster!.level.value
                     : nr == gameState.level.value;
                 bool isRecommended = GameMethods.getRecommendedLevel() == nr;
                 Color color = Colors.transparent;

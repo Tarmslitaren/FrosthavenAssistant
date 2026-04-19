@@ -2,23 +2,25 @@ part of 'game_state.dart';
 // ignore_for_file: library_private_types_in_public_api
 
 class Monster extends ListItemData {
-  Monster(String name, int level, this._isAlly, {GameData? gameData}) {
+  Monster(String name, int level, this._isAlly, {GameData? gameData})
+      : type = _findType(name, gameData) {
     id = name;
     _level.value = level;
-    final gd = gameData ?? getIt<GameData>();
-    Map<String, MonsterModel> monsters = {};
-    for (String key in gd.modelData.value.keys) {
-      monsters.addAll(gd.modelData.value[key]!.monsters); // ignore: avoid-non-null-assertion
-    }
-    for (String key in monsters.keys) {
-      if (key == name) {
-        type = monsters[key]!; // ignore: avoid-non-null-assertion
-      }
-    }
-
     _addAbilityDeck();
   }
-  late final MonsterModel type; // ignore: avoid-late-keyword
+
+  static MonsterModel _findType(String name, GameData? gameData) {
+    final gd = gameData ?? getIt<GameData>();
+    for (final key in gd.modelData.value.keys) {
+      final monsters = gd.modelData.value[key]!.monsters;
+      if (monsters.containsKey(name)) {
+        return monsters[name]!;
+      }
+    }
+    throw StateError('Monster model not found: $name');
+  }
+
+  MonsterModel type;
   final List<MonsterInstance> _monsterInstances = [];
   final _monsterInstancesNotifier =
       ValueNotifier<BuiltList<MonsterInstance>>(BuiltList.of([]));
@@ -49,7 +51,8 @@ class Monster extends ListItemData {
   }
 
   Monster.fromJson(Map<String, dynamic> json, {GameData? gameData})
-      : _isAlly = false {
+      : _isAlly = false,
+        type = _findType(json['type'] as String, gameData) {
     id = json['id'];
     final turnStateIdx = json['turnState'] as int?;
     if (turnStateIdx != null &&
@@ -63,19 +66,6 @@ class Monster extends ListItemData {
     }
     if (json.containsKey("isActive")) {
       _isActive = json['isActive'];
-    }
-    String modelName = json['type'];
-
-    final gd = gameData ?? getIt<GameData>();
-    Map<String, MonsterModel> monsters = {};
-    for (String key in gd.modelData.value.keys) {
-      monsters.addAll(gd.modelData.value[key]!.monsters); // ignore: avoid-non-null-assertion
-    }
-    for (var item in monsters.keys) {
-      if (item == modelName) {
-        type = monsters[item]!; // ignore: avoid-non-null-assertion
-        break;
-      }
     }
 
     List<Object?> instanceList = json["monsterInstances"] as List<Object?>;

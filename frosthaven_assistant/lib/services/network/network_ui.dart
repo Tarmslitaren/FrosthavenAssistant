@@ -21,17 +21,10 @@ class NetworkUI extends StatefulWidget {
 }
 
 class NetworkUIState extends State<NetworkUI> {
-  late final Network _network; // ignore: avoid-late-keyword
-  late final Settings _settings; // ignore: avoid-late-keyword
-  late final Client _client; // ignore: avoid-late-keyword
+  Network get _network => widget.network ?? getIt<Network>();
+  Settings get _settings => widget.settings ?? getIt<Settings>();
+  Client get _client => widget.client ?? getIt<Client>();
 
-  @override
-  initState() {
-    _network = widget.network ?? getIt<Network>();
-    _settings = widget.settings ?? getIt<Settings>();
-    _client = widget.client ?? getIt<Client>();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

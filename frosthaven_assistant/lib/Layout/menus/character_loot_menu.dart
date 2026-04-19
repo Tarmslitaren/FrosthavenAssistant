@@ -22,13 +22,8 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
     "corpsecap", "flamefruit", "rockroot", "snowthistle",
   ];
 
-  late final GameState _gameState; // ignore: avoid-late-keyword
+  final GameState _gameState = getIt<GameState>();
 
-  @override
-  initState() {
-    _gameState = getIt<GameState>();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

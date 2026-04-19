@@ -10,7 +10,7 @@ class ThemeSwitcher extends InheritedWidget {
   });
 
   static ThemeSwitcherWidgetState of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<ThemeSwitcher>()!.data; // ignore: avoid-non-null-assertion
+    return context.dependOnInheritedWidgetOfExactType<ThemeSwitcher>()!.data;
   }
 
   final ThemeSwitcherWidgetState data;

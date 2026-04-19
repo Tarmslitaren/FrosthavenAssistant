@@ -5,18 +5,20 @@ class AddMonsterCommand extends Command {
   final String _name;
   final int? _level;
   final bool _isAlly;
-  late Monster monster; // ignore: avoid-late-keyword
+  Monster? monster;
 
   AddMonsterCommand(this._name, this._level, this._isAlly,
       {required GameState gameState})
       : _gameState = gameState {
     monster =
-        MonsterMethods.createMonster(stateAccess, _name, _level, _isAlly)!; // ignore: avoid-non-null-assertion
+        MonsterMethods.createMonster(stateAccess, _name, _level, _isAlly);
   }
 
   @override
   void execute() {
-    RoundMethods.addToMainList(stateAccess, null, monster);
+    final m = monster;
+    if (m == null) return;
+    RoundMethods.addToMainList(stateAccess, null, m);
   }
 
   @override
@@ -26,6 +28,6 @@ class AddMonsterCommand extends Command {
 
   @override
   String describe() {
-    return "Add ${monster.type.display}";
+    return "Add ${monster?.type.display ?? ''}";
   }
 }

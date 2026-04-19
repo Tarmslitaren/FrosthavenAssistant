@@ -11,18 +11,20 @@ import 'view_models/condition_icon_view_model.dart';
 
 class ConditionIcon extends StatefulWidget {
   ConditionIcon(this.condition, this.size, this.owner, this.figure,
-      {super.key, required this.scale, this.gameState, this.settings}) {
+      {super.key, required this.scale, this.gameState, this.settings})
+      : gfx = _buildGfxPath(condition);
+
+  static String _buildGfxPath(Condition condition) {
     String suffix = "";
     if (GameMethods.isFrosthavenStyle(null)) {
       suffix = "_fh";
     }
-    String imagePath = "assets/images/abilities/${condition.name}.png";
     if (condition.name.contains("character")) {
-      imagePath = "assets/images/class-icons/${condition.getName()}.png";
+      return "assets/images/class-icons/${condition.getName()}.png";
     } else if (suffix.isNotEmpty && hasGHVersion(condition.name)) {
-      imagePath = "assets/images/abilities/${condition.getName()}$suffix.png";
+      return "assets/images/abilities/${condition.getName()}$suffix.png";
     }
-    gfx = imagePath;
+    return "assets/images/abilities/${condition.name}.png";
   }
 
   final Condition condition;
@@ -33,7 +35,7 @@ class ConditionIcon extends StatefulWidget {
   final GameState? gameState;
   // injected for testing
   final Settings? settings;
-  late final String gfx; // ignore: avoid-late-keyword
+  final String gfx;
 
   @override
   ConditionIconState createState() => ConditionIconState();
@@ -48,23 +50,24 @@ class ConditionIconState extends State<ConditionIcon>
   static const double _kShakeWeightHalf = 2;
   static const double _kClassTokenIconScale = 0.45;
 
-  late final ConditionIconViewModel _vm; // ignore: avoid-late-keyword
-  late final AnimationController _shakeController; // ignore: avoid-late-keyword
-  late final Animation<double> _shakeAngle; // ignore: avoid-late-keyword
+  ConditionIconViewModel? _vmInstance;
+  ConditionIconViewModel get _vm => _vmInstance ??= ConditionIconViewModel(
+      gameState: widget.gameState, settings: widget.settings);
+  AnimationController? _shakeController;
+  Animation<double>? _shakeAngle;
 
   final animate = ValueNotifier<bool>(false);
 
   @override
   void initState() {
     super.initState();
-    _vm = ConditionIconViewModel(
-        gameState: widget.gameState, settings: widget.settings);
     _vm.commandIndex.addListener(_animateListener);
 
-    _shakeController = AnimationController(
+    final ctrl = AnimationController(
       duration: const Duration(milliseconds: 333),
       vsync: this,
     );
+    _shakeController = ctrl;
     _shakeAngle = TweenSequence<double>([
       TweenSequenceItem(
           tween: Tween(begin: 0.0, end: _kShakeAngleRad), weight: 1),
@@ -73,19 +76,19 @@ class ConditionIconState extends State<ConditionIcon>
           weight: _kShakeWeightHalf),
       TweenSequenceItem(
           tween: Tween(begin: -_kShakeAngleRad, end: 0.0), weight: 1),
-    ]).animate(_shakeController);
+    ]).animate(ctrl);
   }
 
   @override
   void dispose() {
-    _vm.commandIndex.removeListener(_animateListener);
-    _shakeController.dispose();
+    _vmInstance?.commandIndex.removeListener(_animateListener);
+    _shakeController?.dispose();
     super.dispose();
   }
 
   void _runAnimation() {
     animate.value = true;
-    _shakeController.forward(from: 0.0).then((_) {
+    _shakeController?.forward(from: 0.0).then((_) {
       animate.value = false;
     });
   }
@@ -107,6 +110,11 @@ class ConditionIconState extends State<ConditionIcon>
   @override
   Widget build(BuildContext context) {
     final scale = widget.scale;
+    final shakeController = _shakeController;
+    final shakeAngle = _shakeAngle;
+    if (shakeController == null || shakeAngle == null) {
+      return const SizedBox.shrink();
+    }
     return ValueListenableBuilder<bool>(
         valueListenable: animate,
         builder: (context, value, child) {
@@ -114,9 +122,9 @@ class ConditionIconState extends State<ConditionIcon>
           final classColor = _vm.classColorFor(widget.condition);
           return RepaintBoundary(
               child: AnimatedBuilder(
-                  animation: _shakeController,
+                  animation: shakeController,
                   builder: (context, child) => Transform.rotate(
-                        angle: _shakeAngle.value,
+                        angle: shakeAngle.value,
                         child: child,
                       ),
                   child: isCharacter

@@ -79,7 +79,7 @@ class ActionHandler {
   }
 
   Command getCurrent() {
-    return _commands[commandIndex.value]!; // ignore: avoid-non-null-assertion
+    return _commands[commandIndex.value]!;
   }
 
   void undo() {
@@ -93,7 +93,7 @@ class ActionHandler {
             _self); //this works as gameSaveStates has one more entry than command list (includes load at start)
         saveState.saveToDisk(_self);
         if (!isServer && !isClient) {
-          _commands[commandIndex.value]! // ignore: avoid-non-null-assertion
+          _commands[commandIndex.value]!
               .onUndo(); //undo only makes sure ui is updated
         } else {
           updateAllUI();

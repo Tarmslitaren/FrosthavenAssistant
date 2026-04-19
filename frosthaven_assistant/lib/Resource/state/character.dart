@@ -2,8 +2,8 @@ part of 'game_state.dart';
 // ignore_for_file: library_private_types_in_public_api
 
 class Character extends ListItemData {
-  late final CharacterState characterState; // ignore: avoid-late-keyword
-  late final CharacterClass characterClass; // ignore: avoid-late-keyword
+  final CharacterState characterState;
+  final CharacterClass characterClass;
 
   Character(this.characterState, this.characterClass) {
     id = GameMethods.isObjectiveOrEscort(characterClass)
@@ -11,34 +11,33 @@ class Character extends ListItemData {
         : characterClass.id;
   }
 
-  Character.fromSave(Map<String, dynamic> json) {
-    final anId = json['characterClass'];
-    String? edition = json['edition'];
-    characterState = CharacterState.fromSave(anId, json['characterState']);
-    final cls = _getClass(anId, edition);
+  static CharacterClass _requireClass(String anId, String? edition) {
+    final cls = _getClassStatic(anId, edition);
     if (cls == null) {
       throw StateError('Character class not found: $anId (edition: $edition)');
     }
-    characterClass = cls;
+    return cls;
+  }
+
+  Character.fromSave(Map<String, dynamic> json)
+      : characterState = CharacterState.fromSave(
+            json['characterClass'] as String, json['characterState'] as Map<String, dynamic>),
+        characterClass = _requireClass(
+            json['characterClass'] as String, json['edition'] as String?) {
     id = characterClass.id;
   }
 
-  Character.fromJson(Map<String, dynamic> json) {
-    final anId = json['characterClass'];
-    String? edition = json['edition'];
+  Character.fromJson(Map<String, dynamic> json)
+      : characterState = CharacterState.fromJson(
+            json['characterClass'] as String, json['characterState'] as Map<String, dynamic>),
+        characterClass = _requireClass(
+            json['characterClass'] as String, json['edition'] as String?) {
     final turnStateIdx = json['turnState'] as int?;
     if (turnStateIdx != null &&
         turnStateIdx >= 0 &&
         turnStateIdx < TurnsState.values.length) {
       _turnState.value = TurnsState.values[turnStateIdx];
     }
-    characterState = CharacterState.fromJson(anId, json['characterState']);
-
-    final cls = _getClass(anId, edition);
-    if (cls == null) {
-      throw StateError('Character class not found: $anId (edition: $edition)');
-    }
-    characterClass = cls;
 
     id = GameMethods.isObjectiveOrEscort(characterClass)
         ? characterState.display.value
@@ -46,8 +45,7 @@ class Character extends ListItemData {
   }
 
   /// Updates mutable fields in-place from [json]. [characterClass] and [id]
-  /// are [late final] and never change; only [_turnState] and [characterState]
-  /// need updating.
+  /// never change; only [_turnState] and [characterState] need updating.
   void updateFromJson(Map<String, dynamic> json) {
     final turnStateIdx = json['turnState'] as int?;
     if (turnStateIdx != null &&
@@ -105,10 +103,10 @@ class Character extends ListItemData {
         '}';
   }
 
-  CharacterClass? _getClass(String id, String? edition, {GameData? gameData}) {
+  static CharacterClass? _getClassStatic(String id, String? edition, {GameData? gameData}) {
     final modelData = (gameData ?? getIt<GameData>()).modelData.value;
     for (String key in modelData.keys) {
-      final item = modelData[key]!.characters.firstWhereOrNull((item) { // ignore: avoid-non-null-assertion
+      final item = modelData[key]!.characters.firstWhereOrNull((item) {
         return item.id == id && (edition == null || edition == item.edition);
       });
       if (item != null) {

@@ -36,11 +36,11 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
   // This list holds the data for the list view
   List<CharacterClass> _foundCharacters = [];
   final List<CharacterClass> _allCharacters = [];
-  late CharacterClass bs; // ignore: avoid-late-keyword
-  late CharacterClass vq; // ignore: avoid-late-keyword
-  late final GameState _gameState; // ignore: avoid-late-keyword
-  late final Settings _settings; // ignore: avoid-late-keyword
-  late final GameData _gameData; // ignore: avoid-late-keyword
+  CharacterClass? bs;
+  CharacterClass? vq;
+  GameState get _gameState => widget.gameState ?? getIt<GameState>();
+  Settings get _settings => widget.settings ?? getIt<Settings>();
+  GameData get _gameData => widget.gameData ?? getIt<GameData>();
   final ScrollController _scrollController = ScrollController();
 
   int compareEditions(String a, String b) {
@@ -68,13 +68,10 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
 
   @override
   initState() {
-    _gameState = widget.gameState ?? getIt<GameState>();
-    _settings = widget.settings ?? getIt<Settings>();
-    _gameData = widget.gameData ?? getIt<GameData>();
     // at the beginning, all users are shown
     final data = _gameData.modelData.value;
     for (String key in data.keys) {
-      _allCharacters.addAll(data[key]!.characters); // ignore: avoid-non-null-assertion
+      _allCharacters.addAll(data[key]!.characters);
     }
 
     for (var item in _allCharacters) {
@@ -126,13 +123,15 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
               user.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
       final keyWord = enteredKeyword.toLowerCase();
-      if (keyWord == "bladeswarm") {
+      final bsLocal = bs;
+      if (keyWord == "bladeswarm" && bsLocal != null) {
         //unlocked it!
-        results = [bs];
+        results = [bsLocal];
       }
-      if (keyWord == "vanquisher") {
+      final vqLocal = vq;
+      if (keyWord == "vanquisher" && vqLocal != null) {
         //unlocked it!
-        results = [vq];
+        results = [vqLocal];
       }
       // we use the toLowerCase() method to make it case-insensitive
     }
@@ -165,7 +164,10 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
     _gameState.action(command);
 
     //open level menu
-    openDialog(context, SetCharacterLevelMenu(character: command.character));
+    final addedChar = command.character;
+    if (addedChar != null) {
+      openDialog(context, SetCharacterLevelMenu(character: addedChar));
+    }
 
     //update UI to disable added character
     setState(() => _foundCharacters = _foundCharacters);

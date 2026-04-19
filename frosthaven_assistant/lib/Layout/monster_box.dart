@@ -58,13 +58,16 @@ class MonsterBox extends StatelessWidget {
       required this.blockInput,
       required this.scale,
       this.gameState,
-      this.settings}) {
+      this.settings})
+      : data = _resolveData(ownerId, figureId);
+
+  static MonsterInstance _resolveData(String? ownerId, String figureId) {
     final figure = GameMethods.getFigure(ownerId, figureId);
     if (figure is! MonsterInstance) {
       throw StateError(
           'MonsterBox: expected MonsterInstance for $ownerId/$figureId, got ${figure.runtimeType}');
     }
-    data = figure;
+    return figure;
   }
 
   // injected for testing
@@ -88,7 +91,7 @@ class MonsterBox extends StatelessWidget {
   final bool blockInput;
   final double scale;
 
-  late final MonsterInstance data; // ignore: avoid-late-keyword
+  final MonsterInstance data;
 
   List<Widget> _createConditionList(
       double scale, MonsterBoxViewModel vm) {

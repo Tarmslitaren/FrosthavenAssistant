@@ -30,7 +30,7 @@ class MonsterAbilityState {
 
     List<MonsterAbilityDeckModel> monsters = [];
     for (String key in gd.modelData.value.keys) {
-      monsters.addAll(gd.modelData.value[key]!.monsterAbilities); // ignore: avoid-non-null-assertion
+      monsters.addAll(gd.modelData.value[key]!.monsterAbilities);
     }
     for (MonsterAbilityDeckModel model in monsters) {
       if (name == model.name) {

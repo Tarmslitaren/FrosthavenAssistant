@@ -37,13 +37,8 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
   static const double _kModalWidth = 300.0;
   static const double _kModalHeight = 140.0;
 
-  late final GameState _gameState; // ignore: avoid-late-keyword
+  GameState get _gameState => widget.gameState ?? getIt<GameState>();
 
-  @override
-  initState() {
-    super.initState();
-    _gameState = widget.gameState ?? getIt<GameState>();
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -30,16 +30,12 @@ class HealthWheelControllerState extends State<HealthWheelController> {
   static const double _kOverlayHeight = 50.0;
 
   OverlayEntry? entry;
-  late final HealthWheelControllerViewModel _vm; // ignore: avoid-late-keyword
+  HealthWheelControllerViewModel? _vmInstance;
+  HealthWheelControllerViewModel get _vm => _vmInstance ??= HealthWheelControllerViewModel(gameState: widget.gameState);
 
   final wheelDelta = ValueNotifier<double>(0);
   final wheelTimeDelta = ValueNotifier<int>(0);
 
-  @override
-  void initState() {
-    super.initState();
-    _vm = HealthWheelControllerViewModel(gameState: widget.gameState);
-  }
 
   @override
   void dispose() {
@@ -48,7 +44,7 @@ class HealthWheelControllerState extends State<HealthWheelController> {
   }
 
   void hideOverlay() {
-    if (entry != null && entry!.mounted) { // ignore: avoid-non-null-assertion
+    if (entry != null && entry!.mounted) {
       entry?.remove();
       entry?.dispose();
       entry = null;
@@ -59,8 +55,8 @@ class HealthWheelControllerState extends State<HealthWheelController> {
   void showOverlay(String figureId, double scale, BuildContext context) {
     final figure = GameMethods.getFigure(widget.ownerId, widget.figureId);
     if (figure == null) return;
-    double dx = context.globalPaintBounds!.topCenter.dx - _kOverlayXOffset * scale; // ignore: avoid-non-null-assertion
-    double dy = context.globalPaintBounds!.topCenter.dy - _kOverlayYOffset * scale; // ignore: avoid-non-null-assertion
+    double dx = context.globalPaintBounds!.topCenter.dx - _kOverlayXOffset * scale;
+    double dy = context.globalPaintBounds!.topCenter.dy - _kOverlayYOffset * scale;
     var selectHealthWheel = SelectHealthWheel(
         key: UniqueKey(),
         data: figure,
@@ -77,7 +73,7 @@ class HealthWheelControllerState extends State<HealthWheelController> {
             child:
                 Material(color: Colors.transparent, child: selectHealthWheel)));
     final overlay = Overlay.of(context);
-    overlay.insert(entry!); // ignore: avoid-non-null-assertion
+    overlay.insert(entry!);
   }
 
   @override
@@ -99,13 +95,13 @@ class HealthWheelControllerState extends State<HealthWheelController> {
         onHorizontalDragUpdate: (DragUpdateDetails details) {
           int timeDiff = 0;
           if (lastTimeStamp != null) {
-            timeDiff = details.sourceTimeStamp!.inMicroseconds - lastTimeStamp!; // ignore: avoid-non-null-assertion
+            timeDiff = details.sourceTimeStamp!.inMicroseconds - lastTimeStamp!;
           }
 
           wheelTimeDelta.value = timeDiff;
           wheelDelta.value = details.delta.dx;
 
-          lastTimeStamp = details.sourceTimeStamp!.inMicroseconds; // ignore: avoid-non-null-assertion
+          lastTimeStamp = details.sourceTimeStamp!.inMicroseconds;
         },
         onHorizontalDragEnd: (details) {
           //close scrollview and run changeHeath command

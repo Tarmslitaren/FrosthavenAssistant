@@ -53,19 +53,14 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   static const int _kDiscardThirdFromEnd = 3;
   static const int _kDiscardSecondFromEnd = 2;
 
-  late final ModifierDeckViewModel _vm; // ignore: avoid-late-keyword
-  bool _animationsEnabled = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _vm = ModifierDeckViewModel(
+  ModifierDeckViewModel? _vmInstance;
+  ModifierDeckViewModel get _vm => _vmInstance ??= ModifierDeckViewModel(
       widget.name,
       gameState: widget.gameState,
       gameData: widget.gameData,
       settings: widget.settings,
     );
-  }
+  bool _animationsEnabled = false;
 
   Widget _buildStayAnimation(Widget child, double userScalingBars) {
     return Container(
@@ -378,18 +373,19 @@ class _ModifierSlideAnimationWidget extends StatefulWidget {
 class _ModifierSlideAnimationWidgetState
     extends State<_ModifierSlideAnimationWidget>
     with SingleTickerProviderStateMixin {
-  late final AnimationController _controller; // ignore: avoid-late-keyword
-  late final Animation<Offset> _translation; // ignore: avoid-late-keyword
-  late final Animation<double> _rotation; // ignore: avoid-late-keyword
+  AnimationController? _controller;
+  Animation<Offset>? _translation;
+  Animation<double>? _rotation;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
+    final ctrl = AnimationController(
       duration: const Duration(
           milliseconds: ModifierDeckWidgetState.cardAnimationDuration),
       vsync: this,
     );
+    _controller = ctrl;
 
     final slideTarget = Offset(
         ModifierDeckWidgetState._kCardOffset * widget.userScalingBars, 0);
@@ -400,7 +396,7 @@ class _ModifierSlideAnimationWidgetState
             .chain(CurveTween(curve: Curves.easeIn)),
         weight: 1,
       ),
-    ]).animate(_controller);
+    ]).animate(ctrl);
 
     _rotation = TweenSequence<double>([
       TweenSequenceItem(
@@ -416,31 +412,37 @@ class _ModifierSlideAnimationWidgetState
             end: 0.0),
         weight: 1,
       ),
-    ]).animate(_controller);
+    ]).animate(ctrl);
 
-    _controller.addStatusListener((status) {
+    ctrl.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         widget.onComplete();
       }
     });
-    _controller.forward();
+    ctrl.forward();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final controller = _controller;
+    final translation = _translation;
+    final rotation = _rotation;
+    if (controller == null || translation == null || rotation == null) {
+      return widget.child;
+    }
     return RepaintBoundary(
       child: AnimatedBuilder(
-        animation: _controller,
+        animation: controller,
         builder: (context, child) => Transform.translate(
-          offset: _translation.value,
+          offset: translation.value,
           child: Transform.rotate(
-            angle: _rotation.value,
+            angle: rotation.value,
             child: child,
           ),
         ),
@@ -478,19 +480,20 @@ class _ModifierDrawAnimationWidgetState
   static const double _kAnimWeightPause = 2;
   static const double _kTwoPI = math.pi * 2;
 
-  late final AnimationController _controller; // ignore: avoid-late-keyword
-  late final Animation<Offset> _translation; // ignore: avoid-late-keyword
-  late final Animation<double> _scale; // ignore: avoid-late-keyword
-  late final Animation<double> _rotation; // ignore: avoid-late-keyword
+  AnimationController? _controller;
+  Animation<Offset>? _translation;
+  Animation<double>? _scale;
+  Animation<double>? _rotation;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
+    final ctrl = AnimationController(
       duration: const Duration(
           milliseconds: ModifierDeckWidgetState.cardAnimationDuration),
       vsync: this,
     );
+    _controller = ctrl;
 
     final start = Offset(widget.startXOffset, 0);
     final center = Offset(widget.xOffset, widget.yOffset);
@@ -501,47 +504,54 @@ class _ModifierDrawAnimationWidgetState
           tween: ConstantTween(center), weight: _kAnimWeightPause),
       TweenSequenceItem(
           tween: Tween(begin: center, end: Offset.zero), weight: 1),
-    ]).animate(_controller);
+    ]).animate(ctrl);
 
     _scale = TweenSequence<double>([
       TweenSequenceItem(tween: Tween(begin: 1.0, end: _maxScale), weight: 1),
       TweenSequenceItem(
           tween: ConstantTween(_maxScale), weight: _kAnimWeightPause),
       TweenSequenceItem(tween: Tween(begin: _maxScale, end: 1.0), weight: 1),
-    ]).animate(_controller);
+    ]).animate(ctrl);
 
     _rotation = Tween<double>(begin: math.pi, end: _kTwoPI).animate(
       CurvedAnimation(
-          parent: _controller,
+          parent: ctrl,
           curve:
               const Interval(0.0, ModifierDeckWidgetState._kRotationInterval)),
     );
 
-    _controller.addStatusListener((status) {
+    ctrl.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         widget.onComplete();
       }
     });
-    _controller.forward();
+    ctrl.forward();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final controller = _controller;
+    final translation = _translation;
+    final scale = _scale;
+    final rotation = _rotation;
+    if (controller == null || translation == null || scale == null || rotation == null) {
+      return widget.child;
+    }
     return RepaintBoundary(
       child: AnimatedBuilder(
-        animation: _controller,
+        animation: controller,
         builder: (context, child) => Transform.translate(
-          offset: _translation.value,
+          offset: translation.value,
           child: Transform.scale(
-            scale: _scale.value,
+            scale: scale.value,
             child: Transform.rotate(
-              angle: _rotation.value,
+              angle: rotation.value,
               child: child,
             ),
           ),

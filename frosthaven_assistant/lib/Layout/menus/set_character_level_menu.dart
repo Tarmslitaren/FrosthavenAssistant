@@ -36,7 +36,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
   static const int _kMaxHealth = 900;
   static const double _kNameFieldWidth = 160.0;
 
-  late final GameState _gameState; // ignore: avoid-late-keyword
+  GameState get _gameState => widget.gameState ?? getIt<GameState>();
   final TextEditingController nameController = TextEditingController();
   final FocusNode focusNode = FocusNode();
 
@@ -60,7 +60,6 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
   initState() {
     // at the beginning, all items are shown
     super.initState();
-    _gameState = widget.gameState ?? getIt<GameState>();
 
     focusNode.addListener(_focusNodeListener);
   }

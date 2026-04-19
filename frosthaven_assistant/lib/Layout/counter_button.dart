@@ -41,14 +41,10 @@ class CounterButton extends StatefulWidget {
 }
 
 class CounterButtonState extends State<CounterButton> {
-  late final CounterButtonViewModel _vm; // ignore: avoid-late-keyword
+  CounterButtonViewModel? _vmInstance;
+  CounterButtonViewModel get _vm => _vmInstance ??= CounterButtonViewModel();
   final totalChangeValue = ValueNotifier<int>(0);
 
-  @override
-  void initState() {
-    super.initState();
-    _vm = CounterButtonViewModel();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +96,7 @@ class CounterButtonState extends State<CounterButton> {
               colorBlendMode: BlendMode.modulate,
               fit: BoxFit.contain,
               filterQuality: FilterQuality.medium,
-              image: AssetImage(widget.extraImage!), // ignore: avoid-non-null-assertion
+              image: AssetImage(widget.extraImage!),
             ),
           ),
         ValueListenableBuilder<int>(

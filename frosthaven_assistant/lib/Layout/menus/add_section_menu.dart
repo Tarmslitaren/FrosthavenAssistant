@@ -31,17 +31,14 @@ class AddSectionMenuState extends State<AddSectionMenu> {
   static const int _kNumpadMaxLength = 3;
   // This list holds the data for the list view
   List<String> _foundScenarios = [];
-  late final GameState _gameState; // ignore: avoid-late-keyword
-  late final Settings _settings; // ignore: avoid-late-keyword
-  late final GameData _gameData; // ignore: avoid-late-keyword
+  GameState get _gameState => widget.gameState ?? getIt<GameState>();
+  Settings get _settings => widget.settings ?? getIt<Settings>();
+  GameData get _gameData => widget.gameData ?? getIt<GameData>();
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
 
   @override
   initState() {
-    _gameState = widget.gameState ?? getIt<GameState>();
-    _settings = widget.settings ?? getIt<Settings>();
-    _gameData = widget.gameData ?? getIt<GameData>();
     // at the beginning, all items are shown
     var scenarios = _gameData.modelData.value[_gameState.currentCampaign.value]
         ?.scenarios[_gameState.scenario.value]?.sections
@@ -69,14 +66,14 @@ class AddSectionMenuState extends State<AddSectionMenu> {
     List<String> results = [];
     if (enteredKeyword.isEmpty) {
       // if the search field is empty or only contains white-space, we'll display all
-      results = _gameData.modelData.value[_gameState.currentCampaign.value]! // ignore: avoid-non-null-assertion
-          .scenarios[_gameState.scenario.value]!.sections // ignore: avoid-non-null-assertion
+      results = _gameData.modelData.value[_gameState.currentCampaign.value]!
+          .scenarios[_gameState.scenario.value]!.sections
           .map((e) => e.name)
           .toList();
       results = results.where((element) => !element.contains("spawn")).toList();
     } else {
-      results = _gameData.modelData.value[_gameState.currentCampaign.value]! // ignore: avoid-non-null-assertion
-          .scenarios[_gameState.scenario.value]!.sections // ignore: avoid-non-null-assertion
+      results = _gameData.modelData.value[_gameState.currentCampaign.value]!
+          .scenarios[_gameState.scenario.value]!.sections
           .map((e) => e.name)
           .toList()
           .where((user) =>

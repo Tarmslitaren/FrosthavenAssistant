@@ -20,17 +20,12 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
   static const double _kDeckBaseHeight = 39.0;
   static const double _kDeckMargin = 4.0;
 
-  late final CharacterAmdsViewModel _vm; // ignore: avoid-late-keyword
+  CharacterAmdsViewModel? _vmInstance;
+  CharacterAmdsViewModel get _vm => _vmInstance ??= CharacterAmdsViewModel(gameState: widget.gameState, settings: widget.settings);
   _OpenState _openStateUserIntentPlayTurns = _OpenState.oneOpen;
   _OpenState _openStateUserIntentChooseInit = _OpenState.allOpen;
   _OpenState _lastState = _OpenState.noOpen;
 
-  @override
-  void initState() {
-    super.initState();
-    _vm = CharacterAmdsViewModel(
-        gameState: widget.gameState, settings: widget.settings);
-  }
 
   List<Offset> _getOffsets(int characterAmount) {
     final roundState = _vm.roundState;
@@ -205,7 +200,7 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
                           ? Container(
                               margin: EdgeInsets.only(top: _kDeckMargin * barScale),
                               child: ModifierDeckWidget(
-                                  name: currentCharacter!.id)) // ignore: avoid-non-null-assertion
+                                  name: currentCharacter!.id))
                           : Column(
                               children: _vm.charsWithPerks
                                   .map((item) => Container(

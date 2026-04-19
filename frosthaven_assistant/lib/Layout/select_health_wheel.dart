@@ -45,17 +45,15 @@ class SelectHealthWheelState extends State<SelectHealthWheel> {
   static const double _kSelectedFontSize = 18.0;
   static const double _kUnselectedFontSize = 16.0;
 
-  late int selected; // ignore: avoid-late-keyword
-  late final FixedExtentScrollController scrollController; // ignore: avoid-late-keyword
-  late final GameState _gameState; // ignore: avoid-late-keyword
+  int selected = 0;
+  FixedExtentScrollController? scrollController;
+  final GameState _gameState = getIt<GameState>();
   double currentScrollOffset = 0;
-  late int itemIndex; // ignore: avoid-late-keyword
   final double itemExtent = 25;
   bool scrollInited = false;
 
   @override
   void initState() {
-    _gameState = getIt<GameState>();
     super.initState();
     int count = widget.data.maxHealth.value;
     selected = count - (widget.data.maxHealth.value - widget.data.health.value);
@@ -91,14 +89,16 @@ class SelectHealthWheelState extends State<SelectHealthWheel> {
       deltaMod /= _kIOSDivider;
     }
 
-    double initialPosition = scrollController.initialItem * itemExtent * scale;
+    final sc = scrollController;
+    if (sc == null) return;
+    double initialPosition = sc.initialItem * itemExtent * scale;
     if (currentScrollOffset == 0 && !scrollInited) {
       scrollInited = true;
       currentScrollOffset = initialPosition;
     }
-    if (scrollController.hasClients) {
+    if (sc.hasClients) {
       if (timeMicroSeconds > 0) {
-        scrollController.animateTo(currentScrollOffset - deltaMod,
+        sc.animateTo(currentScrollOffset - deltaMod,
             duration: Duration(microseconds: timeMicroSeconds),
             curve: Curves.linear);
         currentScrollOffset = currentScrollOffset - deltaMod;

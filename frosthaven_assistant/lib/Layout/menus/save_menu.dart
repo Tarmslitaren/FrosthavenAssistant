@@ -28,14 +28,12 @@ class SaveMenuState extends State<SaveMenu> {
 
   // This list holds the data for the list view
   final List<String> _saves = [];
-  late final Settings _settings; // ignore: avoid-late-keyword
-  late final GameState _gameState; // ignore: avoid-late-keyword
+  Settings get _settings => widget.settings ?? getIt<Settings>();
+  GameState get _gameState => widget.gameState ?? getIt<GameState>();
   final ScrollController _scrollController = ScrollController();
 
   @override
   initState() {
-    _settings = widget.settings ?? getIt<Settings>();
-    _gameState = widget.gameState ?? getIt<GameState>();
     //fill list with all saved states
     for (String save in _settings.saves.value.keys) {
       _saves.add(save);

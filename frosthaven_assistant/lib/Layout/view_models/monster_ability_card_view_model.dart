@@ -40,7 +40,7 @@ class MonsterAbilityCardViewModel {
 
   int get deckSize => GameMethods.getDeck(monster.type.deck)?.drawPileSize ?? 0;
 
-  MonsterAbilityState get deck => GameMethods.getDeck(monster.type.deck)!; // ignore: avoid-non-null-assertion
+  MonsterAbilityState get deck => GameMethods.getDeck(monster.type.deck)!;
 
   void openDeckMenu(BuildContext context) {
     openDialog(

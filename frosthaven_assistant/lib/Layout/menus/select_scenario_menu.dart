@@ -36,17 +36,14 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
 
   // This list holds the data for the list view
   List<String> _foundScenarios = [];
-  late final GameState _gameState; // ignore: avoid-late-keyword
-  late final GameData _gameData; // ignore: avoid-late-keyword
-  late final Settings _settings; // ignore: avoid-late-keyword
+  GameState get _gameState => widget.gameState ?? getIt<GameState>();
+  GameData get _gameData => widget.gameData ?? getIt<GameData>();
+  Settings get _settings => widget.settings ?? getIt<Settings>();
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
 
   @override
   initState() {
-    _gameState = widget.gameState ?? getIt<GameState>();
-    _gameData = widget.gameData ?? getIt<GameData>();
-    _settings = widget.settings ?? getIt<Settings>();
     // at the beginning, all items are shown
     setCampaign(_gameState.currentCampaign.value);
     super.initState();
@@ -90,7 +87,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
       _gameState.action(SetCampaignCommand(campaign));
     }
     _foundScenarios =
-        modelData[_gameState.currentCampaign.value]!.scenarios.keys.toList(); // ignore: avoid-non-null-assertion
+        modelData[_gameState.currentCampaign.value]!.scenarios.keys.toList();
 
     //special hack for solo BladeSwarm and Vanquisher
     if (campaign == "Solo" || campaign == "Trail of Ashes") {
@@ -152,12 +149,12 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
     final String campaign = _gameState.currentCampaign.value;
     if (enteredKeyword.isEmpty) {
       // if the search field is empty or only contains white-space, we'll display all
-      results = _gameData.modelData.value[campaign]!.scenarios.keys.toList(); // ignore: avoid-non-null-assertion
+      results = _gameData.modelData.value[campaign]!.scenarios.keys.toList();
       if (campaign != "Solo") {
         results.insert(0, "custom");
       }
     } else {
-      results = _gameData.modelData.value[campaign]!.scenarios.keys // ignore: avoid-non-null-assertion
+      results = _gameData.modelData.value[campaign]!.scenarios.keys
           .toList()
           .where((user) =>
               user.toLowerCase().contains(enteredKeyword.toLowerCase()))
@@ -345,7 +342,7 @@ class _SoloTile extends StatelessWidget {
 
     String text = strings[_kSoloTextIndex];
     for (String key in gameData.modelData.value.keys) {
-      for (CharacterClass character in gameData.modelData.value[key]!.characters) { // ignore: avoid-non-null-assertion
+      for (CharacterClass character in gameData.modelData.value[key]!.characters) {
         if (character.name == characterName) {
           if (character.hidden && !gameState.unlockedClasses.contains(character.id)) {
             text = "???";

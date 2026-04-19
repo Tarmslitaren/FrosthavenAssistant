@@ -281,7 +281,7 @@ class LootDeck {
       id: id,
       baseValue: LootBaseValue.one,
       enhanced: _enhancements[id.toString()] != null
-          ? _enhancements[id.toString()]! // ignore: avoid-non-null-assertion
+          ? _enhancements[id.toString()]!
           : 0,
       lootType: LootType.other,
       gfx: gfx,
@@ -295,7 +295,7 @@ class LootDeck {
           id: startId,
           baseValue: LootBaseValue.one,
           enhanced: _enhancements[startId.toString()] != null
-              ? _enhancements[startId.toString()]! // ignore: avoid-non-null-assertion
+              ? _enhancements[startId.toString()]!
               : 0,
           lootType: LootType.materiel,
           gfx: gfx));
@@ -306,7 +306,7 @@ class LootDeck {
           id: startId,
           baseValue: LootBaseValue.oneIf3or4twoIfNot,
           enhanced: _enhancements[startId.toString()] != null
-              ? _enhancements[startId.toString()]! // ignore: avoid-non-null-assertion
+              ? _enhancements[startId.toString()]!
               : 0,
           lootType: LootType.materiel,
           gfx: gfx));
@@ -317,7 +317,7 @@ class LootDeck {
           id: startId,
           baseValue: LootBaseValue.oneIf4twoIfNot,
           enhanced: _enhancements[startId.toString()] != null
-              ? _enhancements[startId.toString()]! // ignore: avoid-non-null-assertion
+              ? _enhancements[startId.toString()]!
               : 0,
           lootType: LootType.materiel,
           gfx: gfx));
@@ -332,7 +332,7 @@ class LootDeck {
           id: startId,
           baseValue: LootBaseValue.one,
           enhanced: _enhancements[startId.toString()] != null
-              ? _enhancements[startId.toString()]! // ignore: avoid-non-null-assertion
+              ? _enhancements[startId.toString()]!
               : 0,
           lootType: LootType.materiel,
           gfx: gfx));

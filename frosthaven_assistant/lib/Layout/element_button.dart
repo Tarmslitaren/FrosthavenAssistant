@@ -34,16 +34,16 @@ class AnimatedContainerButtonState extends State<ElementButton> {
   static const double _kBoxShadowBlur = 4.0;
   static const double _kIconScale = 0.65;
 
-  late final ElementButtonViewModel _vm; // ignore: avoid-late-keyword
-  late double _height; // ignore: avoid-late-keyword
-  late Color _color; // ignore: avoid-late-keyword
-  late BorderRadiusGeometry _borderRadius; // ignore: avoid-late-keyword
+  ElementButtonViewModel? _vmInstance;
+  ElementButtonViewModel get _vm => _vmInstance ??= ElementButtonViewModel(
+      widget.element, gameState: widget.gameState, settings: widget.settings);
+  double _height = 0;
+  Color _color = Colors.transparent;
+  BorderRadiusGeometry _borderRadius = BorderRadius.zero;
 
   @override
   void initState() {
     super.initState();
-    _vm = ElementButtonViewModel(widget.element,
-        gameState: widget.gameState, settings: widget.settings);
     final scale = _vm.userScalingBars;
     _height = widget.width * scale;
     _color = Colors.transparent;

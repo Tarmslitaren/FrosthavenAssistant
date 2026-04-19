@@ -126,13 +126,8 @@ class PerkListTileState extends State<PerkListTile> {
   static const int _kDigit3 = 3;
   static const int _kDigit4 = 4;
 
-  late final GameState _gameState; // ignore: avoid-late-keyword
+  GameState get _gameState => widget.gameState ?? getIt<GameState>();
 
-  @override
-  void initState() {
-    _gameState = widget.gameState ?? getIt<GameState>();
-    super.initState();
-  }
   String _cardText(String gfx) {
     if (gfx.startsWith("perks/")) {
       gfx = gfx.substring("perks/".length);

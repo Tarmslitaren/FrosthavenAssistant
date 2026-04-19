@@ -13,7 +13,7 @@ class CharacterState extends FigureState {
   final List<MonsterInstance> _summonList = [];
   final _summonListNotifier =
       ValueNotifier<BuiltList<MonsterInstance>>(BuiltList.of([]));
-  late final ModifierDeck _modifierDeck; // ignore: avoid-late-keyword
+  final ModifierDeck _modifierDeck;
 
   ValueListenable<String> get display => _display;
   ValueListenable<int> get initiative => _initiative;
@@ -36,11 +36,17 @@ class CharacterState extends FigureState {
   BuiltList<bool> get perkList => BuiltList.of(_perkList);
   ValueListenable<bool> get useFHPerks => _useFHPerks;
 
-  CharacterState(final String id) {
-    _modifierDeck = ModifierDeck(id);
+  CharacterState(final String id) : _modifierDeck = ModifierDeck(id);
+
+  static ModifierDeck _deckFromJson(String id, Map<String, dynamic> json) {
+    if (json.containsKey("modifierDeck")) {
+      return ModifierDeck.fromJson(id, json["modifierDeck"]);
+    }
+    return ModifierDeck(id);
   }
 
-  CharacterState.fromSave(final String id, Map<String, dynamic> json) {
+  CharacterState.fromSave(final String id, Map<String, dynamic> json)
+      : _modifierDeck = ModifierDeck(id) {
     _level.value = json["level"];
     _display.value = json['display'];
     if (json.containsKey("useFHPerks")) {
@@ -55,10 +61,10 @@ class CharacterState extends FigureState {
         i++;
       }
     }
-    _modifierDeck = ModifierDeck(id);
   }
 
-  CharacterState.fromJson(final String id, Map<String, dynamic> json) {
+  CharacterState.fromJson(final String id, Map<String, dynamic> json)
+      : _modifierDeck = _deckFromJson(id, json) {
     _initiative.value = json['initiative'];
     _xp.value = json['xp'];
     _chill.value = json['chill'];
@@ -94,13 +100,6 @@ class CharacterState extends FigureState {
       }
     }
 
-    if (json.containsKey("modifierDeck")) {
-      final deck = json["modifierDeck"];
-      _modifierDeck = ModifierDeck.fromJson(id, deck);
-    } else {
-      //needs to be initialized first time
-      _modifierDeck = ModifierDeck(id);
-    }
 
     if (json.containsKey("conditionsAddedThisTurn")) {
       final condis2 = json["conditionsAddedThisTurn"];

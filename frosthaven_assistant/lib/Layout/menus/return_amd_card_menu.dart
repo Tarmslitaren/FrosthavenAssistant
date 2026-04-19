@@ -34,13 +34,8 @@ class RemoveAMDCardMenuState extends State<ReturnAMDCardMenu> {
   static const double _kModalHeight = 120.0;
   static const double _kInnerSpacing = 35.0;
 
-  late final GameState _gameState; // ignore: avoid-late-keyword
+  GameState get _gameState => widget.gameState ?? getIt<GameState>();
 
-  @override
-  initState() {
-    super.initState();
-    _gameState = widget.gameState ?? getIt<GameState>();
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -35,13 +35,13 @@ class MonsterWidgetState extends State<MonsterWidget> {
   static const double _kScaledHeight = 96.0;
   static const double _kMarginH = 3.2;
 
-  late final MonsterWidgetViewModel _vm; // ignore: avoid-late-keyword
+  MonsterWidgetViewModel? _vmInstance;
+  MonsterWidgetViewModel get _vm => _vmInstance ??= MonsterWidgetViewModel(widget.data, gameState: widget.gameState);
   List<MonsterInstance> lastList = [];
 
   @override
   void initState() {
     super.initState();
-    _vm = MonsterWidgetViewModel(widget.data, gameState: widget.gameState);
     lastList = widget.data.monsterInstances.asList();
   }
 

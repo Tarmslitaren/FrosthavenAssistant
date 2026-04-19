@@ -56,17 +56,13 @@ class SettingsMenuState extends State<SettingsMenu> {
 
   final ScrollController scrollController = ScrollController();
 
-  late final Settings settings; // ignore: avoid-late-keyword
-  late final GameState _gameState; // ignore: avoid-late-keyword
-  late final Network _network; // ignore: avoid-late-keyword
-  late final Client _client; // ignore: avoid-late-keyword
+  Settings get settings => widget.settings ?? getIt<Settings>();
+  GameState get _gameState => widget.gameState ?? getIt<GameState>();
+  Network get _network => widget.network ?? getIt<Network>();
+  Client get _client => widget.client ?? getIt<Client>();
 
   @override
   initState() {
-    settings = widget.settings ?? getIt<Settings>();
-    _gameState = widget.gameState ?? getIt<GameState>();
-    _network = widget.network ?? getIt<Network>();
-    _client = widget.client ?? getIt<Client>();
     // at the beginning, all items are shown
     super.initState();
     _network.networkInfo.initNetworkInfo();
@@ -125,7 +121,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.softNumpadInput.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.softNumpadInput.value = value!; // ignore: avoid-non-null-assertion
+                                      settings.softNumpadInput.value = value!;
                                       settings.saveToDisk();
                                     });
                                   }),
@@ -134,7 +130,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.noInit.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.noInit.value = value!; // ignore: avoid-non-null-assertion
+                                      settings.noInit.value = value!;
                                       settings.saveToDisk();
                                     });
                                   }),
@@ -143,7 +139,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.expireConditions.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.expireConditions.value = value!; // ignore: avoid-non-null-assertion
+                                      settings.expireConditions.value = value!;
                                       settings.saveToDisk();
                                     });
                                   }),
@@ -153,7 +149,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   onChanged: (bool? value) {
                                     setState(() {
                                       _gameState.action(
-                                          TrackStandeesCommand(!value!, gameState: _gameState, settings: settings)); // ignore: avoid-non-null-assertion
+                                          TrackStandeesCommand(!value!, gameState: _gameState, settings: settings));
                                       settings.saveToDisk();
                                     });
                                   }),
@@ -162,7 +158,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.autoAddStandees.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.autoAddStandees.value = value!; // ignore: avoid-non-null-assertion
+                                      settings.autoAddStandees.value = value!;
                                       settings.saveToDisk();
                                       _gameState.updateList.value++;
                                     });
@@ -172,7 +168,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.autoAddSpawns.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.autoAddSpawns.value = value!; // ignore: avoid-non-null-assertion
+                                      settings.autoAddSpawns.value = value!;
                                       settings.saveToDisk();
                                       _gameState.updateList.value++;
                                     });
@@ -182,7 +178,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.randomStandees.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.randomStandees.value = value!; // ignore: avoid-non-null-assertion
+                                      settings.randomStandees.value = value!;
                                       settings.saveToDisk();
                                     });
                                   }),
@@ -191,7 +187,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.noCalculation.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.noCalculation.value = value!; // ignore: avoid-non-null-assertion
+                                      settings.noCalculation.value = value!;
                                       settings.saveToDisk();
                                       _gameState.updateList.value++;
                                     });
@@ -201,7 +197,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.hideLootDeck.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.hideLootDeck.value = value!; // ignore: avoid-non-null-assertion
+                                      settings.hideLootDeck.value = value!;
                                       settings.saveToDisk();
                                       _gameState.updateAllUI();
                                     });
@@ -211,7 +207,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.shimmer.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.shimmer.value = value!; // ignore: avoid-non-null-assertion
+                                      settings.shimmer.value = value!;
                                       settings.saveToDisk();
                                       _gameState.updateAllUI();
                                     });
@@ -224,7 +220,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   onChanged: (bool? value) {
                                     setState(() {
                                       settings.fhHazTerrainCalcInOGGloom.value =
-                                          value!; // ignore: avoid-non-null-assertion
+                                          value!;
                                       settings.saveToDisk();
                                       _gameState.updateAllUI();
                                     });
@@ -238,7 +234,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   onChanged: (bool? value) {
                                     setState(() {
                                       _gameState.action(
-                                          SetAllyDeckInOgGloomCommand(value!, gameState: _gameState)); // ignore: avoid-non-null-assertion
+                                          SetAllyDeckInOgGloomCommand(value!, gameState: _gameState));
                                       _gameState.updateAllUI();
                                     });
                                   }),
@@ -248,7 +244,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.showScenarioNames.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.showScenarioNames.value = value!; // ignore: avoid-non-null-assertion
+                                      settings.showScenarioNames.value = value!;
                                       settings.saveToDisk();
                                       _gameState.updateAllUI();
                                     });
@@ -260,7 +256,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   onChanged: (bool? value) {
                                     setState(() {
                                       settings.showBattleGoalReminder.value =
-                                          value!; // ignore: avoid-non-null-assertion
+                                          value!;
                                       settings.saveToDisk();
                                     });
                                   }),
@@ -269,7 +265,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.showCustomContent.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.showCustomContent.value = value!; // ignore: avoid-non-null-assertion
+                                      settings.showCustomContent.value = value!;
                                       settings.saveToDisk();
                                       _gameState.updateAllUI();
                                     });
@@ -281,7 +277,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   onChanged: (bool? value) {
                                     setState(() {
                                       settings.showSectionsInMainView.value =
-                                          value!; // ignore: avoid-non-null-assertion
+                                          value!;
                                       settings.saveToDisk();
                                       _gameState.updateAllUI();
                                     });
@@ -292,7 +288,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.showReminders.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.showReminders.value = value!; // ignore: avoid-non-null-assertion
+                                      settings.showReminders.value = value!;
                                       settings.saveToDisk();
                                       _gameState.updateAllUI();
                                     });
@@ -303,7 +299,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.showAmdDeck.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.showAmdDeck.value = value!; // ignore: avoid-non-null-assertion
+                                      settings.showAmdDeck.value = value!;
                                       if (!settings.showAmdDeck.value) {
                                         //disable also character amd
                                         settings.showCharacterAMD.value = false;
@@ -318,7 +314,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.showCharacterAMD.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.showCharacterAMD.value = value!; // ignore: avoid-non-null-assertion
+                                      settings.showCharacterAMD.value = value!;
                                       if (settings.showCharacterAMD.value) {
                                         //enable also monster amd
                                         settings.showAmdDeck.value = true;
@@ -333,7 +329,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.enableHeathWheel.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.enableHeathWheel.value = value!; // ignore: avoid-non-null-assertion
+                                      settings.enableHeathWheel.value = value!;
                                       settings.saveToDisk();
                                       _gameState.updateAllUI();
                                     });
@@ -344,7 +340,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                     value: settings.fullScreen.value,
                                     onChanged: (bool? value) {
                                       setState(() {
-                                        settings.setFullscreen(value!); // ignore: avoid-non-null-assertion
+                                        settings.setFullscreen(value!);
                                         settings.saveToDisk();
                                       });
                                     }),
@@ -562,7 +558,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                                   _network
                                                       .networkInfo
                                                       .wifiIPv6
-                                                      .value = value!)), // ignore: avoid-non-null-assertion
+                                                      .value = value!)),
                                     );
                                   }),
                               ValueListenableBuilder<String>(

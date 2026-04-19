@@ -2,7 +2,7 @@ import '../state/game_state.dart';
 
 class AMDRemoveMinus2Command extends Command {
   bool allies;
-  late bool remove; // ignore: avoid-late-keyword
+  bool remove = false;
   final GameState _gameState;
 
   AMDRemoveMinus2Command(this.allies, {required GameState gameState})

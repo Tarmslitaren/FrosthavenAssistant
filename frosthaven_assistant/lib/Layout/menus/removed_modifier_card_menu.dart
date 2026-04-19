@@ -34,7 +34,7 @@ class RemovedModifierCardMenuState extends State<RemovedModifierCardMenu> {
   static const double _kCloseButtonLeft = 20.0;
   static const double _kItemMargin = 2.0;
 
-  late final GameState _gameState; // ignore: avoid-late-keyword
+  GameState get _gameState => widget.gameState ?? getIt<GameState>();
   final scrollController = ScrollController();
 
   List<Widget> generateList(List<ModifierCard> inputList, String name) {
@@ -79,11 +79,6 @@ class RemovedModifierCardMenuState extends State<RemovedModifierCardMenu> {
         ));
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _gameState = widget.gameState ?? getIt<GameState>();
-  }
 
   @override
   Widget build(BuildContext context) {

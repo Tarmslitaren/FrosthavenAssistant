@@ -29,7 +29,7 @@ class ConditionIconViewModel {
       return null;
     }
     final oldSave =
-        gs.gameSaveStates[gs.gameSaveStates.length - offset]!.getState(); // ignore: avoid-non-null-assertion
+        gs.gameSaveStates[gs.gameSaveStates.length - offset]!.getState();
     oldState.loadFromData(oldSave);
     return oldState;
   }
