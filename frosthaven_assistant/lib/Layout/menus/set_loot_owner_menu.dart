@@ -36,7 +36,6 @@ class SetLootOwnerMenuState extends State<SetLootOwnerMenu> {
   GameState get _gameState => widget.gameState ?? getIt<GameState>();
   Settings get _settings => widget.settings ?? getIt<Settings>();
 
-
   @override
   Widget build(BuildContext context) {
     List<Character> characters = GameMethods.getCurrentCharacters();
@@ -53,7 +52,7 @@ class SetLootOwnerMenuState extends State<SetLootOwnerMenu> {
           ),
           ...List.generate(
             characters.length,
-            (i) => _CharacterButton( // ignore: avoid-returning-widgets, widget generator lambda
+            (i) => _CharacterButton(
                 character: characters[i],
                 card: widget.card,
                 gameState: _gameState,
@@ -82,7 +81,8 @@ class _CharacterButton extends StatelessWidget {
       const SizedBox(height: SetLootOwnerMenu._kRowSpacing),
       TextButton(
           onPressed: () {
-            gameState.action(SetLootOwnerCommand(character.characterClass.id, card));
+            gameState
+                .action(SetLootOwnerCommand(character.characterClass.id, card));
             Navigator.pop(context);
           },
           child: Row(children: [

@@ -74,11 +74,12 @@ class RemovedModifierCardMenuState extends State<RemovedModifierCardMenu> {
           width: screenWidth * _kListWidthRatio,
           child: ListView(
             controller: ScrollController(),
-            children: generateList(list, widget.name).reversed.toList(), // ignore: avoid-returning-widgets, list-returning helper for ListView children
+            children: generateList(list, widget.name)
+                .reversed
+                .toList(), // ignore: avoid-returning-widgets, list-returning helper for ListView children
           ),
         ));
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +120,7 @@ class RemovedModifierCardMenuState extends State<RemovedModifierCardMenu> {
                           child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [buildList(removedPile)], // ignore: avoid-returning-widgets, list-returning helper for Column children
+                        children: [buildList(removedPile)],
                       )),
                       Container(
                         height: _kBottomBarHeight,

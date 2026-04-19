@@ -31,7 +31,6 @@ class SetLevelMenu extends StatefulWidget {
   static const int _kMaxHealth = 900;
   static const double _kBoxShadowAlpha = 0.3;
   static const int _kLevelMin = 0;
-  static const int _kLevelMax = 7;
   static const int _kLevelRowSize = 4;
   static const int _kLevelRow2Start = _kLevelRowSize;
   static const int _kDifficultyMin = -1;
@@ -44,9 +43,8 @@ class SetLevelMenu extends StatefulWidget {
     this.figure,
     this.characterId,
     this.gameState,
-
     this.settings,
-    });
+  });
 
   final Monster? monster;
   final String? characterId;
@@ -113,7 +111,9 @@ class SetLevelMenuState extends State<SetLevelMenu> {
 
     return ModalBackground(
         width: SetLevelMenu._kMenuWidth * scale,
-        height: showLegend ? SetLevelMenu._kMenuHeightWithLegend * scale : SetLevelMenu._kMenuHeightNoLegend * scale,
+        height: showLegend
+            ? SetLevelMenu._kMenuHeightWithLegend * scale
+            : SetLevelMenu._kMenuHeightNoLegend * scale,
         child: Stack(children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -127,7 +127,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
                     SetLevelMenu._kLevelRowSize,
-                    (i) => _LevelButton( // ignore: avoid-returning-widgets, widget generator lambda
+                    (i) => _LevelButton(
                         nr: SetLevelMenu._kLevelMin + i,
                         scale: scale,
                         monster: widget.monster,
@@ -140,7 +140,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
                     SetLevelMenu._kLevelRowSize,
-                    (i) => _LevelButton( // ignore: avoid-returning-widgets, widget generator lambda
+                    (i) => _LevelButton(
                         nr: SetLevelMenu._kLevelRow2Start + i,
                         scale: scale,
                         monster: widget.monster,
@@ -192,7 +192,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                   Text("Difficulty:", style: getSmallTextStyle(scale)),
                   ...List.generate(
                     SetLevelMenu._kDifficultyCount,
-                    (i) => _DifficultyButton( // ignore: avoid-returning-widgets, widget generator lambda
+                    (i) => _DifficultyButton(
                         nr: SetLevelMenu._kDifficultyMin + i,
                         scale: scale,
                         gameState: _gameState,
@@ -287,7 +287,8 @@ class _LevelButton extends StatelessWidget {
                 Color shadowColor = isCurrentlySelected && !darkMode
                     ? Colors.grey
                     : Colors.black;
-                Color selectedTextColor = darkMode ? Colors.white : Colors.black;
+                Color selectedTextColor =
+                    darkMode ? Colors.white : Colors.black;
                 Color textColor =
                     isCurrentlySelected ? selectedTextColor : Colors.grey;
                 return SizedBox(
@@ -298,8 +299,8 @@ class _LevelButton extends StatelessWidget {
                           border: Border.all(
                             color: color,
                           ),
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(SetLevelMenu._kButtonBorderRadius * scale))),
+                          borderRadius: BorderRadius.all(Radius.circular(
+                              SetLevelMenu._kButtonBorderRadius * scale))),
                       child: TextButton(
                         child: Text(
                           text,
@@ -307,7 +308,9 @@ class _LevelButton extends StatelessWidget {
                               fontSize: kFontSizeTitle * scale,
                               shadows: [
                                 Shadow(
-                                    offset: Offset(SetLevelMenu._kShadowOffset * scale, SetLevelMenu._kShadowOffset * scale),
+                                    offset: Offset(
+                                        SetLevelMenu._kShadowOffset * scale,
+                                        SetLevelMenu._kShadowOffset * scale),
                                     color: shadowColor)
                               ],
                               color: textColor),
@@ -351,9 +354,8 @@ class _DifficultyButton extends StatelessWidget {
             text = "+$text";
           }
           bool darkMode = settings.darkMode.value;
-          Color shadowColor = isCurrentlySelected && !darkMode
-              ? Colors.grey
-              : Colors.black;
+          Color shadowColor =
+              isCurrentlySelected && !darkMode ? Colors.grey : Colors.black;
           Color selectedTextColor = darkMode ? Colors.white : Colors.black;
           Color textColor =
               isCurrentlySelected ? selectedTextColor : Colors.grey;
@@ -365,8 +367,8 @@ class _DifficultyButton extends StatelessWidget {
                     border: Border.all(
                       color: color,
                     ),
-                    borderRadius:
-                        BorderRadius.all(Radius.circular(SetLevelMenu._kButtonBorderRadius * scale))),
+                    borderRadius: BorderRadius.all(Radius.circular(
+                        SetLevelMenu._kButtonBorderRadius * scale))),
                 child: TextButton(
                   child: Text(
                     text,
@@ -374,15 +376,17 @@ class _DifficultyButton extends StatelessWidget {
                         fontSize: kFontSizeTitle * scale,
                         shadows: [
                           Shadow(
-                              offset: Offset(SetLevelMenu._kShadowOffset * scale, SetLevelMenu._kShadowOffset * scale),
+                              offset: Offset(
+                                  SetLevelMenu._kShadowOffset * scale,
+                                  SetLevelMenu._kShadowOffset * scale),
                               color: shadowColor)
                         ],
                         color: textColor),
                   ),
                   onPressed: () {
                     if (!isCurrentlySelected) {
-                      gameState.action(SetDifficultyCommand(nr,
-                          gameState: gameState));
+                      gameState.action(
+                          SetDifficultyCommand(nr, gameState: gameState));
                     }
                   },
                 )),
@@ -407,7 +411,8 @@ class _LevelLegend extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var shadow = Shadow(
-      offset: Offset(SetLevelMenu._kShadowOffset * scale, SetLevelMenu._kShadowOffset * scale),
+      offset: Offset(SetLevelMenu._kShadowOffset * scale,
+          SetLevelMenu._kShadowOffset * scale),
       color: Colors.black87,
       blurRadius: SetLevelMenu._kShadowBlur * scale,
     );
@@ -431,7 +436,8 @@ class _LevelLegend extends StatelessWidget {
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: SetLevelMenu._kBoxShadowAlpha),
+                  color: Colors.black
+                      .withValues(alpha: SetLevelMenu._kBoxShadowAlpha),
                   spreadRadius: SetLevelMenu._kBoxShadowSpread,
                   blurRadius: SetLevelMenu._kBoxShadowBlur,
                 ),

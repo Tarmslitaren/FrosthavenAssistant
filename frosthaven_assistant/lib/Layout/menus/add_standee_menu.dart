@@ -52,7 +52,6 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
 
   bool addAsSummon = false;
 
-
   @override
   Widget build(BuildContext context) {
     bool boss = widget.monster.type.levels.first.boss != null;
@@ -90,20 +89,24 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
                     SizedBox(height: AddStandeeMenu._kTopSpacing * scale),
                     Text("Add Standee Nr", style: getTitleTextStyle(scale)),
                     ...List.generate(
-                      (nrOfStandees + AddStandeeMenu._kRow1Max - 1) ~/ AddStandeeMenu._kRow1Max,
-                      (rowIdx) => Row( // ignore: avoid-returning-widgets, widget generator lambda
+                      (nrOfStandees + AddStandeeMenu._kRow1Max - 1) ~/
+                          AddStandeeMenu._kRow1Max,
+                      (rowIdx) => Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: List.generate(
                           AddStandeeMenu._kRow1Max,
-                          (colIdx) { // ignore: avoid-returning-widgets, widget generator lambda
-                            final nr = rowIdx * AddStandeeMenu._kRow1Max + colIdx + 1;
+                          (colIdx) {
+                            final nr =
+                                rowIdx * AddStandeeMenu._kRow1Max + colIdx + 1;
                             if (nr > nrOfStandees) return Container();
                             bool isOut = widget.monster.monsterInstances
                                 .any((item) => item.standeeNr == nr);
                             Color color = isOut
                                 ? Colors.grey
-                                : (_gameState.currentCampaign.value == "Buttons and Bugs"
-                                    ? (AddStandeeMenu._kBnBColors[nr] ?? baseColor)
+                                : (_gameState.currentCampaign.value ==
+                                        "Buttons and Bugs"
+                                    ? (AddStandeeMenu._kBnBColors[nr] ??
+                                        baseColor)
                                     : baseColor);
                             return _StandeeNrButton(
                               nr: nr,
@@ -112,7 +115,11 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
                               onPressed: isOut
                                   ? null
                                   : () => _gameState.action(AddStandeeCommand(
-                                      nr, null, widget.monster.id, type, addAsSummon,
+                                      nr,
+                                      null,
+                                      widget.monster.id,
+                                      type,
+                                      addAsSummon,
                                       gameState: _gameState)),
                             );
                           },
@@ -159,7 +166,8 @@ class _StandeeNrButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var shadow = Shadow(
-      offset: Offset(AddStandeeMenu._kShadowOffset * scale, AddStandeeMenu._kShadowOffset * scale),
+      offset: Offset(AddStandeeMenu._kShadowOffset * scale,
+          AddStandeeMenu._kShadowOffset * scale),
       color: Colors.black87,
       blurRadius: AddStandeeMenu._kShadowBlur,
     );

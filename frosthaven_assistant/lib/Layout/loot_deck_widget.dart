@@ -48,7 +48,9 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
 
   LootDeckViewModel? _vmInstance;
   LootDeckViewModel get _vm => _vmInstance ??= LootDeckViewModel(
-      gameState: widget.gameState, gameData: widget.gameData, settings: widget.settings);
+      gameState: widget.gameState,
+      gameData: widget.gameData,
+      settings: widget.settings);
   bool _animationsEnabled = false;
 
   Widget _buildStayAnimation(Widget child, double userScalingBars) {
@@ -110,7 +112,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
     return ValueListenableBuilder<Object>(
         valueListenable: _vm.modelData,
         builder: (context, value, child) {
-          return _buildContent(); // ignore: avoid-returning-widgets, internal layout helper
+          return _buildContent();
         });
   }
 
@@ -234,14 +236,15 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                                   ._kDiscardBorderRadius *
                                               userScalingBars)),
                                       border: Border.fromBorderSide(
-                                          const BorderSide(color: Colors.white70)),
+                                          const BorderSide(
+                                              color: Colors.white70)),
                                       color: Color(_kTransparentBlack),
                                     ),
                                   ),
                                   discardPileSize >
                                           LootDeckWidgetState
                                               ._kDiscardShowThirdMinSize
-                                      ? _buildStayAnimation( // ignore: avoid-returning-widgets, animation helper
+                                      ? _buildStayAnimation(
                                           RotationTransition(
                                               turns: AlwaysStoppedAnimation(
                                                   LootDeckWidgetState
@@ -256,7 +259,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                           userScalingBars)
                                       : Container(),
                                   discardPileSize > 1
-                                      ? _buildSlideAnimation( // ignore: avoid-returning-widgets, animation helper
+                                      ? _buildSlideAnimation(
                                           RotationTransition(
                                               turns: AlwaysStoppedAnimation(
                                                   LootDeckWidgetState
@@ -272,7 +275,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                           userScalingBars)
                                       : Container(),
                                   deck.discardPileIsNotEmpty
-                                      ? _buildDrawAnimation( // ignore: avoid-returning-widgets, animation helper
+                                      ? _buildDrawAnimation(
                                           LootCardWidget(
                                             key:
                                                 Key(discardPileSize.toString()),
@@ -475,7 +478,10 @@ class _LootDrawAnimationWidgetState extends State<_LootDrawAnimationWidget>
     final translation = _translation;
     final scale = _scale;
     final rotation = _rotation;
-    if (controller == null || translation == null || scale == null || rotation == null) {
+    if (controller == null ||
+        translation == null ||
+        scale == null ||
+        rotation == null) {
       return widget.child;
     }
     return RepaintBoundary(

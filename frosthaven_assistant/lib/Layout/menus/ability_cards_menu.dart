@@ -144,13 +144,16 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
                             gameState: _gameState));
                       });
                     },
-                    children: generateList(list, allOpen), // ignore: avoid-returning-widgets, list-returning helper for ReorderableListView/ListView children
+                    children: generateList(list,
+                        allOpen), // ignore: avoid-returning-widgets, list-returning helper for ReorderableListView/ListView children
                   )
                 : ListView(
                     clipBehavior: Clip.none,
                     controller: ScrollController(),
                     padding: EdgeInsets.zero,
-                    children: generateList(list, allOpen).reversed.toList(), // ignore: avoid-returning-widgets, list-returning helper for ReorderableListView/ListView children
+                    children: generateList(list, allOpen)
+                        .reversed
+                        .toList(), // ignore: avoid-returning-widgets, list-returning helper for ReorderableListView/ListView children
                   )));
   }
 
@@ -194,8 +197,10 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
                                         "  Reveal\n    cards:",
                                       ),
                                       ...List.generate(
-                                        min(drawPile.length, _kMaxRevealButtons),
-                                        (i) => buildRevealButton(drawPile.length, i + 1), // ignore: avoid-returning-widgets, widget generator lambda
+                                        min(drawPile.length,
+                                            _kMaxRevealButtons),
+                                        (i) => buildRevealButton(
+                                            drawPile.length, i + 1),
                                       ),
                                       TextButton(
                                         onPressed: () {
@@ -240,8 +245,8 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          buildList(drawPile, true, false), // ignore: avoid-returning-widgets, list-returning helper for Row children
-                          buildList(discardPile, false, true) // ignore: avoid-returning-widgets, list-returning helper for Row children
+                          buildList(drawPile, true, false),
+                          buildList(discardPile, false, true)
                         ],
                       )),
                       Container(
@@ -292,13 +297,16 @@ class Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    double scale = max((screenSize.height / (_kScaleCardHeight * _kScaleCardRows)), _kScaleMin);
+    double scale = max(
+        (screenSize.height / (_kScaleCardHeight * _kScaleCardRows)),
+        _kScaleMin);
     if (screenSize.width * _kListWidthRatio < _kCardWidth * scale) {
       scale = screenSize.width * _kListWidthRatio / _kCardWidth;
     }
 
     return revealed
-        ? MonsterAbilityCardFront(card: data, data: monsterData, scale: scale, calculateAll: true)
+        ? MonsterAbilityCardFront(
+            card: data, data: monsterData, scale: scale, calculateAll: true)
         : MonsterAbilityCardRear(scale: scale, size: -1, monster: monsterData);
   }
 }

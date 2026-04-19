@@ -19,7 +19,6 @@ class NumpadMenu extends StatefulWidget {
 }
 
 class NumpadMenuState extends State<NumpadMenu> {
-  static const double _kButtonSize = 40.0;
   static const double _kMenuWidth = 10.0;
   static const double _kMenuHeight = 180.0;
   static const double _kTopSpacing = 20.0;
@@ -63,10 +62,11 @@ class NumpadMenuState extends State<NumpadMenu> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
                     _kNumpadColCount,
-                    (colIdx) => _NrButton( // ignore: avoid-returning-widgets, widget generator lambda
+                    (colIdx) => _NrButton(
                         nr: rowIdx * _kNumpadColCount + colIdx + 1,
                         scale: scale,
-                        onPressed: () => _handlePress(rowIdx * _kNumpadColCount + colIdx + 1, context)),
+                        onPressed: () => _handlePress(
+                            rowIdx * _kNumpadColCount + colIdx + 1, context)),
                   ),
                 ),
               ),

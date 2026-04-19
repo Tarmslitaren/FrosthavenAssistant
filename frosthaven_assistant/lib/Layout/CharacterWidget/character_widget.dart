@@ -82,7 +82,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
         (index) => AnimatedSize(
               //not really needed now
               key: Key(index.toString()),
-              duration: const Duration(milliseconds: CharacterWidget._kAnimationDurationMs),
+              duration: const Duration(
+                  milliseconds: CharacterWidget._kAnimationDurationMs),
               child: MonsterBox(
                   key: Key(summonList[index].getId()),
                   figureId: summonList[index].name +
@@ -132,20 +133,24 @@ class CharacterWidgetState extends State<CharacterWidget> {
 
               return Column(mainAxisSize: MainAxisSize.max, children: [
                 Container(
-                  margin:
-                      EdgeInsets.only(left: CharacterWidget._kMarginH * scale, right: CharacterWidget._kMarginH * scale),
-                  width: getMainListWidth(context) - CharacterWidget._kMarginH * CharacterWidget._kBothSides * scale,
+                  margin: EdgeInsets.only(
+                      left: CharacterWidget._kMarginH * scale,
+                      right: CharacterWidget._kMarginH * scale),
+                  width: getMainListWidth(context) -
+                      CharacterWidget._kMarginH *
+                          CharacterWidget._kBothSides *
+                          scale,
                   child: ValueListenableBuilder<BuiltList<MonsterInstance>>(
                       valueListenable: vm.summonListNotifier,
                       builder: (context, value, child) {
-                        return buildMonsterBoxGrid(scale, character); // ignore: avoid-returning-widgets, internal layout helper
+                        return buildMonsterBoxGrid(scale, character);
                       }),
                 ),
                 ColorFiltered(
                     colorFilter: vm.notGrayScale
                         ? ColorFilter.matrix(identity)
                         : ColorFilter.matrix(grayScale),
-                    child: _buildCharacterContent( // ignore: avoid-returning-widgets, internal layout helper
+                    child: _buildCharacterContent(
                         vm, character, isCharacter, inner))
               ]);
             }));

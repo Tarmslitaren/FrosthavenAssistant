@@ -67,8 +67,8 @@ class MonsterAbilityCardWidget extends StatefulWidget {
     double cardHeight = _kCardHeight * scale;
 
     for (GraphicPositional item in positionals) {
-      double scaleConstant =
-          _kGfxScaleBase * _kGfxScaleAsset; //this is because of the actual size of the assets
+      double scaleConstant = _kGfxScaleBase *
+          _kGfxScaleAsset; //this is because of the actual size of the assets
       if (LineBuilder.isElement(item.gfx)) {
         //because we added new graphics for these that are bigger
         scaleConstant *= _kGfxScaleElement;
@@ -106,16 +106,18 @@ class MonsterAbilityCardWidget extends StatefulWidget {
 
 class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
   MonsterAbilityCardViewModel? _vmInstance;
-  MonsterAbilityCardViewModel get _vm => _vmInstance ??= MonsterAbilityCardViewModel(
-      widget.data, gameState: widget.gameState, settings: widget.settings);
+  MonsterAbilityCardViewModel get _vm =>
+      _vmInstance ??= MonsterAbilityCardViewModel(widget.data,
+          gameState: widget.gameState, settings: widget.settings);
 
-  Widget _transitionBuilder(Widget widget, Animation<double> animation) { // ignore: avoid-returning-widgets, required AnimatedSwitcher callback signature
+  Widget _transitionBuilder(Widget widget, Animation<double> animation) {
     final rotateAnim = Tween(begin: pi, end: 0.0).animate(animation);
     return AnimatedBuilder(
         animation: rotateAnim,
         child: widget,
         builder: (context, widget) {
-          final value = min(rotateAnim.value, MonsterAbilityCardWidget._kHalfPi);
+          final value =
+              min(rotateAnim.value, MonsterAbilityCardWidget._kHalfPi);
           return Transform(
             transform: Matrix4.rotationX(value),
             alignment: Alignment.center,
@@ -143,14 +145,19 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                 }
               },
               child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: MonsterAbilityCardWidget._kAnimationDurationMs),
+                duration: const Duration(
+                    milliseconds:
+                        MonsterAbilityCardWidget._kAnimationDurationMs),
                 transitionBuilder: _transitionBuilder,
                 layoutBuilder: (currentWidget, list) => Stack(
                   children: [if (currentWidget != null) currentWidget, ...list],
                 ),
                 child: showFront && card != null
                     ? MonsterAbilityCardFront(
-                        card: card, data: widget.data, scale: scale, calculateAll: false)
+                        card: card,
+                        data: widget.data,
+                        scale: scale,
+                        calculateAll: false)
                     : MonsterAbilityCardRear(
                         scale: scale, size: _vm.deckSize, monster: widget.data),
               ));
@@ -185,13 +192,15 @@ class MonsterAbilityCardFront extends StatelessWidget {
     }
 
     var shadow = Shadow(
-      offset: Offset(MonsterAbilityCardWidget._kShadowTextOffsetX * scale, MonsterAbilityCardWidget._kShadowTextOffsetY * scale),
+      offset: Offset(MonsterAbilityCardWidget._kShadowTextOffsetX * scale,
+          MonsterAbilityCardWidget._kShadowTextOffsetY * scale),
       color: Colors.black87,
       blurRadius: MonsterAbilityCardWidget._kShadowTextBlur * scale,
     );
 
     List<Widget> positionals =
-        MonsterAbilityCardWidget._buildGraphicPositionals(scale, card.graphicPositional); // ignore: avoid-returning-widgets, returns List<Widget> accessed by index for Stack children
+        MonsterAbilityCardWidget._buildGraphicPositionals(
+            scale, card.graphicPositional);
 
     return RepaintBoundary(
         child: Container(
@@ -200,7 +209,10 @@ class MonsterAbilityCardFront extends StatelessWidget {
                 BoxShadow(
                   color: Colors.black45,
                   blurRadius: MonsterAbilityCardWidget._kShadowBlur * scale,
-                  offset: Offset(MonsterAbilityCardWidget._kShadowOffsetX * scale, MonsterAbilityCardWidget._kShadowOffsetY * scale), // Shadow position
+                  offset: Offset(
+                      MonsterAbilityCardWidget._kShadowOffsetX * scale,
+                      MonsterAbilityCardWidget._kShadowOffsetY *
+                          scale), // Shadow position
                 ),
               ],
             ),
@@ -213,7 +225,8 @@ class MonsterAbilityCardFront extends StatelessWidget {
 
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(MonsterAbilityCardWidget._kBorderRadius * scale)),
+                  borderRadius: BorderRadius.all(Radius.circular(
+                      MonsterAbilityCardWidget._kBorderRadius * scale)),
                   child: Image(
                     fit: BoxFit.fill,
                     height: MonsterAbilityCardWidget._kCardImageHeight * scale,
@@ -224,10 +237,14 @@ class MonsterAbilityCardFront extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                    top: frosthavenStyle ? MonsterAbilityCardWidget._kTitleTopFh * scale : 0,
+                    top: frosthavenStyle
+                        ? MonsterAbilityCardWidget._kTitleTopFh * scale
+                        : 0,
                     child: SizedBox(
-                      height: MonsterAbilityCardWidget._kTitleAreaHeight * scale,
-                      width: MonsterAbilityCardWidget._kCardWidth * scale, //needed for line breaks in lines
+                      height:
+                          MonsterAbilityCardWidget._kTitleAreaHeight * scale,
+                      width: MonsterAbilityCardWidget._kCardWidth *
+                          scale, //needed for line breaks in lines
 
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -240,8 +257,13 @@ class MonsterAbilityCardFront extends StatelessWidget {
                                 fontFamily:
                                     frosthavenStyle ? "GermaniaOne" : 'Pirata',
                                 color: Colors.white,
-                                fontSize:
-                                    frosthavenStyle ? MonsterAbilityCardWidget._kTitleFontSizeFh * scale : MonsterAbilityCardWidget._kTitleFontSizeGh * scale,
+                                fontSize: frosthavenStyle
+                                    ? MonsterAbilityCardWidget
+                                            ._kTitleFontSizeFh *
+                                        scale
+                                    : MonsterAbilityCardWidget
+                                            ._kTitleFontSizeGh *
+                                        scale,
                                 shadows: [shadow]),
                           ),
                         ],
@@ -257,7 +279,11 @@ class MonsterAbilityCardFront extends StatelessWidget {
                           fontFamily:
                               frosthavenStyle ? "GermaniaOne" : 'Pirata',
                           color: Colors.white,
-                          fontSize: frosthavenStyle ? MonsterAbilityCardWidget._kInitFontSizeFh * scale : MonsterAbilityCardWidget._kInitFontSizeGh * scale,
+                          fontSize: frosthavenStyle
+                              ? MonsterAbilityCardWidget._kInitFontSizeFh *
+                                  scale
+                              : MonsterAbilityCardWidget._kInitFontSizeGh *
+                                  scale,
                           shadows: [shadow]),
                     )),
                 Positioned(
@@ -268,15 +294,19 @@ class MonsterAbilityCardFront extends StatelessWidget {
                       style: TextStyle(
                           fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
                           color: Colors.white,
-                          fontSize: MonsterAbilityCardWidget._kCardNrFontSize * scale,
+                          fontSize:
+                              MonsterAbilityCardWidget._kCardNrFontSize * scale,
                           shadows: [shadow]),
                     )),
                 card.shuffle
                     ? Positioned(
                         left: MonsterAbilityCardWidget._kShuffleLeft * scale,
-                        bottom: MonsterAbilityCardWidget._kShuffleBottom * scale,
+                        bottom:
+                            MonsterAbilityCardWidget._kShuffleBottom * scale,
                         child: Image(
-                          height: MonsterAbilityCardWidget._kShuffleBaseHeight * MonsterAbilityCardWidget._kShuffleHeightFactor * scale,
+                          height: MonsterAbilityCardWidget._kShuffleBaseHeight *
+                              MonsterAbilityCardWidget._kShuffleHeightFactor *
+                              scale,
                           fit: BoxFit.cover,
                           image: const AssetImage(
                               "assets/images/abilities/shuffle.png"),
@@ -286,14 +316,17 @@ class MonsterAbilityCardFront extends StatelessWidget {
                 //add graphic positionals here
                 if (positionals.isNotEmpty) positionals.first,
                 if (positionals.length > 1) positionals[1],
-                if (positionals.length > MonsterAbilityCardWidget._kGfxIndex2) positionals[MonsterAbilityCardWidget._kGfxIndex2],
-                if (positionals.length > MonsterAbilityCardWidget._kGfxIndex3) positionals[MonsterAbilityCardWidget._kGfxIndex3],
+                if (positionals.length > MonsterAbilityCardWidget._kGfxIndex2)
+                  positionals[MonsterAbilityCardWidget._kGfxIndex2],
+                if (positionals.length > MonsterAbilityCardWidget._kGfxIndex3)
+                  positionals[MonsterAbilityCardWidget._kGfxIndex3],
 
                 Positioned(
                   top: MonsterAbilityCardWidget._kLinesTop * scale,
                   child: SizedBox(
                     height: MonsterAbilityCardWidget._kTitleAreaHeight * scale,
-                    width: MonsterAbilityCardWidget._kCardWidth * scale, //needed for line breaks in lines
+                    width: MonsterAbilityCardWidget._kCardWidth *
+                        scale, //needed for line breaks in lines
                     child: LineBuilder.createLines(
                         card.lines,
                         false,
@@ -331,7 +364,10 @@ class MonsterAbilityCardRear extends StatelessWidget {
             BoxShadow(
               color: Colors.black45,
               blurRadius: MonsterAbilityCardWidget._kShadowBlur * scale,
-              offset: Offset(MonsterAbilityCardWidget._kShadowOffsetX * scale, MonsterAbilityCardWidget._kShadowOffsetY * scale), // Shadow position
+              offset: Offset(
+                  MonsterAbilityCardWidget._kShadowOffsetX * scale,
+                  MonsterAbilityCardWidget._kShadowOffsetY *
+                      scale), // Shadow position
             ),
           ],
         ),
@@ -343,7 +379,8 @@ class MonsterAbilityCardRear extends StatelessWidget {
           alignment: Alignment.center,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(MonsterAbilityCardWidget._kBorderRadius * scale)),
+              borderRadius: BorderRadius.all(Radius.circular(
+                  MonsterAbilityCardWidget._kBorderRadius * scale)),
               child: Image(
                 fit: BoxFit.fitHeight,
                 height: MonsterAbilityCardWidget._kCardRearImageHeight * scale,
@@ -361,10 +398,16 @@ class MonsterAbilityCardRear extends StatelessWidget {
                       style: TextStyle(
                           fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
                           color: Colors.white,
-                          fontSize: MonsterAbilityCardWidget._kRearDeckSizeFontSize * scale,
+                          fontSize:
+                              MonsterAbilityCardWidget._kRearDeckSizeFontSize *
+                                  scale,
                           shadows: [
                             Shadow(
-                                offset: Offset(MonsterAbilityCardWidget._kRearShadowOffset, MonsterAbilityCardWidget._kRearShadowOffset), color: Colors.black)
+                                offset: Offset(
+                                    MonsterAbilityCardWidget._kRearShadowOffset,
+                                    MonsterAbilityCardWidget
+                                        ._kRearShadowOffset),
+                                color: Colors.black)
                           ]),
                     ))
                 : Container(),

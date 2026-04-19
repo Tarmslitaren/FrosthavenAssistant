@@ -33,7 +33,6 @@ class AutoAddStandeeMenu extends StatefulWidget {
 
 class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
   static const int _kButtonRowSize = 4;
-  static const double _kButtonSize = 40.0;
   static const double _kButtonSpacerHeight = 20.0;
   static const double _kMenuWidth = 250.0;
   static const double _kHeightBase = 140.0;
@@ -42,8 +41,6 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
   static const int _kCharIndexMin = 2;
   static const int _kCharIndexMax = 4;
   static const int _kBothTypesMultiplier = 2;
-  static const double _kShadowOffset = 1.0;
-  static const double _kShadowBlur = 1.0;
   static const int _kKillHealth = -10000;
   static const int _kStandeesRow2Threshold = _kButtonRowSize;
   static const int _kStandeesRow3Threshold = _kButtonRowSize * 2;
@@ -110,7 +107,8 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
     }
   }
 
-  bool _isStandeeOut(int nr, Monster monster, bool elite, int nrOfElite, int nrOfNormal) {
+  bool _isStandeeOut(
+      int nr, Monster monster, bool elite, int nrOfElite, int nrOfNormal) {
     for (var item in monster.monsterInstances) {
       if (item.standeeNr == nr ||
           (elite && nrOfElite <= currentEliteAdded) ||
@@ -137,7 +135,8 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
         });
       }
       setState(() {
-        if (currentEliteAdded == nrOfElite && currentNormalAdded == nrOfNormal) {
+        if (currentEliteAdded == nrOfElite &&
+            currentNormalAdded == nrOfNormal) {
           if (currentMonsterIndex + 1 < widget.monsterData.length) {
             currentMonsterIndex++;
             currentEliteAdded = 0;
@@ -151,7 +150,8 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
         MonsterInstance state =
             GameMethods.getFigure(monster.id, figureId) as MonsterInstance;
         if (!initialEliteAdded[currentMonsterIndex].contains(state.standeeNr) &&
-            !initialNormalAdded[currentMonsterIndex].contains(state.standeeNr)) {
+            !initialNormalAdded[currentMonsterIndex]
+                .contains(state.standeeNr)) {
           _gameState.action(ChangeHealthCommand(
               _kKillHealth, figureId, monster.id,
               gameState: _gameState));
@@ -193,16 +193,23 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: List.generate(
           end - start + 1,
-          (i) { // ignore: avoid-returning-widgets, widget generator lambda
+          (i) {
             final nr = start + i;
             bool boss = monster.type.levels.first.boss != null;
-            MonsterType type = elite ? MonsterType.elite : (boss ? MonsterType.boss : MonsterType.normal);
-            Color color = elite ? Colors.yellow : (boss ? Colors.red : Colors.white);
-            bool isOut = _isStandeeOut(nr, monster, elite, nrOfElite, nrOfNormal);
+            MonsterType type = elite
+                ? MonsterType.elite
+                : (boss ? MonsterType.boss : MonsterType.normal);
+            Color color =
+                elite ? Colors.yellow : (boss ? Colors.red : Colors.white);
+            bool isOut =
+                _isStandeeOut(nr, monster, elite, nrOfElite, nrOfNormal);
             if (isOut) color = Colors.grey;
             return _StandeeNrButton(
-              nr: nr, scale: scale, color: color,
-              onPressed: () => _handleStandeePress(nr, monster, type, elite, isOut, nrOfElite, nrOfNormal),
+              nr: nr,
+              scale: scale,
+              color: color,
+              onPressed: () => _handleStandeePress(
+                  nr, monster, type, elite, isOut, nrOfElite, nrOfNormal),
             );
           },
         ),
@@ -221,8 +228,9 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
 
   @override
   Widget build(BuildContext context) {
-    int characterIndex =
-        GameMethods.getCurrentCharacterAmount().clamp(_kCharIndexMin, _kCharIndexMax) - _kCharIndexMin;
+    int characterIndex = GameMethods.getCurrentCharacterAmount()
+            .clamp(_kCharIndexMin, _kCharIndexMax) -
+        _kCharIndexMin;
 
     return ValueListenableBuilder<int>(
         valueListenable: _gameState.commandIndex,
@@ -334,7 +342,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                       Column(
                         children: [
                           if (nrOfElite > 0)
-                            _buildButtonGrid( // ignore: avoid-returning-widgets, internal layout helper
+                            _buildButtonGrid(
                                 scale,
                                 monster,
                                 true,
@@ -343,7 +351,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                                 nrOfElite,
                                 nrOfNormal),
                           if (nrOfNormal > 0)
-                            _buildButtonGrid( // ignore: avoid-returning-widgets, internal layout helper
+                            _buildButtonGrid(
                                 scale,
                                 monster,
                                 false,

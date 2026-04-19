@@ -28,7 +28,6 @@ class SetCharacterLevelMenu extends StatefulWidget {
 }
 
 class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
-  static const double _kButtonSize = 40.0;
   static const double _kMenuSize = 240.0;
   static const double _kTopSpacing = 20.0;
   static const int _kLevelRow1Count = 5;
@@ -64,8 +63,6 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
     focusNode.addListener(_focusNodeListener);
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     double scale = getModalMenuScale(context);
@@ -98,16 +95,25 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
                     _kLevelRow1Count,
-                    (i) => _LevelButton(nr: i + 1, scale: scale, character: widget.character, gameState: _gameState), // ignore: avoid-returning-widgets, widget generator lambda
+                    (i) => _LevelButton(
+                        nr: i + 1,
+                        scale: scale,
+                        character: widget.character,
+                        gameState: _gameState),
                   ),
                 ),
               if (!isObjective &&
-                  widget.character.characterClass.healthByLevel.length > _kLevelRow1Count)
+                  widget.character.characterClass.healthByLevel.length >
+                      _kLevelRow1Count)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
                     _kLevelRow2Count,
-                    (i) => _LevelButton(nr: _kLevelRow1Count + i + 1, scale: scale, character: widget.character, gameState: _gameState), // ignore: avoid-returning-widgets, widget generator lambda
+                    (i) => _LevelButton(
+                        nr: _kLevelRow1Count + i + 1,
+                        scale: scale,
+                        character: widget.character,
+                        gameState: _gameState),
                   ),
                 ),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -172,7 +178,8 @@ class _LevelButton extends StatelessWidget {
           String text = nr.toString();
           bool darkMode = getIt<Settings>().darkMode.value;
           Color selectedTextColor = darkMode ? Colors.white : Colors.black;
-          Color textColor = isCurrentlySelected ? selectedTextColor : Colors.grey;
+          Color textColor =
+              isCurrentlySelected ? selectedTextColor : Colors.grey;
           return SizedBox(
             width: _kButtonSize * scale,
             height: _kButtonSize * scale,
@@ -183,8 +190,11 @@ class _LevelButton extends StatelessWidget {
                     fontSize: kFontSizeTitle * scale,
                     shadows: [
                       Shadow(
-                        offset: Offset(_kShadowOffset * scale, _kShadowOffset * scale),
-                        color: isCurrentlySelected ? Colors.black54 : Colors.black87,
+                        offset: Offset(
+                            _kShadowOffset * scale, _kShadowOffset * scale),
+                        color: isCurrentlySelected
+                            ? Colors.black54
+                            : Colors.black87,
                         blurRadius: _kShadowBlur * scale,
                       ),
                     ],

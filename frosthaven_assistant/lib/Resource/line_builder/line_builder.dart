@@ -195,20 +195,30 @@ class LineBuilder {
     var smallStyle = TextStyle(
         fontFamily: 'Majalla',
         color: left ? Colors.black : Colors.white,
-        fontSize: (alignment == CrossAxisAlignment.center ? _kSmallFontSizeCenter : _kSmallFontSizeStat) * scale,
+        fontSize: (alignment == CrossAxisAlignment.center
+                ? _kSmallFontSizeCenter
+                : _kSmallFontSizeStat) *
+            scale,
         //sizes are larger on stat cards
         height: _kLineHeightSmall,
         backgroundColor: debugColors ? Colors.amber : null,
         //0.85,
         shadows: [shadow]);
     bool isCenterAlignment = alignment == CrossAxisAlignment.center;
-    double centerMidFontSize = frosthavenStyle ? _kMidFontSizeFH : _kMidFontSizeGH;
-    double nonCenterMidFontSize = frosthavenStyle ? _kMidFontSizeGH : _kMidFontSizeGHStat;
-    double midFontSize = isCenterAlignment ? centerMidFontSize : nonCenterMidFontSize;
-    double centerMidLineHeight = frosthavenStyle ? _kLineHeightMidFH : _kLineHeightGH;
-    double midLineHeight = isCenterAlignment ? centerMidLineHeight : _kLineHeightGH;
-    double centerNormalFontSize = frosthavenStyle ? _kNormalFontSizeFH : _kNormalFontSizeGH;
-    double normalFontSize = isCenterAlignment ? centerNormalFontSize : _kNormalFontSizeStat;
+    double centerMidFontSize =
+        frosthavenStyle ? _kMidFontSizeFH : _kMidFontSizeGH;
+    double nonCenterMidFontSize =
+        frosthavenStyle ? _kMidFontSizeGH : _kMidFontSizeGHStat;
+    double midFontSize =
+        isCenterAlignment ? centerMidFontSize : nonCenterMidFontSize;
+    double centerMidLineHeight =
+        frosthavenStyle ? _kLineHeightMidFH : _kLineHeightGH;
+    double midLineHeight =
+        isCenterAlignment ? centerMidLineHeight : _kLineHeightGH;
+    double centerNormalFontSize =
+        frosthavenStyle ? _kNormalFontSizeFH : _kNormalFontSizeGH;
+    double normalFontSize =
+        isCenterAlignment ? centerNormalFontSize : _kNormalFontSizeStat;
     var midStyle = TextStyle(
         backgroundColor: debugColors ? Colors.greenAccent : null,
         leadingDistribution: TextLeadingDistribution.even,
@@ -242,7 +252,9 @@ class LineBuilder {
         //maybe slightly bigger between chars space?
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: Colors.yellow,
-        fontSize: frosthavenStyle ? _kNormalFontSizeFH * scale : _kNormalFontSizeGH * scale,
+        fontSize: frosthavenStyle
+            ? _kNormalFontSizeFH * scale
+            : _kNormalFontSizeGH * scale,
         height: frosthavenStyle ? _kLineHeightFH : _kLineHeightGH,
         shadows: [shadow]);
 
@@ -256,7 +268,8 @@ class LineBuilder {
         leadingDistribution: TextLeadingDistribution.even,
         fontFamily: 'Majalla',
         color: Colors.yellow,
-        fontSize: frosthavenStyle ? _kMidFontSizeFH * scale : _kMidFontSizeGH * scale,
+        fontSize:
+            frosthavenStyle ? _kMidFontSizeFH * scale : _kMidFontSizeGH * scale,
         height: frosthavenStyle ? _kLineHeightMidFH : _kLineHeightGH,
         shadows: [shadow]);
 
@@ -295,14 +308,6 @@ class LineBuilder {
     Widget column;
 
     bool hasInnerRow = false;
-
-    TextAlign textAlign = TextAlign.center;
-    if (alignment == CrossAxisAlignment.start) {
-      textAlign = TextAlign.start;
-    }
-    if (alignment == CrossAxisAlignment.end) {
-      textAlign = TextAlign.end;
-    }
 
     var textColor =
         alignment == CrossAxisAlignment.end ? Colors.black : Colors.white;
@@ -480,8 +485,8 @@ class LineBuilder {
       }
 
       if (line.startsWith('¤')) {
-        double scaleConstant =
-            _kImageScaleBase * _kImageScaleAsset; //this is because of the actual size of the assets
+        double scaleConstant = _kImageScaleBase *
+            _kImageScaleAsset; //this is because of the actual size of the assets
         if (isElement(line.substring(1))) {
           //because we added new graphics for these that are bigger
           scaleConstant *= _kElementScaleFactor;
@@ -533,8 +538,9 @@ class LineBuilder {
                   : Alignment.center,
               scale: 1 / (scale * _kDividerImageScale),
               //for some reason flutter likes scale to be inverted
-              height:
-                  styleToUse == dividerStyleExtraThin ? _kDividerThinImageHeight * scale : _kDividerImageHeight * scale,
+              height: styleToUse == dividerStyleExtraThin
+                  ? _kDividerThinImageHeight * scale
+                  : _kDividerImageHeight * scale,
               width: _kDividerImageWidth *
                   scale, //actually 40, but some layout might depend on wider size so not changing now
               filterQuality: FilterQuality.medium,
@@ -623,7 +629,9 @@ class LineBuilder {
                       lastImage,
                       Positioned(
                           width: frosthavenStyle
-                              ? (styleToUse.fontSize ?? 0.0) * _kUseFHWidthRatio + scale * _kUseFHWidthAdd
+                              ? (styleToUse.fontSize ?? 0.0) *
+                                      _kUseFHWidthRatio +
+                                  scale * _kUseFHWidthAdd
                               : (styleToUse.fontSize ?? 0.0) * _kUseGHRatio,
                           bottom: 0,
                           left: frosthavenStyle ? _kUseLeft * scale : 0.0,
@@ -631,7 +639,8 @@ class LineBuilder {
 
                           child: Image(
                             height: frosthavenStyle
-                                ? (styleToUse.fontSize ?? 0.0) * _kUseFHHeightRatio
+                                ? (styleToUse.fontSize ?? 0.0) *
+                                    _kUseFHHeightRatio
                                 : (styleToUse.fontSize ?? 0.0) * _kUseGHRatio,
                             fit: BoxFit.fitHeight,
                             filterQuality: FilterQuality.medium,
@@ -644,7 +653,8 @@ class LineBuilder {
               textPartListRowContent.add(Container(
                   color: debugColors ? Colors.red : null,
                   padding: EdgeInsets.only(
-                      top: getTopPaddingForStyle(normalStyle) * _kUseFHHeightRatio),
+                      top: getTopPaddingForStyle(normalStyle) *
+                          _kUseFHHeightRatio),
                   child: Text(frosthavenStyle ? " :" : " : ",
                       style: normalStyle)));
             } else {
@@ -703,8 +713,8 @@ class LineBuilder {
               if (imageSuffix.isNotEmpty && hasOldStyle) {
                 imagePath = "assets/images/abilities/$iconGfx$imageSuffix.png";
               }
-              bool overflow = FrosthavenConverter.shouldOverflow(
-                  frosthavenStyle, iconGfx);
+              bool overflow =
+                  FrosthavenConverter.shouldOverflow(frosthavenStyle, iconGfx);
               double heightMod = mainLine
                   ? _kHeightModMainLine
                   : _kSubLineHeightMod; //to make sub line conditions have larger size and overflow on FH style
@@ -925,12 +935,15 @@ class LineBuilder {
         return const EdgeInsets.all(0);
       } else if (isFrostHavenStyle && iconToken != "target") {
         //need more margin around the over sized condition gfx
-        return EdgeInsets.only(left: _kConditionMarginRatio * height, right: _kConditionMarginRatio * height);
+        return EdgeInsets.only(
+            left: _kConditionMarginRatio * height,
+            right: _kConditionMarginRatio * height);
       }
     }
     if (isFrostHavenStyle) {
       return EdgeInsets.zero;
     }
-    return EdgeInsets.only(left: _kMarginStatRatio * height, right: _kMarginStatRatio * height);
+    return EdgeInsets.only(
+        left: _kMarginStatRatio * height, right: _kMarginStatRatio * height);
   }
 }

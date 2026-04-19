@@ -68,8 +68,8 @@ class Item extends StatelessWidget {
       if (summonList.isNotEmpty) {
         double summonsTotalWidth = 0;
         for (var monsterInstance in summonList) {
-          summonsTotalWidth +=
-              MonsterBox.getWidth(scale, monsterInstance) + _kBoxSpacing * scale;
+          summonsTotalWidth += MonsterBox.getWidth(scale, monsterInstance) +
+              _kBoxSpacing * scale;
         }
         double rows = summonsTotalWidth / listWidth;
         height += _kRowHeight * rows.ceil() * scale;
@@ -118,6 +118,7 @@ class ListAnimation extends StatefulWidget {
   final int index;
   final int lastIndex;
   final Widget child;
+
   /// When true the translation offset is forced to zero so no slide plays.
   final bool skipAnimation;
 
@@ -186,7 +187,9 @@ class ListAnimationState extends State<ListAnimation>
     _diff = widget.skipAnimation ? 0 : lastPosition - position;
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      MainListState.lastPositions..clear()..addAll(positions);
+      MainListState.lastPositions
+        ..clear()
+        ..addAll(positions);
     });
 
     final curved = _curved;
@@ -235,10 +238,10 @@ class MainListState extends State<MainList> {
 
   MainListViewModel? _vmInstance;
   MainListViewModel get _vm => _vmInstance ??= MainListViewModel(
-      gameState: widget.gameState,
-      gameData: widget.gameData,
-      settings: widget.settings,
-    );
+        gameState: widget.gameState,
+        gameData: widget.gameData,
+        settings: widget.settings,
+      );
   List<Widget> _generatedList = [];
   static final scrollController = ScrollController();
 
@@ -255,7 +258,9 @@ class MainListState extends State<MainList> {
 
     //this does cause a index 0
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      lastPositions..clear()..addAll(_vm.getItemHeights(context));
+      lastPositions
+        ..clear()
+        ..addAll(_vm.getItemHeights(context));
     });
   }
 
@@ -277,7 +282,7 @@ class MainListState extends State<MainList> {
                     return ValueListenableBuilder<double>(
                         valueListenable: _vm.userScalingMainList,
                         builder: (context, value, child) {
-                          return buildList(); // ignore: avoid-returning-widgets, internal layout helper
+                          return buildList();
                         });
                   }));
         });
@@ -285,11 +290,13 @@ class MainListState extends State<MainList> {
 
   int _getItemsForHalfTotalHeight(List<double> widgetPositions) {
     final screenSize = MediaQuery.of(context).size;
-    bool canFit2Columns = screenSize.width >= getMainListWidth(context) * _kTwoColumns;
+    bool canFit2Columns =
+        screenSize.width >= getMainListWidth(context) * _kTwoColumns;
     if (!canFit2Columns) {
       return _vm.currentListLength;
     }
-    double screenHeight = screenSize.height - _kTopBarHeight * _vm.userScalingBars;
+    double screenHeight =
+        screenSize.height - _kTopBarHeight * _vm.userScalingBars;
 
     if (widgetPositions.isNotEmpty) {
       bool allFitInView = widgetPositions.last < screenHeight * _kTwoColumns;
@@ -334,8 +341,7 @@ class MainListState extends State<MainList> {
     List<Widget> newList = List<Widget>.generate(
       _vm.currentListLength,
       (index) {
-        return Item(
-            key: Key(_vm.itemIdAt(index)), data: _vm.itemAt(index));
+        return Item(key: Key(_vm.itemIdAt(index)), data: _vm.itemAt(index));
       },
     );
 
@@ -422,7 +428,7 @@ class MainListState extends State<MainList> {
                                       _vm.reorderItem(oldIndex, newIndex);
                                     });
                                   },
-                                  children: _generateChildren(), // ignore: avoid-returning-widgets, list-returning helper for ReorderableListView children
+                                  children: _generateChildren(),
                                 ),
                               ))))));
         });

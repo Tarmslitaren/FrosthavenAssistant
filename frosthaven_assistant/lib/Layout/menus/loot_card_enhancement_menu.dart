@@ -43,7 +43,6 @@ class LootCardEnhancementMenu extends StatefulWidget {
 class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
   GameState get _gameState => widget.gameState ?? getIt<GameState>();
 
-
   LootCard? getCardFromIndex(String type, int index) {
     if (type == "lumber") {
       return _gameState.lootDeck.lumberPool[index];
@@ -90,31 +89,73 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                 child: Stack(children: [
                   Column(
                     children: [
-                      const SizedBox(height: LootCardEnhancementMenu._kTopSpacing),
+                      const SizedBox(
+                          height: LootCardEnhancementMenu._kTopSpacing),
                       Container(
-                        constraints: const BoxConstraints(maxWidth: LootCardEnhancementMenu._kMaxWidth),
+                        constraints: const BoxConstraints(
+                            maxWidth: LootCardEnhancementMenu._kMaxWidth),
                         child: Column(children: [
                           const Text(
                             "Loot Card Enhancements",
                             style: kTitleStyle,
                           ),
-                          _MaterialSection(type: "hide", gameState: _gameState, getCard: getCardFromIndex),
-                          _MaterialSection(type: "lumber", gameState: _gameState, getCard: getCardFromIndex),
-                          _MaterialSection(type: "metal", gameState: _gameState, getCard: getCardFromIndex),
-                          _HerbSection(type: "arrowvine", gameState: _gameState, getCard: getCardFromIndex),
-                          _HerbSection(type: "axenut", gameState: _gameState, getCard: getCardFromIndex),
-                          _HerbSection(type: "corpsecap", gameState: _gameState, getCard: getCardFromIndex),
-                          _HerbSection(type: "flamefruit", gameState: _gameState, getCard: getCardFromIndex),
-                          _HerbSection(type: "rockroot", gameState: _gameState, getCard: getCardFromIndex),
-                          _HerbSection(type: "snowthistle", gameState: _gameState, getCard: getCardFromIndex),
+                          _MaterialSection(
+                              type: "hide",
+                              gameState: _gameState,
+                              getCard: getCardFromIndex),
+                          _MaterialSection(
+                              type: "lumber",
+                              gameState: _gameState,
+                              getCard: getCardFromIndex),
+                          _MaterialSection(
+                              type: "metal",
+                              gameState: _gameState,
+                              getCard: getCardFromIndex),
+                          _HerbSection(
+                              type: "arrowvine",
+                              gameState: _gameState,
+                              getCard: getCardFromIndex),
+                          _HerbSection(
+                              type: "axenut",
+                              gameState: _gameState,
+                              getCard: getCardFromIndex),
+                          _HerbSection(
+                              type: "corpsecap",
+                              gameState: _gameState,
+                              getCard: getCardFromIndex),
+                          _HerbSection(
+                              type: "flamefruit",
+                              gameState: _gameState,
+                              getCard: getCardFromIndex),
+                          _HerbSection(
+                              type: "rockroot",
+                              gameState: _gameState,
+                              getCard: getCardFromIndex),
+                          _HerbSection(
+                              type: "snowthistle",
+                              gameState: _gameState,
+                              getCard: getCardFromIndex),
                           _LootTypeHeader(type: "coin", amount: "1"),
-                          _CoinRowsSection(start: 0, rows: LootCardEnhancementMenu._kCoin1Rows, gameState: _gameState, getCard: getCardFromIndex),
+                          _CoinRowsSection(
+                              start: 0,
+                              rows: LootCardEnhancementMenu._kCoin1Rows,
+                              gameState: _gameState,
+                              getCard: getCardFromIndex),
                           const Divider(),
                           _LootTypeHeader(type: "coin", amount: "2"),
-                          _CoinRowsSection(start: LootCardEnhancementMenu._kCoin2Start, rows: LootCardEnhancementMenu._kCoin2Rows, gameState: _gameState, getCard: getCardFromIndex),
+                          _CoinRowsSection(
+                              start: LootCardEnhancementMenu._kCoin2Start,
+                              rows: LootCardEnhancementMenu._kCoin2Rows,
+                              gameState: _gameState,
+                              getCard: getCardFromIndex),
                           const Divider(),
                           _LootTypeHeader(type: "coin", amount: "3"),
-                          _LootCardRow(type: "coin", start: LootCardEnhancementMenu._kCoin3Start, count: LootCardEnhancementMenu._kCoin3Count, gameState: _gameState, getCard: getCardFromIndex),
+                          _LootCardRow(
+                              type: "coin",
+                              start: LootCardEnhancementMenu._kCoin3Start,
+                              count: LootCardEnhancementMenu._kCoin3Count,
+                              gameState: _gameState,
+                              getCard: getCardFromIndex),
                         ]),
                       ),
                       const SizedBox(
@@ -140,7 +181,8 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
 }
 
 class _MaterialSection extends StatelessWidget {
-  const _MaterialSection({required this.type, required this.gameState, required this.getCard});
+  const _MaterialSection(
+      {required this.type, required this.gameState, required this.getCard});
   final String type;
   final GameState gameState;
   final LootCard? Function(String, int) getCard;
@@ -149,20 +191,36 @@ class _MaterialSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       _LootTypeHeader(type: type, amount: "1"),
-      _LootCardRow(type: type, start: 0, count: LootCardEnhancementMenu._kMaterial1Count, gameState: gameState, getCard: getCard),
+      _LootCardRow(
+          type: type,
+          start: 0,
+          count: LootCardEnhancementMenu._kMaterial1Count,
+          gameState: gameState,
+          getCard: getCard),
       const Divider(),
       _LootTypeHeader(type: type, amount: "2 for 2 characters"),
-      _LootCardRow(type: type, start: LootCardEnhancementMenu._kMaterial2x2Start, count: LootCardEnhancementMenu._kMaterial2x2Count, gameState: gameState, getCard: getCard),
+      _LootCardRow(
+          type: type,
+          start: LootCardEnhancementMenu._kMaterial2x2Start,
+          count: LootCardEnhancementMenu._kMaterial2x2Count,
+          gameState: gameState,
+          getCard: getCard),
       const Divider(),
       _LootTypeHeader(type: type, amount: "2 for 2-3 characters"),
-      _LootCardRow(type: type, start: LootCardEnhancementMenu._kMaterial2x3Start, count: LootCardEnhancementMenu._kMaterial2x3Count, gameState: gameState, getCard: getCard),
+      _LootCardRow(
+          type: type,
+          start: LootCardEnhancementMenu._kMaterial2x3Start,
+          count: LootCardEnhancementMenu._kMaterial2x3Count,
+          gameState: gameState,
+          getCard: getCard),
       const Divider(),
     ]);
   }
 }
 
 class _HerbSection extends StatelessWidget {
-  const _HerbSection({required this.type, required this.gameState, required this.getCard});
+  const _HerbSection(
+      {required this.type, required this.gameState, required this.getCard});
   final String type;
   final GameState gameState;
   final LootCard? Function(String, int) getCard;
@@ -171,14 +229,23 @@ class _HerbSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       _LootTypeHeader(type: type, amount: ""),
-      _LootCardRow(type: type, start: 0, count: LootCardEnhancementMenu._kHerbCount, gameState: gameState, getCard: getCard),
+      _LootCardRow(
+          type: type,
+          start: 0,
+          count: LootCardEnhancementMenu._kHerbCount,
+          gameState: gameState,
+          getCard: getCard),
       const Divider(),
     ]);
   }
 }
 
 class _CoinRowsSection extends StatelessWidget {
-  const _CoinRowsSection({required this.start, required this.rows, required this.gameState, required this.getCard});
+  const _CoinRowsSection(
+      {required this.start,
+      required this.rows,
+      required this.gameState,
+      required this.getCard});
   final int start;
   final int rows;
   final GameState gameState;
@@ -188,8 +255,14 @@ class _CoinRowsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       for (var row = 0; row < rows; row++) ...[
-        _LootCardRow(type: "coin", start: start + row * LootCardEnhancementMenu._kCoinRowSize, count: LootCardEnhancementMenu._kCoinRowSize, gameState: gameState, getCard: getCard),
-        if (row < rows - 1) const SizedBox(height: LootCardEnhancementMenu._kCoinRowSpacing),
+        _LootCardRow(
+            type: "coin",
+            start: start + row * LootCardEnhancementMenu._kCoinRowSize,
+            count: LootCardEnhancementMenu._kCoinRowSize,
+            gameState: gameState,
+            getCard: getCard),
+        if (row < rows - 1)
+          const SizedBox(height: LootCardEnhancementMenu._kCoinRowSpacing),
       ],
     ]);
   }
@@ -242,7 +315,7 @@ class _LootCardRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: List.generate(
         count,
-        (i) => _EnhancementCounterButton( // ignore: avoid-returning-widgets, widget generator lambda
+        (i) => _EnhancementCounterButton(
             card: getCard(type, start + i)!, gameState: gameState),
       ),
     );
@@ -250,7 +323,8 @@ class _LootCardRow extends StatelessWidget {
 }
 
 class _EnhancementCounterButton extends StatelessWidget {
-  const _EnhancementCounterButton({required this.card, required this.gameState});
+  const _EnhancementCounterButton(
+      {required this.card, required this.gameState});
 
   final LootCard card;
   final GameState gameState;
@@ -261,9 +335,11 @@ class _EnhancementCounterButton extends StatelessWidget {
         valueListenable: gameState.commandIndex,
         builder: (context, _, child) {
           return Container(
-            padding: const EdgeInsets.all(LootCardEnhancementMenu._kCounterPadding),
+            padding:
+                const EdgeInsets.all(LootCardEnhancementMenu._kCounterPadding),
             decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(LootCardEnhancementMenu._kCounterBorderRadius)),
+                borderRadius: const BorderRadius.all(Radius.circular(
+                    LootCardEnhancementMenu._kCounterBorderRadius)),
                 color: Theme.of(context).colorScheme.secondary),
             child: Row(
               children: [
@@ -271,29 +347,38 @@ class _EnhancementCounterButton extends StatelessWidget {
                     onTap: () {
                       if (card.enhanced > 0) {
                         gameState.action(EnhanceLootCardCommand(
-                            card.id, card.enhanced - 1, card.gfx, gameState: gameState));
+                            card.id, card.enhanced - 1, card.gfx,
+                            gameState: gameState));
                       }
                     },
-                    child: const Icon(Icons.remove, color: Colors.white, size: LootCardEnhancementMenu._kIconSize)),
+                    child: const Icon(Icons.remove,
+                        color: Colors.white,
+                        size: LootCardEnhancementMenu._kIconSize)),
                 Container(
-                  margin: const EdgeInsets.symmetric(horizontal: LootCardEnhancementMenu._kCounterPadding),
+                  margin: const EdgeInsets.symmetric(
+                      horizontal: LootCardEnhancementMenu._kCounterPadding),
                   padding: const EdgeInsets.symmetric(
                       horizontal: LootCardEnhancementMenu._kValuePaddingH,
                       vertical: LootCardEnhancementMenu._kValuePaddingV),
                   decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(LootCardEnhancementMenu._kValueBorderRadius)),
+                      borderRadius: const BorderRadius.all(Radius.circular(
+                          LootCardEnhancementMenu._kValueBorderRadius)),
                       color: Colors.white),
                   child: Text(
                     card.enhanced.toString(),
-                    style: const TextStyle(color: Colors.black, fontSize: kFontSizeTitle),
+                    style: const TextStyle(
+                        color: Colors.black, fontSize: kFontSizeTitle),
                   ),
                 ),
                 InkWell(
                     onTap: () {
                       gameState.action(EnhanceLootCardCommand(
-                          card.id, card.enhanced + 1, card.gfx, gameState: gameState));
+                          card.id, card.enhanced + 1, card.gfx,
+                          gameState: gameState));
                     },
-                    child: const Icon(Icons.add, color: Colors.white, size: LootCardEnhancementMenu._kIconSize)),
+                    child: const Icon(Icons.add,
+                        color: Colors.white,
+                        size: LootCardEnhancementMenu._kIconSize)),
               ],
             ),
           );

@@ -40,7 +40,6 @@ class LootCardsMenuState extends State<LootCardsMenu> {
   GameState get _gameState => widget.gameState ?? getIt<GameState>();
   final scrollController = ScrollController();
 
-
   List<Widget> generateList(List<LootCard> inputList) {
     List<Widget> list = [];
     for (int index = 0; index < inputList.length; index++) {
@@ -68,7 +67,9 @@ class LootCardsMenuState extends State<LootCardsMenu> {
             padding: EdgeInsets.zero,
             crossAxisCount:
                 max(_kMinColumns, (screenWidth / _kItemMaxWidth).ceil()),
-            children: generateList(list).reversed.toList(), // ignore: avoid-returning-widgets, list-returning helper for ListView children
+            children: generateList(list)
+                .reversed
+                .toList(), // ignore: avoid-returning-widgets, list-returning helper for ListView children
           ),
         ));
   }
@@ -190,7 +191,7 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                                 ),
                               ])),
                       Flexible(
-                          fit: FlexFit.tight, child: buildList(discardPile)), // ignore: avoid-returning-widgets, list-returning helper
+                          fit: FlexFit.tight, child: buildList(discardPile)),
                       Container(
                         height: _kBottomBarHeight,
                         margin: const EdgeInsets.all(_kItemMargin),

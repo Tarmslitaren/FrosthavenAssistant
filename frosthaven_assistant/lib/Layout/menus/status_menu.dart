@@ -131,7 +131,6 @@ class StatusMenuState extends State<StatusMenu> {
     super.initState();
   }
 
-
   Widget buildStackableConditionButtons(
       ValueListenable<int> notifier,
       Condition stackableCondition,
@@ -203,7 +202,6 @@ class StatusMenuState extends State<StatusMenu> {
           )),
     ]);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -689,7 +687,7 @@ class StatusMenuState extends State<StatusMenu> {
                               ownerId: "unknown",
                               scale: scale),
                         if (hasPlagueHerald && isMonster)
-                          buildStackableConditionButtons( // ignore: avoid-returning-widgets, tightly-coupled state helper
+                          buildStackableConditionButtons(
                               figure.plague,
                               Condition.plague,
                               StatusMenu._kMaxPlague,
@@ -699,7 +697,7 @@ class StatusMenuState extends State<StatusMenu> {
                               ownerId,
                               scale),
                         if (showCustomContent)
-                          buildStackableConditionButtons( // ignore: avoid-returning-widgets, tightly-coupled state helper
+                          buildStackableConditionButtons(
                               figure.chill,
                               Condition.chill,
                               StatusMenu._kMaxChill,
@@ -919,7 +917,12 @@ class StatusMenuState extends State<StatusMenu> {
                               ownerId: ownerId,
                               immunities: immunities,
                               scale: scale),
-                        _SummonButton(figureId: figureId, ownerId: ownerId, scale: scale, gameState: _gameState, settings: _settings)
+                        _SummonButton(
+                            figureId: figureId,
+                            ownerId: ownerId,
+                            scale: scale,
+                            gameState: _gameState,
+                            settings: _settings)
                       ],
                     ),
                 ],
@@ -1072,8 +1075,8 @@ class _SummonButton extends StatelessWidget {
               margin: EdgeInsets.all(StatusMenu._kSummonMargin * scale),
               decoration: BoxDecoration(
                   border: Border.all(color: color),
-                  borderRadius: BorderRadius.all(
-                      Radius.circular(StatusMenu._kSummonBorderRadius * scale))),
+                  borderRadius: BorderRadius.all(Radius.circular(
+                      StatusMenu._kSummonBorderRadius * scale))),
               child: IconButton(
                   icon: isActive
                       ? Image(

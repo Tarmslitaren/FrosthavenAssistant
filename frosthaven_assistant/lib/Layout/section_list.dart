@@ -43,7 +43,7 @@ class SectionList extends StatelessWidget {
                         alignment: WrapAlignment.center,
                         spacing: _kSpacing * scale,
                         runSpacing: 0 * scale,
-                        children: _generateList(vm.sections))); // ignore: avoid-returning-widgets, list-returning helper for Wrap children
+                        children: _generateList(vm.sections)));
               });
         });
   }

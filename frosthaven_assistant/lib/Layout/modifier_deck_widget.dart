@@ -55,11 +55,11 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
   ModifierDeckViewModel? _vmInstance;
   ModifierDeckViewModel get _vm => _vmInstance ??= ModifierDeckViewModel(
-      widget.name,
-      gameState: widget.gameState,
-      gameData: widget.gameData,
-      settings: widget.settings,
-    );
+        widget.name,
+        gameState: widget.gameState,
+        gameData: widget.gameData,
+        settings: widget.settings,
+      );
   bool _animationsEnabled = false;
 
   Widget _buildStayAnimation(Widget child, double userScalingBars) {
@@ -128,7 +128,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
     return ValueListenableBuilder<Object>(
         valueListenable: _vm.modelData,
         builder: (context, value, child) {
-          return _buildContent(); // ignore: avoid-returning-widgets, internal layout helper
+          return _buildContent();
         });
   }
 
@@ -282,7 +282,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                         discardPileSize >
                                 ModifierDeckWidgetState
                                     ._kDiscardShowThirdMinSize
-                            ? _buildStayAnimation( // ignore: avoid-returning-widgets, animation helper
+                            ? _buildStayAnimation(
                                 RotationTransition(
                                     turns: const AlwaysStoppedAnimation(
                                         ModifierDeckWidgetState
@@ -298,7 +298,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                 userScalingBars)
                             : Container(),
                         discardPileSize > 1
-                            ? _buildSlideAnimation( // ignore: avoid-returning-widgets, animation helper
+                            ? _buildSlideAnimation(
                                 RotationTransition(
                                     turns: const AlwaysStoppedAnimation(
                                         ModifierDeckWidgetState
@@ -315,7 +315,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                 userScalingBars)
                             : Container(),
                         deck.discardPileIsNotEmpty
-                            ? _buildDrawAnimation( // ignore: avoid-returning-widgets, animation helper
+                            ? _buildDrawAnimation(
                                 ModifierCardWidget(
                                   name: deck.name,
                                   key: Key(widgetKey),
@@ -540,7 +540,10 @@ class _ModifierDrawAnimationWidgetState
     final translation = _translation;
     final scale = _scale;
     final rotation = _rotation;
-    if (controller == null || translation == null || scale == null || rotation == null) {
+    if (controller == null ||
+        translation == null ||
+        scale == null ||
+        rotation == null) {
       return widget.child;
     }
     return RepaintBoundary(

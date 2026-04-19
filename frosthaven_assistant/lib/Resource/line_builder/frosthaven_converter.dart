@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/line_builder/line_builder.dart';
 
 class FrosthavenConverter {
-  static const int _kColorRadix = 16;
   static const int _kBossStatCardColor = 0x45D2D2D2;
   static const int _kStatCardColor = 0x9A808080;
   static const double _kBoxBorderRadius = 6.0;
@@ -201,8 +200,7 @@ class FrosthavenConverter {
     return retVal;
   }
 
-  static bool shouldOverflow(
-      bool frosthavenStyle, String iconToken) {
+  static bool shouldOverflow(bool frosthavenStyle, String iconToken) {
     return /*!mainLine &&*/ frosthavenStyle &&
         ((iconToken == "pierce" ||
             iconToken == "brittle" ||
@@ -289,14 +287,19 @@ class FrosthavenConverter {
             color: conditional
                 ? Colors.blue
                 : Color(bossStatCard ? _kBossStatCardColor : _kStatCardColor),
-            borderRadius: BorderRadius.all(Radius.circular(_kBoxBorderRadius * scale))),
+            borderRadius:
+                BorderRadius.all(Radius.circular(_kBoxBorderRadius * scale))),
         padding: EdgeInsets.fromLTRB(
-            _kBoxPaddingLeft * scale, _kBoxPaddingTop * scale, _kBoxPaddingRight * scale, _kBoxPaddingBottom * scale),
-        margin: EdgeInsets.only(left: _kBoxMarginH * scale, right: _kBoxMarginH * scale),
+            _kBoxPaddingLeft * scale,
+            _kBoxPaddingTop * scale,
+            _kBoxPaddingRight * scale,
+            _kBoxPaddingBottom * scale),
+        margin: EdgeInsets.only(
+            left: _kBoxMarginH * scale, right: _kBoxMarginH * scale),
         //child: Expanded(
-        child: Column(mainAxisSize: MainAxisSize.max, children: [
-          ...list2.map((row) => Row(children: row))
-        ]));
+        child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [...list2.map((row) => Row(children: row))]));
 
     Widget row = Row(
       mainAxisSize: MainAxisSize.max,
@@ -340,7 +343,8 @@ class FrosthavenConverter {
         retVal.addAll(getAllImagesInWidget(item));
       }
     } else if (widget is Container && widget.child != null) {
-      retVal.addAll(getAllImagesInWidget(widget.child ?? const SizedBox.shrink()));
+      retVal.addAll(
+          getAllImagesInWidget(widget.child ?? const SizedBox.shrink()));
     } else if (widget is Image) {
       final label = widget.semanticLabel;
       if (label != null) retVal.add(label);
@@ -420,18 +424,25 @@ class FrosthavenConverter {
                     //these are closer to the real values, but looks bad on small scale
                     //dashPattern: [1.2 * scale, 0.5 * scale], //1.2 && 0.5
                     //strokeWidth: 0.5 * scale, //0.4
-                    dashPattern: [_kDashPattern1 * scale, _kDashPattern2 * scale],
+                    dashPattern: [
+                      _kDashPattern1 * scale,
+                      _kDashPattern2 * scale
+                    ],
                     strokeWidth: _kStrokeWidth * scale,
                   ),
                   child: Container(
                       decoration: BoxDecoration(
                           //backgroundBlendMode: BlendMode.softLight,
                           //border: Border.fromBorderSide(BorderSide(style: BorderStyle.solid, color: Colors.white)),
-                          color: Color(bossStatCard ? _kBossStatCardColor : _kStatCardColor),
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(_kDottedBorderRadius * scale))),
+                          color: Color(bossStatCard
+                              ? _kBossStatCardColor
+                              : _kStatCardColor),
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(_kDottedBorderRadius * scale))),
                       padding: EdgeInsets.fromLTRB(
-                          elementUse ? _kPaddingUseLeft * scale : _kPaddingNoUseLeft * scale,
+                          elementUse
+                              ? _kPaddingUseLeft * scale
+                              : _kPaddingNoUseLeft * scale,
                           _kPaddingTop2 * scale,
                           rightMargin,
                           _kBoxPaddingBottom * scale),

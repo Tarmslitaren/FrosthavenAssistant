@@ -36,7 +36,8 @@ class MonsterWidgetState extends State<MonsterWidget> {
   static const double _kMarginH = 3.2;
 
   MonsterWidgetViewModel? _vmInstance;
-  MonsterWidgetViewModel get _vm => _vmInstance ??= MonsterWidgetViewModel(widget.data, gameState: widget.gameState);
+  MonsterWidgetViewModel get _vm => _vmInstance ??=
+      MonsterWidgetViewModel(widget.data, gameState: widget.gameState);
   List<MonsterInstance> lastList = [];
 
   @override
@@ -93,7 +94,8 @@ class MonsterWidgetState extends State<MonsterWidget> {
     return RepaintBoundary(
         child: Stack(alignment: Alignment.bottomCenter, children: [
       Container(
-          margin: EdgeInsets.only(bottom: _kImageMarginV * scale, top: _kImageMarginV * scale),
+          margin: EdgeInsets.only(
+              bottom: _kImageMarginV * scale, top: _kImageMarginV * scale),
           child: PhysicalShape(
             color: _vm.turnState == TurnsState.current
                 ? Colors.tealAccent
@@ -115,7 +117,8 @@ class MonsterWidgetState extends State<MonsterWidget> {
       Container(
           width: height * _kNameWidthRatio,
           alignment: Alignment.bottomCenter,
-          margin: EdgeInsets.only(bottom: _vm.frosthavenStyle ? _kNameMarginBottom * scale : 0),
+          margin: EdgeInsets.only(
+              bottom: _vm.frosthavenStyle ? _kNameMarginBottom * scale : 0),
           child: Text(
             textAlign: TextAlign.center,
             widget.data.type.display,
@@ -125,7 +128,8 @@ class MonsterWidgetState extends State<MonsterWidget> {
                 fontSize: _kFontSize * scale,
                 shadows: [
                   Shadow(
-                    offset: Offset(_kShadowOffset * scale, _kShadowOffset * scale),
+                    offset:
+                        Offset(_kShadowOffset * scale, _kShadowOffset * scale),
                     color: Colors.black87,
                     blurRadius: _kShadowBlur * scale,
                   )
@@ -158,8 +162,8 @@ class MonsterWidgetState extends State<MonsterWidget> {
                               onTap: () {
                                 _vm.endTurn();
                               },
-                              child: _buildImagePart(height, scale)) // ignore: avoid-returning-widgets, internal layout helper
-                          : _buildImagePart(height, scale), // ignore: avoid-returning-widgets, internal layout helper
+                              child: _buildImagePart(height, scale))
+                          : _buildImagePart(height, scale),
                       RepaintBoundary(
                           child: MonsterAbilityCardWidget(data: widget.data)),
                       RepaintBoundary(
@@ -168,12 +172,13 @@ class MonsterWidgetState extends State<MonsterWidget> {
                   ),
                 )),
             Container(
-              margin: EdgeInsets.only(left: _kMarginH * scale, right: _kMarginH * scale),
+              margin: EdgeInsets.only(
+                  left: _kMarginH * scale, right: _kMarginH * scale),
               width: getMainListWidth(context) - _kMarginH * scale,
               child: ValueListenableBuilder<BuiltList<MonsterInstance>>(
                   valueListenable: _vm.monsterInstancesNotifier,
                   builder: (context, value, child) {
-                    return _buildMonsterBoxGrid(scale); // ignore: avoid-returning-widgets, internal layout helper
+                    return _buildMonsterBoxGrid(scale);
                   }),
             ),
           ]));

@@ -44,7 +44,7 @@ class ModifierCardWidget extends StatelessWidget {
   final revealed = ValueNotifier<bool>(false);
   final String name;
 
-  Widget transitionBuilder(Widget widget, Animation<double> animation) { // ignore: avoid-returning-widgets, required AnimatedSwitcher callback signature
+  Widget transitionBuilder(Widget widget, Animation<double> animation) {
     final rotateAnim = Tween(begin: pi, end: 0.0).animate(animation);
     return AnimatedBuilder(
         animation: rotateAnim,
@@ -130,7 +130,8 @@ class ModifierCardFront extends StatelessWidget {
             : character.characterClass.perks;
         gfx = gfx.substring(1);
         if (gfx.endsWith("-2")) {
-          gfx = gfx.substring(0, gfx.length - ModifierCardWidget._kPerkSuffixLength);
+          gfx = gfx.substring(
+              0, gfx.length - ModifierCardWidget._kPerkSuffixLength);
           final int? index = int.tryParse(gfx);
           if (index != null &&
               index >= 0 &&
@@ -152,49 +153,58 @@ class ModifierCardFront extends StatelessWidget {
 
     gfx = "assets/images/attack/$gfx.png";
 
-    return RepaintBoundary(child: Container(
-        width: ModifierCardWidget._kCardWidth * scale,
-        height: ModifierCardWidget._kCardHeight * scale,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black45,
-              blurRadius: ModifierCardWidget._kShadowBlur * scale,
-              offset: Offset(ModifierCardWidget._kShadowOffsetX * scale, ModifierCardWidget._kShadowOffsetY * scale), // Shadow position
-            ),
-          ],
-        ),
-        child: Stack(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(ModifierCardWidget._kBorderRadius * scale)),
-              child: Image(
-                fit: BoxFit.fitHeight,
-                image: AssetImage(gfx),
-              ),
-            ),
-            if (hasExtra)
-              Positioned(
-                height: ModifierCardWidget._kMarkerBgSize * scale,
-                width: ModifierCardWidget._kMarkerBgSize * scale,
-                top: ModifierCardWidget._kMarkerTopNumerator * scale / ModifierCardWidget._kMarkerBgTopDivisor,
-                left: ModifierCardWidget._kMarkerBgLeft * scale,
-                child: Image.asset(
-                    'assets/images/attack/class-marker-background.png'),
-              ),
-            if (hasExtra)
-              Positioned(
-                height: ModifierCardWidget._kMarkerIconSize * scale,
-                width: ModifierCardWidget._kMarkerIconSize * scale,
-                top: ModifierCardWidget._kMarkerIconTopNumerator * scale / ModifierCardWidget._kMarkerBgTopDivisor,
-                left: ModifierCardWidget._kMarkerIconLeft * scale,
-                child: Image(
-                  color: Colors.white,
-                  image: AssetImage(extraGfx),
+    return RepaintBoundary(
+        child: Container(
+            width: ModifierCardWidget._kCardWidth * scale,
+            height: ModifierCardWidget._kCardHeight * scale,
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black45,
+                  blurRadius: ModifierCardWidget._kShadowBlur * scale,
+                  offset: Offset(
+                      ModifierCardWidget._kShadowOffsetX * scale,
+                      ModifierCardWidget._kShadowOffsetY *
+                          scale), // Shadow position
                 ),
-              ),
-          ],
-        )));
+              ],
+            ),
+            child: Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(
+                      ModifierCardWidget._kBorderRadius * scale)),
+                  child: Image(
+                    fit: BoxFit.fitHeight,
+                    image: AssetImage(gfx),
+                  ),
+                ),
+                if (hasExtra)
+                  Positioned(
+                    height: ModifierCardWidget._kMarkerBgSize * scale,
+                    width: ModifierCardWidget._kMarkerBgSize * scale,
+                    top: ModifierCardWidget._kMarkerTopNumerator *
+                        scale /
+                        ModifierCardWidget._kMarkerBgTopDivisor,
+                    left: ModifierCardWidget._kMarkerBgLeft * scale,
+                    child: Image.asset(
+                        'assets/images/attack/class-marker-background.png'),
+                  ),
+                if (hasExtra)
+                  Positioned(
+                    height: ModifierCardWidget._kMarkerIconSize * scale,
+                    width: ModifierCardWidget._kMarkerIconSize * scale,
+                    top: ModifierCardWidget._kMarkerIconTopNumerator *
+                        scale /
+                        ModifierCardWidget._kMarkerBgTopDivisor,
+                    left: ModifierCardWidget._kMarkerIconLeft * scale,
+                    child: Image(
+                      color: Colors.white,
+                      image: AssetImage(extraGfx),
+                    ),
+                  ),
+              ],
+            )));
   }
 }
 
@@ -220,50 +230,55 @@ class ModifierCardRear extends StatelessWidget {
       extraGfx = 'assets/images/class-icons/$name.png';
     }
 
-    return RepaintBoundary(child: Container(
-        width: ModifierCardWidget._kCardWidth * scale,
-        height: ModifierCardWidget._kCardHeight * scale,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black45,
-              blurRadius: ModifierCardWidget._kShadowBlur * scale,
-              offset: Offset(ModifierCardWidget._kShadowOffsetX * scale, ModifierCardWidget._kShadowOffsetY * scale), // Shadow position
-            ),
-          ],
-        ),
-        child: Stack(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(ModifierCardWidget._kBorderRadius * scale)),
-              child: Image(
-                fit: BoxFit.fitHeight,
-                image: const AssetImage("assets/images/attack/back.png"),
-              ),
-            ),
-            if (hasExtra)
-              Positioned(
-                height: ModifierCardWidget._kRearMarkerBgSize * scale,
-                width: ModifierCardWidget._kRearMarkerBgSize * scale,
-                top: ModifierCardWidget._kRearMarkerBgTop * scale,
-                left: ModifierCardWidget._kRearMarkerBgLeft * scale,
-                child: Image(
-                  image: AssetImage(
-                      'assets/images/attack/class-marker-background.png'),
+    return RepaintBoundary(
+        child: Container(
+            width: ModifierCardWidget._kCardWidth * scale,
+            height: ModifierCardWidget._kCardHeight * scale,
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black45,
+                  blurRadius: ModifierCardWidget._kShadowBlur * scale,
+                  offset: Offset(
+                      ModifierCardWidget._kShadowOffsetX * scale,
+                      ModifierCardWidget._kShadowOffsetY *
+                          scale), // Shadow position
                 ),
-              ),
-            if (hasExtra)
-              Positioned(
-                height: ModifierCardWidget._kRearMarkerIconSize * scale,
-                width: ModifierCardWidget._kRearMarkerIconSize * scale,
-                top: ModifierCardWidget._kRearMarkerIconTop * scale,
-                left: ModifierCardWidget._kRearMarkerIconLeft * scale,
-                child: Image(
-                  color: Colors.white,
-                  image: AssetImage(extraGfx),
+              ],
+            ),
+            child: Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(
+                      ModifierCardWidget._kBorderRadius * scale)),
+                  child: Image(
+                    fit: BoxFit.fitHeight,
+                    image: const AssetImage("assets/images/attack/back.png"),
+                  ),
                 ),
-              ),
-          ],
-        )));
+                if (hasExtra)
+                  Positioned(
+                    height: ModifierCardWidget._kRearMarkerBgSize * scale,
+                    width: ModifierCardWidget._kRearMarkerBgSize * scale,
+                    top: ModifierCardWidget._kRearMarkerBgTop * scale,
+                    left: ModifierCardWidget._kRearMarkerBgLeft * scale,
+                    child: Image(
+                      image: AssetImage(
+                          'assets/images/attack/class-marker-background.png'),
+                    ),
+                  ),
+                if (hasExtra)
+                  Positioned(
+                    height: ModifierCardWidget._kRearMarkerIconSize * scale,
+                    width: ModifierCardWidget._kRearMarkerIconSize * scale,
+                    top: ModifierCardWidget._kRearMarkerIconTop * scale,
+                    left: ModifierCardWidget._kRearMarkerIconLeft * scale,
+                    child: Image(
+                      color: Colors.white,
+                      image: AssetImage(extraGfx),
+                    ),
+                  ),
+              ],
+            )));
   }
 }

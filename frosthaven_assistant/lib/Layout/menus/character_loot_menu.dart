@@ -15,15 +15,21 @@ class CharacterLootMenu extends StatefulWidget {
 class CharacterLootMenuState extends State<CharacterLootMenu> {
   static const int _kCoinValue3 = 3;
   static const int _kCoinValue2 = 2;
-  static const double _kIconSize = 30.0;
   static const double _kTopSpacing = 20.0;
   static const List<String> _kLootNames = [
-    "coin", "hide", "lumber", "metal", "arrowvine", "axenut",
-    "corpsecap", "flamefruit", "rockroot", "snowthistle",
+    "coin",
+    "hide",
+    "lumber",
+    "metal",
+    "arrowvine",
+    "axenut",
+    "corpsecap",
+    "flamefruit",
+    "rockroot",
+    "snowthistle",
   ];
 
   final GameState _gameState = getIt<GameState>();
-
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +51,8 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
                       for (Character character in characters)
                         _CharacterLootWidget(
                             characterId: character.characterClass.id,
-                            characterName: character.characterState.display.value,
+                            characterName:
+                                character.characterState.display.value,
                             gameState: _gameState),
                       const SizedBox(
                         height: kMenuCloseButtonSpacing,
@@ -107,8 +114,8 @@ class _CharacterLootWidget extends StatelessWidget {
                 style: kTitleStyle,
               )
             ]),
-        ...CharacterLootMenuState._kLootNames.map( // ignore: avoid-returning-widgets, widget generator lambda
-            (name) => _LootListTile(lootName: name, characterId: characterId, gameState: gameState)),
+        ...CharacterLootMenuState._kLootNames.map((name) => _LootListTile(
+            lootName: name, characterId: characterId, gameState: gameState)),
       ]),
     );
   }

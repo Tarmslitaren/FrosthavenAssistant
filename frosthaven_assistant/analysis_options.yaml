@@ -7,8 +7,6 @@
 
 #dcm plugin
 dart_code_metrics:
-  extends:
-    - recommended
   rules:
 
     #common
@@ -62,8 +60,6 @@ dart_code_metrics:
     #Warns when a property access or a method invocation start with duplicated chains of other invocations / accesses inside a single function or method block
     prefer-correct-test-file-name: true
     #Warns if the file within /test contains a main, but the file name doesn't end with _test.dart
-    prefer-abstract-final-static-class: true
-    #Suggests adding abstract final to classes with only static members to avoid them being instantiated or being used in inheritance
     prefer-async-await: true
     #Recommends to use async/await syntax to handle a Future result instead of .then() invocation
     prefer-commenting-analyzer-ignores: true

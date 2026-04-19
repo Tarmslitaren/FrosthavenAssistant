@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:frosthaven_assistant/Layout/condition_icon.dart';
+import 'package:frosthaven_assistant/Resource/app_constantscon.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../Resource/color_matrices.dart';
@@ -93,8 +93,7 @@ class MonsterBox extends StatelessWidget {
 
   final MonsterInstance data;
 
-  List<Widget> _createConditionList(
-      double scale, MonsterBoxViewModel vm) {
+  List<Widget> _createConditionList(double scale, MonsterBoxViewModel vm) {
     final owner = vm.ownerItem;
     if (owner == null) return [];
     return data.conditions.value
@@ -108,8 +107,7 @@ class MonsterBox extends StatelessWidget {
         .toList();
   }
 
-  Widget _buildInternal(
-      double scale, double width, MonsterBoxViewModel vm) {
+  Widget _buildInternal(double scale, double width, MonsterBoxViewModel vm) {
     final color = vm.color;
     String imagePath = "assets/images/tombstone.png";
     if (data.type == MonsterType.summon) {
@@ -158,7 +156,8 @@ class MonsterBox extends StatelessWidget {
                     BoxShadow(
                       color: Colors.black45,
                       blurRadius: _kBoxShadowBlur * scale,
-                      offset: Offset(_kBoxShadowOffsetX * scale, _kBoxShadowOffsetY * scale),
+                      offset: Offset(_kBoxShadowOffsetX * scale,
+                          _kBoxShadowOffsetY * scale),
                     ),
                   ],
                 ),
@@ -174,7 +173,9 @@ class MonsterBox extends StatelessWidget {
                   ),
                   Container(
                     margin: EdgeInsets.only(
-                        left: _kImageMarginLeft * scale, top: _kImageMarginTop * scale, bottom: _kImageMarginBottom * scale),
+                        left: _kImageMarginLeft * scale,
+                        top: _kImageMarginTop * scale,
+                        bottom: _kImageMarginBottom * scale),
                     child: Image(
                       height: _kImageHeight * scale,
                       width: _kImageWidth * scale,
@@ -196,7 +197,9 @@ class MonsterBox extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    left: health > _kHealthLargeThreshold ? _kHealthLeftLarge * scale : _kHealthLeftSmall * scale,
+                    left: health > _kHealthLargeThreshold
+                        ? _kHealthLeftLarge * scale
+                        : _kHealthLeftSmall * scale,
                     top: 0,
                     child: Container(
                         padding: EdgeInsets.zero,
@@ -206,11 +209,12 @@ class MonsterBox extends StatelessWidget {
                             Image(
                               color: Colors.red,
                               height: _kBloodIconHeight * scale,
-                              image: const AssetImage(
-                                  "assets/images/blood.png"),
+                              image:
+                                  const AssetImage("assets/images/blood.png"),
                             ),
                             Container(
-                              margin: EdgeInsets.only(bottom: _kHealthMarginBottom * scale),
+                              margin: EdgeInsets.only(
+                                  bottom: _kHealthMarginBottom * scale),
                               width: health > _kHealthLargeThreshold
                                   ? _kHealthWidthLarge * scale
                                   : _kHealthWidthSmall * scale,
@@ -243,8 +247,7 @@ class MonsterBox extends StatelessWidget {
                                       alignment: WrapAlignment.center,
                                       crossAxisAlignment:
                                           WrapCrossAlignment.center,
-                                      children: _createConditionList( // ignore: avoid-returning-widgets, list-returning helper for Wrap children
-                                          scale, vm),
+                                      children: _createConditionList(scale, vm),
                                     ));
                               }),
                         ])),
@@ -260,21 +263,19 @@ class MonsterBox extends StatelessWidget {
                           valueListenable: data.maxHealth,
                           builder: (context, value, child) {
                             return FAProgressBar(
-                              currentValue:
-                                  data.health.value.toDouble(),
+                              currentValue: data.health.value.toDouble(),
                               maxValue: data.maxHealth.value.toDouble(),
                               size: _kProgressBarSize * scale,
                               direction: Axis.horizontal,
-                              borderRadius: const BorderRadius.all(
-                                  Radius.circular(0)),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(0)),
                               border: Border.all(
                                 color: Colors.black,
                                 width: _kProgressBarBorderWidth * scale,
                               ),
                               backgroundColor: Colors.black,
                               progressColor: Colors.red,
-                              changeColorValue:
-                                  (data.maxHealth.value).toInt(),
+                              changeColorValue: (data.maxHealth.value).toInt(),
                               changeProgressColor: Colors.green,
                             );
                           }))
@@ -298,7 +299,7 @@ class MonsterBox extends StatelessWidget {
               builder: (context, value, child) {
                 final alive = vm.isAlive;
                 final double offset = -_kAnimationOffset * scale;
-                final child = _buildInternal(scale, width, vm); // ignore: avoid-returning-widgets, internal layout helper
+                final child = _buildInternal(scale, width, vm);
 
                 if (displayStartAnimation != figureId) {
                   return TweenAnimationBuilder<Offset>(
@@ -308,10 +309,11 @@ class MonsterBox extends StatelessWidget {
                             ? Offset(0, -offset)
                             : Offset.zero,
                       ),
-                      duration: const Duration(milliseconds: _kFlipAnimationDurationMs),
+                      duration: const Duration(
+                          milliseconds: _kFlipAnimationDurationMs),
                       curve: Curves.linear,
-                      builder: (context, translation, _) =>
-                          Transform.translate(offset: translation, child: child));
+                      builder: (context, translation, _) => Transform.translate(
+                          offset: translation, child: child));
                 }
 
                 return TweenAnimationBuilder<Offset>(
@@ -319,16 +321,17 @@ class MonsterBox extends StatelessWidget {
                       begin: Offset(0, alive ? offset : 0),
                       end: Offset(0, alive ? 0 : -offset),
                     ),
-                    duration: const Duration(milliseconds: _kFlipAnimationDurationMs),
+                    duration:
+                        const Duration(milliseconds: _kFlipAnimationDurationMs),
                     curve: Curves.linear,
-                    builder: (context, translation, _) =>
-                        Transform.translate(
-                            offset: translation,
-                            child: AnimatedOpacity(
-                              opacity: alive ? 1.0 : 0.0,
-                              duration: const Duration(milliseconds: _kFlipAnimationDurationMs),
-                              child: child,
-                            )));
+                    builder: (context, translation, _) => Transform.translate(
+                        offset: translation,
+                        child: AnimatedOpacity(
+                          opacity: alive ? 1.0 : 0.0,
+                          duration: const Duration(
+                              milliseconds: _kFlipAnimationDurationMs),
+                          child: child,
+                        )));
               })),
     );
 
