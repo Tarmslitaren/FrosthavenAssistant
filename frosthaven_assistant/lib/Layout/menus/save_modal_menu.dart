@@ -7,10 +7,11 @@ import '../../services/service_locator.dart';
 
 class SaveModalMenu extends StatefulWidget {
   const SaveModalMenu(
-      {super.key, required this.saveName, required this.saveOnly});
+      {super.key, required this.saveName, required this.saveOnly, this.settings});
 
   final bool saveOnly;
   final String saveName;
+  final Settings? settings;
 
   @override
   SaveModalMenuState createState() => SaveModalMenuState();
@@ -25,6 +26,7 @@ class SaveModalMenuState extends State<SaveModalMenu> {
   static const double _kNameSpacing = 20.0;
   static const double _kNameFieldWidth = 200.0;
 
+  late final Settings _settings;
   final TextEditingController nameController = TextEditingController();
   final FocusNode focusNode = FocusNode();
 
@@ -32,6 +34,7 @@ class SaveModalMenuState extends State<SaveModalMenu> {
 
   @override
   initState() {
+    _settings = widget.settings ?? getIt<Settings>();
     // at the beginning, all items are shown
     super.initState();
     _newSaveName = widget.saveName;
@@ -58,8 +61,6 @@ class SaveModalMenuState extends State<SaveModalMenu> {
   Widget build(BuildContext context) {
     double scale = getModalMenuScale(context);
 
-    Settings settings = getIt<Settings>();
-
     final ButtonStyle buttonStyle = OutlinedButton.styleFrom(
       side: BorderSide(width: _kBorderWidth * scale, color: Colors.blue),
     );
@@ -85,7 +86,7 @@ class SaveModalMenuState extends State<SaveModalMenu> {
                       OutlinedButton(
                         style: buttonStyle,
                         onPressed: () {
-                          settings.loadSave(widget.saveName);
+                          _settings.loadSave(widget.saveName);
                           Navigator.pop(context);
                           Navigator.pop(context);
                         },
@@ -97,8 +98,8 @@ class SaveModalMenuState extends State<SaveModalMenu> {
                     OutlinedButton(
                       style: buttonStyle,
                       onPressed: () {
-                        settings.deleteSave(widget.saveName);
-                        settings.saveState(_newSaveName);
+                        _settings.deleteSave(widget.saveName);
+                        _settings.saveState(_newSaveName);
                         Navigator.pop(context);
                         Navigator.pop(context);
                       },
@@ -111,7 +112,7 @@ class SaveModalMenuState extends State<SaveModalMenu> {
                       OutlinedButton(
                         style: buttonStyle,
                         onPressed: () {
-                          settings.deleteSave(widget.saveName);
+                          _settings.deleteSave(widget.saveName);
                           Navigator.pop(context);
                         },
                         child: Text("Delete", style: getButtonTextStyle(scale)),

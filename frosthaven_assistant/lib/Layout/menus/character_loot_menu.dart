@@ -6,7 +6,9 @@ import '../../Resource/game_methods.dart';
 import '../../services/service_locator.dart';
 
 class CharacterLootMenu extends StatefulWidget {
-  const CharacterLootMenu({super.key});
+  const CharacterLootMenu({super.key, this.gameState});
+
+  final GameState? gameState;
 
   @override
   CharacterLootMenuState createState() => CharacterLootMenuState();
@@ -29,7 +31,13 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
     "snowthistle",
   ];
 
-  final GameState _gameState = getIt<GameState>();
+  late final GameState _gameState;
+
+  @override
+  void initState() {
+    _gameState = widget.gameState ?? getIt<GameState>();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

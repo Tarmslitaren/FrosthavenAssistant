@@ -67,10 +67,11 @@ class AddLootCardMenu extends StatelessWidget {
 }
 
 class LootCardListTile extends StatefulWidget {
-  const LootCardListTile({super.key, required this.name, required this.index});
+  const LootCardListTile({super.key, required this.name, required this.index, this.gameState});
 
   final String name;
   final int index;
+  final GameState? gameState;
 
   @override
   State<StatefulWidget> createState() => LootCardListTileState();
@@ -81,8 +82,13 @@ class LootCardListTileState extends State<LootCardListTile> {
   static const double _kContentPaddingLeft = 14.0;
   static const double _kHorizontalTitleGap = 6.0;
 
-  final GameState _gameState = getIt<GameState>();
+  late final GameState _gameState;
 
+  @override
+  void initState() {
+    _gameState = widget.gameState ?? getIt<GameState>();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

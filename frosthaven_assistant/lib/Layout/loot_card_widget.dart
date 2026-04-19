@@ -27,11 +27,12 @@ class LootCardWidget extends StatelessWidget {
   static const double _kOwnerIconRight = 2.0;
   static const double _kHalfPi = pi / 2;
 
-  LootCardWidget({super.key, required this.card, required bool revealed}) {
+  LootCardWidget({super.key, required this.card, required bool revealed, this.settings}) {
     this.revealed.value = revealed;
   }
 
   final LootCard card;
+  final Settings? settings;
   final revealed = ValueNotifier<bool>(false);
 
   Widget transitionBuilder(Widget widget, Animation<double> animation) {
@@ -51,7 +52,7 @@ class LootCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Settings settings = getIt<Settings>();
+    final settings = this.settings ?? getIt<Settings>();
     return revealed.value
         ? LootCardFront(card: card, scale: settings.userScalingBars.value)
         : LootCardRear(scale: settings.userScalingBars.value);

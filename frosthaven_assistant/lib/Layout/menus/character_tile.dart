@@ -11,11 +11,13 @@ class CharacterTile extends StatelessWidget {
       {super.key,
       required this.character,
       required this.onSelect,
-      this.disabled = false});
+      this.disabled = false,
+      this.gameState});
 
   final CharacterClass character;
   final void Function(CharacterClass) onSelect;
   final bool disabled;
+  final GameState? gameState;
   void _handleAddCharacter() {
     if (!disabled) {
       onSelect(character);
@@ -24,8 +26,9 @@ class CharacterTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final gameState = this.gameState ?? getIt<GameState>();
     bool characterUnlocked =
-        getIt<GameState>().unlockedClasses.contains(character.id);
+        gameState.unlockedClasses.contains(character.id);
 
     return ListTile(
       leading: Image.asset(

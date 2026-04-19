@@ -12,12 +12,14 @@ class SaveCharacterModalMenu extends StatefulWidget {
       required this.saveName,
       required this.saveOnly,
       required this.saveId,
-      required this.character});
+      required this.character,
+      this.settings});
 
   final String saveId;
   final bool saveOnly;
   final String saveName;
   final Character? character;
+  final Settings? settings;
 
   @override
   SaveCharacterModalMenuState createState() => SaveCharacterModalMenuState();
@@ -32,6 +34,7 @@ class SaveCharacterModalMenuState extends State<SaveCharacterModalMenu> {
   static const double _kNameSpacing = 20.0;
   static const double _kNameFieldWidth = 200.0;
 
+  late final Settings _settings;
   final TextEditingController nameController = TextEditingController();
   final FocusNode focusNode = FocusNode();
 
@@ -39,6 +42,7 @@ class SaveCharacterModalMenuState extends State<SaveCharacterModalMenu> {
 
   @override
   initState() {
+    _settings = widget.settings ?? getIt<Settings>();
     // at the beginning, all items are shown
     super.initState();
     _newSaveName = widget.saveName;
@@ -64,8 +68,6 @@ class SaveCharacterModalMenuState extends State<SaveCharacterModalMenu> {
   @override
   Widget build(BuildContext context) {
     double scale = getModalMenuScale(context);
-
-    Settings settings = getIt<Settings>();
 
     final ButtonStyle buttonStyle = OutlinedButton.styleFrom(
       side: BorderSide(width: _kBorderWidth * scale, color: Colors.blue),
@@ -94,7 +96,7 @@ class SaveCharacterModalMenuState extends State<SaveCharacterModalMenu> {
                       OutlinedButton(
                         style: buttonStyle,
                         onPressed: () {
-                          settings.loadCharacterSave(widget.saveId);
+                          _settings.loadCharacterSave(widget.saveId);
                           Navigator.pop(context);
                           Navigator.pop(context);
                         },
@@ -107,8 +109,8 @@ class SaveCharacterModalMenuState extends State<SaveCharacterModalMenu> {
                       OutlinedButton(
                         style: buttonStyle,
                         onPressed: () {
-                          settings.deleteCharacterSave(widget.saveId);
-                          settings.saveCharacterState(_newSaveName, character);
+                          _settings.deleteCharacterSave(widget.saveId);
+                          _settings.saveCharacterState(_newSaveName, character);
                           Navigator.pop(context);
                         },
                         child: Text("Save", style: getButtonTextStyle(scale)),
@@ -120,7 +122,7 @@ class SaveCharacterModalMenuState extends State<SaveCharacterModalMenu> {
                       OutlinedButton(
                         style: buttonStyle,
                         onPressed: () {
-                          settings.deleteCharacterSave(widget.saveId);
+                          _settings.deleteCharacterSave(widget.saveId);
                           Navigator.pop(context);
                         },
                         child: Text("Delete", style: getButtonTextStyle(scale)),

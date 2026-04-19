@@ -13,13 +13,15 @@ class CharacterXPWidget extends StatelessWidget {
       {super.key,
       required this.character,
       required this.scale,
-      required this.shadow});
+      required this.shadow,
+      this.gameState});
   final Character character;
   final double scale;
   final Shadow shadow;
+  final GameState? gameState;
   @override
   Widget build(BuildContext context) {
-    final gameState = getIt<GameState>();
+    final gameState = this.gameState ?? getIt<GameState>();
     return GestureDetector(
         onTap: () {
           gameState.action(ChangeXPCommand(1, character.id, character.id,

@@ -13,11 +13,13 @@ class TopBar extends StatelessWidget {
   static const double _kFlexibleHeight = 42.0;
   static const double _kDarkModeOpacity = 0.4;
 
-  const TopBar({super.key});
+  const TopBar({super.key, this.settings});
+
+  final Settings? settings;
 
   @override
   Widget build(BuildContext context) {
-    Settings settings = getIt<Settings>();
+    final settings = this.settings ?? getIt<Settings>();
     return ValueListenableBuilder<double>(
         valueListenable: settings.userScalingBars,
         builder: (context, value, child) {

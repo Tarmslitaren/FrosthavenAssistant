@@ -23,9 +23,9 @@ class DataLoadedNotification extends Notification { // ignore: prefer-match-file
 
 class MainState extends State<MyHomePage>
     with WindowListener, WidgetsBindingObserver {
-  final Network _network = getIt<Network>();
-  final Settings _settings = getIt<Settings>();
-  final Client _client = getIt<Client>();
+  late final Network _network;
+  late final Settings _settings;
+  late final Client _client;
 
   @override
   void dispose() {
@@ -88,6 +88,9 @@ class MainState extends State<MyHomePage>
 
   @override
   void initState() {
+    _network = getIt<Network>();
+    _settings = getIt<Settings>();
+    _client = getIt<Client>();
     super.initState();
     WidgetsBinding.instance.addObserver(this);
 

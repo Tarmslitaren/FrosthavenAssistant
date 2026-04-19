@@ -158,12 +158,14 @@ class _LevelButton extends StatelessWidget {
     required this.scale,
     required this.character,
     required this.gameState,
+    this.settings,
   });
 
   final int nr;
   final double scale;
   final Character character;
   final GameState gameState;
+  final Settings? settings;
 
   static const double _kButtonSize = 40.0;
   static const double _kShadowOffset = 1.0;
@@ -176,7 +178,7 @@ class _LevelButton extends StatelessWidget {
         builder: (context, value, child) {
           bool isCurrentlySelected = nr == character.characterState.level.value;
           String text = nr.toString();
-          bool darkMode = getIt<Settings>().darkMode.value;
+          bool darkMode = (settings ?? getIt<Settings>()).darkMode.value;
           Color selectedTextColor = darkMode ? Colors.white : Colors.black;
           Color textColor =
               isCurrentlySelected ? selectedTextColor : Colors.grey;

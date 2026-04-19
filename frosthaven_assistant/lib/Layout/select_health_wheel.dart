@@ -15,6 +15,7 @@ class SelectHealthWheel extends StatefulWidget {
   final String? ownerId;
   final ValueNotifier<double> delta;
   final ValueNotifier<int> time;
+  final GameState? gameState;
 
   const SelectHealthWheel(
       {super.key,
@@ -22,7 +23,8 @@ class SelectHealthWheel extends StatefulWidget {
       required this.figureId,
       required this.ownerId,
       required this.delta,
-      required this.time});
+      required this.time,
+      this.gameState});
 
   @override
   SelectHealthWheelState createState() => SelectHealthWheelState();
@@ -47,13 +49,14 @@ class SelectHealthWheelState extends State<SelectHealthWheel> {
 
   int selected = 0;
   FixedExtentScrollController? scrollController;
-  final GameState _gameState = getIt<GameState>();
+  late final GameState _gameState;
   double currentScrollOffset = 0;
   final double itemExtent = 25;
   bool scrollInited = false;
 
   @override
   void initState() {
+    _gameState = widget.gameState ?? getIt<GameState>();
     super.initState();
     int count = widget.data.maxHealth.value;
     selected = count - (widget.data.maxHealth.value - widget.data.health.value);

@@ -36,13 +36,15 @@ class ModifierCardWidget extends StatelessWidget {
       {super.key,
       required this.card,
       required bool revealed,
-      required this.name}) {
+      required this.name,
+      this.settings}) {
     this.revealed.value = revealed;
   }
 
   final ModifierCard card;
   final revealed = ValueNotifier<bool>(false);
   final String name;
+  final Settings? settings;
 
   Widget transitionBuilder(Widget widget, Animation<double> animation) {
     final rotateAnim = Tween(begin: pi, end: 0.0).animate(animation);
@@ -61,7 +63,7 @@ class ModifierCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userScalingBars = getIt<Settings>().userScalingBars.value;
+    final userScalingBars = (settings ?? getIt<Settings>()).userScalingBars.value;
     return revealed.value
         ? ModifierCardFront(card: card, name: name, scale: userScalingBars)
         : ModifierCardRear(scale: userScalingBars, name: name);
