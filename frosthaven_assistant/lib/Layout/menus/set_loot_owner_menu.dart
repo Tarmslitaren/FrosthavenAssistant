@@ -8,7 +8,7 @@ import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
-class SetLootOwnerMenu extends StatefulWidget {
+class SetLootOwnerMenu extends StatelessWidget {
   static const double _kMenuWidth = 300.0;
   static const double _kMenuHeight = 280.0;
   static const double _kTopSpacing = 20.0;
@@ -28,13 +28,8 @@ class SetLootOwnerMenu extends StatefulWidget {
   // injected for testing
   final Settings? settings;
 
-  @override
-  SetLootOwnerMenuState createState() => SetLootOwnerMenuState();
-}
-
-class SetLootOwnerMenuState extends State<SetLootOwnerMenu> {
-  GameState get _gameState => widget.gameState ?? getIt<GameState>();
-  Settings get _settings => widget.settings ?? getIt<Settings>();
+  GameState get _gameState => gameState ?? getIt<GameState>();
+  Settings get _settings => settings ?? getIt<Settings>();
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +49,7 @@ class SetLootOwnerMenuState extends State<SetLootOwnerMenu> {
             characters.length,
             (i) => _CharacterButton(
                 character: characters[i],
-                card: widget.card,
+                card: card,
                 gameState: _gameState,
                 settings: _settings),
           ),

@@ -9,7 +9,7 @@ import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 import '../modifier_card_widget.dart';
 
-class SendToBottomMenu extends StatefulWidget {
+class SendToBottomMenu extends StatelessWidget {
   const SendToBottomMenu(
       {super.key,
       required this.currentIndex,
@@ -25,11 +25,6 @@ class SendToBottomMenu extends StatefulWidget {
 
   final GameState? gameState;
 
-  @override
-  SendToBottomMenuState createState() => SendToBottomMenuState();
-}
-
-class SendToBottomMenuState extends State<SendToBottomMenu> {
   static const double _kDefaultScale = 6.0;
   static const double _kCardWidthFactor = 7.0;
   static const double _kCardWidthBase = 58.6666;
@@ -37,13 +32,12 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
   static const double _kModalWidth = 300.0;
   static const double _kModalHeight = 140.0;
 
-  GameState get _gameState => widget.gameState ?? getIt<GameState>();
-
+  GameState get _gameState => gameState ?? getIt<GameState>();
 
   @override
   Widget build(BuildContext context) {
-    final deck = GameMethods.getModifierDeck(widget.name, _gameState);
-    final card = deck.drawPileContents[widget.length - 1 - widget.currentIndex];
+    final deck = GameMethods.getModifierDeck(name, _gameState);
+    final card = deck.drawPileContents[length - 1 - currentIndex];
     double scale = _kDefaultScale;
     final cardWidth = _kCardWidthFactor * _kCardWidthBase;
     final screenWidth = MediaQuery.of(context).size.width;
@@ -54,8 +48,7 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (widget.revealed)
-            ModifierCardFront(card: card, name: widget.name, scale: scale),
+          if (revealed) ModifierCardFront(card: card, name: name, scale: scale),
           const SizedBox(
             height: _kSpacing,
           ),
@@ -68,9 +61,9 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
                 ),
                 TextButton(
                     onPressed: () {
-                      int oldIndex = widget.length - 1 - widget.currentIndex;
+                      int oldIndex = length - 1 - currentIndex;
                       _gameState.action(ReorderModifierListCommand(
-                          0, oldIndex, widget.name,
+                          0, oldIndex, name,
                           gameState: _gameState));
                       Navigator.pop(context);
                     },
@@ -81,8 +74,8 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
                 ),
                 TextButton(
                     onPressed: () {
-                      _gameState.action(ShuffleAMDCardCommand(widget.name,
-                          gameState: _gameState));
+                      _gameState.action(
+                          ShuffleAMDCardCommand(name, gameState: _gameState));
                       Navigator.pop(context);
                     },
                     child: const Text("Shuffle un-drawn Cards",

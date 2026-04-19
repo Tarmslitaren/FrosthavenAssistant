@@ -5,7 +5,7 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../../services/service_locator.dart';
 
-class LootCardEnhancementMenu extends StatefulWidget {
+class LootCardEnhancementMenu extends StatelessWidget {
   static const double _kCounterPadding = 3.0;
   static const double _kCounterBorderRadius = 5.0;
   static const double _kIconSize = 32.0;
@@ -36,12 +36,7 @@ class LootCardEnhancementMenu extends StatefulWidget {
 
   final GameState? gameState;
 
-  @override
-  LootCardEnhancementMenuState createState() => LootCardEnhancementMenuState();
-}
-
-class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
-  GameState get _gameState => widget.gameState ?? getIt<GameState>();
+  GameState get _gameState => gameState ?? getIt<GameState>();
 
   LootCard? getCardFromIndex(String type, int index) {
     if (type == "lumber") {

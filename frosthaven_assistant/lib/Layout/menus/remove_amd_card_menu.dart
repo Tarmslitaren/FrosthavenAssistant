@@ -9,7 +9,7 @@ import '../../Resource/game_methods.dart';
 import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
-class RemoveAMDCardMenu extends StatefulWidget {
+class RemoveAMDCardMenu extends StatelessWidget {
   const RemoveAMDCardMenu({
     super.key,
     required this.index,
@@ -22,11 +22,6 @@ class RemoveAMDCardMenu extends StatefulWidget {
 
   final GameState? gameState;
 
-  @override
-  RemoveAMDCardMenuState createState() => RemoveAMDCardMenuState();
-}
-
-class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
   static const double _kDefaultScale = 6.0;
   static const double _kCardWidthFactor = 7.0;
   static const double _kCardWidthBase = 58.6666;
@@ -34,13 +29,12 @@ class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
   static const double _kModalWidth = 300.0;
   static const double _kModalHeight = 180.0;
 
-  GameState get _gameState => widget.gameState ?? getIt<GameState>();
-
+  GameState get _gameState => gameState ?? getIt<GameState>();
 
   @override
   Widget build(BuildContext context) {
-    final deck = GameMethods.getModifierDeck(widget.name, _gameState);
-    final card = deck.discardPileContents[widget.index];
+    final deck = GameMethods.getModifierDeck(name, _gameState);
+    final card = deck.discardPileContents[index];
     final screenSize = MediaQuery.of(context).size;
     double scale = _kDefaultScale;
     final cardWidth = _kCardWidthFactor * _kCardWidthBase;
@@ -51,7 +45,7 @@ class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ModifierCardFront(card: card, name: widget.name, scale: scale),
+          ModifierCardFront(card: card, name: name, scale: scale),
           const SizedBox(
             height: _kSpacing,
           ),
@@ -64,8 +58,7 @@ class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
                 ),
                 TextButton(
                     onPressed: () {
-                      _gameState.action(RemoveAMDCardCommand(
-                          widget.index, widget.name,
+                      _gameState.action(RemoveAMDCardCommand(index, name,
                           gameState: _gameState));
 
                       Navigator.pop(context);
@@ -77,9 +70,8 @@ class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
                 ),
                 TextButton(
                   onPressed: () {
-                    _gameState.action(ReturnModifierCardCommand(widget.name));
-                    final deck =
-                        GameMethods.getModifierDeck(widget.name, _gameState);
+                    _gameState.action(ReturnModifierCardCommand(name));
+                    final deck = GameMethods.getModifierDeck(name, _gameState);
                     //if last card, remove modal
                     if (deck.discardPileIsEmpty) {
                       Navigator.pop(context);

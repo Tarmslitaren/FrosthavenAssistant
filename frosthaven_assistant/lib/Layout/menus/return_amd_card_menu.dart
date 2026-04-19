@@ -8,7 +8,7 @@ import '../../Resource/game_methods.dart';
 import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
-class ReturnAMDCardMenu extends StatefulWidget {
+class ReturnAMDCardMenu extends StatelessWidget {
   const ReturnAMDCardMenu({
     super.key,
     required this.index,
@@ -21,11 +21,6 @@ class ReturnAMDCardMenu extends StatefulWidget {
 
   final GameState? gameState;
 
-  @override
-  RemoveAMDCardMenuState createState() => RemoveAMDCardMenuState();
-}
-
-class RemoveAMDCardMenuState extends State<ReturnAMDCardMenu> {
   static const double _kDefaultScale = 6.0;
   static const double _kCardWidthFactor = 7.0;
   static const double _kCardWidthBase = 58.6666;
@@ -34,13 +29,12 @@ class RemoveAMDCardMenuState extends State<ReturnAMDCardMenu> {
   static const double _kModalHeight = 120.0;
   static const double _kInnerSpacing = 35.0;
 
-  GameState get _gameState => widget.gameState ?? getIt<GameState>();
-
+  GameState get _gameState => gameState ?? getIt<GameState>();
 
   @override
   Widget build(BuildContext context) {
-    final deck = GameMethods.getModifierDeck(widget.name, _gameState);
-    final card = deck.removedPileContents[widget.index];
+    final deck = GameMethods.getModifierDeck(name, _gameState);
+    final card = deck.removedPileContents[index];
     final screenSize = MediaQuery.of(context).size;
     double scale = _kDefaultScale;
     final cardWidth = _kCardWidthFactor * _kCardWidthBase;
@@ -51,7 +45,7 @@ class RemoveAMDCardMenuState extends State<ReturnAMDCardMenu> {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ModifierCardFront(card: card, name: widget.name, scale: scale),
+          ModifierCardFront(card: card, name: name, scale: scale),
           const SizedBox(
             height: _kTopSpacing,
           ),
@@ -64,8 +58,7 @@ class RemoveAMDCardMenuState extends State<ReturnAMDCardMenu> {
                 ),
                 TextButton(
                     onPressed: () {
-                      _gameState.action(ReturnRemovedAMDCardCommand(
-                          widget.index, widget.name,
+                      _gameState.action(ReturnRemovedAMDCardCommand(index, name,
                           gameState: _gameState));
                       Navigator.pop(context);
                     },

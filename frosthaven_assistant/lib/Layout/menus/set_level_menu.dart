@@ -14,7 +14,7 @@ import '../../Resource/state/game_state.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 
-class SetLevelMenu extends StatefulWidget {
+class SetLevelMenu extends StatelessWidget {
   static const double _kButtonSize = 40.0;
   static const double _kButtonBorderRadius = 30.0;
   static const double _kShadowOffset = 1.0;
@@ -53,64 +53,50 @@ class SetLevelMenu extends StatefulWidget {
   final GameState? gameState;
   final Settings? settings;
 
-  @override
-  SetLevelMenuState createState() => SetLevelMenuState();
-}
-
-class SetLevelMenuState extends State<SetLevelMenu> {
-  GameState get _gameState => widget.gameState ?? getIt<GameState>();
-  Settings get _settings => widget.settings ?? getIt<Settings>();
-
-  @override
-  initState() {
-    // at the beginning, all items are shown
-    super.initState();
-  }
+  GameState get _gameState => gameState ?? getIt<GameState>();
+  Settings get _settings => settings ?? getIt<Settings>();
 
   @override
   Widget build(BuildContext context) {
     String title = "Set Scenario Level";
-    final monster = widget.monster;
     if (monster != null) {
-      String name = monster.type.display;
-      if (monster.type.display.endsWith("y")) {
+      String name = monster?.type.display ?? "";
+      if (monster?.type.display.endsWith("y") ?? false) {
         name = "${name.substring(0, name.length - 1)}ie";
       }
       title = "Set $name's level";
     }
     //if summon:
-    bool isSummon = widget.monster == null && widget.figure is MonsterInstance;
+    bool isSummon = monster == null && figure is MonsterInstance;
     if (isSummon) {
-      title = "Set ${(widget.figure as MonsterInstance).name}'s max health";
+      title = "Set ${(figure as MonsterInstance).name}'s max health";
     }
 
     String name = "";
     String ownerId = "";
     String figureId = "";
     if (monster != null) {
-      name = monster.type.display;
-      ownerId = widget.monster?.id ?? "";
-    } else if (widget.figure is CharacterState) {
-      figureId = (widget.figure as CharacterState).display.value;
+      name = monster?.type.display ?? "";
+      ownerId = monster?.id ?? "";
+    } else if (figure is CharacterState) {
+      figureId = (figure as CharacterState).display.value;
       ownerId = name;
     }
-    if (widget.figure is MonsterInstance) {
-      name = (widget.figure as MonsterInstance).name;
-      int nr = (widget.figure as MonsterInstance).standeeNr;
-      String gfx = (widget.figure as MonsterInstance).gfx;
+    if (figure is MonsterInstance) {
+      name = (figure as MonsterInstance).name;
+      int nr = (figure as MonsterInstance).standeeNr;
+      String gfx = (figure as MonsterInstance).gfx;
       figureId = name + gfx + nr.toString();
-      if (widget.characterId != null) {
-        ownerId = widget.characterId ?? "";
+      if (characterId != null) {
+        ownerId = characterId ?? "";
       }
     }
 
-    bool showLegend = widget.figure == null;
+    bool showLegend = figure == null;
 
     bool darkMode = _settings.darkMode.value;
 
     double scale = getModalMenuScale(context);
-
-    final figure = widget.figure;
 
     return ModalBackground(
         width: SetLevelMenu._kMenuWidth * scale,
@@ -133,7 +119,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                     (i) => _LevelButton(
                         nr: SetLevelMenu._kLevelMin + i,
                         scale: scale,
-                        monster: widget.monster,
+                        monster: monster,
                         gameState: _gameState,
                         settings: _settings),
                   ),
@@ -146,7 +132,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                     (i) => _LevelButton(
                         nr: SetLevelMenu._kLevelRow2Start + i,
                         scale: scale,
-                        monster: widget.monster,
+                        monster: monster,
                         gameState: _gameState,
                         settings: _settings),
                   ),
@@ -206,7 +192,8 @@ class SetLevelMenuState extends State<SetLevelMenu> {
               if (figure != null)
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   CounterButton(
-                      notifier: figure.maxHealth,
+                      // ignore: avoid-non-null-assertion, obviously non null
+                      notifier: figure!.maxHealth,
                       command: ChangeMaxHealthCommand(0, figureId, ownerId,
                           gameState: _gameState),
                       maxValue: SetLevelMenu._kMaxHealth,

@@ -8,7 +8,7 @@ import '../../Resource/ui_utils.dart';
 import '../service_locator.dart';
 import 'network.dart';
 
-class NetworkUI extends StatefulWidget {
+class NetworkUI extends StatelessWidget {
   const NetworkUI({super.key, this.network, this.settings, this.client});
 
   // injected for testing
@@ -16,15 +16,9 @@ class NetworkUI extends StatefulWidget {
   final Settings? settings;
   final Client? client;
 
-  @override
-  NetworkUIState createState() => NetworkUIState();
-}
-
-class NetworkUIState extends State<NetworkUI> {
-  Network get _network => widget.network ?? getIt<Network>();
-  Settings get _settings => widget.settings ?? getIt<Settings>();
-  Client get _client => widget.client ?? getIt<Client>();
-
+  Network get _network => network ?? getIt<Network>();
+  Settings get _settings => settings ?? getIt<Settings>();
+  Client get _client => client ?? getIt<Client>();
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +38,7 @@ class NetworkUIState extends State<NetworkUI> {
                   if (_settings.client.value != ClientState.connected &&
                       _settings.lastKnownConnection != "") {
                     _settings.client.value = ClientState.connecting;
-                    unawaited(
-                        _client.connect(_settings.lastKnownConnection));
+                    unawaited(_client.connect(_settings.lastKnownConnection));
                     _settings.saveToDisk();
                   }
                 });
