@@ -21,10 +21,6 @@ class AddMonsterCommand extends Command {
     RoundMethods.addToMainList(stateAccess, null, m);
   }
 
-  @override
-  void onUndo() {
-    _gameState.updateList.notify();
-  }
 
   @override
   String describe() {

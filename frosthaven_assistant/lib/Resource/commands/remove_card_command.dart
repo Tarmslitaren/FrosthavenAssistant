@@ -34,10 +34,6 @@ class RemoveCardCommand extends Command {
     AbilityCardsMenuState.revealedList.clear();
   }
 
-  @override
-  void onUndo() {
-    _gameState.updateList.notify();
-  }
 
   @override
   String describe() {

@@ -112,25 +112,6 @@ void main() {
           1);
     });
 
-    test('undo should not revert adding a condition (as currently implemented)',
-        () {
-      // Arrange
-      final command = AddConditionCommand(
-          Condition.poison, character.id, character.id,
-          gameState: getIt<GameState>());
-      command.execute();
-      final conditionsAfterExecute =
-          List.of(character.characterState.conditions.value);
-
-      // Act
-      command.onUndo();
-
-      // Assert
-      // The undo method is empty, so no change is expected.
-      expect(character.characterState.conditions.value,
-          orderedEquals(conditionsAfterExecute));
-    });
-
     test('describe should return correct string for character', () {
       // Arrange
       final command = AddConditionCommand(

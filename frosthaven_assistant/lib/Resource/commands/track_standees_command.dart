@@ -17,10 +17,6 @@ class TrackStandeesCommand extends Command {
     _handleNoStandeesSettingChange();
   }
 
-  @override
-  void onUndo() {
-    _gameState.updateList.notify();
-  }
 
   @override
   String describe() {

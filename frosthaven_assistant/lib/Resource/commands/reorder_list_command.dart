@@ -14,10 +14,6 @@ class ReorderListCommand extends Command {
     RoundMethods.reorderMainList(stateAccess, newIndex, oldIndex);
   }
 
-  @override
-  void onUndo() {
-    _gameState.updateList.notify();
-  }
 
   @override
   String describe() {

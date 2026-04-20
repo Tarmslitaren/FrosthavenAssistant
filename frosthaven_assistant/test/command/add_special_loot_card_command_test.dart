@@ -76,22 +76,6 @@ void main() {
       // Since no change is expected, we don't call checkSaveState()
     });
 
-    test('undo should not do anything (as currently implemented)', () {
-      // Arrange
-      final command =
-          AddSpecialLootCardCommand(1418, gameState: getIt<GameState>());
-      final lootDeck = getIt<GameState>().lootDeck;
-      command.execute();
-      final cardCountAfterExecute = lootDeck.drawPileSize;
-
-      // Act
-      command.onUndo();
-
-      // Assert
-      // The undo method is empty, so no change is expected.
-      expect(lootDeck.drawPileSize, cardCountAfterExecute);
-    });
-
     test('describe should return correct string', () {
       // Arrange
       final command =

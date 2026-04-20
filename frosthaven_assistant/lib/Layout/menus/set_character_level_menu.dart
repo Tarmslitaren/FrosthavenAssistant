@@ -13,15 +13,13 @@ import '../../services/service_locator.dart';
 import '../counter_button.dart';
 
 class SetCharacterLevelMenu extends StatefulWidget {
-  const SetCharacterLevelMenu({
-    super.key,
-    required this.character,
-    this.gameState,
-  });
+  const SetCharacterLevelMenu(
+      {super.key, required this.character, this.gameState, this.settings});
 
   final Character character;
 
   final GameState? gameState;
+  final Settings? settings;
 
   @override
   SetCharacterLevelMenuState createState() => SetCharacterLevelMenuState();
@@ -36,6 +34,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
   static const double _kNameFieldWidth = 160.0;
 
   GameState get _gameState => widget.gameState ?? getIt<GameState>();
+  Settings get _settings => widget.settings ?? getIt<Settings>();
   final TextEditingController nameController = TextEditingController();
   final FocusNode focusNode = FocusNode();
 
@@ -99,6 +98,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                         nr: i + 1,
                         scale: scale,
                         character: widget.character,
+                        settings: _settings,
                         gameState: _gameState),
                   ),
                 ),
@@ -113,6 +113,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                         nr: _kLevelRow1Count + i + 1,
                         scale: scale,
                         character: widget.character,
+                        settings: _settings,
                         gameState: _gameState),
                   ),
                 ),
@@ -158,7 +159,7 @@ class _LevelButton extends StatelessWidget {
     required this.scale,
     required this.character,
     required this.gameState,
-    this.settings,
+    required this.settings,
   });
 
   final int nr;

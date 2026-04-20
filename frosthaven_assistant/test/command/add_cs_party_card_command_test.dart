@@ -60,22 +60,6 @@ void main() {
       checkSaveState();
     });
 
-    test('undo should not do anything (as currently implemented)', () {
-      // Arrange
-      final command =
-          AddCSPartyCardCommand(character.id, 1, gameState: getIt<GameState>());
-      final modifierDeck = character.characterState.modifierDeck;
-      command.execute();
-      final cardCountAfterExecute = modifierDeck.cardCount.value;
-
-      // Act
-      command.onUndo();
-
-      // Assert
-      // The undo method is empty, so no change is expected.
-      expect(modifierDeck.cardCount.value, cardCountAfterExecute);
-    });
-
     test('describe should return correct string', () {
       // Arrange
       final command =

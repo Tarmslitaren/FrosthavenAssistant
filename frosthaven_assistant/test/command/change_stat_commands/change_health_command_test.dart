@@ -119,22 +119,6 @@ void main() {
       expect(character.characterState.health.value, 0);
     });
 
-    test('undo should not revert health change (as currently implemented)', () {
-      // Arrange
-      final initialHealth = character.characterState.health.value;
-      final command = ChangeHealthCommand(5, character.id, character.id,
-          gameState: getIt<GameState>());
-      command.execute();
-
-      // Act
-      command.onUndo();
-
-      // Assert
-      // The undo method is incomplete and does not revert the health.
-      // This test verifies the current behavior.
-      expect(character.characterState.health.value, initialHealth + 5);
-    });
-
     test('describe should return correct string for increasing health', () {
       final command = ChangeHealthCommand(5, 'Blinkblade', 'Blinkblade',
           gameState: getIt<GameState>());

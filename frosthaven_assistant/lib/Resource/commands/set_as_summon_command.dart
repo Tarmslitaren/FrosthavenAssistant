@@ -23,10 +23,6 @@ class SetAsSummonCommand extends Command {
     _gameState.updateList.notify();
   }
 
-  @override
-  void onUndo() {
-    _gameState.updateList.notify();
-  }
 
   @override
   String describe() {

@@ -72,25 +72,6 @@ void main() {
       checkSaveState();
     });
 
-    test('undo should not remove the standee (as currently implemented)', () {
-      // Arrange
-      final command = AddStandeeCommand(
-          1, null, monster.id, MonsterType.normal, false,
-          gameState: getIt<GameState>());
-      command.execute();
-      final monsterAfterExecute = getIt<GameState>()
-          .currentList
-          .firstWhere((m) => m.id == monster.id) as Monster;
-      final instanceCount = monsterAfterExecute.monsterInstances.length;
-
-      // Act
-      command.onUndo();
-
-      // Assert
-      // The undo method is incomplete and only increments updateList.
-      expect(monsterAfterExecute.monsterInstances.length, instanceCount);
-    });
-
     test('describe should return correct string for a monster standee', () {
       // Arrange
       final command = AddStandeeCommand(

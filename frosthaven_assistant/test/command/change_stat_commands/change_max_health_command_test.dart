@@ -125,21 +125,6 @@ void main() {
       expect(monsterInstance.maxHealth.value, initialMaxHealth + 3);
     });
 
-    test('undo should not revert max health change (as currently implemented)',
-        () {
-      // Arrange
-      final initialMaxHealth = character.characterState.maxHealth.value;
-      final command = ChangeMaxHealthCommand(5, character.id, character.id,
-          gameState: getIt<GameState>());
-      command.execute();
-
-      // Act
-      command.onUndo();
-
-      // Assert
-      expect(character.characterState.maxHealth.value, initialMaxHealth + 5);
-    });
-
     test('describe should return correct string for increasing max health', () {
       final command = ChangeMaxHealthCommand(5, 'Blinkblade', 'Blinkblade',
           gameState: getIt<GameState>());

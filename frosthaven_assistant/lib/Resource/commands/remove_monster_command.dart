@@ -12,10 +12,6 @@ class RemoveMonsterCommand extends Command {
     MonsterMethods.removeMonsters(stateAccess, names);
   }
 
-  @override
-  void onUndo() {
-    _gameState.updateList.notify();
-  }
 
   @override
   String describe() {

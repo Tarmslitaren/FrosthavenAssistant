@@ -12,10 +12,6 @@ class SetAllyDeckInOgGloomCommand extends Command {
     _gameState.setAllyDeckInOGGloom(stateAccess, set);
   }
 
-  @override
-  void onUndo() {
-    _gameState.updateList.notify();
-  }
 
   @override
   String describe() {

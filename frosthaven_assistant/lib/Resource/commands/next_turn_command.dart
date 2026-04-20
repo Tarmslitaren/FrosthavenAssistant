@@ -22,10 +22,6 @@ class TurnDoneCommand extends Command { // ignore: prefer-match-file-name, file 
     RoundMethods.setTurnDone(stateAccess, index);
   }
 
-  @override
-  void onUndo() {
-    _gameState.updateList.notify();
-  }
 
   @override
   String describe() {

@@ -59,20 +59,6 @@ void main() {
       checkSaveState();
     });
 
-    test('undo should not do anything (as currently implemented)', () {
-      // Arrange
-      final command = AddPerkCommand(character.id, 0);
-      command.execute();
-      final perkStateAfterExecute = character.characterState.perkList[0];
-
-      // Act
-      command.onUndo();
-
-      // Assert
-      // The undo method is empty, so no change is expected.
-      expect(character.characterState.perkList[0], perkStateAfterExecute);
-    });
-
     test('describe should return "Remove" when adding a perk (due to bug)', () {
       // Arrange
       // The perk is not yet added, so perkList[index] is false.

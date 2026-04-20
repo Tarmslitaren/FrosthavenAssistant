@@ -36,10 +36,6 @@ class RemoveConditionCommand extends Command {
     }
   }
 
-  @override
-  void onUndo() {
-    _gameState.updateList.notify();
-  }
 
   @override
   String describe() {

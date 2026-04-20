@@ -81,10 +81,6 @@ abstract class ChangeStatCommand extends Command {
     }
   }
 
-  @override
-  void onUndo() {
-    gameState.updateList.notify();
-  }
 
   @override
   String describe() {

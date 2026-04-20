@@ -35,10 +35,6 @@ class AddCharacterCommand extends Command {
     ScenarioMethods.unlockClass(stateAccess, char.characterClass.id);
   }
 
-  @override
-  void onUndo() {
-    _gameState.updateList.notify();
-  }
 
   @override
   String describe() {

@@ -61,22 +61,6 @@ void main() {
       expect(modifierDeck.hasCard(factionCardId), isFalse);
     });
 
-    test('undo should not do anything (as currently implemented)', () {
-      // Arrange
-      final command = AddFactionCardCommand(character.id, factionCardId, true,
-          gameState: getIt<GameState>());
-      final modifierDeck = character.characterState.modifierDeck;
-      command.execute();
-      final hasCardAfterExecute = modifierDeck.hasCard(factionCardId);
-
-      // Act
-      command.onUndo();
-
-      // Assert
-      // The undo method is empty, so no change is expected.
-      expect(modifierDeck.hasCard(factionCardId), hasCardAfterExecute);
-    });
-
     test('describe should return correct string for adding a card', () {
       // Arrange
       final command = AddFactionCardCommand('Blinkblade', factionCardId, true,

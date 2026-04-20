@@ -14,10 +14,6 @@ class SetScenarioCommand extends Command {
     ScenarioMethods.setScenario(stateAccess, _scenario, _section);
   }
 
-  @override
-  void onUndo() {
-    _gameState.updateList.notify();
-  }
 
   @override
   String describe() {

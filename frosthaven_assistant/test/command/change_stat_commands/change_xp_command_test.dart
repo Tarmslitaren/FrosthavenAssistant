@@ -66,22 +66,6 @@ void main() {
       expect(character.characterState.xp.value, 0);
     });
 
-    test('undo should not revert XP change (as currently implemented)', () {
-      // Arrange
-      final initialXp = character.characterState.xp.value;
-      final command = ChangeXPCommand(10, character.id, character.id,
-          gameState: getIt<GameState>());
-      command.execute();
-
-      // Act
-      command.onUndo();
-
-      // Assert
-      // The undo method is incomplete and does not revert the xp.
-      // This test verifies the current behavior.
-      expect(character.characterState.xp.value, initialXp + 10);
-    });
-
     test('describe should return correct string for increasing XP', () {
       final command = ChangeXPCommand(10, 'Blinkblade', 'Blinkblade',
           gameState: getIt<GameState>());
