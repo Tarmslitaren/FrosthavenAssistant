@@ -24,8 +24,11 @@ class Communication {
 
   void sendToAllExcept(Socket client, String data) {
     final sockets = _connection.getAll();
-    final recipients =
-        sockets.where((x) => x.remoteAddress != client.remoteAddress);
+    // FIX: Filter by both remoteAddress AND remotePort to correctly
+    // distinguish clients behind NAT that share the same IP address.
+    final recipients = sockets.where((x) =>
+        x.remoteAddress != client.remoteAddress ||
+        x.remotePort != client.remotePort);
     for (var socket in recipients) {
       sendTo(socket, data);
     }

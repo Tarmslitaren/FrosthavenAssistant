@@ -20,8 +20,19 @@ class Client {
   final _network = getIt<Network>();
   final _settings = getIt<Settings>();
 
+  // FIX: Track missed pong count instead of binary responsive flag.
+  // This gives the server more time to respond before disconnecting.
+  int _missedPongs = 0;
+  static const int _maxMissedPongs = 2;
+
+  // FIX: Use instance variable instead of static so reconnections
+  // properly reset the ping loop state.
+  bool _pinging = false;
+
   Future<void> connect(String address) async {
     _serverResponsive = true;
+    _missedPongs = 0;
+    _pinging = false;
     try {
       int port = int.parse(_settings.lastKnownPort);
       debugPrint("port nr: ${port.toString()}");
@@ -51,24 +62,38 @@ class Client {
     }
   }
 
-  static bool pinging =
-      false; //to not restart this ping sub process, if one is running
   void _sendPing() {
-    if (_connection.established() &&
-        _settings.client.value == ClientState.connected &&
-        pinging == false) {
-      Future.delayed(const Duration(seconds: 12), () {
-        if (_serverResponsive == true) {
-          pinging = true;
-          _communication.sendToAll("ping");
-          _sendPing();
-          _serverResponsive = false; //set back to true when get response
-        } else {
-          pinging = false;
-          disconnect("Server unresponsive. Client disconnected.");
-        }
-      });
+    // FIX: Guard against multiple concurrent ping loops
+    if (!_connection.established() ||
+        _settings.client.value != ClientState.connected ||
+        _pinging) {
+      return;
     }
+    _pinging = true;
+
+    // FIX: Increased ping interval from 12s to 25s to be more tolerant
+    // of network latency and to align better with server's 20s ping cycle.
+    Future.delayed(const Duration(seconds: 25), () {
+      // FIX: Re-check connection state after the delay — the connection
+      // may have been closed while we were waiting.
+      if (!_connection.established() ||
+          _settings.client.value != ClientState.connected) {
+        _pinging = false;
+        return;
+      }
+
+      if (_missedPongs >= _maxMissedPongs) {
+        // Server hasn't responded to multiple pings — disconnect
+        _pinging = false;
+        disconnect("Server unresponsive after $_maxMissedPongs missed pings. Client disconnected.");
+        return;
+      }
+
+      _missedPongs++;
+      _communication.sendToAll("ping");
+      _pinging = false; // FIX: Reset before recursing so the guard works
+      _sendPing();
+    });
   }
 
   void _listen() {
@@ -142,6 +167,8 @@ class Client {
           _send("pong");
         } else if (message.startsWith("pong")) {
           _serverResponsive = true;
+          // FIX: Reset missed pong counter on successful response
+          _missedPongs = 0;
         }
       } else {
         _leftOverMessage = message;
@@ -178,5 +205,8 @@ class Client {
       _network.clientDisconnectedWhileInBackground = true;
     }
     _serverResponsive = true;
+    // FIX: Reset ping state on cleanup so reconnection works properly
+    _missedPongs = 0;
+    _pinging = false;
   }
 }

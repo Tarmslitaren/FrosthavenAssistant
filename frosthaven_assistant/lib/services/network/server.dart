@@ -25,6 +25,11 @@ class Server extends GameServer {
   @override
   set serverEnabled(bool value) {
     getIt<Settings>().server.value = value;
+    // FIX: Reset pinging flag when server is disabled so the ping loop
+    // can restart properly when the server is re-enabled.
+    if (!value) {
+      pinging = false;
+    }
     super.serverEnabled = value;
   }
 
@@ -103,19 +108,22 @@ class Server extends GameServer {
     return "Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_gameState.gameSaveStates.last!.getState()}";
   }
 
-  //to not restart this ping sub process, if one is running
-  static bool pinging = false;
+  // FIX: Changed from static to instance variable so it resets with the
+  // Server instance lifecycle and doesn't persist across stop/start cycles.
+  bool pinging = false;
+
   @override
   void sendPing() {
     if (serverSocket != null &&
         getIt<Settings>().server.value != false &&
         pinging == false) {
+      pinging = true; // FIX: Set true immediately before the delay
       Future.delayed(const Duration(seconds: 20), () {
         if (serverSocket == null || getIt<Settings>().server.value == false) {
           pinging = false;
         } else {
-          pinging = true;
           send("ping");
+          pinging = false; // FIX: Reset before recursing
           sendPing();
         }
       });
@@ -138,6 +146,8 @@ class Server extends GameServer {
   }
 
   Future<void> startServer() async {
+    // FIX: Reset ping state when starting server
+    pinging = false;
     startServerInternal(InternetAddress.anyIPv6.address,
         int.parse(getIt<Settings>().lastKnownPort));
   }
