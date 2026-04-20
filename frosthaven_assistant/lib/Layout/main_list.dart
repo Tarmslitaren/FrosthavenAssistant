@@ -154,7 +154,10 @@ class ListAnimationState extends State<ListAnimation>
     super.didUpdateWidget(oldWidget);
     if (oldWidget.index != widget.index ||
         oldWidget.lastIndex != widget.lastIndex) {
-      // build() will run before the callback fires, so _diff will be current.
+      // Reset to 0 now so the first build() after this shows the start offset
+      // (offset = _diff), not the end offset (0) that a completed controller
+      // value of 1.0 would produce.
+      _controller?.value = 0;
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (_diff != 0 && mounted) _controller?.forward(from: 0.0);
       });
