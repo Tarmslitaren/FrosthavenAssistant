@@ -284,7 +284,6 @@ class _GameListState extends State<_GameList> {
   final Map<String, _FlipItemState> _flipStates = {};
   List<Widget> _cachedChildren = const [];
   bool _skipNextAnimation = false;
-  bool _isDragging = false;
 
   void _registerFlipState(String id, _FlipItemState state) {
     _flipStates[id] = state;
@@ -299,8 +298,7 @@ class _GameListState extends State<_GameList> {
     final result = <String, Offset>{};
     for (final entry in _flipStates.entries) {
       if (!entry.value.mounted) continue;
-      final box =
-          entry.value.context.findRenderObject() as RenderBox?;
+      final box = entry.value.context.findRenderObject() as RenderBox?;
       if (box != null && box.attached) {
         result[entry.key] = box.localToGlobal(Offset.zero);
       }
@@ -341,7 +339,7 @@ class _GameListState extends State<_GameList> {
   }
 
   void _onUpdateList() {
-    final skipAnimation = _skipNextAnimation || _isDragging;
+    final skipAnimation = _skipNextAnimation;
     _skipNextAnimation = false;
     final fromPositions = skipAnimation ? null : _capturePositions();
     setState(() {
@@ -371,8 +369,8 @@ class _GameListState extends State<_GameList> {
         );
       },
     );
-    _flipStates.removeWhere(
-        (id, state) => !currentIds.contains(id) && !state.mounted);
+    _flipStates
+        .removeWhere((id, state) => !currentIds.contains(id) && !state.mounted);
     return children;
   }
 
@@ -421,14 +419,7 @@ class _GameListState extends State<_GameList> {
       direction: Axis.vertical,
       buildDraggableFeedback: defaultBuildDraggableFeedback,
       needsLongPressDraggable: true,
-      onReorderStarted: (index) {
-        _isDragging = true;
-      },
-      onNoReorder: (index) {
-        _isDragging = false;
-      },
       onReorder: (int oldIndex, int newIndex) {
-        _isDragging = false;
         _skipNextAnimation = true;
         widget.vm.reorderItem(oldIndex, newIndex);
       },
