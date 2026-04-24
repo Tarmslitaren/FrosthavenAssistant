@@ -6,6 +6,7 @@ import 'package:frosthaven_assistant/Layout/main_list.dart';
 import 'package:frosthaven_assistant/Layout/monster_widget.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/reorder_list_command.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
@@ -96,6 +97,64 @@ void main() {
       MainList.scrollToTop();
       await pumpWidget(tester);
       MainList.scrollToTop(); // After pumping, has a client
+    });
+  });
+
+  group('FLIP animation', () {
+    testWidgets('translates items when list order changes',
+        (WidgetTester tester) async {
+      AddMonsterCommand('Zealot', 1, false,
+              gameState: getIt<GameState>())
+          .execute();
+      AddMonsterCommand('Vermling Raider', 1, false,
+              gameState: getIt<GameState>())
+          .execute();
+
+      final originalOnError = FlutterError.onError;
+      addTearDown(() => FlutterError.onError = originalOnError);
+      FlutterError.onError = ignoreOverflowErrors;
+
+      await tester.pumpWidget(
+        const MaterialApp(home: Scaffold(body: MainList())),
+      );
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+
+      // Capture layout y-positions before the reorder.
+      final monsterFinder = find.byType(MonsterWidget);
+      final yBefore0 = tester.getTopLeft(monsterFinder.at(0)).dy;
+      final yBefore1 = tester.getTopLeft(monsterFinder.at(1)).dy;
+      expect(yBefore0, isNot(equals(yBefore1)),
+          reason: 'Monsters must start at different y-positions for FLIP to work');
+
+      // Swap the two monsters.  ReorderListCommand calls updateList.notify()
+      // internally, which fires _onUpdateList → _capturePositions + setState
+      // + addPostFrameCallback.
+      getIt<GameState>()
+          .action(ReorderListCommand(0, 1, gameState: getIt<GameState>()));
+
+      // One pump: rebuild + layout + post-frame callback (starts the
+      // AnimationController via animateFrom).
+      await tester.pump();
+
+      // Advance the 500 ms animation to its midpoint.
+      await tester.pump(const Duration(milliseconds: 250));
+
+      // At the midpoint the FLIP offset should be ~half the item height.
+      // We look for any Transform whose y-translation exceeds a small
+      // threshold to avoid false positives from identity matrices.
+      final transforms =
+          tester.widgetList<Transform>(find.byType(Transform)).toList();
+      // Matrix4 is column-major; y-translation is at storage index 13.
+      final nonZeroYTranslations = transforms
+          .map((t) => t.transform.storage[13].abs())
+          .where((abs) => abs > 1.0)
+          .toList();
+
+      expect(nonZeroYTranslations, isNotEmpty,
+          reason: 'Expected at least one Transform with a non-zero '
+              'y-translation at animation midpoint.\n'
+              'All y-translations: ${transforms.map((t) => t.transform.storage[13]).toList()}');
     });
   });
 

@@ -107,102 +107,87 @@ class Item extends StatelessWidget {
   }
 }
 
-class ListAnimation extends StatefulWidget {
-  const ListAnimation(
-      {super.key,
-      required this.index,
-      required this.lastIndex,
-      required this.child,
-      this.skipAnimation = false});
+/// Wraps a list item and plays a FLIP translation animation when [animateFrom]
+/// is called with the item's previous global position.
+///
+/// Uses [ValueKey] (not GlobalKey) so that [ReorderableWrap] can safely
+/// duplicate this widget into the drag-feedback overlay without triggering
+/// the "multiple widgets used the same GlobalKey" error. State registration
+/// with the parent [_GameListState] uses the [onRegister]/[onUnregister]
+/// callbacks; the feedback copy is ignored because the original state is
+/// still mounted when the copy registers.
+class _FlipItem extends StatefulWidget {
+  const _FlipItem({
+    required super.key, // ValueKey(itemId)
+    required this.itemId,
+    required this.onRegister,
+    required this.onUnregister,
+    required this.child,
+  });
 
-  final int index;
-  final int lastIndex;
+  final String itemId;
+  final void Function(String id, _FlipItemState state) onRegister;
+  final void Function(String id, _FlipItemState state) onUnregister;
   final Widget child;
 
-  /// When true the translation offset is forced to zero so no slide plays.
-  final bool skipAnimation;
-
   @override
-  State<StatefulWidget> createState() {
-    return ListAnimationState();
-  }
+  State<_FlipItem> createState() => _FlipItemState();
 }
 
-class ListAnimationState extends State<ListAnimation>
+class _FlipItemState extends State<_FlipItem>
     with SingleTickerProviderStateMixin {
-  AnimationController? _controller;
-  CurvedAnimation? _curved;
-  double _diff = 0;
+  static const Duration _kDuration = Duration(milliseconds: 500);
+
+  late final AnimationController _controller;
+  late final CurvedAnimation _curved;
+  Offset _startOffset = Offset.zero;
 
   @override
   void initState() {
     super.initState();
-    final ctrl = AnimationController(
-      duration: const Duration(milliseconds: 1000),
-      vsync: this,
-    );
-    _controller = ctrl;
-    _curved = CurvedAnimation(parent: ctrl, curve: Curves.linearToEaseOut);
-    // Start animation after first build has computed _diff.
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (_diff != 0 && mounted) ctrl.forward(from: 0.0);
-    });
+    _controller = AnimationController(vsync: this, duration: _kDuration);
+    _curved =
+        CurvedAnimation(parent: _controller, curve: Curves.linearToEaseOut);
+    widget.onRegister(widget.itemId, this);
   }
 
   @override
-  void didUpdateWidget(ListAnimation oldWidget) {
+  void didUpdateWidget(_FlipItem oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.index != widget.index ||
-        oldWidget.lastIndex != widget.lastIndex) {
-      // Reset to 0 now so the first build() after this shows the start offset
-      // (offset = _diff), not the end offset (0) that a completed controller
-      // value of 1.0 would produce.
-      _controller?.value = 0;
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (_diff != 0 && mounted) _controller?.forward(from: 0.0);
-      });
+    if (oldWidget.itemId != widget.itemId) {
+      oldWidget.onUnregister(oldWidget.itemId, this);
     }
+    widget.onRegister(widget.itemId, this);
   }
 
   @override
   void dispose() {
-    _curved?.dispose();
-    _controller?.dispose();
+    widget.onUnregister(widget.itemId, this);
+    _curved.dispose();
+    _controller.dispose();
     super.dispose();
+  }
+
+  /// Called after the new layout has settled. [globalFrom] is the item's
+  /// screen position before the list changed (the "First" in FLIP). Measures
+  /// the current "Last" position, computes the invert offset, and plays.
+  void animateFrom(Offset globalFrom) {
+    if (!mounted) return;
+    final box = context.findRenderObject() as RenderBox?;
+    if (box == null || !box.attached) return;
+    final globalTo = box.localToGlobal(Offset.zero);
+    _startOffset = globalFrom - globalTo;
+    if (_startOffset == Offset.zero) return;
+    _controller.forward(from: 0.0);
   }
 
   @override
   Widget build(BuildContext context) {
-    //need also last positions
-    final positions = MainListState.getItemHeights(context);
-    double position = widget.index > 0 ? positions[widget.index - 1] : 0;
-
-    double lastPosition = 0;
-    if (widget.lastIndex > 0) {
-      if (MainListState.lastPositions.length >= widget.lastIndex) {
-        //should be ok except for on reload as we don't bother saving lastPositions to disk
-        lastPosition = MainListState.lastPositions[widget.lastIndex - 1];
-      }
-    }
-
-    // When the caller flags skipAnimation (e.g. a manual reorder) we set _diff
-    // to zero so no slide plays, while still letting lastPositions update below.
-    _diff = widget.skipAnimation ? 0 : lastPosition - position;
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      MainListState.lastPositions
-        ..clear()
-        ..addAll(positions);
-    });
-
-    final curved = _curved;
-    if (curved == null) return widget.child;
-
     return RepaintBoundary(
       child: AnimatedBuilder(
-        animation: curved,
+        animation: _curved,
         builder: (context, child) => Transform.translate(
-          offset: Offset(0, (1 - curved.value) * _diff),
+          offset: _startOffset * (1 - _curved.value),
           child: child,
         ),
         child: widget.child,
@@ -213,9 +198,6 @@ class ListAnimationState extends State<ListAnimation>
 
 class MainListState extends State<MainList> {
   static const int _kTwoColumns = 2;
-  static const double _kTopBarHeight = 80.0;
-  static const int _kKeyOffset = 3;
-  static const double _kHalfHeightFactor = 0.5;
 
   static void scrollToTop() {
     if (scrollController.hasClients) {
@@ -231,47 +213,14 @@ class MainListState extends State<MainList> {
     //TODO: implement
   }
 
-  static List<double> getItemHeights(BuildContext context,
-      {GameState? gameState}) {
-    return MainListState._staticVm?.getItemHeights(context) ??
-        MainListViewModel(gameState: gameState).getItemHeights(context);
-  }
-
-  static MainListViewModel? _staticVm;
-
   MainListViewModel? _vmInstance;
   MainListViewModel get _vm => _vmInstance ??= MainListViewModel(
         gameState: widget.gameState,
         gameData: widget.gameData,
         settings: widget.settings,
       );
-  List<Widget> _generatedList = [];
+
   static final scrollController = ScrollController();
-
-  static final List<double> lastPositions = [];
-
-  /// Set to true by [onReorder] so the next [_generateChildren] call skips
-  /// the translation animation (the drag widget already animates the move).
-  bool _skipNextAnimation = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _staticVm = _vm;
-
-    //this does cause a index 0
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      lastPositions
-        ..clear()
-        ..addAll(_vm.getItemHeights(context));
-    });
-  }
-
-  @override
-  void dispose() {
-    _staticVm = null;
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -291,15 +240,151 @@ class MainListState extends State<MainList> {
         });
   }
 
-  int _getItemsForHalfTotalHeight(List<double> widgetPositions) {
+  Widget buildList() {
     final screenSize = MediaQuery.of(context).size;
-    bool canFit2Columns =
-        screenSize.width >= getMainListWidth(context) * _kTwoColumns;
+    double width = getMainListWidth(context);
+    bool canFit2Columns = screenSize.width >= width * _kTwoColumns;
+    if (canFit2Columns) {
+      width *= _kTwoColumns;
+    }
+
+    return Container(
+        alignment: Alignment.topCenter,
+        child: RepaintBoundary(
+            child: Scrollbar(
+                controller: scrollController,
+                child: SingleChildScrollView(
+                    controller: scrollController,
+                    child: Container(
+                        alignment: Alignment.center,
+                        width: screenSize.width,
+                        child: RepaintBoundary(
+                          child: _GameList(vm: _vm),
+                        ))))));
+  }
+}
+
+class _GameList extends StatefulWidget {
+  const _GameList({required this.vm});
+
+  final MainListViewModel vm;
+
+  @override
+  State<_GameList> createState() => _GameListState();
+}
+
+class _GameListState extends State<_GameList> {
+  static const int _kTwoColumns = 2;
+  static const double _kTopBarHeight = 80.0;
+  static const double _kHalfHeightFactor = 0.5;
+
+  /// Live references to mounted [_FlipItemState]s, keyed by item ID.
+  /// The drag-feedback copy of a [_FlipItem] is silently ignored in
+  /// [_registerFlipState] because the original state is still mounted.
+  final Map<String, _FlipItemState> _flipStates = {};
+  List<Widget> _cachedChildren = const [];
+  bool _skipNextAnimation = false;
+  bool _isDragging = false;
+
+  void _registerFlipState(String id, _FlipItemState state) {
+    _flipStates[id] = state;
+  }
+
+  void _unregisterFlipState(String id, _FlipItemState state) {
+    if (_flipStates[id] == state) _flipStates.remove(id);
+  }
+
+  /// Snapshot each currently-mounted item's global top-left position.
+  Map<String, Offset> _capturePositions() {
+    final result = <String, Offset>{};
+    for (final entry in _flipStates.entries) {
+      if (!entry.value.mounted) continue;
+      final box =
+          entry.value.context.findRenderObject() as RenderBox?;
+      if (box != null && box.attached) {
+        result[entry.key] = box.localToGlobal(Offset.zero);
+      }
+    }
+    return result;
+  }
+
+  /// After the new layout has rendered, trigger FLIP on every item that has
+  /// a captured "from" position.
+  void _playFlipAnimations(Map<String, Offset> fromPositions) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      for (final entry in fromPositions.entries) {
+        _flipStates[entry.key]?.animateFrom(entry.value);
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    widget.vm.updateList.addListener(_onUpdateList);
+    _cachedChildren = _buildChildren();
+  }
+
+  @override
+  void didUpdateWidget(_GameList oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (!identical(oldWidget.vm, widget.vm)) {
+      oldWidget.vm.updateList.removeListener(_onUpdateList);
+      widget.vm.updateList.addListener(_onUpdateList);
+    }
+  }
+
+  @override
+  void dispose() {
+    widget.vm.updateList.removeListener(_onUpdateList);
+    super.dispose();
+  }
+
+  void _onUpdateList() {
+    final skipAnimation = _skipNextAnimation || _isDragging;
+    _skipNextAnimation = false;
+    final fromPositions = skipAnimation ? null : _capturePositions();
+    setState(() {
+      _cachedChildren = _buildChildren();
+    });
+    if (fromPositions != null) {
+      _playFlipAnimations(fromPositions);
+    }
+  }
+
+  List<Widget> _buildChildren() {
+    final vm = widget.vm;
+    final currentIds = <String>{};
+    final children = List<Widget>.generate(
+      vm.currentListLength,
+      (i) {
+        final id = vm.itemIdAt(i);
+        currentIds.add(id);
+        return RepaintBoundary(
+          child: _FlipItem(
+            key: ValueKey(id),
+            itemId: id,
+            onRegister: _registerFlipState,
+            onUnregister: _unregisterFlipState,
+            child: Item(key: Key(id), data: vm.itemAt(i)),
+          ),
+        );
+      },
+    );
+    _flipStates.removeWhere(
+        (id, state) => !currentIds.contains(id) && !state.mounted);
+    return children;
+  }
+
+  int _getItemsForHalfTotalHeight(
+      List<double> widgetPositions, Size screenSize) {
+    double listWidth = getMainListWidth(context);
+    bool canFit2Columns = screenSize.width >= listWidth * _kTwoColumns;
     if (!canFit2Columns) {
-      return _vm.currentListLength;
+      return widget.vm.currentListLength;
     }
     double screenHeight =
-        screenSize.height - _kTopBarHeight * _vm.userScalingBars;
+        screenSize.height - _kTopBarHeight * widget.vm.userScalingBars;
 
     if (widgetPositions.isNotEmpty) {
       bool allFitInView = widgetPositions.last < screenHeight * _kTwoColumns;
@@ -318,122 +403,36 @@ class MainListState extends State<MainList> {
     return widgetPositions.length;
   }
 
-  List<Widget> _generateChildren() {
-    final skipAnimation = _skipNextAnimation;
-    _skipNextAnimation = false;
+  @override
+  Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    List<double> itemHeights = widget.vm.getItemHeights(context);
+    int itemsPerColumn = _getItemsForHalfTotalHeight(itemHeights, screenSize);
+    int itemsColumn2 = itemHeights.length - itemsPerColumn;
+    itemsPerColumn = max(itemsPerColumn, itemsColumn2);
+    double paddingBottom = _kHalfHeightFactor * screenSize.height;
 
-    List<Widget> generatedListAnimators = [];
-    List<int> indices = [];
-    for (int i = 0; i < _vm.currentListLength; i++) {
-      int index = i;
-      if (_generatedList.length > i) {
-        for (int j = 0; j < _generatedList.length; j++) {
-          String key = _generatedList[j].key.toString();
-          key = key.substring(_kKeyOffset, key.length - _kKeyOffset);
-          if (key == _vm.itemIdAt(i)) {
-            if (index != j) {
-              index = j;
-            }
-            break;
-          }
-        }
-      }
-      indices.add(index);
-    }
-
-    List<Widget> newList = List<Widget>.generate(
-      _vm.currentListLength,
-      (index) {
-        return Item(key: Key(_vm.itemIdAt(index)), data: _vm.itemAt(index));
+    return ReorderableWrap(
+      padding: EdgeInsets.only(bottom: paddingBottom),
+      scrollAnimationDuration: const Duration(milliseconds: 400),
+      reorderAnimationDuration: const Duration(milliseconds: 400),
+      maxMainAxisCount: itemsPerColumn,
+      ignorePrimaryScrollController: false,
+      direction: Axis.vertical,
+      buildDraggableFeedback: defaultBuildDraggableFeedback,
+      needsLongPressDraggable: true,
+      onReorderStarted: (index) {
+        _isDragging = true;
       },
+      onNoReorder: (index) {
+        _isDragging = false;
+      },
+      onReorder: (int oldIndex, int newIndex) {
+        _isDragging = false;
+        _skipNextAnimation = true;
+        widget.vm.reorderItem(oldIndex, newIndex);
+      },
+      children: _cachedChildren,
     );
-
-    for (int i = 0; i < newList.length; i++) {
-      if (_generatedList.length > i) {
-        _generatedList[i] = newList[i];
-      } else {
-        _generatedList.add(newList[i]);
-      }
-    }
-    if (_generatedList.length > newList.length) {
-      _generatedList = _generatedList.sublist(0, newList.length);
-    }
-
-    if (_generatedList.length > generatedListAnimators.length) {
-      for (int i = generatedListAnimators.length;
-          i < _generatedList.length;
-          i++) {
-        generatedListAnimators.add(RepaintBoundary(
-            child: ListAnimation(
-                index: i,
-                lastIndex: indices[i],
-                skipAnimation: skipAnimation,
-                child: _generatedList[i])));
-      }
-    }
-
-    if (generatedListAnimators.length > _generatedList.length) {
-      for (int i = _generatedList.length;
-          i < generatedListAnimators.length;
-          i++) {
-        _generatedList.add(Container());
-      }
-    }
-
-    return generatedListAnimators;
-  }
-
-  Widget buildList() {
-    return ListenableBuilder(
-        listenable: _vm.updateList,
-        builder: (context, child) {
-          double width = getMainListWidth(context);
-          final screenSize = MediaQuery.of(context).size;
-          bool canFit2Columns = screenSize.width >= width * _kTwoColumns;
-          if (canFit2Columns) {
-            width *= _kTwoColumns;
-          }
-          List<double> itemHeights = _vm.getItemHeights(context);
-          int itemsPerColumn = _getItemsForHalfTotalHeight(itemHeights);
-          int itemsColumn2 = itemHeights.length - itemsPerColumn;
-          itemsPerColumn = max(itemsPerColumn, itemsColumn2);
-          bool ignoreScroll = false;
-          double paddingBottom = _kHalfHeightFactor * screenSize.height;
-
-          return Container(
-              alignment: Alignment.topCenter,
-              child: RepaintBoundary(
-                  child: Scrollbar(
-                      interactive: !ignoreScroll,
-                      controller: scrollController,
-                      child: SingleChildScrollView(
-                          controller: scrollController,
-                          child: Container(
-                              alignment: Alignment.center,
-                              width: MediaQuery.of(context).size.width,
-                              child: RepaintBoundary(
-                                child: ReorderableWrap(
-                                  padding:
-                                      EdgeInsets.only(bottom: paddingBottom),
-                                  scrollAnimationDuration:
-                                      const Duration(milliseconds: 400),
-                                  reorderAnimationDuration:
-                                      const Duration(milliseconds: 400),
-                                  maxMainAxisCount: itemsPerColumn,
-                                  ignorePrimaryScrollController: ignoreScroll,
-                                  direction: Axis.vertical,
-                                  buildDraggableFeedback:
-                                      defaultBuildDraggableFeedback,
-                                  needsLongPressDraggable: true,
-                                  onReorder: (int oldIndex, int newIndex) {
-                                    _skipNextAnimation = true;
-                                    setState(() {
-                                      _vm.reorderItem(oldIndex, newIndex);
-                                    });
-                                  },
-                                  children: _generateChildren(),
-                                ),
-                              ))))));
-        });
   }
 }
