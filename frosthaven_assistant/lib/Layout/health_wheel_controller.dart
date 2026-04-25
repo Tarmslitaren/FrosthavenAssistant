@@ -103,7 +103,10 @@ class HealthWheelControllerState extends State<HealthWheelController> {
           int timeDiff = 0;
           final lastTime = lastTimeStamp;
           if (lastTime != null) {
-            timeDiff = details.sourceTimeStamp?.inMicroseconds ?? 0 - lastTime;
+            final timeStamp = details.sourceTimeStamp;
+            if (timeStamp != null) {
+              timeDiff = timeStamp.inMicroseconds - lastTime;
+            }
           }
 
           wheelTimeDelta.value = timeDiff;

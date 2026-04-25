@@ -74,8 +74,9 @@ class SelectHealthWheelState extends State<SelectHealthWheel> {
     if (value != 0) {
       //in case figure killed by other device double check
       if (GameMethods.getFigure(widget.ownerId, widget.figureId) != null) {
-        _gameState.action(
-            ChangeHealthCommand(value, widget.figureId, widget.ownerId, gameState: _gameState));
+        _gameState.action(ChangeHealthCommand(
+            value, widget.figureId, widget.ownerId,
+            gameState: _gameState));
       }
       selected = widget.data.maxHealth.value -
           (widget.data.maxHealth.value - widget.data.health.value);
@@ -84,7 +85,8 @@ class SelectHealthWheelState extends State<SelectHealthWheel> {
 
   void scrollTheWheel(double delta, int timeMicroSeconds, double scale) {
     int maxHealth = widget.data.maxHealth.value;
-    double deltaMod = min(widget.data.maxHealth.value * _kScrollDeltaRatio, _kScrollDeltaMax);
+    double deltaMod =
+        min(widget.data.maxHealth.value * _kScrollDeltaRatio, _kScrollDeltaMax);
     deltaMod = max(deltaMod, _kScrollDeltaMin);
 
     deltaMod *= delta;
@@ -142,7 +144,8 @@ class SelectHealthWheelState extends State<SelectHealthWheel> {
                 BoxShadow(
                   color: Colors.black45,
                   blurRadius: _kBoxShadowBlur * scale,
-                  offset: Offset(_kBoxShadowOffsetX * scale, _kBoxShadowBlur * scale), // Shadow position
+                  offset: Offset(_kBoxShadowOffsetX * scale,
+                      _kBoxShadowBlur * scale), // Shadow position
                 ),
               ],
             ),
@@ -171,8 +174,12 @@ class SelectHealthWheelState extends State<SelectHealthWheel> {
                             quarterTurns: 1,
                             child: AnimatedContainer(
                                 duration: const Duration(milliseconds: 200),
-                                width: x == selected ? _kSelectedWidth * scale : _kUnselectedWidth * scale,
-                                height: x == selected ? _kSelectedHeight * scale : _kUnselectedHeight * scale,
+                                width: x == selected
+                                    ? _kSelectedWidth * scale
+                                    : _kUnselectedWidth * scale,
+                                height: x == selected
+                                    ? _kSelectedHeight * scale
+                                    : _kUnselectedHeight * scale,
                                 alignment: Alignment.center,
                                 child: Text(
                                   _buildNrString(x),
