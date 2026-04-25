@@ -275,24 +275,14 @@ class _MonsterStatNormalLayout extends StatelessWidget {
             child: Text(
               textAlign: TextAlign.center,
               data.type.display,
-              style: TextStyle(
-                  fontFamily: frosthavenStyle ? 'GermaniaOne' : 'Pirata',
-                  color: Colors.white,
-                  fontSize: MonsterStatCardWidget._kTitleFontSize * scale,
-                  height: 1,
-                  shadows: [shadow]),
+              style: getCardTitleStyle(MonsterStatCardWidget._kTitleFontSize * scale, shadow, frosthavenStyle, height: 1),
             )),
         Positioned(
             left: MonsterStatCardWidget._kLevelLeft * scale,
             top: MonsterStatCardWidget._kLevelTop * scale,
             child: Text(
               data.level.value.toString(),
-              style: TextStyle(
-                  fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
-                  color: Colors.white,
-                  fontSize: MonsterStatCardWidget._kLevelFontSize * scale,
-                  height: 1,
-                  shadows: [shadow]),
+              style: getCardNumberStyle(MonsterStatCardWidget._kLevelFontSize * scale, shadow, frosthavenStyle, height: 1),
             )),
         Positioned(
           left: MonsterStatCardWidget._kNormalStatsLeft * scale,
@@ -488,12 +478,7 @@ class MonsterStatBossLayout extends StatelessWidget {
     Widget attackAttributes = LineBuilder.createLines([bossAttackAttributes],
         true, false, false, data, CrossAxisAlignment.start, scale, false);
 
-    final specialStyle = TextStyle(
-        fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
-        color: Colors.yellow,
-        fontSize: MonsterStatCardWidget._kBossSpecialFontSize * scale,
-        height: 1,
-        shadows: [shadow]);
+    final specialStyle = getCardNumberStyle(MonsterStatCardWidget._kBossSpecialFontSize * scale, shadow, frosthavenStyle, color: Colors.yellow, height: 1);
 
     return RepaintBoundary(
         child: Stack(
@@ -515,12 +500,7 @@ class MonsterStatBossLayout extends StatelessWidget {
                 : MonsterStatCardWidget._kBossLevelTopGh * scale,
             child: Text(
               data.level.value.toString(),
-              style: TextStyle(
-                  fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
-                  color: Colors.white,
-                  fontSize: MonsterStatCardWidget._kLevelFontSize * scale,
-                  height: 1,
-                  shadows: [shadow]),
+              style: getCardNumberStyle(MonsterStatCardWidget._kLevelFontSize * scale, shadow, frosthavenStyle, height: 1),
             )),
         Positioned(
           left: 0,
@@ -716,19 +696,8 @@ class MonsterStatCardView extends StatelessWidget {
       blurRadius: MonsterStatCardWidget._kShadowTextBlur * scale,
     );
 
-    final leftStyle = TextStyle(
-        fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
-        color: Colors.black,
-        fontSize: MonsterStatCardWidget._kStatsFontSize * scale,
-        height: MonsterStatCardWidget._kStatsLineHeight,
-        shadows: [shadowLeft]);
-
-    final rightStyle = TextStyle(
-        fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
-        color: Colors.white,
-        fontSize: MonsterStatCardWidget._kStatsFontSize * scale,
-        height: MonsterStatCardWidget._kStatsLineHeight,
-        shadows: [shadow]);
+    final leftStyle = getCardNumberStyle(MonsterStatCardWidget._kStatsFontSize * scale, shadowLeft, frosthavenStyle, color: Colors.black, height: MonsterStatCardWidget._kStatsLineHeight);
+    final rightStyle = getCardNumberStyle(MonsterStatCardWidget._kStatsFontSize * scale, shadow, frosthavenStyle, height: MonsterStatCardWidget._kStatsLineHeight);
 
     return ValueListenableBuilder<int>(
         valueListenable: data.level,

@@ -54,11 +54,7 @@ class DrawButtonState extends State<DrawButton> {
                     bottom: _kRoundTextBottom * scaling,
                     left: _kRoundTextLeft * scaling,
                     child: Text(_vm.roundText,
-                        style: TextStyle(
-                          fontSize: kFontSizeSmall * scaling,
-                          color: Colors.white,
-                          shadows: [shadow],
-                        )));
+                        style: getWhiteShadowStyle(kFontSizeSmall * scaling, shadow)));
               },
             ),
             ValueListenableBuilder<int>(
@@ -76,12 +72,7 @@ class DrawButtonState extends State<DrawButton> {
                         onPressed: _onPressed,
                         child: Text(
                           _vm.buttonText,
-                          style: TextStyle(
-                            height: _kTextHeight,
-                            fontSize: kFontSizeBody * scaling,
-                            color: Colors.white,
-                            shadows: [shadow],
-                          ),
+                          style: getWhiteShadowStyle(kFontSizeBody * scaling, shadow, height: _kTextHeight),
                         )));
               },
             )

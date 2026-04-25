@@ -3,6 +3,7 @@ import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 
 import '../Resource/enums.dart';
+import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
 import 'element_button.dart';
 
@@ -49,11 +50,7 @@ class TopBar extends StatelessWidget {
               padding: EdgeInsets.only(left: _kTitlePaddingLeft * userScaling),
               child: Text(
                 "X-haven\nAssistant",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: kFontSizeBody * userScaling,
-                  shadows: [shadow],
-                ),
+                style: getWhiteShadowStyle(kFontSizeBody * userScaling, shadow),
               ),
             ),
             toolbarHeight: _kToolbarHeight * settings.userScalingBars.value,

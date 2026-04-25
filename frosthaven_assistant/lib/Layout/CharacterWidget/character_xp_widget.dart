@@ -4,6 +4,7 @@ import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/chan
 
 import '../../Resource/game_methods.dart';
 import '../../Resource/state/game_state.dart';
+import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 
 class CharacterXPWidget extends StatelessWidget {
@@ -46,13 +47,7 @@ class CharacterXPWidget extends StatelessWidget {
                 builder: (context, value, child) {
                   return Text(
                     character.characterState.xp.value.toString(),
-                    style: TextStyle(
-                        fontFamily: GameMethods.isFrosthavenStyle(null)
-                            ? 'GermaniaOne'
-                            : 'Pirata',
-                        color: Colors.blue,
-                        fontSize: kFontSizeSmall * scale,
-                        shadows: [shadow]),
+                    style: getCardTitleStyle(kFontSizeSmall * scale, shadow, GameMethods.isFrosthavenStyle(null), color: Colors.blue),
                   );
                 }),
           ],

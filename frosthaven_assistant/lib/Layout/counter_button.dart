@@ -5,6 +5,7 @@ import '../Resource/app_constants.dart';
 import '../Resource/commands/change_stat_commands/change_stat_command.dart';
 import '../Resource/game_methods.dart';
 import '../Resource/state/game_state.dart';
+import '../Resource/ui_utils.dart';
 import 'view_models/counter_button_view_model.dart';
 
 class CounterButton extends StatefulWidget {
@@ -122,11 +123,7 @@ class CounterButtonState extends State<CounterButton> {
                   right: 0,
                   child: Text(
                     text,
-                    style: TextStyle(
-                        height: CounterButton._kTextHeight,
-                        fontSize: kFontSizeBody * widget.scale,
-                        color: Colors.white,
-                        shadows: [shadow]),
+                    style: getWhiteShadowStyle(kFontSizeBody * widget.scale, shadow, height: CounterButton._kTextHeight),
                   ));
             })
       ]),

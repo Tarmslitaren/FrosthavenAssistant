@@ -222,11 +222,7 @@ class MonsterBox extends StatelessWidget {
                               child: Text(
                                 textAlign: TextAlign.end,
                                 "$health",
-                                style: TextStyle(
-                                    height: 1,
-                                    color: Colors.white,
-                                    fontSize: kFontSizeBody * scale,
-                                    shadows: [shadow]),
+                                style: getWhiteShadowStyle(kFontSizeBody * scale, shadow, height: 1),
                               ),
                             )
                           ]),

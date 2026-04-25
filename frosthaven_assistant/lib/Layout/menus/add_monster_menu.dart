@@ -235,9 +235,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                                       ? Colors.grey
                                       : Colors.black)),
                           trailing: Text("(${_foundMonsters[index].edition})",
-                              style: const TextStyle(
-                                  fontSize: kFontSizeSmall,
-                                  color: Colors.grey)),
+                              style: kSubtitleStyle),
                           onTap: () {
                             if (!_monsterAlreadyAdded(
                                 _foundMonsters[index].name)) {

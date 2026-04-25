@@ -56,6 +56,11 @@ class InitiativeWidget extends StatelessWidget {
       ValueListenableBuilder<int>(
           valueListenable: vm.initiative,
           builder: (context, value, child) {
+            final initTextStyle = TextStyle(
+                fontFamily: vm.fontFamily,
+                color: Colors.white,
+                fontSize: kFontSizeHeading * scale,
+                shadows: [shadow]);
             final initiative = vm.initiative.value;
             final roundState = vm.roundState;
             final secret = vm.isSecret;
@@ -98,12 +103,7 @@ class InitiativeWidget extends StatelessWidget {
                     textAlign: TextAlign.center,
                     cursorColor: Colors.white,
                     maxLength: InitiativeWidget._kInitMaxLength,
-                    style: TextStyle(
-                        height: 1,
-                        fontFamily: vm.fontFamily,
-                        color: Colors.white,
-                        fontSize: kFontSizeHeading * scale,
-                        shadows: [shadow]),
+                    style: initTextStyle.copyWith(height: 1),
                     decoration: const InputDecoration(
                       isDense: true,
                       counterText: '',
@@ -133,11 +133,7 @@ class InitiativeWidget extends StatelessWidget {
                   child: Text(
                     vm.initiativeDisplayText(initiative),
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontFamily: vm.fontFamily,
-                        color: Colors.white,
-                        fontSize: kFontSizeHeading * scale,
-                        shadows: [shadow]),
+                    style: initTextStyle,
                   ));
             }
           }),

@@ -8,6 +8,7 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../Resource/color_matrices.dart';
+import '../Resource/ui_utils.dart';
 import 'monster_stat_card_widget.dart';
 
 class MonsterWidget extends StatefulWidget {
@@ -90,6 +91,11 @@ class MonsterWidgetState extends State<MonsterWidget> {
   }
 
   Widget _buildImagePart(double height, double scale) {
+    final shadow = Shadow(
+      offset: Offset(_kShadowOffset * scale, _kShadowOffset * scale),
+      color: Colors.black87,
+      blurRadius: _kShadowBlur * scale,
+    );
     return RepaintBoundary(
         child: Stack(alignment: Alignment.bottomCenter, children: [
       Container(
@@ -121,18 +127,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
           child: Text(
             textAlign: TextAlign.center,
             widget.data.type.display,
-            style: TextStyle(
-                fontFamily: _vm.frosthavenStyle ? "GermaniaOne" : 'Pirata',
-                color: Colors.white,
-                fontSize: _kFontSize * scale,
-                shadows: [
-                  Shadow(
-                    offset:
-                        Offset(_kShadowOffset * scale, _kShadowOffset * scale),
-                    color: Colors.black87,
-                    blurRadius: _kShadowBlur * scale,
-                  )
-                ]),
+            style: getCardTitleStyle(_kFontSize * scale, shadow, _vm.frosthavenStyle),
           ))
     ]));
   }

@@ -6,6 +6,7 @@ import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Resource/state/game_state.dart';
+import '../Resource/ui_utils.dart';
 
 class LootCardWidget extends StatelessWidget {
   static const double _kCardWidth = 39.0;
@@ -81,6 +82,7 @@ class LootCardFront extends StatelessWidget {
       blurRadius: LootCardWidget._kShadowTextBlur * scale,
     );
     int? value = card.getValue();
+    final specialStyle = getWhiteShadowStyle(LootCardWidget._kSpecialTextFontSize * scale, shadow);
 
     return Container(
         width: LootCardWidget._kCardWidth * scale,
@@ -115,30 +117,12 @@ class LootCardFront extends StatelessWidget {
                 if (value != null)
                   Text(
                     "+$value",
-                    style: TextStyle(
-                      shadows: [shadow],
-                      fontSize: LootCardWidget._kValueFontSize * scale,
-                      color: Colors.white,
-                    ),
+                    style: getWhiteShadowStyle(LootCardWidget._kValueFontSize * scale, shadow),
                   ),
                 if (card.gfx.contains("1418"))
-                  Text(
-                    "1418",
-                    style: TextStyle(
-                      shadows: [shadow],
-                      fontSize: LootCardWidget._kSpecialTextFontSize * scale,
-                      color: Colors.white,
-                    ),
-                  ),
+                  Text("1418", style: specialStyle),
                 if (card.gfx.contains("1419"))
-                  Text(
-                    "1419",
-                    style: TextStyle(
-                      shadows: [shadow],
-                      fontSize: LootCardWidget._kSpecialTextFontSize * scale,
-                      color: Colors.white,
-                    ),
-                  ),
+                  Text("1419", style: specialStyle),
                 if (card.enhanced > 0)
                   Positioned(
                     bottom: LootCardWidget._kEnhancedBottom * scale,

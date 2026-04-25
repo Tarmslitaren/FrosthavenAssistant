@@ -33,6 +33,37 @@ TextStyle getButtonTextStyle(double scale) {
   return TextStyle(fontSize: kFontSizeSmall * scale, color: Colors.blue);
 }
 
+TextStyle getCardTitleStyle(double fontSize, Shadow shadow, bool frosthavenStyle,
+    {Color color = Colors.white, double? height}) {
+  return TextStyle(
+    fontFamily: frosthavenStyle ? 'GermaniaOne' : 'Pirata',
+    color: color,
+    fontSize: fontSize,
+    height: height,
+    shadows: [shadow],
+  );
+}
+
+TextStyle getCardNumberStyle(double fontSize, Shadow shadow, bool frosthavenStyle,
+    {Color color = Colors.white, double? height}) {
+  return TextStyle(
+    fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
+    color: color,
+    fontSize: fontSize,
+    height: height,
+    shadows: [shadow],
+  );
+}
+
+TextStyle getWhiteShadowStyle(double fontSize, Shadow shadow, {double? height}) {
+  return TextStyle(
+    fontSize: fontSize,
+    color: Colors.white,
+    shadows: [shadow],
+    height: height,
+  );
+}
+
 bool isLargeTablet(BuildContext context) {
   double screenWidth = MediaQuery.of(context).size.width;
   double screenHeight = MediaQuery.of(context).size.height;

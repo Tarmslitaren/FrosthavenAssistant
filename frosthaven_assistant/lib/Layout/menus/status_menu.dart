@@ -399,10 +399,7 @@ class StatusMenuState extends State<StatusMenu> {
                               });
                             },
                             child: Text("                     Switch Form",
-                                style: TextStyle(
-                                  fontSize: kFontSizeSmall * scale,
-                                  color: Colors.blue,
-                                )))
+                                style: getButtonTextStyle(scale)))
                     ])),
             Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
               ValueListenableBuilder<int>(

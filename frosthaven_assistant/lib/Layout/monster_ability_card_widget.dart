@@ -9,6 +9,7 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Resource/game_methods.dart';
 import '../Resource/line_builder/line_builder.dart';
+import '../Resource/ui_utils.dart';
 import 'view_models/monster_ability_card_view_model.dart';
 
 class MonsterAbilityCardWidget extends StatefulWidget {
@@ -253,18 +254,12 @@ class MonsterAbilityCardFront extends StatelessWidget {
                         children: [
                           Text(
                             card.title,
-                            style: TextStyle(
-                                fontFamily:
-                                    frosthavenStyle ? "GermaniaOne" : 'Pirata',
-                                color: Colors.white,
-                                fontSize: frosthavenStyle
-                                    ? MonsterAbilityCardWidget
-                                            ._kTitleFontSizeFh *
-                                        scale
-                                    : MonsterAbilityCardWidget
-                                            ._kTitleFontSizeGh *
-                                        scale,
-                                shadows: [shadow]),
+                            style: getCardTitleStyle(
+                                frosthavenStyle
+                                    ? MonsterAbilityCardWidget._kTitleFontSizeFh * scale
+                                    : MonsterAbilityCardWidget._kTitleFontSizeGh * scale,
+                                shadow,
+                                frosthavenStyle),
                           ),
                         ],
                       ),
@@ -275,28 +270,19 @@ class MonsterAbilityCardFront extends StatelessWidget {
                     child: Text(
                       textAlign: TextAlign.center,
                       initText,
-                      style: TextStyle(
-                          fontFamily:
-                              frosthavenStyle ? "GermaniaOne" : 'Pirata',
-                          color: Colors.white,
-                          fontSize: frosthavenStyle
-                              ? MonsterAbilityCardWidget._kInitFontSizeFh *
-                                  scale
-                              : MonsterAbilityCardWidget._kInitFontSizeGh *
-                                  scale,
-                          shadows: [shadow]),
+                      style: getCardTitleStyle(
+                          frosthavenStyle
+                              ? MonsterAbilityCardWidget._kInitFontSizeFh * scale
+                              : MonsterAbilityCardWidget._kInitFontSizeGh * scale,
+                          shadow,
+                          frosthavenStyle),
                     )),
                 Positioned(
                     left: MonsterAbilityCardWidget._kCardNrLeft * scale,
                     bottom: MonsterAbilityCardWidget._kCardNrBottom * scale,
                     child: Text(
                       card.nr.toString(),
-                      style: TextStyle(
-                          fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
-                          color: Colors.white,
-                          fontSize:
-                              MonsterAbilityCardWidget._kCardNrFontSize * scale,
-                          shadows: [shadow]),
+                      style: getCardNumberStyle(MonsterAbilityCardWidget._kCardNrFontSize * scale, shadow, frosthavenStyle),
                     )),
                 card.shuffle
                     ? Positioned(
@@ -358,6 +344,9 @@ class MonsterAbilityCardRear extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool frosthavenStyle = GameMethods.isFrosthavenStyle(monster.type);
+    final rearShadow = Shadow(
+        offset: Offset(MonsterAbilityCardWidget._kRearShadowOffset, MonsterAbilityCardWidget._kRearShadowOffset),
+        color: Colors.black);
     return Container(
         decoration: BoxDecoration(
           boxShadow: [
@@ -395,20 +384,7 @@ class MonsterAbilityCardRear extends StatelessWidget {
                     bottom: 0,
                     child: Text(
                       size.toString(),
-                      style: TextStyle(
-                          fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
-                          color: Colors.white,
-                          fontSize:
-                              MonsterAbilityCardWidget._kRearDeckSizeFontSize *
-                                  scale,
-                          shadows: [
-                            Shadow(
-                                offset: Offset(
-                                    MonsterAbilityCardWidget._kRearShadowOffset,
-                                    MonsterAbilityCardWidget
-                                        ._kRearShadowOffset),
-                                color: Colors.black)
-                          ]),
+                      style: getCardNumberStyle(MonsterAbilityCardWidget._kRearDeckSizeFontSize * scale, rearShadow, frosthavenStyle),
                     ))
                 : Container(),
           ],

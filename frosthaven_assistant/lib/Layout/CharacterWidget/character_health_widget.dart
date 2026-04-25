@@ -5,6 +5,7 @@ import '../../Resource/enums.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
+import '../../Resource/ui_utils.dart';
 import '../condition_icon.dart';
 import '../health_wheel_controller.dart';
 import '../view_models/character_health_widget_view_model.dart';
@@ -51,14 +52,12 @@ class CharacterHealthWidget extends StatelessWidget {
                 builder: (context, value, child) {
                   return Text(
                     character.characterState.display.value,
-                    style: TextStyle(
-                        fontFamily:
-                            vm.frosthavenStyle ? 'GermaniaOne' : 'Pirata',
-                        color: Colors.white,
-                        fontSize: vm.frosthavenStyle
+                    style: getCardTitleStyle(
+                        vm.frosthavenStyle
                             ? CharacterHealthWidget._kFontSizeFH * scale
                             : CharacterHealthWidget._kFontSizeOrig * scale,
-                        shadows: [shadow]),
+                        shadow,
+                        vm.frosthavenStyle),
                   );
                 }),
           ),
@@ -127,11 +126,7 @@ class CharacterHealthInnerWidget extends StatelessWidget {
       ),
       Text(
         frosthavenStyle ? '$health/$maxHealth' : '$health / $maxHealth',
-        style: TextStyle(
-            fontFamily: frosthavenStyle ? 'GermaniaOne' : 'Pirata',
-            color: Colors.white,
-            fontSize: kFontSizeBody * scale,
-            shadows: [shadow]),
+        style: getCardTitleStyle(kFontSizeBody * scale, shadow, frosthavenStyle),
       ),
       //add conditions here
       ValueListenableBuilder<List<Condition>>(
