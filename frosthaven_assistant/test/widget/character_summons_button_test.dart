@@ -56,6 +56,7 @@ void main() {
       final iconButton = tester.widget<IconButton>(find.byType(IconButton));
       iconButton.onPressed?.call();
       await tester.pump();
+      expect(find.byType(CharacterSummonsButton), findsOneWidget);
     });
   });
 }

@@ -1090,8 +1090,8 @@ void main() async {
         final monster = getIt<GameState>().currentList.first as Monster;
         final instance = monster.monsterInstances.first;
         // Boss path is exercised; result depends on actual data, just verify no crash
-        final _ = GameMethods.hasShield(monster, instance);
-        final __ = GameMethods.hasRetaliate(monster, instance);
+        expect(GameMethods.hasShield(monster, instance), isA<bool>());
+        expect(GameMethods.hasRetaliate(monster, instance), isA<bool>());
       });
     });
 

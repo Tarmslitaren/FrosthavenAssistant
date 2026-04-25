@@ -86,7 +86,7 @@ void main() {
       await tester.tap(find.widgetWithText(
           CheckboxListTile, 'Show Scenario Special Monsters'));
       await tester.pump();
-      // Just verify it doesn't throw
+      expect(find.byType(AddMonsterMenu), findsOneWidget);
     });
 
     testWidgets('tapping Add as Ally checkbox works',
@@ -94,7 +94,7 @@ void main() {
       await pumpMenu(tester);
       await tester.tap(find.widgetWithText(CheckboxListTile, 'Add as Ally'));
       await tester.pump();
-      // Just verify it doesn't throw
+      expect(find.byType(AddMonsterMenu), findsOneWidget);
     });
 
     testWidgets('monster list shows results after typing filter',

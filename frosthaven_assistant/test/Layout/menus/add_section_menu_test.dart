@@ -76,7 +76,7 @@ void main() {
       await tester.pump();
       await tester.enterText(find.byType(TextField), '');
       await tester.pump();
-      // Should not crash
+      expect(find.byType(TextField), findsOneWidget);
     });
 
     testWidgets('tapping Close dismisses the menu',
@@ -100,6 +100,7 @@ void main() {
     testWidgets('tapping a section item in the list triggers action',
         (WidgetTester tester) async {
       await pumpMenu(tester);
+      expect(find.byType(TextField), findsOneWidget);
       // With empty search, any visible section should be tappable
       await tester.pump(const Duration(milliseconds: 100));
       // If there are visible sections, tap the first ListTile

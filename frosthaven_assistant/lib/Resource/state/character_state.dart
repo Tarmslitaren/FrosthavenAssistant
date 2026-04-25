@@ -100,7 +100,6 @@ class CharacterState extends FigureState {
       }
     }
 
-
     if (json.containsKey("conditionsAddedThisTurn")) {
       final condis2 = json["conditionsAddedThisTurn"];
       for (int item in condis2) {
@@ -234,7 +233,7 @@ class CharacterState extends FigureState {
         'modifierDeck': _modifierDeck.toJson(),
         'summonList': _summonList.map((s) => s.toJson()).toList(),
         'useFHPerks': useFHPerks.value,
-        'perkList': List<bool>.from(_perkList),
+        'perkList': List<bool>.of(_perkList),
         'conditions': _conditions.value.map((c) => c.index).toList(),
         'conditionsAddedThisTurn':
             _conditionsAddedThisTurn.map((c) => c.index).toList(),

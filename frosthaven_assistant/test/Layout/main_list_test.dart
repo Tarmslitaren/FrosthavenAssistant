@@ -97,6 +97,7 @@ void main() {
       MainList.scrollToTop();
       await pumpWidget(tester);
       MainList.scrollToTop(); // After pumping, has a client
+      expect(find.byType(MainList), findsOneWidget);
     });
   });
 

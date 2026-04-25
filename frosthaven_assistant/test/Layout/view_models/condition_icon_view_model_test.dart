@@ -1,4 +1,4 @@
-// ignore_for_file: no-magic-number
+// ignore_for_file: no-magic-number, avoid-non-null-assertion
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -169,8 +169,8 @@ void main() {
       final vm = makeVm();
       final old = vm.getOldState()!;
       // Add another item after capturing the old state.
-      gs.action(AddMonsterCommand('Ancient Artillery (FH)', 1, false,
-          gameState: gs));
+      gs.action(
+          AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: gs));
       expect(vm.getTurnChanged(old, gs), isNull);
       gs.undo();
       gs.undo();
@@ -280,8 +280,8 @@ void main() {
       final gs = getIt<GameState>();
       gs.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
           gameState: gs));
-      gs.action(AddMonsterCommand('Ancient Artillery (FH)', 1, false,
-          gameState: gs));
+      gs.action(
+          AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: gs));
       final vm = makeVm();
       final old = vm.getOldState()!;
       final monster = gs.currentList.firstWhere((e) => e is Monster) as Monster;

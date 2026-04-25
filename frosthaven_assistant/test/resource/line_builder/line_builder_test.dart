@@ -166,6 +166,7 @@ void main() {
         false,
       );
       await pump(tester, widget);
+      expect(find.byType(Column), findsAtLeast(1));
     });
 
     testWidgets('row tokens [r] and [/r] render without error',
@@ -197,6 +198,7 @@ void main() {
         false,
       );
       await pump(tester, widget);
+      expect(find.byType(Column), findsAtLeast(1));
     });
 
     testWidgets('inner row tokens [s] and [/s] render without error',
@@ -212,6 +214,7 @@ void main() {
         false,
       );
       await pump(tester, widget);
+      expect(find.byType(Column), findsAtLeast(1));
     });
 
     testWidgets('[subLineEnd] token renders without error',
@@ -227,6 +230,7 @@ void main() {
         false,
       );
       await pump(tester, widget);
+      expect(find.byType(Column), findsAtLeast(1));
     });
 
     testWidgets('image token starting with ¤ renders without error',
@@ -242,6 +246,7 @@ void main() {
         false,
       );
       await pump(tester, widget);
+      expect(find.byType(Column), findsAtLeast(1));
     });
 
     testWidgets('right-join token starting with ! renders without error',
@@ -257,6 +262,7 @@ void main() {
         false,
       );
       await pump(tester, widget);
+      expect(find.byType(Column), findsAtLeast(1));
     });
 
     testWidgets('small-style token starting with * renders without error',
@@ -272,6 +278,7 @@ void main() {
         false,
       );
       await pump(tester, widget);
+      expect(find.byType(Column), findsAtLeast(1));
     });
 
     testWidgets('mid-style token starting with ^ renders without error',
@@ -287,6 +294,7 @@ void main() {
         false,
       );
       await pump(tester, widget);
+      expect(find.byType(Column), findsAtLeast(1));
     });
 
     testWidgets('double ^^ mid-squished style renders without error',
@@ -302,6 +310,7 @@ void main() {
         false,
       );
       await pump(tester, widget);
+      expect(find.byType(Column), findsAtLeast(1));
     });
 
     testWidgets('grant token starting with > renders without error',
@@ -317,6 +326,7 @@ void main() {
         false,
       );
       await pump(tester, widget);
+      expect(find.byType(Column), findsAtLeast(1));
     });
 
     testWidgets('icon token %attack% renders without error',
@@ -332,6 +342,7 @@ void main() {
         false,
       );
       await pump(tester, widget);
+      expect(find.byType(Column), findsAtLeast(1));
     });
 
     testWidgets('£ elite-style switch renders without error',
@@ -347,6 +358,7 @@ void main() {
         false,
       );
       await pump(tester, widget);
+      expect(find.byType(Column), findsAtLeast(1));
     });
 
     testWidgets('left=true with icon token renders black icon',
@@ -362,6 +374,7 @@ void main() {
         false,
       );
       await pump(tester, widget);
+      expect(find.byType(Column), findsAtLeast(1));
     });
 
     testWidgets('alignment start renders without error',
@@ -377,6 +390,7 @@ void main() {
         false,
       );
       await pump(tester, widget);
+      expect(find.byType(Column), findsAtLeast(1));
     });
 
     testWidgets('alignment end renders without error',
@@ -392,6 +406,7 @@ void main() {
         false,
       );
       await pump(tester, widget);
+      expect(find.byType(Column), findsAtLeast(1));
     });
 
     testWidgets('¤fire image inside column renders without error',
@@ -407,6 +422,7 @@ void main() {
         false,
       );
       await pump(tester, widget);
+      expect(find.byType(Column), findsAtLeast(1));
     });
 
     testWidgets('¤fire image as last element returns column',
@@ -422,6 +438,7 @@ void main() {
         false,
       );
       await pump(tester, widget);
+      expect(find.byType(Column), findsAtLeast(1));
     });
   });
 }

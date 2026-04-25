@@ -26,7 +26,7 @@ void main() {
     testWidgets('empty string renders without crashing', (tester) async {
       final widget = TokenApplier.applyTokensForPerks('');
       await tester.pumpWidget(wrapWidget(widget));
-      // No crash is the assertion
+      expect(find.byType(RichText), findsAtLeast(1));
     });
   });
 

@@ -68,7 +68,8 @@ void main() {
       // No characters → showToast is called, but does not throw
       await tester.tap(find.byType(TextButton));
       await tester.pump(const Duration(milliseconds: 300));
-      // No crash is the assertion
+      // Blocked: no characters, so state is unchanged
+      expect(getIt<GameState>().roundState.value, RoundState.chooseInitiative);
     });
 
     testWidgets('tapping in playTurns advances to next round',

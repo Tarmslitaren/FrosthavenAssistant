@@ -1,4 +1,4 @@
-// ignore_for_file: no-magic-number
+// ignore_for_file: no-magic-number, avoid-late-keyword
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -31,9 +31,8 @@ void main() {
     AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
             gameState: getIt<GameState>())
         .execute();
-    character = getIt<GameState>()
-        .currentList
-        .firstWhere((e) => e is Character) as Character;
+    character = getIt<GameState>().currentList.firstWhere((e) => e is Character)
+        as Character;
     (character.characterState.health as ValueNotifier<int>).value = 10;
     (character.characterState.initiative as ValueNotifier<int>).value = 0;
   });

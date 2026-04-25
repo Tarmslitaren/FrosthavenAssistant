@@ -136,7 +136,7 @@ void main() {
       ));
       await tester.tap(find.text('tap'));
       await tester.pump();
-      // No crash is the assertion
+      expect(find.text('tap'), findsOneWidget);
     });
 
     testWidgets('rebuildAllChildren does not throw', (tester) async {
@@ -150,6 +150,7 @@ void main() {
       ));
       await tester.tap(find.text('tap'));
       await tester.pump();
+      expect(find.text('tap'), findsOneWidget);
     });
 
     testWidgets('defaultBuildDraggableFeedback builds a widget',
@@ -184,6 +185,7 @@ void main() {
       ));
       await tester.tap(find.text('tap'));
       await tester.pump();
+      expect(find.text('tap'), findsOneWidget);
     });
 
     testWidgets('showErrorToastStickyWithRetry does not throw', (tester) async {
@@ -200,6 +202,7 @@ void main() {
       ));
       await tester.tap(find.text('tap'));
       await tester.pump();
+      expect(find.text('tap'), findsOneWidget);
     });
 
     testWidgets(

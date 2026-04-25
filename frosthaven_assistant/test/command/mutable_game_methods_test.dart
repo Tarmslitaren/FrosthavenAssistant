@@ -292,6 +292,7 @@ void main() {
           fail('Alive character "${item.id}" appeared after an active monster');
         }
       }
+      expect(list, isNotEmpty);
     });
 
     test('dead character is sorted after alive characters', () {

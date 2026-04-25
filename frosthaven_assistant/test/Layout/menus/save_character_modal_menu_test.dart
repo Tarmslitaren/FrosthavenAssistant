@@ -88,7 +88,7 @@ void main() {
       await pumpMenu(tester, saveOnly: false, char: character);
       await tester.tap(find.text('Save'));
       await tester.pumpAndSettle();
-      // Dialog should close (Navigator.pop called)
+      expect(find.byType(SaveCharacterModalMenu), findsNothing);
     });
 
     testWidgets('tapping Delete button closes dialog',
@@ -96,6 +96,7 @@ void main() {
       await pumpMenu(tester, saveOnly: false, char: character);
       await tester.tap(find.text('Delete'));
       await tester.pumpAndSettle();
+      expect(find.byType(SaveCharacterModalMenu), findsNothing);
     });
 
     testWidgets('tapping Load button closes dialog',
@@ -104,6 +105,7 @@ void main() {
       // Load button is the first button when saveOnly=false
       await tester.tap(find.text('Load'));
       await tester.pumpAndSettle();
+      expect(find.byType(SaveCharacterModalMenu), findsNothing);
     });
   });
 }

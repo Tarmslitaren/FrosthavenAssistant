@@ -80,8 +80,8 @@ void main() {
       if (tester.widgetList(iconButtons).isNotEmpty) {
         await tester.tap(iconButtons.first, warnIfMissed: false);
         await tester.pump();
-        // No crash is the assertion
       }
+      expect(find.byType(AddSummonMenu), findsOneWidget);
     });
 
     testWidgets('tapping a non-selected color button triggers setState',
@@ -94,6 +94,7 @@ void main() {
         greenButton.onPressed?.call();
         await tester.pump();
       }
+      expect(find.byType(AddSummonMenu), findsOneWidget);
     });
 
     testWidgets('tapping nr button 2 changes selected standee number',
@@ -106,17 +107,18 @@ void main() {
         btn2.onPressed?.call();
         await tester.pump();
       }
+      expect(find.byType(AddSummonMenu), findsOneWidget);
     });
 
     testWidgets('tapping a summon list item triggers addSummon',
         (WidgetTester tester) async {
       await pumpMenu(tester);
+      expect(find.byType(AddSummonMenu), findsOneWidget);
       // Find ListTile items in the summon list
       final listTiles = find.byType(ListTile);
       if (tester.widgetList(listTiles).isNotEmpty) {
         await tester.tap(listTiles.first, warnIfMissed: false);
         await tester.pump();
-        // After tapping a summon, the menu should close (Navigator.pop)
       }
     });
   });

@@ -77,18 +77,21 @@ void main() {
       await pumpMenu(tester, saveOnly: false, saveName: 'TestSave');
       await tester.tap(find.text('Save'));
       await tester.pumpAndSettle();
+      expect(find.byType(SaveModalMenu), findsNothing);
     });
 
     testWidgets('tapping Load button closes dialog', (WidgetTester tester) async {
       await pumpMenu(tester, saveOnly: false, saveName: 'TestSave');
       await tester.tap(find.text('Load'));
       await tester.pumpAndSettle();
+      expect(find.byType(SaveModalMenu), findsNothing);
     });
 
     testWidgets('tapping Delete button closes dialog', (WidgetTester tester) async {
       await pumpMenu(tester, saveOnly: false, saveName: 'TestSave');
       await tester.tap(find.text('Delete'));
       await tester.pumpAndSettle();
+      expect(find.byType(SaveModalMenu), findsNothing);
     });
   });
 }

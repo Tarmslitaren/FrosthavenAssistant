@@ -72,6 +72,7 @@ void main() {
       final menuInkWells = find.descendant(
           of: find.byType(GH2eFactionAMDCardMenu),
           matching: find.byType(InkWell));
+      expect(menuInkWells, findsAtLeast(1));
       if (tester.widgetList(menuInkWells).isNotEmpty) {
         final inkWell = tester.widget<InkWell>(menuInkWells.first);
         inkWell.onTap?.call();

@@ -77,7 +77,7 @@ void main() {
       // Replace widget tree — should trigger dispose
       await tester.pumpWidget(const MaterialApp(home: SizedBox()));
       await tester.pump();
-      // No exception expected
+      expect(find.byType(HealthWheelController), findsNothing);
     });
   });
 }

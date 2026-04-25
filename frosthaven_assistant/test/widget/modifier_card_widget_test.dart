@@ -47,6 +47,7 @@ void main() {
       );
       await tester.pump();
       FlutterError.onError = originalOnError;
+      expect(find.byType(ModifierCardFront), findsOneWidget);
     });
 
     testWidgets('buildFront with Military faction card renders without error',
@@ -63,6 +64,7 @@ void main() {
       );
       await tester.pump();
       FlutterError.onError = originalOnError;
+      expect(find.byType(ModifierCardFront), findsOneWidget);
     });
 
     testWidgets('buildFront with allies deck renders without error',
@@ -79,6 +81,7 @@ void main() {
       );
       await tester.pump();
       FlutterError.onError = originalOnError;
+      expect(find.byType(ModifierCardFront), findsOneWidget);
     });
   });
 }

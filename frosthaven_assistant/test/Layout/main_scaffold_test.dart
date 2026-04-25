@@ -131,6 +131,7 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 300));
       FlutterError.onError = originalOnError;
+      expect(find.byType(ToastNotifier), findsOneWidget);
     });
   });
 }

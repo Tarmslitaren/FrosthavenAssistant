@@ -364,7 +364,7 @@ void main() {
       await tester.ensureVisible(finder);
       await tester.tap(finder);
       await tester.pump();
-      // Just verify the tap didn't throw
+      expect(find.widgetWithText(ListTile, 'Clear unlocked characters and stuff'), findsOneWidget);
     });
 
     testWidgets('tapping Load/Save State opens SaveMenu',
