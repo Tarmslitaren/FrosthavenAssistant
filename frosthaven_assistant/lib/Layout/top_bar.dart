@@ -25,7 +25,7 @@ class TopBar extends StatelessWidget {
         valueListenable: settings.userScalingBars,
         builder: (context, value, child) {
           final userScaling = settings.userScalingBars.value;
-          var shadow = Shadow(
+          final shadow = Shadow(
             offset: Offset(1 * userScaling, 1 * userScaling),
             color: Colors.black87,
             blurRadius: 1 * userScaling,
@@ -42,8 +42,8 @@ class TopBar extends StatelessWidget {
               },
               child: Container(
                 alignment: Alignment.center,
-                child:
-                    Icon(Icons.menu, shadows: [shadow], size: _kMenuIconSize * userScaling),
+                child: Icon(Icons.menu,
+                    shadows: [shadow], size: _kMenuIconSize * userScaling),
               ),
             ),
             title: Container(
@@ -70,8 +70,9 @@ class TopBar extends StatelessWidget {
                             AssetImage(darkMode
                                 ? 'assets/images/psd/gloomhaven-bar.png'
                                 : 'assets/images/psd/frosthaven-bar.png'),
-                            height:
-                                (_kToolbarHeight * settings.userScalingBars.value).toInt()),
+                            height: (_kToolbarHeight *
+                                    settings.userScalingBars.value)
+                                .toInt()),
                       ),
                     ),
                   );

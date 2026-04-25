@@ -21,7 +21,9 @@ class Settings {
 
   final userScalingMainList = ValueNotifier<double>(1.0);
   final userScalingBars = ValueNotifier<double>(
-      (Platform.isWindows || Platform.isLinux || Platform.isMacOS) ? _kDesktopBarScale : 1.0);
+      (Platform.isWindows || Platform.isLinux || Platform.isMacOS)
+          ? _kDesktopBarScale
+          : 1.0);
   final userScalingMenus = ValueNotifier<double>(1.0);
   final fullScreen = ValueNotifier<bool>(true);
   final darkMode = ValueNotifier<bool>(false);
@@ -321,14 +323,14 @@ class Settings {
 
       if (data["saves"] != null) {
         Map<String, dynamic> map = data["saves"];
-        for (var key in map.keys) {
+        for (final key in map.keys) {
           saves.value[key] = map[key];
         }
       }
 
       if (data["characterSaves"] != null) {
         Map<String, dynamic> map = data["characterSaves"];
-        for (var key in map.keys) {
+        for (final key in map.keys) {
           characterSaves.value[key] = map[key];
         }
       }

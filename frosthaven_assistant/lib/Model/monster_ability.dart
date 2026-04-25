@@ -3,7 +3,8 @@ import 'package:flutter/foundation.dart';
 const int _kGraphicsIndex = 3;
 
 @immutable
-class MonsterAbilityDeckModel { // ignore: prefer-match-file-name, file contains multiple ability model types
+class MonsterAbilityDeckModel {
+  // ignore: prefer-match-file-name, file contains multiple ability model types
   final String name;
   final String edition;
   final List<MonsterAbilityCardModel> cards;
@@ -12,9 +13,10 @@ class MonsterAbilityDeckModel { // ignore: prefer-match-file-name, file contains
   factory MonsterAbilityDeckModel.fromJson(
       Map<String, dynamic> data, String edition) {
     final name = data['name'] as String;
-    final List<dynamic> dynamicCards = data['cards'] as List<dynamic>; // ignore: avoid-dynamic, complex JSON cards array requires mutable dynamic list
+    final List<dynamic> dynamicCards = data['cards'] as List<
+        dynamic>; // ignore: avoid-dynamic, complex JSON cards array requires mutable dynamic list
     List<MonsterAbilityCardModel> cards = [];
-    for (var card in dynamicCards) {
+    for (final card in dynamicCards) {
       String title = name;
       if (card[0] is String) {
         title = card[0] as String;
@@ -33,9 +35,10 @@ class MonsterAbilityDeckModel { // ignore: prefer-match-file-name, file contains
       List<GraphicPositional> graphicPositionals = [];
       if (card[3] is List) {
         //handle the graphic extras
-        List<dynamic> list = card[3]; // ignore: avoid-dynamic, graphic extras are a dynamic JSON array
+        List<dynamic> list = card[
+            3]; // ignore: avoid-dynamic, graphic extras are a dynamic JSON array
 
-        for (var item in list) {
+        for (final item in list) {
           double angle = 0;
           double scale = 1;
           if (item.containsKey('angle')) {

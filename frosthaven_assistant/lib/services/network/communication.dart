@@ -14,7 +14,8 @@ import 'connection.dart';
 ///
 /// The previous text-delimited format (`Index:NDescription:...GameState:...`)
 /// is still accepted on receive for backwards compatibility with older peers.
-class StateEnvelope { // ignore: prefer-match-file-name, file contains multiple communication types
+class StateEnvelope {
+  // ignore: prefer-match-file-name, file contains multiple communication types
   final int index;
   final String description;
 
@@ -69,7 +70,7 @@ class Communication {
   void listen(
       Function(Uint8List) onData, Function? onError, Function()? onDone) {
     final sockets = _connection.getAll();
-    for (var socket in sockets) {
+    for (final socket in sockets) {
       socket.listen(onData, onError: onError, onDone: onDone);
     }
   }
@@ -82,13 +83,14 @@ class Communication {
     final recipients = sockets.where((x) =>
         x.remoteAddress != client.remoteAddress ||
         x.remotePort != client.remotePort);
-    for (var socket in recipients) {
+    for (final socket in recipients) {
       sendTo(socket, data);
     }
   }
 
   void sendTo(Socket? socket, String data) {
-    assert(socket != null, 'sendTo called with a null socket — message dropped');
+    assert(
+        socket != null, 'sendTo called with a null socket — message dropped');
     if (socket == null) {
       debugPrint('Communication.sendTo: null socket, message dropped: "$data"');
       return;
@@ -99,7 +101,7 @@ class Communication {
   void sendToAll(String data) {
     final message = _composeMessageFrom(data);
     final sockets = _connection.getAll();
-    for (var socket in sockets) {
+    for (final socket in sockets) {
       socket.write(message);
     }
   }

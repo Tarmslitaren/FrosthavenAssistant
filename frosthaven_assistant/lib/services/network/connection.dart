@@ -13,7 +13,7 @@ class Connection {
 
   Future<Socket> connect(String address, int port) async {
     final resolvedAddresses = await _resolveAddress(address);
-    var socket = await Socket.connect(resolvedAddresses.first, port);
+    final socket = await Socket.connect(resolvedAddresses.first, port);
     add(socket);
 
     return socket;
@@ -37,7 +37,7 @@ class Connection {
   void remove(Socket socket) {
     _cleanUpClosedConnections();
     if (!_isClosed(socket)) {
-      var toDisconnect = _find(socket);
+      final toDisconnect = _find(socket);
       _destroy(toDisconnect);
     }
   }
@@ -98,9 +98,9 @@ class Connection {
   }
 
   void _cleanUpClosedConnections() {
-    var toDisconnect = _sockets.where((x) => _isClosed(x));
+    final toDisconnect = _sockets.where((x) => _isClosed(x));
     while (toDisconnect.isNotEmpty) {
-      var socket = toDisconnect.first;
+      final socket = toDisconnect.first;
       socket.destroy();
       _sockets.remove(socket);
     }

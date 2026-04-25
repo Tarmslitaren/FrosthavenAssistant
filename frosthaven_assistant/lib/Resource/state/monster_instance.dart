@@ -11,9 +11,8 @@ class MonsterInstance extends FigureState {
     move = 0; //only used for summons
     attack = 0;
     range = 0;
-    _roundSummoned = summoned
-        ? (gameState ?? getIt<GameState>()).round.value
-        : -1;
+    _roundSummoned =
+        summoned ? (gameState ?? getIt<GameState>()).round.value : -1;
   }
 
   MonsterInstance.summon(
@@ -42,7 +41,8 @@ class MonsterInstance extends FigureState {
   }
 
   MonsterType get type => _type;
-  MonsterType _type = MonsterType.normal; //can't be final due to ice wraith special
+  MonsterType _type =
+      MonsterType.normal; //can't be final due to ice wraith special
   String name = '';
   String gfx = '';
 
@@ -62,19 +62,15 @@ class MonsterInstance extends FigureState {
     StatValue newHealthValue = const IntStatValue(
         10); //need to put something outer than 0 or the standee will die immediately causing glitch
     final levels = monster.type.levels;
-    final levelIndex = levels.isEmpty
-        ? -1
-        : monster.level.value.clamp(0, levels.length - 1);
+    final levelIndex =
+        levels.isEmpty ? -1 : monster.level.value.clamp(0, levels.length - 1);
     if (levelIndex >= 0) {
       if (type == MonsterType.boss) {
-        newHealthValue =
-            levels[levelIndex].boss?.health ?? newHealthValue;
+        newHealthValue = levels[levelIndex].boss?.health ?? newHealthValue;
       } else if (type == MonsterType.elite) {
-        newHealthValue =
-            levels[levelIndex].elite?.health ?? newHealthValue;
+        newHealthValue = levels[levelIndex].elite?.health ?? newHealthValue;
       } else if (type == MonsterType.normal) {
-        newHealthValue =
-            levels[levelIndex].normal?.health ?? newHealthValue;
+        newHealthValue = levels[levelIndex].normal?.health ?? newHealthValue;
       }
     }
     int? value = StatCalculator.calculateFormula(newHealthValue);
@@ -86,7 +82,7 @@ class MonsterInstance extends FigureState {
       if (newHealthValue is FormulaStatValue &&
           newHealthValue.formula == "Hollowpact") {
         int value = 7;
-        for (var item in gs.currentList) {
+        for (final item in gs.currentList) {
           if (item is Character && item.id == "Hollowpact") {
             final healthByLevel = item.characterClass.healthByLevel;
             final level = item.characterState.level.value;
@@ -101,7 +97,7 @@ class MonsterInstance extends FigureState {
       if (newHealthValue is FormulaStatValue &&
           newHealthValue.formula == "Incarnate") {
         int value = 36; //double Incarnates level 5 health
-        for (var item in gs.currentList) {
+        for (final item in gs.currentList) {
           if (item is Character && item.id == "Incarnate") {
             final healthByLevel = item.characterClass.healthByLevel;
             final level = item.characterState.level.value;
@@ -150,9 +146,10 @@ class MonsterInstance extends FigureState {
     name = json["name"];
     gfx = json["gfx"];
     final typeIdx = json["type"] as int?;
-    _type = (typeIdx != null && typeIdx >= 0 && typeIdx < MonsterType.values.length)
-        ? MonsterType.values[typeIdx]
-        : MonsterType.normal;
+    _type =
+        (typeIdx != null && typeIdx >= 0 && typeIdx < MonsterType.values.length)
+            ? MonsterType.values[typeIdx]
+            : MonsterType.normal;
     move = json["move"];
     attack = json["attack"];
     range = json["range"];
@@ -178,7 +175,8 @@ class MonsterInstance extends FigureState {
       }
     }
     if (json.containsKey("conditionsAddedPreviousTurn")) {
-      List<Object?> condis3 = json["conditionsAddedPreviousTurn"] as List<Object?>;
+      List<Object?> condis3 =
+          json["conditionsAddedPreviousTurn"] as List<Object?>;
       for (int item in condis3.cast<int>()) {
         if (item >= 0 && item < Condition.values.length) {
           _conditionsAddedPreviousTurn.add(Condition.values[item]);

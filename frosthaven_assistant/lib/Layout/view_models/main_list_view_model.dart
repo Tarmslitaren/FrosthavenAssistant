@@ -55,7 +55,7 @@ class MainListViewModel {
         final summonList = item.characterState.summonList;
         if (summonList.isNotEmpty) {
           double listWidth = 0;
-          for (var monsterInstance in summonList) {
+          for (final monsterInstance in summonList) {
             listWidth += MonsterBox.getWidth(scale, monsterInstance);
           }
           double rows = listWidth / mainListWidth;
@@ -66,7 +66,7 @@ class MainListViewModel {
         listHeight += _kMonsterHeaderHeight;
         if (item.monsterInstances.isNotEmpty) {
           double listWidth = 0;
-          for (var monsterInstance in item.monsterInstances) {
+          for (final monsterInstance in item.monsterInstances) {
             listWidth += MonsterBox.getWidth(scale, monsterInstance);
           }
           double rows = listWidth / mainListWidth;
@@ -79,7 +79,7 @@ class MainListViewModel {
   }
 
   void reorderItem(int oldIndex, int newIndex) {
-    _gameState.action(
-        ReorderListCommand(newIndex, oldIndex, gameState: _gameState));
+    _gameState
+        .action(ReorderListCommand(newIndex, oldIndex, gameState: _gameState));
   }
 }

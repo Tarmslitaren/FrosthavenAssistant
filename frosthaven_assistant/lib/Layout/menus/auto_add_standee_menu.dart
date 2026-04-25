@@ -64,7 +64,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
     super.initState();
     startCommandIndex = _gameState.commandIndex.value;
 
-    for (var data in widget.monsterData) {
+    for (final data in widget.monsterData) {
       Monster? monster = _gameState.currentList.firstWhereOrNull(
               (element) => element.id == data.name && element is Monster)
           as Monster?;
@@ -74,7 +74,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
       }
       List<int> someElites = [];
       List<int> someNormals = [];
-      for (var item in monster.monsterInstances) {
+      for (final item in monster.monsterInstances) {
         if (item.type == MonsterType.elite) {
           someElites.add(item.standeeNr);
         } else {
@@ -109,7 +109,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
 
   bool _isStandeeOut(
       int nr, Monster monster, bool elite, int nrOfElite, int nrOfNormal) {
-    for (var item in monster.monsterInstances) {
+    for (final item in monster.monsterInstances) {
       if (item.standeeNr == nr ||
           (elite && nrOfElite <= currentEliteAdded) ||
           (!elite && nrOfNormal <= currentNormalAdded)) {
@@ -297,7 +297,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
           int currentEliteAdded = 0;
           int currentNormalAdded = 0;
 
-          for (var item in monster.monsterInstances) {
+          for (final item in monster.monsterInstances) {
             if (item.type == MonsterType.elite) {
               currentEliteAdded++;
             } else {
@@ -419,7 +419,7 @@ class _StandeeNrButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var shadow = Shadow(
+    final shadow = Shadow(
       offset: Offset(_kShadowOffset * scale, _kShadowOffset * scale),
       color: Colors.black87,
       blurRadius: _kShadowBlur,

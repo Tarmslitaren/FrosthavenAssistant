@@ -67,7 +67,7 @@ class Item extends StatelessWidget {
       final summonList = character.characterState.summonList;
       if (summonList.isNotEmpty) {
         double summonsTotalWidth = 0;
-        for (var monsterInstance in summonList) {
+        for (final monsterInstance in summonList) {
           summonsTotalWidth += MonsterBox.getWidth(scale, monsterInstance) +
               _kBoxSpacing * scale;
         }
@@ -82,7 +82,7 @@ class Item extends StatelessWidget {
         standeeRows = 1;
       }
       double totalWidthOfMonsterBoxes = 0;
-      for (var item in monster.monsterInstances) {
+      for (final item in monster.monsterInstances) {
         totalWidthOfMonsterBoxes +=
             MonsterBox.getWidth(scale, item) + _kBoxSpacing * scale;
       }

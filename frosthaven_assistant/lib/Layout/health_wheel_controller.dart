@@ -62,7 +62,7 @@ class HealthWheelControllerState extends State<HealthWheelController> {
       dx = bounds.topCenter.dx - _kOverlayXOffset * scale;
       dy = bounds.topCenter.dy - _kOverlayYOffset * scale;
     }
-    var selectHealthWheel = SelectHealthWheel(
+    final selectHealthWheel = SelectHealthWheel(
         key: UniqueKey(),
         data: figure,
         figureId: figureId,

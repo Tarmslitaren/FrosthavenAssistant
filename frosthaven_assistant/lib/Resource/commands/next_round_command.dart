@@ -24,7 +24,7 @@ class NextRoundCommand extends Command {
   @override
   void execute() {
     //todo: move code to GameMethods?
-    for (var item in _gameState.currentList) {
+    for (final item in _gameState.currentList) {
       if (item is Character) {
         item.nextRound(stateAccess);
       }
@@ -49,7 +49,7 @@ class NextRoundCommand extends Command {
 
     GameUtilMethods.setToastMessage("");
 
-    for (var rule in _gameState.scenarioSpecialRules) {
+    for (final rule in _gameState.scenarioSpecialRules) {
       if (rule.type == "Timer" && !rule.startOfRound) {
         for (int round in rule.list.cast<int>()) {
           //minus 1 means always
@@ -65,7 +65,7 @@ class NextRoundCommand extends Command {
     }
 
     //start of next round is now
-    for (var rule in _gameState.scenarioSpecialRules) {
+    for (final rule in _gameState.scenarioSpecialRules) {
       if (rule.type == "Timer" && rule.startOfRound) {
         for (int round in rule.list.cast<int>()) {
           //minus 1 means always
@@ -105,7 +105,6 @@ class NextRoundCommand extends Command {
       }
     }
   }
-
 
   @override
   String describe() {

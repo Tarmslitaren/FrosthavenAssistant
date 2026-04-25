@@ -401,13 +401,13 @@ class _LevelLegend extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var shadow = Shadow(
+    final shadow = Shadow(
       offset: Offset(SetLevelMenu._kShadowOffset * scale,
           SetLevelMenu._kShadowOffset * scale),
       color: Colors.black87,
       blurRadius: SetLevelMenu._kShadowBlur * scale,
     );
-    var textStyleLevelWidget = TextStyle(
+    final textStyleLevelWidget = TextStyle(
         color: Colors.white,
         overflow: TextOverflow.fade,
         fontSize: kFontSizeTitle * scale,

@@ -86,12 +86,12 @@ class ModifierDeck {
   void updateFromJson(Map<String, dynamic> modifierDeckData) {
     // Reset removable counts first (fires _handleRemovableCards on the current
     // pile, but the piles are fully replaced below anyway).
-    for (var key in _removables.keys) {
+    for (final key in _removables.keys) {
       _removables[key]?.value = 0;
     }
     _needsShuffle = false;
 
-    for (var item in modifierDeckData["drawPile"] as List) {
+    for (final item in modifierDeckData["drawPile"] as List) {
       String gfx = item["gfx"];
       if (gfx == "curse" ||
           gfx.contains("empower") ||
@@ -100,7 +100,7 @@ class ModifierDeck {
         addRemovableValue(_StateModifier(), gfx, 1);
       }
     }
-    for (var item in modifierDeckData["discardPile"] as List) {
+    for (final item in modifierDeckData["discardPile"] as List) {
       String gfx = item["gfx"];
       if (_isMultiplyType(gfx)) {
         _needsShuffle = true;
@@ -355,7 +355,7 @@ class ModifierDeck {
   }
 
   void removeCardFromDiscard(_StateModifier _, int index) {
-    var card = _discardPile.removeAt(index);
+    final card = _discardPile.removeAt(index);
     _removedPile.add(card);
     if (card.gfx == "minus1") {
       _addedMinusOnes.value--;
@@ -363,7 +363,7 @@ class ModifierDeck {
   }
 
   void returnCardToDiscard(_StateModifier _, int index) {
-    var card = _removedPile.removeAt(index);
+    final card = _removedPile.removeAt(index);
     _discardPile.add(card);
     if (card.gfx == "minus1") {
       _addedMinusOnes.value++;
@@ -371,7 +371,7 @@ class ModifierDeck {
   }
 
   void returnCardToDrawPile(_StateModifier _) {
-    var card = _discardPile.pop();
+    final card = _discardPile.pop();
     _drawPile.push(card);
     _cardCount.value = _drawPile.size();
     //todo: how to tell if revealed should change? if it is over 0?
@@ -493,7 +493,7 @@ class ModifierDeck {
 
   void reorderCards(_StateModifier s, int newIndex, int oldIndex) {
     List<ModifierCard> list = List.of(_drawPile.getList());
-    var item = list.removeAt(oldIndex);
+    final item = list.removeAt(oldIndex);
     list.insert(newIndex, item);
     _drawPile.setList(list);
 
@@ -528,12 +528,14 @@ class ModifierDeck {
   String toString() => json.encode(toJson());
 
   void _initListeners() {
-    for (var item in _removables.keys) {
+    for (final item in _removables.keys) {
       _removables[item]?.removeListener(() {
-        final r = _removables[item]; if (r != null) _handleRemovableCards(r, item);
+        final r = _removables[item];
+        if (r != null) _handleRemovableCards(r, item);
       });
       _removables[item]?.addListener(() {
-        final r = _removables[item]; if (r != null) _handleRemovableCards(r, item);
+        final r = _removables[item];
+        if (r != null) _handleRemovableCards(r, item);
       });
     }
   }
@@ -541,7 +543,7 @@ class ModifierDeck {
   List<ModifierCard> _getCardsFromJson(
       Map<String, dynamic> modifierDeckData, String deckId) {
     List<ModifierCard> newList = [];
-    for (var item in modifierDeckData[deckId] as List) {
+    for (final item in modifierDeckData[deckId] as List) {
       String gfx = item["gfx"];
       gfx = gfx.replaceAll("-allies", "");
       if (gfx == "curse") {
@@ -588,13 +590,13 @@ class ModifierDeck {
     _addedMinusOnes.value = 0;
     _imbuement.value = 0;
     _needsShuffle = false;
-    for (var item in _removables.keys) {
+    for (final item in _removables.keys) {
       _removables[item]?.value = 0;
     }
   }
 
   ModifierCard? _removeCardFromDrawPile(String gfx) {
-    var card =
+    final card =
         _drawPile.getList().lastWhereOrNull((element) => element.gfx == gfx);
     if (card != null) {
       _drawPile.remove(card);
@@ -608,7 +610,7 @@ class ModifierDeck {
     //count and add or remove, then shuffle
     int count = 0;
     bool shuffle = true;
-    for (var item in _drawPile.getList()) {
+    for (final item in _drawPile.getList()) {
       if (item.gfx == gfx) {
         count++;
       }

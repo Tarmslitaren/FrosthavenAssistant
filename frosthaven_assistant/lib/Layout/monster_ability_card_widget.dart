@@ -192,7 +192,7 @@ class MonsterAbilityCardFront extends StatelessWidget {
       initText = "0$initText";
     }
 
-    var shadow = Shadow(
+    final shadow = Shadow(
       offset: Offset(MonsterAbilityCardWidget._kShadowTextOffsetX * scale,
           MonsterAbilityCardWidget._kShadowTextOffsetY * scale),
       color: Colors.black87,
@@ -256,8 +256,12 @@ class MonsterAbilityCardFront extends StatelessWidget {
                             card.title,
                             style: getCardTitleStyle(
                                 frosthavenStyle
-                                    ? MonsterAbilityCardWidget._kTitleFontSizeFh * scale
-                                    : MonsterAbilityCardWidget._kTitleFontSizeGh * scale,
+                                    ? MonsterAbilityCardWidget
+                                            ._kTitleFontSizeFh *
+                                        scale
+                                    : MonsterAbilityCardWidget
+                                            ._kTitleFontSizeGh *
+                                        scale,
                                 shadow,
                                 frosthavenStyle),
                           ),
@@ -272,8 +276,10 @@ class MonsterAbilityCardFront extends StatelessWidget {
                       initText,
                       style: getCardTitleStyle(
                           frosthavenStyle
-                              ? MonsterAbilityCardWidget._kInitFontSizeFh * scale
-                              : MonsterAbilityCardWidget._kInitFontSizeGh * scale,
+                              ? MonsterAbilityCardWidget._kInitFontSizeFh *
+                                  scale
+                              : MonsterAbilityCardWidget._kInitFontSizeGh *
+                                  scale,
                           shadow,
                           frosthavenStyle),
                     )),
@@ -282,7 +288,10 @@ class MonsterAbilityCardFront extends StatelessWidget {
                     bottom: MonsterAbilityCardWidget._kCardNrBottom * scale,
                     child: Text(
                       card.nr.toString(),
-                      style: getCardNumberStyle(MonsterAbilityCardWidget._kCardNrFontSize * scale, shadow, frosthavenStyle),
+                      style: getCardNumberStyle(
+                          MonsterAbilityCardWidget._kCardNrFontSize * scale,
+                          shadow,
+                          frosthavenStyle),
                     )),
                 card.shuffle
                     ? Positioned(
@@ -345,7 +354,8 @@ class MonsterAbilityCardRear extends StatelessWidget {
   Widget build(BuildContext context) {
     bool frosthavenStyle = GameMethods.isFrosthavenStyle(monster.type);
     final rearShadow = Shadow(
-        offset: Offset(MonsterAbilityCardWidget._kRearShadowOffset, MonsterAbilityCardWidget._kRearShadowOffset),
+        offset: Offset(MonsterAbilityCardWidget._kRearShadowOffset,
+            MonsterAbilityCardWidget._kRearShadowOffset),
         color: Colors.black);
     return Container(
         decoration: BoxDecoration(
@@ -384,7 +394,11 @@ class MonsterAbilityCardRear extends StatelessWidget {
                     bottom: 0,
                     child: Text(
                       size.toString(),
-                      style: getCardNumberStyle(MonsterAbilityCardWidget._kRearDeckSizeFontSize * scale, rearShadow, frosthavenStyle),
+                      style: getCardNumberStyle(
+                          MonsterAbilityCardWidget._kRearDeckSizeFontSize *
+                              scale,
+                          rearShadow,
+                          frosthavenStyle),
                     ))
                 : Container(),
           ],

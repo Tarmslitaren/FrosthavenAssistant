@@ -74,14 +74,14 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
       _allCharacters.addAll(data[key]!.characters);
     }
 
-    for (var item in _allCharacters) {
+    for (final item in _allCharacters) {
       if (item.name == "Bladeswarm" && item.edition == "Gloomhaven") {
         _allCharacters.remove(item);
         bs = item;
         break;
       }
     }
-    for (var item in _allCharacters) {
+    for (final item in _allCharacters) {
       if (item.name == "Vanquisher") {
         _allCharacters.remove(item);
         vq = item;
@@ -148,7 +148,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
 
     if (GameMethods.isObjectiveOrEscort(character)) {
       //add a number to name if already exists
-      for (var item in _gameState.currentList) {
+      for (final item in _gameState.currentList) {
         if (item is Character && item.characterClass.name == character.name) {
           count++;
         }
@@ -177,8 +177,8 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
     if (GameMethods.isObjectiveOrEscort(newCharacter)) {
       return false;
     }
-    var characters = GameMethods.getCurrentCharacters();
-    for (var character in characters) {
+    final characters = GameMethods.getCurrentCharacters();
+    for (final character in characters) {
       if (character.characterClass.id == newCharacter.id) {
         return true;
       }

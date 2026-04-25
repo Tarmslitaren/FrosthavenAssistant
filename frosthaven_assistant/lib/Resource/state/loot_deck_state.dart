@@ -1,7 +1,8 @@
 part of 'game_state.dart';
 // ignore_for_file: library_private_types_in_public_api
 
-class LootCard { // ignore: prefer-match-file-name, file contains multiple loot deck state types
+class LootCard {
+  // ignore: prefer-match-file-name, file contains multiple loot deck state types
   static const int _kHighCharCount = 4;
   static const int _kLowCharCount = 2;
 
@@ -202,12 +203,12 @@ class LootDeck {
     List<LootCard> newDrawList = [];
     List drawPile = lootDeckData["drawPile"] as List;
     int id = 0;
-    for (var item in drawPile) {
+    for (final item in drawPile) {
       if (item.containsKey('id')) id = item["id"] as int;
       newDrawList.add(cardFromJson(item as Map, id));
     }
     List<LootCard> newDiscardList = [];
-    for (var item in lootDeckData["discardPile"] as List) {
+    for (final item in lootDeckData["discardPile"] as List) {
       if (item.containsKey('id')) id = item["id"] as int;
       newDiscardList.add(cardFromJson(item as Map, id));
     }
@@ -223,7 +224,7 @@ class LootDeck {
   }
 
   void returnLootCard(_StateModifier _, bool top) {
-    var card = _discardPile.pop();
+    final card = _discardPile.pop();
     card.owner = "";
     if (top) {
       _drawPile.push(card);
@@ -419,7 +420,7 @@ class LootDeck {
 
   List<LootCard> _getAvailableCards(List<LootCard> pool) {
     List<LootCard> list = [];
-    for (var item in pool) {
+    for (final item in pool) {
       if (!_drawPile.getList().any((element) => element.id == item.id)) {
         list.add(item);
       }
@@ -432,63 +433,63 @@ class LootDeck {
     _initPools();
     _shuffle();
     if (identifier == "hide") {
-      var pool = _getAvailableCards(_hidePool);
+      final pool = _getAvailableCards(_hidePool);
       if (pool.isNotEmpty) {
         _drawPile.add(pool.first);
         _addedCards[0] = _addedCards.first + 1;
       }
     }
     if (identifier == "lumber") {
-      var pool = _getAvailableCards(_lumberPool);
+      final pool = _getAvailableCards(_lumberPool);
       if (pool.isNotEmpty) {
         _drawPile.add(pool.first);
         _addedCards[1]++;
       }
     }
     if (identifier == "metal") {
-      var pool = _getAvailableCards(_metalPool);
+      final pool = _getAvailableCards(_metalPool);
       if (pool.isNotEmpty) {
         _drawPile.add(pool.first);
         _addedCards[2]++;
       }
     }
     if (identifier == "arrowvine") {
-      var pool = _getAvailableCards(_arrowvinePool);
+      final pool = _getAvailableCards(_arrowvinePool);
       if (pool.isNotEmpty) {
         _drawPile.add(pool.first);
         _addedCards[3]++;
       }
     }
     if (identifier == "axenut") {
-      var pool = _getAvailableCards(_axenutPool);
+      final pool = _getAvailableCards(_axenutPool);
       if (pool.isNotEmpty) {
         _drawPile.add(pool.first);
         _addedCards[4]++;
       }
     }
     if (identifier == "corpsecap") {
-      var pool = _getAvailableCards(_corpsecapPool);
+      final pool = _getAvailableCards(_corpsecapPool);
       if (pool.isNotEmpty) {
         _drawPile.add(pool.first);
         _addedCards[5]++;
       }
     }
     if (identifier == "flamefruit") {
-      var pool = _getAvailableCards(_flamefruitPool);
+      final pool = _getAvailableCards(_flamefruitPool);
       if (pool.isNotEmpty) {
         _drawPile.add(pool.first);
         _addedCards[6]++;
       }
     }
     if (identifier == "rockroot") {
-      var pool = _getAvailableCards(_rockrootPool);
+      final pool = _getAvailableCards(_rockrootPool);
       if (pool.isNotEmpty) {
         _drawPile.add(pool.first);
         _addedCards[7]++;
       }
     }
     if (identifier == "snowthistle") {
-      var pool = _getAvailableCards(_snowthistlePool);
+      final pool = _getAvailableCards(_snowthistlePool);
       if (pool.isNotEmpty) {
         _drawPile.add(pool.first);
         _addedCards[8]++;
@@ -527,7 +528,7 @@ class LootDeck {
 
     //mark owner
     final gs = gameState ?? getIt<GameState>();
-    for (var item in gs.currentList) {
+    for (final item in gs.currentList) {
       if (item.turnState.value == TurnsState.current && item is Character) {
         if (!GameMethods.isObjectiveOrEscort(item.characterClass)) {
           card.owner = item.characterClass.id;

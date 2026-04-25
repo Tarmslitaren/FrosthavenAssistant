@@ -17,7 +17,6 @@ class TrackStandeesCommand extends Command {
     _handleNoStandeesSettingChange();
   }
 
-
   @override
   String describe() {
     if (!track) {
@@ -28,14 +27,14 @@ class TrackStandeesCommand extends Command {
 
   void _handleNoStandeesSettingChange() {
     if (_settings.noStandees.value) {
-      for (var item in _gameState.currentList) {
+      for (final item in _gameState.currentList) {
         if (item is Monster) {
           item.clearMonsterInstances(stateAccess);
           item.notifyMonsterInstances(stateAccess);
         }
       }
     } else {
-      for (var item in _gameState.currentList) {
+      for (final item in _gameState.currentList) {
         if (item is Monster && item.isActive) {
           item.setActive(stateAccess, false);
         }

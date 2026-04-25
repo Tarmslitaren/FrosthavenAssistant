@@ -11,13 +11,12 @@ class SetInitCommand extends Command {
   @override
   void execute() {
     //add new character on top of list
-    for (var item in _gameState.currentList) {
+    for (final item in _gameState.currentList) {
       if (item.id == _characterId && item is Character) {
         item.characterState.setInitiative(stateAccess, _init);
       }
     }
   }
-
 
   @override
   String describe() {

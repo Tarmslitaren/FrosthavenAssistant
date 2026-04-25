@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/monster_ability_card_widget.dart';
@@ -49,7 +50,7 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
   void markAsOpen(int revealed) {
     setState(() {
       revealedList.clear();
-      var drawPile =
+      final drawPile =
           widget.monsterAbilityState.drawPileContents.reversed.toList();
       for (int i = 0; i < revealed; i++) {
         revealedList.add(drawPile[i]);
@@ -58,19 +59,13 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
   }
 
   bool isRevealed(MonsterAbilityCardModel item) {
-    for (var card in revealedList) {
-      if (card.nr == item.nr) {
-        return true;
-      }
-    }
-
-    return false;
+    return revealedList.firstWhereOrNull((card) => card.nr == item.nr) != null;
   }
 
   List<Widget> generateList(
       List<MonsterAbilityCardModel> inputList, bool allOpen) {
     List<Widget> list = [];
-    for (var item in inputList) {
+    for (final item in inputList) {
       final nrString = item.nr.toString();
       Item value = Item(
           key: Key(nrString),
@@ -159,9 +154,9 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
     return ValueListenableBuilder<int>(
         valueListenable: _gameState.commandIndex,
         builder: (context, value, child) {
-          var drawPile =
+          final drawPile =
               widget.monsterAbilityState.drawPileContents.reversed.toList();
-          var discardPile =
+          final discardPile =
               widget.monsterAbilityState.discardPileContents.toList();
 
           final screenSize = MediaQuery.of(context).size;
@@ -293,7 +288,7 @@ class Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.of(context).size;
     double scale = max(
         (screenSize.height / (_kScaleCardHeight * _kScaleCardRows)),
         _kScaleMin);

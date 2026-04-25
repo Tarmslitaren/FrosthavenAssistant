@@ -193,7 +193,7 @@ class GameState {
 
   Map<String, dynamic> toJson() {
     final Map<String, int> elements = {};
-    for (var key in _elementState.keys) {
+    for (final key in _elementState.keys) {
       final state = _elementState[key];
       if (state != null) {
         elements[key.index.toString()] = state.index;
@@ -258,7 +258,7 @@ class GameState {
   /// Fires `monsterInstancesNotifier` / `summonListNotifier` on every item in
   /// the current list. Used by [updateAllUI] (redo / network sync).
   void notifyAllMonsterInstances() {
-    for (var item in _currentList) {
+    for (final item in _currentList) {
       if (item is Monster) {
         item._notifyMonsterInstances();
       } else if (item is Character) {

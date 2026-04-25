@@ -14,7 +14,7 @@ class ActivateMonsterTypeCommand extends Command {
   @override
   void execute() {
     Monster? monster;
-    for (var item in _gameState.currentList) {
+    for (final item in _gameState.currentList) {
       if (item.id == name) {
         if (item is Monster) {
           item.setActive(stateAccess, activate);
@@ -42,7 +42,6 @@ class ActivateMonsterTypeCommand extends Command {
       _gameState.updateList.notify();
     }
   }
-
 
   @override
   String describe() {

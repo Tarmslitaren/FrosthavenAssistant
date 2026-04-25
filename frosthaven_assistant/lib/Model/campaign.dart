@@ -10,7 +10,8 @@ import 'package:frosthaven_assistant/Model/room.dart';
 import 'package:frosthaven_assistant/Model/scenario.dart';
 
 @immutable
-class CampaignModel { // ignore: prefer-match-file-name, file name reflects campaign data domain
+class CampaignModel {
+  // ignore: prefer-match-file-name, file name reflects campaign data domain
   const CampaignModel(
       {required this.edition,
       required this.monsterAbilities,
@@ -28,9 +29,10 @@ class CampaignModel { // ignore: prefer-match-file-name, file name reflects camp
     // note the explicit cast to String
     // this is required if robust lint rules are enabled
     final edition = data['edition'] as String;
-    final monsterAbilities = (data['monsterAbilities'] as List<Object?>).cast<Map<String, dynamic>>();
+    final monsterAbilities = (data['monsterAbilities'] as List<Object?>)
+        .cast<Map<String, dynamic>>();
     List<MonsterAbilityDeckModel> deckDataList = [];
-    for (var item in monsterAbilities) {
+    for (final item in monsterAbilities) {
       deckDataList.add(MonsterAbilityDeckModel.fromJson(item, edition));
     }
 
@@ -41,8 +43,9 @@ class CampaignModel { // ignore: prefer-match-file-name, file name reflects camp
     }
 
     List<CharacterClass> characterDataList = [];
-    final classes = (data['classes'] as List<Object?>).cast<Map<String, dynamic>>();
-    for (var item in classes) {
+    final classes =
+        (data['classes'] as List<Object?>).cast<Map<String, dynamic>>();
+    for (final item in classes) {
       characterDataList.add(CharacterClass.fromJson(item));
     }
 
@@ -51,8 +54,8 @@ class CampaignModel { // ignore: prefer-match-file-name, file name reflects camp
     for (String key in scenarios.keys) {
       //find right room if exists
 
-      RoomsModel? rooms = roomsData.firstWhereOrNull(
-          (element) => element.scenarioName == key.substring(1).split(" ").first);
+      RoomsModel? rooms = roomsData.firstWhereOrNull((element) =>
+          element.scenarioName == key.substring(1).split(" ").first);
       scenarioMap[key] = ScenarioModel.fromJson(key, scenarios[key], rooms);
     }
 

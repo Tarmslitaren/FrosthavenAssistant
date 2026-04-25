@@ -4,7 +4,8 @@ part of 'state/game_state.dart';
 class RoundMethods {
   static const int _kMaxLevel = 7;
   static const int _kMinLevel = 0;
-  static void setRoundState(_StateModifier _, RoundState state, {GameState? gameState}) {
+  static void setRoundState(_StateModifier _, RoundState state,
+      {GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
     gs._roundState.value = state;
   }
@@ -15,7 +16,8 @@ class RoundMethods {
     gs._totalRounds.value++;
   }
 
-  static void resetRound(_StateModifier _, int round, bool resetTotal, {GameState? gameState}) {
+  static void resetRound(_StateModifier _, int round, bool resetTotal,
+      {GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
     gs._round.value = round;
     if (resetTotal) {
@@ -89,9 +91,10 @@ class RoundMethods {
     });
   }
 
-  static void sortItemToPlace(_StateModifier _, String id, int initiative, {GameState? gameState}) {
+  static void sortItemToPlace(_StateModifier _, String id, int initiative,
+      {GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
-    var newList = gs.currentList.toList();
+    final newList = gs.currentList.toList();
     ListItemData? item;
     int currentTurnItemIndex = 0;
     for (int i = 0; i < newList.length; i++) {
@@ -177,7 +180,7 @@ class RoundMethods {
         }
 
         //find the deck
-        for (var item in gs.currentAbilityDecks) {
+        for (final item in gs.currentAbilityDecks) {
           if (item.name == a.type.deck && item.discardPileIsNotEmpty) {
             aInitiative = item.discardPileTop.initiative;
           }
@@ -193,7 +196,7 @@ class RoundMethods {
           return -1; //inactive at bottom
         }
         //find the deck
-        for (var item in gs.currentAbilityDecks) {
+        for (final item in gs.currentAbilityDecks) {
           if (item.name == b.type.deck && item.discardPileIsNotEmpty) {
             bInitiative = item.discardPileTop.initiative;
           }
@@ -216,10 +219,11 @@ class RoundMethods {
     });
   }
 
-  static void addToMainList(_StateModifier _, int? index, ListItemData item, {GameState? gameState}) {
+  static void addToMainList(_StateModifier _, int? index, ListItemData item,
+      {GameState? gameState}) {
     List<ListItemData> newList = [];
     final gs = gameState ?? getIt<GameState>();
-    for (var item in gs.currentList) {
+    for (final item in gs.currentList) {
       newList.add(item);
     }
     if (index != null) {
@@ -231,10 +235,10 @@ class RoundMethods {
     gs._notifyCurrentList();
   }
 
-  static void reorderMainList(_StateModifier _, int newIndex, int oldIndex, {GameState? gameState}) {
+  static void reorderMainList(_StateModifier _, int newIndex, int oldIndex,
+      {GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
-    gs._currentList
-        .insert(newIndex, gs._currentList.removeAt(oldIndex));
+    gs._currentList.insert(newIndex, gs._currentList.removeAt(oldIndex));
     gs._notifyCurrentList();
   }
 
@@ -242,11 +246,8 @@ class RoundMethods {
       {GameState? gameState, GameData? gameData}) {
     final gs = gameState ?? getIt<GameState>();
     final gd = gameData ?? getIt<GameData>();
-    List<SpecialRule>? rules = gd
-        .modelData
-        .value[gs.currentCampaign.value]
-        ?.scenarios[gs.scenario.value]
-        ?.specialRules;
+    List<SpecialRule>? rules = gd.modelData.value[gs.currentCampaign.value]
+        ?.scenarios[gs.scenario.value]?.specialRules;
     if (rules != null) {
       for (SpecialRule rule in rules) {
         if (rule.type == "Objective" || rule.type == "Escort") {
@@ -268,7 +269,8 @@ class RoundMethods {
               as Monster?;
           if (monster != null) {
             if (gs.level.value == monster.level.value) {
-              int newLevel = (monster.level.value + rule.level).clamp(_kMinLevel, _kMaxLevel);
+              int newLevel = (monster.level.value + rule.level)
+                  .clamp(_kMinLevel, _kMaxLevel);
               monster._level.value = newLevel;
               for (MonsterInstance instance in monster._monsterInstances) {
                 instance._setLevel(monster);
@@ -310,16 +312,16 @@ class RoundMethods {
       _StateModifier stateModifier, bool clearLastTurnToo,
       {GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
-    for (var item in gs._currentList) {
+    for (final item in gs._currentList) {
       item._turnState.value = TurnsState.notDone;
       if (item is Character) {
         clearTurnStateConditions(
             stateModifier, item.characterState, clearLastTurnToo);
-        for (var instance in item.characterState._summonList) {
+        for (final instance in item.characterState._summonList) {
           clearTurnStateConditions(stateModifier, instance, clearLastTurnToo);
         }
       } else if (item is Monster) {
-        for (var instance in item._monsterInstances) {
+        for (final instance in item._monsterInstances) {
           clearTurnStateConditions(stateModifier, instance, clearLastTurnToo);
         }
       }
@@ -353,18 +355,18 @@ class RoundMethods {
       _StateModifier s, ListItemData item) {
     if (item is Character) {
       removeExpiringConditions(s, item.characterState);
-      for (var summon in item.characterState._summonList) {
+      for (final summon in item.characterState._summonList) {
         removeExpiringConditions(s, summon);
       }
     } else if (item is Monster) {
-      for (var instance in item._monsterInstances) {
+      for (final instance in item._monsterInstances) {
         removeExpiringConditions(s, instance);
       }
     }
   }
 
   static void reapplyConditions(_StateModifier _, FigureState figure) {
-    for (var condition in figure.conditionsAddedPreviousTurn) {
+    for (final condition in figure.conditionsAddedPreviousTurn) {
       final conditions = figure._conditions.value;
       if (!conditions.contains(condition) || condition == Condition.chill) {
         conditions.add(condition);
@@ -380,11 +382,11 @@ class RoundMethods {
       _StateModifier s, ListItemData item) {
     if (item is Character) {
       reapplyConditions(s, item.characterState);
-      for (var summon in item.characterState.summonList) {
+      for (final summon in item.characterState.summonList) {
         reapplyConditions(s, summon);
       }
     } else if (item is Monster) {
-      for (var instance in item._monsterInstances) {
+      for (final instance in item._monsterInstances) {
         reapplyConditions(s, instance);
       }
     }

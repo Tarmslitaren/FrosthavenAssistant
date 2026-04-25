@@ -147,7 +147,7 @@ class _LootListTile extends StatelessWidget {
 
   int _getLootAmount() {
     int value = 0;
-    for (var item in gameState.lootDeck.discardPileContents) {
+    for (final item in gameState.lootDeck.discardPileContents) {
       if (item.owner == characterId && item.gfx.contains(lootName)) {
         if (lootName == "coin") {
           if (item.gfx.endsWith("3")) {
@@ -159,7 +159,7 @@ class _LootListTile extends StatelessWidget {
           }
           value += item.enhanced;
         } else {
-          var itemValue = item.getValue();
+          final itemValue = item.getValue();
           if (itemValue != null) {
             value += itemValue;
           }

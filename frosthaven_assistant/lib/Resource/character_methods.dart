@@ -18,7 +18,8 @@ class CharacterMethods {
   static const int _kSpecialSummonStandeeNr = 0;
   static const int _kSpecialSummonInitiative = -1;
 
-  static void addPerk(_StateModifier s, Character character, int index, {GameState? gameState}) {
+  static void addPerk(_StateModifier s, Character character, int index,
+      {GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
     final deck = character.characterState.modifierDeck;
     final perksFH = character.characterClass.perksFH;
@@ -79,7 +80,8 @@ class CharacterMethods {
     }
   }
 
-  static void removePerk(_StateModifier s, Character character, int index, {GameState? gameState}) {
+  static void removePerk(_StateModifier s, Character character, int index,
+      {GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
     final deck = character.characterState.modifierDeck;
     final perksFH = character.characterClass.perksFH;
@@ -123,19 +125,18 @@ class CharacterMethods {
     }
   }
 
-  static void setCharacterLevel(
-      _StateModifier s, int level, String characterId,
+  static void setCharacterLevel(_StateModifier s, int level, String characterId,
       {GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
     Character? character;
-    for (var item in gs.currentList) {
+    for (final item in gs.currentList) {
       if (item.id == characterId && item is Character) {
         character = item;
         break;
       }
     }
     if (character != null) {
-      var healthByLevel = character.characterClass.healthByLevel;
+      final healthByLevel = character.characterClass.healthByLevel;
       if (healthByLevel.length < level) {
         level = healthByLevel.length;
       }
@@ -144,7 +145,8 @@ class CharacterMethods {
 
       if (character.id == "Pain Conduit" &&
           character.characterState.perkList[_kPainConduitPerkIndex]) {
-        character.characterState.setHealth(s, healthByLevel[level - 1] + _kPainConduitHealthBonus);
+        character.characterState
+            .setHealth(s, healthByLevel[level - 1] + _kPainConduitHealthBonus);
       }
 
       character.characterState
@@ -174,7 +176,7 @@ class CharacterMethods {
         name = "Jester Twin";
       }
 
-      var list = character.characterState.summonList;
+      final list = character.characterState.summonList;
       if (list.isNotEmpty && list.first.name == name) {
         int hp = health + character.characterState.level.value * multiplier;
         list.first.setMaxHealth(s, hp);
@@ -245,20 +247,29 @@ class CharacterMethods {
     }
 
     if (name.isNotEmpty) {
-      MonsterInstance summon = MonsterInstance.summon(_kSpecialSummonStandeeNr, MonsterType.summon,
-          name, health + level * multiplier, _kSpecialSummonMove, _kSpecialSummonAttack, _kSpecialSummonRange, gfx, _kSpecialSummonInitiative);
+      MonsterInstance summon = MonsterInstance.summon(
+          _kSpecialSummonStandeeNr,
+          MonsterType.summon,
+          name,
+          health + level * multiplier,
+          _kSpecialSummonMove,
+          _kSpecialSummonAttack,
+          _kSpecialSummonRange,
+          gfx,
+          _kSpecialSummonInitiative);
       summonList.add(summon);
     }
     item.characterState._notifySummonList();
   }
 
-  static void removeCharacters(_StateModifier s, List<Character> characters, {GameState? gameState}) {
+  static void removeCharacters(_StateModifier s, List<Character> characters,
+      {GameState? gameState}) {
     List<ListItemData> newList = [];
     final gs = gameState ?? getIt<GameState>();
-    for (var item in gs.currentList) {
+    for (final item in gs.currentList) {
       if (item is Character) {
         bool remove = false;
-        for (var name in characters) {
+        for (final name in characters) {
           if (item.characterState.display.value ==
               name.characterState.display.value) {
             remove = true;
@@ -277,8 +288,9 @@ class CharacterMethods {
     gs._notifyCurrentList();
   }
 
-  static Character? createCharacter(_StateModifier _, String id,
-      String? edition, String? display, int level, {GameData? gameData}) {
+  static Character? createCharacter(
+      _StateModifier _, String id, String? edition, String? display, int level,
+      {GameData? gameData}) {
     Character? character;
     List<CharacterClass> characters = [];
     final gd = gameData ?? getIt<GameData>();
@@ -289,7 +301,7 @@ class CharacterMethods {
     for (CharacterClass characterClass in characters) {
       if (characterClass.id == id &&
           (edition == null || edition == characterClass.edition)) {
-        var characterState = CharacterState(id);
+        final characterState = CharacterState(id);
         characterState._level.value = level;
 
         if (GameMethods.isObjectiveOrEscort(characterClass)) {
@@ -337,8 +349,16 @@ class CharacterMethods {
         }
 
         if (name.isNotEmpty) {
-          MonsterInstance summon = MonsterInstance.summon(_kSpecialSummonStandeeNr, MonsterType.summon,
-              name, health + level * multiplier, _kSpecialSummonMove, _kSpecialSummonAttack, _kSpecialSummonRange, gfx, _kSpecialSummonInitiative);
+          MonsterInstance summon = MonsterInstance.summon(
+              _kSpecialSummonStandeeNr,
+              MonsterType.summon,
+              name,
+              health + level * multiplier,
+              _kSpecialSummonMove,
+              _kSpecialSummonAttack,
+              _kSpecialSummonRange,
+              gfx,
+              _kSpecialSummonInitiative);
           summonList.add(summon);
         }
 

@@ -105,8 +105,8 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
   }
 
   bool _monsterAlreadyAdded(String id) {
-    var monsters = GameMethods.getCurrentMonsters();
-    for (var monster in monsters) {
+    final monsters = GameMethods.getCurrentMonsters();
+    for (final monster in monsters) {
       if (monster.id == id) {
         return true;
       }

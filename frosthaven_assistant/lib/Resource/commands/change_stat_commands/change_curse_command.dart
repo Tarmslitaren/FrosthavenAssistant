@@ -14,7 +14,7 @@ class ChangeCurseCommand extends ChangeStatCommand {
   void execute() {
     if (deck == null) {
       deck = gameState.modifierDeck;
-      for (var item in gameState.currentList) {
+      for (final item in gameState.currentList) {
         if (item.id == ownerId) {
           if (item is Monster &&
               item.isAlly &&

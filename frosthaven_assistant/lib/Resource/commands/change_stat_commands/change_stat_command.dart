@@ -17,11 +17,11 @@ abstract class ChangeStatCommand extends Command {
   }
 
   void handleDeath() {
-    for (var item in gameState.currentList) {
+    for (final item in gameState.currentList) {
       if (item is Monster) {
         List<MonsterInstance> newList = [];
         newList.addAll(item.monsterInstances);
-        for (var instance in item.monsterInstances) {
+        for (final instance in item.monsterInstances) {
           if (instance.health.value == 0) {
             newList.remove(instance);
             item.setMonsterInstances(stateAccess, newList);
@@ -54,7 +54,7 @@ abstract class ChangeStatCommand extends Command {
 
         //handle summon death
         final summonList = item.characterState.summonList;
-        for (var instance in summonList) {
+        for (final instance in summonList) {
           if (instance.health.value == 0) {
             if (!GameMethods.summonDoesNotDie(item.id, instance.name)) {
               item.characterState.removeSummon(stateAccess, instance);
@@ -80,7 +80,6 @@ abstract class ChangeStatCommand extends Command {
       }
     }
   }
-
 
   @override
   String describe() {

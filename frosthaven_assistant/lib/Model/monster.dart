@@ -9,7 +9,8 @@ import 'package:flutter/foundation.dart';
 /// Use [StatValue.fromJson] when parsing JSON — it throws [FormatException] for
 /// values that are neither int nor String, catching data errors at load time
 /// instead of silently producing wrong results at runtime.
-sealed class StatValue { // ignore: prefer-match-file-name, file contains multiple monster model types
+sealed class StatValue {
+  // ignore: prefer-match-file-name, file contains multiple monster model types
   const StatValue();
 
   static StatValue fromJson(Object? value) {
@@ -93,9 +94,10 @@ class MonsterModel {
     final deck = data['deck'] as String;
     final count = data['count'] as int;
 
-    final levels = (data['levels'] as List<Object?>).cast<Map<String, dynamic>>();
+    final levels =
+        (data['levels'] as List<Object?>).cast<Map<String, dynamic>>();
     List<MonsterLevelModel> monsterLevelDataList = [];
-    for (var item in levels) {
+    for (final item in levels) {
       monsterLevelDataList.add(MonsterLevelModel.fromJson(item));
     }
     return MonsterModel(name, display, gfx, hidden, flying, deck, count,

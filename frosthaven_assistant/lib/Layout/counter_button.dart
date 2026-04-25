@@ -113,7 +113,7 @@ class CounterButtonState extends State<CounterButton> {
               if (widget.showTotalValue) {
                 text = widget.notifier.value.toString();
               }
-              var shadow = Shadow(
+              final shadow = Shadow(
                 offset: Offset(1 * widget.scale, 1 * widget.scale),
                 color: Colors.black,
                 blurRadius: 1 * widget.scale,
@@ -123,7 +123,9 @@ class CounterButtonState extends State<CounterButton> {
                   right: 0,
                   child: Text(
                     text,
-                    style: getWhiteShadowStyle(kFontSizeBody * widget.scale, shadow, height: CounterButton._kTextHeight),
+                    style: getWhiteShadowStyle(
+                        kFontSizeBody * widget.scale, shadow,
+                        height: CounterButton._kTextHeight),
                   ));
             })
       ]),

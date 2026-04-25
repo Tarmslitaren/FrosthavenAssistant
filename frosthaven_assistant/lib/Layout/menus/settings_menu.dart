@@ -73,7 +73,7 @@ class SettingsMenuState extends State<SettingsMenu> {
 
   List<DropdownMenuItem<String>> getIPList() {
     List<DropdownMenuItem<String>> retVal = [];
-    for (var item in _network.networkInfo.wifiIPv6List) {
+    for (final item in _network.networkInfo.wifiIPv6List) {
       retVal.add(DropdownMenuItem<String>(value: item, child: Text(item)));
     }
 

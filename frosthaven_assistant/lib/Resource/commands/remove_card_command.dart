@@ -11,15 +11,15 @@ class RemoveCardCommand extends Command {
       : _gameState = gameState;
   @override
   void execute() {
-    for (var deck in _gameState.currentAbilityDecks) {
+    for (final deck in _gameState.currentAbilityDecks) {
       if (deck.name == card.deck) {
-        for (var drawPileCard in deck.drawPileContents) {
+        for (final drawPileCard in deck.drawPileContents) {
           if (drawPileCard.nr == card.nr) {
             deck.removeFromDrawPile(stateAccess, card);
             break;
           }
         }
-        for (var discardPileCard in deck.discardPileContents) {
+        for (final discardPileCard in deck.discardPileContents) {
           if (discardPileCard.nr == card.nr) {
             deck.removeFromDiscardPile(stateAccess, card);
             break;
@@ -33,7 +33,6 @@ class RemoveCardCommand extends Command {
     //todo: not use a sad hack, find better ui update solution
     AbilityCardsMenuState.revealedList.clear();
   }
-
 
   @override
   String describe() {

@@ -7,7 +7,8 @@ import 'package:frosthaven_assistant/Model/room.dart';
 import '../Resource/game_methods.dart';
 
 @immutable
-class LootDeckModel { // ignore: prefer-match-file-name, file contains multiple scenario model types
+class LootDeckModel {
+  // ignore: prefer-match-file-name, file contains multiple scenario model types
   final int lumber;
   final int hide;
   final int metal;
@@ -146,14 +147,15 @@ class ScenarioModel {
     List<String> monsterList = [];
     if (data.containsKey('monsters')) {
       final monsters = (data['monsters'] as List<Object?>).cast<String>();
-      for (var monster in monsters) {
+      for (final monster in monsters) {
         monsterList.add(monster);
       }
     }
     List<SpecialRule> rulesList = [];
     if (data.containsKey('special')) {
-      final specialRules = (data['special'] as List<Object?>).cast<Map<String, dynamic>>();
-      for (var rule in specialRules) {
+      final specialRules =
+          (data['special'] as List<Object?>).cast<Map<String, dynamic>>();
+      for (final rule in specialRules) {
         rulesList.add(SpecialRule.fromJson(rule));
       }
     }
@@ -171,7 +173,7 @@ class ScenarioModel {
     if (kDebugMode) {
       if (rooms != null) {
         List names = [];
-        for (var u in rooms.roomData) {
+        for (final u in rooms.roomData) {
           if (names.contains(u.name)) {
             print("duplicate ${u.name} in ${rooms.scenarioName}");
           } else {
@@ -234,14 +236,15 @@ class ScenarioModel {
     List<String> monsterList = [];
     if (data.containsKey('monsters')) {
       final monsters = (data['monsters'] as List<Object?>).cast<String>();
-      for (var monster in monsters) {
+      for (final monster in monsters) {
         monsterList.add(monster);
       }
     }
     List<SpecialRule> rulesList = [];
     if (data.containsKey('special')) {
-      final specialRules = (data['special'] as List<Object?>).cast<Map<String, dynamic>>();
-      for (var rule in specialRules) {
+      final specialRules =
+          (data['special'] as List<Object?>).cast<Map<String, dynamic>>();
+      for (final rule in specialRules) {
         rulesList.add(SpecialRule.fromJson(rule));
       }
     }

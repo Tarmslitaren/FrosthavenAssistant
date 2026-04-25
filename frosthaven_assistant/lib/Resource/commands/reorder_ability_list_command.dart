@@ -12,7 +12,7 @@ class ReorderAbilityListCommand extends Command {
 
   @override
   void execute() {
-    for (var item in _gameState.currentAbilityDecks) {
+    for (final item in _gameState.currentAbilityDecks) {
       if (item.name == deck) {
         item.reorderDrawPile(stateAccess, oldIndex, newIndex);
         break;

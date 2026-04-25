@@ -36,7 +36,7 @@ class RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
   @override
   Widget build(BuildContext context) {
     List<Character> currentCharacters = [];
-    for (var data in _gameState.currentList) {
+    for (final data in _gameState.currentList) {
       if (data is Character) {
         currentCharacters.add(data);
       }

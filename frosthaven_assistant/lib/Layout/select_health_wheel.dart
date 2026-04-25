@@ -130,7 +130,7 @@ class SelectHealthWheelState extends State<SelectHealthWheel> {
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
 
-    var shadow = Shadow(
+    final shadow = Shadow(
       offset: Offset(_kShadowOffset * scale, _kShadowOffset * scale),
       color: Colors.black87,
       blurRadius: 1 * scale,

@@ -54,8 +54,9 @@ class CharacterWidgetInternal extends StatefulWidget {
 
 class CharacterInternalWidgetState extends State<CharacterWidgetInternal> {
   CharacterWidgetInternalViewModel? _vmInstance;
-  CharacterWidgetInternalViewModel get _vm => _vmInstance ??= CharacterWidgetInternalViewModel(
-      widget.character, gameState: widget.gameState, settings: widget.settings);
+  CharacterWidgetInternalViewModel get _vm =>
+      _vmInstance ??= CharacterWidgetInternalViewModel(widget.character,
+          gameState: widget.gameState, settings: widget.settings);
   bool isCharacter = true;
   final _initTextFieldController = TextEditingController();
   List<MonsterInstance> lastList = [];
@@ -103,8 +104,9 @@ class CharacterInternalWidgetState extends State<CharacterWidgetInternal> {
     double scale = getScaleByReference(context);
     double scaledHeight = CharacterWidgetInternal._kScaledHeight * scale;
 
-    var shadow = Shadow(
-      offset: Offset(CharacterWidgetInternal._kShadowOffset * scale, CharacterWidgetInternal._kShadowOffset * scale),
+    final shadow = Shadow(
+      offset: Offset(CharacterWidgetInternal._kShadowOffset * scale,
+          CharacterWidgetInternal._kShadowOffset * scale),
       color: Colors.black87,
       blurRadius: CharacterWidgetInternal._kShadowBlur * scale,
     );
@@ -174,7 +176,8 @@ class CharacterInternalWidgetState extends State<CharacterWidgetInternal> {
                             context,
                             NumpadMenu(
                               controller: _initTextFieldController,
-                              maxLength: CharacterWidgetInternal._kInitMaxLength,
+                              maxLength:
+                                  CharacterWidgetInternal._kInitMaxLength,
                             ));
                       } else {
                         _focusNode.requestFocus();

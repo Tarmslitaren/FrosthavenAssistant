@@ -85,7 +85,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
 
   bool isRevealed(ModifierCard item) {
     ModifierDeck deck = GameMethods.getModifierDeck(widget.name, _gameState);
-    var drawPile = deck.drawPileContents.reversed.toList();
+    final drawPile = deck.drawPileContents.reversed.toList();
     for (int i = 0; i < deck.revealedCount.value; i++) {
       if (item == drawPile[i]) {
         return true;
@@ -99,7 +99,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
     List<Widget> list = [];
     for (int index = 0; index < inputList.length; index++) {
       final key = index.toString();
-      var item = inputList[index];
+      final item = inputList[index];
       Item value = Item(
           key: Key(key),
           data: item,
@@ -792,7 +792,7 @@ class Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.of(context).size;
     double scale = max(
         (screenSize.height /
             (ModifierDeckMenu._kItemBaseHeight *

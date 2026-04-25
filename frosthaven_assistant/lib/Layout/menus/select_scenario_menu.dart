@@ -92,7 +92,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
     //special hack for solo BladeSwarm and Vanquisher
     if (campaign == "Solo" || campaign == "Trail of Ashes") {
       if (!_gameState.unlockedClasses.contains("Bladeswarm")) {
-        for (var item in _foundScenarios) {
+        for (final item in _foundScenarios) {
           if (item.contains("Bladeswarm")) {
             _foundScenarios.remove(item);
             break;
@@ -100,7 +100,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
         }
       }
       if (!_gameState.unlockedClasses.contains("Vanquisher")) {
-        for (var item in _foundScenarios) {
+        for (final item in _foundScenarios) {
           if (item.contains("Vanquisher")) {
             _foundScenarios.remove(item);
             break;
@@ -171,7 +171,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
       //special hack for solo BladeSwarm
       if (campaign == "Solo" || campaign == "Trail of Ashes") {
         if (!_gameState.unlockedClasses.contains("Bladeswarm")) {
-          for (var item in results) {
+          for (final item in results) {
             if (item.contains("Bladeswarm")) {
               results.remove(item);
               break;
@@ -179,7 +179,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
           }
         }
         if (!_gameState.unlockedClasses.contains("Vanquisher")) {
-          for (var item in results) {
+          for (final item in results) {
             if (item.contains("Vanquisher")) {
               results.remove(item);
               break;

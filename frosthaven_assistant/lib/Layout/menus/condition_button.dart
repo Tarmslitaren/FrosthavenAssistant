@@ -42,7 +42,7 @@ class ConditionButton extends StatelessWidget {
 
   bool _isConditionActive(Condition condition, FigureState figure) {
     bool isActive = false;
-    for (var item in figure.conditions.value) {
+    for (final item in figure.conditions.value) {
       if (item == condition) {
         isActive = true;
         break;
@@ -64,7 +64,7 @@ class ConditionButton extends StatelessWidget {
     } else if (suffix.isNotEmpty && hasGHVersion(condition.name)) {
       imagePath = "assets/images/abilities/${condition.getName()}$suffix.png";
     }
-    for (var item in immunities) {
+    for (final item in immunities) {
       if (condition.name.contains(item.substring(1, item.length - 1))) {
         enabled = false;
       }
@@ -93,7 +93,7 @@ class ConditionButton extends StatelessWidget {
 
           //todo: fix this logic (move to viewmodel))
           ListItemData owner = ListItemData();
-          for (var item in gameState.currentList) {
+          for (final item in gameState.currentList) {
             if (item.id == ownerId) {
               owner = item;
               break;
@@ -108,7 +108,7 @@ class ConditionButton extends StatelessWidget {
           bool isCharacter = condition.name.contains("character");
           Color classColor = Colors.transparent;
           if (isCharacter) {
-            var characters = GameMethods.getCurrentCharacters();
+            final characters = GameMethods.getCurrentCharacters();
             classColor = characters
                 .where((element) =>
                     element.characterClass.name == condition.getName())

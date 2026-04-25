@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/network/communication.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
-import 'package:flutter/material.dart';
 
 class ConditionIconViewModel {
   ConditionIconViewModel(
@@ -74,8 +74,9 @@ class ConditionIconViewModel {
         final currentItem = currentState.currentList[i];
         if (oldItem.id == currentItem.id) {
           if (oldItem is Character) {
-            final diff = (currentItem as Character).characterState.health.value -
-                oldItem.characterState.health.value;
+            final diff =
+                (currentItem as Character).characterState.health.value -
+                    oldItem.characterState.health.value;
             if (diff != 0) {
               healthChangedValue = diff;
               changeHealthId = oldItem.id;
@@ -105,9 +106,8 @@ class ConditionIconViewModel {
     }
 
     if (turnIndex != null) {
-      for (var item in currentState.currentList) {
-        if (item.id == owner.id &&
-            item.turnState.value == TurnsState.current) {
+      for (final item in currentState.currentList) {
+        if (item.id == owner.id && item.turnState.value == TurnsState.current) {
           if (condition == Condition.regenerate ||
               condition == Condition.wound ||
               condition == Condition.wound2) {
@@ -143,8 +143,7 @@ class ConditionIconViewModel {
 
     if (healthChangedValue != 0) {
       final isOwner = changeHealthId == owner.id ||
-          (figure is MonsterInstance &&
-              figure.getId() == changeHealthId);
+          (figure is MonsterInstance && figure.getId() == changeHealthId);
       if (isOwner) {
         if (healthChangedValue < 0) {
           if (condition.name.contains("poison") ||
@@ -177,8 +176,8 @@ class ConditionIconViewModel {
   Color classColorFor(Condition condition) {
     if (!isCharacterCondition(condition)) return Colors.transparent;
     final characters = GameMethods.getCurrentCharacters();
-    final match = characters.where(
-        (e) => e.characterClass.name == condition.getName());
+    final match =
+        characters.where((e) => e.characterClass.name == condition.getName());
     if (match.isEmpty) return Colors.transparent;
     return match.first.characterClass.color;
   }

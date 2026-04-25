@@ -215,7 +215,7 @@ class StatusMenuState extends State<StatusMenu> {
         widget.characterId !=
             widget
                 .figureId); //hack - should have monsterBox send summon data instead
-    for (var item in _gameState.currentList) {
+    for (final item in _gameState.currentList) {
       if (item.id == "Mirefoot" && showCustomContent) {
         hasMireFoot = true;
       }
@@ -407,7 +407,7 @@ class StatusMenuState extends State<StatusMenu> {
                   builder: (context, value, child) {
                     ModifierDeck deck = _gameState.modifierDeck;
                     if (isMonster) {
-                      for (var item in _gameState.currentList) {
+                      for (final item in _gameState.currentList) {
                         if (item.id == widget.monsterId) {
                           if (item is Monster &&
                               item.isAlly &&
@@ -424,7 +424,7 @@ class StatusMenuState extends State<StatusMenu> {
                     if (isCharacter && !isSummon) {
                       hasXp = true;
 
-                      for (var item in _gameState.currentList) {
+                      for (final item in _gameState.currentList) {
                         if (item.id == widget.characterId &&
                             item is Character) {
                           if (GameMethods.isObjectiveOrEscort(
@@ -446,7 +446,7 @@ class StatusMenuState extends State<StatusMenu> {
                     }
 
                     bool canBeCursed = true;
-                    for (var item in immunities) {
+                    for (final item in immunities) {
                       if (item.substring(1, item.length - 1) == "curse") {
                         canBeCursed = false;
                       }

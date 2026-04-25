@@ -28,9 +28,9 @@ class RemoveCardMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isInDrawPile = false;
-    for (var item in _gameState.currentAbilityDecks) {
+    for (final item in _gameState.currentAbilityDecks) {
       if (item.name == card.deck) {
-        var list = item.drawPileContents.toList();
+        final list = item.drawPileContents.toList();
         for (int i = 0; i < list.length; i++) {
           if (list[i].nr == card.nr) {
             isInDrawPile = true;
@@ -65,9 +65,9 @@ class RemoveCardMenu extends StatelessWidget {
                   int oldIndex = 0;
                   int newIndex = 0;
                   //todo: no logic in ui
-                  for (var item in _gameState.currentAbilityDecks) {
+                  for (final item in _gameState.currentAbilityDecks) {
                     if (item.name == card.deck) {
-                      var list = item.drawPileContents.toList();
+                      final list = item.drawPileContents.toList();
                       for (int i = 0; i < list.length; i++) {
                         if (list[i].nr == card.nr) {
                           oldIndex = i;

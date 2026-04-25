@@ -34,17 +34,17 @@ class MonsterStatCardViewModel {
   // Boss health special cases: some bosses derive HP from a character's level
   String resolveBossHealth(String rawHealth) {
     if (rawHealth == "Hollowpact") {
-      for (var item in _gameState.currentList) {
+      for (final item in _gameState.currentList) {
         if (item is Character && item.id == "Hollowpact") {
-          return item.characterClass
-              .healthByLevel[item.characterState.level.value - 1]
+          return item
+              .characterClass.healthByLevel[item.characterState.level.value - 1]
               .toString();
         }
       }
       return "7";
     }
     if (rawHealth == "Incarnate") {
-      for (var item in _gameState.currentList) {
+      for (final item in _gameState.currentList) {
         if (item is Character && item.id == "Incarnate") {
           return (item.characterClass
                       .healthByLevel[item.characterState.level.value - 1] *

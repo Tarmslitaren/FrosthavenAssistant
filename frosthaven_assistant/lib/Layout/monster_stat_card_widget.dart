@@ -79,6 +79,8 @@ class MonsterStatCardWidget extends StatelessWidget {
   static const double _kImmuneIconLeft = 9.0;
   static const double _kImmuneIconTop = 3.5;
 
+  //todo: extract boss from normal/elite layout
+
   const MonsterStatCardWidget({
     super.key,
     required this.data,
@@ -275,14 +277,22 @@ class _MonsterStatNormalLayout extends StatelessWidget {
             child: Text(
               textAlign: TextAlign.center,
               data.type.display,
-              style: getCardTitleStyle(MonsterStatCardWidget._kTitleFontSize * scale, shadow, frosthavenStyle, height: 1),
+              style: getCardTitleStyle(
+                  MonsterStatCardWidget._kTitleFontSize * scale,
+                  shadow,
+                  frosthavenStyle,
+                  height: 1),
             )),
         Positioned(
             left: MonsterStatCardWidget._kLevelLeft * scale,
             top: MonsterStatCardWidget._kLevelTop * scale,
             child: Text(
               data.level.value.toString(),
-              style: getCardNumberStyle(MonsterStatCardWidget._kLevelFontSize * scale, shadow, frosthavenStyle, height: 1),
+              style: getCardNumberStyle(
+                  MonsterStatCardWidget._kLevelFontSize * scale,
+                  shadow,
+                  frosthavenStyle,
+                  height: 1),
             )),
         Positioned(
           left: MonsterStatCardWidget._kNormalStatsLeft * scale,
@@ -478,7 +488,12 @@ class MonsterStatBossLayout extends StatelessWidget {
     Widget attackAttributes = LineBuilder.createLines([bossAttackAttributes],
         true, false, false, data, CrossAxisAlignment.start, scale, false);
 
-    final specialStyle = getCardNumberStyle(MonsterStatCardWidget._kBossSpecialFontSize * scale, shadow, frosthavenStyle, color: Colors.yellow, height: 1);
+    final specialStyle = getCardNumberStyle(
+        MonsterStatCardWidget._kBossSpecialFontSize * scale,
+        shadow,
+        frosthavenStyle,
+        color: Colors.yellow,
+        height: 1);
 
     return RepaintBoundary(
         child: Stack(
@@ -500,7 +515,11 @@ class MonsterStatBossLayout extends StatelessWidget {
                 : MonsterStatCardWidget._kBossLevelTopGh * scale,
             child: Text(
               data.level.value.toString(),
-              style: getCardNumberStyle(MonsterStatCardWidget._kLevelFontSize * scale, shadow, frosthavenStyle, height: 1),
+              style: getCardNumberStyle(
+                  MonsterStatCardWidget._kLevelFontSize * scale,
+                  shadow,
+                  frosthavenStyle,
+                  height: 1),
             )),
         Positioned(
           left: 0,
@@ -682,22 +701,29 @@ class MonsterStatCardView extends StatelessWidget {
   Widget build(BuildContext context) {
     bool frosthavenStyle = GameMethods.isFrosthavenStyle(data.type);
 
-    var shadow = Shadow(
+    final shadow = Shadow(
       offset: Offset(MonsterStatCardWidget._kShadowTextOffset * scale,
           MonsterStatCardWidget._kShadowTextOffset * scale),
       color: Colors.black87,
       blurRadius: MonsterStatCardWidget._kShadowTextBlur * scale,
     );
 
-    var shadowLeft = Shadow(
+    final shadowLeft = Shadow(
       offset: Offset(MonsterStatCardWidget._kShadowTextOffset * scale,
           MonsterStatCardWidget._kShadowTextOffset * scale),
       color: Colors.black54,
       blurRadius: MonsterStatCardWidget._kShadowTextBlur * scale,
     );
 
-    final leftStyle = getCardNumberStyle(MonsterStatCardWidget._kStatsFontSize * scale, shadowLeft, frosthavenStyle, color: Colors.black, height: MonsterStatCardWidget._kStatsLineHeight);
-    final rightStyle = getCardNumberStyle(MonsterStatCardWidget._kStatsFontSize * scale, shadow, frosthavenStyle, height: MonsterStatCardWidget._kStatsLineHeight);
+    final leftStyle = getCardNumberStyle(
+        MonsterStatCardWidget._kStatsFontSize * scale,
+        shadowLeft,
+        frosthavenStyle,
+        color: Colors.black,
+        height: MonsterStatCardWidget._kStatsLineHeight);
+    final rightStyle = getCardNumberStyle(
+        MonsterStatCardWidget._kStatsFontSize * scale, shadow, frosthavenStyle,
+        height: MonsterStatCardWidget._kStatsLineHeight);
 
     return ValueListenableBuilder<int>(
         valueListenable: data.level,

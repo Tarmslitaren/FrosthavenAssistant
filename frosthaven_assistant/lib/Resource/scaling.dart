@@ -6,7 +6,8 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 
 const double _kMaxListWidth = 740.0;
 const double _kReferenceMinBarWidth = 370.0;
-double get maxWidth => _kMaxListWidth * getIt<Settings>().userScalingMainList.value;
+double get maxWidth =>
+    _kMaxListWidth * getIt<Settings>().userScalingMainList.value;
 const double referenceWidth = 412.0;
 
 void setMaxWidth() => null;
@@ -28,20 +29,21 @@ bool modifiersFitOnBar(BuildContext context, {Settings? settings}) {
 }
 
 double getMainListWidth(BuildContext context) {
-  var screenSize = MediaQuery.of(context).size;
+  final screenSize = MediaQuery.of(context).size;
 
   return min(screenSize.width, maxWidth);
 }
 
 double _scaleByReference(
     BuildContext context, double referenceWidth, double maxWidth) {
-  var screenSize = MediaQuery.of(context).size;
-  var width = min(screenSize.width, maxWidth);
+  final screenSize = MediaQuery.of(context).size;
+  final width = min(screenSize.width, maxWidth);
 
   return width / referenceWidth;
 }
 
-extension GlobalPaintBounds on BuildContext { // ignore: prefer-match-file-name, file contains scaling utilities and this extension
+extension GlobalPaintBounds on BuildContext {
+  // ignore: prefer-match-file-name, file contains scaling utilities and this extension
   Rect? get globalPaintBounds {
     final renderObject =
         findRenderObject(); // Get the RenderObject associated with the widget

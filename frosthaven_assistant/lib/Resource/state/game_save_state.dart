@@ -16,7 +16,7 @@ class GameSaveState {
   void load(GameState gameState) {
     if (_savedState != null) {
       try {
-        var data = json.decode(_savedState ?? '') as Map<String, dynamic>;
+        final data = json.decode(_savedState ?? '') as Map<String, dynamic>;
 
         gameState._level.value = data['level'] as int;
         gameState._scenario.value = data['scenario']; // as String;
@@ -28,13 +28,13 @@ class GameSaveState {
           List<Object?> scenarioSectionsAdded =
               data['scenarioSectionsAdded'] as List<Object?>;
           gameState._scenarioSectionsAdded.clear();
-          for (var item in scenarioSectionsAdded) {
+          for (final item in scenarioSectionsAdded) {
             gameState._scenarioSectionsAdded.add(item as String);
           }
         }
 
         if (data.containsKey('scenarioSpecialRules')) {
-          var scenarioSpecialRulesList = data['scenarioSpecialRules'] as List;
+          final scenarioSpecialRulesList = data['scenarioSpecialRules'] as List;
           gameState._scenarioSpecialRules.clear();
           for (Map<String, dynamic> item in scenarioSpecialRulesList) {
             gameState._scenarioSpecialRules.add(SpecialRule.fromJson(item));
@@ -76,7 +76,7 @@ class GameSaveState {
         }
 
         //main list — update existing objects in-place to preserve VLB subscriptions
-        var list = data['currentList'] as List;
+        final list = data['currentList'] as List;
         List<ListItemData> newList = [];
         for (Map<String, dynamic> item in list) {
           if (item["characterClass"] != null) {
@@ -106,23 +106,23 @@ class GameSaveState {
         gameState._currentList = newList;
         gameState._notifyCurrentList();
 
-        var unlockedClassesList = data['unlockedClasses'] as List;
+        final unlockedClassesList = data['unlockedClasses'] as List;
         gameState._unlockedClasses.clear();
         for (String item in unlockedClassesList) {
           gameState._unlockedClasses.add(item);
         }
 
         //ability decks
-        var decks = data['currentAbilityDecks'] as List;
+        final decks = data['currentAbilityDecks'] as List;
         gameState._currentAbilityDecks.clear();
         for (Map<String, dynamic> item in decks) {
           MonsterAbilityState state = MonsterAbilityState(item["name"]);
 
           List<MonsterAbilityCardModel> newDrawList = [];
           List drawPile = item["drawPile"] as List;
-          for (var item in drawPile) {
+          for (final item in drawPile) {
             int nr = item["nr"];
-            for (var card in state._drawPile.getList()) {
+            for (final card in state._drawPile.getList()) {
               if (card.nr == nr) {
                 newDrawList.add(card);
                 break;
@@ -130,9 +130,9 @@ class GameSaveState {
             }
           }
           List<MonsterAbilityCardModel> newDiscardList = [];
-          for (var item in item["discardPile"] as List) {
+          for (final item in item["discardPile"] as List) {
             int nr = item["nr"];
-            for (var card in state._drawPile.getList()) {
+            for (final card in state._drawPile.getList()) {
               if (card.nr == nr) {
                 newDiscardList.add(card);
                 break;
@@ -169,9 +169,10 @@ class GameSaveState {
         gameState._elementState.clear();
         for (final element in Elements.values) {
           final raw = elementData[element.index.toString()] as int?;
-          final idx = (raw != null && raw >= 0 && raw < ElementState.values.length)
-              ? raw
-              : ElementState.inert.index;
+          final idx =
+              (raw != null && raw >= 0 && raw < ElementState.values.length)
+                  ? raw
+                  : ElementState.inert.index;
           gameState._elementState[element] = ElementState.values[idx];
         }
       } catch (e, stack) {
@@ -230,7 +231,8 @@ class GameSaveState {
     gameState._lootDeck.updateFromJson(data["lootDeck"]);
   }
 
-  void _loadModifierDeck(String identifier, Map<String, dynamic> data, GameState gameState) {
+  void _loadModifierDeck(
+      String identifier, Map<String, dynamic> data, GameState gameState) {
     final modifierDeckData = data[identifier] as Map<String, dynamic>;
     if (identifier == 'modifierDeck') {
       gameState._modifierDeck.updateFromJson(modifierDeckData);

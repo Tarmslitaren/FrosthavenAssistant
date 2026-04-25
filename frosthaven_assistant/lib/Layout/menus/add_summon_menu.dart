@@ -59,11 +59,11 @@ class AddSummonMenuState extends State<AddSummonMenu> {
     super.initState();
 
     //populate the summon list
-    for (var item in widget.character.characterClass.summons) {
+    for (final item in widget.character.characterClass.summons) {
       final characterState = widget.character.characterState;
       if (item.level <= characterState.level.value) {
         int standeesOut = 0;
-        for (var item2 in characterState.summonList) {
+        for (final item2 in characterState.summonList) {
           if (item2.name == item.name) {
             standeesOut++;
           }

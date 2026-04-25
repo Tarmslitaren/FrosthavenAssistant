@@ -73,9 +73,9 @@ class Monster extends ListItemData {
     List<Object?> instanceList = json["monsterInstances"] as List<Object?>;
 
     _monsterInstances.clear();
-    for (Map<String, dynamic> item in instanceList.cast<Map<String, dynamic>>()) {
-      var instance = MonsterInstance.fromJson(item);
-      _monsterInstances.add(instance);
+    for (Map<String, dynamic> item
+        in instanceList.cast<Map<String, dynamic>>()) {
+      _monsterInstances.add(MonsterInstance.fromJson(item));
     }
 
     //fixing update issue, when _isActive is repurposed to work even with standees
@@ -142,7 +142,7 @@ class Monster extends ListItemData {
   }
 
   bool hasElites() {
-    for (var instance in _monsterInstances) {
+    for (final instance in _monsterInstances) {
       if (instance.type == MonsterType.elite) {
         return true;
       }
@@ -152,7 +152,7 @@ class Monster extends ListItemData {
 
   //includes boss
   bool hasNormal() {
-    for (var instance in _monsterInstances) {
+    for (final instance in _monsterInstances) {
       if (instance.type != MonsterType.elite) {
         return true;
       }
@@ -162,7 +162,7 @@ class Monster extends ListItemData {
 
   void setLevel(_StateModifier _, int level) {
     _level.value = level;
-    for (var item in _monsterInstances) {
+    for (final item in _monsterInstances) {
       item._setLevel(this);
     }
   }

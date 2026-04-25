@@ -249,7 +249,7 @@ class _CoinRowsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      for (var row = 0; row < rows; row++) ...[
+      for (int row = 0; row < rows; row++) ...[
         _LootCardRow(
             type: "coin",
             start: start + row * LootCardEnhancementMenu._kCoinRowSize,

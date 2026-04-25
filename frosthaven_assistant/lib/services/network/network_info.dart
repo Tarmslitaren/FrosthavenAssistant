@@ -11,7 +11,8 @@ import 'package:network_info_plus/network_info_plus.dart';
 import '../service_locator.dart';
 import 'network.dart';
 
-class NetworkInformation { // ignore: prefer-match-file-name, file name uses short form of NetworkInformation
+class NetworkInformation {
+  // ignore: prefer-match-file-name, file name uses short form of NetworkInformation
   NetworkInformation() {
     _connectivitySubscription = _connectivity.onConnectivityChanged
         .listen((List<ConnectivityResult> result) {
@@ -44,13 +45,13 @@ class NetworkInformation { // ignore: prefer-match-file-name, file name uses sho
   final outgoingIPv6 = ValueNotifier<String>("");
 
   Future<void> initNonWifiIPs() async {
-    for (var interface in await NetworkInterface.list()) {
+    for (final interface in await NetworkInterface.list()) {
       //searching for eth should fix the ethernet ip address issue on
       // ethernet connections on windows and linux
       if (interface.name.toLowerCase().contains("eth") &&
           !interface.name.toLowerCase().contains("switch") &&
           !interface.name.toLowerCase().contains("veth")) {
-        for (var address in interface.addresses) {
+        for (final address in interface.addresses) {
           if (address.type == InternetAddressType.IPv6) {
             wifiIPv6List.add(address.address);
             if (wifiIPv6.value != "") {

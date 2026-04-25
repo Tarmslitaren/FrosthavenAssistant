@@ -41,8 +41,8 @@ class StatApplier {
     List<String> retVal = [];
 
     //get the data
-    var normalTokens = _getStatTokens(monster, false);
-    var eliteTokens = _getStatTokens(monster, true);
+    final normalTokens = _getStatTokens(monster, false);
+    final eliteTokens = _getStatTokens(monster, true);
 
     RegExp regExpNumbers = RegExp(r'^[\d ()xCL/*+-]+$');
     //first pass fix values only
@@ -145,7 +145,7 @@ class StatApplier {
   }
 
   static Map<String, int> _getStatTokens(Monster monster, bool isElite) {
-    var map = <String, int>{};
+    final map = <String, int>{};
     MonsterStatsModel data;
     final level = monster.type.levels[monster.level.value];
     final boss = level.boss;
@@ -249,7 +249,7 @@ class StatApplier {
 
       RegExp regEx =
           RegExp(r"(?=.*[a-z])"); //not sure why I do this. only letters?
-      for (var item in normalTokens.keys) {
+      for (final item in normalTokens.keys) {
         if (regEx.hasMatch(item)) {
           if (item != "shield" &&
               item != "retaliate" &&
@@ -260,7 +260,7 @@ class StatApplier {
           }
         }
       }
-      for (var item in eliteTokens.keys) {
+      for (final item in eliteTokens.keys) {
         if (regEx.hasMatch(item)) {
           if (item != "shield" &&
               item != "retaliate" &&
@@ -322,7 +322,7 @@ class StatApplier {
     if (showNormal) {
       newStartOfLine += normalResult;
       if (!skipCalculation) {
-        for (var item in tokens) {
+        for (final item in tokens) {
           newStartOfLine += "|$item";
           //add nr if applicable
           String key = item.substring(1, item.length - 1);
@@ -351,7 +351,7 @@ class StatApplier {
         eliteResult = _kResultFloor;
       }
       String eliteString = "!$sizeModifier£$eliteResult";
-      for (var item in eTokens) {
+      for (final item in eTokens) {
         eliteString += "|$item";
 
         //add nr if applicable

@@ -133,7 +133,7 @@ class MonsterBox extends StatelessWidget {
       borderColor = null;
     }
 
-    var shadow = Shadow(
+    final shadow = Shadow(
       offset: Offset(_kShadowOffset * scale, _kShadowOffset * scale),
       color: Colors.black87,
       blurRadius: _kShadowBlur * scale,
@@ -222,7 +222,9 @@ class MonsterBox extends StatelessWidget {
                               child: Text(
                                 textAlign: TextAlign.end,
                                 "$health",
-                                style: getWhiteShadowStyle(kFontSizeBody * scale, shadow, height: 1),
+                                style: getWhiteShadowStyle(
+                                    kFontSizeBody * scale, shadow,
+                                    height: 1),
                               ),
                             )
                           ]),

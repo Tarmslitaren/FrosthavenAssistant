@@ -165,7 +165,7 @@ class _StandeeNrButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var shadow = Shadow(
+    final shadow = Shadow(
       offset: Offset(AddStandeeMenu._kShadowOffset * scale,
           AddStandeeMenu._kShadowOffset * scale),
       color: Colors.black87,

@@ -41,7 +41,7 @@ class RemovedModifierCardMenuState extends State<RemovedModifierCardMenu> {
     List<Widget> list = [];
     for (int index = 0; index < inputList.length; index++) {
       final key = index.toString();
-      var item = inputList[index];
+      final item = inputList[index];
       Item value = Item(key: Key(key), data: item, name: name, revealed: true);
       InkWell gestureDetector = InkWell(
         key: Key(index.toString()),
@@ -172,7 +172,7 @@ class Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery.of(context).size;
     double scale =
         max((screenSize.height / (_kScaleHeightBase * _kScaleHeightRows)), 1);
     final Widget child = revealed

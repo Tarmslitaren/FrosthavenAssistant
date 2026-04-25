@@ -55,7 +55,8 @@ class SaveCharacterMenuState extends State<SaveCharacterMenu> {
                 children: [
                   Container(
                       height: _kHeaderHeight,
-                      margin: const EdgeInsets.symmetric(horizontal: _kHeaderPadding),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: _kHeaderPadding),
                       child: Text('Load, Save or Delete Characters.',
                           style: getTitleTextStyle(1, forceBlack: true))),
                   const Text(
@@ -64,7 +65,7 @@ class SaveCharacterMenuState extends State<SaveCharacterMenu> {
                   ),
                   Wrap(
                     children: [
-                      for (var item in _characters)
+                      for (final item in _characters)
                         IconButton(
                             onPressed: () {
                               //get nr

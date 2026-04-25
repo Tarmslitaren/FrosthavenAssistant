@@ -33,8 +33,7 @@ class GameMethods {
   static int getHazardValue({GameState? gameState, Settings? settings}) {
     final gs = gameState ?? getIt<GameState>();
     final s = settings ?? getIt<Settings>();
-    if (isOgGloomEdition(gameState: gs) &&
-        !s.fhHazTerrainCalcInOGGloom.value) {
+    if (isOgGloomEdition(gameState: gs) && !s.fhHazTerrainCalcInOGGloom.value) {
       return (getTrapValue(gameState: gs) / _kHazardHalveDivisor).floor();
     }
 
@@ -60,7 +59,7 @@ class GameMethods {
     double totalLevels = 0;
     double nrOfCharacters = 0;
     final gs = gameState ?? getIt<GameState>();
-    for (var item in gs.currentList) {
+    for (final item in gs.currentList) {
       if (item is Character &&
           !GameMethods.isObjectiveOrEscort(item.characterClass)) {
         totalLevels += item.characterState.level.value;
@@ -91,7 +90,7 @@ class GameMethods {
     if ((settings ?? getIt<Settings>()).noInit.value) {
       return true;
     }
-    for (var item in gs.currentList) {
+    for (final item in gs.currentList) {
       if (item is Character) {
         if (item.characterState.initiative.value == 0) {
           if (item.characterState.health.value > 0) {
@@ -133,7 +132,7 @@ class GameMethods {
         return _kInactiveInitiative; //sorted last
       }
       final gs = gameState ?? getIt<GameState>();
-      for (var deck in gs.currentAbilityDecks) {
+      for (final deck in gs.currentAbilityDecks) {
         if (deck.name == item.type.deck) {
           if (deck.discardPileIsNotEmpty) {
             return deck.discardPileTop.initiative;
@@ -175,7 +174,7 @@ class GameMethods {
 
   static Character? getCurrentCharacter({GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
-    for (var item in gs.currentList) {
+    for (final item in gs.currentList) {
       if (item.turnState.value == TurnsState.current) {
         if (item is Character) {
           if (!GameMethods.isObjectiveOrEscort(item.characterClass)) {
@@ -307,7 +306,7 @@ class GameMethods {
     int nrOfStandees = data.type.count;
     for (int i = 0; i < nrOfStandees; i++) {
       bool isAvailable = true;
-      for (var item in data.monsterInstances) {
+      for (final item in data.monsterInstances) {
         if (item.standeeNr == i + 1) {
           isAvailable = false;
           break;
@@ -316,10 +315,10 @@ class GameMethods {
 
       if (isAvailable) {
         //check for other monsters with same standees
-        for (var item in gs.currentList) {
+        for (final item in gs.currentList) {
           if (item is Monster) {
             if (item.id != data.id) {
-              for (var standee in item.monsterInstances) {
+              for (final standee in item.monsterInstances) {
                 if (standee.standeeNr == i + 1) {
                   isAvailable = false;
                   break;
@@ -349,7 +348,7 @@ class GameMethods {
     List<int> available = [];
     for (int i = 0; i < nrOfStandees; i++) {
       bool isAvailable = true;
-      for (var item in data.monsterInstances) {
+      for (final item in data.monsterInstances) {
         if (item.standeeNr == i + 1) {
           isAvailable = false;
           break;
@@ -357,11 +356,11 @@ class GameMethods {
       }
       if (isAvailable) {
         //check for special monsters with same standees
-        for (var item in gs.currentList) {
+        for (final item in gs.currentList) {
           if (item is Monster) {
             if (item.id != data.id) {
               if (item.type.gfx == data.type.gfx) {
-                for (var standee in item.monsterInstances) {
+                for (final standee in item.monsterInstances) {
                   if (standee.standeeNr == i + 1) {
                     isAvailable = false;
                     break;
@@ -387,15 +386,16 @@ class GameMethods {
     return available[Random().nextInt(available.length)];
   }
 
-  static FigureState? getFigure(String? ownerId, String figureId, {GameState? gameState}) {
+  static FigureState? getFigure(String? ownerId, String figureId,
+      {GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
-    for (var item in gs.currentList) {
+    for (final item in gs.currentList) {
       if (item.id == figureId) {
         return (item as Character).characterState;
       }
       if (item.id == ownerId) {
         if (item is Monster) {
-          for (var instance in item.monsterInstances) {
+          for (final instance in item.monsterInstances) {
             String id =
                 instance.name + instance.gfx + instance.standeeNr.toString();
             if (id == figureId) {
@@ -403,7 +403,7 @@ class GameMethods {
             }
           }
         } else if (item is Character) {
-          for (var instance in item.characterState.summonList) {
+          for (final instance in item.characterState.summonList) {
             String id =
                 instance.name + instance.gfx + instance.standeeNr.toString();
             if (id == figureId) {
@@ -416,12 +416,13 @@ class GameMethods {
     return null;
   }
 
-  static String getFigureIdFromNr(String ownerId, int nr, {GameState? gameState}) {
+  static String getFigureIdFromNr(String ownerId, int nr,
+      {GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
-    for (var item in gs.currentList) {
+    for (final item in gs.currentList) {
       if (item.id == ownerId) {
         if (item is Monster) {
-          for (var instance in item.monsterInstances) {
+          for (final instance in item.monsterInstances) {
             if (instance.standeeNr == nr) {
               return instance.name +
                   instance.gfx +
@@ -449,7 +450,7 @@ class GameMethods {
     if (!gs.allyDeckInOGGloom.value && isOgGloomEdition(gameState: gs)) {
       return false;
     }
-    for (var item in gs.currentList) {
+    for (final item in gs.currentList) {
       if (item is Monster) {
         if (item.isAlly) {
           return true;
@@ -475,7 +476,8 @@ class GameMethods {
     return false;
   }
 
-  static bool isFrosthavenStyledEdition(String edition, {GameState? gameState}) {
+  static bool isFrosthavenStyledEdition(String edition,
+      {GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
     String scenario = gs.scenario.value;
     if (edition == "Solo") {
@@ -510,8 +512,8 @@ class GameMethods {
       {GameState? gameState, Settings? settings}) {
     final gs = gameState ?? getIt<GameState>();
     //frosthaven monster
-    final monsterFrostHavenStyledEdition =
-        monster != null && isFrosthavenStyledEdition(monster.edition, gameState: gs);
+    final monsterFrostHavenStyledEdition = monster != null &&
+        isFrosthavenStyledEdition(monster.edition, gameState: gs);
     if (monsterFrostHavenStyledEdition) {
       return true;
     }
@@ -561,8 +563,7 @@ class GameMethods {
   static bool hasLootDeck({GameState? gameState, Settings? settings}) {
     final gs = gameState ?? getIt<GameState>();
     bool hasLootDeck = !(settings ?? getIt<Settings>()).hideLootDeck.value;
-    if (gs.lootDeck.discardPileIsEmpty &&
-        gs.lootDeck.drawPileIsEmpty) {
+    if (gs.lootDeck.discardPileIsEmpty && gs.lootDeck.drawPileIsEmpty) {
       hasLootDeck = false;
     }
     return hasLootDeck;
@@ -595,7 +596,7 @@ class GameMethods {
 
   static bool isCardInAnyCharacterDeck(String gfx, {GameState? gameState}) {
     final characters = getCurrentCharacters(gameState: gameState);
-    for (var item in characters) {
+    for (final item in characters) {
       if (item.characterState.modifierDeck.hasCard(gfx)) {
         return true;
       }
@@ -603,12 +604,16 @@ class GameMethods {
     return false;
   }
 
-  static bool hasRetaliate(Monster monster, MonsterInstance figure, {GameState? gameState}) {
-    return _monsterHasConditionOnCards(monster, figure, "%retaliate%", gameState: gameState);
+  static bool hasRetaliate(Monster monster, MonsterInstance figure,
+      {GameState? gameState}) {
+    return _monsterHasConditionOnCards(monster, figure, "%retaliate%",
+        gameState: gameState);
   }
 
-  static bool hasShield(Monster monster, MonsterInstance figure, {GameState? gameState}) {
-    return _monsterHasConditionOnCards(monster, figure, "%shield%", gameState: gameState);
+  static bool hasShield(Monster monster, MonsterInstance figure,
+      {GameState? gameState}) {
+    return _monsterHasConditionOnCards(monster, figure, "%shield%",
+        gameState: gameState);
   }
 
   static bool _monsterHasConditionOnCards(
@@ -631,7 +636,7 @@ class GameMethods {
           level.boss?.attributes.indexWhere((i) => i.contains(condition)) != -1;
     }
     //check ability card
-    var deck = GameMethods.getDeck(monster.type.deck, gameState: gameState);
+    final deck = GameMethods.getDeck(monster.type.deck, gameState: gameState);
     if (deck != null &&
         deck.discardPileIsNotEmpty &&
         monster.turnState.value != TurnsState.notDone) {

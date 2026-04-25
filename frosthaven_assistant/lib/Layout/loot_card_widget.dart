@@ -28,7 +28,8 @@ class LootCardWidget extends StatelessWidget {
   static const double _kOwnerIconRight = 2.0;
   static const double _kHalfPi = pi / 2;
 
-  LootCardWidget({super.key, required this.card, required bool revealed, this.settings}) {
+  LootCardWidget(
+      {super.key, required this.card, required bool revealed, this.settings}) {
     this.revealed.value = revealed;
   }
 
@@ -75,14 +76,15 @@ class LootCardFront extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final settings_ = settings ?? getIt<Settings>();
-    var shadow = Shadow(
+    final shadow = Shadow(
       offset: Offset(LootCardWidget._kShadowTextOffsetX * scale,
           LootCardWidget._kShadowTextOffsetY * scale),
       color: Colors.black87,
       blurRadius: LootCardWidget._kShadowTextBlur * scale,
     );
     int? value = card.getValue();
-    final specialStyle = getWhiteShadowStyle(LootCardWidget._kSpecialTextFontSize * scale, shadow);
+    final specialStyle = getWhiteShadowStyle(
+        LootCardWidget._kSpecialTextFontSize * scale, shadow);
 
     return Container(
         width: LootCardWidget._kCardWidth * scale,
@@ -117,7 +119,8 @@ class LootCardFront extends StatelessWidget {
                 if (value != null)
                   Text(
                     "+$value",
-                    style: getWhiteShadowStyle(LootCardWidget._kValueFontSize * scale, shadow),
+                    style: getWhiteShadowStyle(
+                        LootCardWidget._kValueFontSize * scale, shadow),
                   ),
                 if (card.gfx.contains("1418"))
                   Text("1418", style: specialStyle),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 @immutable
-class RoomMonsterData { // ignore: prefer-match-file-name, file contains multiple room model types
+class RoomMonsterData {
+  // ignore: prefer-match-file-name, file contains multiple room model types
   final String name;
   final List<int> normal;
   final List<int> elite;
@@ -9,12 +10,10 @@ class RoomMonsterData { // ignore: prefer-match-file-name, file contains multipl
 
   factory RoomMonsterData.fromJson(Map<String, dynamic> data, String key) {
     String name = key;
-    List<int> normal = data.containsKey('normal')
-        ? data['normal'].cast<int>()
-        : [0, 0, 0];
-    List<int> elite = data.containsKey('elite')
-        ? data['elite'].cast<int>()
-        : [0, 0, 0];
+    List<int> normal =
+        data.containsKey('normal') ? data['normal'].cast<int>() : [0, 0, 0];
+    List<int> elite =
+        data.containsKey('elite') ? data['elite'].cast<int>() : [0, 0, 0];
 
     return RoomMonsterData(name, normal, elite);
   }
@@ -45,7 +44,7 @@ class RoomsModel {
 
   factory RoomsModel.fromJson(List<Object?> sectionData, String scenarioName) {
     List<RoomModel> roomList = [];
-    for (var value in sectionData) {
+    for (final value in sectionData) {
       roomList.add(RoomModel.fromJson(value as Map<String, dynamic>));
     }
 
@@ -60,7 +59,7 @@ class EditionRoomsModel {
 
   factory EditionRoomsModel.fromJson(Map<String, dynamic> data) {
     List<RoomsModel> roomList = [];
-    for (var entry in data.entries) {
+    for (final entry in data.entries) {
       roomList.add(RoomsModel.fromJson(entry.value, entry.key));
     }
 

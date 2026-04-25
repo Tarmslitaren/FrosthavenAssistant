@@ -3,10 +3,10 @@ import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_faction_card_command.dart';
 
 import '../../Layout/components/modal_background.dart';
+import '../../Resource/app_constants.dart';
 import '../../Resource/color_matrices.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/state/game_state.dart';
-import '../../Resource/app_constants.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 
@@ -72,13 +72,14 @@ class GH2eFactionAMDCardMenuState extends State<GH2eFactionAMDCardMenu> {
             runSpacing: _kWrapSpacing,
             spacing: _kWrapSpacing,
             children: [
-              for (var item in _factionCards)
+              for (final item in _factionCards)
                 InkWell(
                     onTap: () {
                       if (addedCard == null &&
                           !GameMethods.isCardInAnyCharacterDeck(item.gfx)) {
-                        _gameState.action(
-                            AddFactionCardCommand(widget.name, item.gfx, true, gameState: _gameState));
+                        _gameState.action(AddFactionCardCommand(
+                            widget.name, item.gfx, true,
+                            gameState: _gameState));
                         setState(() {
                           addedCard = item.gfx;
                         });
@@ -89,8 +90,8 @@ class GH2eFactionAMDCardMenuState extends State<GH2eFactionAMDCardMenu> {
                             !GameMethods.isCardInAnyCharacterDeck(item.gfx)
                                 ? ColorFilter.matrix(identity)
                                 : ColorFilter.matrix(grayScale),
-                        child:
-                            ModifierCardFront(card: item, name: "", scale: scale))),
+                        child: ModifierCardFront(
+                            card: item, name: "", scale: scale))),
             ],
           ),
           const SizedBox(
@@ -112,7 +113,8 @@ class GH2eFactionAMDCardMenuState extends State<GH2eFactionAMDCardMenu> {
                         final cardToRemove = addedCard;
                         if (cardToRemove != null) {
                           _gameState.action(AddFactionCardCommand(
-                              widget.name, cardToRemove, false, gameState: _gameState));
+                              widget.name, cardToRemove, false,
+                              gameState: _gameState));
                         }
                         setState(() {
                           addedCard = null;

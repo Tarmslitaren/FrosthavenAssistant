@@ -51,9 +51,9 @@ class MonsterWidgetState extends State<MonsterWidget> {
     final monsterInstances = widget.data.monsterInstances;
 
     if (lastList.length < monsterInstances.length) {
-      for (var item in monsterInstances) {
+      for (final item in monsterInstances) {
         bool found = false;
-        for (var oldItem in lastList) {
+        for (final oldItem in lastList) {
           if (item.standeeNr == oldItem.standeeNr) {
             found = true;
             break;
@@ -127,7 +127,8 @@ class MonsterWidgetState extends State<MonsterWidget> {
           child: Text(
             textAlign: TextAlign.center,
             widget.data.type.display,
-            style: getCardTitleStyle(_kFontSize * scale, shadow, _vm.frosthavenStyle),
+            style: getCardTitleStyle(
+                _kFontSize * scale, shadow, _vm.frosthavenStyle),
           ))
     ]));
   }

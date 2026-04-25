@@ -14,7 +14,7 @@ class LoadCharacterSaveCommand extends Command {
 
   @override
   void execute() {
-    var data = json.decode(saveData) as Map<String, dynamic>;
+    final data = json.decode(saveData) as Map<String, dynamic>;
     Character character = Character.fromSave(data);
 
     //add new character on top of list, if not present.

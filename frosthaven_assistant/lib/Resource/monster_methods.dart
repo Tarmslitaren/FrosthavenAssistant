@@ -32,14 +32,15 @@ class MonsterMethods {
     return Monster(name, level, isAlly);
   }
 
-  static void removeMonsters(_StateModifier _, List<Monster> items, {GameState? gameState}) {
+  static void removeMonsters(_StateModifier _, List<Monster> items,
+      {GameState? gameState}) {
     List<String> deckIds = [];
     List<ListItemData> newList = [];
     final gs = gameState ?? getIt<GameState>();
-    for (var item in gs.currentList) {
+    for (final item in gs.currentList) {
       if (item is Monster) {
         bool remove = false;
-        for (var name in items) {
+        for (final name in items) {
           if (item.id == name.id) {
             remove = true;
             deckIds.add(item.type.deck);
@@ -55,9 +56,9 @@ class MonsterMethods {
 
     gs._currentList = newList;
 
-    for (var deck in deckIds) {
+    for (final deck in deckIds) {
       bool removeDeck = true;
-      for (var item in gs.currentList) {
+      for (final item in gs.currentList) {
         if (item is Monster) {
           if (item.type.deck == deck) {
             removeDeck = false;
@@ -66,7 +67,7 @@ class MonsterMethods {
       }
 
       if (removeDeck) {
-        for (var item in gs.currentAbilityDecks) {
+        for (final item in gs.currentAbilityDecks) {
           if (item.name == deck) {
             gs._currentAbilityDecks.remove(item);
             break;
@@ -90,7 +91,7 @@ class MonsterMethods {
     MonsterInstance instance;
     Monster? monster;
     if (summon == null) {
-      for (var item in gs.currentList) {
+      for (final item in gs.currentList) {
         if (item.id == ownerId && item is Monster) {
           monster = item;
           monster._isActive = true;
@@ -118,7 +119,7 @@ class MonsterMethods {
     if (monster != null) {
       monsterList = monster._monsterInstances;
     } else {
-      for (var item in gs.currentList) {
+      for (final item in gs.currentList) {
         if (item.id == ownerId) {
           character = item as Character;
           monsterList = character.characterState._summonList;
@@ -132,7 +133,7 @@ class MonsterMethods {
       bool ok = false;
       while (!ok) {
         ok = true;
-        for (var item in monsterList) {
+        for (final item in monsterList) {
           if (item.standeeNr == instance.standeeNr) {
             if (item.gfx == instance.gfx) {
               //can not have same gfx and nr
@@ -187,7 +188,7 @@ class MonsterMethods {
       //add first un added nr
       for (int i = 1; i <= data.type.count; i++) {
         bool added = false;
-        for (var item in data.monsterInstances) {
+        for (final item in data.monsterInstances) {
           if (item.standeeNr == i) {
             added = true;
             break;
@@ -207,7 +208,7 @@ class MonsterMethods {
       {GameState? gameState}) {
     int levelAdjust = 0;
     Set<String> alliedMonsters = {};
-    for (var rule in specialRules) {
+    for (final rule in specialRules) {
       if (rule.name == monster || rule.name == "Enemies") {
         if (rule.type == "LevelAdjust") {
           levelAdjust = rule.level;
@@ -222,7 +223,7 @@ class MonsterMethods {
 
     final gs = gameState ?? getIt<GameState>();
     bool add = true;
-    for (var item in gs.currentList) {
+    for (final item in gs.currentList) {
       //don't add duplicates
       if (item.id == monster) {
         add = false;
@@ -248,12 +249,12 @@ class MonsterMethods {
       {GameState? gameState, Settings? settings}) {
     final gs = gameState ?? getIt<GameState>();
     //handle room data
-    int characterIndex =
-        GameMethods.getCurrentCharacterAmount().clamp(_kMinCharacters, _kMaxCharacters) - _kCharIndexOffset;
+    int characterIndex = GameMethods.getCurrentCharacterAmount()
+            .clamp(_kMinCharacters, _kMaxCharacters) -
+        _kCharIndexOffset;
     for (int i = 0; i < roomMonsterData.length; i++) {
-      var roomMonsters = roomMonsterData[i];
-      addMonster(
-          stateModifier, roomMonsters.name, gs._scenarioSpecialRules);
+      final roomMonsters = roomMonsterData[i];
+      addMonster(stateModifier, roomMonsters.name, gs._scenarioSpecialRules);
     }
     bool addSorted = gs.currentCampaign.value == "Buttons and Bugs";
     final s = settings ?? getIt<Settings>();
@@ -265,7 +266,7 @@ class MonsterMethods {
         for (int i = 0; i < roomMonsterData.length; i++) {
           List<int> normals = [];
           List<int> elites = [];
-          var roomMonsters = roomMonsterData[i];
+          final roomMonsters = roomMonsterData[i];
           Monster data = gs.currentList.firstWhereOrNull(
               (element) => element.id == roomMonsters.name) as Monster;
 
@@ -316,8 +317,8 @@ class MonsterMethods {
               for (int i = 0; i < elites.length; i++) {
                 initMessage += "${elites[i]}, ";
                 if (i == elites.length - 1) {
-                  initMessage =
-                      initMessage.substring(0, initMessage.length - _kTrailingCommaLength);
+                  initMessage = initMessage.substring(
+                      0, initMessage.length - _kTrailingCommaLength);
                 }
               }
             }
@@ -331,8 +332,8 @@ class MonsterMethods {
               for (int i = 0; i < normals.length; i++) {
                 initMessage += "${normals[i]}, ";
                 if (i == normals.length - 1) {
-                  initMessage =
-                      initMessage.substring(0, initMessage.length - _kTrailingCommaLength);
+                  initMessage = initMessage.substring(
+                      0, initMessage.length - _kTrailingCommaLength);
                 }
               }
             }

@@ -43,7 +43,7 @@ class LootCardsMenuState extends State<LootCardsMenu> {
   List<Widget> generateList(List<LootCard> inputList) {
     List<Widget> list = [];
     for (int index = 0; index < inputList.length; index++) {
-      var item = inputList[index];
+      final item = inputList[index];
       Item value = Item(key: Key(index.toString()), data: item);
       list.add(value);
     }
@@ -77,7 +77,7 @@ class LootCardsMenuState extends State<LootCardsMenu> {
     return ValueListenableBuilder<int>(
         valueListenable: _gameState.commandIndex,
         builder: (context, value, child) {
-          var discardPile = _gameState.lootDeck.discardPileContents.toList();
+          final discardPile = _gameState.lootDeck.discardPileContents.toList();
 
           return Container(
               constraints: BoxConstraints(

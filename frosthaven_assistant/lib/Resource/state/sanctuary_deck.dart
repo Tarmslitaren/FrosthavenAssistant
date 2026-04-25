@@ -17,11 +17,11 @@ class SanctuaryDeck {
 
     List<ModifierCard> newMultList = [];
     List<ModifierCard> newFlipList = [];
-    for (var item in modifierDeckData["multPile"] as List) {
+    for (final item in modifierDeckData["multPile"] as List) {
       String gfx = item["gfx"];
       newMultList.add(ModifierCard(CardType.remove, gfx));
     }
-    for (var item in modifierDeckData["flipPile"] as List) {
+    for (final item in modifierDeckData["flipPile"] as List) {
       String gfx = item["gfx"];
       newFlipList.add(ModifierCard(CardType.remove, gfx));
     }

@@ -40,8 +40,11 @@ class AddSectionMenuState extends State<AddSectionMenu> {
   @override
   initState() {
     // at the beginning, all items are shown
-    var scenarios = _gameData.modelData.value[_gameState.currentCampaign.value]
-        ?.scenarios[_gameState.scenario.value]?.sections
+    final scenarios = _gameData
+        .modelData
+        .value[_gameState.currentCampaign.value]
+        ?.scenarios[_gameState.scenario.value]
+        ?.sections
         .map((e) => e.name)
         .toList();
     if (scenarios != null) {

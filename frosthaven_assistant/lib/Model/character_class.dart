@@ -40,7 +40,7 @@ class CharacterClass {
     //TODO: color array + gradiantType support
     final healthByLevel = (data['health'] as List<Object?>).cast<int>();
     int radix = 16;
-    var colorValue = data['color'];
+    final colorValue = data['color'];
     Color color = (colorValue is List<Object?>)
         ? Color(int.parse(colorValue.first as String, radix: radix))
         : Color(int.parse(colorValue as String, radix: radix));
@@ -63,7 +63,8 @@ class CharacterClass {
 
     List<PerkModel> perkList = [];
     if (data.containsKey('perks')) {
-      final perks = (data['perks'] as List<Object?>).cast<Map<String, dynamic>>();
+      final perks =
+          (data['perks'] as List<Object?>).cast<Map<String, dynamic>>();
       for (final item in perks) {
         perkList.add(PerkModel.fromJson(item));
       }
@@ -71,7 +72,8 @@ class CharacterClass {
 
     List<PerkModel> perkFHList = [];
     if (data.containsKey('perks_fh')) {
-      final perks = (data['perks_fh'] as List<Object?>).cast<Map<String, dynamic>>();
+      final perks =
+          (data['perks_fh'] as List<Object?>).cast<Map<String, dynamic>>();
       for (final item in perks) {
         perkFHList.add(PerkModel.fromJson(item));
       }

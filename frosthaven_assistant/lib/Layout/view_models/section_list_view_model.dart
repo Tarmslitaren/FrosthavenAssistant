@@ -8,7 +8,8 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 import '../../Model/scenario.dart';
 
 class SectionListViewModel {
-  SectionListViewModel({Settings? settings, GameData? gameData, GameState? gameState})
+  SectionListViewModel(
+      {Settings? settings, GameData? gameData, GameState? gameState})
       : _settings = settings ?? getIt<Settings>(),
         _gameData = gameData ?? getIt<GameData>(),
         _gameState = gameState ?? getIt<GameState>();
@@ -24,11 +25,8 @@ class SectionListViewModel {
   /// Returns the filtered section list for the current scenario,
   /// or an empty list if all sections have been added.
   List<ScenarioModel> get sections {
-    var list = _gameData
-        .modelData
-        .value[_gameState.currentCampaign.value]
-        ?.scenarios[_gameState.scenario.value]
-        ?.sections
+    var list = _gameData.modelData.value[_gameState.currentCampaign.value]
+        ?.scenarios[_gameState.scenario.value]?.sections
         .toList();
 
     // Apply random sections filter if present
@@ -36,7 +34,7 @@ class SectionListViewModel {
         .firstWhereOrNull((element) => element.type == "RandomSections");
     if (randomSections != null && list != null) {
       final newList = <ScenarioModel>[];
-      for (var item in randomSections.list) {
+      for (final item in randomSections.list) {
         final section =
             list.firstWhereOrNull((element) => element.name == item);
         if (section != null) {
@@ -57,8 +55,7 @@ class SectionListViewModel {
 
     // Hide list when all non-spawn sections have been added
     if (list != null) {
-      final nonSpawnCount =
-          list.where((s) => !s.name.contains("spawn")).length;
+      final nonSpawnCount = list.where((s) => !s.name.contains("spawn")).length;
       if (_gameState.scenarioSectionsAdded.length == nonSpawnCount) {
         return [];
       }

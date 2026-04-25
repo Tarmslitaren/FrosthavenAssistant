@@ -33,7 +33,7 @@ class AddConditionCommand extends Command {
       }
 
       //only added this turn if is current or done
-      for (var item in _gameState.currentList) {
+      for (final item in _gameState.currentList) {
         if (item.id == ownerId) {
           if (item.turnState.value != TurnsState.notDone &&
               _gameState.roundState.value == RoundState.playTurns) {
@@ -44,7 +44,6 @@ class AddConditionCommand extends Command {
       _gameState.updateList.notify();
     }
   }
-
 
   @override
   String describe() {

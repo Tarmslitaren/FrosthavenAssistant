@@ -169,12 +169,12 @@ class LineBuilder {
       rowMainAxisAlignment = MainAxisAlignment.end;
     }
 
-    var shadow = Shadow(
+    final shadow = Shadow(
       offset: Offset(_kShadowOffset * scale, _kShadowOffset * scale),
       color: left ? Colors.black54 : Colors.black87,
       blurRadius: _kShadowBlur * scale,
     );
-    var dividerStyle = TextStyle(
+    final dividerStyle = TextStyle(
         fontFamily: 'Majalla',
         leadingDistribution: TextLeadingDistribution.proportional,
         color: left ? Colors.black : Colors.white,
@@ -183,7 +183,7 @@ class LineBuilder {
         height: _kLineHeightDivider,
         shadows: [shadow]);
 
-    var dividerStyleExtraThin = TextStyle(
+    final dividerStyleExtraThin = TextStyle(
         fontFamily: 'Majalla',
         leadingDistribution: TextLeadingDistribution.proportional,
         color: left ? Colors.black : Colors.white,
@@ -192,7 +192,7 @@ class LineBuilder {
         height: _kLineHeightDividerThin,
         shadows: [shadow]);
 
-    var smallStyle = TextStyle(
+    final smallStyle = TextStyle(
         fontFamily: 'Majalla',
         color: left ? Colors.black : Colors.white,
         fontSize: (alignment == CrossAxisAlignment.center
@@ -219,7 +219,7 @@ class LineBuilder {
         frosthavenStyle ? _kNormalFontSizeFH : _kNormalFontSizeGH;
     double normalFontSize =
         isCenterAlignment ? centerNormalFontSize : _kNormalFontSizeStat;
-    var midStyle = TextStyle(
+    final midStyle = TextStyle(
         backgroundColor: debugColors ? Colors.greenAccent : null,
         leadingDistribution: TextLeadingDistribution.even,
         fontFamily: 'Majalla',
@@ -229,7 +229,7 @@ class LineBuilder {
         height: midLineHeight,
         // 0.9,
         shadows: [shadow]);
-    var normalStyle = TextStyle(
+    final normalStyle = TextStyle(
         //maybe slightly bigger between chars space?
         //leadingDistribution: TextLeadingDistribution.even,
         //textBaseline: TextBaseline.alphabetic,
@@ -245,7 +245,7 @@ class LineBuilder {
 
         shadows: [shadow]);
 
-    var eliteStyle = TextStyle(
+    final eliteStyle = TextStyle(
         backgroundColor: debugColors ? Colors.lightGreen : null,
         //leadingDistribution: TextLeadingDistribution.even,
         //textBaseline: TextBaseline.alphabetic,
@@ -258,13 +258,13 @@ class LineBuilder {
         height: frosthavenStyle ? _kLineHeightFH : _kLineHeightGH,
         shadows: [shadow]);
 
-    var eliteSmallStyle = TextStyle(
+    final eliteSmallStyle = TextStyle(
         fontFamily: 'Majalla',
         color: Colors.yellow,
         fontSize: _kSmallFontSizeCenter * scale,
         height: _kLineHeightMidFH,
         shadows: [shadow]);
-    var eliteMidStyle = TextStyle(
+    final eliteMidStyle = TextStyle(
         leadingDistribution: TextLeadingDistribution.even,
         fontFamily: 'Majalla',
         color: Colors.yellow,
@@ -273,7 +273,7 @@ class LineBuilder {
         height: frosthavenStyle ? _kLineHeightMidFH : _kLineHeightGH,
         shadows: [shadow]);
 
-    var midStyleSquished = TextStyle(
+    final midStyleSquished = TextStyle(
         backgroundColor: debugColors ? Colors.greenAccent : null,
         leadingDistribution: TextLeadingDistribution.even,
         fontFamily: 'Majalla',
@@ -309,9 +309,9 @@ class LineBuilder {
 
     bool hasInnerRow = false;
 
-    var textColor =
+    final textColor =
         alignment == CrossAxisAlignment.end ? Colors.black : Colors.white;
-    var colorizeColors = [
+    final colorizeColors = [
       textColor,
       textColor,
       Colors.blueGrey,
@@ -398,7 +398,7 @@ class LineBuilder {
         bool columnHack = false;
         //this is used since there is a bug where if there is a [r] %element%%use% [c] ... [/c][/r] then the use is drawn twice. the bug is likely higher up
         String texts = "";
-        for (var item in widgetsInInnerRow) {
+        for (final item in widgetsInInnerRow) {
           texts += FrosthavenConverter.getAllTextInWidget(item);
         }
         if (texts.contains(" :")) {
@@ -445,7 +445,7 @@ class LineBuilder {
         bool columnHack = false;
         //this is used since there is a bug where if there is a [r] %element%%use% [c] ... [/c][/r] then the use is drawn twice. the bug is likely higher up
         String texts = "";
-        for (var item in widgetsInRow) {
+        for (final item in widgetsInRow) {
           texts += FrosthavenConverter.getAllTextInWidget(item);
         }
         if (texts.contains(" :")) {

@@ -76,7 +76,7 @@ void main() {
       _sut.sendToAllExcept(excludedSocket, data);
 
       //assert
-      for (var socket in includedSockets) {
+      for (final socket in includedSockets) {
         verify(socket.write(any));
       }
       verifyNever(excludedSocket.write(any));
@@ -92,7 +92,7 @@ void main() {
       _sut.sendToAll(data);
 
       // assert
-      for (var socket in sockets) {
+      for (final socket in sockets) {
         verify(socket.write(message));
       }
     });

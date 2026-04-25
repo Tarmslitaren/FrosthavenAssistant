@@ -13,11 +13,8 @@ class MonsterBoxViewModel {
     4: Colors.red,
   };
 
-  MonsterBoxViewModel(
-      this.data, {
-      required this.ownerId,
-      GameState? gameState,
-      Settings? settings})
+  MonsterBoxViewModel(this.data,
+      {required this.ownerId, GameState? gameState, Settings? settings})
       : _gameState = gameState ?? getIt<GameState>(),
         _settings = settings ?? getIt<Settings>();
 
@@ -44,7 +41,7 @@ class MonsterBoxViewModel {
 
   /// The monster group id this standee belongs to, or null if not found.
   String? get monsterId {
-    for (var item in _gameState.currentList) {
+    for (final item in _gameState.currentList) {
       if (item is Monster && item.id == data.name) {
         return item.id;
       }
@@ -53,11 +50,10 @@ class MonsterBoxViewModel {
   }
 
   bool get isAlive =>
-      data.health.value > 0 ||
-      GameMethods.summonDoesNotDie(ownerId, data.name);
+      data.health.value > 0 || GameMethods.summonDoesNotDie(ownerId, data.name);
 
   bool get ownerIsCurrent {
-    for (var item in _gameState.currentList) {
+    for (final item in _gameState.currentList) {
       if (item.id == ownerId) {
         return item.turnState.value != TurnsState.done;
       }
@@ -72,7 +68,7 @@ class MonsterBoxViewModel {
 
   /// Returns the owner ListItemData for building condition icons.
   ListItemData? get ownerItem {
-    for (var item in _gameState.currentList) {
+    for (final item in _gameState.currentList) {
       if (item.id == ownerId) return item;
     }
     return null;
