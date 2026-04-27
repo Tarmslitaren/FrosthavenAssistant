@@ -30,7 +30,7 @@ class SummonModel {
     }
     int range = 0;
     if (data.containsKey('range')) {
-      attack = data['range'];
+      range = data['range'];
     }
     int level = 0;
     if (data.containsKey('level')) {
