@@ -18,23 +18,9 @@ Monster _getBoss() {
 
 Future<void> _pumpBoss(WidgetTester tester, Monster monster,
     {bool frosthavenStyle = true}) async {
-  final shadow = const Shadow(
-    offset: Offset(0.4, 0.4),
-    color: Colors.black87,
-    blurRadius: 1,
-  );
-  final leftStyle = TextStyle(
-    fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
-    color: Colors.black,
-    fontSize: 12.8,
-    height: 1.2,
-  );
-
   final widget = MonsterStatBossLayout(
       data: monster,
       scale: 1.0,
-      shadow: shadow,
-      leftStyle: leftStyle,
       frosthavenStyle: frosthavenStyle,
       viewModel:
           MonsterStatCardViewModel(monster, gameState: getIt<GameState>()));

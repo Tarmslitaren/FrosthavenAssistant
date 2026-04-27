@@ -79,8 +79,6 @@ class MonsterStatCardWidget extends StatelessWidget {
   static const double _kImmuneIconLeft = 9.0;
   static const double _kImmuneIconTop = 3.5;
 
-  //todo: extract boss from normal/elite layout
-
   const MonsterStatCardWidget({
     super.key,
     required this.data,
@@ -209,24 +207,39 @@ class _MonsterStatNormalLayout extends StatelessWidget {
   const _MonsterStatNormalLayout({
     required this.data,
     required this.scale,
-    required this.shadow,
-    required this.leftStyle,
-    required this.rightStyle,
     required this.frosthavenStyle,
     this.settings,
   });
 
   final Monster data;
   final double scale;
-  final Shadow shadow;
-  final TextStyle leftStyle;
-  final TextStyle rightStyle;
   final bool frosthavenStyle;
   final Settings? settings;
 
   @override
   Widget build(BuildContext context) {
     final settings_ = settings ?? getIt<Settings>();
+    final shadow = Shadow(
+      offset: Offset(MonsterStatCardWidget._kShadowTextOffset * scale,
+          MonsterStatCardWidget._kShadowTextOffset * scale),
+      color: Colors.black87,
+      blurRadius: MonsterStatCardWidget._kShadowTextBlur * scale,
+    );
+    final shadowLeft = Shadow(
+      offset: Offset(MonsterStatCardWidget._kShadowTextOffset * scale,
+          MonsterStatCardWidget._kShadowTextOffset * scale),
+      color: Colors.black54,
+      blurRadius: MonsterStatCardWidget._kShadowTextBlur * scale,
+    );
+    final leftStyle = getCardNumberStyle(
+        MonsterStatCardWidget._kStatsFontSize * scale,
+        shadowLeft,
+        frosthavenStyle,
+        color: Colors.black,
+        height: MonsterStatCardWidget._kStatsLineHeight);
+    final rightStyle = getCardNumberStyle(
+        MonsterStatCardWidget._kStatsFontSize * scale, shadow, frosthavenStyle,
+        height: MonsterStatCardWidget._kStatsLineHeight);
     MonsterStatsModel? normal = data.type.levels[data.level.value].normal;
     MonsterStatsModel? elite = data.type.levels[data.level.value].elite;
 
@@ -425,8 +438,6 @@ class MonsterStatBossLayout extends StatelessWidget {
     super.key,
     required this.data,
     required this.scale,
-    required this.shadow,
-    required this.leftStyle,
     required this.frosthavenStyle,
     required this.viewModel,
     this.settings,
@@ -434,8 +445,6 @@ class MonsterStatBossLayout extends StatelessWidget {
 
   final Monster data;
   final double scale;
-  final Shadow shadow;
-  final TextStyle leftStyle;
   final bool frosthavenStyle;
   final MonsterStatCardViewModel viewModel;
   final Settings? settings;
@@ -443,6 +452,24 @@ class MonsterStatBossLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final settings_ = settings ?? getIt<Settings>();
+    final shadow = Shadow(
+      offset: Offset(MonsterStatCardWidget._kShadowTextOffset * scale,
+          MonsterStatCardWidget._kShadowTextOffset * scale),
+      color: Colors.black87,
+      blurRadius: MonsterStatCardWidget._kShadowTextBlur * scale,
+    );
+    final shadowLeft = Shadow(
+      offset: Offset(MonsterStatCardWidget._kShadowTextOffset * scale,
+          MonsterStatCardWidget._kShadowTextOffset * scale),
+      color: Colors.black54,
+      blurRadius: MonsterStatCardWidget._kShadowTextBlur * scale,
+    );
+    final leftStyle = getCardNumberStyle(
+        MonsterStatCardWidget._kStatsFontSize * scale,
+        shadowLeft,
+        frosthavenStyle,
+        color: Colors.black,
+        height: MonsterStatCardWidget._kStatsLineHeight);
     bool noCalculationSetting = settings_.noCalculation.value;
     MonsterStatsModel? normal = data.type.levels[data.level.value].boss;
 
@@ -699,36 +726,12 @@ class MonsterStatCardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool frosthavenStyle = GameMethods.isFrosthavenStyle(data.type);
-
-    final shadow = Shadow(
-      offset: Offset(MonsterStatCardWidget._kShadowTextOffset * scale,
-          MonsterStatCardWidget._kShadowTextOffset * scale),
-      color: Colors.black87,
-      blurRadius: MonsterStatCardWidget._kShadowTextBlur * scale,
-    );
-
-    final shadowLeft = Shadow(
-      offset: Offset(MonsterStatCardWidget._kShadowTextOffset * scale,
-          MonsterStatCardWidget._kShadowTextOffset * scale),
-      color: Colors.black54,
-      blurRadius: MonsterStatCardWidget._kShadowTextBlur * scale,
-    );
-
-    final leftStyle = getCardNumberStyle(
-        MonsterStatCardWidget._kStatsFontSize * scale,
-        shadowLeft,
-        frosthavenStyle,
-        color: Colors.black,
-        height: MonsterStatCardWidget._kStatsLineHeight);
-    final rightStyle = getCardNumberStyle(
-        MonsterStatCardWidget._kStatsFontSize * scale, shadow, frosthavenStyle,
-        height: MonsterStatCardWidget._kStatsLineHeight);
+    final frosthavenStyle = GameMethods.isFrosthavenStyle(data.type);
 
     return ValueListenableBuilder<int>(
         valueListenable: data.level,
         builder: (context, value, child) {
-          bool isBoss = data.type.levels[data.level.value].boss != null;
+          final isBoss = data.type.levels[data.level.value].boss != null;
 
           return Container(
               decoration: BoxDecoration(
@@ -747,17 +750,12 @@ class MonsterStatCardView extends StatelessWidget {
                   ? MonsterStatBossLayout(
                       data: data,
                       scale: scale,
-                      shadow: shadow,
-                      leftStyle: leftStyle,
                       frosthavenStyle: frosthavenStyle,
                       viewModel: viewModel,
                       settings: settings)
                   : _MonsterStatNormalLayout(
                       data: data,
                       scale: scale,
-                      shadow: shadow,
-                      leftStyle: leftStyle,
-                      rightStyle: rightStyle,
                       frosthavenStyle: frosthavenStyle,
                       settings: settings));
         });
