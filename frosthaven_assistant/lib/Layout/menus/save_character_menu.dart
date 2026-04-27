@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/save_character_modal_menu.dart';
+import 'package:frosthaven_assistant/Layout/widgets/menu_card.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 
 import '../../Resource/game_methods.dart';
@@ -45,123 +46,101 @@ class SaveCharacterMenuState extends State<SaveCharacterMenu> {
 
   @override
   Widget build(BuildContext context) {
-    //edge insets if width not too small
-    return Container(
-        constraints: const BoxConstraints(maxWidth: _kMaxWidth),
-        child: Card(
-            margin: const EdgeInsets.all(_kCardMargin),
-            child: Stack(children: [
-              Column(
-                children: [
-                  Container(
-                      height: _kHeaderHeight,
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: _kHeaderPadding),
-                      child: Text('Load, Save or Delete Characters.',
-                          style: getTitleTextStyle(1, forceBlack: true))),
-                  const Text(
-                    "Add new Save:",
-                    style: kHeadingStyle,
-                  ),
-                  Wrap(
-                    children: [
-                      for (final item in _characters)
-                        IconButton(
-                            onPressed: () {
-                              //get nr
-                              String number = "";
-                              int nr = 1;
-                              for (final saveName in _saves) {
-                                if (saveName.startsWith(
-                                    item.characterState.display.value)) {
-                                  nr++;
-                                }
-                              }
-                              if (nr > 1) {
-                                number = nr.toString();
-                              }
+    return MenuCard(
+        maxWidth: _kMaxWidth,
+        cardMargin: const EdgeInsets.all(_kCardMargin),
+        child: Column(
+          children: [
+            Container(
+                height: _kHeaderHeight,
+                margin:
+                    const EdgeInsets.symmetric(horizontal: _kHeaderPadding),
+                child: Text('Load, Save or Delete Characters.',
+                    style: getTitleTextStyle(1, forceBlack: true))),
+            const Text(
+              "Add new Save:",
+              style: kHeadingStyle,
+            ),
+            Wrap(
+              children: [
+                for (final item in _characters)
+                  IconButton(
+                      onPressed: () {
+                        String number = "";
+                        int nr = 1;
+                        for (final saveName in _saves) {
+                          if (saveName.startsWith(
+                              item.characterState.display.value)) {
+                            nr++;
+                          }
+                        }
+                        if (nr > 1) {
+                          number = nr.toString();
+                        }
 
-                              final saveName =
-                                  "${item.characterState.display.value}$number";
-                              final saveId = '$saveName\n${item.id}';
+                        final saveName =
+                            "${item.characterState.display.value}$number";
+                        final saveId = '$saveName\n${item.id}';
 
+                        openDialog(
+                            context,
+                            SaveCharacterModalMenu(
+                              saveName: saveName,
+                              saveOnly: true,
+                              saveId: saveId,
+                              character: item,
+                            ));
+                      },
+                      icon: Image.asset(
+                          "assets/images/class-icons/${item.id}.png")),
+              ],
+            ),
+            const Text(
+              "Load Character:",
+              style: kHeadingStyle,
+            ),
+            Expanded(
+              child: Scrollbar(
+                  controller: _scrollController,
+                  child: ValueListenableBuilder<Map<String, String>>(
+                      valueListenable: _settings.characterSaves,
+                      builder: (context, value, child) {
+                        _saves.clear();
+                        List<String> characterId = [];
+                        for (String save
+                            in _settings.characterSaves.value.keys) {
+                          final split = save.split('\n');
+                          characterId.add(split.last);
+                          _saves.add(split.first);
+                        }
+
+                        return ListView.builder(
+                          controller: _scrollController,
+                          itemCount: _saves.length,
+                          itemBuilder: (context, index) => ListTile(
+                            leading: SizedBox(
+                                height: _kIconSize,
+                                width: _kIconSize,
+                                child: Image.asset(
+                                    "assets/images/class-icons/${characterId[index]}.png")),
+                            title: Text(_saves[index], style: kTitleStyle),
+                            onTap: () {
                               openDialog(
                                   context,
                                   SaveCharacterModalMenu(
-                                    saveName: saveName,
-                                    saveOnly: true,
-                                    saveId: saveId,
-                                    character: item,
+                                    saveName: _saves[index],
+                                    saveId:
+                                        '${_saves[index]}\n${characterId[index]}',
+                                    saveOnly: false,
+                                    character: null,
                                   ));
                             },
-                            icon: Image.asset(
-                                "assets/images/class-icons/${item.id}.png")),
-                    ],
-                  ),
-                  const Text(
-                    "Load Character:",
-                    style: kHeadingStyle,
-                  ),
-                  Expanded(
-                    child: Scrollbar(
-                        controller: _scrollController,
-                        child: ValueListenableBuilder<Map<String, String>>(
-                            valueListenable: _settings.characterSaves,
-                            builder: (context, value, child) {
-                              _saves.clear();
-                              List<String> characterId = [];
-                              for (String save
-                                  in _settings.characterSaves.value.keys) {
-                                final split = save.split('\n');
-                                characterId.add(split.last);
-                                _saves.add(split.first);
-                              }
-
-                              return ListView.builder(
-                                controller: _scrollController,
-                                itemCount: _saves.length,
-                                itemBuilder: (context, index) => ListTile(
-                                  leading: SizedBox(
-                                      height: _kIconSize,
-                                      width: _kIconSize,
-                                      child: Image.asset(
-                                          "assets/images/class-icons/${characterId[index]}.png")),
-                                  //should show icon
-                                  title:
-                                      Text(_saves[index], style: kTitleStyle),
-                                  onTap: () {
-                                    openDialog(
-                                        context,
-                                        SaveCharacterModalMenu(
-                                          saveName: _saves[index],
-                                          saveId:
-                                              '${_saves[index]}\n${characterId[index]}',
-                                          saveOnly: false,
-                                          character: null,
-                                        ));
-                                  },
-                                ),
-                              );
-                            })),
-                  ),
-                  const SizedBox(
-                    height: kMenuCloseButtonSpacing,
-                  ),
-                ],
-              ),
-              Positioned(
-                  width: kCloseButtonWidth,
-                  height: kButtonSize,
-                  right: 0,
-                  bottom: 0,
-                  child: TextButton(
-                      child: const Text(
-                        'Close',
-                        style: kButtonLabelStyle,
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      }))
-            ])));
+                          ),
+                        );
+                      })),
+            ),
+            const SizedBox(height: kMenuCloseButtonSpacing),
+          ],
+        ));
   }
 }

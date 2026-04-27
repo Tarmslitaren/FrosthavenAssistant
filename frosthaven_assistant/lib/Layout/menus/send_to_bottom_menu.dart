@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/commands/reorder_modifier_list_command.dart';
 
-import '../../Layout/components/modal_background.dart';
+import '../../Layout/widgets/modal_background.dart';
 import '../../Resource/app_constants.dart';
 import '../../Resource/commands/shuffle_amd_card_command.dart';
 import '../../Resource/game_methods.dart';

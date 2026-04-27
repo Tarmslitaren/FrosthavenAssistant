@@ -11,7 +11,7 @@ import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/chan
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_curse_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_xp_command.dart';
 
-import '../../Layout/components/modal_background.dart';
+import '../../Layout/widgets/modal_background.dart';
 import '../../Resource/commands/add_condition_command.dart';
 import '../../Resource/commands/change_stat_commands/change_empower_command.dart';
 import '../../Resource/commands/change_stat_commands/change_enfeeble_command.dart';

@@ -4,7 +4,7 @@ import 'package:frosthaven_assistant/Resource/commands/remove_card_command.dart'
 import 'package:frosthaven_assistant/Resource/commands/reorder_ability_list_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/shuffle_drawn_ability_card_command.dart';
 
-import '../../Layout/components/modal_background.dart';
+import '../../Layout/widgets/modal_background.dart';
 import '../../Resource/app_constants.dart';
 import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';

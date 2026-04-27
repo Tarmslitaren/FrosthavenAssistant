@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Layout/components/menu_card.dart';
+import 'package:frosthaven_assistant/Layout/widgets/menu_card.dart';
 import 'package:frosthaven_assistant/Layout/menus/save_modal_menu.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 

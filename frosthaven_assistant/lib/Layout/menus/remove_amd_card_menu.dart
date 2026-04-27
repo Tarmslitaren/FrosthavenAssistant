@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
 
-import '../../Layout/components/modal_background.dart';
+import '../../Layout/widgets/modal_background.dart';
 import '../../Resource/app_constants.dart';
 import '../../Resource/commands/remove_amd_card_command.dart';
 import '../../Resource/commands/return_modifier_card_command.dart';

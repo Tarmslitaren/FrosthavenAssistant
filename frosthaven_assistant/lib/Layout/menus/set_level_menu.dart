@@ -6,7 +6,7 @@ import 'package:frosthaven_assistant/Resource/commands/set_auto_level_adjust_com
 import 'package:frosthaven_assistant/Resource/commands/set_difficulty_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_solo_command.dart';
 
-import '../../Layout/components/modal_background.dart';
+import '../../Layout/widgets/modal_background.dart';
 import '../../Resource/commands/set_level_command.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';

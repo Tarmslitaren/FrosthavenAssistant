@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/widgets/menu_card.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_campaign_command.dart';
 
@@ -222,105 +223,81 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        constraints: const BoxConstraints(maxWidth: 400),
-        child: Card(
-            margin: const EdgeInsets.all(_kCardMargin),
-            child: Stack(children: [
-              Column(
-                children: [
-                  const SizedBox(
-                    height: _kTopSpacing,
-                  ),
-                  Column(children: [
-                    const Text("Set Scenario", style: kTitleStyle),
-                    ExpansionTile(
-                      key: UniqueKey(),
-                      title: Text(
-                          "Current Campaign: ${_gameState.currentCampaign.value}"),
-                      children: buildCampaignButtons(),
-                    ),
-                  ]),
-                  Container(
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: _kSearchPadding),
-                    child: KeyboardListener(
-                        //needed to trigger onEditingComplete on enter
-                        //TODO: add this to the other menus
-                        focusNode: FocusNode(),
-                        child: TextField(
-                          onChanged: (value) => _runFilter(value),
-                          controller: _controller,
-                          onTap: () {
-                            _controller.clear();
-                            if (_settings.softNumpadInput.value) {
-                              openDialog(
-                                  context,
-                                  NumpadMenu(
-                                      controller: _controller,
-                                      maxLength: _kNumpadMaxLength,
-                                      onChange: (String value) {
-                                        _runFilter(value);
-                                      }));
-                            }
-                          },
-                          onEditingComplete: () {
-                            if (_foundScenarios.isNotEmpty) {
-                              Navigator.pop(context);
-                              _gameState.action(SetScenarioCommand(
-                                  _foundScenarios.first, false,
-                                  gameState: _gameState));
-                            }
-                          },
-                          decoration: const InputDecoration(
-                              labelText: 'Set Scenario',
-                              suffixIcon: Icon(Icons.search)),
-                        )),
-                  ),
-                  const SizedBox(
-                    height: _kTopSpacing,
-                  ),
-                  Expanded(
-                    child: _foundScenarios.isNotEmpty
-                        ? Scrollbar(
-                            controller: _scrollController,
-                            child: ListView.builder(
-                                controller: _scrollController,
-                                itemCount: _foundScenarios.length,
-                                itemBuilder: (context, index) =>
-                                    _gameState.currentCampaign.value == "Solo"
-                                        ? _SoloTile(
-                                            name: _foundScenarios[index],
-                                            gameState: _gameState,
-                                            gameData: _gameData)
-                                        : _ScenarioTile(
-                                            name: _foundScenarios[index],
-                                            gameState: _gameState,
-                                            settings: _settings)))
-                        : const Text(
-                            'No results found',
-                            style: kHeadingStyle,
-                          ),
-                  ),
-                  const SizedBox(
-                    height: kMenuCloseButtonSpacing,
-                  ),
-                ],
+    return MenuCard(
+        cardMargin: const EdgeInsets.all(_kCardMargin),
+        child: Column(
+          children: [
+            const SizedBox(height: _kTopSpacing),
+            Column(children: [
+              const Text("Set Scenario", style: kTitleStyle),
+              ExpansionTile(
+                key: UniqueKey(),
+                title: Text(
+                    "Current Campaign: ${_gameState.currentCampaign.value}"),
+                children: buildCampaignButtons(),
               ),
-              Positioned(
-                  width: kCloseButtonWidth,
-                  height: kButtonSize,
-                  right: 0,
-                  bottom: 0,
-                  child: TextButton(
-                      child: const Text(
-                        'Close',
-                        style: kButtonLabelStyle,
-                      ),
-                      onPressed: () {
+            ]),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: _kSearchPadding),
+              child: KeyboardListener(
+                  //needed to trigger onEditingComplete on enter
+                  //TODO: add this to the other menus
+                  focusNode: FocusNode(),
+                  child: TextField(
+                    onChanged: (value) => _runFilter(value),
+                    controller: _controller,
+                    onTap: () {
+                      _controller.clear();
+                      if (_settings.softNumpadInput.value) {
+                        openDialog(
+                            context,
+                            NumpadMenu(
+                                controller: _controller,
+                                maxLength: _kNumpadMaxLength,
+                                onChange: (String value) {
+                                  _runFilter(value);
+                                }));
+                      }
+                    },
+                    onEditingComplete: () {
+                      if (_foundScenarios.isNotEmpty) {
                         Navigator.pop(context);
-                      }))
-            ])));
+                        _gameState.action(SetScenarioCommand(
+                            _foundScenarios.first, false,
+                            gameState: _gameState));
+                      }
+                    },
+                    decoration: const InputDecoration(
+                        labelText: 'Set Scenario',
+                        suffixIcon: Icon(Icons.search)),
+                  )),
+            ),
+            const SizedBox(height: _kTopSpacing),
+            Expanded(
+              child: _foundScenarios.isNotEmpty
+                  ? Scrollbar(
+                      controller: _scrollController,
+                      child: ListView.builder(
+                          controller: _scrollController,
+                          itemCount: _foundScenarios.length,
+                          itemBuilder: (context, index) =>
+                              _gameState.currentCampaign.value == "Solo"
+                                  ? _SoloTile(
+                                      name: _foundScenarios[index],
+                                      gameState: _gameState,
+                                      gameData: _gameData)
+                                  : _ScenarioTile(
+                                      name: _foundScenarios[index],
+                                      gameState: _gameState,
+                                      settings: _settings)))
+                  : const Text(
+                      'No results found',
+                      style: kHeadingStyle,
+                    ),
+            ),
+            const SizedBox(height: kMenuCloseButtonSpacing),
+          ],
+        ));
   }
 }
 
