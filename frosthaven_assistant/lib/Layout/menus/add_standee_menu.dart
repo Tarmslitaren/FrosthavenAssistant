@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/widgets/standee_nr_button.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
@@ -10,9 +11,6 @@ import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class AddStandeeMenu extends StatefulWidget {
-  static const double _kButtonSize = 40.0;
-  static const double _kShadowOffset = 1.0;
-  static const double _kShadowBlur = 1.0;
   static const double _kMenuWidth = 250.0;
   static const double _kTopSpacing = 20.0;
   static const double _kHeightOneRow = 140.0;
@@ -108,7 +106,7 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
                                     ? (AddStandeeMenu._kBnBColors[nr] ??
                                         baseColor)
                                     : baseColor);
-                            return _StandeeNrButton(
+                            return StandeeNrButton(
                               nr: nr,
                               scale: scale,
                               color: color,
@@ -150,41 +148,3 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
   }
 }
 
-class _StandeeNrButton extends StatelessWidget {
-  const _StandeeNrButton({
-    required this.nr,
-    required this.scale,
-    required this.color,
-    required this.onPressed,
-  });
-
-  final int nr;
-  final double scale;
-  final Color color;
-  final VoidCallback? onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    final shadow = Shadow(
-      offset: Offset(AddStandeeMenu._kShadowOffset * scale,
-          AddStandeeMenu._kShadowOffset * scale),
-      color: Colors.black87,
-      blurRadius: AddStandeeMenu._kShadowBlur,
-    );
-    return SizedBox(
-      width: AddStandeeMenu._kButtonSize * scale,
-      height: AddStandeeMenu._kButtonSize * scale,
-      child: TextButton(
-        onPressed: onPressed,
-        child: Text(
-          nr.toString(),
-          style: TextStyle(
-            color: color,
-            fontSize: kFontSizeTitle * scale,
-            shadows: [shadow],
-          ),
-        ),
-      ),
-    );
-  }
-}

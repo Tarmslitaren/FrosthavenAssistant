@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/widgets/standee_nr_button.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 import '../../Layout/widgets/modal_background.dart';
@@ -204,7 +205,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
             bool isOut =
                 _isStandeeOut(nr, monster, elite, nrOfElite, nrOfNormal);
             if (isOut) color = Colors.grey;
-            return _StandeeNrButton(
+            return StandeeNrButton(
               nr: nr,
               scale: scale,
               color: color,
@@ -400,44 +401,3 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
   }
 }
 
-class _StandeeNrButton extends StatelessWidget {
-  const _StandeeNrButton({
-    required this.nr,
-    required this.scale,
-    required this.color,
-    required this.onPressed,
-  });
-
-  final int nr;
-  final double scale;
-  final Color color;
-  final VoidCallback onPressed;
-
-  static const double _kButtonSize = 40.0;
-  static const double _kShadowOffset = 1.0;
-  static const double _kShadowBlur = 1.0;
-
-  @override
-  Widget build(BuildContext context) {
-    final shadow = Shadow(
-      offset: Offset(_kShadowOffset * scale, _kShadowOffset * scale),
-      color: Colors.black87,
-      blurRadius: _kShadowBlur,
-    );
-    return SizedBox(
-      width: _kButtonSize * scale,
-      height: _kButtonSize * scale,
-      child: TextButton(
-        onPressed: onPressed,
-        child: Text(
-          nr.toString(),
-          style: TextStyle(
-            color: color,
-            fontSize: kFontSizeTitle * scale,
-            shadows: [shadow],
-          ),
-        ),
-      ),
-    );
-  }
-}
