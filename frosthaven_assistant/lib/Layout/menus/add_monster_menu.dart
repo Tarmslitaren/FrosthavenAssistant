@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/widgets/filtered_list_view.dart';
 import 'package:frosthaven_assistant/Layout/widgets/menu_card.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
@@ -43,7 +44,6 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
   bool _showSpecial = false;
   bool _showBoss = true;
   String _currentCampaign = '';
-  final ScrollController _scrollController = ScrollController();
 
   @override
   initState() {
@@ -211,49 +211,37 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
             const SizedBox(
               height: AddMonsterMenu._kTopSpacing,
             ),
-            Expanded(
-              child: _foundMonsters.isNotEmpty
-                  ? Scrollbar(
-                      controller: _scrollController,
-                      child: ListView.builder(
-                        controller: _scrollController,
-                        itemCount: _foundMonsters.length,
-                        itemBuilder: (context, index) => ListTile(
-                          leading: Image.asset(
-                            "assets/images/monsters/${_foundMonsters[index].gfx}.png",
-                            height: AddMonsterMenu._kImageHeight,
-                            cacheHeight: kMonsterImageCacheHeight,
-                          ),
-                          title: Text(
-                              _foundMonsters[index].hidden
-                                  ? "${_foundMonsters[index].display} (special)"
-                                  : _foundMonsters[index].display,
-                              style: TextStyle(
-                                  fontSize: kFontSizeTitle,
-                                  color: _monsterAlreadyAdded(
-                                          _foundMonsters[index].name)
-                                      ? Colors.grey
-                                      : Colors.black)),
-                          trailing: Text("(${_foundMonsters[index].edition})",
-                              style: kSubtitleStyle),
-                          onTap: () {
-                            if (!_monsterAlreadyAdded(
-                                _foundMonsters[index].name)) {
-                              setState(() {
-                                _gameState.action(AddMonsterCommand(
-                                    _foundMonsters[index].name,
-                                    null,
-                                    _addAsAlly,
-                                    gameState: _gameState));
-                              });
-                            }
-                          },
-                        ),
-                      ))
-                  : const Text(
-                      'No results found',
-                      style: kHeadingStyle,
-                    ),
+            FilteredListView(
+              items: _foundMonsters,
+              itemBuilder: (context, index) => ListTile(
+                leading: Image.asset(
+                  "assets/images/monsters/${_foundMonsters[index].gfx}.png",
+                  height: AddMonsterMenu._kImageHeight,
+                  cacheHeight: kMonsterImageCacheHeight,
+                ),
+                title: Text(
+                    _foundMonsters[index].hidden
+                        ? "${_foundMonsters[index].display} (special)"
+                        : _foundMonsters[index].display,
+                    style: TextStyle(
+                        fontSize: kFontSizeTitle,
+                        color: _monsterAlreadyAdded(_foundMonsters[index].name)
+                            ? Colors.grey
+                            : Colors.black)),
+                trailing: Text("(${_foundMonsters[index].edition})",
+                    style: kSubtitleStyle),
+                onTap: () {
+                  if (!_monsterAlreadyAdded(_foundMonsters[index].name)) {
+                    setState(() {
+                      _gameState.action(AddMonsterCommand(
+                          _foundMonsters[index].name,
+                          null,
+                          _addAsAlly,
+                          gameState: _gameState));
+                    });
+                  }
+                },
+              ),
             ),
             const SizedBox(
               height: kMenuCloseButtonSpacing,

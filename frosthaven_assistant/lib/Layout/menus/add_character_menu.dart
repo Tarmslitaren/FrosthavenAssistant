@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/widgets/filtered_list_view.dart';
 import 'package:frosthaven_assistant/Layout/widgets/menu_card.dart';
 import 'package:frosthaven_assistant/Layout/menus/save_character_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart';
@@ -41,7 +42,6 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
   GameState get _gameState => widget.gameState ?? getIt<GameState>();
   Settings get _settings => widget.settings ?? getIt<Settings>();
   GameData get _gameData => widget.gameData ?? getIt<GameData>();
-  final ScrollController _scrollController = ScrollController();
 
   int compareEditions(String a, String b) {
     //sort current edition to top
@@ -220,26 +220,13 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
             const SizedBox(
               height: 20,
             ),
-            Expanded(
-              child: _foundCharacters.isNotEmpty
-                  ? Scrollbar(
-                      controller: _scrollController,
-                      child: ListView.builder(
-                        controller: _scrollController,
-                        itemCount: _foundCharacters.length,
-                        itemBuilder: (context, index) {
-                          return CharacterTile(
-                            character: _foundCharacters[index],
-                            onSelect: _addCharacter,
-                            disabled:
-                                _characterAlreadyAdded(_foundCharacters[index]),
-                          );
-                        },
-                      ))
-                  : const Text(
-                      'No results found',
-                      style: kHeadingStyle,
-                    ),
+            FilteredListView(
+              items: _foundCharacters,
+              itemBuilder: (context, index) => CharacterTile(
+                character: _foundCharacters[index],
+                onSelect: _addCharacter,
+                disabled: _characterAlreadyAdded(_foundCharacters[index]),
+              ),
             ),
             const SizedBox(
               height: kMenuCloseButtonSpacing,

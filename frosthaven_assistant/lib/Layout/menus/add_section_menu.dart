@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/numpad_menu.dart';
+import 'package:frosthaven_assistant/Layout/widgets/filtered_list_view.dart';
 import 'package:frosthaven_assistant/Layout/widgets/menu_card.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
@@ -36,7 +37,6 @@ class AddSectionMenuState extends State<AddSectionMenu> {
   Settings get _settings => widget.settings ?? getIt<Settings>();
   GameData get _gameData => widget.gameData ?? getIt<GameData>();
   final TextEditingController _controller = TextEditingController();
-  final ScrollController _scrollController = ScrollController();
 
   @override
   initState() {
@@ -142,37 +142,26 @@ class AddSectionMenuState extends State<AddSectionMenu> {
             const SizedBox(
               height: 20,
             ),
-            Expanded(
-              child: _foundScenarios.isNotEmpty
-                  ? Scrollbar(
-                      controller: _scrollController,
-                      child: ListView.builder(
-                        controller: _scrollController,
-                        itemCount: _foundScenarios.length,
-                        itemBuilder: (context, index) => ListTile(
-                          title: Text(_foundScenarios[index],
-                              style: TextStyle(
-                                  color: _gameState.scenarioSectionsAdded
-                                          .contains(
-                                              _foundScenarios[index])
-                                      ? Colors.blueGrey
-                                      : Colors.black,
-                                  fontSize: kFontSizeTitle)),
-                          onTap: () {
-                            if (!_gameState.scenarioSectionsAdded
-                                .contains(_foundScenarios[index])) {
-                              Navigator.pop(context);
-                              _gameState.action(SetScenarioCommand(
-                                  _foundScenarios[index], true,
-                                  gameState: _gameState));
-                            }
-                          },
-                        ),
-                      ))
-                  : const Text(
-                      'No results found',
-                      style: kHeadingStyle,
-                    ),
+            FilteredListView(
+              items: _foundScenarios,
+              itemBuilder: (context, index) => ListTile(
+                title: Text(_foundScenarios[index],
+                    style: TextStyle(
+                        color: _gameState.scenarioSectionsAdded
+                                .contains(_foundScenarios[index])
+                            ? Colors.blueGrey
+                            : Colors.black,
+                        fontSize: kFontSizeTitle)),
+                onTap: () {
+                  if (!_gameState.scenarioSectionsAdded
+                      .contains(_foundScenarios[index])) {
+                    Navigator.pop(context);
+                    _gameState.action(SetScenarioCommand(
+                        _foundScenarios[index], true,
+                        gameState: _gameState));
+                  }
+                },
+              ),
             ),
             const SizedBox(
               height: kMenuCloseButtonSpacing,

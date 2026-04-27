@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/widgets/filtered_list_view.dart';
 import 'package:frosthaven_assistant/Layout/widgets/menu_card.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_campaign_command.dart';
@@ -41,7 +42,6 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
   GameData get _gameData => widget.gameData ?? getIt<GameData>();
   Settings get _settings => widget.settings ?? getIt<Settings>();
   final TextEditingController _controller = TextEditingController();
-  final ScrollController _scrollController = ScrollController();
 
   @override
   initState() {
@@ -273,27 +273,18 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                   )),
             ),
             const SizedBox(height: _kTopSpacing),
-            Expanded(
-              child: _foundScenarios.isNotEmpty
-                  ? Scrollbar(
-                      controller: _scrollController,
-                      child: ListView.builder(
-                          controller: _scrollController,
-                          itemCount: _foundScenarios.length,
-                          itemBuilder: (context, index) =>
-                              _gameState.currentCampaign.value == "Solo"
-                                  ? _SoloTile(
-                                      name: _foundScenarios[index],
-                                      gameState: _gameState,
-                                      gameData: _gameData)
-                                  : _ScenarioTile(
-                                      name: _foundScenarios[index],
-                                      gameState: _gameState,
-                                      settings: _settings)))
-                  : const Text(
-                      'No results found',
-                      style: kHeadingStyle,
-                    ),
+            FilteredListView(
+              items: _foundScenarios,
+              itemBuilder: (context, index) =>
+                  _gameState.currentCampaign.value == "Solo"
+                      ? _SoloTile(
+                          name: _foundScenarios[index],
+                          gameState: _gameState,
+                          gameData: _gameData)
+                      : _ScenarioTile(
+                          name: _foundScenarios[index],
+                          gameState: _gameState,
+                          settings: _settings),
             ),
             const SizedBox(height: kMenuCloseButtonSpacing),
           ],
