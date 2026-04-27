@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/widgets/scrollable_menu_card.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
@@ -17,52 +18,20 @@ class AddLootCardMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ScrollController scrollController = ScrollController();
-
-    return Card(
-        child: Scrollbar(
-            controller: scrollController,
-            child: SingleChildScrollView(
-                controller: scrollController,
-                child: Stack(children: [
-                  Column(
-                    children: [
-                      const SizedBox(
-                        height: _kTopSpacing,
-                      ),
-                      Container(
-                        constraints: const BoxConstraints(maxWidth: _kMaxWidth),
-                        child: Column(children: [
-                          const Text(
-                            "Add Extra Loot Card",
-                            style: kTitleStyle,
-                          ),
-                          //TODO: only show what can be added?
-                          ...List.generate(
-                            _kLootCardNames.length,
-                            (i) => LootCardListTile(name: _kLootCardNames[i], index: i),
-                          ),
-                        ]),
-                      ),
-                      const SizedBox(
-                        height: kMenuCloseButtonSpacing,
-                      ),
-                    ],
-                  ),
-                  Positioned(
-                      width: kCloseButtonWidth,
-                      height: kButtonSize,
-                      right: 0,
-                      bottom: 0,
-                      child: TextButton(
-                          child: const Text(
-                            'Close',
-                            style: kButtonLabelStyle,
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          }))
-                ]))));
+    return ScrollableMenuCard(
+      maxWidth: _kMaxWidth,
+      child: Column(children: [
+        const Text(
+          "Add Extra Loot Card",
+          style: kTitleStyle,
+        ),
+        //TODO: only show what can be added?
+        ...List.generate(
+          _kLootCardNames.length,
+          (i) => LootCardListTile(name: _kLootCardNames[i], index: i),
+        ),
+      ]),
+    );
   }
 }
 

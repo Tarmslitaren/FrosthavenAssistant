@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/widgets/scrollable_menu_card.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/enhance_loot_card_command.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
@@ -74,104 +75,62 @@ class LootCardEnhancementMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ScrollController scrollController = ScrollController();
-
-    return Card(
-        child: Scrollbar(
-            controller: scrollController,
-            child: SingleChildScrollView(
-                controller: scrollController,
-                child: Stack(children: [
-                  Column(
-                    children: [
-                      const SizedBox(
-                          height: LootCardEnhancementMenu._kTopSpacing),
-                      Container(
-                        constraints: const BoxConstraints(
-                            maxWidth: LootCardEnhancementMenu._kMaxWidth),
-                        child: Column(children: [
-                          const Text(
-                            "Loot Card Enhancements",
-                            style: kTitleStyle,
-                          ),
-                          _MaterialSection(
-                              type: "hide",
-                              gameState: _gameState,
-                              getCard: getCardFromIndex),
-                          _MaterialSection(
-                              type: "lumber",
-                              gameState: _gameState,
-                              getCard: getCardFromIndex),
-                          _MaterialSection(
-                              type: "metal",
-                              gameState: _gameState,
-                              getCard: getCardFromIndex),
-                          _HerbSection(
-                              type: "arrowvine",
-                              gameState: _gameState,
-                              getCard: getCardFromIndex),
-                          _HerbSection(
-                              type: "axenut",
-                              gameState: _gameState,
-                              getCard: getCardFromIndex),
-                          _HerbSection(
-                              type: "corpsecap",
-                              gameState: _gameState,
-                              getCard: getCardFromIndex),
-                          _HerbSection(
-                              type: "flamefruit",
-                              gameState: _gameState,
-                              getCard: getCardFromIndex),
-                          _HerbSection(
-                              type: "rockroot",
-                              gameState: _gameState,
-                              getCard: getCardFromIndex),
-                          _HerbSection(
-                              type: "snowthistle",
-                              gameState: _gameState,
-                              getCard: getCardFromIndex),
-                          _LootTypeHeader(type: "coin", amount: "1"),
-                          _CoinRowsSection(
-                              start: 0,
-                              rows: LootCardEnhancementMenu._kCoin1Rows,
-                              gameState: _gameState,
-                              getCard: getCardFromIndex),
-                          const Divider(),
-                          _LootTypeHeader(type: "coin", amount: "2"),
-                          _CoinRowsSection(
-                              start: LootCardEnhancementMenu._kCoin2Start,
-                              rows: LootCardEnhancementMenu._kCoin2Rows,
-                              gameState: _gameState,
-                              getCard: getCardFromIndex),
-                          const Divider(),
-                          _LootTypeHeader(type: "coin", amount: "3"),
-                          _LootCardRow(
-                              type: "coin",
-                              start: LootCardEnhancementMenu._kCoin3Start,
-                              count: LootCardEnhancementMenu._kCoin3Count,
-                              gameState: _gameState,
-                              getCard: getCardFromIndex),
-                        ]),
-                      ),
-                      const SizedBox(
-                        height: kMenuCloseButtonSpacing,
-                      ),
-                    ],
-                  ),
-                  Positioned(
-                      width: kCloseButtonWidth,
-                      height: kButtonSize,
-                      right: 0,
-                      bottom: 0,
-                      child: TextButton(
-                          child: const Text(
-                            'Close',
-                            style: kButtonLabelStyle,
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          }))
-                ]))));
+    return ScrollableMenuCard(
+      maxWidth: _kMaxWidth,
+      child: Column(children: [
+        const Text(
+          "Loot Card Enhancements",
+          style: kTitleStyle,
+        ),
+        _MaterialSection(
+            type: "hide", gameState: _gameState, getCard: getCardFromIndex),
+        _MaterialSection(
+            type: "lumber", gameState: _gameState, getCard: getCardFromIndex),
+        _MaterialSection(
+            type: "metal", gameState: _gameState, getCard: getCardFromIndex),
+        _HerbSection(
+            type: "arrowvine",
+            gameState: _gameState,
+            getCard: getCardFromIndex),
+        _HerbSection(
+            type: "axenut", gameState: _gameState, getCard: getCardFromIndex),
+        _HerbSection(
+            type: "corpsecap",
+            gameState: _gameState,
+            getCard: getCardFromIndex),
+        _HerbSection(
+            type: "flamefruit",
+            gameState: _gameState,
+            getCard: getCardFromIndex),
+        _HerbSection(
+            type: "rockroot", gameState: _gameState, getCard: getCardFromIndex),
+        _HerbSection(
+            type: "snowthistle",
+            gameState: _gameState,
+            getCard: getCardFromIndex),
+        _LootTypeHeader(type: "coin", amount: "1"),
+        _CoinRowsSection(
+            start: 0,
+            rows: _kCoin1Rows,
+            gameState: _gameState,
+            getCard: getCardFromIndex),
+        const Divider(),
+        _LootTypeHeader(type: "coin", amount: "2"),
+        _CoinRowsSection(
+            start: _kCoin2Start,
+            rows: _kCoin2Rows,
+            gameState: _gameState,
+            getCard: getCardFromIndex),
+        const Divider(),
+        _LootTypeHeader(type: "coin", amount: "3"),
+        _LootCardRow(
+            type: "coin",
+            start: _kCoin3Start,
+            count: _kCoin3Count,
+            gameState: _gameState,
+            getCard: getCardFromIndex),
+      ]),
+    );
   }
 }
 

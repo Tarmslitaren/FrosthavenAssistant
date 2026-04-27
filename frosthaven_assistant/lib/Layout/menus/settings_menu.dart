@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/save_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/special_unlocks_menu.dart';
+import 'package:frosthaven_assistant/Layout/widgets/scrollable_menu_card.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/clear_unlocked_classes_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_ally_deck_in_og_gloom_command.dart';
@@ -34,8 +35,6 @@ class SettingsMenu extends StatefulWidget {
   static const double _kInputHeight = 40.0;
   static const double _kDropdownHeight = 20.0;
   static const int _kPortMaxLength = 6;
-  static const double _kCloseButtonWidth = 100.0;
-  static const double _kCloseButtonHeight = 40.0;
 
   const SettingsMenu(
       {super.key, this.gameState, this.network, this.client, this.settings});
@@ -54,8 +53,6 @@ final networkInfo = NetworkInfo();
 class SettingsMenuState extends State<SettingsMenu> {
   final TextEditingController _serverTextController = TextEditingController();
   final TextEditingController _portTextController = TextEditingController();
-
-  final ScrollController scrollController = ScrollController();
 
   Settings get settings => widget.settings ?? getIt<Settings>();
   GameState get _gameState => widget.gameState ?? getIt<GameState>();
@@ -87,22 +84,11 @@ class SettingsMenuState extends State<SettingsMenu> {
         SettingsMenu._kBarWidthBase * SettingsMenu._kBarWidthMultiplier;
     double maxBarScale = screenWidth / referenceMinBarWidth;
 
-    return Card(
-        child: Scrollbar(
-            controller: scrollController,
-            child: SingleChildScrollView(
-                controller: scrollController,
-                child: Stack(children: [
-                  Column(
-                    children: [
-                      const SizedBox(
-                        height: SettingsMenu._kTopSpacing,
-                      ),
-                      Container(
-                          constraints: const BoxConstraints(
-                              maxWidth: SettingsMenu._kMaxWidth),
-                          child: Column(
-                            children: [
+    return ScrollableMenuCard(
+        maxWidth: SettingsMenu._kMaxWidth,
+        onClose: settings.saveToDisk,
+        child: Column(
+          children: [
                               const Text(
                                 "Settings",
                                 style: kTitleStyle,
@@ -605,27 +591,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   }),
                               //checkbox client + host + port
                               //checkbox server - show ip, port
-                            ],
-                          )),
-                      const SizedBox(
-                        height: kMenuCloseButtonSpacing,
-                      ),
-                    ],
-                  ),
-                  Positioned(
-                      width: SettingsMenu._kCloseButtonWidth,
-                      height: SettingsMenu._kCloseButtonHeight,
-                      right: 0,
-                      bottom: 0,
-                      child: TextButton(
-                          child: const Text(
-                            'Close',
-                            style: kButtonLabelStyle,
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                            settings.saveToDisk();
-                          }))
-                ]))));
+          ],
+        ));
   }
 }

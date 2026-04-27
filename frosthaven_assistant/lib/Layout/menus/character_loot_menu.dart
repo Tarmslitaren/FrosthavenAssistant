@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/widgets/scrollable_menu_card.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
@@ -41,46 +42,19 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
 
   @override
   Widget build(BuildContext context) {
-    final ScrollController scrollController = ScrollController();
-
     List<Character> characters = GameMethods.getCurrentCharacters();
 
-    return Card(
-        child: Scrollbar(
-            controller: scrollController,
-            child: SingleChildScrollView(
-                controller: scrollController,
-                child: Stack(children: [
-                  Column(
-                    children: [
-                      const SizedBox(
-                        height: _kTopSpacing,
-                      ),
-                      for (Character character in characters)
-                        _CharacterLootWidget(
-                            characterId: character.characterClass.id,
-                            characterName:
-                                character.characterState.display.value,
-                            gameState: _gameState),
-                      const SizedBox(
-                        height: kMenuCloseButtonSpacing,
-                      ),
-                    ],
-                  ),
-                  Positioned(
-                      width: kCloseButtonWidth,
-                      height: kButtonSize,
-                      right: 0,
-                      bottom: 0,
-                      child: TextButton(
-                          child: const Text(
-                            'Close',
-                            style: kButtonLabelStyle,
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          }))
-                ]))));
+    return ScrollableMenuCard(
+      child: Column(
+        children: [
+          for (Character character in characters)
+            _CharacterLootWidget(
+                characterId: character.characterClass.id,
+                characterName: character.characterState.display.value,
+                gameState: _gameState),
+        ],
+      ),
+    );
   }
 }
 

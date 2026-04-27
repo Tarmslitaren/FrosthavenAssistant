@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/widgets/scrollable_menu_card.dart';
 import 'package:frosthaven_assistant/Model/character_class.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/use_fh_perks_command.dart';
@@ -64,40 +65,8 @@ class PerksMenu extends StatelessWidget {
           }
           tiles.add(divider);
 
-          return Card(
-              child: Scrollbar(
-                  controller: scrollController,
-                  child: SingleChildScrollView(
-                      controller: scrollController,
-                      child: Stack(children: [
-                        Column(
-                          children: [
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Container(
-                              constraints: const BoxConstraints(maxWidth: 300),
-                              child: Column(children: tiles),
-                            ),
-                            const SizedBox(
-                              height: kMenuCloseButtonSpacing,
-                            ),
-                          ],
-                        ),
-                        Positioned(
-                            width: kCloseButtonWidth,
-                            height: kButtonSize,
-                            right: 0,
-                            bottom: 0,
-                            child: TextButton(
-                                child: const Text(
-                                  'Close',
-                                  style: kButtonLabelStyle,
-                                ),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                }))
-                      ]))));
+          return ScrollableMenuCard(
+              maxWidth: 300, child: Column(children: tiles));
         });
   }
 }
