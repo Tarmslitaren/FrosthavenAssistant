@@ -1,4 +1,3 @@
-import 'package:frosthaven_assistant/Layout/menus/ability_cards_menu.dart';
 import 'package:frosthaven_assistant/Model/monster_ability.dart';
 
 import '../state/game_state.dart';
@@ -30,8 +29,6 @@ class RemoveCardCommand extends Command {
         break;
       }
     }
-    //todo: not use a sad hack, find better ui update solution
-    AbilityCardsMenuState.revealedList.clear();
   }
 
   @override

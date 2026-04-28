@@ -4,6 +4,8 @@ part of 'game_state.dart';
 class MonsterAbilityState {
   final String name;
 
+  final ValueNotifier<int> drawPileVersion = ValueNotifier(0);
+
   final CardStack<MonsterAbilityCardModel> _drawPile =
       CardStack<MonsterAbilityCardModel>();
   final CardStack<MonsterAbilityCardModel> _discardPile =
@@ -45,14 +47,17 @@ class MonsterAbilityState {
 
   void shuffle(_StateModifier _) {
     _shuffle();
+    drawPileVersion.value++;
   }
 
   void shuffleUnDrawn(_StateModifier _) {
     _drawPile.shuffle();
+    drawPileVersion.value++;
   }
 
   void removeFromDrawPile(_StateModifier _, MonsterAbilityCardModel card) {
     _drawPile.remove(card);
+    drawPileVersion.value++;
   }
 
   void removeFromDiscardPile(_StateModifier _, MonsterAbilityCardModel card) {
