@@ -57,9 +57,9 @@ class DrawButtonState extends State<DrawButton> {
                         style: getWhiteShadowStyle(kFontSizeSmall * scaling, shadow)));
               },
             ),
-            ValueListenableBuilder<int>(
-              valueListenable: _vm.commandIndex,
-              builder: (context, value, child) {
+            ListenableBuilder(
+              listenable: Listenable.merge([_vm.roundState, _vm.totalRounds]),
+              builder: (context, child) {
                 return Container(
                     margin: EdgeInsets.zero,
                     height: _kButtonHeight * scaling,

@@ -98,8 +98,12 @@ void main() {
       expect(makeVm().round, isNotNull);
     });
 
-    test('commandIndex listenable is exposed', () {
-      expect(makeVm().commandIndex, isNotNull);
+    test('roundState listenable is exposed', () {
+      expect(makeVm().roundState, isNotNull);
+    });
+
+    test('totalRounds listenable is exposed', () {
+      expect(makeVm().totalRounds, isNotNull);
     });
   });
 }

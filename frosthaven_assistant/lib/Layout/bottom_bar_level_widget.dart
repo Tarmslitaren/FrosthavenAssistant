@@ -51,7 +51,7 @@ class BottomBarLevelWidget extends StatelessWidget {
                             ));
                       }),
                   ValueListenableBuilder<int>(
-                      valueListenable: vm.commandIndex,
+                      valueListenable: vm.level,
                       builder: (context, value, child) {
                         const double blurRadius = 3.0;
                         const double spreadRadius = 1.0;
@@ -82,7 +82,7 @@ class BottomBarLevelWidget extends StatelessWidget {
                                           "assets/images/psd/level.png"),
                                     ))),
                             TextSpan(
-                              text: ": ${vm.level} ",
+                              text: ": $value ",
                               style: textStyle,
                             ),
                             WidgetSpan(

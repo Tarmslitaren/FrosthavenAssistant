@@ -257,32 +257,30 @@ void main() {
   group('CharacterHealthWidgetViewModel.enableHealthWheel', () {
     test('true when setting is true', () {
       getIt<Settings>().enableHeathWheel.value = true;
-      final vm = CharacterHealthWidgetViewModel(
-          gameState: getIt<GameState>(), settings: getIt<Settings>());
-      expect(vm.enableHealthWheel, isTrue);
+      final vm =
+          CharacterHealthWidgetViewModel(settings: getIt<Settings>());
+      expect(vm.enableHealthWheel.value, isTrue);
     });
 
     test('false when setting is false', () {
       getIt<Settings>().enableHeathWheel.value = false;
-      final vm = CharacterHealthWidgetViewModel(
-          gameState: getIt<GameState>(), settings: getIt<Settings>());
-      expect(vm.enableHealthWheel, isFalse);
+      final vm =
+          CharacterHealthWidgetViewModel(settings: getIt<Settings>());
+      expect(vm.enableHealthWheel.value, isFalse);
+    });
+
+    test('enableHealthWheel listenable is exposed', () {
+      final vm =
+          CharacterHealthWidgetViewModel(settings: getIt<Settings>());
+      expect(vm.enableHealthWheel, isNotNull);
     });
   });
 
   group('CharacterHealthWidgetViewModel.frosthavenStyle', () {
     test('returns a bool', () {
-      final vm = CharacterHealthWidgetViewModel(
-          gameState: getIt<GameState>(), settings: getIt<Settings>());
+      final vm =
+          CharacterHealthWidgetViewModel(settings: getIt<Settings>());
       expect(vm.frosthavenStyle, isA<bool>());
-    });
-  });
-
-  group('CharacterHealthWidgetViewModel.commandIndex', () {
-    test('commandIndex listenable is exposed', () {
-      final vm = CharacterHealthWidgetViewModel(
-          gameState: getIt<GameState>(), settings: getIt<Settings>());
-      expect(vm.commandIndex, isNotNull);
     });
   });
 }

@@ -127,5 +127,17 @@ void main() {
       await pumpButton(tester);
       expect(find.byType(RepaintBoundary), findsAtLeast(1));
     });
+
+    testWidgets('button text updates when roundState changes after render',
+        (WidgetTester tester) async {
+      await pumpButton(tester);
+      expect(find.text('Draw'), findsOneWidget);
+
+      (getIt<GameState>().roundState as ValueNotifier<RoundState>).value =
+          RoundState.playTurns;
+      await tester.pump();
+
+      expect(find.textContaining('Next Round'), findsOneWidget);
+    });
   });
 }

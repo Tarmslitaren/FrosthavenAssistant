@@ -24,20 +24,16 @@ class CharacterHealthWidget extends StatelessWidget {
       required this.scale,
       required this.shadow,
       required this.scaledHeight,
-      this.gameState,
       this.settings});
   final Character character;
   final double scale;
   final double scaledHeight;
   final Shadow shadow;
-  // injected for testing
-  final GameState? gameState;
   final Settings? settings;
 
   @override
   Widget build(BuildContext context) {
-    final vm = CharacterHealthWidgetViewModel(
-        gameState: gameState, settings: settings);
+    final vm = CharacterHealthWidgetViewModel(settings: settings);
 
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,13 +57,13 @@ class CharacterHealthWidget extends StatelessWidget {
                   );
                 }),
           ),
-          ValueListenableBuilder<int>(
-              valueListenable: vm.commandIndex,
+          ValueListenableBuilder<bool>(
+              valueListenable: vm.enableHealthWheel,
               builder: (context, value, child) {
                 return Container(
                     margin: EdgeInsets.only(
                         left: CharacterHealthWidget._kMarginLeft * scale),
-                    child: vm.enableHealthWheel
+                    child: value
                         ? HealthWheelController(
                             figureId: character.id,
                             ownerId: character.id,

@@ -105,5 +105,17 @@ void main() {
       await pumpWidget(tester);
       expect(find.byType(Material), findsAtLeast(1));
     });
+
+    testWidgets('level value updates when level changes after render',
+        (WidgetTester tester) async {
+      (getIt<GameState>().level as ValueNotifier<int>).value = 2;
+      await pumpWidget(tester);
+      expect(find.textContaining(': 2 '), findsOneWidget);
+
+      (getIt<GameState>().level as ValueNotifier<int>).value = 5;
+      await tester.pump();
+
+      expect(find.textContaining(': 5 '), findsOneWidget);
+    });
   });
 }

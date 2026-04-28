@@ -18,7 +18,8 @@ class DrawButtonViewModel {
   // Notifiers the widget subscribes to
   ValueListenable<double> get userScalingBars => _settings.userScalingBars;
   ValueListenable<int> get round => _gameState.round;
-  ValueListenable<int> get commandIndex => _gameState.commandIndex;
+  ValueListenable<RoundState> get roundState => _gameState.roundState;
+  ValueListenable<int> get totalRounds => _gameState.totalRounds;
 
   // Derived state
   String get buttonText =>

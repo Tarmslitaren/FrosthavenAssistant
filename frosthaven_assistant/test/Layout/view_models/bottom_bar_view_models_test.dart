@@ -211,11 +211,11 @@ void main() {
   });
 
   group('BottomBarLevelWidgetViewModel.level', () {
-    test('returns current game level', () {
+    test('exposes current game level via notifier', () {
       (getIt<GameState>().level as ValueNotifier<int>).value = 4;
       final vm = BottomBarLevelWidgetViewModel(
           gameState: getIt<GameState>(), settings: getIt<Settings>());
-      expect(vm.level, 4);
+      expect(vm.level.value, 4);
     });
   });
 
@@ -226,10 +226,10 @@ void main() {
       expect(vm.scenario, isNotNull);
     });
 
-    test('commandIndex listenable is exposed', () {
+    test('level listenable is exposed', () {
       final vm = BottomBarLevelWidgetViewModel(
           gameState: getIt<GameState>(), settings: getIt<Settings>());
-      expect(vm.commandIndex, isNotNull);
+      expect(vm.level, isNotNull);
     });
   });
 }

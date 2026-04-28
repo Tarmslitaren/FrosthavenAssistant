@@ -19,7 +19,7 @@ class BottomBarLevelWidgetViewModel {
   final Settings _settings;
 
   ValueListenable<String> get scenario => _gameState.scenario;
-  ValueListenable<int> get commandIndex => _gameState.commandIndex;
+  ValueListenable<int> get level => _gameState.level;
 
   double get userScalingBars => _settings.userScalingBars.value;
   double get fontHeight => _kFontSize * userScalingBars;
@@ -60,7 +60,6 @@ class BottomBarLevelWidgetViewModel {
               ]);
   }
 
-  int get level => _gameState.level.value;
   int get trapValue => GameMethods.getTrapValue();
   int get hazardValue => GameMethods.getHazardValue();
   int get xpValue => GameMethods.getXPValue();
