@@ -11,7 +11,7 @@ import 'view_models/condition_icon_view_model.dart';
 
 class ConditionIcon extends StatefulWidget {
   ConditionIcon(this.condition, this.size, this.owner, this.figure,
-      {super.key, required this.scale, this.gameState, this.settings})
+      {super.key, required this.scale, this.settings})
       : gfx = _buildGfxPath(condition);
 
   static String _buildGfxPath(Condition condition) {
@@ -32,7 +32,6 @@ class ConditionIcon extends StatefulWidget {
   final double scale;
   final ListItemData owner;
   final FigureState figure;
-  final GameState? gameState;
   // injected for testing
   final Settings? settings;
   final String gfx;
@@ -51,17 +50,22 @@ class ConditionIconState extends State<ConditionIcon>
   static const double _kClassTokenIconScale = 0.45;
 
   ConditionIconViewModel? _vmInstance;
-  ConditionIconViewModel get _vm => _vmInstance ??= ConditionIconViewModel(
-      gameState: widget.gameState, settings: widget.settings);
+  ConditionIconViewModel get _vm =>
+      _vmInstance ??= ConditionIconViewModel(settings: widget.settings);
+
   AnimationController? _shakeController;
   Animation<double>? _shakeAngle;
+
+  int _previousHealth = 0;
 
   final animate = ValueNotifier<bool>(false);
 
   @override
   void initState() {
     super.initState();
-    _vm.commandIndex.addListener(_animateListener);
+    _previousHealth = widget.figure.health.value;
+    widget.figure.health.addListener(_onHealthChanged);
+    widget.owner.turnState.addListener(_onTurnStateChanged);
 
     final ctrl = AnimationController(
       duration: const Duration(milliseconds: 333),
@@ -81,7 +85,8 @@ class ConditionIconState extends State<ConditionIcon>
 
   @override
   void dispose() {
-    _vmInstance?.commandIndex.removeListener(_animateListener);
+    widget.figure.health.removeListener(_onHealthChanged);
+    widget.owner.turnState.removeListener(_onTurnStateChanged);
     _shakeController?.dispose();
     super.dispose();
   }
@@ -93,17 +98,28 @@ class ConditionIconState extends State<ConditionIcon>
     });
   }
 
-  void _animateListener() {
-    final oldState = _vm.getOldState();
-    if (oldState == null) return;
+  void _onHealthChanged() {
+    final newHealth = widget.figure.health.value;
+    if (newHealth < _previousHealth) {
+      if (_vm.shouldAnimateOnDamage(widget.condition)) _runAnimation();
+    } else if (newHealth > _previousHealth) {
+      if (_vm.shouldAnimateOnHeal(widget.condition)) _runAnimation();
+    }
+    _previousHealth = newHealth;
+  }
 
-    if (_vm.shouldTriggerAnimation(
-      condition: widget.condition,
-      owner: widget.owner,
-      figure: widget.figure,
-      oldState: oldState,
-    )) {
-      _runAnimation();
+  void _onTurnStateChanged() {
+    final turnState = widget.owner.turnState.value;
+    if (turnState == TurnsState.current) {
+      if (_vm.shouldAnimateOnTurnStart(widget.condition)) _runAnimation();
+    } else if (turnState == TurnsState.done) {
+      if (_vm.shouldAnimateOnTurnEnd(
+        widget.condition,
+        widget.figure.conditionsAddedThisTurn,
+        widget.figure.conditionsAddedPreviousTurn,
+      )) {
+        _runAnimation();
+      }
     }
   }
 

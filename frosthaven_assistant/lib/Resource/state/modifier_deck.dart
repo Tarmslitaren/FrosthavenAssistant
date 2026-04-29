@@ -640,14 +640,8 @@ class ModifierDeck {
       }
     } else {
       int toRemove = count - notifier.value;
-      final list = _drawPile.getList();
       for (int i = 0; i < toRemove; i++) {
-        for (int j = list.length - 1; j >= 0; j--) {
-          if (list[j].gfx == gfx) {
-            _drawPile.removeAt(j);
-            break;
-          }
-        }
+        _drawPile.removeFirstWhere((card) => card.gfx == gfx);
       }
     }
     if (shuffle) {

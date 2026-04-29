@@ -1,15 +1,10 @@
 // ignore_for_file: no-magic-number, avoid-non-null-assertion
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/view_models/condition_icon_view_model.dart';
-import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
-import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
-import 'package:frosthaven_assistant/Resource/state/game_state.dart';
-import 'package:frosthaven_assistant/services/network/communication.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../../command/test_helpers.dart';
@@ -20,15 +15,11 @@ void main() {
   });
 
   setUp(() {
-    getIt<GameState>().clearList();
-    (getIt<GameState>().roundState as ValueNotifier<RoundState>).value =
-        RoundState.chooseInitiative;
+    getIt<Settings>().expireConditions.value = true;
   });
 
   ConditionIconViewModel makeVm() => ConditionIconViewModel(
-        gameState: getIt<GameState>(),
         settings: getIt<Settings>(),
-        communication: getIt<Communication>(),
       );
 
   // ── isCharacterCondition ───────────────────────────────────────────────────
@@ -98,235 +89,139 @@ void main() {
 
     test('returns transparent for character condition when no character loaded',
         () {
-      // No characters in list → no match → transparent.
       expect(makeVm().classColorFor(Condition.character1), Colors.transparent);
     });
   });
 
-  // ── commandIndex ───────────────────────────────────────────────────────────
+  // ── shouldAnimateOnDamage ──────────────────────────────────────────────────
 
-  group('ConditionIconViewModel.commandIndex', () {
-    test('listenable is exposed and of type ValueListenable<int>', () {
-      final vl = makeVm().commandIndex;
-      expect(vl, isA<ValueListenable<int>>());
-    });
-  });
-
-  // ── getOldState ────────────────────────────────────────────────────────────
-
-  group('ConditionIconViewModel.getOldState', () {
-    test('returns null immediately after clearList (no save history)', () {
-      // clearList does not create a save state, so getOldState should be null.
-      final result = makeVm().getOldState();
-      expect(result, isNull);
-    });
-
-    test('returns a non-null GameState after action() builds save history', () {
-      final gs = getIt<GameState>();
-      // action() goes through the ActionHandler, which saves state before
-      // executing the command.
-      gs.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-          gameState: gs));
-      final result = makeVm().getOldState();
-      expect(result, isNotNull);
-      gs.undo();
-    });
-  });
-
-  // ── getTurnChanged ─────────────────────────────────────────────────────────
-
-  group('ConditionIconViewModel.getTurnChanged', () {
-    test('returns null when round values differ between states', () {
-      final gs = getIt<GameState>();
-      gs.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-          gameState: gs));
+  group('ConditionIconViewModel.shouldAnimateOnDamage', () {
+    test('true for damage-sensitive conditions', () {
       final vm = makeVm();
-      final old = vm.getOldState()!;
-      final savedRound = gs.round.value;
-      (gs.round as ValueNotifier<int>).value = savedRound + 1;
-      expect(vm.getTurnChanged(old, gs), isNull);
-      (gs.round as ValueNotifier<int>).value = savedRound;
-      gs.undo();
-    });
-
-    test('returns null when roundState values differ', () {
-      final gs = getIt<GameState>();
-      gs.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-          gameState: gs));
-      final vm = makeVm();
-      final old = vm.getOldState()!;
-      (gs.roundState as ValueNotifier<RoundState>).value = RoundState.playTurns;
-      expect(vm.getTurnChanged(old, gs), isNull);
-      (gs.roundState as ValueNotifier<RoundState>).value =
-          RoundState.chooseInitiative;
-      gs.undo();
-    });
-
-    test('returns null when list lengths differ', () {
-      final gs = getIt<GameState>();
-      gs.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-          gameState: gs));
-      final vm = makeVm();
-      final old = vm.getOldState()!;
-      // Add another item after capturing the old state.
-      gs.action(
-          AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: gs));
-      expect(vm.getTurnChanged(old, gs), isNull);
-      gs.undo();
-      gs.undo();
-    });
-
-    test('returns index when a turnState changed for the same ids', () {
-      final gs = getIt<GameState>();
-      gs.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-          gameState: gs));
-      final vm = makeVm();
-      final old = vm.getOldState()!;
-      final item = gs.currentList.first;
-      (item.turnState as ValueNotifier<TurnsState>).value = TurnsState.done;
-      final changed = vm.getTurnChanged(old, gs);
-      expect(changed, 0);
-      (item.turnState as ValueNotifier<TurnsState>).value = TurnsState.notDone;
-      gs.undo();
-    });
-
-    test('returns null when no items changed turnState', () {
-      final gs = getIt<GameState>();
-      gs.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-          gameState: gs));
-      final vm = makeVm();
-      final old = vm.getOldState()!;
-      // No change – turnState is still notDone in both old and current.
-      expect(vm.getTurnChanged(old, gs), isNull);
-      gs.undo();
-    });
-  });
-
-  // ── shouldTriggerAnimation – health-change branches ───────────────────────
-
-  group('ConditionIconViewModel.shouldTriggerAnimation (health change)', () {
-    test('returns true for poison condition when owner takes damage', () {
-      final gs = getIt<GameState>();
-      gs.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-          gameState: gs));
-      final vm = makeVm();
-      final old = vm.getOldState()!;
-      final character =
-          gs.currentList.firstWhere((e) => e is Character) as Character;
-      final oldHealth = character.characterState.health.value;
-      // Simulate taking damage (negative health change from old to current).
-      (character.characterState.health as ValueNotifier<int>).value =
-          oldHealth - 3;
-
-      final result = vm.shouldTriggerAnimation(
-        condition: Condition.poison,
-        owner: character,
-        figure: character.characterState,
-        oldState: old,
-      );
-      expect(result, isTrue);
-      (character.characterState.health as ValueNotifier<int>).value = oldHealth;
-      gs.undo();
-    });
-
-    test('returns true for wound when owner receives healing', () {
-      final gs = getIt<GameState>();
-      gs.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-          gameState: gs));
-      final vm = makeVm();
-      final old = vm.getOldState()!;
-      final character =
-          gs.currentList.firstWhere((e) => e is Character) as Character;
-      final oldHealth = character.characterState.health.value;
-      // Simulate healing (positive health change).
-      (character.characterState.health as ValueNotifier<int>).value =
-          oldHealth + 3;
-
-      final result = vm.shouldTriggerAnimation(
-        condition: Condition.wound,
-        owner: character,
-        figure: character.characterState,
-        oldState: old,
-      );
-      expect(result, isTrue);
-      (character.characterState.health as ValueNotifier<int>).value = oldHealth;
-      gs.undo();
-    });
-
-    test('returns false for stun condition when owner takes damage', () {
-      final gs = getIt<GameState>();
-      gs.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-          gameState: gs));
-      final vm = makeVm();
-      final old = vm.getOldState()!;
-      final character =
-          gs.currentList.firstWhere((e) => e is Character) as Character;
-      final oldHealth = character.characterState.health.value;
-      (character.characterState.health as ValueNotifier<int>).value =
-          oldHealth - 3;
-
-      final result = vm.shouldTriggerAnimation(
-        condition: Condition.stun,
-        owner: character,
-        figure: character.characterState,
-        oldState: old,
-      );
-      expect(result, isFalse);
-      (character.characterState.health as ValueNotifier<int>).value = oldHealth;
-      gs.undo();
-    });
-
-    test('returns false when a different owner takes damage', () {
-      final gs = getIt<GameState>();
-      gs.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-          gameState: gs));
-      gs.action(
-          AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: gs));
-      final vm = makeVm();
-      final old = vm.getOldState()!;
-      final monster = gs.currentList.firstWhere((e) => e is Monster) as Monster;
-      final character =
-          gs.currentList.firstWhere((e) => e is Character) as Character;
-
-      if (monster.monsterInstances.isNotEmpty) {
-        final standee = monster.monsterInstances.first;
-        final oldHealth = standee.health.value;
-        (standee.health as ValueNotifier<int>).value = oldHealth - 2;
-        final result = vm.shouldTriggerAnimation(
-          condition: Condition.poison,
-          owner: character,
-          figure: character.characterState,
-          oldState: old,
-        );
-        expect(result, isFalse);
-        (standee.health as ValueNotifier<int>).value = oldHealth;
+      for (final c in [
+        Condition.poison,
+        Condition.regenerate,
+        Condition.ward,
+        Condition.shield,
+        Condition.retaliate,
+        Condition.brittle,
+      ]) {
+        expect(vm.shouldAnimateOnDamage(c), isTrue,
+            reason: '${c.name} should animate on damage');
       }
-      gs.undo();
-      gs.undo();
     });
 
-    test('returns false for ward (defensive) when owner receives healing', () {
-      final gs = getIt<GameState>();
-      gs.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-          gameState: gs));
-      final vm = makeVm();
-      final old = vm.getOldState()!;
-      final character =
-          gs.currentList.firstWhere((e) => e is Character) as Character;
-      final oldHealth = character.characterState.health.value;
-      (character.characterState.health as ValueNotifier<int>).value =
-          oldHealth + 3;
+    test('true for poison2 (name contains "poison")', () {
+      expect(makeVm().shouldAnimateOnDamage(Condition.poison2), isTrue);
+    });
 
-      final result = vm.shouldTriggerAnimation(
-        condition: Condition.ward,
-        owner: character,
-        figure: character.characterState,
-        oldState: old,
-      );
-      // ward is not in the healing-triggered list
-      expect(result, isFalse);
-      (character.characterState.health as ValueNotifier<int>).value = oldHealth;
-      gs.undo();
+    test('false for conditions not triggered by damage', () {
+      final vm = makeVm();
+      for (final c in [
+        Condition.stun,
+        Condition.disarm,
+        Condition.wound,
+        Condition.rupture,
+        Condition.infect,
+        Condition.bane,
+        Condition.muddle,
+      ]) {
+        expect(vm.shouldAnimateOnDamage(c), isFalse,
+            reason: '${c.name} should NOT animate on damage');
+      }
+    });
+  });
+
+  // ── shouldAnimateOnHeal ────────────────────────────────────────────────────
+
+  group('ConditionIconViewModel.shouldAnimateOnHeal', () {
+    test('true for heal-sensitive conditions', () {
+      final vm = makeVm();
+      for (final c in [
+        Condition.rupture,
+        Condition.wound,
+        Condition.bane,
+        Condition.infect,
+        Condition.brittle,
+      ]) {
+        expect(vm.shouldAnimateOnHeal(c), isTrue,
+            reason: '${c.name} should animate on heal');
+      }
+    });
+
+    test('true for poison (name contains "poison") on heal', () {
+      expect(makeVm().shouldAnimateOnHeal(Condition.poison), isTrue);
+    });
+
+    test('false for conditions not triggered by healing', () {
+      final vm = makeVm();
+      for (final c in [
+        Condition.stun,
+        Condition.disarm,
+        Condition.ward,
+        Condition.shield,
+        Condition.regenerate,
+        Condition.retaliate,
+        Condition.muddle,
+      ]) {
+        expect(vm.shouldAnimateOnHeal(c), isFalse,
+            reason: '${c.name} should NOT animate on heal');
+      }
+    });
+  });
+
+  // ── shouldAnimateOnTurnStart ───────────────────────────────────────────────
+
+  group('ConditionIconViewModel.shouldAnimateOnTurnStart', () {
+    test('true for regenerate, wound, wound2', () {
+      final vm = makeVm();
+      expect(vm.shouldAnimateOnTurnStart(Condition.regenerate), isTrue);
+      expect(vm.shouldAnimateOnTurnStart(Condition.wound), isTrue);
+      expect(vm.shouldAnimateOnTurnStart(Condition.wound2), isTrue);
+    });
+
+    test('false for conditions not triggered at turn start', () {
+      final vm = makeVm();
+      for (final c in [
+        Condition.poison,
+        Condition.stun,
+        Condition.muddle,
+        Condition.bane,
+        Condition.rupture,
+        Condition.brittle,
+      ]) {
+        expect(vm.shouldAnimateOnTurnStart(c), isFalse,
+            reason: '${c.name} should NOT animate on turn start');
+      }
+    });
+  });
+
+  // ── shouldAnimateOnTurnEnd ─────────────────────────────────────────────────
+
+  group('ConditionIconViewModel.shouldAnimateOnTurnEnd', () {
+    test('true for bane when NOT added this turn', () {
+      expect(makeVm().shouldAnimateOnTurnEnd(Condition.bane, [], []), isTrue);
+    });
+
+    test('false for bane when added this turn', () {
+      expect(makeVm().shouldAnimateOnTurnEnd(
+          Condition.bane, [Condition.bane], []), isFalse);
+    });
+
+    test('true for stun added previous turn when expireConditions=false', () {
+      getIt<Settings>().expireConditions.value = false;
+      expect(makeVm().shouldAnimateOnTurnEnd(
+          Condition.stun, [], [Condition.stun]), isTrue);
+    });
+
+    test('false for stun added previous turn when expireConditions=true', () {
+      getIt<Settings>().expireConditions.value = true;
+      expect(makeVm().shouldAnimateOnTurnEnd(
+          Condition.stun, [], [Condition.stun]), isFalse);
+    });
+
+    test('false for wound at turn end (wound is turn-start, not turn-end)', () {
+      expect(makeVm().shouldAnimateOnTurnEnd(Condition.wound, [], []), isFalse);
     });
   });
 }

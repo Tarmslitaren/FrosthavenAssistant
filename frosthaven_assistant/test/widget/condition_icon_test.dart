@@ -274,7 +274,6 @@ void main() {
       // Mock SharedPreferences so saveToDisk does not throw MissingPluginException
       SharedPreferences.setMockInitialValues({});
       getIt<GameState>().clearList();
-      // Use action() to populate gameSaveStates so listener can read old state
       getIt<GameState>().action(AddCharacterCommand(
           'Blinkblade', 'Frosthaven', null, 1,
           gameState: getIt<GameState>()));
@@ -304,17 +303,21 @@ void main() {
       await tester.pump();
       FlutterError.onError = originalOnError;
 
-      // Trigger health change: commandIndex change → listener → animation path
+      final state =
+          tester.state<ConditionIconState>(find.byType(ConditionIcon));
+
+      // Health decrease fires figure.health notifier → _onHealthChanged → animation
       gameState.action(ChangeHealthCommand(-1, character.id, character.id,
           gameState: getIt<GameState>()));
 
       FlutterError.onError = ignoreOverflowErrors;
-      // Pump past the 1000ms animation timer started by _runAnimation()
       await tester.pump();
-      await tester.pump(const Duration(milliseconds: 1100));
+      expect(state.animate.value, isTrue);
+      await tester.pump(const Duration(milliseconds: 400));
       FlutterError.onError = originalOnError;
 
       expect(find.byType(ConditionIcon), findsOneWidget);
+      expect(state.animate.value, isFalse);
       gameState.undo();
     });
 
