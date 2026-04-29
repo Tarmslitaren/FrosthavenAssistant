@@ -78,9 +78,12 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
         width: AddStandeeMenu._kMenuWidth * scale,
         height: height * scale,
         child: Stack(children: [
-          ValueListenableBuilder<int>(
-              valueListenable: _gameState.commandIndex,
-              builder: (context, value, child) {
+          ListenableBuilder(
+              listenable: Listenable.merge([
+                widget.monster.monsterInstancesNotifier,
+                _gameState.currentCampaign,
+              ]),
+              builder: (context, child) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [

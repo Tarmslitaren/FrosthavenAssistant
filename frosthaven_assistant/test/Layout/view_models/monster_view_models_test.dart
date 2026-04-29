@@ -435,11 +435,11 @@ void main() {
       getIt<GameState>().undo();
     });
 
-    test('commandIndex listenable is exposed', () {
+    test('monsterInstancesNotifier listenable is exposed', () {
       final monster = addArtillery();
       final vm = MonsterStatCardViewModel(monster,
           gameState: getIt<GameState>(), settings: getIt<Settings>());
-      expect(vm.commandIndex, isNotNull);
+      expect(vm.monsterInstancesNotifier, isNotNull);
       getIt<GameState>().undo();
     });
   });

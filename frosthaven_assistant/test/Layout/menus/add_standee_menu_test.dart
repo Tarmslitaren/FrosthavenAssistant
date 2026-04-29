@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_standee_menu.dart';
+import 'package:frosthaven_assistant/Layout/widgets/standee_nr_button.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_standee_command.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
@@ -107,6 +108,24 @@ void main() {
       // Check the Checkbox value via the widget state
       final checkbox = tester.widget<Checkbox>(find.byType(Checkbox));
       expect(checkbox.value, false);
+    });
+
+    testWidgets(
+        'standee button becomes disabled reactively after standee is added',
+        (WidgetTester tester) async {
+      await pumpMenu(tester);
+      expect(monster.monsterInstances.length, 0);
+
+      // Add standee 1 reactively (after menu is open)
+      getIt<GameState>().action(AddStandeeCommand(
+          1, null, monster.id, MonsterType.normal, false,
+          gameState: getIt<GameState>()));
+      await tester.pump();
+
+      // StandeeNrButton for nr 1 should now be pressed = null (grey / disabled)
+      final btn = tester.widget<StandeeNrButton>(
+          find.byWidgetPredicate((w) => w is StandeeNrButton && w.nr == 1));
+      expect(btn.onPressed, isNull);
     });
   });
 }

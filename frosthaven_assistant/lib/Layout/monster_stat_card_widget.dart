@@ -118,9 +118,9 @@ class MonsterStatCardWidget extends StatelessWidget {
                 child: SizedBox(
                     width: _kButtonIconSize * scale + _kButtonPadding,
                     height: _kButtonIconSize * scale + _kButtonPadding,
-                    child: ValueListenableBuilder<int>(
-                        valueListenable: vm.commandIndex,
-                        builder: (context, value, child) {
+                    child: ListenableBuilder(
+                        listenable: vm.monsterInstancesNotifier,
+                        builder: (context, child) {
                           return IconButton(
                             padding: EdgeInsets.only(
                                 right: _kButtonPadding, top: _kButtonPadding),
@@ -141,9 +141,9 @@ class MonsterStatCardWidget extends StatelessWidget {
               child: SizedBox(
                   width: _kButtonIconSize * scale + _kButtonPadding,
                   height: _kButtonIconSize * scale + _kButtonPadding,
-                  child: ValueListenableBuilder<int>(
-                      valueListenable: vm.commandIndex,
-                      builder: (context, value, child) {
+                  child: ListenableBuilder(
+                      listenable: vm.monsterInstancesNotifier,
+                      builder: (context, child) {
                         return IconButton(
                             padding: EdgeInsets.only(
                                 left: _kButtonPadding, top: _kButtonPadding),

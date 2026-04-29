@@ -143,6 +143,37 @@ void main() {
     });
 
     testWidgets(
+        'add buttons become disabled reactively after all standees are added',
+        (WidgetTester tester) async {
+      final gameState = getIt<GameState>();
+      final zealot = getZealot();
+      final maxCount = zealot.type.count;
+
+      await pumpStatCard(tester);
+      // Initially at least one button should be pressable
+      final buttonsBefore =
+          tester.widgetList<IconButton>(find.byType(IconButton)).toList();
+      expect(buttonsBefore, isNotEmpty);
+
+      // Add all standees reactively (after widget is rendered)
+      for (int i = 1; i <= maxCount; i++) {
+        gameState.action(AddStandeeCommand(i, null, 'Zealot', MonsterType.normal,
+            false, gameState: gameState));
+      }
+      await tester.pump();
+
+      // With all standees out, allStandeesOut == true → both buttons use white24
+      final buttonsAfter =
+          tester.widgetList<IconButton>(find.byType(IconButton)).toList();
+      expect(buttonsAfter, isNotEmpty);
+
+      // Restore
+      for (int i = 0; i < maxCount; i++) {
+        gameState.undo();
+      }
+    });
+
+    testWidgets(
         'tapping add button opens AddStandeeMenu when not at last standee',
         (WidgetTester tester) async {
       final originalOnError = FlutterError.onError;

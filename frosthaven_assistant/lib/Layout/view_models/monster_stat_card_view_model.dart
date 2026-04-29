@@ -24,7 +24,7 @@ class MonsterStatCardViewModel {
 
   // Notifiers the widget should subscribe to
   ValueListenable<int> get levelChanges => monster.level;
-  ValueListenable<int> get commandIndex => _gameState.commandIndex;
+  Listenable get monsterInstancesNotifier => monster.monsterInstancesNotifier;
 
   // Derived state
   bool get isBoss => monster.type.levels[monster.level.value].boss != null;
