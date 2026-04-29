@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:frosthaven_assistant/Layout/condition_icon.dart';
 import 'package:frosthaven_assistant/Layout/menus/condition_button.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_condition_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
@@ -185,6 +186,32 @@ void main() {
 
       final iconButton = tester.widget<IconButton>(find.byType(IconButton));
       expect(iconButton.onPressed, isNull);
+    });
+
+    testWidgets('button updates reactively when condition is added via command',
+        (WidgetTester tester) async {
+      final originalOnError = FlutterError.onError;
+      addTearDown(() => FlutterError.onError = originalOnError);
+      FlutterError.onError = ignoreOverflowErrors;
+      final figureId = standee.getId();
+
+      await tester.pumpWidget(buildConditionButton(
+        condition: Condition.stun,
+        figureId: figureId,
+        ownerId: monster.id,
+      ));
+
+      // No ConditionIcon initially — condition is inactive
+      expect(find.byType(ConditionIcon), findsNothing);
+
+      // Add condition via command (fires figure.conditions notifier)
+      getIt<GameState>().action(AddConditionCommand(
+          Condition.stun, figureId, monster.id,
+          gameState: getIt<GameState>()));
+      await tester.pump();
+
+      // Active condition renders a ConditionIcon
+      expect(find.byType(ConditionIcon), findsOneWidget);
     });
   });
 }

@@ -174,12 +174,14 @@ class _LevelButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<int>(
-        valueListenable: gameState.commandIndex,
-        builder: (context, value, child) {
+    final effectiveSettings = settings ?? getIt<Settings>();
+    return ListenableBuilder(
+        listenable: Listenable.merge(
+            [character.characterState.level, effectiveSettings.darkMode]),
+        builder: (context, child) {
           bool isCurrentlySelected = nr == character.characterState.level.value;
           String text = nr.toString();
-          bool darkMode = (settings ?? getIt<Settings>()).darkMode.value;
+          bool darkMode = effectiveSettings.darkMode.value;
           Color selectedTextColor = darkMode ? Colors.white : Colors.black;
           Color textColor =
               isCurrentlySelected ? selectedTextColor : Colors.grey;

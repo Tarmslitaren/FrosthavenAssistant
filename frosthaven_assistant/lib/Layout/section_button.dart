@@ -26,7 +26,7 @@ class SectionButton extends StatelessWidget {
     final settings = this.settings ?? getIt<Settings>();
     double scale = settings.userScalingBars.value;
     return ValueListenableBuilder<int>(
-        valueListenable: gameState.commandIndex,
+        valueListenable: gameState.scenarioSectionsVersion,
         builder: (context, value, child) {
           return RepaintBoundary(
               child: OutlinedButton(

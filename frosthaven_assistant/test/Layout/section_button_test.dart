@@ -98,5 +98,24 @@ void main() {
       await pumpWidget(tester, '3c section');
       expect(find.byType(RepaintBoundary), findsAtLeast(1));
     });
+
+    testWidgets('button becomes disabled reactively after section is added',
+        (WidgetTester tester) async {
+      const sectionName = 'test-reactive-disable';
+      await pumpWidget(tester, sectionName);
+      // button starts enabled
+      expect(
+          tester.widget<OutlinedButton>(find.byType(OutlinedButton)).onPressed,
+          isNotNull);
+
+      // add section via command (fires scenarioSectionsVersion notifier)
+      getIt<GameState>().action(
+          SetScenarioCommand(sectionName, true, gameState: getIt<GameState>()));
+      await tester.pump();
+
+      expect(
+          tester.widget<OutlinedButton>(find.byType(OutlinedButton)).onPressed,
+          isNull);
+    });
   });
 }

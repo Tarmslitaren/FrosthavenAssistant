@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/set_character_level_command.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
@@ -89,6 +90,30 @@ void main() {
       await tester.pump(const Duration(milliseconds: 100));
 
       expect(character.characterState.level.value, targetLevel);
+    });
+
+    testWidgets(
+        'level button selection updates reactively when level changes via command',
+        (WidgetTester tester) async {
+      await pumpMenu(tester);
+      expect(character.characterState.level.value, 1);
+
+      // Change level externally (not through the button tap)
+      getIt<GameState>()
+          .action(SetCharacterLevelCommand(5, character.id));
+      await tester.pump();
+
+      // State updated
+      expect(character.characterState.level.value, 5);
+      // Buttons 1..9 still all rendered — widget rebuilt without crash
+      for (int i = 1; i <= 9; i++) {
+        expect(find.text(i.toString()), findsAtLeast(1),
+            reason: 'Level button $i should still be visible after reactive update');
+      }
+      // Level 5 button is now selected, so tapping level 1 should work (isCurrentlySelected=false)
+      await tester.tap(find.text('1').first);
+      await tester.pump();
+      expect(character.characterState.level.value, 1);
     });
 
     testWidgets('entering a name in the text field triggers name change',

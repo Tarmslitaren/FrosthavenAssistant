@@ -79,17 +79,14 @@ class ConditionButton extends StatelessWidget {
     }
     final gameState = this.gameState ?? getIt<GameState>();
     final settings = this.settings ?? getIt<Settings>();
-    return ValueListenableBuilder<int>(
-        valueListenable: gameState.commandIndex,
-        builder: (context, value, child) {
+    final figure = GameMethods.getFigure(ownerId, figureId);
+    if (figure == null) {
+      return const SizedBox(width: 0, height: 0);
+    }
+    return ListenableBuilder(
+        listenable: Listenable.merge([figure.conditions, settings.darkMode]),
+        builder: (context, child) {
           Color color = Colors.transparent;
-          FigureState? figure = GameMethods.getFigure(ownerId, figureId);
-          if (figure == null) {
-            return const SizedBox(
-              width: 0,
-              height: 0,
-            );
-          }
 
           //todo: fix this logic (move to viewmodel))
           ListItemData owner = ListItemData();
