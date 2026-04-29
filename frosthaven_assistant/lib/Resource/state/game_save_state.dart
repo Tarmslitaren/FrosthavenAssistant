@@ -112,6 +112,7 @@ class GameSaveState {
         for (String item in unlockedClassesList) {
           gameState._unlockedClasses.add(item);
         }
+        gameState._unlockedClassesVersion.value++;
 
         //ability decks
         final decks = data['currentAbilityDecks'] as List;

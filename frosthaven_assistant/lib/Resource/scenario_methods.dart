@@ -23,17 +23,20 @@ class ScenarioMethods {
       {GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
     gs._unlockedClasses.add(name);
+    gs._unlockedClassesVersion.value++;
   }
 
   static void clearUnlockedClasses(_StateModifier _, {GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
     gs._unlockedClasses = {};
+    gs._unlockedClassesVersion.value++;
   }
 
   static void clearUnlockedClass(_StateModifier _, String id,
       {GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
     gs._unlockedClasses.remove(id);
+    gs._unlockedClassesVersion.value++;
   }
 
   static void setLevel(_StateModifier s, int level, String? monsterId,

@@ -53,7 +53,7 @@ class SpecialUnlocksMenu extends StatelessWidget {
               child: Scrollbar(
                   controller: _scrollController,
                   child: ValueListenableBuilder<int>(
-                      valueListenable: gameState.commandIndex,
+                      valueListenable: gameState.unlockedClassesVersion,
                       builder: (context, value, child) {
                         return ListView.builder(
                             controller: _scrollController,

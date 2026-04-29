@@ -76,6 +76,7 @@ class GameState {
       <MonsterAbilityState>[];
   final Map<Elements, ValueNotifier<ElementState>> _elementState = HashMap();
   Set<String> _unlockedClasses = {};
+  final _unlockedClassesVersion = ValueNotifier<int>(0);
 
   LootDeck _lootDeck = LootDeck.empty(); //loot deck for current scenario
   final ModifierDeck _modifierDeck = ModifierDeck("");
@@ -111,6 +112,7 @@ class GameState {
   ValueListenable<ElementState> elementStateFor(Elements element) =>
       _elementState[element]!;
   BuiltSet<String> get unlockedClasses => BuiltSet.of(_unlockedClasses);
+  ValueListenable<int> get unlockedClassesVersion => _unlockedClassesVersion;
 
   LootDeck get lootDeck => _lootDeck; //todo: still mutable
   ModifierDeck get modifierDeck => _modifierDeck; //todo: still mutable

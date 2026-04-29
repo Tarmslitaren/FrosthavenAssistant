@@ -6,6 +6,7 @@ class CharacterState extends FigureState {
 
   final _display = ValueNotifier<String>("");
   final List<bool> _perkList = List.filled(_kMaxPerks, false);
+  final _perkListVersion = ValueNotifier<int>(0);
   final _useFHPerks = ValueNotifier<bool>(false);
 
   final _initiative = ValueNotifier<int>(0);
@@ -34,6 +35,7 @@ class CharacterState extends FigureState {
   }
 
   BuiltList<bool> get perkList => BuiltList.of(_perkList);
+  ValueListenable<int> get perkListVersion => _perkListVersion;
   ValueListenable<bool> get useFHPerks => _useFHPerks;
 
   CharacterState(final String id) : _modifierDeck = ModifierDeck(id);
@@ -148,6 +150,7 @@ class CharacterState extends FigureState {
         i++;
       }
     }
+    _perkListVersion.value++;
     _useFHPerks.value =
         json.containsKey("useFHPerks") ? json["useFHPerks"] as bool : false;
 
@@ -187,6 +190,7 @@ class CharacterState extends FigureState {
 
   void flipPerk(_StateModifier _, int index) {
     _perkList[index] = !_perkList[index];
+    _perkListVersion.value++;
   }
 
   void setDisplay(_StateModifier _, String value) {

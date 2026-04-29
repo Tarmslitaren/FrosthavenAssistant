@@ -27,9 +27,12 @@ class PerksMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gameState = this.gameState ?? getIt<GameState>();
-    return ValueListenableBuilder<int>(
-        valueListenable: gameState.commandIndex,
-        builder: (context, value, child) {
+    return ListenableBuilder(
+        listenable: Listenable.merge([
+          character.characterState.useFHPerks,
+          character.characterState.perkListVersion,
+        ]),
+        builder: (context, child) {
           final ScrollController scrollController = ScrollController();
 
           final perksFH = character.characterClass.perksFH;
