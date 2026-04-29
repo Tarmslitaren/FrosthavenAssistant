@@ -27,7 +27,7 @@ class LootDeckViewModel {
 
   // Notifiers the widget subscribes to
   ValueListenable<double> get userScalingBars => _settings.userScalingBars;
-  ValueListenable<int> get commandIndex => _gameState.commandIndex;
+  ValueListenable<GameEvent> get lastEvent => _gameState.lastEvent;
   ValueListenable<int> get cardCount => _gameState.lootDeck.cardCount;
   ValueListenable<Map<String, CampaignModel>> get modelData =>
       _gameData.modelData;

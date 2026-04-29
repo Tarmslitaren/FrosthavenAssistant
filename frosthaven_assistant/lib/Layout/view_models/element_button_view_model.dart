@@ -17,7 +17,8 @@ class ElementButtonViewModel {
   final Settings _settings;
 
   // Notifiers the widget subscribes to
-  ValueListenable<int> get commandIndex => _gameState.commandIndex;
+  ValueListenable<ElementState> get elementStateNotifier =>
+      _gameState.elementStateFor(element);
   ValueListenable<bool> get darkMode => _settings.darkMode;
 
   double get userScalingBars => _settings.userScalingBars.value;

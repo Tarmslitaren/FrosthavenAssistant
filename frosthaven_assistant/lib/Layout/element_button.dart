@@ -101,10 +101,9 @@ class AnimatedContainerButtonState extends State<ElementButton> {
                     padding: EdgeInsets.only(bottom: _kSmallMargin * scale),
                     child: Align(
                       alignment: Alignment.bottomCenter,
-                      child: ValueListenableBuilder<int>(
-                          valueListenable: _vm.commandIndex,
-                          builder: (context, value, child) {
-                            final state = _vm.elementState;
+                      child: ValueListenableBuilder<ElementState>(
+                          valueListenable: _vm.elementStateNotifier,
+                          builder: (context, state, child) {
                             if (state == ElementState.inert) {
                               _setInert();
                             } else if (state == ElementState.half) {
@@ -139,9 +138,9 @@ class AnimatedContainerButtonState extends State<ElementButton> {
                 ValueListenableBuilder<bool>(
                     valueListenable: _vm.darkMode,
                     builder: (context, value, child) {
-                      return ValueListenableBuilder<int>(
-                          valueListenable: _vm.commandIndex,
-                          builder: (context, value, child) {
+                      return ValueListenableBuilder<ElementState>(
+                          valueListenable: _vm.elementStateNotifier,
+                          builder: (context, state, child) {
                             return Image(
                               height: widget.width * scale * _kIconScale,
                               image: AssetImage(widget.icon),

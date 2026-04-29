@@ -126,8 +126,8 @@ void main() {
       expect(makeLootVm().userScalingBars, isNotNull);
     });
 
-    test('commandIndex listenable is exposed', () {
-      expect(makeLootVm().commandIndex, isNotNull);
+    test('lastEvent listenable is exposed', () {
+      expect(makeLootVm().lastEvent, isNotNull);
     });
 
     test('cardCount listenable is exposed', () {
@@ -218,8 +218,12 @@ void main() {
       expect(makeModifierVm('Monster').userScalingBars, isNotNull);
     });
 
-    test('commandIndex listenable is exposed', () {
-      expect(makeModifierVm('Monster').commandIndex, isNotNull);
+    test('lastEvent listenable is exposed', () {
+      expect(makeModifierVm('Monster').lastEvent, isNotNull);
+    });
+
+    test('cardCount listenable is exposed', () {
+      expect(makeModifierVm('Monster').cardCount, isNotNull);
     });
 
     test('modelData listenable is exposed', () {

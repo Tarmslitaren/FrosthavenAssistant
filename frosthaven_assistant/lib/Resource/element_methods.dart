@@ -5,7 +5,7 @@ class ElementMethods {
   static void resetElements(_StateModifier _, {GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
     for (final key in gs.elementState.keys) {
-      gs._elementState[key] = ElementState.inert;
+      gs._elementState[key]?.value = ElementState.inert;
     }
   }
 
@@ -25,13 +25,13 @@ class ElementMethods {
         if (!elementalistPerk ||
             key == Elements.light ||
             key == Elements.dark) {
-          gs._elementState[key] = ElementState.half;
+          gs._elementState[key]?.value = ElementState.half;
         }
       } else if (gs.elementState[key] == ElementState.half) {
         if (!elementalistPerk ||
             key == Elements.light ||
             key == Elements.dark) {
-          gs._elementState[key] = ElementState.inert;
+          gs._elementState[key]?.value = ElementState.inert;
         }
       }
     }
@@ -40,15 +40,13 @@ class ElementMethods {
   static void imbueElement(_StateModifier _, Elements element, bool half,
       {GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
-    gs._elementState[element] = ElementState.full;
-    if (half) {
-      gs._elementState[element] = ElementState.half;
-    }
+    gs._elementState[element]?.value =
+        half ? ElementState.half : ElementState.full;
   }
 
   static void useElement(_StateModifier _, Elements element,
       {GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
-    gs._elementState[element] = ElementState.inert;
+    gs._elementState[element]?.value = ElementState.inert;
   }
 }

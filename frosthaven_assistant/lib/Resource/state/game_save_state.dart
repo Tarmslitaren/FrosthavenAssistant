@@ -166,14 +166,13 @@ class GameSaveState {
 
         //////elements
         Map elementData = data['elementState'];
-        gameState._elementState.clear();
         for (final element in Elements.values) {
           final raw = elementData[element.index.toString()] as int?;
           final idx =
               (raw != null && raw >= 0 && raw < ElementState.values.length)
                   ? raw
                   : ElementState.inert.index;
-          gameState._elementState[element] = ElementState.values[idx];
+          gameState._elementState[element]?.value = ElementState.values[idx];
         }
       } catch (e, stack) {
         // Deserialization failure: log always (not just debug) so it surfaces

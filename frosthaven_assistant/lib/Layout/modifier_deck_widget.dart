@@ -142,9 +142,10 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
           return SizedBox(
             width: ModifierDeckWidgetState._kWidgetWidth * userScalingBars,
             height: ModifierDeckWidgetState._kCardHeight * userScalingBars,
-            child: ValueListenableBuilder<int>(
-                valueListenable: _vm.commandIndex,
-                builder: (context, value, child) {
+            child: ListenableBuilder(
+                listenable:
+                    Listenable.merge([_vm.lastEvent, _vm.cardCount]),
+                builder: (context, child) {
                   if (!_animationsEnabled) {
                     _animationsEnabled = _vm.initAnimationEnabled();
                   }

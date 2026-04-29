@@ -124,8 +124,8 @@ void main() {
   });
 
   group('ElementButtonViewModel notifiers', () {
-    test('commandIndex listenable is exposed', () {
-      expect(makeVm(Elements.fire).commandIndex, isNotNull);
+    test('elementStateNotifier listenable is exposed', () {
+      expect(makeVm(Elements.fire).elementStateNotifier, isNotNull);
     });
 
     test('darkMode listenable is exposed', () {

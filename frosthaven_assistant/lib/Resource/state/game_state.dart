@@ -73,7 +73,7 @@ class GameState {
       ValueNotifier<BuiltList<ListItemData>>(BuiltList.of([]));
   final List<MonsterAbilityState> _currentAbilityDecks =
       <MonsterAbilityState>[];
-  final Map<Elements, ElementState> _elementState = HashMap();
+  final Map<Elements, ValueNotifier<ElementState>> _elementState = HashMap();
   Set<String> _unlockedClasses = {};
 
   LootDeck _lootDeck = LootDeck.empty(); //loot deck for current scenario
@@ -104,7 +104,10 @@ class GameState {
   BuiltList<MonsterAbilityState> get currentAbilityDecks =>
       BuiltList.of(_currentAbilityDecks);
   BuiltMap<Elements, ElementState> get elementState =>
-      BuiltMap.of(_elementState);
+      BuiltMap.of(_elementState.map((k, v) => MapEntry(k, v.value)));
+
+  ValueListenable<ElementState> elementStateFor(Elements element) =>
+      _elementState[element]!;
   BuiltSet<String> get unlockedClasses => BuiltSet.of(_unlockedClasses);
 
   LootDeck get lootDeck => _lootDeck; //todo: still mutable
@@ -147,12 +150,12 @@ class GameState {
   List<GameSaveState?> get gameSaveStates => _actionHandler.gameSaveStates;
 
   void init() {
-    _elementState[Elements.fire] = ElementState.inert;
-    _elementState[Elements.ice] = ElementState.inert;
-    _elementState[Elements.air] = ElementState.inert;
-    _elementState[Elements.earth] = ElementState.inert;
-    _elementState[Elements.light] = ElementState.inert;
-    _elementState[Elements.dark] = ElementState.inert;
+    _elementState[Elements.fire] = ValueNotifier(ElementState.inert);
+    _elementState[Elements.ice] = ValueNotifier(ElementState.inert);
+    _elementState[Elements.air] = ValueNotifier(ElementState.inert);
+    _elementState[Elements.earth] = ValueNotifier(ElementState.inert);
+    _elementState[Elements.light] = ValueNotifier(ElementState.inert);
+    _elementState[Elements.dark] = ValueNotifier(ElementState.inert);
   }
 
   void setCampaign(_StateModifier _, String value) {
@@ -196,7 +199,7 @@ class GameState {
     for (final key in _elementState.keys) {
       final state = _elementState[key];
       if (state != null) {
-        elements[key.index.toString()] = state.index;
+        elements[key.index.toString()] = state.value.index;
       }
     }
     return {

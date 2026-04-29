@@ -144,6 +144,24 @@ void main() {
       await pumpWidget(tester, monsterDeckName);
       expect(find.byType(Row), findsAtLeast(1));
     });
+
+    testWidgets('card count text updates after drawing a card',
+        (WidgetTester tester) async {
+      final gameState = getIt<GameState>();
+      final deck =
+          GameMethods.getModifierDeck(monsterDeckName, gameState);
+      final countBefore = deck.cardCount.value;
+
+      await pumpWidget(tester, monsterDeckName);
+      expect(find.text(countBefore.toString()), findsAtLeast(1));
+
+      gameState.action(DrawModifierCardCommand(monsterDeckName,
+          gameState: gameState));
+      await tester.pump();
+
+      expect(find.text((countBefore - 1).toString()), findsAtLeast(1));
+      gameState.undo();
+    });
   });
 
   group('ModifierDeckWidget character deck', () {

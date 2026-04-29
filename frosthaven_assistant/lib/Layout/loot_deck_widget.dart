@@ -127,27 +127,25 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
           return SizedBox(
             width: LootDeckWidgetState._kWidgetWidth * userScalingBars,
             height: LootDeckWidgetState._kCardH * userScalingBars,
-            child: ValueListenableBuilder<int>(
-                valueListenable: _vm.commandIndex,
-                builder: (context, value, child) {
+            child: ListenableBuilder(
+                listenable:
+                    Listenable.merge([_vm.lastEvent, _vm.cardCount]),
+                builder: (context, child) {
                   if (!_animationsEnabled) {
                     _animationsEnabled = _vm.initAnimationEnabled();
                   }
-                  return ValueListenableBuilder<int>(
-                      valueListenable: _vm.cardCount,
-                      builder: (context, value, child) {
-                        if (_vm.shouldHide) {
-                          return Container();
-                        }
+                  if (_vm.shouldHide) {
+                    return Container();
+                  }
 
-                        final deck = _vm.lootDeck;
-                        final currentCharacterColor = _vm.currentCharacterColor;
-                        final currentCharacterName = _vm.currentCharacterName;
-                        final discardPileSize = deck.discardPileSize;
-                        final discardPileList =
-                            deck.discardPileContents.toList();
+                  final deck = _vm.lootDeck;
+                  final currentCharacterColor = _vm.currentCharacterColor;
+                  final currentCharacterName = _vm.currentCharacterName;
+                  final discardPileSize = deck.discardPileSize;
+                  final discardPileList =
+                      deck.discardPileContents.toList();
 
-                        return RepaintBoundary(
+                  return RepaintBoundary(
                             child: Row(
                           children: [
                             InkWell(
@@ -295,7 +293,6 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                 ]))
                           ],
                         ));
-                      });
                 }),
           );
         });
