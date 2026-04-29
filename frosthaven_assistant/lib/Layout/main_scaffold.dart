@@ -146,9 +146,19 @@ class MainScaffoldBody extends StatelessWidget {
               ValueListenableBuilder<Map<String, CampaignModel>>(
                   valueListenable: vm.modelData,
                   builder: (context, value, child) {
-                    return ValueListenableBuilder<int>(
-                        valueListenable: vm.commandIndex,
-                        builder: (context, value, child) {
+                    return ListenableBuilder(
+                        listenable: Listenable.merge([
+                          vm.scenario,
+                          vm.currentCampaign,
+                          vm.scenarioSectionsVersion,
+                          vm.lootDeckCardCount,
+                          vm.hideLootDeck,
+                          vm.showAmdDeckNotifier,
+                          vm.showAllyDeck,
+                          vm.allyDeckInOGGloom,
+                          vm.currentListNotifier,
+                        ]),
+                        builder: (context, child) {
                           return ValueListenableBuilder<double>(
                               valueListenable: vm.userScalingBars,
                               builder: (context, value, child) {

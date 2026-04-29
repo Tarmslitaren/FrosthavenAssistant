@@ -20,7 +20,11 @@ class SectionListViewModel {
 
   // Notifiers the widget subscribes to
   ValueListenable<double> get userScalingBars => _settings.userScalingBars;
-  ValueListenable<int> get commandIndex => _gameState.commandIndex;
+  ValueListenable<String> get scenario => _gameState.scenario;
+  ValueListenable<String> get currentCampaign => _gameState.currentCampaign;
+  ValueListenable<int> get scenarioSectionsVersion =>
+      _gameState.scenarioSectionsVersion;
+  ValueListenable<bool> get autoAddStandees => _settings.autoAddStandees;
 
   /// Returns the filtered section list for the current scenario,
   /// or an empty list if all sections have been added.

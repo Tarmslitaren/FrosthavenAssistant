@@ -25,10 +25,19 @@ class MainScaffoldViewModel {
   final GameData _gameData;
 
   // Notifiers the widget subscribes to
-  ValueListenable<int> get commandIndex => _gameState.commandIndex;
   ValueListenable<Map<String, CampaignModel>> get modelData =>
       _gameData.modelData;
   ValueListenable<double> get userScalingBars => _settings.userScalingBars;
+  ValueListenable<String> get scenario => _gameState.scenario;
+  ValueListenable<String> get currentCampaign => _gameState.currentCampaign;
+  ValueListenable<int> get scenarioSectionsVersion =>
+      _gameState.scenarioSectionsVersion;
+  ValueListenable<int> get lootDeckCardCount => _gameState.lootDeck.cardCount;
+  ValueListenable<bool> get hideLootDeck => _settings.hideLootDeck;
+  ValueListenable<bool> get showAmdDeckNotifier => _settings.showAmdDeck;
+  ValueListenable<bool> get showAllyDeck => _gameState.showAllyDeck;
+  ValueListenable<bool> get allyDeckInOGGloom => _gameState.allyDeckInOGGloom;
+  Listenable get currentListNotifier => _gameState.currentListNotifier;
 
   // Derived state
   bool get hasLootDeck => GameMethods.hasLootDeck();

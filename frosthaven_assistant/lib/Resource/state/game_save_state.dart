@@ -40,6 +40,7 @@ class GameSaveState {
             gameState._scenarioSpecialRules.add(SpecialRule.fromJson(item));
           }
         }
+        gameState._scenarioSectionsVersion.value++;
         gameState._currentCampaign.value = data['currentCampaign'];
         gameState._round.value = data['round'] as int;
         if (data.containsKey('totalRounds')) {

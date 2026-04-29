@@ -35,9 +35,14 @@ class SectionList extends StatelessWidget {
         valueListenable: vm.userScalingBars,
         builder: (context, value, child) {
           final scale = vm.userScalingBars.value;
-          return ValueListenableBuilder<int>(
-              valueListenable: vm.commandIndex,
-              builder: (context, value, child) {
+          return ListenableBuilder(
+              listenable: Listenable.merge([
+                vm.scenario,
+                vm.currentCampaign,
+                vm.scenarioSectionsVersion,
+                vm.autoAddStandees,
+              ]),
+              builder: (context, child) {
                 return RepaintBoundary(
                     child: Wrap(
                         alignment: WrapAlignment.center,

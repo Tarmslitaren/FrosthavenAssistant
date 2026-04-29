@@ -68,6 +68,7 @@ class GameState {
 
   List<String> _scenarioSectionsAdded = [];
   List<SpecialRule> _scenarioSpecialRules = [];
+  final _scenarioSectionsVersion = ValueNotifier<int>(0);
   List<ListItemData> _currentList = []; //has both monsters and characters
   final _currentListNotifier =
       ValueNotifier<BuiltList<ListItemData>>(BuiltList.of([]));
@@ -93,6 +94,7 @@ class GameState {
   ValueListenable<String> get toastMessage => _toastMessage;
   ValueListenable<String> get scenario => _scenario;
   ValueListenable<bool> get showAllyDeck => _showAllyDeck;
+  ValueListenable<int> get scenarioSectionsVersion => _scenarioSectionsVersion;
 
   BuiltList<String> get scenarioSectionsAdded =>
       BuiltList.of(_scenarioSectionsAdded);

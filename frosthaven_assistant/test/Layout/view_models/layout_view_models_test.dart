@@ -192,8 +192,20 @@ void main() {
   });
 
   group('MainScaffoldViewModel notifiers', () {
-    test('commandIndex listenable is exposed', () {
-      expect(makeScaffoldVm().commandIndex, isNotNull);
+    test('scenario listenable is exposed', () {
+      expect(makeScaffoldVm().scenario, isNotNull);
+    });
+
+    test('currentCampaign listenable is exposed', () {
+      expect(makeScaffoldVm().currentCampaign, isNotNull);
+    });
+
+    test('scenarioSectionsVersion listenable is exposed', () {
+      expect(makeScaffoldVm().scenarioSectionsVersion, isNotNull);
+    });
+
+    test('lootDeckCardCount listenable is exposed', () {
+      expect(makeScaffoldVm().lootDeckCardCount, isNotNull);
     });
 
     test('modelData listenable is exposed', () {
@@ -244,8 +256,20 @@ void main() {
       expect(makeSectionVm().userScalingBars, isNotNull);
     });
 
-    test('commandIndex listenable is exposed', () {
-      expect(makeSectionVm().commandIndex, isNotNull);
+    test('scenario listenable is exposed', () {
+      expect(makeSectionVm().scenario, isNotNull);
+    });
+
+    test('currentCampaign listenable is exposed', () {
+      expect(makeSectionVm().currentCampaign, isNotNull);
+    });
+
+    test('scenarioSectionsVersion listenable is exposed', () {
+      expect(makeSectionVm().scenarioSectionsVersion, isNotNull);
+    });
+
+    test('autoAddStandees listenable is exposed', () {
+      expect(makeSectionVm().autoAddStandees, isNotNull);
     });
   });
 }

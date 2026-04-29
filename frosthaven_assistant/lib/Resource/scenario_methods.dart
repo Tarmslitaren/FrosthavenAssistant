@@ -372,6 +372,7 @@ class ScenarioMethods {
       gs._scenarioSpecialRules.addAll(specialRules);
       gs._scenarioSectionsAdded.add(scenario);
     }
+    gs._scenarioSectionsVersion.value++;
 
     //handle random sections
     final rule = specialRules

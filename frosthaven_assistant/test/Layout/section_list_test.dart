@@ -105,5 +105,41 @@ void main() {
       await pumpWidget(tester);
       expect(find.byType(RepaintBoundary), findsAtLeast(1));
     });
+
+    testWidgets('section buttons disappear after all sections are added',
+        (WidgetTester tester) async {
+      final gameState = getIt<GameState>();
+      final gameData = getIt<GameData>();
+      SetCampaignCommand('Frosthaven').execute();
+      SetScenarioCommand('#0 Howling in the Snow', false,
+              gameState: gameState)
+          .execute();
+      getIt<Settings>().autoAddStandees.value = true;
+
+      await pumpWidget(tester);
+
+      final sections = gameData
+          .modelData
+          .value[gameState.currentCampaign.value]
+          ?.scenarios[gameState.scenario.value]
+          ?.sections
+          .toList();
+      if (sections == null || sections.isEmpty) return;
+
+      final countBefore =
+          tester.widgetList(find.byType(SectionButton)).length;
+
+      // Add all sections after widget is already rendered
+      for (final section in sections) {
+        gameState.action(
+            SetScenarioCommand(section.name, true, gameState: gameState));
+      }
+      await tester.pump();
+
+      expect(find.byType(SectionButton), findsNothing);
+      expect(
+          tester.widgetList(find.byType(SectionButton)).length,
+          lessThan(countBefore + 1));
+    });
   });
 }
