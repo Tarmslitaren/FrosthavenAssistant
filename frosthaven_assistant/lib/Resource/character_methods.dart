@@ -28,9 +28,9 @@ class CharacterMethods {
     final perks = useFHPerks ? perksFH : character.characterClass.perks;
     final perk = perks[index];
     for (final item in perk.remove) {
-      final amount = deck.cardCount.value;
+      final amount = deck.drawPileSize;
       deck.removeCard(s, item);
-      if (deck.cardCount.value == amount) {
+      if (deck.drawPileSize == amount) {
         //must be a perk card
 
         //find missing card from perk list
@@ -46,7 +46,7 @@ class CharacterMethods {
               second = "-2"; //in case perk adds 2 different cards
             }
             deck.removeCard(s, "P$i$second");
-            if (deck.cardCount.value != amount) {
+            if (deck.drawPileSize != amount) {
               //found and removed
               break;
             }

@@ -88,7 +88,7 @@ void main() {
         return;
       }
       await pumpWidget(tester);
-      expect(find.text(deck.cardCount.value.toString()), findsAtLeast(1));
+      expect(find.text(deck.drawPileSize.toString()), findsAtLeast(1));
     });
 
     testWidgets('renders Row with draw and discard sections',
@@ -164,7 +164,7 @@ void main() {
       final gameState = getIt<GameState>();
       final deck = gameState.lootDeck;
       if (deck.drawPileIsEmpty) return;
-      final countBefore = deck.cardCount.value;
+      final countBefore = deck.drawPileSize;
 
       await pumpWidget(tester);
       expect(find.text(countBefore.toString()), findsAtLeast(1));

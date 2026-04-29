@@ -31,13 +31,13 @@ void main() {
       final command =
           AddCSPartyCardCommand(character.id, 1, gameState: getIt<GameState>());
       final modifierDeck = character.characterState.modifierDeck;
-      final initialCardCount = modifierDeck.cardCount.value;
+      final initialCardCount = modifierDeck.drawPileSize;
 
       // Act
       command.execute();
 
       // Assert
-      final finalCardCount = modifierDeck.cardCount.value;
+      final finalCardCount = modifierDeck.drawPileSize;
       expect(finalCardCount, initialCardCount + 1);
       expect(modifierDeck.hasCard('party/1'), isTrue);
       checkSaveState();
@@ -48,13 +48,13 @@ void main() {
       final command =
           AddCSPartyCardCommand(character.id, 2, gameState: getIt<GameState>());
       final modifierDeck = character.characterState.modifierDeck;
-      final initialCardCount = modifierDeck.cardCount.value;
+      final initialCardCount = modifierDeck.drawPileSize;
 
       // Act
       command.execute();
 
       // Assert
-      final finalCardCount = modifierDeck.cardCount.value;
+      final finalCardCount = modifierDeck.drawPileSize;
       expect(finalCardCount, initialCardCount + 1);
       expect(modifierDeck.hasCard('party/2'), isTrue);
       checkSaveState();

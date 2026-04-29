@@ -28,7 +28,7 @@ class LootDeckViewModel {
   // Notifiers the widget subscribes to
   ValueListenable<double> get userScalingBars => _settings.userScalingBars;
   ValueListenable<GameEvent> get lastEvent => _gameState.lastEvent;
-  ValueListenable<int> get cardCount => _gameState.lootDeck.cardCount;
+  Listenable get cardCount => _gameState.lootDeck.drawPileNotifier;
   ValueListenable<Map<String, CampaignModel>> get modelData =>
       _gameData.modelData;
 

@@ -252,7 +252,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                 right: ModifierDeckWidgetState._kSmallMargin *
                                     userScalingBars,
                                 child: Text(
-                                  deck.cardCount.value.toString(),
+                                  deck.drawPileSize.toString(),
                                   style: textStyle,
                                 )),
                           ])),

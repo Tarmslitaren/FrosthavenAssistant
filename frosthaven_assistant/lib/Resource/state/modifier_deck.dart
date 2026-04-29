@@ -26,8 +26,6 @@ class ModifierDeck {
     "vi-gr-empower": ValueNotifier<int>(0),
   };
 
-  final _cardCount = ValueNotifier<int>(
-      0); //TODO: everything is a hammer - use maybe change notifier instead?
   final _badOmen = ValueNotifier<int>(0);
   final _corrosiveSpew = ValueNotifier<bool>(false);
   final _addedMinusOnes = ValueNotifier<int>(0);
@@ -55,7 +53,7 @@ class ModifierDeck {
   ModifierCard get discardPileTop => _discardPile.peek;
   ModifierCard get drawPileTop => _drawPile.peek;
 
-  ValueListenable<int> get cardCount => _cardCount;
+  Listenable get drawPileNotifier => _drawPile;
   ValueListenable<int> get badOmen => _badOmen;
   ValueListenable<bool> get corrosiveSpew => _corrosiveSpew;
   ValueListenable<int> get addedMinusOnes => _addedMinusOnes;
@@ -115,7 +113,6 @@ class ModifierDeck {
     if (modifierDeckData.containsKey('removedPile')) {
       _removedPile.setList(_getCardsFromJson(modifierDeckData, "removedPile"));
     }
-    _cardCount.value = _drawPile.size();
 
     _imbuement.value = modifierDeckData.containsKey("imbuement")
         ? modifierDeckData['imbuement'] as int
@@ -176,7 +173,6 @@ class ModifierDeck {
     _drawPile.add(gs._sanctuaryDeck.drawFlip(s));
     _drawPile.add(gs._sanctuaryDeck.drawMult(s));
     _drawPile.shuffle();
-    _cardCount.value = _drawPile.size();
   }
 
   void removeCSSanctuary(_StateModifier _, {GameState? gameState}) {
@@ -195,7 +191,6 @@ class ModifierDeck {
         _discardPile.removeAt(i);
       }
     }
-    _cardCount.value = _drawPile.size();
   }
 
   bool hasCSSanctuary() {
@@ -223,7 +218,6 @@ class ModifierDeck {
     _discardPile.removeWhere((test) {
       return test.gfx.startsWith("party/");
     });
-    _cardCount.value = _drawPile.size();
   }
 
   bool hasPartyCard() {
@@ -277,7 +271,6 @@ class ModifierDeck {
     _drawPile.add(ModifierCard(CardType.add, "minus1"));
     _drawPile.shuffle();
     _revealedCount.value = 0;
-    _cardCount.value++;
     if (_addedMinusOnes.value < 0) {
       //do not add/remove extra minus ones to removed pile
       _removedPile.removeFirstWhere((item) => item.gfx == "minus1");
@@ -373,7 +366,6 @@ class ModifierDeck {
   void returnCardToDrawPile(_StateModifier _) {
     final card = _discardPile.pop();
     _drawPile.push(card);
-    _cardCount.value = _drawPile.size();
     //todo: how to tell if revealed should change? if it is over 0?
   }
 
@@ -488,7 +480,6 @@ class ModifierDeck {
       addRemovableValue(_StateModifier(), card.gfx, -1);
     }
     _discardPile.push(card);
-    _cardCount.value = _drawPile.size();
   }
 
   void reorderCards(_StateModifier s, int newIndex, int oldIndex) {
@@ -584,7 +575,6 @@ class ModifierDeck {
     _discardPile.setList([]);
     _removedPile.setList([]);
     _shuffle();
-    _cardCount.value = _drawPile.size();
     _badOmen.value = 0;
     _corrosiveSpew.value = false;
     _addedMinusOnes.value = 0;
@@ -601,7 +591,6 @@ class ModifierDeck {
     if (card != null) {
       _drawPile.remove(card);
       _drawPile.shuffle();
-      _cardCount.value--;
     }
     return card;
   }
@@ -647,7 +636,6 @@ class ModifierDeck {
     if (shuffle) {
       _drawPile.shuffle();
     }
-    _cardCount.value = _drawPile.size();
   }
 
   void _shuffle() {
@@ -661,7 +649,6 @@ class ModifierDeck {
     _drawPile.shuffle();
 
     _needsShuffle = false;
-    _cardCount.value = _drawPile.size();
     _revealedCount.value = 0;
   }
 

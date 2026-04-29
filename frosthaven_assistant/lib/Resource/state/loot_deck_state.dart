@@ -120,9 +120,7 @@ class LootDeck {
   bool get hasCard1419 => _hasCard1419;
   bool _hasCard1419 = false;
 
-  ValueListenable<int> get cardCount => _cardCount;
-  final _cardCount = ValueNotifier<int>(0);
-  //TODO: everything is a hammer - use maybe change notifier instead?
+  Listenable get drawPileNotifier => _drawPile;
 
   LootDeck(LootDeckModel model, LootDeck other) {
     _hasCard1418 = other._hasCard1418;
@@ -150,8 +148,7 @@ class LootDeck {
     updateFromJson(lootDeckData);
   }
 
-  /// Updates this deck in-place from [lootDeckData], firing [_cardCount] so
-  /// subscribed widgets rebuild automatically.
+  /// Updates this deck in-place from [lootDeckData].
   void updateFromJson(Map<String, dynamic> lootDeckData) {
     _hasCard1418 = lootDeckData["1418"] as bool;
     _hasCard1419 = lootDeckData["1419"] as bool;
@@ -216,7 +213,6 @@ class LootDeck {
     _discardPile.clear();
     _drawPile.setList(newDrawList);
     _discardPile.setList(newDiscardList);
-    _cardCount.value = _drawPile.size();
   }
 
   void setDeck(_StateModifier _, LootDeckModel model) {
@@ -231,7 +227,6 @@ class LootDeck {
     } else {
       _drawPile.insert(0, card);
     }
-    _cardCount.value = _drawPile.size();
   }
 
   void _addCardFromPool(int amount, List<LootCard> pool, List<LootCard> cards) {
@@ -274,7 +269,6 @@ class LootDeck {
     _drawPile.setList(cards);
     _discardPile.setList([]);
     _shuffle();
-    _cardCount.value = _drawPile.size();
   }
 
   void _addOtherType(int id, List<LootCard> cards, String gfx) {
@@ -408,14 +402,12 @@ class LootDeck {
     _hasCard1418 = false;
     _drawPile.removeWhere((element) => element.id == _kSpecialCard1418);
     _discardPile.removeWhere((element) => element.id == _kSpecialCard1418);
-    _cardCount.value = _drawPile.size();
   }
 
   void removeSpecial1419(_StateModifier _) {
     _hasCard1419 = false;
     _drawPile.removeWhere((element) => element.id == _kSpecialCard1419);
     _discardPile.removeWhere((element) => element.id == _kSpecialCard1419);
-    _cardCount.value = _drawPile.size();
   }
 
   List<LootCard> _getAvailableCards(List<LootCard> pool) {
@@ -519,7 +511,6 @@ class LootDeck {
       _drawPile.push(card);
     }
     _drawPile.shuffle();
-    _cardCount.value = _drawPile.size();
   }
 
   void draw(_StateModifier _, {GameState? gameState}) {
@@ -538,7 +529,6 @@ class LootDeck {
     }
 
     _discardPile.push(card);
-    _cardCount.value = _drawPile.size();
   }
 
   Map<String, dynamic> toJson() => {

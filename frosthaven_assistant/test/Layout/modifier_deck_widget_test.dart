@@ -58,7 +58,7 @@ void main() {
       final deck =
           GameMethods.getModifierDeck(monsterDeckName, getIt<GameState>());
       await pumpWidget(tester, monsterDeckName);
-      expect(find.text(deck.cardCount.value.toString()), findsAtLeast(1));
+      expect(find.text(deck.drawPileSize.toString()), findsAtLeast(1));
     });
 
     testWidgets('tapping draw pile draws a modifier card',
@@ -150,7 +150,7 @@ void main() {
       final gameState = getIt<GameState>();
       final deck =
           GameMethods.getModifierDeck(monsterDeckName, gameState);
-      final countBefore = deck.cardCount.value;
+      final countBefore = deck.drawPileSize;
 
       await pumpWidget(tester, monsterDeckName);
       expect(find.text(countBefore.toString()), findsAtLeast(1));
@@ -183,7 +183,7 @@ void main() {
       final deck =
           GameMethods.getModifierDeck('Blinkblade', getIt<GameState>());
       await pumpWidget(tester, 'Blinkblade');
-      expect(find.text(deck.cardCount.value.toString()), findsAtLeast(1));
+      expect(find.text(deck.drawPileSize.toString()), findsAtLeast(1));
     });
 
     testWidgets('tapping draw pile draws a card from character deck',

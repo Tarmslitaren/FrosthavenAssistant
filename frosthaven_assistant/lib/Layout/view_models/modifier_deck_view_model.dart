@@ -31,7 +31,7 @@ class ModifierDeckViewModel {
   // Notifiers the widget subscribes to
   ValueListenable<double> get userScalingBars => _settings.userScalingBars;
   ValueListenable<GameEvent> get lastEvent => _gameState.lastEvent;
-  ValueListenable<int> get cardCount => deck.cardCount;
+  Listenable get cardCount => deck.drawPileNotifier;
   ValueListenable<Map<String, CampaignModel>> get modelData =>
       _gameData.modelData;
 

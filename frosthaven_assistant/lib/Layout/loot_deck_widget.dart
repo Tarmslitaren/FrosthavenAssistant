@@ -173,7 +173,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                       right: LootDeckWidgetState._kSmallMargin *
                                           userScalingBars,
                                       child: Text(
-                                        deck.cardCount.value.toString(),
+                                        deck.drawPileSize.toString(),
                                         style: TextStyle(
                                             fontSize:
                                                 LootDeckWidgetState._kFontSize *

@@ -837,14 +837,14 @@ void main() {
     });
 
     test('adding Hail perk 17 adds special card to the main modifier deck', () {
-      final deckBefore = getIt<GameState>().modifierDeck.cardCount.value;
+      final deckBefore = getIt<GameState>().modifierDeck.drawPileSize;
 
       AddPerkCommand(hail.id, 17).execute();
 
       expect(getIt<GameState>().modifierDeck.hasHail(), isTrue,
           reason:
               'Main modifier deck should contain the Hail special card after perk 17');
-      expect(getIt<GameState>().modifierDeck.cardCount.value,
+      expect(getIt<GameState>().modifierDeck.drawPileSize,
           greaterThan(deckBefore),
           reason:
               'Main modifier deck size should increase after adding Hail perk 17');
@@ -864,12 +864,12 @@ void main() {
     });
 
     test('main modifier deck card count is restored after add then remove', () {
-      final deckBefore = getIt<GameState>().modifierDeck.cardCount.value;
+      final deckBefore = getIt<GameState>().modifierDeck.drawPileSize;
 
       AddPerkCommand(hail.id, 17).execute();
       AddPerkCommand(hail.id, 17).execute();
 
-      expect(getIt<GameState>().modifierDeck.cardCount.value, deckBefore,
+      expect(getIt<GameState>().modifierDeck.drawPileSize, deckBefore,
           reason:
               'Deck count should be unchanged after toggling perk on and off');
     });

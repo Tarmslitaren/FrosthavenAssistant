@@ -110,7 +110,7 @@ void main() {
       SetScenarioCommand('#5 A Deeper Understanding', false,
               gameState: getIt<GameState>())
           .execute();
-      expect(getIt<GameState>().lootDeck.cardCount.value, 0);
+      expect(getIt<GameState>().lootDeck.drawPileSize, 0);
     });
 
     test('loot deck populated for Frosthaven scenario with loot', () {
@@ -118,7 +118,7 @@ void main() {
       SetScenarioCommand('#0 Howling in the Snow', false,
               gameState: getIt<GameState>())
           .execute();
-      expect(getIt<GameState>().lootDeck.cardCount.value, greaterThan(0));
+      expect(getIt<GameState>().lootDeck.drawPileSize, greaterThan(0));
       checkSaveState();
     });
 
@@ -458,7 +458,7 @@ void main() {
       SetCampaignCommand('Frosthaven').execute();
       SetScenarioCommand('custom', false, gameState: getIt<GameState>())
           .execute();
-      expect(getIt<GameState>().lootDeck.cardCount.value, greaterThan(0));
+      expect(getIt<GameState>().lootDeck.drawPileSize, greaterThan(0));
       checkSaveState();
     });
 
@@ -466,7 +466,7 @@ void main() {
       SetCampaignCommand('Jaws of the Lion').execute();
       SetScenarioCommand('custom', false, gameState: getIt<GameState>())
           .execute();
-      expect(getIt<GameState>().lootDeck.cardCount.value, 0);
+      expect(getIt<GameState>().lootDeck.drawPileSize, 0);
     });
 
     test('custom scenario has no monsters', () {

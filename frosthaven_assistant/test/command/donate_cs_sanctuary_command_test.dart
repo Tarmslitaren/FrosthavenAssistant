@@ -28,13 +28,13 @@ void main() {
   group('DonateCSSanctuaryCommand', () {
     test('should add sanctuary cards to character modifier deck', () {
       final deck = character.characterState.modifierDeck;
-      final countBefore = deck.cardCount.value;
+      final countBefore = deck.drawPileSize;
 
       DonateCSSanctuaryCommand(character.id, gameState: getIt<GameState>())
           .execute();
 
       expect(deck.hasCSSanctuary(), isTrue);
-      expect(deck.cardCount.value, greaterThan(countBefore));
+      expect(deck.drawPileSize, greaterThan(countBefore));
       checkSaveState();
     });
 

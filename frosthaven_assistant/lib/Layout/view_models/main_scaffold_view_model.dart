@@ -32,7 +32,7 @@ class MainScaffoldViewModel {
   ValueListenable<String> get currentCampaign => _gameState.currentCampaign;
   ValueListenable<int> get scenarioSectionsVersion =>
       _gameState.scenarioSectionsVersion;
-  ValueListenable<int> get lootDeckCardCount => _gameState.lootDeck.cardCount;
+  Listenable get lootDeckCardCount => _gameState.lootDeck.drawPileNotifier;
   ValueListenable<bool> get hideLootDeck => _settings.hideLootDeck;
   ValueListenable<bool> get showAmdDeckNotifier => _settings.showAmdDeck;
   ValueListenable<bool> get showAllyDeck => _gameState.showAllyDeck;
