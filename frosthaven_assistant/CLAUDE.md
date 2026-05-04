@@ -48,7 +48,7 @@ This app uses a sophisticated hybrid state management approach:
 
 1. **Command Pattern** for all state mutations
    - All changes go through `Command` objects in `lib/Resource/commands/`
-   - Each command implements `execute()`, `undo()`, and `describe()`
+   - Each command implements `execute()`, and `describe()`
    - 70+ command classes for different operations (AddMonsterCommand, ChangeHealthCommand, etc.)
    - Commands use `_StateModifier` token pattern to enforce single mutation path
 

@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 import '../../Resource/commands/add_condition_command.dart';
@@ -89,19 +90,14 @@ class ConditionButton extends StatelessWidget {
           Color color = Colors.transparent;
 
           //todo: fix this logic (move to viewmodel))
-          ListItemData owner = ListItemData();
-          for (final item in gameState.currentList) {
-            if (item.id == ownerId) {
-              owner = item;
-              break;
-            }
-          }
+          final ListItemData owner = gameState.currentList
+                  .firstWhereOrNull((item) => item.id == ownerId) ??
+              ListItemData();
 
           bool isActive = _isConditionActive(condition, figure);
           if (isActive) {
             color = settings.darkMode.value ? Colors.white : Colors.black;
           }
-
           bool isCharacter = condition.name.contains("character");
           Color classColor = Colors.transparent;
           if (isCharacter) {

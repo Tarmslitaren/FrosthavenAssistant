@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/background.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/modifier_deck_widget.dart';
 import 'package:frosthaven_assistant/Layout/section_list.dart';
 import 'package:frosthaven_assistant/Layout/top_bar.dart';
@@ -21,8 +22,6 @@ import 'menus/main_menu.dart';
 import 'view_models/main_scaffold_view_model.dart';
 
 class MainScaffold extends StatelessWidget {
-  static const double _kAppBarHeight = 40.0;
-
   const MainScaffold({super.key, this.settings});
 
   // injected for testing
@@ -44,7 +43,7 @@ class MainScaffold extends StatelessWidget {
                   bottomNavigationBar: RepaintBoundary(child: BottomBar()),
                   appBar: PreferredSize(
                       preferredSize: Size(
-                          double.infinity, _kAppBarHeight * settings.userScalingBars.value),
+                          double.infinity, kBarHeight * settings.userScalingBars.value),
                       child: const RepaintBoundary(child: TopBar())),
                   drawer: MainMenu(),
                   body: const RepaintBoundary(child: MainScaffoldBody())));

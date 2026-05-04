@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../Resource/app_constants.dart';
 import '../../Resource/enums.dart';
 import '../../Resource/scaling.dart';
 import '../../Resource/settings.dart';
@@ -17,7 +18,6 @@ import 'initiative_widget.dart';
 
 class CharacterWidgetInternal extends StatefulWidget {
   static const double _kScaledHeight = 60.0;
-  static const double _kShadowOffset = 1.0;
   static const double _kShadowBlur = 1.0;
   static const double _kXPTop = 10.0;
   static const double _kXPLeft = 314.0;
@@ -105,8 +105,8 @@ class CharacterInternalWidgetState extends State<CharacterWidgetInternal> {
     double scaledHeight = CharacterWidgetInternal._kScaledHeight * scale;
 
     final shadow = Shadow(
-      offset: Offset(CharacterWidgetInternal._kShadowOffset * scale,
-          CharacterWidgetInternal._kShadowOffset * scale),
+      offset: Offset(kShadowOffset * scale,
+          kShadowOffset * scale),
       color: Colors.black87,
       blurRadius: CharacterWidgetInternal._kShadowBlur * scale,
     );

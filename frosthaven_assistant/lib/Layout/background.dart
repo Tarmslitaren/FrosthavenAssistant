@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../Resource/app_constants.dart';
 import '../Resource/settings.dart';
 import '../services/service_locator.dart';
 
 class BackGround extends StatelessWidget {
-  static const double _kDarkModeOpacity = 0.4;
-  static const double _kLightModeOpacity = 0.7;
   static const double _kBarHeightTotal = 80.0;
 
   const BackGround({super.key, required this.child, this.settings});
@@ -23,7 +22,7 @@ class BackGround extends StatelessWidget {
             backgroundBlendMode: BlendMode.srcATop,
             color: darkMode ? Colors.black : Colors.grey,
             image: DecorationImage(
-              opacity: darkMode ? _kDarkModeOpacity : _kLightModeOpacity,
+              opacity: darkMode ? kDarkModeOpacity : kLightModeOpacity,
               fit: BoxFit.cover,
               image: ResizeImage(
                   AssetImage(

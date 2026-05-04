@@ -14,6 +14,21 @@ const double kFontSizeToast = 28;        // toast / snackbar messages
 const double kButtonSize = 40;   // icon buttons and numpad buttons
 const double kIconSize = 30;     // stat icons and list-tile leading images
 
+/// Bar and toolbar height (multiply by userScalingBars where needed)
+const double kBarHeight = 40.0;
+
+/// Background image opacity for dark/light mode
+const double kDarkModeOpacity = 0.4;
+const double kLightModeOpacity = 0.7;
+
+/// Standard text/icon shadow — offset and blur are equal; multiply by scale factor
+const double kShadowOffset = 1.0;
+
+/// Card box-shadow (multiply by scale where needed)
+const double kCardShadowBlur = 4.0;
+const double kCardShadowOffsetX = 2.0;
+const double kCardShadowOffsetY = 4.0;
+
 /// Menu layout
 const double kMenuCloseButtonSpacing = 34; // bottom padding that clears the positioned close button
 const double kCloseButtonWidth = 100;      // width of the positioned close button

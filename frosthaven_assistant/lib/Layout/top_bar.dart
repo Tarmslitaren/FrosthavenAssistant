@@ -10,9 +10,7 @@ import 'element_button.dart';
 class TopBar extends StatelessWidget {
   static const double _kMenuIconSize = 24.0;
   static const double _kTitlePaddingLeft = 2.0;
-  static const double _kToolbarHeight = 40.0;
   static const double _kFlexibleHeight = 42.0;
-  static const double _kDarkModeOpacity = 0.4;
 
   const TopBar({super.key, this.settings});
 
@@ -53,7 +51,7 @@ class TopBar extends StatelessWidget {
                 style: getWhiteShadowStyle(kFontSizeBody * userScaling, shadow),
               ),
             ),
-            toolbarHeight: _kToolbarHeight * settings.userScalingBars.value,
+            toolbarHeight: kBarHeight * settings.userScalingBars.value,
             flexibleSpace: ValueListenableBuilder<bool>(
                 valueListenable: settings.darkMode,
                 builder: (context, value, child) {
@@ -63,14 +61,14 @@ class TopBar extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: darkMode ? Colors.black : Colors.transparent,
                       image: DecorationImage(
-                        opacity: darkMode ? _kDarkModeOpacity : 1,
+                        opacity: darkMode ? kDarkModeOpacity : 1,
                         fit: BoxFit.cover,
                         repeat: ImageRepeat.repeatX,
                         image: ResizeImage(
                             AssetImage(darkMode
                                 ? 'assets/images/psd/gloomhaven-bar.png'
                                 : 'assets/images/psd/frosthaven-bar.png'),
-                            height: (_kToolbarHeight *
+                            height: (kBarHeight *
                                     settings.userScalingBars.value)
                                 .toInt()),
                       ),

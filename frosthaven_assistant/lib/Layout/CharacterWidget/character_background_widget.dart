@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../../Resource/app_constants.dart';
 import '../../Resource/state/game_state.dart';
 
 class CharacterBackgroundWidget extends StatelessWidget {
   static const double _kMargin = 2.0;
   static const double _kWidth = 408.0;
   static const double _kHeight = 58.0;
-  static const double _kShadowBlur = 4.0;
-  static const double _kShadowOffsetX = 2.0;
-  static const double _kShadowOffsetY = 4.0;
   static const double _kGradientRotation = 2.0;
   static const int _kGradientRepeat = 3;
   static const int _kGradientExtraColor = 1;
@@ -111,8 +109,8 @@ class CharacterBackgroundWidget extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.black45,
-            blurRadius: CharacterBackgroundWidget._kShadowBlur * scale,
-            offset: Offset(CharacterBackgroundWidget._kShadowOffsetX * scale, CharacterBackgroundWidget._kShadowOffsetY * scale), // Shadow position
+            blurRadius: kCardShadowBlur * scale,
+            offset: Offset(kCardShadowOffsetX * scale, kCardShadowOffsetY * scale),
           ),
         ],
         image: DecorationImage(

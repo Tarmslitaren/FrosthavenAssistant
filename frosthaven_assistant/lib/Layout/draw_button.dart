@@ -15,10 +15,8 @@ class DrawButton extends StatefulWidget {
 }
 
 class DrawButtonState extends State<DrawButton> {
-  static const double _kShadowOffset = 1.0;
   static const double _kRoundTextBottom = 2.0;
   static const double _kRoundTextLeft = 45.0;
-  static const double _kButtonHeight = 40.0;
   static const double _kButtonPadding = 10.0;
   static const double _kTextHeight = 0.8;
 
@@ -40,9 +38,9 @@ class DrawButtonState extends State<DrawButton> {
         builder: (context, value, child) {
           final scaling = _vm.userScalingBars.value;
           final shadow = Shadow(
-            offset: Offset(_kShadowOffset * scaling, _kShadowOffset * scaling),
+            offset: Offset(kShadowOffset * scaling, kShadowOffset * scaling),
             color: Colors.black87,
-            blurRadius: _kShadowOffset * scaling,
+            blurRadius: kShadowOffset * scaling,
           );
 
           return RepaintBoundary(
@@ -62,7 +60,7 @@ class DrawButtonState extends State<DrawButton> {
               builder: (context, child) {
                 return Container(
                     margin: EdgeInsets.zero,
-                    height: _kButtonHeight * scaling,
+                    height: kBarHeight * scaling,
                     width: _vm.buttonWidth * scaling,
                     child: TextButton(
                         style: TextButton.styleFrom(

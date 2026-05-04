@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
@@ -12,9 +13,6 @@ class LootCardWidget extends StatelessWidget {
   static const double _kCardWidth = 39.0;
   static const double _kCardHeight = 58.6666;
   static const double _kBorderRadius = 4.0;
-  static const double _kShadowBlur = 4.0;
-  static const double _kShadowOffsetX = 2.0;
-  static const double _kShadowOffsetY = 4.0;
   static const double _kShadowTextOffsetX = 0.6;
   static const double _kShadowTextOffsetY = 0.6;
   static const double _kShadowTextBlur = 1.0;
@@ -93,9 +91,9 @@ class LootCardFront extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: Colors.black45,
-              blurRadius: LootCardWidget._kShadowBlur * scale,
-              offset: Offset(LootCardWidget._kShadowOffsetX * scale,
-                  LootCardWidget._kShadowOffsetY * scale), // Shadow position
+              blurRadius: kCardShadowBlur * scale,
+              offset: Offset(kCardShadowOffsetX * scale,
+                  kCardShadowOffsetY * scale), // Shadow position
             ),
           ],
         ),
@@ -195,9 +193,9 @@ class LootCardRear extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.black45,
-            blurRadius: LootCardWidget._kShadowBlur * scale,
-            offset: Offset(LootCardWidget._kShadowOffsetX * scale,
-                LootCardWidget._kShadowOffsetY * scale), // Shadow position
+            blurRadius: kCardShadowBlur * scale,
+            offset: Offset(kCardShadowOffsetX * scale,
+                kCardShadowOffsetY * scale), // Shadow position
           ),
         ],
       ),
