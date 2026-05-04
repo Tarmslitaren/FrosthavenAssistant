@@ -31,7 +31,6 @@ class LootCardsMenuState extends State<LootCardsMenu> {
   static const double _kItemMaxWidth = 200.0;
   static const double _kGridAspectRatio = 0.72;
   static const int _kMinColumns = 4;
-  static const double _kMaxHeightRatio = 0.9;
   static const double _kBottomBarHeight = 32.0;
   static const double _kItemMargin = 2.0;
   static const int _kCard1418 = 1418;
@@ -83,7 +82,7 @@ class LootCardsMenuState extends State<LootCardsMenu> {
               constraints: BoxConstraints(
                   maxWidth: MediaQuery.of(context).size.width,
                   maxHeight:
-                      MediaQuery.of(context).size.height * _kMaxHeightRatio),
+                      MediaQuery.of(context).size.height * kMenuMaxHeightRatio),
               child: Card(
                   color: Colors.transparent,
                   child: Stack(children: [

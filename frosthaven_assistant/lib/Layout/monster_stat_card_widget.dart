@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
@@ -16,13 +17,8 @@ class MonsterStatCardWidget extends StatelessWidget {
   // Card dimensions
   static const double _kCardWidth = 167.0;
   static const double _kCardHeight = 93.5;
-  static const double _kBorderRadius = 8.0;
-  static const double _kShadowBlur = 4.0;
-  static const double _kShadowOffsetX = 2.0;
-  static const double _kShadowOffsetY = 4.0;
   static const double _kShadowTextOffset = 0.4;
   static const double _kShadowTextBlur = 1.0;
-  static const double _kMargin = 1.6;
   // Normal layout positions
   static const double _kTitleTop = 3.5;
   static const double _kTitleLeft = 2.0;
@@ -274,7 +270,7 @@ class _MonsterStatNormalLayout extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.all(
-              Radius.circular(MonsterStatCardWidget._kBorderRadius * scale)),
+              Radius.circular(kGameCardBorderRadius * scale)),
           child: Image(
             height: MonsterStatCardWidget._kCardHeight * scale,
             width: MonsterStatCardWidget._kCardWidth * scale,
@@ -527,7 +523,7 @@ class MonsterStatBossLayout extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.all(
-              Radius.circular(MonsterStatCardWidget._kBorderRadius * scale)),
+              Radius.circular(kGameCardBorderRadius * scale)),
           child: Image(
             height: MonsterStatCardWidget._kCardHeight * scale,
             width: MonsterStatCardWidget._kCardWidth * scale,
@@ -738,14 +734,14 @@ class MonsterStatCardView extends StatelessWidget {
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black45,
-                    blurRadius: MonsterStatCardWidget._kShadowBlur * scale,
+                    blurRadius: kCardShadowBlur * scale,
                     offset: Offset(
-                        MonsterStatCardWidget._kShadowOffsetX * scale,
-                        MonsterStatCardWidget._kShadowOffsetY * scale),
+                        kCardShadowOffsetX * scale,
+                        kCardShadowOffsetY * scale),
                   ),
                 ],
               ),
-              margin: EdgeInsets.all(MonsterStatCardWidget._kMargin * scale),
+              margin: EdgeInsets.all(kMonsterCardMargin * scale),
               child: isBoss
                   ? MonsterStatBossLayout(
                       data: data,

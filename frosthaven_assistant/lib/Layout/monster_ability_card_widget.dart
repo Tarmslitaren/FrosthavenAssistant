@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Model/monster_ability.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
@@ -13,18 +14,12 @@ import '../Resource/ui_utils.dart';
 import 'view_models/monster_ability_card_view_model.dart';
 
 class MonsterAbilityCardWidget extends StatefulWidget {
-  static const double _kCardWidth = 142.4;
   static const double _kCardHeight = 94.4;
   static const double _kCardImageHeight = 92.8;
   static const double _kCardRearImageHeight = 91.2;
-  static const double _kBorderRadius = 8.0;
-  static const double _kShadowBlur = 4.0;
-  static const double _kShadowOffsetX = 2.0;
-  static const double _kShadowOffsetY = 4.0;
   static const double _kShadowTextOffsetX = 0.6;
   static const double _kShadowTextOffsetY = 0.6;
   static const double _kShadowTextBlur = 1.0;
-  static const double _kMargin = 1.6;
   static const double _kTitleAreaHeight = 88.0;
   static const double _kTitleTopFh = 2.0;
   static const double _kTitleFontSizeFh = 10.0;
@@ -49,7 +44,6 @@ class MonsterAbilityCardWidget extends StatefulWidget {
   static const double _kGfxScaleAsset = 0.55;
   static const double _kGfxScaleElement = 0.6;
   static const double _kDegreesToRadians = 180.0;
-  static const double _kHalfPi = pi / 2;
   static const int _kAnimationDurationMs = 600;
   static const int _kGfxIndex2 = 2;
   static const int _kGfxIndex3 = 3;
@@ -64,7 +58,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
   static List<Widget> _buildGraphicPositionals(
       double scale, List<GraphicPositional> positionals) {
     List<Widget> list = [];
-    double cardWidth = _kCardWidth * scale;
+    double cardWidth = kAbilityCardWidth * scale;
     double cardHeight = _kCardHeight * scale;
 
     for (GraphicPositional item in positionals) {
@@ -118,7 +112,7 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
         child: widget,
         builder: (context, widget) {
           final value =
-              min(rotateAnim.value, MonsterAbilityCardWidget._kHalfPi);
+              min(rotateAnim.value, kHalfPi);
           return Transform(
             transform: Matrix4.rotationX(value),
             alignment: Alignment.center,
@@ -209,17 +203,17 @@ class MonsterAbilityCardFront extends StatelessWidget {
               boxShadow: [
                 BoxShadow(
                   color: Colors.black45,
-                  blurRadius: MonsterAbilityCardWidget._kShadowBlur * scale,
+                  blurRadius: kCardShadowBlur * scale,
                   offset: Offset(
-                      MonsterAbilityCardWidget._kShadowOffsetX * scale,
-                      MonsterAbilityCardWidget._kShadowOffsetY *
+                      kCardShadowOffsetX * scale,
+                      kCardShadowOffsetY *
                           scale), // Shadow position
                 ),
               ],
             ),
             key: const ValueKey<int>(1),
-            margin: EdgeInsets.all(MonsterAbilityCardWidget._kMargin * scale),
-            width: MonsterAbilityCardWidget._kCardWidth * scale,
+            margin: EdgeInsets.all(kMonsterCardMargin * scale),
+            width: kAbilityCardWidth * scale,
             height: MonsterAbilityCardWidget._kCardHeight * scale,
             child: Stack(
               clipBehavior: Clip.none, //if text overflows it still visible
@@ -227,11 +221,11 @@ class MonsterAbilityCardFront extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(
-                      MonsterAbilityCardWidget._kBorderRadius * scale)),
+                      kGameCardBorderRadius * scale)),
                   child: Image(
                     fit: BoxFit.fill,
                     height: MonsterAbilityCardWidget._kCardImageHeight * scale,
-                    width: MonsterAbilityCardWidget._kCardWidth * scale,
+                    width: kAbilityCardWidth * scale,
                     image: AssetImage(frosthavenStyle
                         ? "assets/images/psd/monsterAbility-front_fh.png"
                         : "assets/images/psd/monsterAbility-front.png"),
@@ -244,7 +238,7 @@ class MonsterAbilityCardFront extends StatelessWidget {
                     child: SizedBox(
                       height:
                           MonsterAbilityCardWidget._kTitleAreaHeight * scale,
-                      width: MonsterAbilityCardWidget._kCardWidth *
+                      width: kAbilityCardWidth *
                           scale, //needed for line breaks in lines
 
                       child: Column(
@@ -320,7 +314,7 @@ class MonsterAbilityCardFront extends StatelessWidget {
                   top: MonsterAbilityCardWidget._kLinesTop * scale,
                   child: SizedBox(
                     height: MonsterAbilityCardWidget._kTitleAreaHeight * scale,
-                    width: MonsterAbilityCardWidget._kCardWidth *
+                    width: kAbilityCardWidth *
                         scale, //needed for line breaks in lines
                     child: LineBuilder.createLines(
                         card.lines,
@@ -362,24 +356,24 @@ class MonsterAbilityCardRear extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: Colors.black45,
-              blurRadius: MonsterAbilityCardWidget._kShadowBlur * scale,
+              blurRadius: kCardShadowBlur * scale,
               offset: Offset(
-                  MonsterAbilityCardWidget._kShadowOffsetX * scale,
-                  MonsterAbilityCardWidget._kShadowOffsetY *
+                  kCardShadowOffsetX * scale,
+                  kCardShadowOffsetY *
                       scale), // Shadow position
             ),
           ],
         ),
         key: const ValueKey<int>(0),
-        margin: EdgeInsets.all(MonsterAbilityCardWidget._kMargin * scale),
-        width: MonsterAbilityCardWidget._kCardWidth * scale,
+        margin: EdgeInsets.all(kMonsterCardMargin * scale),
+        width: kAbilityCardWidth * scale,
         height: MonsterAbilityCardWidget._kCardHeight * scale,
         child: Stack(
           alignment: Alignment.center,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(
-                  MonsterAbilityCardWidget._kBorderRadius * scale)),
+                  kGameCardBorderRadius * scale)),
               child: Image(
                 fit: BoxFit.fitHeight,
                 height: MonsterAbilityCardWidget._kCardRearImageHeight * scale,

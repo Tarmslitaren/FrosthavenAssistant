@@ -21,11 +21,6 @@ class ReturnAMDCardMenu extends StatelessWidget {
 
   final GameState? gameState;
 
-  static const double _kDefaultScale = 6.0;
-  static const double _kCardWidthFactor = 7.0;
-  static const double _kCardWidthBase = 58.6666;
-  static const double _kTopSpacing = 20.0;
-  static const double _kModalWidth = 300.0;
   static const double _kModalHeight = 120.0;
   static const double _kInnerSpacing = 35.0;
 
@@ -36,10 +31,10 @@ class ReturnAMDCardMenu extends StatelessWidget {
     final deck = GameMethods.getModifierDeck(name, _gameState);
     final card = deck.removedPileContents[index];
     final screenSize = MediaQuery.of(context).size;
-    double scale = _kDefaultScale;
-    final cardWidth = _kCardWidthFactor * _kCardWidthBase;
+    double scale = kCardZoomDefaultScale;
+    final cardWidth = kCardZoomWidthFactor * kModifierCardBaseWidth;
     if (screenSize.width < cardWidth) {
-      scale = _kDefaultScale * (screenSize.width / cardWidth);
+      scale = kCardZoomDefaultScale * (screenSize.width / cardWidth);
     }
     return Column(
         mainAxisSize: MainAxisSize.min,
@@ -47,10 +42,10 @@ class ReturnAMDCardMenu extends StatelessWidget {
         children: [
           ModifierCardFront(card: card, name: name, scale: scale),
           const SizedBox(
-            height: _kTopSpacing,
+            height: kMenuTopPadding,
           ),
           ModalBackground(
-              width: _kModalWidth,
+              width: kMenuNarrowWidth,
               height: _kModalHeight,
               child: Column(children: [
                 const SizedBox(
@@ -65,7 +60,7 @@ class ReturnAMDCardMenu extends StatelessWidget {
                     child: const Text("Return card to discard pile",
                         textAlign: TextAlign.center, style: kButtonLabelStyle)),
                 const SizedBox(
-                  height: _kTopSpacing,
+                  height: kMenuTopPadding,
                 ),
               ]))
         ]);

@@ -1,3 +1,5 @@
+import 'dart:math' show pi;
+
 import 'package:flutter/material.dart';
 
 // Shared UI constants for the Frosthaven Assistant app.
@@ -28,6 +30,46 @@ const double kShadowOffset = 1.0;
 const double kCardShadowBlur = 4.0;
 const double kCardShadowOffsetX = 2.0;
 const double kCardShadowOffsetY = 4.0;
+
+/// Card dimensions — base size for modifier/loot cards and ability cards
+const double kModifierCardBaseWidth = 58.6666;
+const double kAbilityCardWidth = 142.4;
+
+/// Card border radii
+const double kCardBorderRadius = 4.0;      // modifier/loot cards
+const double kGameCardBorderRadius = 8.0;  // monster stat/ability cards
+
+/// Monster card margin (multiply by scale)
+const double kMonsterCardMargin = 1.6;
+
+/// Card zoom dialog constants
+const double kCardZoomDefaultScale = 6.0;
+const double kCardZoomWidthFactor = 7.0;
+
+/// Standard animation duration in milliseconds
+const int kAnimationDurationMs = 300;
+
+/// Menu layout
+const double kMenuTopPadding = 20.0;     // top spacing inside modal menus
+const double kMenuNarrowWidth = 300.0;   // narrow menu/modal width
+const double kMenuMaxHeightRatio = 0.9;  // max height for scrollable menus
+
+/// Button sizes and radii for action/condition buttons
+const double kConditionButtonSize = 42.0;
+const double kRoundButtonBorderRadius = 30.0;
+
+/// Small item margin/spacing
+const double kSmallMargin = 2.0;
+
+/// Deck widget font size
+const double kDeckFontSize = 12.0;
+
+/// Height for save confirmation dialogs
+const double kSaveModalHeight = 160.0;
+
+/// Math helpers for card flip animations
+const double kHalfPi = pi / 2;
+const double kTwoPI = pi * 2;
 
 /// Menu layout
 const double kMenuCloseButtonSpacing = 34; // bottom padding that clears the positioned close button

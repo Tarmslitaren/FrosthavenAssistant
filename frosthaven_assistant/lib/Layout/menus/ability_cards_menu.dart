@@ -35,7 +35,6 @@ class AbilityCardsMenu extends StatefulWidget {
 class AbilityCardsMenuState extends State<AbilityCardsMenu> {
   static const double _kBarSize = 32.0;
   static const double _kListWidthRatio = 0.4;
-  static const double _kMaxHeightRatio = 0.9;
   static const int _kMaxRevealButtons = 8;
 
   GameState get _gameState => widget.gameState ?? getIt<GameState>();
@@ -176,7 +175,7 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
           return Container(
               constraints: BoxConstraints(
                   maxWidth: screenSize.width,
-                  maxHeight: screenSize.height * _kMaxHeightRatio),
+                  maxHeight: screenSize.height * kMenuMaxHeightRatio),
               child: Card(
                   color: Colors.transparent,
                   child: Stack(children: [
@@ -286,7 +285,6 @@ class Item extends StatelessWidget {
   static const int _kScaleCardRows = 14;
   static const double _kScaleMin = 0.5;
   static const double _kListWidthRatio = 0.4;
-  static const double _kCardWidth = 142.4;
 
   const Item(
       {super.key,
@@ -304,8 +302,8 @@ class Item extends StatelessWidget {
     double scale = max(
         (screenSize.height / (_kScaleCardHeight * _kScaleCardRows)),
         _kScaleMin);
-    if (screenSize.width * _kListWidthRatio < _kCardWidth * scale) {
-      scale = screenSize.width * _kListWidthRatio / _kCardWidth;
+    if (screenSize.width * _kListWidthRatio < kAbilityCardWidth * scale) {
+      scale = screenSize.width * _kListWidthRatio / kAbilityCardWidth;
     }
 
     return revealed

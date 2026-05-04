@@ -14,7 +14,6 @@ class LootCardEnhancementMenu extends StatelessWidget {
   static const double _kValuePaddingV = 4.0;
   static const double _kValueBorderRadius = 1.0;
   static const double _kHeaderImageSize = 30.0;
-  static const double _kTopSpacing = 20.0;
   static const double _kMaxWidth = 300.0;
   static const double _kCoinRowSpacing = 6.0;
 
@@ -76,7 +75,7 @@ class LootCardEnhancementMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScrollableMenuCard(
-      maxWidth: _kMaxWidth,
+      maxWidth: kMenuNarrowWidth,
       child: Column(children: [
         const Text(
           "Loot Card Enhancements",

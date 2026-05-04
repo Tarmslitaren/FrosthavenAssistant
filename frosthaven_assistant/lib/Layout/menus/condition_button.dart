@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 
 import '../../Resource/commands/add_condition_command.dart';
 import '../../Resource/commands/remove_condition_command.dart';
@@ -12,8 +13,6 @@ import '../../services/service_locator.dart';
 import '../condition_icon.dart';
 
 class ConditionButton extends StatelessWidget {
-  static const double _kButtonSize = 42.0;
-  static const double _kBorderRadius = 30.0;
   static const double _kIconSize = 24.0;
   static const double _kClassTokenScale = 0.65;
   static const double _kDisabledIconSize = 23.1;
@@ -141,8 +140,8 @@ class ConditionButton extends StatelessWidget {
                 )
               : inactiveIcon;
           return Container(
-              width: _kButtonSize * scale,
-              height: _kButtonSize * scale,
+              width: kConditionButtonSize * scale,
+              height: kConditionButtonSize * scale,
               padding: EdgeInsets.zero,
               margin: EdgeInsets.all(1 * scale),
               decoration: BoxDecoration(
@@ -150,7 +149,7 @@ class ConditionButton extends StatelessWidget {
                     color: color,
                   ),
                   borderRadius: BorderRadius.all(
-                      Radius.circular(_kBorderRadius * scale))),
+                      Radius.circular(kRoundButtonBorderRadius * scale))),
               child: IconButton(
                 icon: enabled
                     ? enabledIcon

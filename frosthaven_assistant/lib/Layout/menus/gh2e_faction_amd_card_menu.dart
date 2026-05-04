@@ -25,10 +25,8 @@ class GH2eFactionAMDCardMenu extends StatefulWidget {
 class GH2eFactionAMDCardMenuState extends State<GH2eFactionAMDCardMenu> {
   static const double _kDefaultScale = 3.0;
   static const double _kCardWidthFactor = 3.5;
-  static const double _kCardWidthBase = 58.6666;
   static const int _kTwoColumns = 2;
   static const double _kWrapSpacing = 2.0;
-  static const double _kModalWidth = 300.0;
   static const double _kModalHeight = 180.0;
   static const double _kSpacerNoCard = 20.0;
   static const double _kSpacerWithCard = 30.0;
@@ -58,7 +56,7 @@ class GH2eFactionAMDCardMenuState extends State<GH2eFactionAMDCardMenu> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     double scale = _kDefaultScale;
-    final cardWidth = _kCardWidthFactor * _kCardWidthBase;
+    final cardWidth = _kCardWidthFactor * kModifierCardBaseWidth;
     if (screenSize.width < cardWidth * _kTwoColumns) {
       scale = _kDefaultScale * (screenSize.width / (cardWidth * _kTwoColumns));
     }
@@ -98,7 +96,7 @@ class GH2eFactionAMDCardMenuState extends State<GH2eFactionAMDCardMenu> {
             height: _kSpacerNoCard,
           ),
           ModalBackground(
-              width: _kModalWidth,
+              width: kMenuNarrowWidth,
               height: _kModalHeight,
               child: Column(children: [
                 SizedBox(

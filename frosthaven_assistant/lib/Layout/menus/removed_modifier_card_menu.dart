@@ -27,7 +27,6 @@ class RemovedModifierCardMenu extends StatefulWidget {
 
 class RemovedModifierCardMenuState extends State<RemovedModifierCardMenu> {
   static const double _kListWidthRatio = 0.3;
-  static const double _kMaxHeightRatio = 0.9;
   static const double _kHeaderPadding = 10.0;
   static const double _kBottomBarHeight = 32.0;
   static const double _kCloseButtonBottom = 4.0;
@@ -93,7 +92,7 @@ class RemovedModifierCardMenuState extends State<RemovedModifierCardMenu> {
           return Container(
               constraints: BoxConstraints(
                   maxWidth: screenSize.width,
-                  maxHeight: screenSize.height * _kMaxHeightRatio),
+                  maxHeight: screenSize.height * kMenuMaxHeightRatio),
               child: Card(
                   color: Colors.transparent,
                   child: Stack(children: [

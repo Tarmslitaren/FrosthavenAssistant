@@ -1,5 +1,6 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 
 import '../../Resource/color_matrices.dart';
@@ -12,7 +13,6 @@ import '../view_models/character_view_model.dart';
 import 'character_widget_internal.dart';
 
 class CharacterWidget extends StatefulWidget {
-  static const int _kAnimationDurationMs = 300;
   static const double _kSpacing = 2.0;
   static const double _kElevation = 8.0;
   static const double _kMarginH = 3.2;
@@ -83,7 +83,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
               //not really needed now
               key: Key(index.toString()),
               duration: const Duration(
-                  milliseconds: CharacterWidget._kAnimationDurationMs),
+                  milliseconds: kAnimationDurationMs),
               child: MonsterBox(
                   key: Key(summonList[index].getId()),
                   figureId: summonList[index].name +

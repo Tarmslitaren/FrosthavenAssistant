@@ -12,7 +12,6 @@ import '../Resource/ui_utils.dart';
 class LootCardWidget extends StatelessWidget {
   static const double _kCardWidth = 39.0;
   static const double _kCardHeight = 58.6666;
-  static const double _kBorderRadius = 4.0;
   static const double _kShadowTextOffsetX = 0.6;
   static const double _kShadowTextOffsetY = 0.6;
   static const double _kShadowTextBlur = 1.0;
@@ -24,7 +23,6 @@ class LootCardWidget extends StatelessWidget {
   static const double _kOwnerIconSize = 15.0;
   static const double _kOwnerIconTop = 2.0;
   static const double _kOwnerIconRight = 2.0;
-  static const double _kHalfPi = pi / 2;
 
   LootCardWidget(
       {super.key, required this.card, required bool revealed, this.settings}) {
@@ -41,7 +39,7 @@ class LootCardWidget extends StatelessWidget {
         animation: rotateAnim,
         child: widget,
         builder: (context, widget) {
-          final value = min(rotateAnim.value, _kHalfPi);
+          final value = min(rotateAnim.value, kHalfPi);
           return Transform(
             transform: Matrix4.rotationX(value),
             alignment: Alignment.center,
@@ -107,7 +105,7 @@ class LootCardFront extends StatelessWidget {
                     child: ClipRRect(
                   clipBehavior: Clip.hardEdge,
                   borderRadius: BorderRadius.all(
-                      Radius.circular(LootCardWidget._kBorderRadius * scale)),
+                      Radius.circular(kCardBorderRadius * scale)),
                   child: Image(
                     filterQuality: FilterQuality.medium,
                     fit: BoxFit.cover,
@@ -201,7 +199,7 @@ class LootCardRear extends StatelessWidget {
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.all(
-            Radius.circular(LootCardWidget._kBorderRadius * scale)),
+            Radius.circular(kCardBorderRadius * scale)),
         child: Image(
           fit: BoxFit.fitHeight,
           image: const AssetImage("assets/images/loot/back.png"),

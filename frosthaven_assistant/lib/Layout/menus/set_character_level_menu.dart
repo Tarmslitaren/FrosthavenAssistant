@@ -27,7 +27,6 @@ class SetCharacterLevelMenu extends StatefulWidget {
 
 class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
   static const double _kMenuSize = 240.0;
-  static const double _kTopSpacing = 20.0;
   static const int _kLevelRow1Count = 5;
   static const int _kLevelRow2Count = 4;
   static const int _kMaxHealth = 900;
@@ -77,7 +76,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: _kTopSpacing * scale,
+                height: kMenuTopPadding * scale,
               ),
               ValueListenableBuilder<String>(
                   valueListenable: widget.character.characterState.display,
@@ -168,9 +167,6 @@ class _LevelButton extends StatelessWidget {
   final GameState gameState;
   final Settings? settings;
 
-  static const double _kButtonSize = 40.0;
-  static const double _kShadowOffset = 1.0;
-  static const double _kShadowBlur = 1.0;
 
   @override
   Widget build(BuildContext context) {
@@ -186,8 +182,8 @@ class _LevelButton extends StatelessWidget {
           Color textColor =
               isCurrentlySelected ? selectedTextColor : Colors.grey;
           return SizedBox(
-            width: _kButtonSize * scale,
-            height: _kButtonSize * scale,
+            width: kButtonSize * scale,
+            height: kButtonSize * scale,
             child: TextButton(
               child: Text(
                 text,
@@ -196,11 +192,11 @@ class _LevelButton extends StatelessWidget {
                     shadows: [
                       Shadow(
                         offset: Offset(
-                            _kShadowOffset * scale, _kShadowOffset * scale),
+                            kShadowOffset * scale, kShadowOffset * scale),
                         color: isCurrentlySelected
                             ? Colors.black54
                             : Colors.black87,
-                        blurRadius: _kShadowBlur * scale,
+                        blurRadius: kShadowOffset * scale,
                       ),
                     ],
                     color: textColor),

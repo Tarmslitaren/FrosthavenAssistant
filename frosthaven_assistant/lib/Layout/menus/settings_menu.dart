@@ -24,8 +24,6 @@ import '../../services/service_locator.dart';
 class SettingsMenu extends StatefulWidget {
   static const double _kBarWidthBase = 40.0;
   static const double _kBarWidthMultiplier = 6.5;
-  static const double _kTopSpacing = 20.0;
-  static const double _kMaxWidth = 300.0;
   static const double _kScaleMin = 0.2;
   static const double _kScaleMax = 3.0;
   static const double _kBarScaleMin = 0.8;
@@ -85,7 +83,7 @@ class SettingsMenuState extends State<SettingsMenu> {
     double maxBarScale = screenWidth / referenceMinBarWidth;
 
     return ScrollableMenuCard(
-        maxWidth: SettingsMenu._kMaxWidth,
+        maxWidth: kMenuNarrowWidth,
         onClose: settings.saveToDisk,
         child: Column(
           children: [
@@ -506,7 +504,7 @@ class SettingsMenuState extends State<SettingsMenu> {
 
                               Container(
                                 margin: const EdgeInsets.only(
-                                    top: SettingsMenu._kTopSpacing),
+                                    top: kMenuTopPadding),
                                 width: SettingsMenu._kInputWidth,
                                 height: SettingsMenu._kInputHeight,
                                 child: TextField(
@@ -571,7 +569,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   }),
                               Container(
                                 margin: const EdgeInsets.only(
-                                    top: SettingsMenu._kTopSpacing),
+                                    top: kMenuTopPadding),
                                 width: SettingsMenu._kInputWidth,
                                 height: SettingsMenu._kInputHeight,
                                 child: TextField(

@@ -42,7 +42,6 @@ class ModifierDeckMenu extends StatefulWidget {
   static const double _kRevealButtonWidth = 32.0;
   static const double _kListWidthRatio = 0.3;
   static const int _kReorderAnimationMs = 400;
-  static const double _kMaxHeightRatio = 0.9;
   static const int _kMaxBlessCurse = 10;
   static const int _kMaxRuinmawEmpower = 12;
   static const int _kMaxVimthreaderGrEmpower = 5;
@@ -276,7 +275,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
               constraints: BoxConstraints(
                   maxWidth: screenSize.width,
                   maxHeight:
-                      screenSize.height * ModifierDeckMenu._kMaxHeightRatio),
+                      screenSize.height * kMenuMaxHeightRatio),
               child: Card(
                   color: Colors.transparent,
                   child: Stack(children: [

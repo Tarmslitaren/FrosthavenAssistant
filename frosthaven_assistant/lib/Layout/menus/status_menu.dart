@@ -28,11 +28,7 @@ import '../../services/service_locator.dart';
 import '../counter_button.dart';
 
 class StatusMenu extends StatefulWidget {
-  static const double _kButtonSize = 40.0;
-  static const double _kIconSize = 30.0;
-  static const double _kActionButtonSize = 42.0;
   static const double _kSummonIconSize = 24.0;
-  static const double _kSummonBorderRadius = 30.0;
   static const double _kSummonMargin = 1.0;
   static const double _kSummonPaddingRight = 20.0;
   static const double _kHeaderHeight = 28.0;
@@ -40,8 +36,6 @@ class StatusMenu extends StatefulWidget {
   static const double _kConditionMarginTop = 2.0;
   static const double _kConditionMarginRight = 2.0;
   static const double _kMonsterBoxScale = 0.9;
-  static const double _kShadowOffset = 1.0;
-  static const double _kShadowBlur = 1.0;
   static const double _kTextHeight = 0.5;
   static const double _kTopSpacing = 2.0;
   static const int _kMaxXp = 900;
@@ -141,8 +135,8 @@ class StatusMenuState extends State<StatusMenu> {
       double scale) {
     return Row(children: [
       SizedBox(
-          width: StatusMenu._kButtonSize * scale,
-          height: StatusMenu._kButtonSize * scale,
+          width: kButtonSize * scale,
+          height: kButtonSize * scale,
           child: IconButton(
               icon: Image.asset('assets/images/psd/sub.png'),
               onPressed: () {
@@ -155,8 +149,8 @@ class StatusMenuState extends State<StatusMenu> {
               })),
       Stack(children: [
         SizedBox(
-          width: StatusMenu._kIconSize * scale,
-          height: StatusMenu._kIconSize * scale,
+          width: kIconSize * scale,
+          height: kIconSize * scale,
           child: Image(
             image: AssetImage(image),
           ),
@@ -178,17 +172,17 @@ class StatusMenuState extends State<StatusMenu> {
                           fontSize: kFontSizeBody * scale,
                           shadows: [
                             Shadow(
-                              offset: Offset(StatusMenu._kShadowOffset * scale,
-                                  StatusMenu._kShadowOffset * scale),
+                              offset: Offset(kShadowOffset * scale,
+                                  kShadowOffset * scale),
                               color: Colors.black87,
-                              blurRadius: StatusMenu._kShadowBlur * scale,
+                              blurRadius: kShadowOffset * scale,
                             )
                           ])));
             })
       ]),
       SizedBox(
-          width: StatusMenu._kButtonSize * scale,
-          height: StatusMenu._kButtonSize * scale,
+          width: kButtonSize * scale,
+          height: kButtonSize * scale,
           child: IconButton(
             icon: Image.asset('assets/images/psd/add.png'),
             onPressed: () {
@@ -710,8 +704,8 @@ class StatusMenuState extends State<StatusMenu> {
                         Row(
                           children: [
                             SizedBox(
-                              width: StatusMenu._kActionButtonSize * scale,
-                              height: StatusMenu._kActionButtonSize * scale,
+                              width: kConditionButtonSize * scale,
+                              height: kConditionButtonSize * scale,
                               child: IconButton(
                                 icon:
                                     Image.asset('assets/images/psd/skull.png'),
@@ -724,8 +718,8 @@ class StatusMenuState extends State<StatusMenu> {
                               ),
                             ),
                             SizedBox(
-                                width: StatusMenu._kActionButtonSize * scale,
-                                height: StatusMenu._kActionButtonSize * scale,
+                                width: kConditionButtonSize * scale,
+                                height: kConditionButtonSize * scale,
                                 child: IconButton(
                                   icon: Image.asset(
                                       colorBlendMode: BlendMode.multiply,
@@ -757,12 +751,12 @@ class StatusMenuState extends State<StatusMenu> {
                                       shadows: [
                                         Shadow(
                                           offset: Offset(
-                                              StatusMenu._kShadowOffset * scale,
-                                              StatusMenu._kShadowOffset *
+                                              kShadowOffset * scale,
+                                              kShadowOffset *
                                                   scale),
                                           color: Colors.black87,
                                           blurRadius:
-                                              StatusMenu._kShadowBlur * scale,
+                                              kShadowOffset * scale,
                                         )
                                       ])),
                           ],
@@ -1069,14 +1063,14 @@ class _SummonButton extends StatelessWidget {
           }
 
           return Container(
-              width: StatusMenu._kActionButtonSize * scale,
-              height: StatusMenu._kActionButtonSize * scale,
+              width: kConditionButtonSize * scale,
+              height: kConditionButtonSize * scale,
               padding: EdgeInsets.zero,
               margin: EdgeInsets.all(StatusMenu._kSummonMargin * scale),
               decoration: BoxDecoration(
                   border: Border.all(color: color),
                   borderRadius: BorderRadius.all(Radius.circular(
-                      StatusMenu._kSummonBorderRadius * scale))),
+                      kRoundButtonBorderRadius * scale))),
               child: IconButton(
                   icon: isActive
                       ? Image(

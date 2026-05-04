@@ -12,7 +12,6 @@ import '../../services/service_locator.dart';
 
 class AddStandeeMenu extends StatefulWidget {
   static const double _kMenuWidth = 250.0;
-  static const double _kTopSpacing = 20.0;
   static const double _kHeightOneRow = 140.0;
   static const double _kHeightTwoRows = 172.0;
   static const double _kHeightThreeRows = 211.0;
@@ -87,7 +86,7 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(height: AddStandeeMenu._kTopSpacing * scale),
+                    SizedBox(height: kMenuTopPadding * scale),
                     Text("Add Standee Nr", style: getTitleTextStyle(scale)),
                     ...List.generate(
                       (nrOfStandees + AddStandeeMenu._kRow1Max - 1) ~/

@@ -34,7 +34,6 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
   static const double _kCardMargin = 2.0;
   static const double _kSearchPadding = 10.0;
   static const int _kNumpadMaxLength = 3;
-  static const double _kTopSpacing = 20.0;
 
   // This list holds the data for the list view
   List<String> _foundScenarios = [];
@@ -227,7 +226,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
         cardMargin: const EdgeInsets.all(_kCardMargin),
         child: Column(
           children: [
-            const SizedBox(height: _kTopSpacing),
+            const SizedBox(height: kMenuTopPadding),
             Column(children: [
               const Text("Set Scenario", style: kTitleStyle),
               ExpansionTile(
@@ -272,7 +271,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                         suffixIcon: Icon(Icons.search)),
                   )),
             ),
-            const SizedBox(height: _kTopSpacing),
+            const SizedBox(height: kMenuTopPadding),
             FilteredListView(
               items: _foundScenarios,
               itemBuilder: (context, index) =>
@@ -295,8 +294,6 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
 class _SoloTile extends StatelessWidget {
   static const int _kSoloNameIndex = 0;
   static const int _kSoloTextIndex = 1;
-  static const double _kIconSize = 30.0;
-
   const _SoloTile({
     required this.name,
     required this.gameState,
@@ -331,8 +328,8 @@ class _SoloTile extends StatelessWidget {
 
     return ListTile(
       leading: Image(
-        height: _kIconSize,
-        width: _kIconSize,
+        height: kIconSize,
+        width: kIconSize,
         fit: BoxFit.scaleDown,
         image: AssetImage("assets/images/class-icons/$characterName.png"),
       ),

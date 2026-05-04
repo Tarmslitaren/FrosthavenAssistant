@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
@@ -8,12 +9,7 @@ import '../Resource/game_methods.dart';
 import '../Resource/state/game_state.dart';
 
 class ModifierCardWidget extends StatelessWidget {
-  static const double _kCardWidth = 58.6666;
   static const double _kCardHeight = 39.0;
-  static const double _kBorderRadius = 4.0;
-  static const double _kShadowBlur = 4.0;
-  static const double _kShadowOffsetX = 2.0;
-  static const double _kShadowOffsetY = 4.0;
   // Front layout marker icon positions
   static const double _kMarkerBgSize = 10.0;
   static const double _kMarkerBgTopDivisor = 2.0;
@@ -29,7 +25,6 @@ class ModifierCardWidget extends StatelessWidget {
   static const double _kRearMarkerIconSize = 20.0;
   static const double _kRearMarkerIconTop = 9.0;
   static const double _kRearMarkerIconLeft = 19.0;
-  static const double _kHalfPi = pi / 2;
   static const int _kPerkSuffixLength = 2; // length of "-2" suffix
 
   ModifierCardWidget(
@@ -52,7 +47,7 @@ class ModifierCardWidget extends StatelessWidget {
         animation: rotateAnim,
         child: widget,
         builder: (context, widget) {
-          final value = min(rotateAnim.value, _kHalfPi);
+          final value = min(rotateAnim.value, kHalfPi);
           return Transform(
             transform: Matrix4.rotationX(value),
             alignment: Alignment.center,
@@ -157,16 +152,16 @@ class ModifierCardFront extends StatelessWidget {
 
     return RepaintBoundary(
         child: Container(
-            width: ModifierCardWidget._kCardWidth * scale,
+            width: kModifierCardBaseWidth * scale,
             height: ModifierCardWidget._kCardHeight * scale,
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
                   color: Colors.black45,
-                  blurRadius: ModifierCardWidget._kShadowBlur * scale,
+                  blurRadius: kCardShadowBlur * scale,
                   offset: Offset(
-                      ModifierCardWidget._kShadowOffsetX * scale,
-                      ModifierCardWidget._kShadowOffsetY *
+                      kCardShadowOffsetX * scale,
+                      kCardShadowOffsetY *
                           scale), // Shadow position
                 ),
               ],
@@ -175,7 +170,7 @@ class ModifierCardFront extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(
-                      ModifierCardWidget._kBorderRadius * scale)),
+                      kCardBorderRadius * scale)),
                   child: Image(
                     fit: BoxFit.fitHeight,
                     image: AssetImage(gfx),
@@ -234,16 +229,16 @@ class ModifierCardRear extends StatelessWidget {
 
     return RepaintBoundary(
         child: Container(
-            width: ModifierCardWidget._kCardWidth * scale,
+            width: kModifierCardBaseWidth * scale,
             height: ModifierCardWidget._kCardHeight * scale,
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
                   color: Colors.black45,
-                  blurRadius: ModifierCardWidget._kShadowBlur * scale,
+                  blurRadius: kCardShadowBlur * scale,
                   offset: Offset(
-                      ModifierCardWidget._kShadowOffsetX * scale,
-                      ModifierCardWidget._kShadowOffsetY *
+                      kCardShadowOffsetX * scale,
+                      kCardShadowOffsetY *
                           scale), // Shadow position
                 ),
               ],
@@ -252,7 +247,7 @@ class ModifierCardRear extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(
-                      ModifierCardWidget._kBorderRadius * scale)),
+                      kCardBorderRadius * scale)),
                   child: Image(
                     fit: BoxFit.fitHeight,
                     image: const AssetImage("assets/images/attack/back.png"),

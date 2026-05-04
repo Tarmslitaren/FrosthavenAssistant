@@ -7,8 +7,7 @@ import '../../Resource/commands/add_loot_card_command.dart';
 import '../../services/service_locator.dart';
 
 class AddLootCardMenu extends StatelessWidget {
-  static const double _kTopSpacing = 20.0;
-  static const double _kMaxWidth = 300.0;
+
   static const List<String> _kLootCardNames = [
     "hide", "lumber", "metal", "arrowvine", "axenut",
     "corpsecap", "flamefruit", "rockroot", "snowthistle",
@@ -19,7 +18,7 @@ class AddLootCardMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScrollableMenuCard(
-      maxWidth: _kMaxWidth,
+      maxWidth: kMenuNarrowWidth,
       child: Column(children: [
         const Text(
           "Add Extra Loot Card",
@@ -47,7 +46,6 @@ class LootCardListTile extends StatefulWidget {
 }
 
 class LootCardListTileState extends State<LootCardListTile> {
-  static const double _kIconSize = 30.0;
   static const double _kContentPaddingLeft = 14.0;
   static const double _kHorizontalTitleGap = 6.0;
 
@@ -73,8 +71,8 @@ class LootCardListTileState extends State<LootCardListTile> {
       horizontalTitleGap: _kHorizontalTitleGap,
       leading: Image(
         filterQuality: FilterQuality.medium,
-        height: _kIconSize,
-        width: _kIconSize,
+        height: kIconSize,
+        width: kIconSize,
         fit: BoxFit.contain,
         image: AssetImage("assets/images/loot/${widget.name}_icon.png"),
       ),

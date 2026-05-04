@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
@@ -7,8 +8,6 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 
 class BottomBarLevelWidgetViewModel {
   static const double _kFontSize = 14.0;
-  static const double _kShadowOffset = 1.0;
-  static const double _kBlurRadius = 1.0;
   static const double _kWhiteBlurSmall = 3.0;
   static const double _kWhiteBlurLarge = 8.0;
   BottomBarLevelWidgetViewModel({GameState? gameState, Settings? settings})
@@ -38,9 +37,9 @@ class BottomBarLevelWidgetViewModel {
     final darkMode = _settings.darkMode.value;
     final fontH = _kFontSize * scaling;
     final shadow = Shadow(
-      offset: Offset(_kShadowOffset * scaling, _kShadowOffset * scaling),
+      offset: Offset(kShadowOffset * scaling, kShadowOffset * scaling),
       color: Colors.black87,
-      blurRadius: _kBlurRadius * scaling,
+      blurRadius: kShadowOffset * scaling,
     );
     return TextStyle(
         color: darkMode ? Colors.white : Colors.black,
@@ -50,11 +49,11 @@ class BottomBarLevelWidgetViewModel {
             ? [shadow]
             : [
                 Shadow(
-                    offset: Offset(_kShadowOffset * scaling, _kShadowOffset * scaling),
+                    offset: Offset(kShadowOffset * scaling, kShadowOffset * scaling),
                     blurRadius: _kWhiteBlurSmall * scaling,
                     color: Colors.white),
                 Shadow(
-                    offset: Offset(_kShadowOffset * scaling, _kShadowOffset * scaling),
+                    offset: Offset(kShadowOffset * scaling, kShadowOffset * scaling),
                     blurRadius: _kWhiteBlurLarge * scaling,
                     color: Colors.white),
               ]);

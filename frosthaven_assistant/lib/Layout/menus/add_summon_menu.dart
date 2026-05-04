@@ -36,10 +36,6 @@ class AddSummonMenuState extends State<AddSummonMenu> {
   static const int _kCustomSummonCount = 4;
   static const double _kMenuWidth = 336.0;
   static const double _kMenuHeight = 452.0;
-  static const double _kTopSpacing = 20.0;
-  static const double _kIconSize = 30.0;
-  static const double _kShadowOffset = 1.0;
-  static const double _kShadowBlur = 1.0;
   static const int _kNrButtonRowSize = 4;
   static const int _kMinStandeesForNr = 2;
   static const int _kDefaultHealth = 2;
@@ -92,7 +88,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
       height: _kMenuHeight * scale,
       child: Column(children: [
         SizedBox(
-          height: _kTopSpacing * scale,
+          height: kMenuTopPadding * scale,
         ),
         Text("Add Summon", style: getTitleTextStyle(scale)),
         Row(
@@ -216,8 +212,8 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                           leading:
                               Stack(alignment: Alignment.center, children: [
                             Image(
-                              height: _kIconSize * scale,
-                              width: _kIconSize * scale,
+                              height: kIconSize * scale,
+                              width: kIconSize * scale,
                               image:
                                   AssetImage("assets/images/summon/$gfx.png"),
                             ),
@@ -228,10 +224,10 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                                       color: Colors.white,
                                       shadows: [
                                         Shadow(
-                                          offset: Offset(_kShadowOffset * scale,
-                                              _kShadowOffset * scale),
+                                          offset: Offset(kShadowOffset * scale,
+                                              kShadowOffset * scale),
                                           color: Colors.black87,
-                                          blurRadius: _kShadowBlur * scale,
+                                          blurRadius: kShadowOffset * scale,
                                         )
                                       ])),
                           ]),
@@ -279,7 +275,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                           });
                     }))),
         SizedBox(
-          height: _kTopSpacing * scale,
+          height: kMenuTopPadding * scale,
         ),
       ]),
     );
@@ -301,8 +297,6 @@ class _SummonGraphicButton extends StatelessWidget {
   final bool darkMode;
   final VoidCallback onPressed;
 
-  static const double _kButtonSize = 42.0;
-  static const double _kButtonBorderRadius = 30.0;
 
   @override
   Widget build(BuildContext context) {
@@ -310,13 +304,13 @@ class _SummonGraphicButton extends StatelessWidget {
         ? (darkMode ? Colors.white : Colors.black)
         : Colors.transparent;
     return SizedBox(
-      width: _kButtonSize * scale,
-      height: _kButtonSize * scale,
+      width: kConditionButtonSize * scale,
+      height: kConditionButtonSize * scale,
       child: Container(
           decoration: BoxDecoration(
               border: Border.all(color: color),
               borderRadius: BorderRadius.all(
-                  Radius.circular(_kButtonBorderRadius * scale))),
+                  Radius.circular(kRoundButtonBorderRadius * scale))),
           child: IconButton(
             onPressed: isSelected ? null : onPressed,
             icon: Image.asset(
@@ -343,22 +337,20 @@ class _SummonNrButton extends StatelessWidget {
   final bool darkMode;
   final VoidCallback onPressed;
 
-  static const double _kButtonSize = 42.0;
-  static const double _kButtonBorderRadius = 30.0;
 
   @override
   Widget build(BuildContext context) {
     Color selectedTextColor = darkMode ? Colors.white : Colors.black;
     Color textColor = isSelected ? selectedTextColor : Colors.grey;
     return SizedBox(
-      width: _kButtonSize * scale,
-      height: _kButtonSize * scale,
+      width: kConditionButtonSize * scale,
+      height: kConditionButtonSize * scale,
       child: Container(
           decoration: BoxDecoration(
               border: Border.fromBorderSide(
                   const BorderSide(color: Colors.transparent)),
               borderRadius:
-                  BorderRadius.all(Radius.circular(_kButtonBorderRadius))),
+                  BorderRadius.all(Radius.circular(kRoundButtonBorderRadius))),
           child: TextButton(
             onPressed: isSelected ? null : onPressed,
             child: Text(

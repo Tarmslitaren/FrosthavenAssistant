@@ -15,7 +15,6 @@ class AddMonsterMenu extends StatefulWidget {
   static const double _kMaxWidth = 450.0;
   static const double _kCardMargin = 2.0;
   static const double _kSearchMarginH = 10.0;
-  static const double _kTopSpacing = 20.0;
   static const double _kImageHeight = 35.0;
 
   const AddMonsterMenu({
@@ -209,7 +208,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
               ),
             ),
             const SizedBox(
-              height: AddMonsterMenu._kTopSpacing,
+              height: kMenuTopPadding,
             ),
             FilteredListView(
               items: _foundMonsters,

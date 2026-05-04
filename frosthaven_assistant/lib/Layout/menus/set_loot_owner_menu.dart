@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_loot_owner_command.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
@@ -9,11 +10,8 @@ import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class SetLootOwnerMenu extends StatelessWidget {
-  static const double _kMenuWidth = 300.0;
   static const double _kMenuHeight = 280.0;
-  static const double _kTopSpacing = 20.0;
   static const double _kRowSpacing = 10.0;
-  static const double _kIconSize = 30.0;
 
   final LootCard card;
 
@@ -35,11 +33,11 @@ class SetLootOwnerMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Character> characters = GameMethods.getCurrentCharacters();
     return ModalBackground(
-        width: SetLootOwnerMenu._kMenuWidth,
+        width: kMenuNarrowWidth,
         height: SetLootOwnerMenu._kMenuHeight,
         child: Column(children: [
           const SizedBox(
-            height: SetLootOwnerMenu._kTopSpacing,
+            height: kMenuTopPadding,
           ),
           Text(
             "Set Loot Owner:",
@@ -83,8 +81,8 @@ class _CharacterButton extends StatelessWidget {
           child: Row(children: [
             Image(
               filterQuality: FilterQuality.medium,
-              height: SetLootOwnerMenu._kIconSize,
-              width: SetLootOwnerMenu._kIconSize,
+              height: kIconSize,
+              width: kIconSize,
               fit: BoxFit.contain,
               color: settings.darkMode.value ? Colors.white : Colors.black,
               image: AssetImage(

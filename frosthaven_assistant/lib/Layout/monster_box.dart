@@ -18,10 +18,6 @@ class MonsterBox extends StatelessWidget {
   static const double _kBaseWidth = 47.0;
   static const double _kBoxHeight = 30.0;
   static const double _kShadowOffset = 0.4;
-  static const double _kShadowBlur = 1.0;
-  static const double _kBoxShadowBlur = 4.0;
-  static const double _kBoxShadowOffsetX = 2.0;
-  static const double _kBoxShadowOffsetY = 4.0;
   static const double _kImageMarginLeft = 3.0;
   static const double _kImageMarginTop = 3.0;
   static const double _kImageMarginBottom = 2.0;
@@ -45,7 +41,6 @@ class MonsterBox extends StatelessWidget {
   static const double _kProgressBarBorderWidth = 0.5;
   static const int _kHealthLargeThreshold = 99;
   static const double _kAnimationOffset = 30.0;
-  static const int _kAnimationDurationMs = 300;
   static const int _kFlipAnimationDurationMs = 600;
   static const int _kConditionRowDivisor = 2;
   static const int _kHexRadix = 16;
@@ -136,7 +131,7 @@ class MonsterBox extends StatelessWidget {
     final shadow = Shadow(
       offset: Offset(_kShadowOffset * scale, _kShadowOffset * scale),
       color: Colors.black87,
-      blurRadius: _kShadowBlur * scale,
+      blurRadius: kShadowOffset * scale,
     );
 
     final health = data.health.value;
@@ -155,9 +150,9 @@ class MonsterBox extends StatelessWidget {
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black45,
-                      blurRadius: _kBoxShadowBlur * scale,
-                      offset: Offset(_kBoxShadowOffsetX * scale,
-                          _kBoxShadowOffsetY * scale),
+                      blurRadius: kCardShadowBlur * scale,
+                      offset: Offset(kCardShadowOffsetX * scale,
+                          kCardShadowOffsetY * scale),
                     ),
                   ],
                 ),
@@ -291,7 +286,7 @@ class MonsterBox extends StatelessWidget {
           key: Key(data.getId()),
           width: width,
           curve: Curves.easeInOut,
-          duration: const Duration(milliseconds: _kAnimationDurationMs),
+          duration: const Duration(milliseconds: kAnimationDurationMs),
           child: ValueListenableBuilder<int>(
               valueListenable: data.health,
               builder: (context, value, child) {

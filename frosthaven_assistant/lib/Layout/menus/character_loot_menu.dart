@@ -18,7 +18,6 @@ class CharacterLootMenu extends StatefulWidget {
 class CharacterLootMenuState extends State<CharacterLootMenu> {
   static const int _kCoinValue3 = 3;
   static const int _kCoinValue2 = 2;
-  static const double _kTopSpacing = 20.0;
   static const List<String> _kLootNames = [
     "coin",
     "hide",
@@ -69,14 +68,12 @@ class _CharacterLootWidget extends StatelessWidget {
   final String characterName;
   final GameState gameState;
 
-  static const double _kIconSize = 30.0;
-  static const double _kMaxWidth = 300.0;
   static const double _kCharIconSpacing = 10.0;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: const BoxConstraints(maxWidth: _kMaxWidth),
+      constraints: const BoxConstraints(maxWidth: kMenuNarrowWidth),
       child: Column(children: [
         const Divider(),
         Row(
@@ -85,8 +82,8 @@ class _CharacterLootWidget extends StatelessWidget {
             children: [
               Image(
                 filterQuality: FilterQuality.medium,
-                height: _kIconSize,
-                width: _kIconSize,
+                height: kIconSize,
+                width: kIconSize,
                 fit: BoxFit.contain,
                 image: AssetImage("assets/images/class-icons/$characterId.png"),
               ),
@@ -114,7 +111,6 @@ class _LootListTile extends StatelessWidget {
   final String characterId;
   final GameState gameState;
 
-  static const double _kIconSize = 30.0;
   static const double _kContentPaddingLeft = 14.0;
   static const double _kHorizontalTitleGap = 6.0;
   static const double _kTrailingPaddingRight = 16.0;
@@ -156,8 +152,8 @@ class _LootListTile extends StatelessWidget {
         horizontalTitleGap: _kHorizontalTitleGap,
         leading: Image(
           filterQuality: FilterQuality.medium,
-          height: _kIconSize,
-          width: _kIconSize,
+          height: kIconSize,
+          width: kIconSize,
           fit: BoxFit.contain,
           image: AssetImage("assets/images/loot/${lootName}_icon.png"),
         ),

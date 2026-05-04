@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/view_models/modifier_deck_view_model.dart';
 import 'package:frosthaven_assistant/Resource/game_data.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
@@ -30,14 +31,10 @@ class ModifierDeckWidget extends StatefulWidget {
 class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   static const int cardAnimationDuration = 1200;
   static const double _kCardOffset = 33.3333;
-  static const double _kCardWidth = 58.6666;
   static const double _kCardHeight = 39.0;
   static const double _kWidgetWidth = 153.0;
-  static const double _kFontSize = 12.0;
-  static const double _kShadowOffset = 1.0;
   static const double _kCharIconSize = 27.0;
   static const double _kCharIconLeft = 16.0;
-  static const double _kSmallMargin = 2.0;
   static const double _kDiscardBorderRadius = 5.0;
   static const double _kEmptyDiscardWidth = 66.6666;
   static const double _kDiscardPileWidth = 57.6666;
@@ -88,12 +85,12 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
     if (!_animationsEnabled || context.globalPaintBounds == null) {
       return Container(child: child);
     }
-    final double width = ModifierDeckWidgetState._kCardWidth * userScalingBars;
+    final double width = kModifierCardBaseWidth * userScalingBars;
     final double height =
         ModifierDeckWidgetState._kCardHeight * userScalingBars;
     final screenSize = MediaQuery.of(context).size;
     final double startXOffset =
-        -(width + ModifierDeckWidgetState._kSmallMargin * userScalingBars);
+        -(width + kSmallMargin * userScalingBars);
 
     final globalPaintBounds = context.globalPaintBounds;
     final screenSpaceOffset =
@@ -152,14 +149,14 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
                   final textStyle = TextStyle(
                       fontSize:
-                          ModifierDeckWidgetState._kFontSize * userScalingBars,
+                          kDeckFontSize * userScalingBars,
                       color: Colors.white,
                       shadows: [
                         Shadow(
                             offset: Offset(
-                                ModifierDeckWidgetState._kShadowOffset *
+                                kShadowOffset *
                                     userScalingBars,
-                                ModifierDeckWidgetState._kShadowOffset *
+                                kShadowOffset *
                                     userScalingBars),
                             color: Colors.black)
                       ]);
@@ -217,8 +214,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                   ])
                                 : Stack(children: [
                                     Container(
-                                        width: ModifierDeckWidgetState
-                                                ._kCardWidth *
+                                        width: kModifierCardBaseWidth *
                                             userScalingBars,
                                         height: ModifierDeckWidgetState
                                                 ._kCardHeight *
@@ -249,7 +245,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                   ]),
                             Positioned(
                                 bottom: 0,
-                                right: ModifierDeckWidgetState._kSmallMargin *
+                                right: kSmallMargin *
                                     userScalingBars,
                                 child: Text(
                                   deck.drawPileSize.toString(),
@@ -257,13 +253,13 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                 )),
                           ])),
                       SizedBox(
-                        width: ModifierDeckWidgetState._kSmallMargin *
+                        width: kSmallMargin *
                             userScalingBars,
                       ),
                       Stack(children: [
                         Container(
                           margin: EdgeInsets.only(
-                              top: ModifierDeckWidgetState._kSmallMargin /
+                              top: kSmallMargin /
                                   ModifierDeckWidgetState._kCenterDivisor *
                                   userScalingBars),
                           width: ModifierDeckWidgetState._kDiscardPileWidth *
@@ -479,7 +475,6 @@ class _ModifierDrawAnimationWidgetState
     with SingleTickerProviderStateMixin {
   static const double _maxScale = 4.0;
   static const double _kAnimWeightPause = 2;
-  static const double _kTwoPI = math.pi * 2;
 
   AnimationController? _controller;
   Animation<Offset>? _translation;
@@ -514,7 +509,7 @@ class _ModifierDrawAnimationWidgetState
       TweenSequenceItem(tween: Tween(begin: _maxScale, end: 1.0), weight: 1),
     ]).animate(ctrl);
 
-    _rotation = Tween<double>(begin: math.pi, end: _kTwoPI).animate(
+    _rotation = Tween<double>(begin: math.pi, end: kTwoPI).animate(
       CurvedAnimation(
           parent: ctrl,
           curve:

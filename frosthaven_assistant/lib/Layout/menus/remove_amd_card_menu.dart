@@ -22,11 +22,6 @@ class RemoveAMDCardMenu extends StatelessWidget {
 
   final GameState? gameState;
 
-  static const double _kDefaultScale = 6.0;
-  static const double _kCardWidthFactor = 7.0;
-  static const double _kCardWidthBase = 58.6666;
-  static const double _kSpacing = 20.0;
-  static const double _kModalWidth = 300.0;
   static const double _kModalHeight = 180.0;
 
   GameState get _gameState => gameState ?? getIt<GameState>();
@@ -36,10 +31,10 @@ class RemoveAMDCardMenu extends StatelessWidget {
     final deck = GameMethods.getModifierDeck(name, _gameState);
     final card = deck.discardPileContents[index];
     final screenSize = MediaQuery.of(context).size;
-    double scale = _kDefaultScale;
-    final cardWidth = _kCardWidthFactor * _kCardWidthBase;
+    double scale = kCardZoomDefaultScale;
+    final cardWidth = kCardZoomWidthFactor * kModifierCardBaseWidth;
     if (screenSize.width < cardWidth) {
-      scale = _kDefaultScale * (screenSize.width / cardWidth);
+      scale = kCardZoomDefaultScale * (screenSize.width / cardWidth);
     }
     return Column(
         mainAxisSize: MainAxisSize.min,
@@ -47,14 +42,14 @@ class RemoveAMDCardMenu extends StatelessWidget {
         children: [
           ModifierCardFront(card: card, name: name, scale: scale),
           const SizedBox(
-            height: _kSpacing,
+            height: kMenuTopPadding,
           ),
           ModalBackground(
-              width: _kModalWidth,
+              width: kMenuNarrowWidth,
               height: _kModalHeight,
               child: Column(children: [
                 const SizedBox(
-                  height: _kSpacing,
+                  height: kMenuTopPadding,
                 ),
                 TextButton(
                     onPressed: () {
@@ -66,7 +61,7 @@ class RemoveAMDCardMenu extends StatelessWidget {
                     child: const Text("Remove card?",
                         textAlign: TextAlign.center, style: kButtonLabelStyle)),
                 const SizedBox(
-                  height: _kSpacing,
+                  height: kMenuTopPadding,
                 ),
                 TextButton(
                   onPressed: () {
@@ -81,7 +76,7 @@ class RemoveAMDCardMenu extends StatelessWidget {
                       textAlign: TextAlign.center, style: kButtonLabelStyle),
                 ),
                 const SizedBox(
-                  height: _kSpacing,
+                  height: kMenuTopPadding,
                 ),
               ]))
         ]);

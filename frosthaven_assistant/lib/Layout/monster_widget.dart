@@ -1,6 +1,7 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/monster_ability_card_widget.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/monster_box.dart';
 import 'package:frosthaven_assistant/Layout/view_models/monster_widget_view_model.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
@@ -22,7 +23,6 @@ class MonsterWidget extends StatefulWidget {
 }
 
 class MonsterWidgetState extends State<MonsterWidget> {
-  static const int _kAnimationDurationMs = 300;
   static const double _kSpacing = 2.0;
   static const double _kImageMarginV = 4.0;
   static const double _kElevation = 8.0;
@@ -30,8 +30,6 @@ class MonsterWidgetState extends State<MonsterWidget> {
   static const double _kNameWidthRatio = 0.95;
   static const double _kNameMarginBottom = 2.0;
   static const double _kFontSize = 14.4;
-  static const double _kShadowOffset = 1.0;
-  static const double _kShadowBlur = 1.0;
   static const double _kScaledHeight = 96.0;
   static const double _kMarginH = 3.2;
 
@@ -71,7 +69,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
         (index) => RepaintBoundary(
                 child: AnimatedSize(
               key: Key(monsterInstances[index].standeeNr.toString()),
-              duration: const Duration(milliseconds: _kAnimationDurationMs),
+              duration: const Duration(milliseconds: kAnimationDurationMs),
               child: MonsterBox(
                   key: Key(monsterInstances[index].standeeNr.toString()),
                   figureId: monsterInstances[index].name +
@@ -92,9 +90,9 @@ class MonsterWidgetState extends State<MonsterWidget> {
 
   Widget _buildImagePart(double height, double scale) {
     final shadow = Shadow(
-      offset: Offset(_kShadowOffset * scale, _kShadowOffset * scale),
+      offset: Offset(kShadowOffset * scale, kShadowOffset * scale),
       color: Colors.black87,
-      blurRadius: _kShadowBlur * scale,
+      blurRadius: kShadowOffset * scale,
     );
     return RepaintBoundary(
         child: Stack(alignment: Alignment.bottomCenter, children: [

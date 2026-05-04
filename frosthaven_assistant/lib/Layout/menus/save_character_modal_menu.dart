@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 import '../../Layout/widgets/modal_background.dart';
@@ -28,7 +29,6 @@ class SaveCharacterModalMenu extends StatefulWidget {
 class SaveCharacterModalMenuState extends State<SaveCharacterModalMenu> {
   static const double _kBorderWidth = 2.0;
   static const double _kMenuWidth = 240.0;
-  static const double _kMenuHeight = 160.0;
   static const double _kTopSpacing = 2.0;
   static const double _kButtonSpacing = 10.0;
   static const double _kNameSpacing = 20.0;
@@ -77,7 +77,7 @@ class SaveCharacterModalMenuState extends State<SaveCharacterModalMenu> {
 
     return ModalBackground(
         width: _kMenuWidth * scale,
-        height: _kMenuHeight * scale,
+        height: kSaveModalHeight * scale,
         alignment: Alignment.center,
         child: Stack(children: [
           Column(

@@ -15,10 +15,6 @@ import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 
 class SetLevelMenu extends StatelessWidget {
-  static const double _kButtonSize = 40.0;
-  static const double _kButtonBorderRadius = 30.0;
-  static const double _kShadowOffset = 1.0;
-  static const double _kShadowBlur = 1.0;
   static const double _kLegendImageHeight = 20.0;
   static const double _kLegendLevelImageHeight = 15.0;
   static const double _kLegendSpacer = 8.0;
@@ -27,7 +23,6 @@ class SetLevelMenu extends StatelessWidget {
   static const double _kMenuWidth = 270.0;
   static const double _kMenuHeightWithLegend = 400.0;
   static const double _kMenuHeightNoLegend = 287.0;
-  static const double _kTopSpacing = 20.0;
   static const int _kMaxHealth = 900;
   static const double _kBoxShadowAlpha = 0.3;
   static const int _kLevelMin = 0;
@@ -108,7 +103,7 @@ class SetLevelMenu extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: SetLevelMenu._kTopSpacing * scale,
+                height: kMenuTopPadding * scale,
               ),
               Text(title, style: getTitleTextStyle(scale)),
               if (!isSummon)
@@ -283,15 +278,15 @@ class _LevelButton extends StatelessWidget {
                 Color textColor =
                     isCurrentlySelected ? selectedTextColor : Colors.grey;
                 return SizedBox(
-                  width: SetLevelMenu._kButtonSize * scale,
-                  height: SetLevelMenu._kButtonSize * scale,
+                  width: kButtonSize * scale,
+                  height: kButtonSize * scale,
                   child: Container(
                       decoration: BoxDecoration(
                           border: Border.all(
                             color: color,
                           ),
                           borderRadius: BorderRadius.all(Radius.circular(
-                              SetLevelMenu._kButtonBorderRadius * scale))),
+                              kRoundButtonBorderRadius * scale))),
                       child: TextButton(
                         child: Text(
                           text,
@@ -300,8 +295,8 @@ class _LevelButton extends StatelessWidget {
                               shadows: [
                                 Shadow(
                                     offset: Offset(
-                                        SetLevelMenu._kShadowOffset * scale,
-                                        SetLevelMenu._kShadowOffset * scale),
+                                        kShadowOffset * scale,
+                                        kShadowOffset * scale),
                                     color: shadowColor)
                               ],
                               color: textColor),
@@ -351,15 +346,15 @@ class _DifficultyButton extends StatelessWidget {
           Color textColor =
               isCurrentlySelected ? selectedTextColor : Colors.grey;
           return SizedBox(
-            width: SetLevelMenu._kButtonSize * scale,
-            height: SetLevelMenu._kButtonSize * scale,
+            width: kButtonSize * scale,
+            height: kButtonSize * scale,
             child: Container(
                 decoration: BoxDecoration(
                     border: Border.all(
                       color: color,
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(
-                        SetLevelMenu._kButtonBorderRadius * scale))),
+                        kRoundButtonBorderRadius * scale))),
                 child: TextButton(
                   child: Text(
                     text,
@@ -368,8 +363,8 @@ class _DifficultyButton extends StatelessWidget {
                         shadows: [
                           Shadow(
                               offset: Offset(
-                                  SetLevelMenu._kShadowOffset * scale,
-                                  SetLevelMenu._kShadowOffset * scale),
+                                  kShadowOffset * scale,
+                                  kShadowOffset * scale),
                               color: shadowColor)
                         ],
                         color: textColor),
@@ -402,10 +397,10 @@ class _LevelLegend extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final shadow = Shadow(
-      offset: Offset(SetLevelMenu._kShadowOffset * scale,
-          SetLevelMenu._kShadowOffset * scale),
+      offset: Offset(kShadowOffset * scale,
+          kShadowOffset * scale),
       color: Colors.black87,
-      blurRadius: SetLevelMenu._kShadowBlur * scale,
+      blurRadius: kShadowOffset * scale,
     );
     final textStyleLevelWidget = TextStyle(
         color: Colors.white,

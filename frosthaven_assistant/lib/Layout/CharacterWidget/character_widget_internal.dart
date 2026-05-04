@@ -18,7 +18,6 @@ import 'initiative_widget.dart';
 
 class CharacterWidgetInternal extends StatefulWidget {
   static const double _kScaledHeight = 60.0;
-  static const double _kShadowBlur = 1.0;
   static const double _kXPTop = 10.0;
   static const double _kXPLeft = 314.0;
   static const double _kLevelTop = 28.0;
@@ -108,7 +107,7 @@ class CharacterInternalWidgetState extends State<CharacterWidgetInternal> {
       offset: Offset(kShadowOffset * scale,
           kShadowOffset * scale),
       color: Colors.black87,
-      blurRadius: CharacterWidgetInternal._kShadowBlur * scale,
+      blurRadius: kShadowOffset * scale,
     );
 
     final character = widget.character;

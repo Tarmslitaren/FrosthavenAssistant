@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../Resource/app_constants.dart';
 import '../Resource/enums.dart';
 import '../Resource/settings.dart';
 import '../Resource/state/game_state.dart';
@@ -27,7 +28,6 @@ class ElementButton extends StatefulWidget {
 }
 
 class AnimatedContainerButtonState extends State<ElementButton> {
-  static const double _kSmallMargin = 2.0;
   static const double _kHalfDivisor = 2.0;
   static const double _kBorderSides = 2.0;
   static const double _kInertHeight = 4.0;
@@ -56,7 +56,7 @@ class AnimatedContainerButtonState extends State<ElementButton> {
   void _setHalf() {
     final scale = _userScalingBars;
     _color = widget.color;
-    _height = widget.width * scale / _kHalfDivisor + _kSmallMargin * scale;
+    _height = widget.width * scale / _kHalfDivisor + kSmallMargin * scale;
     _borderRadius = BorderRadius.only(
         bottomLeft: Radius.circular(widget.width * scale / _kHalfDivisor),
         bottomRight: Radius.circular(widget.width * scale / _kHalfDivisor));
@@ -80,7 +80,7 @@ class AnimatedContainerButtonState extends State<ElementButton> {
   Widget build(BuildContext context) {
     final scale = _userScalingBars;
     return Container(
-        margin: EdgeInsets.only(right: _kSmallMargin * scale),
+        margin: EdgeInsets.only(right: kSmallMargin * scale),
         child: InkWell(
             hoverColor: Colors.transparent,
             splashColor: Colors.transparent,
@@ -98,7 +98,7 @@ class AnimatedContainerButtonState extends State<ElementButton> {
               alignment: Alignment.center,
               children: [
                 Container(
-                    padding: EdgeInsets.only(bottom: _kSmallMargin * scale),
+                    padding: EdgeInsets.only(bottom: kSmallMargin * scale),
                     child: Align(
                       alignment: Alignment.bottomCenter,
                       child: ValueListenableBuilder<ElementState>(

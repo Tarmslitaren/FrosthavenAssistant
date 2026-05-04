@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../Layout/widgets/modal_background.dart';
+import '../../Resource/app_constants.dart';
 import '../../Resource/ui_utils.dart';
 
 class NumpadMenu extends StatefulWidget {
@@ -21,7 +22,6 @@ class NumpadMenu extends StatefulWidget {
 class NumpadMenuState extends State<NumpadMenu> {
   static const double _kMenuWidth = 10.0;
   static const double _kMenuHeight = 180.0;
-  static const double _kTopSpacing = 20.0;
   static const int _kNumpadRowCount = 3;
   static const int _kNumpadColCount = 3;
 
@@ -54,7 +54,7 @@ class NumpadMenuState extends State<NumpadMenu> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: _kTopSpacing * scale,
+                height: kMenuTopPadding * scale,
               ),
               ...List.generate(
                 _kNumpadRowCount,
@@ -96,13 +96,11 @@ class _NrButton extends StatelessWidget {
   final double scale;
   final VoidCallback onPressed;
 
-  static const double _kButtonSize = 40.0;
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: _kButtonSize * scale,
-      height: _kButtonSize * scale,
+      width: kButtonSize * scale,
+      height: kButtonSize * scale,
       child: TextButton(
         onPressed: onPressed,
         child: Text(

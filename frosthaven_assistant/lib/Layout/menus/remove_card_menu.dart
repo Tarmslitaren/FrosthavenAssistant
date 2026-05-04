@@ -20,7 +20,6 @@ class RemoveCardMenu extends StatelessWidget {
 
   final GameState? gameState;
 
-  static const double _kModalWidth = 300;
   static const double _kModalHeight = 210;
 
   GameState get _gameState => gameState ?? getIt<GameState>();
@@ -42,7 +41,7 @@ class RemoveCardMenu extends StatelessWidget {
     }
 
     return ModalBackground(
-        width: _kModalWidth,
+        width: kMenuNarrowWidth,
         height: _kModalHeight,
         child: Column(children: [
           const SizedBox(
