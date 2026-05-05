@@ -7,11 +7,10 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../../Resource/enums.dart';
 import '../../Resource/ui_utils.dart';
-import '../menus/status_menu.dart';
+import '../menus/StatusMenu/status_menu.dart';
 
 class CharacterViewModel {
-  CharacterViewModel(this.character,
-      {GameState? gameState, Settings? settings})
+  CharacterViewModel(this.character, {GameState? gameState, Settings? settings})
       : _gameState = gameState ?? getIt<GameState>(),
         _settings = settings ?? getIt<Settings>();
 
@@ -38,8 +37,6 @@ class CharacterViewModel {
 
   void openStatusMenu(BuildContext context) {
     openDialog(
-        context,
-        StatusMenu(
-            figureId: character.id, characterId: character.id));
+        context, StatusMenu(figureId: character.id, characterId: character.id));
   }
 }

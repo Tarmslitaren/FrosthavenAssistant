@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/CharacterWidget/character_widget.dart';
-import 'package:frosthaven_assistant/Layout/menus/status_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/StatusMenu/status_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/next_round_command.dart';
+import 'package:frosthaven_assistant/Resource/game_data.dart';
+import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../command/test_helpers.dart';
-import 'package:frosthaven_assistant/Resource/settings.dart';
-import 'package:frosthaven_assistant/Resource/game_data.dart';
 
 void main() {
   setUpAll(() async {
@@ -19,7 +19,9 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+            gameState: getIt<GameState>())
+        .execute();
   });
 
   Future<void> pumpCharacterWidget(WidgetTester tester) async {
@@ -44,7 +46,8 @@ void main() {
       expect(find.byType(CharacterWidget), findsOneWidget);
     });
 
-    testWidgets('shows InkWell for tap interaction', (WidgetTester tester) async {
+    testWidgets('shows InkWell for tap interaction',
+        (WidgetTester tester) async {
       await pumpCharacterWidget(tester);
       expect(find.byType(InkWell), findsAtLeast(1));
     });
@@ -104,7 +107,11 @@ void main() {
       FlutterError.onError = originalOnError;
       expect(find.byType(CharacterWidget), findsOneWidget);
       // Reset round state (NextRoundCommand also has 600ms timer — pump past it)
-      NextRoundCommand(gameState: getIt<GameState>(), gameData: getIt<GameData>(), settings: getIt<Settings>()).execute();
+      NextRoundCommand(
+              gameState: getIt<GameState>(),
+              gameData: getIt<GameData>(),
+              settings: getIt<Settings>())
+          .execute();
       await tester.pump(const Duration(milliseconds: 700));
     });
   });

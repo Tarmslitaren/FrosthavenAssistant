@@ -10,7 +10,7 @@ import '../Resource/game_methods.dart';
 import '../Resource/settings.dart';
 import '../Resource/ui_utils.dart';
 import 'health_wheel_controller.dart';
-import 'menus/status_menu.dart';
+import 'menus/StatusMenu/status_menu.dart';
 import 'view_models/monster_box_view_model.dart';
 
 class MonsterBox extends StatelessWidget {

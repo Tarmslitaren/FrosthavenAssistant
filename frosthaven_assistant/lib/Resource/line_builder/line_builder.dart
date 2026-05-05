@@ -287,7 +287,6 @@ class LineBuilder {
     List<Widget> lines = [];
     List<String> localStrings = [];
     localStrings.addAll(strings);
-    //List<InlineSpan> lastLineTextPartList = [];
     List<Widget> lastLineTextPartListRowContent = [];
 
     if (frosthavenStyle) {
@@ -330,9 +329,6 @@ class LineBuilder {
       var styleToUse = normalStyle;
       List<Widget> textPartListRowContent = [];
 
-      //if (line == "[subLineStart]") {
-      //continue;
-      //}
       //handle FH layout with gray background for sub-lines
       if (line.contains("[subLineEnd]")) {
         FrosthavenConverter.buildFHStyleBackgrounds(

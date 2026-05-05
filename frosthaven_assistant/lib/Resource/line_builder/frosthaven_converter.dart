@@ -98,18 +98,7 @@ class FrosthavenConverter {
             line.startsWith("^Advantage") ||
             //only target on same line for non valued tokens - damn myself, what did I mean by that? I was probably wrong
             line.startsWith("^Target") ||
-            line.startsWith(
-                "^%target%") || //supersedes the lower ones. In FH target clauses go first so this old code is useless
-            /*(line.startsWith("^Target") && lines[i - 1].contains('%push%')) ||
-            (line.startsWith("^Target") && lines[i - 1].contains('%pull%')) ||
-            (line.startsWith("^Target") &&
-                lines[i - 1].startsWith('%') &&
-                lines[i - 1].endsWith(
-                    '%')) || //this is to add sub line after a lone condition
-            (line.startsWith("^Target") &&
-                lines[i - 1].startsWith('^%') &&
-                lines[i - 1].endsWith(
-                    '%')) || //you will not want a linebreak after a lone poison sub line*/
+            line.startsWith("^%target%") ||
             line.startsWith("^Normal") || //for ice wraith
             line.startsWith("^all") ||
             line.startsWith("^All") &&
@@ -170,7 +159,6 @@ class FrosthavenConverter {
       } else if (!line.startsWith("!") &&
           !line.startsWith("*") &&
           !line.startsWith("^")) {
-        // if(line != "[c]" && line != "[r]"){
         if (!isSubLine && !line.contains("%use%")) {
           isSubLine = true;
         } else {

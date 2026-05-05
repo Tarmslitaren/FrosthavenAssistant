@@ -204,16 +204,12 @@ class GameSaveState {
     //have to call after init or element state overridden
 
     const sharedPrefsKey = 'gameState';
-    //bool hasError = false;
-    //bool isWaiting = true;
     try {
       final prefs = await SharedPreferences.getInstance();
       _savedState = prefs.getString(sharedPrefsKey);
-      //hasError = false;
     } catch (error) {
-      //hasError = true;
+      //todo
     }
-    //isWaiting = false;
 
     if (_savedState != null) {
       load(gameState);
