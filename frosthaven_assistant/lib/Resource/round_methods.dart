@@ -27,68 +27,36 @@ class RoundMethods {
 
   static void sortCharactersFirst(_StateModifier _, {GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
-    gs._currentList.sort((a, b) {
-      //dead characters dead last
-      if (a is Character) {
-        if (b is Character) {
-          if (b.characterState.health.value == 0) {
-            return -1;
-          }
-        }
-        if (a.characterState.health.value == 0) {
-          return 1;
-        }
-      }
-      if (b is Character) {
-        if (b.characterState.health.value == 0) {
-          return -1;
-        }
-        if (a is Character) {
-          if (a.characterState.health.value == 0) {
-            return 1;
-          }
-        }
-      }
+    gs._currentList.sort(_compareForCharactersFirst);
+  }
 
-      bool aIsChar = false;
-      bool bIsChar = false;
-      if (a is Character) {
-        aIsChar = true;
-      }
-      if (b is Character) {
-        bIsChar = true;
-      }
-      if (aIsChar && bIsChar) {
-        return 0;
-      }
-      if (bIsChar) {
-        return 1;
-      }
+  static int _compareForCharactersFirst(ListItemData a, ListItemData b) {
+    final deadResult = _compareDeadCharacters(a, b);
+    if (deadResult != null) return deadResult;
 
-      //inactive at bottom
-      if (a is Monster) {
-        if (b is Monster) {
-          if (!b.isActive) {
-            return -1;
-          }
-        }
-        if (!a.isActive) {
-          return 1;
-        }
-      }
-      if (b is Monster) {
-        if (!b.isActive) {
-          return -1;
-        }
-        if (a is Monster) {
-          if (!a.isActive) {
-            return 1;
-          }
-        }
-      }
+    final aIsChar = a is Character;
+    final bIsChar = b is Character;
+    if (aIsChar && bIsChar) return 0;
+    if (bIsChar) return 1;
+    if (aIsChar) return -1;
 
-      return -1;
-    });
+    // both are monsters — inactive at bottom
+    if (a is Monster && b is Monster) {
+      if (a.isActive && !b.isActive) return -1;
+      if (!a.isActive && b.isActive) return 1;
+    }
+    return -1;
+  }
+
+  // Returns a sort result if either figure is a dead character (dead go last),
+  // or null if neither is dead and the caller should continue comparing.
+  static int? _compareDeadCharacters(ListItemData a, ListItemData b) {
+    final aIsDead = a is Character && a.characterState.health.value == 0;
+    final bIsDead = b is Character && b.characterState.health.value == 0;
+    if (!aIsDead && bIsDead) return -1;
+    if (aIsDead && !bIsDead) return 1;
+    if (aIsDead) return -1; // both dead characters
+    return null;
   }
 
   static void sortItemToPlace(_StateModifier _, String id, int initiative,
@@ -146,27 +114,9 @@ class RoundMethods {
   static void sortByInitiative(_StateModifier _, {GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
     gs._currentList.sort((a, b) {
-      //dead characters dead last
-      if (a is Character) {
-        if (b is Character) {
-          if (b.characterState.health.value == 0) {
-            return -1;
-          }
-        }
-        if (a.characterState.health.value == 0) {
-          return 1;
-        }
-      }
-      if (b is Character) {
-        if (b.characterState.health.value == 0) {
-          return -1;
-        }
-        if (a is Character) {
-          if (a.characterState.health.value == 0) {
-            return 1;
-          }
-        }
-      }
+      final deadResult = _compareDeadCharacters(a, b);
+      if (deadResult != null) return deadResult;
+
       int aInitiative = 0;
       int bInitiative = 0;
       if (a is Character) {
@@ -221,11 +171,8 @@ class RoundMethods {
 
   static void addToMainList(_StateModifier _, int? index, ListItemData item,
       {GameState? gameState}) {
-    List<ListItemData> newList = [];
     final gs = gameState ?? getIt<GameState>();
-    for (final item in gs.currentList) {
-      newList.add(item);
-    }
+    final newList = gs.currentList.toList();
     if (index != null) {
       newList.insert(index, item);
     } else {
@@ -378,7 +325,6 @@ class RoundMethods {
       if (condition == Condition.chill) {
         figure._chill.value =
             figure.conditions.value.where((a) => a == Condition.chill).length;
-        //figure._chill.value++;
       }
     }
   }

@@ -67,15 +67,14 @@ class Parser {
   int? parse() {
     try {
       nextChar();
-      int? x = parseCondition();
+      int? result = parseCondition();
       if (pos < str.length) {
         if (kDebugMode) {
           print("Unexpected: $ch");
         }
         return null;
-        //throw Exception("Unexpected: $ch");
       }
-      return x;
+      return result;
     } catch (_) {
       return null;
     }
@@ -91,16 +90,16 @@ class Parser {
 
   int? parseCondition() {
     try {
-      int x = parseExpression()!;
+      int result = parseExpression()!;
       for (;;) {
         if (eat('<')) {
-          x = x < parseExpression()! ? 1 : 0;
+          result = result < parseExpression()! ? 1 : 0;
         } else if (eat('>')) {
-          x = x > parseExpression()! ? 1 : 0;
+          result = result > parseExpression()! ? 1 : 0;
         } else if (eat('=')) {
-          x = x == parseExpression()! ? 1 : 0;
+          result = result == parseExpression()! ? 1 : 0;
         } else {
-          return x;
+          return result;
         }
       }
     } catch (_) {
@@ -110,14 +109,14 @@ class Parser {
 
   int? parseExpression() {
     try {
-      int x = parseTerm()!;
+      int result = parseTerm()!;
       for (;;) {
         if (eat('+')) {
-          x += parseTerm()!;
+          result += parseTerm()!;
         } else if (eat('-')) {
-          x -= parseTerm()!;
+          result -= parseTerm()!;
         } else {
-          return x;
+          return result;
         }
       }
     } catch (_) {
@@ -127,17 +126,17 @@ class Parser {
 
   int? parseTerm() {
     try {
-      int x = parseFactor()!;
+      int result = parseFactor()!;
       for (;;) {
-        if (eat('*')) x *= parseFactor()!; // multiplication
+        if (eat('*')) result *= parseFactor()!; // multiplication
         if (eat('x')) {
-          x *= parseFactor()!; // multiplication
+          result *= parseFactor()!; // multiplication
         } else if (eat('/')) {
-          x = (x / parseFactor()!).ceil();
+          result = (result / parseFactor()!).ceil();
         } else if (eat('d')) {
-          x = (x / parseFactor()!).floor();
+          result = (result / parseFactor()!).floor();
         } else {
-          return x;
+          return result;
         }
       }
     } catch (_) {
@@ -150,12 +149,12 @@ class Parser {
       if (eat('+')) return parseFactor(); // unary plus
       if (eat('-')) return -parseFactor()!; // unary minus
 
-      int? x;
+      int? result;
       int startPos = pos;
       int asciiValue = ch.codeUnits.first;
       if (eat('(')) {
         // parentheses
-        x = parseExpression();
+        result = parseExpression();
         if (!eat(')')) throw Exception("Missing ')'");
       } else if (asciiValue >= '0'.codeUnits.first &&
           asciiValue <= '9'.codeUnits.first) {
@@ -165,11 +164,11 @@ class Parser {
           nextChar();
           asciiValue = ch.codeUnits.first;
         }
-        x = int.parse(str.substring(startPos, pos));
+        result = int.parse(str.substring(startPos, pos));
       } else {
         throw Exception("Unexpected: $ch");
       }
-      return x;
+      return result;
     } catch (_) {
       return null;
     }

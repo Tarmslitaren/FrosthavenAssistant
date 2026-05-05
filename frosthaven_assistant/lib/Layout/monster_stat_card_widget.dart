@@ -13,6 +13,14 @@ import '../Resource/ui_utils.dart';
 import 'menus/stat_card_zoom.dart';
 import 'view_models/monster_stat_card_view_model.dart';
 
+String _statDisplay(Object? stat, bool noCalc) {
+  if (!noCalc) {
+    final v = StatCalculator.calculateFormula(stat ?? 0);
+    if (v != null) return v.toString();
+  }
+  return stat?.toString() ?? "";
+}
+
 class MonsterStatCardWidget extends StatelessWidget {
   // Card dimensions
   static const double _kCardWidth = 167.0;
@@ -239,31 +247,10 @@ class _MonsterStatNormalLayout extends StatelessWidget {
     MonsterStatsModel? normal = data.type.levels[data.level.value].normal;
     MonsterStatsModel? elite = data.type.levels[data.level.value].elite;
 
-    bool noCalculationSetting = settings_.noCalculation.value;
-
-    String? health = normal?.health.toString();
-    if (!noCalculationSetting) {
-      int? healthValue = StatCalculator.calculateFormula(normal?.health ?? 0);
-      if (healthValue != null) {
-        health = healthValue.toString();
-      }
-    }
-
-    String? move = normal?.move.toString();
-    if (!noCalculationSetting) {
-      int? moveValue = StatCalculator.calculateFormula(normal?.move ?? 0);
-      if (moveValue != null) {
-        move = moveValue.toString();
-      }
-    }
-
-    String? attack = normal?.attack.toString();
-    if (!noCalculationSetting) {
-      int? attackValue = StatCalculator.calculateFormula(normal?.attack ?? 0);
-      if (attackValue != null) {
-        attack = attackValue.toString();
-      }
-    }
+    final noCalculationSetting = settings_.noCalculation.value;
+    final health = _statDisplay(normal?.health, noCalculationSetting);
+    final move = _statDisplay(normal?.move, noCalculationSetting);
+    final attack = _statDisplay(normal?.attack, noCalculationSetting);
 
     return RepaintBoundary(
         child: Stack(
@@ -308,9 +295,9 @@ class _MonsterStatNormalLayout extends StatelessWidget {
           top: MonsterStatCardWidget._kNormalStatsTop * scale,
           child: Column(
             children: <Widget>[
-              Text(health ?? "", style: leftStyle),
-              Text(move ?? "", style: leftStyle),
-              Text(attack ?? "", style: leftStyle),
+              Text(health, style: leftStyle),
+              Text(move, style: leftStyle),
+              Text(attack, style: leftStyle),
               Text(normal?.range != 0 ? normal?.range.toString() ?? "" : "-",
                   style: leftStyle),
             ],
@@ -466,30 +453,13 @@ class MonsterStatBossLayout extends StatelessWidget {
         frosthavenStyle,
         color: Colors.black,
         height: MonsterStatCardWidget._kStatsLineHeight);
-    bool noCalculationSetting = settings_.noCalculation.value;
+    final noCalculationSetting = settings_.noCalculation.value;
     MonsterStatsModel? normal = data.type.levels[data.level.value].boss;
 
-    String? health = normal?.health.toString();
-    if (!noCalculationSetting) {
-      int? healthValue = StatCalculator.calculateFormula(normal?.health ?? 0);
-      if (healthValue != null) {
-        health = healthValue.toString();
-      }
-    }
-    health = viewModel.resolveBossHealth(health ?? "0");
-
-    String? attack = normal?.attack.toString();
-    String? move = normal?.move.toString();
-    if (!noCalculationSetting) {
-      int? moveValue = StatCalculator.calculateFormula(normal?.move ?? 0);
-      if (moveValue != null) {
-        move = moveValue.toString();
-      }
-      int? attackValue = StatCalculator.calculateFormula(normal?.attack ?? 0);
-      if (attackValue != null) {
-        attack = attackValue.toString();
-      }
-    }
+    final health =
+        viewModel.resolveBossHealth(_statDisplay(normal?.health, noCalculationSetting));
+    final move = _statDisplay(normal?.move, noCalculationSetting);
+    final attack = _statDisplay(normal?.attack, noCalculationSetting);
 
     String bossAttackAttributes = "";
     List<String> bossOtherAttributes = [];
@@ -554,7 +524,7 @@ class MonsterStatBossLayout extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
               Text(health, style: leftStyle),
-              Text(move ?? "0", style: leftStyle),
+              Text(move, style: leftStyle),
               Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                 Container(
                     margin: EdgeInsets.only(
@@ -563,7 +533,7 @@ class MonsterStatBossLayout extends StatelessWidget {
                                 scale
                             : 0),
                     child: attackAttributes),
-                Text(attack ?? "0", style: leftStyle)
+                Text(attack, style: leftStyle)
               ]),
               Text(normal?.range != 0 ? normal?.range.toString() ?? " " : "",
                   style: leftStyle),

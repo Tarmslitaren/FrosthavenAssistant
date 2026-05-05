@@ -169,7 +169,6 @@ class FrosthavenConverter {
             isSubLine = false;
           }
         }
-        // }
       }
 
       //if conditional or sub line start - add marker
@@ -284,7 +283,6 @@ class FrosthavenConverter {
             _kBoxPaddingBottom * scale),
         margin: EdgeInsets.only(
             left: _kBoxMarginH * scale, right: _kBoxMarginH * scale),
-        //child: Expanded(
         child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [...list2.map((row) => Row(children: row))]));
@@ -384,7 +382,6 @@ class FrosthavenConverter {
 
     lines.add(Container(
         margin: EdgeInsets.all(_kContainerMargin * scale),
-        //alignment: Alignment.bottomCenter,
         child: Stack(
             clipBehavior: Clip.none,
             alignment: Alignment.topCenter,
@@ -402,16 +399,8 @@ class FrosthavenConverter {
               DottedBorder(
                   options: RoundedRectDottedBorderOptions(
                     color: Colors.white,
-                    //borderType: BorderType.Rect,
-                    //borderType: BorderType.RRect,
-
                     radius: Radius.circular(_kDottedBorderRadius * scale),
-
-                    //strokeCap: StrokeCap.round,
                     padding: const EdgeInsets.all(0),
-                    //these are closer to the real values, but looks bad on small scale
-                    //dashPattern: [1.2 * scale, 0.5 * scale], //1.2 && 0.5
-                    //strokeWidth: 0.5 * scale, //0.4
                     dashPattern: [
                       _kDashPattern1 * scale,
                       _kDashPattern2 * scale

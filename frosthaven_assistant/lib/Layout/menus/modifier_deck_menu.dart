@@ -192,552 +192,32 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
     return ValueListenableBuilder<int>(
         valueListenable: _gameState.commandIndex,
         builder: (context, value, child) {
-          String name = widget.name;
-          ModifierDeck deck =
-              GameMethods.getModifierDeck(widget.name, _gameState);
+          final name = widget.name;
+          final deck = GameMethods.getModifierDeck(name, _gameState);
           final drawPile = deck.drawPileContents.reversed.toList();
           final discardPile = deck.discardPileContents.toList();
-          final removedPile = deck.removedPileContents.toList();
-
-          bool hasDiviner = false;
-          for (final item in _gameState.currentList) {
-            if (item is Character && item.characterClass.name == "Diviner") {
-              hasDiviner = true;
-            }
-          }
-
-          bool isCharacter = widget.name.isNotEmpty && widget.name != "allies";
-          final character =
-              isCharacter ? GameMethods.getCharacterByName(widget.name) : null;
           final screenSize = MediaQuery.of(context).size;
-          final badOmen = deck.badOmen.value;
-          final corrosiveSpew = deck.corrosiveSpew.value;
-
-          final characterHail = GameMethods.getCharacterByName("Hail");
-          bool hasHailPerk = characterHail != null
-              ? characterHail.characterState.perkList[17]
-              : false;
-
-          final characterCassandra =
-              GameMethods.getCharacterByName("Cassandra");
-          bool hasCassandraPerk = characterCassandra != null
-              ? characterCassandra.characterState.perkList[15]
-              : false;
-
-          final monsterDeck = widget.name.isEmpty;
-          final hasIncarnate =
-              GameMethods.getFigure("Incarnate", "Incarnate") != null;
-
-          final hasVimthreader =
-              GameMethods.getFigure("Vimthreader", "Vimthreader") != null;
-
-          final hasLifespeaker =
-              GameMethods.getFigure("Lifespeaker", "Lifespeaker") != null;
-
-          final imbuement = deck.imbuement.value;
-
-          final textStyle = kBodyBlackStyle;
-
-          final campaign = _gameState.currentCampaign.value;
-          final bool isCSCampaign =
-              campaign == "Crimson Scales" || campaign == "Trail of Ashes";
-
-          bool donatedCS = false;
-          bool addedPartyCard = false;
-          if (isCharacter && deck.hasCSSanctuary()) {
-            donatedCS = true;
-          }
-          if (isCharacter && deck.hasPartyCard()) {
-            addedPartyCard = true;
-          }
-
-          bool hasPlus0Card = deck.hasCard("plus0");
-
-          int nrOfEnfeebles = 0;
-          int nrOfEmpowers = 0;
-          if (hasVimthreader) {
-            nrOfEnfeebles++;
-            nrOfEmpowers++;
-          }
-          if (hasLifespeaker) {
-            nrOfEnfeebles++;
-          }
-          if (hasIncarnate) {
-            nrOfEnfeebles++;
-            nrOfEmpowers++;
-          }
-          final hasMoreThanOneEnfeeble = monsterDeck && nrOfEnfeebles > 1;
-          final hasMoreThanOneEmpower =
-              ((isCharacter || name == "allies") && nrOfEmpowers > 1) ||
-                  isCharacter && character?.id == "Ruinmaw" && nrOfEmpowers > 0;
 
           return Container(
               constraints: BoxConstraints(
                   maxWidth: screenSize.width,
-                  maxHeight:
-                      screenSize.height * kMenuMaxHeightRatio),
+                  maxHeight: screenSize.height * kMenuMaxHeightRatio),
               child: Card(
                   color: Colors.transparent,
                   child: Stack(children: [
                     Column(mainAxisSize: MainAxisSize.max, children: [
-                      Container(
-                          width: screenSize.width, //need some width to fill out
-                          margin: const EdgeInsets.all(
-                              ModifierDeckMenu._kHeaderMargin),
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(
-                                      ModifierDeckMenu._kHeaderBorderRadius),
-                                  topRight: Radius.circular(
-                                      ModifierDeckMenu._kHeaderBorderRadius))),
-                          child: Wrap(
-                              crossAxisAlignment: WrapCrossAlignment.center,
-                              runSpacing: 0,
-                              spacing: 0,
-                              children: [
-                                if (hasDiviner && !isCharacter)
-                                  if (badOmen == 0)
-                                    TextButton(
-                                      onPressed: () {
-                                        _gameState.action(BadOmenCommand(
-                                            name == "allies",
-                                            gameState: _gameState));
-                                      },
-                                      child: const Text("Bad Omen"),
-                                    ),
-                                if (badOmen > 0)
-                                  Text("BadOmensLeft: $badOmen",
-                                      style: textStyle),
-                                if (widget.name == "Ruinmaw" && !corrosiveSpew)
-                                  TextButton(
-                                    onPressed: () {
-                                      _gameState.action(CorrosiveSpewCommand(
-                                          gameState: _gameState));
-                                    },
-                                    child: Text(
-                                      "Corrosive Spew",
-                                    ),
-                                  ),
-                                if (corrosiveSpew)
-                                  Text(" Empowers on top", style: textStyle),
-                                TextButton(
-                                  onPressed: () {
-                                    _gameState.action(AmdAddMinusOneCommand(
-                                        name,
-                                        gameState: _gameState));
-                                  },
-                                  child: Text(
-                                      "Add -1 card (added : ${deck.addedMinusOnes.value})"),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    if (deck.hasMinus1()) {
-                                      _gameState.action(AMDRemoveMinus1Command(
-                                          name,
-                                          gameState: _gameState));
-                                    }
-                                  },
-                                  child: const Text("Remove -1 card"),
-                                ),
-                                if (!isCharacter)
-                                  TextButton(
-                                    onPressed: () {
-                                      _gameState.action(AMDRemoveMinus2Command(
-                                          name == "allies",
-                                          gameState: _gameState));
-                                    },
-                                    child: Text(
-                                      deck.hasMinus2()
-                                          ? "Remove -2 card"
-                                          : "-2 card removed",
-                                    ),
-                                  ),
-                                if (isCharacter &&
-                                    (hasPlus0Card || deck.hasCard("plus0")))
-                                  TextButton(
-                                    onPressed: () {
-                                      _gameState.action(AmdRemovePlus0Command(
-                                          name, hasPlus0Card,
-                                          gameState: _gameState));
-                                    },
-                                    child: Text(
-                                      hasPlus0Card
-                                          ? "Remove +0 card"
-                                          : "+0 card removed",
-                                    ),
-                                  ),
-                                if (monsterDeck)
-                                  TextButton(
-                                    onPressed: () {
-                                      if (deck.imbuement.value > 0) {
-                                        _gameState.action(AMDRemoveImbueCommand(
-                                            gameState: _gameState));
-                                      } else {
-                                        _gameState.action(AMDImbue1Command(
-                                            gameState: _gameState));
-                                      }
-                                    },
-                                    child: Text(
-                                      imbuement > 0 ? "Remove Imbue" : "Imbue",
-                                    ),
-                                  ),
-                                if (imbuement !=
-                                        ModifierDeckMenu
-                                            ._kAdvancedImbuementLevel &&
-                                    monsterDeck)
-                                  TextButton(
-                                    onPressed: () {
-                                      _gameState.action(AMDImbue2Command(
-                                          gameState: _gameState));
-                                    },
-                                    child: Text("Advanced Imbue"),
-                                  ),
-                                if (widget.name.isEmpty &&
-                                    characterHail != null)
-                                  TextButton(
-                                    onPressed: () {
-                                      _gameState.action(AddPerkCommand("Hail",
-                                          ModifierDeckMenu._kHailPerkIndex));
-                                    },
-                                    child: Text(
-                                      hasHailPerk
-                                          ? "Remove Hail Perk"
-                                          : "Add Hail Perk",
-                                    ),
-                                  ),
-                                if (characterCassandra != null &&
-                                    !_settings.showCharacterAMD.value)
-                                  TextButton(
-                                    onPressed: () {
-                                      _gameState.action(AddPerkCommand(
-                                          "Cassandra",
-                                          ModifierDeckMenu
-                                              ._kCassandraPerkIndex));
-                                    },
-                                    child: Text(
-                                      hasCassandraPerk
-                                          ? "Remove\nCassandra Perk"
-                                          : "Add\nCassandra Perk",
-                                    ),
-                                  ),
-                                if (hasCassandraPerk)
-                                  TextButton(
-                                    onPressed: () {
-                                      _gameState.action(
-                                          AMDCassandraSpecialCommand(deck.name,
-                                              !deck.cassandraSpecial.value,
-                                              gameState: _gameState));
-                                    },
-                                    child: Text(
-                                      deck.cassandraSpecial.value
-                                          ? "Don't Save \nRevealed Cards"
-                                          : "Save\nRevealed Cards",
-                                    ),
-                                  ),
-                                if (removedPile.isNotEmpty)
-                                  TextButton(
-                                    onPressed: () {
-                                      openDialog(
-                                          context,
-                                          RemovedModifierCardMenu(
-                                            name: widget.name,
-                                          ));
-                                    },
-                                    child:
-                                        Text("Removed: ${removedPile.length}"),
-                                  ),
-                                if (isCSCampaign && isCharacter)
-                                  TextButton(
-                                    onPressed: () {
-                                      donatedCS
-                                          ? _gameState.action(
-                                              RemoveCSSanctuaryDonationCommand(
-                                                  widget.name,
-                                                  gameState: _gameState))
-                                          : _gameState.action(
-                                              DonateCSSanctuaryCommand(
-                                                  widget.name,
-                                                  gameState: _gameState));
-                                    },
-                                    child: Text(donatedCS
-                                        ? "Remove\nDonation"
-                                        : "Donate to\nSanctuary"),
-                                  ),
-                                if (isCSCampaign && isCharacter)
-                                  addedPartyCard
-                                      ? TextButton(
-                                          onPressed: () {
-                                            _gameState.action(
-                                                RemoveCSPartyCardCommand(
-                                                    widget.name,
-                                                    gameState: _gameState));
-                                          },
-                                          child: Text("Remove\nParty Card:"),
-                                        )
-                                      : Wrap(
-                                          crossAxisAlignment:
-                                              WrapCrossAlignment.center,
-                                          children: [
-                                              Text("Add Party\n Card:"),
-                                              ...List.generate(
-                                                ModifierDeckMenu
-                                                    ._kPartyButtonCount,
-                                                (i) => _PartyButton(
-                                                    nr: i + 1,
-                                                    gameState: _gameState,
-                                                    name: widget.name),
-                                              ), //todo: make own menu for this, just like for gh2e special
-                                            ]),
-                                if (isCharacter &&
-                                    _gameState.unlockedClasses
-                                        .contains("Demons"))
-                                  IconButton(
-                                    icon:
-                                        Image.asset("assets/images/demons.png"),
-                                    onPressed: () {
-                                      openDialog(
-                                          context,
-                                          GH2eFactionAMDCardMenu(
-                                            faction: "Demons",
-                                            name: widget.name,
-                                          ));
-                                    },
-                                  ),
-                                if (isCharacter &&
-                                    _gameState.unlockedClasses
-                                        .contains("Merchant-Guild"))
-                                  IconButton(
-                                    icon: Image.asset(
-                                        "assets/images/merchant-guild.png"),
-                                    onPressed: () {
-                                      openDialog(
-                                          context,
-                                          GH2eFactionAMDCardMenu(
-                                            faction: "Merchant-Guild",
-                                            name: widget.name,
-                                          ));
-                                    },
-                                  ),
-                                if (isCharacter &&
-                                    _gameState.unlockedClasses
-                                        .contains("Military"))
-                                  IconButton(
-                                    icon: Image.asset(
-                                        "assets/images/military.png"),
-                                    onPressed: () {
-                                      openDialog(
-                                          context,
-                                          GH2eFactionAMDCardMenu(
-                                            faction: "Military",
-                                            name: widget.name,
-                                          ));
-                                    },
-                                  ),
-                                CounterButton(
-                                    notifier: deck.getRemovable("bless"),
-                                    command: ChangeBlessCommand.deck(deck,
-                                        gameState: _gameState),
-                                    maxValue: ModifierDeckMenu._kMaxBlessCurse,
-                                    image: "assets/images/abilities/bless.png",
-                                    showTotalValue: true,
-                                    color: Colors.white,
-                                    figureId: "unknown",
-                                    ownerId: "unknown",
-                                    scale: 1),
-                                CounterButton(
-                                    notifier: deck.getRemovable("curse"),
-                                    command: ChangeCurseCommand.deck(deck,
-                                        gameState: _gameState),
-                                    maxValue: ModifierDeckMenu._kMaxBlessCurse,
-                                    image: "assets/images/abilities/curse.png",
-                                    showTotalValue: true,
-                                    color: Colors.white,
-                                    figureId: "unknown",
-                                    ownerId: "unknown",
-                                    scale: 1),
-                                if (hasIncarnate && !isCharacter)
-                                  CounterButton(
-                                      notifier:
-                                          deck.getRemovable("in-enfeeble"),
-                                      command: ChangeEnfeebleCommand.deck(
-                                          deck, "in-enfeeble",
-                                          gameState: _gameState),
-                                      maxValue:
-                                          ModifierDeckMenu._kMaxBlessCurse,
-                                      image:
-                                          "assets/images/abilities/enfeeble_old.png",
-                                      extraImage: hasMoreThanOneEnfeeble
-                                          ? "assets/images/class-icons/Incarnate.png"
-                                          : null,
-                                      showTotalValue: true,
-                                      color: Colors.white,
-                                      figureId: "unknown",
-                                      ownerId: "unknown",
-                                      scale: 1),
-                                if ((isCharacter || widget.name == "allies") &&
-                                    hasIncarnate)
-                                  CounterButton(
-                                      notifier: deck.getRemovable("in-empower"),
-                                      command: ChangeEmpowerCommand.deck(
-                                          deck, "in-empower",
-                                          gameState: _gameState),
-                                      maxValue:
-                                          ModifierDeckMenu._kMaxBlessCurse,
-                                      image:
-                                          "assets/images/abilities/empower_old.png",
-                                      extraImage: hasMoreThanOneEmpower
-                                          ? "assets/images/class-icons/Incarnate.png"
-                                          : null,
-                                      showTotalValue: true,
-                                      color: Colors.white,
-                                      figureId: "unknown",
-                                      ownerId: "unknown",
-                                      scale: 1),
-                                if ((widget.name == "Ruinmaw"))
-                                  CounterButton(
-                                      notifier: deck.getRemovable("rm-empower"),
-                                      command: ChangeEmpowerCommand.deck(
-                                          deck, "rm-empower",
-                                          gameState: _gameState),
-                                      maxValue:
-                                          ModifierDeckMenu._kMaxRuinmawEmpower,
-                                      image:
-                                          "assets/images/abilities/empower_old.png",
-                                      extraImage: hasMoreThanOneEmpower
-                                          ? "assets/images/class-icons/Ruinmaw.png"
-                                          : null,
-                                      showTotalValue: true,
-                                      color: Colors.white,
-                                      figureId: "unknown",
-                                      ownerId: "unknown",
-                                      scale: 1),
-                                if ((isCharacter || widget.name == "allies") &&
-                                    hasVimthreader)
-                                  CounterButton(
-                                      notifier: deck.getRemovable("vi-empower"),
-                                      command: ChangeEmpowerCommand.deck(
-                                          deck, "vi-empower",
-                                          gameState: _gameState),
-                                      maxValue:
-                                          ModifierDeckMenu._kMaxBlessCurse,
-                                      image:
-                                          "assets/images/abilities/empower.png",
-                                      extraImage: hasMoreThanOneEmpower
-                                          ? "assets/images/class-icons/Vimthreader.png"
-                                          : null,
-                                      showTotalValue: true,
-                                      color: Colors.white,
-                                      figureId: "unknown",
-                                      ownerId: "unknown",
-                                      scale: 1),
-                                if ((isCharacter || widget.name == "allies") &&
-                                    hasVimthreader)
-                                  CounterButton(
-                                      notifier:
-                                          deck.getRemovable("vi-gr-empower"),
-                                      command: ChangeEmpowerCommand.deck(
-                                          deck, "vi-gr-empower",
-                                          gameState: _gameState),
-                                      maxValue: ModifierDeckMenu
-                                          ._kMaxVimthreaderGrEmpower,
-                                      image:
-                                          "assets/images/abilities/greater-empower.png",
-                                      showTotalValue: true,
-                                      color: Colors.white,
-                                      figureId: "unknown",
-                                      ownerId: "unknown",
-                                      scale: 1),
-                                if ((!isCharacter) && hasVimthreader)
-                                  CounterButton(
-                                      notifier:
-                                          deck.getRemovable("vi-enfeeble"),
-                                      command: ChangeEnfeebleCommand.deck(
-                                          deck, "vi-enfeeble",
-                                          gameState: _gameState),
-                                      maxValue:
-                                          ModifierDeckMenu._kMaxBlessCurse,
-                                      image:
-                                          "assets/images/abilities/enfeeble.png",
-                                      extraImage: hasMoreThanOneEnfeeble
-                                          ? "assets/images/class-icons/Vimthreader.png"
-                                          : null,
-                                      showTotalValue: true,
-                                      color: Colors.white,
-                                      figureId: "unknown",
-                                      ownerId: "unknown",
-                                      scale: 1),
-                                if ((!isCharacter) && hasVimthreader)
-                                  CounterButton(
-                                      notifier:
-                                          deck.getRemovable("vi-gr-enfeeble"),
-                                      command: ChangeEnfeebleCommand.deck(
-                                          deck, "vi-gr-enfeeble",
-                                          gameState: _gameState),
-                                      maxValue: ModifierDeckMenu
-                                          ._kMaxVimthreaderGrEmpower,
-                                      image:
-                                          "assets/images/abilities/greater-enfeeble.png",
-                                      showTotalValue: true,
-                                      color: Colors.white,
-                                      figureId: "unknown",
-                                      ownerId: "unknown",
-                                      scale: 1),
-                                if ((!isCharacter ||
-                                        widget.name == "Lifespeaker") &&
-                                    hasLifespeaker)
-                                  CounterButton(
-                                      notifier: deck.getRemovable(
-                                          "li-enfeeble"),
-                                      command: ChangeEnfeebleCommand.deck(
-                                          deck, "li-enfeeble",
-                                          gameState: _gameState),
-                                      maxValue:
-                                          ModifierDeckMenu
-                                              ._kMaxLifespeakerEnfeeble,
-                                      image:
-                                          "assets/images/abilities/enfeeble.png",
-                                      extraImage: hasMoreThanOneEnfeeble
-                                          ? "assets/images/class-icons/Lifespeaker.png"
-                                          : null,
-                                      showTotalValue: true,
-                                      color: Colors.white,
-                                      figureId: "unknown",
-                                      ownerId: "unknown",
-                                      scale: 1),
-                                if (isCharacter &&
-                                    character != null &&
-                                    character.characterClass.perks.isNotEmpty)
-                                  TextButton(
-                                    onPressed: () {
-                                      openDialog(
-                                          context,
-                                          PerksMenu(
-                                            character: character,
-                                          ));
-                                    },
-                                    child: const Text("Perks"),
-                                  ),
-                                const Text(
-                                  "   Reveal\n    cards:",
-                                ),
-                                ...List.generate(
-                                  min(drawPile.length + 1,
-                                      ModifierDeckMenu._kMaxRevealButtonNr + 1),
-                                  (i) => _RevealButton(
-                                      nrOfButtons: drawPile.length,
-                                      nr: i,
-                                      gameState: _gameState,
-                                      name: widget.name),
-                                ),
-                              ])),
+                      _ModifierDeckHeader(
+                          deck: deck,
+                          gameState: _gameState,
+                          settings: _settings,
+                          name: name),
                       Flexible(
                           child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          buildList(drawPile, true, false, widget.name),
-                          buildList(discardPile, false, true, widget.name)
+                          buildList(drawPile, true, false, name),
+                          buildList(discardPile, false, true, name)
                         ],
                       )),
                       Container(
@@ -769,12 +249,452 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                     Positioned(
                         bottom: ModifierDeckMenu._kFooterBottomPos,
                         left: ModifierDeckMenu._kNameLeftPos,
-                        child: Text(
-                          name,
-                          style: kButtonLabelStyle,
-                        ))
+                        child: Text(name, style: kButtonLabelStyle))
                   ])));
         });
+  }
+}
+
+class _ModifierDeckHeader extends StatelessWidget {
+  const _ModifierDeckHeader({
+    required this.deck,
+    required this.gameState,
+    required this.settings,
+    required this.name,
+  });
+
+  final ModifierDeck deck;
+  final GameState gameState;
+  final Settings settings;
+  final String name;
+
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    bool hasDiviner = false;
+    for (final item in gameState.currentList) {
+      if (item is Character && item.characterClass.name == "Diviner") {
+        hasDiviner = true;
+      }
+    }
+
+    final bool isCharacter = name.isNotEmpty && name != "allies";
+    final character =
+        isCharacter ? GameMethods.getCharacterByName(name) : null;
+    final badOmen = deck.badOmen.value;
+    final corrosiveSpew = deck.corrosiveSpew.value;
+
+    final characterHail = GameMethods.getCharacterByName("Hail");
+    final bool hasHailPerk = characterHail != null
+        ? characterHail.characterState.perkList[ModifierDeckMenu._kHailPerkIndex]
+        : false;
+
+    final characterCassandra = GameMethods.getCharacterByName("Cassandra");
+    final bool hasCassandraPerk = characterCassandra != null
+        ? characterCassandra.characterState
+            .perkList[ModifierDeckMenu._kCassandraPerkIndex]
+        : false;
+
+    final monsterDeck = name.isEmpty;
+    final hasIncarnate =
+        GameMethods.getFigure("Incarnate", "Incarnate") != null;
+    final hasVimthreader =
+        GameMethods.getFigure("Vimthreader", "Vimthreader") != null;
+    final hasLifespeaker =
+        GameMethods.getFigure("Lifespeaker", "Lifespeaker") != null;
+
+    final imbuement = deck.imbuement.value;
+    final textStyle = kBodyBlackStyle;
+
+    final campaign = gameState.currentCampaign.value;
+    final bool isCSCampaign =
+        campaign == "Crimson Scales" || campaign == "Trail of Ashes";
+
+    final donatedCS = isCharacter && deck.hasCSSanctuary();
+    final addedPartyCard = isCharacter && deck.hasPartyCard();
+    final hasPlus0Card = deck.hasCard("plus0");
+
+    final removedPile = deck.removedPileContents.toList();
+    final drawPile = deck.drawPileContents.reversed.toList();
+
+    int nrOfEnfeebles = 0;
+    int nrOfEmpowers = 0;
+    if (hasVimthreader) {
+      nrOfEnfeebles++;
+      nrOfEmpowers++;
+    }
+    if (hasLifespeaker) {
+      nrOfEnfeebles++;
+    }
+    if (hasIncarnate) {
+      nrOfEnfeebles++;
+      nrOfEmpowers++;
+    }
+    final hasMoreThanOneEnfeeble = monsterDeck && nrOfEnfeebles > 1;
+    final hasMoreThanOneEmpower =
+        ((isCharacter || name == "allies") && nrOfEmpowers > 1) ||
+            isCharacter && character?.id == "Ruinmaw" && nrOfEmpowers > 0;
+
+    return Container(
+        width: screenWidth,
+        margin: const EdgeInsets.all(ModifierDeckMenu._kHeaderMargin),
+        decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+                topLeft:
+                    Radius.circular(ModifierDeckMenu._kHeaderBorderRadius),
+                topRight:
+                    Radius.circular(ModifierDeckMenu._kHeaderBorderRadius))),
+        child: Wrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            runSpacing: 0,
+            spacing: 0,
+            children: [
+              if (hasDiviner && !isCharacter)
+                if (badOmen == 0)
+                  TextButton(
+                    onPressed: () {
+                      gameState.action(BadOmenCommand(name == "allies",
+                          gameState: gameState));
+                    },
+                    child: const Text("Bad Omen"),
+                  ),
+              if (badOmen > 0)
+                Text("BadOmensLeft: $badOmen", style: textStyle),
+              if (name == "Ruinmaw" && !corrosiveSpew)
+                TextButton(
+                  onPressed: () {
+                    gameState
+                        .action(CorrosiveSpewCommand(gameState: gameState));
+                  },
+                  child: const Text("Corrosive Spew"),
+                ),
+              if (corrosiveSpew) Text(" Empowers on top", style: textStyle),
+              TextButton(
+                onPressed: () {
+                  gameState
+                      .action(AmdAddMinusOneCommand(name, gameState: gameState));
+                },
+                child: Text(
+                    "Add -1 card (added : ${deck.addedMinusOnes.value})"),
+              ),
+              TextButton(
+                onPressed: () {
+                  if (deck.hasMinus1()) {
+                    gameState.action(
+                        AMDRemoveMinus1Command(name, gameState: gameState));
+                  }
+                },
+                child: const Text("Remove -1 card"),
+              ),
+              if (!isCharacter)
+                TextButton(
+                  onPressed: () {
+                    gameState.action(AMDRemoveMinus2Command(name == "allies",
+                        gameState: gameState));
+                  },
+                  child: Text(
+                    deck.hasMinus2() ? "Remove -2 card" : "-2 card removed",
+                  ),
+                ),
+              if (isCharacter && (hasPlus0Card || deck.hasCard("plus0")))
+                TextButton(
+                  onPressed: () {
+                    gameState.action(AmdRemovePlus0Command(name, hasPlus0Card,
+                        gameState: gameState));
+                  },
+                  child: Text(
+                    hasPlus0Card ? "Remove +0 card" : "+0 card removed",
+                  ),
+                ),
+              if (monsterDeck)
+                TextButton(
+                  onPressed: () {
+                    if (deck.imbuement.value > 0) {
+                      gameState.action(
+                          AMDRemoveImbueCommand(gameState: gameState));
+                    } else {
+                      gameState
+                          .action(AMDImbue1Command(gameState: gameState));
+                    }
+                  },
+                  child: Text(imbuement > 0 ? "Remove Imbue" : "Imbue"),
+                ),
+              if (imbuement != ModifierDeckMenu._kAdvancedImbuementLevel &&
+                  monsterDeck)
+                TextButton(
+                  onPressed: () {
+                    gameState
+                        .action(AMDImbue2Command(gameState: gameState));
+                  },
+                  child: const Text("Advanced Imbue"),
+                ),
+              if (name.isEmpty && characterHail != null)
+                TextButton(
+                  onPressed: () {
+                    gameState.action(AddPerkCommand(
+                        "Hail", ModifierDeckMenu._kHailPerkIndex));
+                  },
+                  child: Text(
+                    hasHailPerk ? "Remove Hail Perk" : "Add Hail Perk",
+                  ),
+                ),
+              if (characterCassandra != null &&
+                  !settings.showCharacterAMD.value)
+                TextButton(
+                  onPressed: () {
+                    gameState.action(AddPerkCommand("Cassandra",
+                        ModifierDeckMenu._kCassandraPerkIndex));
+                  },
+                  child: Text(
+                    hasCassandraPerk
+                        ? "Remove\nCassandra Perk"
+                        : "Add\nCassandra Perk",
+                  ),
+                ),
+              if (hasCassandraPerk)
+                TextButton(
+                  onPressed: () {
+                    gameState.action(AMDCassandraSpecialCommand(deck.name,
+                        !deck.cassandraSpecial.value,
+                        gameState: gameState));
+                  },
+                  child: Text(
+                    deck.cassandraSpecial.value
+                        ? "Don't Save \nRevealed Cards"
+                        : "Save\nRevealed Cards",
+                  ),
+                ),
+              if (removedPile.isNotEmpty)
+                TextButton(
+                  onPressed: () {
+                    openDialog(context, RemovedModifierCardMenu(name: name));
+                  },
+                  child: Text("Removed: ${removedPile.length}"),
+                ),
+              if (isCSCampaign && isCharacter)
+                TextButton(
+                  onPressed: () {
+                    donatedCS
+                        ? gameState.action(RemoveCSSanctuaryDonationCommand(
+                            name, gameState: gameState))
+                        : gameState.action(DonateCSSanctuaryCommand(name,
+                            gameState: gameState));
+                  },
+                  child: Text(
+                      donatedCS ? "Remove\nDonation" : "Donate to\nSanctuary"),
+                ),
+              if (isCSCampaign && isCharacter)
+                addedPartyCard
+                    ? TextButton(
+                        onPressed: () {
+                          gameState.action(RemoveCSPartyCardCommand(name,
+                              gameState: gameState));
+                        },
+                        child: const Text("Remove\nParty Card:"),
+                      )
+                    : Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                            const Text("Add Party\n Card:"),
+                            ...List.generate(
+                              ModifierDeckMenu._kPartyButtonCount,
+                              (i) => _PartyButton(
+                                  nr: i + 1,
+                                  gameState: gameState,
+                                  name: name),
+                            ),
+                          ]),
+              if (isCharacter &&
+                  gameState.unlockedClasses.contains("Demons"))
+                IconButton(
+                  icon: Image.asset("assets/images/demons.png"),
+                  onPressed: () {
+                    openDialog(
+                        context,
+                        GH2eFactionAMDCardMenu(
+                            faction: "Demons", name: name));
+                  },
+                ),
+              if (isCharacter &&
+                  gameState.unlockedClasses.contains("Merchant-Guild"))
+                IconButton(
+                  icon: Image.asset("assets/images/merchant-guild.png"),
+                  onPressed: () {
+                    openDialog(
+                        context,
+                        GH2eFactionAMDCardMenu(
+                            faction: "Merchant-Guild", name: name));
+                  },
+                ),
+              if (isCharacter &&
+                  gameState.unlockedClasses.contains("Military"))
+                IconButton(
+                  icon: Image.asset("assets/images/military.png"),
+                  onPressed: () {
+                    openDialog(
+                        context,
+                        GH2eFactionAMDCardMenu(
+                            faction: "Military", name: name));
+                  },
+                ),
+              CounterButton(
+                  notifier: deck.getRemovable("bless"),
+                  command:
+                      ChangeBlessCommand.deck(deck, gameState: gameState),
+                  maxValue: ModifierDeckMenu._kMaxBlessCurse,
+                  image: "assets/images/abilities/bless.png",
+                  showTotalValue: true,
+                  color: Colors.white,
+                  figureId: "unknown",
+                  ownerId: "unknown",
+                  scale: 1),
+              CounterButton(
+                  notifier: deck.getRemovable("curse"),
+                  command:
+                      ChangeCurseCommand.deck(deck, gameState: gameState),
+                  maxValue: ModifierDeckMenu._kMaxBlessCurse,
+                  image: "assets/images/abilities/curse.png",
+                  showTotalValue: true,
+                  color: Colors.white,
+                  figureId: "unknown",
+                  ownerId: "unknown",
+                  scale: 1),
+              if (hasIncarnate && !isCharacter)
+                CounterButton(
+                    notifier: deck.getRemovable("in-enfeeble"),
+                    command: ChangeEnfeebleCommand.deck(deck, "in-enfeeble",
+                        gameState: gameState),
+                    maxValue: ModifierDeckMenu._kMaxBlessCurse,
+                    image: "assets/images/abilities/enfeeble_old.png",
+                    extraImage: hasMoreThanOneEnfeeble
+                        ? "assets/images/class-icons/Incarnate.png"
+                        : null,
+                    showTotalValue: true,
+                    color: Colors.white,
+                    figureId: "unknown",
+                    ownerId: "unknown",
+                    scale: 1),
+              if ((isCharacter || name == "allies") && hasIncarnate)
+                CounterButton(
+                    notifier: deck.getRemovable("in-empower"),
+                    command: ChangeEmpowerCommand.deck(deck, "in-empower",
+                        gameState: gameState),
+                    maxValue: ModifierDeckMenu._kMaxBlessCurse,
+                    image: "assets/images/abilities/empower_old.png",
+                    extraImage: hasMoreThanOneEmpower
+                        ? "assets/images/class-icons/Incarnate.png"
+                        : null,
+                    showTotalValue: true,
+                    color: Colors.white,
+                    figureId: "unknown",
+                    ownerId: "unknown",
+                    scale: 1),
+              if (name == "Ruinmaw")
+                CounterButton(
+                    notifier: deck.getRemovable("rm-empower"),
+                    command: ChangeEmpowerCommand.deck(deck, "rm-empower",
+                        gameState: gameState),
+                    maxValue: ModifierDeckMenu._kMaxRuinmawEmpower,
+                    image: "assets/images/abilities/empower_old.png",
+                    extraImage: hasMoreThanOneEmpower
+                        ? "assets/images/class-icons/Ruinmaw.png"
+                        : null,
+                    showTotalValue: true,
+                    color: Colors.white,
+                    figureId: "unknown",
+                    ownerId: "unknown",
+                    scale: 1),
+              if ((isCharacter || name == "allies") && hasVimthreader)
+                CounterButton(
+                    notifier: deck.getRemovable("vi-empower"),
+                    command: ChangeEmpowerCommand.deck(deck, "vi-empower",
+                        gameState: gameState),
+                    maxValue: ModifierDeckMenu._kMaxBlessCurse,
+                    image: "assets/images/abilities/empower.png",
+                    extraImage: hasMoreThanOneEmpower
+                        ? "assets/images/class-icons/Vimthreader.png"
+                        : null,
+                    showTotalValue: true,
+                    color: Colors.white,
+                    figureId: "unknown",
+                    ownerId: "unknown",
+                    scale: 1),
+              if ((isCharacter || name == "allies") && hasVimthreader)
+                CounterButton(
+                    notifier: deck.getRemovable("vi-gr-empower"),
+                    command: ChangeEmpowerCommand.deck(deck, "vi-gr-empower",
+                        gameState: gameState),
+                    maxValue: ModifierDeckMenu._kMaxVimthreaderGrEmpower,
+                    image: "assets/images/abilities/greater-empower.png",
+                    showTotalValue: true,
+                    color: Colors.white,
+                    figureId: "unknown",
+                    ownerId: "unknown",
+                    scale: 1),
+              if (!isCharacter && hasVimthreader)
+                CounterButton(
+                    notifier: deck.getRemovable("vi-enfeeble"),
+                    command: ChangeEnfeebleCommand.deck(deck, "vi-enfeeble",
+                        gameState: gameState),
+                    maxValue: ModifierDeckMenu._kMaxBlessCurse,
+                    image: "assets/images/abilities/enfeeble.png",
+                    extraImage: hasMoreThanOneEnfeeble
+                        ? "assets/images/class-icons/Vimthreader.png"
+                        : null,
+                    showTotalValue: true,
+                    color: Colors.white,
+                    figureId: "unknown",
+                    ownerId: "unknown",
+                    scale: 1),
+              if (!isCharacter && hasVimthreader)
+                CounterButton(
+                    notifier: deck.getRemovable("vi-gr-enfeeble"),
+                    command: ChangeEnfeebleCommand.deck(deck, "vi-gr-enfeeble",
+                        gameState: gameState),
+                    maxValue: ModifierDeckMenu._kMaxVimthreaderGrEmpower,
+                    image: "assets/images/abilities/greater-enfeeble.png",
+                    showTotalValue: true,
+                    color: Colors.white,
+                    figureId: "unknown",
+                    ownerId: "unknown",
+                    scale: 1),
+              if ((!isCharacter || name == "Lifespeaker") && hasLifespeaker)
+                CounterButton(
+                    notifier: deck.getRemovable("li-enfeeble"),
+                    command: ChangeEnfeebleCommand.deck(deck, "li-enfeeble",
+                        gameState: gameState),
+                    maxValue: ModifierDeckMenu._kMaxLifespeakerEnfeeble,
+                    image: "assets/images/abilities/enfeeble.png",
+                    extraImage: hasMoreThanOneEnfeeble
+                        ? "assets/images/class-icons/Lifespeaker.png"
+                        : null,
+                    showTotalValue: true,
+                    color: Colors.white,
+                    figureId: "unknown",
+                    ownerId: "unknown",
+                    scale: 1),
+              if (isCharacter &&
+                  character != null &&
+                  character.characterClass.perks.isNotEmpty)
+                TextButton(
+                  onPressed: () {
+                    openDialog(context, PerksMenu(character: character));
+                  },
+                  child: const Text("Perks"),
+                ),
+              const Text("   Reveal\n    cards:"),
+              ...List.generate(
+                min(drawPile.length + 1,
+                    ModifierDeckMenu._kMaxRevealButtonNr + 1),
+                (i) => _RevealButton(
+                    nrOfButtons: drawPile.length,
+                    nr: i,
+                    gameState: gameState,
+                    name: name),
+              ),
+            ]));
   }
 }
 
