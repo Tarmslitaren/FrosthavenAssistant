@@ -9,7 +9,6 @@ import 'package:frosthaven_assistant/Resource/commands/add_perk_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_standee_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_health_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_command.dart';
-import 'package:frosthaven_assistant/Resource/commands/next_turn_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_campaign_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_character_level_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_init_command.dart';
@@ -17,6 +16,7 @@ import 'package:frosthaven_assistant/Resource/commands/set_level_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_scenario_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_solo_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/show_ally_deck_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/turn_done_command.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
@@ -605,25 +605,19 @@ void main() async {
 
     group('isObjectiveOrEscort', () {
       test('should return true for Objective', () {
-        final cmd = AddCharacterCommand(
-            "Objective", "na", "whatever", 1,
+        final cmd = AddCharacterCommand("Objective", "na", "whatever", 1,
             gameState: getIt<GameState>());
         String oldState = gameState.toString();
-        expect(
-            GameMethods.isObjectiveOrEscort(
-                cmd.character!.characterClass),
+        expect(GameMethods.isObjectiveOrEscort(cmd.character!.characterClass),
             isTrue);
         checkNoSideEffects([], oldState);
       });
 
       test('should return true for Escort', () {
-        final cmd = AddCharacterCommand(
-            "Escort", "na", "whatever", 1,
+        final cmd = AddCharacterCommand("Escort", "na", "whatever", 1,
             gameState: getIt<GameState>());
         String oldState = gameState.toString();
-        expect(
-            GameMethods.isObjectiveOrEscort(
-                cmd.character!.characterClass),
+        expect(GameMethods.isObjectiveOrEscort(cmd.character!.characterClass),
             isTrue);
         checkNoSideEffects([], oldState);
       });
@@ -633,9 +627,7 @@ void main() async {
             "Blinkblade", "Frosthaven", "whatever", 1,
             gameState: getIt<GameState>());
         String oldState = gameState.toString();
-        expect(
-            GameMethods.isObjectiveOrEscort(
-                cmd.character!.characterClass),
+        expect(GameMethods.isObjectiveOrEscort(cmd.character!.characterClass),
             isFalse);
         checkNoSideEffects([], oldState);
       });

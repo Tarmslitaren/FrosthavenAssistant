@@ -1,6 +1,6 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/foundation.dart';
-import 'package:frosthaven_assistant/Resource/commands/next_turn_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/turn_done_command.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
@@ -19,8 +19,7 @@ class MonsterWidgetViewModel {
       monster.monsterInstancesNotifier;
 
   // Derived state
-  bool get specialDisabled =>
-      GameMethods.isInactiveForRule(monster.type.name);
+  bool get specialDisabled => GameMethods.isInactiveForRule(monster.type.name);
 
   bool get frosthavenStyle => GameMethods.isFrosthavenStyle(monster.type);
 
@@ -33,7 +32,8 @@ class MonsterWidgetViewModel {
   bool get isGrayScale =>
       !isActive ||
       specialDisabled ||
-      (turnState == TurnsState.done && roundState != RoundState.chooseInitiative);
+      (turnState == TurnsState.done &&
+          roundState != RoundState.chooseInitiative);
 
   bool get showTurnTap =>
       roundState == RoundState.playTurns &&

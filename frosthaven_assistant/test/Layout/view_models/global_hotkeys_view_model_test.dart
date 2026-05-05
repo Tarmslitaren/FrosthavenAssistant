@@ -7,7 +7,7 @@ import 'package:frosthaven_assistant/Resource/commands/add_character_command.dar
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/imbue_element_command.dart';
-import 'package:frosthaven_assistant/Resource/commands/next_turn_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/turn_done_command.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';

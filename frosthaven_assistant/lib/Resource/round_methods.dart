@@ -291,21 +291,11 @@ class RoundMethods {
     } else {
       figure._conditionsAddedPreviousTurn.clear();
     }
-    if (!clearLastTurnToo) {
-      if (figure.conditionsAddedThisTurn.contains(Condition.chill)) {
-        figure._chill.value--;
-        if (figure.chill.value > 0) {
-          figure._conditionsAddedPreviousTurn.clear();
-          figure._conditionsAddedThisTurn.add(Condition.chill);
-        } else {
-          figure._conditionsAddedThisTurn.clear();
-        }
-      } else {
-        figure._conditionsAddedThisTurn.clear();
-      }
-    } else {
-      figure._conditionsAddedThisTurn.clear();
-    }
+
+    figure._conditionsAddedThisTurn.clear();
+
+    figure._chill.value =
+        figure.conditions.value.where((a) => a == Condition.chill).length;
   }
 
   static void clearTurnState(
@@ -331,19 +321,32 @@ class RoundMethods {
   static void removeExpiringConditions(_StateModifier _, FigureState figure,
       {Settings? settings}) {
     if ((settings ?? getIt<Settings>()).expireConditions.value) {
-      bool chillRemoved = false;
       final conditions = figure._conditions.value;
+
+      //handle chill separately
+      int nrOfChills =
+          figure.conditions.value.where((a) => a == Condition.chill).length;
+      if (nrOfChills > 0) {
+        //remove one if not added this turn
+        if (!figure.conditionsAddedThisTurn.contains(Condition.chill) ||
+                nrOfChills >
+                    1 //this is a cop out: you can add more than one chill in a round, but since we store only if a condition has been added this turn, and not the amount, we have no way to tell
+            ) {
+          conditions.remove(Condition.chill);
+          figure._conditionsAddedPreviousTurn.add(Condition.chill);
+        }
+      }
+
+      figure._chill.value =
+          figure.conditions.value.where((a) => a == Condition.chill).length;
+
       for (int i = conditions.length - 1; i >= 0; i--) {
         Condition item = conditions[i];
         if (GameMethods.canExpire(item)) {
-          if (item != Condition.chill || !chillRemoved) {
+          if (item != Condition.chill) {
             if (!figure.conditionsAddedThisTurn.contains(item)) {
               conditions.removeAt(i);
               figure._conditionsAddedPreviousTurn.add(item);
-            }
-            if (item == Condition.chill) {
-              figure._chill.value--;
-              chillRemoved = true;
             }
           }
         }
@@ -373,7 +376,9 @@ class RoundMethods {
         figure._conditionsAddedThisTurn.remove(condition);
       }
       if (condition == Condition.chill) {
-        figure._chill.value++;
+        figure._chill.value =
+            figure.conditions.value.where((a) => a == Condition.chill).length;
+        //figure._chill.value++;
       }
     }
   }

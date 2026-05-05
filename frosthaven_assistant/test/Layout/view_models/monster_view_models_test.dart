@@ -1,6 +1,5 @@
 // ignore_for_file: no-magic-number
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/view_models/monster_box_view_model.dart';
@@ -10,7 +9,6 @@ import 'package:frosthaven_assistant/Resource/commands/add_character_command.dar
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_standee_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_command.dart';
-import 'package:frosthaven_assistant/Resource/commands/next_turn_command.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
@@ -33,9 +31,8 @@ void main() {
     AddMonsterCommand('Ancient Artillery (FH)', 1, false,
             gameState: getIt<GameState>())
         .execute();
-    return getIt<GameState>()
-        .currentList
-        .firstWhere((e) => e is Monster) as Monster;
+    return getIt<GameState>().currentList.firstWhere((e) => e is Monster)
+        as Monster;
   }
 
   // ── MonsterWidgetViewModel ─────────────────────────────────────────────────

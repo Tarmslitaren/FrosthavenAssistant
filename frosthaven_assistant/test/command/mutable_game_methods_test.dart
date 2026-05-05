@@ -11,11 +11,11 @@ import 'package:frosthaven_assistant/Resource/commands/draw_ability_card_command
 import 'package:frosthaven_assistant/Resource/commands/draw_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/imbue_element_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/next_round_command.dart';
-import 'package:frosthaven_assistant/Resource/commands/next_turn_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_campaign_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_character_level_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_init_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_scenario_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/turn_done_command.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/game_data.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
@@ -844,8 +844,8 @@ void main() {
       expect(getIt<GameState>().modifierDeck.hasHail(), isTrue,
           reason:
               'Main modifier deck should contain the Hail special card after perk 17');
-      expect(getIt<GameState>().modifierDeck.drawPileSize,
-          greaterThan(deckBefore),
+      expect(
+          getIt<GameState>().modifierDeck.drawPileSize, greaterThan(deckBefore),
           reason:
               'Main modifier deck size should increase after adding Hail perk 17');
     });

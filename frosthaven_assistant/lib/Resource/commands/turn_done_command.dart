@@ -1,6 +1,6 @@
 import '../state/game_state.dart';
 
-class TurnDoneCommand extends Command { // ignore: prefer-match-file-name, file name reflects command purpose not class name
+class TurnDoneCommand extends Command {
   int index = 0;
   final String id;
   final GameState _gameState;
@@ -14,14 +14,13 @@ class TurnDoneCommand extends Command { // ignore: prefer-match-file-name, file 
         break;
       }
     }
-    _gameState.updateList.notify();
   }
 
   @override
   void execute() {
     RoundMethods.setTurnDone(stateAccess, index);
+    _gameState.updateList.notify();
   }
-
 
   @override
   String describe() {
