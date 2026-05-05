@@ -19,65 +19,65 @@ abstract class ChangeStatCommand extends Command {
   void handleDeath() {
     for (final item in gameState.currentList) {
       if (item is Monster) {
-        List<MonsterInstance> newList = [];
-        newList.addAll(item.monsterInstances);
-        for (final instance in item.monsterInstances) {
-          if (instance.health.value == 0) {
-            newList.remove(instance);
-            item.setMonsterInstances(stateAccess, newList);
-            Future.delayed(const Duration(milliseconds: 600), () {
-              item.notifyMonsterInstances(stateAccess);
-            });
-
-            final roundState = gameState.roundState.value;
-            if (item.monsterInstances.isEmpty) {
-              item.setActive(stateAccess, false);
-              if (roundState == RoundState.chooseInitiative) {
-                RoundMethods.sortCharactersFirst(stateAccess);
-              }
-              if (roundState == RoundState.playTurns) {
-                Future.delayed(const Duration(milliseconds: 600), () {
-                  gameState.updateList.notify();
-                });
-              } else {
-                gameState.updateList.notify();
-              }
-            }
-            break;
-          }
-        }
+        _handleMonsterDeath(item);
       } else if (item is Character) {
-        //handle character death
-        if (item.characterState.health.value <= 0) {
+        _handleCharacterDeath(item);
+      }
+    }
+  }
+
+  void _handleMonsterDeath(Monster monster) {
+    final instances = monster.monsterInstances;
+    final deadIndex = instances.indexWhere((i) => i.health.value == 0);
+    if (deadIndex == -1) return;
+
+    final newList = List<MonsterInstance>.from(instances)..removeAt(deadIndex);
+    monster.setMonsterInstances(stateAccess, newList);
+    Future.delayed(const Duration(milliseconds: 600), () {
+      monster.notifyMonsterInstances(stateAccess);
+    });
+
+    if (monster.monsterInstances.isEmpty) {
+      monster.setActive(stateAccess, false);
+      if (gameState.roundState.value == RoundState.chooseInitiative) {
+        RoundMethods.sortCharactersFirst(stateAccess);
+      }
+      _notifyUpdateList();
+    }
+  }
+
+  void _handleCharacterDeath(Character character) {
+    if (character.characterState.health.value <= 0) {
+      gameState.updateList.notify();
+    }
+    _handleSummonDeath(character);
+  }
+
+  void _handleSummonDeath(Character character) {
+    for (final instance in character.characterState.summonList) {
+      if (instance.health.value == 0 &&
+          !GameMethods.summonDoesNotDie(character.id, instance.name)) {
+        character.characterState.removeSummon(stateAccess, instance);
+        Future.delayed(const Duration(milliseconds: 600), () {
+          character.characterState.notifySummonList(stateAccess);
+        });
+        if (character.characterState.summonList.isEmpty) {
+          _notifyUpdateList();
+        } else {
           gameState.updateList.notify();
         }
-
-        //handle summon death
-        final summonList = item.characterState.summonList;
-        for (final instance in summonList) {
-          if (instance.health.value == 0) {
-            if (!GameMethods.summonDoesNotDie(item.id, instance.name)) {
-              item.characterState.removeSummon(stateAccess, instance);
-              Future.delayed(const Duration(milliseconds: 600), () {
-                item.characterState.notifySummonList(stateAccess);
-              });
-
-              if (item.characterState.summonList.isEmpty) {
-                if (gameState.roundState.value == RoundState.playTurns) {
-                  Future.delayed(const Duration(milliseconds: 600), () {
-                    gameState.updateList.notify();
-                  });
-                } else {
-                  gameState.updateList.notify();
-                }
-              } else {
-                gameState.updateList.notify();
-              }
-              break;
-            }
-          }
-        }
+        break;
       }
+    }
+  }
+
+  void _notifyUpdateList() {
+    if (gameState.roundState.value == RoundState.playTurns) {
+      Future.delayed(const Duration(milliseconds: 600), () {
+        gameState.updateList.notify();
+      });
+    } else {
+      gameState.updateList.notify();
     }
   }
 
