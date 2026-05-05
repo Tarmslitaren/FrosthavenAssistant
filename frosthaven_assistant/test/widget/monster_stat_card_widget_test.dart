@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:frosthaven_assistant/Layout/MonsterStatCardWidget/monster_stat_card_widget.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_standee_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/stat_card_zoom.dart';
-import 'package:frosthaven_assistant/Layout/monster_stat_card_widget.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_standee_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_level_command.dart';
@@ -157,8 +157,9 @@ void main() {
 
       // Add all standees reactively (after widget is rendered)
       for (int i = 1; i <= maxCount; i++) {
-        gameState.action(AddStandeeCommand(i, null, 'Zealot', MonsterType.normal,
-            false, gameState: gameState));
+        gameState.action(AddStandeeCommand(
+            i, null, 'Zealot', MonsterType.normal, false,
+            gameState: gameState));
       }
       await tester.pump();
 

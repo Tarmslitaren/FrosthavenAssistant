@@ -13,8 +13,8 @@ import '../../../Resource/settings.dart';
 import '../../../Resource/state/game_state.dart';
 import '../../../Resource/ui_utils.dart';
 import '../../counter_button.dart';
+import '../SetLevelMenu/set_level_menu.dart';
 import '../set_character_level_menu.dart';
-import '../set_level_menu.dart';
 import 'status_menu_stackable_condition_buttons.dart';
 
 class StatusMenuStatColumn extends StatelessWidget {
@@ -118,9 +118,10 @@ class StatusMenuStatColumn extends StatelessWidget {
             }
           }
 
-          final bool showCharacterAmd =
-              characterHasAmd && settings.showCharacterAMD.value && isCharacter ||
-                  isSummon;
+          final bool showCharacterAmd = characterHasAmd &&
+                  settings.showCharacterAMD.value &&
+                  isCharacter ||
+              isSummon;
           final bool showMonsterAmd = settings.showAmdDeck.value &&
               (isObjective || (isMonster && !isSummon));
           final bool showAmd = showCharacterAmd || showMonsterAmd;
@@ -403,8 +404,8 @@ class StatusMenuStatColumn extends StatelessWidget {
                             color: Colors.white,
                             shadows: [
                               Shadow(
-                                offset: Offset(
-                                    kShadowOffset * scale, kShadowOffset * scale),
+                                offset: Offset(kShadowOffset * scale,
+                                    kShadowOffset * scale),
                                 color: Colors.black87,
                                 blurRadius: kShadowOffset * scale,
                               )

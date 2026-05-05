@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:frosthaven_assistant/Layout/MainList/main_list.dart';
 import 'package:frosthaven_assistant/Layout/bottom_bar.dart';
-import 'package:frosthaven_assistant/Layout/main_list.dart';
 import 'package:frosthaven_assistant/Layout/main_scaffold.dart';
 import 'package:frosthaven_assistant/Layout/menus/main_menu.dart';
 import 'package:frosthaven_assistant/Layout/top_bar.dart';
@@ -61,14 +61,16 @@ void main() {
       expect(scaffold.drawer, isA<MainMenu>());
     });
 
-    testWidgets('renders MainScaffoldBody in body', (WidgetTester tester) async {
+    testWidgets('renders MainScaffoldBody in body',
+        (WidgetTester tester) async {
       await pumpScaffold(tester);
       expect(find.byType(MainScaffoldBody), findsOneWidget);
     });
   });
 
   group('MainScaffoldBody', () {
-    testWidgets('renders MainList when not loading', (WidgetTester tester) async {
+    testWidgets('renders MainList when not loading',
+        (WidgetTester tester) async {
       loading.value = false;
       await pumpScaffold(tester);
       expect(find.byType(MainList), findsOneWidget);
@@ -114,7 +116,8 @@ void main() {
       FlutterError.onError = originalOnError;
 
       final sizedBox = tester.widget<SizedBox>(
-        find.byWidgetPredicate((w) => w is SizedBox && w.width == 0 && w.height == 0),
+        find.byWidgetPredicate(
+            (w) => w is SizedBox && w.width == 0 && w.height == 0),
       );
       expect(sizedBox, isNotNull);
     });

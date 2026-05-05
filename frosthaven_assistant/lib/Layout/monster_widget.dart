@@ -1,16 +1,16 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Layout/monster_ability_card_widget.dart';
-import 'package:frosthaven_assistant/Resource/app_constants.dart';
+import 'package:frosthaven_assistant/Layout/MonsterAbilityCardWidget/monster_ability_card_widget.dart';
 import 'package:frosthaven_assistant/Layout/monster_box.dart';
 import 'package:frosthaven_assistant/Layout/view_models/monster_widget_view_model.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../Resource/color_matrices.dart';
 import '../Resource/ui_utils.dart';
-import 'monster_stat_card_widget.dart';
+import 'MonsterStatCardWidget/monster_stat_card_widget.dart';
 
 class MonsterWidget extends StatefulWidget {
   MonsterWidget({super.key, required this.data, this.gameState});

@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frosthaven_assistant/Layout/loot_deck_widget.dart';
+import 'package:frosthaven_assistant/Layout/LootDeckWidget/loot_deck_widget.dart';
 import 'package:frosthaven_assistant/Layout/menus/loot_cards_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_loot_card_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_campaign_command.dart';

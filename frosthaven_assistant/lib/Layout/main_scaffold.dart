@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/ModifierDeckWidget/modifier_deck_widget.dart';
 import 'package:frosthaven_assistant/Layout/background.dart';
-import 'package:frosthaven_assistant/Resource/app_constants.dart';
-import 'package:frosthaven_assistant/Layout/modifier_deck_widget.dart';
 import 'package:frosthaven_assistant/Layout/section_list.dart';
 import 'package:frosthaven_assistant/Layout/top_bar.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../Model/campaign.dart';
@@ -13,10 +13,10 @@ import '../Resource/scaling.dart';
 import '../Resource/settings.dart';
 import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
+import 'LootDeckWidget/loot_deck_widget.dart';
+import 'MainList/main_list.dart';
 import 'bottom_bar.dart';
 import 'character_amds_widget.dart';
-import 'loot_deck_widget.dart';
-import 'main_list.dart';
 import 'menus/auto_add_standee_menu.dart';
 import 'menus/main_menu.dart';
 import 'view_models/main_scaffold_view_model.dart';
@@ -42,8 +42,8 @@ class MainScaffold extends StatelessWidget {
                   resizeToAvoidBottomInset: false,
                   bottomNavigationBar: RepaintBoundary(child: BottomBar()),
                   appBar: PreferredSize(
-                      preferredSize: Size(
-                          double.infinity, kBarHeight * settings.userScalingBars.value),
+                      preferredSize: Size(double.infinity,
+                          kBarHeight * settings.userScalingBars.value),
                       child: const RepaintBoundary(child: TopBar())),
                   drawer: MainMenu(),
                   body: const RepaintBoundary(child: MainScaffoldBody())));
@@ -99,10 +99,8 @@ class AutoAddDialogTrigger extends StatelessWidget {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               if (context.mounted) {
                 gameState.pendingAutoAddDialog.value = null;
-                openDialogWithDismissOption(
-                    context,
-                    AutoAddStandeeMenu(monsterData: monsterData),
-                    false);
+                openDialogWithDismissOption(context,
+                    AutoAddStandeeMenu(monsterData: monsterData), false);
               }
             });
           }
@@ -201,7 +199,8 @@ class MainScaffoldBody extends StatelessWidget {
                                               if (vm.shouldShowAlliesDeck)
                                                 Container(
                                                     margin: EdgeInsets.only(
-                                                      top: _kDeckMargin * barScale,
+                                                      top: _kDeckMargin *
+                                                          barScale,
                                                     ),
                                                     child:
                                                         const ModifierDeckWidget(
@@ -212,7 +211,8 @@ class MainScaffoldBody extends StatelessWidget {
                                                   vm.showAmdDeck)
                                                 Container(
                                                     margin: EdgeInsets.only(
-                                                      top: _kDeckMargin * barScale,
+                                                      top: _kDeckMargin *
+                                                          barScale,
                                                     ),
                                                     child:
                                                         const ModifierDeckWidget(

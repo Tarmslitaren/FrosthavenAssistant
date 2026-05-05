@@ -1,262 +1,52 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Layout/menus/perks_menu.dart';
-import 'package:frosthaven_assistant/Layout/menus/remove_amd_card_menu.dart';
-import 'package:frosthaven_assistant/Layout/menus/removed_modifier_card_menu.dart';
-import 'package:frosthaven_assistant/Layout/menus/send_to_bottom_menu.dart';
-import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
-import 'package:frosthaven_assistant/Resource/app_constants.dart';
-import 'package:frosthaven_assistant/Resource/commands/add_cs_party_card_command.dart';
-import 'package:frosthaven_assistant/Resource/commands/add_perk_command.dart';
-import 'package:frosthaven_assistant/Resource/commands/amd_add_minus_one_command.dart';
-import 'package:frosthaven_assistant/Resource/commands/amd_cassandra_special_command.dart';
-import 'package:frosthaven_assistant/Resource/commands/amd_imbue1_command.dart';
-import 'package:frosthaven_assistant/Resource/commands/amd_imbue2_command.dart';
-import 'package:frosthaven_assistant/Resource/commands/amd_remove_imbue_command.dart';
-import 'package:frosthaven_assistant/Resource/commands/amd_remove_minus_1_command.dart';
-import 'package:frosthaven_assistant/Resource/commands/bad_omen_command.dart';
-import 'package:frosthaven_assistant/Resource/commands/corrosive_spew_command.dart';
-import 'package:frosthaven_assistant/Resource/commands/donate_cs_sanctuary_command.dart';
-import 'package:frosthaven_assistant/Resource/commands/remove_cs_party_card_command.dart';
-import 'package:frosthaven_assistant/Resource/commands/remove_cs_sanctuary_donation_command.dart';
-import 'package:frosthaven_assistant/Resource/commands/reorder_modifier_list_command.dart';
-import 'package:frosthaven_assistant/Resource/settings.dart';
-import 'package:reorderables/reorderables.dart';
 
-import '../../Resource/commands/amd_remove_minus_2_command.dart';
-import '../../Resource/commands/amd_remove_plus_0_command.dart';
-import '../../Resource/commands/amd_reveal_command.dart';
-import '../../Resource/commands/change_stat_commands/change_bless_command.dart';
-import '../../Resource/commands/change_stat_commands/change_curse_command.dart';
-import '../../Resource/commands/change_stat_commands/change_empower_command.dart';
-import '../../Resource/commands/change_stat_commands/change_enfeeble_command.dart';
-import '../../Resource/game_methods.dart';
-import '../../Resource/state/game_state.dart';
-import '../../Resource/ui_utils.dart';
-import '../../services/service_locator.dart';
-import '../counter_button.dart';
-import 'gh2e_faction_amd_card_menu.dart';
+import '../../../Resource/app_constants.dart';
+import '../../../Resource/commands/amd_add_minus_one_command.dart';
+import '../../../Resource/commands/amd_cassandra_special_command.dart';
+import '../../../Resource/commands/amd_imbue1_command.dart';
+import '../../../Resource/commands/amd_imbue2_command.dart';
+import '../../../Resource/commands/amd_remove_imbue_command.dart';
+import '../../../Resource/commands/amd_remove_minus_1_command.dart';
+import '../../../Resource/commands/amd_remove_plus_0_command.dart';
+import '../../../Resource/commands/add_perk_command.dart';
+import '../../../Resource/commands/bad_omen_command.dart';
+import '../../../Resource/commands/change_stat_commands/change_bless_command.dart';
+import '../../../Resource/commands/change_stat_commands/change_curse_command.dart';
+import '../../../Resource/commands/change_stat_commands/change_empower_command.dart';
+import '../../../Resource/commands/change_stat_commands/change_enfeeble_command.dart';
+import '../../../Resource/commands/corrosive_spew_command.dart';
+import '../../../Resource/commands/donate_cs_sanctuary_command.dart';
+import '../../../Resource/commands/remove_cs_party_card_command.dart';
+import '../../../Resource/commands/remove_cs_sanctuary_donation_command.dart';
+import '../../../Resource/commands/amd_remove_minus_2_command.dart';
+import '../../../Resource/game_methods.dart';
+import '../../../Resource/settings.dart';
+import '../../../Resource/state/game_state.dart';
+import '../../../Resource/ui_utils.dart';
+import '../../counter_button.dart';
+import '../gh2e_faction_amd_card_menu.dart';
+import '../perks_menu.dart';
+import '../removed_modifier_card_menu.dart';
+import 'modifier_deck_party_button.dart';
+import 'modifier_deck_reveal_button.dart';
 
-class ModifierDeckMenu extends StatefulWidget {
-  static const double _kRevealButtonWidth = 32.0;
-  static const double _kListWidthRatio = 0.3;
-  static const int _kReorderAnimationMs = 400;
+class ModifierDeckHeader extends StatelessWidget {
+  static const double _kHeaderMargin = 2.0;
+  static const double _kHeaderBorderRadius = 4.0;
   static const int _kMaxBlessCurse = 10;
   static const int _kMaxRuinmawEmpower = 12;
   static const int _kMaxVimthreaderGrEmpower = 5;
   static const int _kMaxLifespeakerEnfeeble = 15;
-  static const double _kHeaderBorderRadius = 4.0;
   static const int _kAdvancedImbuementLevel = 2;
   static const int _kHailPerkIndex = 17;
   static const int _kCassandraPerkIndex = 15;
   static const int _kMaxRevealButtonNr = 6;
   static const int _kPartyButtonCount = 4;
-  static const double _kHeaderMargin = 2.0;
-  static const double _kFooterHeight = 32.0;
-  static const double _kFooterBottomPos = 4.0;
-  static const double _kNameLeftPos = 20.0;
-  static const double _kItemHeightCount = 12.0;
-  static const double _kItemBaseHeight = 40.0;
-  static const double _kItemMarginMultiplier = 2.0;
 
-  const ModifierDeckMenu({
+  const ModifierDeckHeader({
     super.key,
-    required this.name,
-    this.gameState,
-    this.settings,
-  });
-
-  final String name;
-
-  final GameState? gameState;
-  // injected for testing
-  final Settings? settings;
-
-  @override
-  ModifierDeckMenuState createState() => ModifierDeckMenuState();
-}
-
-class ModifierDeckMenuState extends State<ModifierDeckMenu> {
-  GameState get _gameState => widget.gameState ?? getIt<GameState>();
-  Settings get _settings => widget.settings ?? getIt<Settings>();
-  final scrollController = ScrollController();
-
-  bool isRevealed(ModifierCard item) {
-    ModifierDeck deck = GameMethods.getModifierDeck(widget.name, _gameState);
-    final drawPile = deck.drawPileContents.reversed.toList();
-    for (int i = 0; i < deck.revealedCount.value; i++) {
-      if (item == drawPile[i]) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  List<Widget> generateList(
-      List<ModifierCard> inputList, bool allOpen, String name) {
-    List<Widget> list = [];
-    for (int index = 0; index < inputList.length; index++) {
-      final key = index.toString();
-      final item = inputList[index];
-      Item value = Item(
-          key: Key(key),
-          data: item,
-          name: name,
-          revealed: isRevealed(item) || allOpen);
-      if (!allOpen) {
-        InkWell gestureDetector = InkWell(
-          key: Key(key),
-          onTap: () {
-            //open remove card menu
-            openDialog(
-                context,
-                SendToBottomMenu(
-                  currentIndex: index,
-                  length: inputList.length,
-                  name: name,
-                  revealed: isRevealed(item) || allOpen,
-                ));
-          },
-          child: value,
-        );
-        list.add(gestureDetector);
-      } else {
-        InkWell gestureDetector = InkWell(
-          key: Key(index.toString()),
-          onTap: () {
-            //open remove card menu
-            openDialog(context, RemoveAMDCardMenu(index: index, name: name));
-          },
-          child: value,
-        );
-        //reason for row is to force wrap width of ListView
-        list.add(Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            mainAxisSize: MainAxisSize.min,
-            key: Key(index.toString()),
-            children: [gestureDetector]));
-      }
-    }
-    return list;
-  }
-
-  Widget buildList(
-      List<ModifierCard> list, bool reorderable, bool allOpen, String name) {
-    double screenWidth = MediaQuery.of(context).size.width;
-
-    return Theme(
-        data: Theme.of(context).copyWith(
-          canvasColor: Colors
-              .transparent, //needed to make background transparent if reorder is enabled
-          //other styles
-        ),
-        child: SizedBox(
-          width: screenWidth * ModifierDeckMenu._kListWidthRatio,
-          child: reorderable
-              ? ReorderableColumn(
-                  needsLongPressDraggable: true,
-                  scrollController: scrollController,
-                  scrollAnimationDuration: const Duration(
-                      milliseconds: ModifierDeckMenu._kReorderAnimationMs),
-                  reorderAnimationDuration: const Duration(
-                      milliseconds: ModifierDeckMenu._kReorderAnimationMs),
-                  buildDraggableFeedback: defaultBuildDraggableFeedback,
-                  onReorder: (index, dropIndex) {
-                    setState(() {
-                      dropIndex = list.length - dropIndex - 1;
-                      index = list.length - index - 1;
-                      list.insert(dropIndex, list.removeAt(index));
-                      _gameState.action(ReorderModifierListCommand(
-                          dropIndex, index, name,
-                          gameState: _gameState));
-                    });
-                  },
-                  children: generateList(list, allOpen, name),
-                )
-              : ListView(
-                  controller: ScrollController(),
-                  children: generateList(list, allOpen, name).reversed.toList(),
-                ),
-        ));
-  }
-
-  @override
-  void deactivate() {
-    //revealedList = [];
-    super.deactivate();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ValueListenableBuilder<int>(
-        valueListenable: _gameState.commandIndex,
-        builder: (context, value, child) {
-          final name = widget.name;
-          final deck = GameMethods.getModifierDeck(name, _gameState);
-          final drawPile = deck.drawPileContents.reversed.toList();
-          final discardPile = deck.discardPileContents.toList();
-          final screenSize = MediaQuery.of(context).size;
-
-          return Container(
-              constraints: BoxConstraints(
-                  maxWidth: screenSize.width,
-                  maxHeight: screenSize.height * kMenuMaxHeightRatio),
-              child: Card(
-                  color: Colors.transparent,
-                  child: Stack(children: [
-                    Column(mainAxisSize: MainAxisSize.max, children: [
-                      _ModifierDeckHeader(
-                          deck: deck,
-                          gameState: _gameState,
-                          settings: _settings,
-                          name: name),
-                      Flexible(
-                          child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          buildList(drawPile, true, false, name),
-                          buildList(discardPile, false, true, name)
-                        ],
-                      )),
-                      Container(
-                        height: ModifierDeckMenu._kFooterHeight,
-                        margin: const EdgeInsets.all(
-                            ModifierDeckMenu._kHeaderMargin),
-                        decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(
-                                    ModifierDeckMenu._kHeaderBorderRadius),
-                                bottomRight: Radius.circular(
-                                    ModifierDeckMenu._kHeaderBorderRadius))),
-                      ),
-                    ]),
-                    Positioned(
-                        width: kCloseButtonWidth,
-                        height: kButtonSize,
-                        right: 0,
-                        bottom: 0,
-                        child: TextButton(
-                            child: const Text(
-                              'Close',
-                              style: kButtonLabelStyle,
-                            ),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            })),
-                    Positioned(
-                        bottom: ModifierDeckMenu._kFooterBottomPos,
-                        left: ModifierDeckMenu._kNameLeftPos,
-                        child: Text(name, style: kButtonLabelStyle))
-                  ])));
-        });
-  }
-}
-
-class _ModifierDeckHeader extends StatelessWidget {
-  const _ModifierDeckHeader({
     required this.deck,
     required this.gameState,
     required this.settings,
@@ -287,13 +77,12 @@ class _ModifierDeckHeader extends StatelessWidget {
 
     final characterHail = GameMethods.getCharacterByName("Hail");
     final bool hasHailPerk = characterHail != null
-        ? characterHail.characterState.perkList[ModifierDeckMenu._kHailPerkIndex]
+        ? characterHail.characterState.perkList[_kHailPerkIndex]
         : false;
 
     final characterCassandra = GameMethods.getCharacterByName("Cassandra");
     final bool hasCassandraPerk = characterCassandra != null
-        ? characterCassandra.characterState
-            .perkList[ModifierDeckMenu._kCassandraPerkIndex]
+        ? characterCassandra.characterState.perkList[_kCassandraPerkIndex]
         : false;
 
     final monsterDeck = name.isEmpty;
@@ -338,14 +127,12 @@ class _ModifierDeckHeader extends StatelessWidget {
 
     return Container(
         width: screenWidth,
-        margin: const EdgeInsets.all(ModifierDeckMenu._kHeaderMargin),
+        margin: const EdgeInsets.all(_kHeaderMargin),
         decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
-                topLeft:
-                    Radius.circular(ModifierDeckMenu._kHeaderBorderRadius),
-                topRight:
-                    Radius.circular(ModifierDeckMenu._kHeaderBorderRadius))),
+                topLeft: Radius.circular(_kHeaderBorderRadius),
+                topRight: Radius.circular(_kHeaderBorderRadius))),
         child: Wrap(
             crossAxisAlignment: WrapCrossAlignment.center,
             runSpacing: 0,
@@ -373,11 +160,11 @@ class _ModifierDeckHeader extends StatelessWidget {
               if (corrosiveSpew) Text(" Empowers on top", style: textStyle),
               TextButton(
                 onPressed: () {
-                  gameState
-                      .action(AmdAddMinusOneCommand(name, gameState: gameState));
+                  gameState.action(
+                      AmdAddMinusOneCommand(name, gameState: gameState));
                 },
-                child: Text(
-                    "Add -1 card (added : ${deck.addedMinusOnes.value})"),
+                child:
+                    Text("Add -1 card (added : ${deck.addedMinusOnes.value})"),
               ),
               TextButton(
                 onPressed: () {
@@ -412,8 +199,8 @@ class _ModifierDeckHeader extends StatelessWidget {
                 TextButton(
                   onPressed: () {
                     if (deck.imbuement.value > 0) {
-                      gameState.action(
-                          AMDRemoveImbueCommand(gameState: gameState));
+                      gameState
+                          .action(AMDRemoveImbueCommand(gameState: gameState));
                     } else {
                       gameState
                           .action(AMDImbue1Command(gameState: gameState));
@@ -421,20 +208,18 @@ class _ModifierDeckHeader extends StatelessWidget {
                   },
                   child: Text(imbuement > 0 ? "Remove Imbue" : "Imbue"),
                 ),
-              if (imbuement != ModifierDeckMenu._kAdvancedImbuementLevel &&
-                  monsterDeck)
+              if (imbuement != _kAdvancedImbuementLevel && monsterDeck)
                 TextButton(
                   onPressed: () {
-                    gameState
-                        .action(AMDImbue2Command(gameState: gameState));
+                    gameState.action(AMDImbue2Command(gameState: gameState));
                   },
                   child: const Text("Advanced Imbue"),
                 ),
               if (name.isEmpty && characterHail != null)
                 TextButton(
                   onPressed: () {
-                    gameState.action(AddPerkCommand(
-                        "Hail", ModifierDeckMenu._kHailPerkIndex));
+                    gameState
+                        .action(AddPerkCommand("Hail", _kHailPerkIndex));
                   },
                   child: Text(
                     hasHailPerk ? "Remove Hail Perk" : "Add Hail Perk",
@@ -444,8 +229,8 @@ class _ModifierDeckHeader extends StatelessWidget {
                   !settings.showCharacterAMD.value)
                 TextButton(
                   onPressed: () {
-                    gameState.action(AddPerkCommand("Cassandra",
-                        ModifierDeckMenu._kCassandraPerkIndex));
+                    gameState.action(
+                        AddPerkCommand("Cassandra", _kCassandraPerkIndex));
                   },
                   child: Text(
                     hasCassandraPerk
@@ -479,8 +264,8 @@ class _ModifierDeckHeader extends StatelessWidget {
                     donatedCS
                         ? gameState.action(RemoveCSSanctuaryDonationCommand(
                             name, gameState: gameState))
-                        : gameState.action(DonateCSSanctuaryCommand(name,
-                            gameState: gameState));
+                        : gameState.action(
+                            DonateCSSanctuaryCommand(name, gameState: gameState));
                   },
                   child: Text(
                       donatedCS ? "Remove\nDonation" : "Donate to\nSanctuary"),
@@ -499,8 +284,8 @@ class _ModifierDeckHeader extends StatelessWidget {
                         children: [
                             const Text("Add Party\n Card:"),
                             ...List.generate(
-                              ModifierDeckMenu._kPartyButtonCount,
-                              (i) => _PartyButton(
+                              _kPartyButtonCount,
+                              (i) => ModifierDeckPartyButton(
                                   nr: i + 1,
                                   gameState: gameState,
                                   name: name),
@@ -511,10 +296,8 @@ class _ModifierDeckHeader extends StatelessWidget {
                 IconButton(
                   icon: Image.asset("assets/images/demons.png"),
                   onPressed: () {
-                    openDialog(
-                        context,
-                        GH2eFactionAMDCardMenu(
-                            faction: "Demons", name: name));
+                    openDialog(context,
+                        GH2eFactionAMDCardMenu(faction: "Demons", name: name));
                   },
                 ),
               if (isCharacter &&
@@ -533,17 +316,14 @@ class _ModifierDeckHeader extends StatelessWidget {
                 IconButton(
                   icon: Image.asset("assets/images/military.png"),
                   onPressed: () {
-                    openDialog(
-                        context,
-                        GH2eFactionAMDCardMenu(
-                            faction: "Military", name: name));
+                    openDialog(context,
+                        GH2eFactionAMDCardMenu(faction: "Military", name: name));
                   },
                 ),
               CounterButton(
                   notifier: deck.getRemovable("bless"),
-                  command:
-                      ChangeBlessCommand.deck(deck, gameState: gameState),
-                  maxValue: ModifierDeckMenu._kMaxBlessCurse,
+                  command: ChangeBlessCommand.deck(deck, gameState: gameState),
+                  maxValue: _kMaxBlessCurse,
                   image: "assets/images/abilities/bless.png",
                   showTotalValue: true,
                   color: Colors.white,
@@ -552,9 +332,8 @@ class _ModifierDeckHeader extends StatelessWidget {
                   scale: 1),
               CounterButton(
                   notifier: deck.getRemovable("curse"),
-                  command:
-                      ChangeCurseCommand.deck(deck, gameState: gameState),
-                  maxValue: ModifierDeckMenu._kMaxBlessCurse,
+                  command: ChangeCurseCommand.deck(deck, gameState: gameState),
+                  maxValue: _kMaxBlessCurse,
                   image: "assets/images/abilities/curse.png",
                   showTotalValue: true,
                   color: Colors.white,
@@ -566,7 +345,7 @@ class _ModifierDeckHeader extends StatelessWidget {
                     notifier: deck.getRemovable("in-enfeeble"),
                     command: ChangeEnfeebleCommand.deck(deck, "in-enfeeble",
                         gameState: gameState),
-                    maxValue: ModifierDeckMenu._kMaxBlessCurse,
+                    maxValue: _kMaxBlessCurse,
                     image: "assets/images/abilities/enfeeble_old.png",
                     extraImage: hasMoreThanOneEnfeeble
                         ? "assets/images/class-icons/Incarnate.png"
@@ -581,7 +360,7 @@ class _ModifierDeckHeader extends StatelessWidget {
                     notifier: deck.getRemovable("in-empower"),
                     command: ChangeEmpowerCommand.deck(deck, "in-empower",
                         gameState: gameState),
-                    maxValue: ModifierDeckMenu._kMaxBlessCurse,
+                    maxValue: _kMaxBlessCurse,
                     image: "assets/images/abilities/empower_old.png",
                     extraImage: hasMoreThanOneEmpower
                         ? "assets/images/class-icons/Incarnate.png"
@@ -596,7 +375,7 @@ class _ModifierDeckHeader extends StatelessWidget {
                     notifier: deck.getRemovable("rm-empower"),
                     command: ChangeEmpowerCommand.deck(deck, "rm-empower",
                         gameState: gameState),
-                    maxValue: ModifierDeckMenu._kMaxRuinmawEmpower,
+                    maxValue: _kMaxRuinmawEmpower,
                     image: "assets/images/abilities/empower_old.png",
                     extraImage: hasMoreThanOneEmpower
                         ? "assets/images/class-icons/Ruinmaw.png"
@@ -611,7 +390,7 @@ class _ModifierDeckHeader extends StatelessWidget {
                     notifier: deck.getRemovable("vi-empower"),
                     command: ChangeEmpowerCommand.deck(deck, "vi-empower",
                         gameState: gameState),
-                    maxValue: ModifierDeckMenu._kMaxBlessCurse,
+                    maxValue: _kMaxBlessCurse,
                     image: "assets/images/abilities/empower.png",
                     extraImage: hasMoreThanOneEmpower
                         ? "assets/images/class-icons/Vimthreader.png"
@@ -626,7 +405,7 @@ class _ModifierDeckHeader extends StatelessWidget {
                     notifier: deck.getRemovable("vi-gr-empower"),
                     command: ChangeEmpowerCommand.deck(deck, "vi-gr-empower",
                         gameState: gameState),
-                    maxValue: ModifierDeckMenu._kMaxVimthreaderGrEmpower,
+                    maxValue: _kMaxVimthreaderGrEmpower,
                     image: "assets/images/abilities/greater-empower.png",
                     showTotalValue: true,
                     color: Colors.white,
@@ -638,7 +417,7 @@ class _ModifierDeckHeader extends StatelessWidget {
                     notifier: deck.getRemovable("vi-enfeeble"),
                     command: ChangeEnfeebleCommand.deck(deck, "vi-enfeeble",
                         gameState: gameState),
-                    maxValue: ModifierDeckMenu._kMaxBlessCurse,
+                    maxValue: _kMaxBlessCurse,
                     image: "assets/images/abilities/enfeeble.png",
                     extraImage: hasMoreThanOneEnfeeble
                         ? "assets/images/class-icons/Vimthreader.png"
@@ -653,7 +432,7 @@ class _ModifierDeckHeader extends StatelessWidget {
                     notifier: deck.getRemovable("vi-gr-enfeeble"),
                     command: ChangeEnfeebleCommand.deck(deck, "vi-gr-enfeeble",
                         gameState: gameState),
-                    maxValue: ModifierDeckMenu._kMaxVimthreaderGrEmpower,
+                    maxValue: _kMaxVimthreaderGrEmpower,
                     image: "assets/images/abilities/greater-enfeeble.png",
                     showTotalValue: true,
                     color: Colors.white,
@@ -665,7 +444,7 @@ class _ModifierDeckHeader extends StatelessWidget {
                     notifier: deck.getRemovable("li-enfeeble"),
                     command: ChangeEnfeebleCommand.deck(deck, "li-enfeeble",
                         gameState: gameState),
-                    maxValue: ModifierDeckMenu._kMaxLifespeakerEnfeeble,
+                    maxValue: _kMaxLifespeakerEnfeeble,
                     image: "assets/images/abilities/enfeeble.png",
                     extraImage: hasMoreThanOneEnfeeble
                         ? "assets/images/class-icons/Lifespeaker.png"
@@ -686,96 +465,13 @@ class _ModifierDeckHeader extends StatelessWidget {
                 ),
               const Text("   Reveal\n    cards:"),
               ...List.generate(
-                min(drawPile.length + 1,
-                    ModifierDeckMenu._kMaxRevealButtonNr + 1),
-                (i) => _RevealButton(
+                min(drawPile.length + 1, _kMaxRevealButtonNr + 1),
+                (i) => ModifierDeckRevealButton(
                     nrOfButtons: drawPile.length,
                     nr: i,
                     gameState: gameState,
                     name: name),
               ),
             ]));
-  }
-}
-
-class Item extends StatelessWidget {
-  const Item(
-      {super.key,
-      required this.data,
-      required this.revealed,
-      required this.name});
-
-  final ModifierCard data;
-  final bool revealed;
-  final String name;
-
-  @override
-  Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    double scale = max(
-        (screenSize.height /
-            (ModifierDeckMenu._kItemBaseHeight *
-                ModifierDeckMenu._kItemHeightCount)),
-        1);
-    final Widget child = revealed
-        ? ModifierCardFront(card: data, name: name, scale: scale)
-        : ModifierCardRear(scale: scale, name: name);
-
-    return Container(
-        margin: EdgeInsets.all(ModifierDeckMenu._kItemMarginMultiplier * scale),
-        child: child);
-  }
-}
-
-class _RevealButton extends StatelessWidget {
-  const _RevealButton({
-    required this.nrOfButtons,
-    required this.nr,
-    required this.gameState,
-    required this.name,
-  });
-
-  final int nrOfButtons;
-  final int nr;
-  final GameState gameState;
-  final String name;
-
-  @override
-  Widget build(BuildContext context) {
-    String text = nr < nrOfButtons ? nr.toString() : "All";
-    return SizedBox(
-        width: ModifierDeckMenu._kRevealButtonWidth,
-        child: TextButton(
-          child: Text(text),
-          onPressed: () {
-            gameState.action(
-                AMDRevealCommand(amount: nr, name: name, gameState: gameState));
-          },
-        ));
-  }
-}
-
-class _PartyButton extends StatelessWidget {
-  const _PartyButton({
-    required this.nr,
-    required this.gameState,
-    required this.name,
-  });
-
-  final int nr;
-  final GameState gameState;
-  final String name;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-        width: ModifierDeckMenu._kRevealButtonWidth,
-        child: TextButton(
-          child: Text(nr.toString()),
-          onPressed: () {
-            gameState
-                .action(AddCSPartyCardCommand(name, 1, gameState: gameState));
-          },
-        ));
   }
 }

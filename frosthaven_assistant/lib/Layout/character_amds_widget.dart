@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../Resource/enums.dart';
 import '../Resource/settings.dart';
 import '../Resource/state/game_state.dart';
-import 'modifier_deck_widget.dart';
+import 'ModifierDeckWidget/modifier_deck_widget.dart';
 import 'view_models/character_amds_view_model.dart';
 
 class CharacterAmdsWidget extends StatefulWidget {
@@ -21,11 +21,11 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
   static const double _kDeckMargin = 4.0;
 
   CharacterAmdsViewModel? _vmInstance;
-  CharacterAmdsViewModel get _vm => _vmInstance ??= CharacterAmdsViewModel(gameState: widget.gameState, settings: widget.settings);
+  CharacterAmdsViewModel get _vm => _vmInstance ??= CharacterAmdsViewModel(
+      gameState: widget.gameState, settings: widget.settings);
   _OpenState _openStateUserIntentPlayTurns = _OpenState.oneOpen;
   _OpenState _openStateUserIntentChooseInit = _OpenState.allOpen;
   _OpenState _lastState = _OpenState.noOpen;
-
 
   List<Offset> _getOffsets(int characterAmount) {
     final roundState = _vm.roundState;
@@ -198,14 +198,15 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
                                   _OpenState.oneOpen &&
                               canShowOneDeck)
                           ? Container(
-                              margin: EdgeInsets.only(top: _kDeckMargin * barScale),
+                              margin:
+                                  EdgeInsets.only(top: _kDeckMargin * barScale),
                               child: ModifierDeckWidget(
                                   name: currentCharacter?.id ?? ''))
                           : Column(
                               children: _vm.charsWithPerks
                                   .map((item) => Container(
-                                      margin:
-                                          EdgeInsets.only(top: _kDeckMargin * barScale),
+                                      margin: EdgeInsets.only(
+                                          top: _kDeckMargin * barScale),
                                       child: ModifierDeckWidget(name: item.id)))
                                   .toList(),
                             )))

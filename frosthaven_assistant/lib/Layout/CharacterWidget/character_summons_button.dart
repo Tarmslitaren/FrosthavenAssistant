@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../Resource/app_constants.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/ui_utils.dart';
-import '../menus/add_summon_menu.dart';
+import '../menus/AddSummonMenu/add_summon_menu.dart';
 
 class CharacterSummonsButton extends StatelessWidget {
   static const double _kButtonSize = 50.0;

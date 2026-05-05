@@ -1,13 +1,14 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
-import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/view_models/modifier_deck_view_model.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/game_data.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
+
+import 'modifier_draw_animation_widget.dart';
+import 'modifier_slide_animation_widget.dart';
 
 class ModifierDeckWidget extends StatefulWidget {
   const ModifierDeckWidget({
@@ -29,7 +30,6 @@ class ModifierDeckWidget extends StatefulWidget {
 }
 
 class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
-  static const int cardAnimationDuration = 1200;
   static const double _kCardOffset = 33.3333;
   static const double _kCardHeight = 39.0;
   static const double _kWidgetWidth = 153.0;
@@ -39,11 +39,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   static const double _kEmptyDiscardWidth = 66.6666;
   static const double _kDiscardPileWidth = 57.6666;
   static const double _kCardRotationTurns = 15 / 360;
-  static const double _kCharIconTop =
-      6.0; // (_kCardHeight - _kCharIconSize) / 2
-  static const double _kRotationDegrees = 15.0;
-  static const double _kRotationInterval = 0.25;
-  static const double _kDegreesPerRadian = 180.0;
+  static const double _kCharIconTop = 6.0;
   static const int _kCenterDivisor = 2;
   static const int _kTransparentBlack = 0x7A000000;
   static const int _kDiscardShowThirdMinSize = 2;
@@ -73,7 +69,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
               left: ModifierDeckWidgetState._kCardOffset * userScalingBars),
           child: child);
     }
-    return _ModifierSlideAnimationWidget(
+    return ModifierSlideAnimationWidget(
       key: key,
       userScalingBars: userScalingBars,
       onComplete: () => _animationsEnabled = false,
@@ -89,8 +85,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
     final double height =
         ModifierDeckWidgetState._kCardHeight * userScalingBars;
     final screenSize = MediaQuery.of(context).size;
-    final double startXOffset =
-        -(width + kSmallMargin * userScalingBars);
+    final double startXOffset = -(width + kSmallMargin * userScalingBars);
 
     final globalPaintBounds = context.globalPaintBounds;
     final screenSpaceOffset =
@@ -110,7 +105,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
         localScreenWidth / ModifierDeckWidgetState._kCenterDivisor -
             width / ModifierDeckWidgetState._kCenterDivisor;
 
-    return _ModifierDrawAnimationWidget(
+    return ModifierDrawAnimationWidget(
       key: key,
       startXOffset: startXOffset,
       xOffset: xOffset,
@@ -131,7 +126,6 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
   Widget _buildContent() {
     final bool isAnimating = false;
-    //is not doing anything now. in case flip animation is added
     return ValueListenableBuilder<double>(
         valueListenable: _vm.userScalingBars,
         builder: (context, value, child) {
@@ -140,24 +134,19 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
             width: ModifierDeckWidgetState._kWidgetWidth * userScalingBars,
             height: ModifierDeckWidgetState._kCardHeight * userScalingBars,
             child: ListenableBuilder(
-                listenable:
-                    Listenable.merge([_vm.lastEvent, _vm.cardCount]),
+                listenable: Listenable.merge([_vm.lastEvent, _vm.cardCount]),
                 builder: (context, child) {
                   if (!_animationsEnabled) {
                     _animationsEnabled = _vm.initAnimationEnabled();
                   }
 
                   final textStyle = TextStyle(
-                      fontSize:
-                          kDeckFontSize * userScalingBars,
+                      fontSize: kDeckFontSize * userScalingBars,
                       color: Colors.white,
                       shadows: [
                         Shadow(
-                            offset: Offset(
-                                kShadowOffset *
-                                    userScalingBars,
-                                kShadowOffset *
-                                    userScalingBars),
+                            offset: Offset(kShadowOffset * userScalingBars,
+                                kShadowOffset * userScalingBars),
                             color: Colors.black)
                       ]);
 
@@ -245,16 +234,14 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                   ]),
                             Positioned(
                                 bottom: 0,
-                                right: kSmallMargin *
-                                    userScalingBars,
+                                right: kSmallMargin * userScalingBars,
                                 child: Text(
                                   deck.drawPileSize.toString(),
                                   style: textStyle,
                                 )),
                           ])),
                       SizedBox(
-                        width: kSmallMargin *
-                            userScalingBars,
+                        width: kSmallMargin * userScalingBars,
                       ),
                       Stack(children: [
                         Container(
@@ -347,216 +334,5 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                 }),
           );
         });
-  }
-}
-
-class _ModifierSlideAnimationWidget extends StatefulWidget {
-  const _ModifierSlideAnimationWidget({
-    required super.key,
-    required this.child,
-    required this.userScalingBars,
-    required this.onComplete,
-  });
-
-  final Widget child;
-  final double userScalingBars;
-  final VoidCallback onComplete;
-
-  @override
-  State<_ModifierSlideAnimationWidget> createState() =>
-      _ModifierSlideAnimationWidgetState();
-}
-
-class _ModifierSlideAnimationWidgetState
-    extends State<_ModifierSlideAnimationWidget>
-    with SingleTickerProviderStateMixin {
-  AnimationController? _controller;
-  Animation<Offset>? _translation;
-  Animation<double>? _rotation;
-
-  @override
-  void initState() {
-    super.initState();
-    final ctrl = AnimationController(
-      duration: const Duration(
-          milliseconds: ModifierDeckWidgetState.cardAnimationDuration),
-      vsync: this,
-    );
-    _controller = ctrl;
-
-    final slideTarget = Offset(
-        ModifierDeckWidgetState._kCardOffset * widget.userScalingBars, 0);
-    _translation = TweenSequence<Offset>([
-      TweenSequenceItem(tween: ConstantTween(Offset.zero), weight: 1),
-      TweenSequenceItem(
-        tween: Tween(begin: Offset.zero, end: slideTarget)
-            .chain(CurveTween(curve: Curves.easeIn)),
-        weight: 1,
-      ),
-    ]).animate(ctrl);
-
-    _rotation = TweenSequence<double>([
-      TweenSequenceItem(
-          tween: ConstantTween(-ModifierDeckWidgetState._kRotationDegrees *
-              math.pi /
-              ModifierDeckWidgetState._kDegreesPerRadian),
-          weight: 1),
-      TweenSequenceItem(
-        tween: Tween(
-            begin: -ModifierDeckWidgetState._kRotationDegrees *
-                math.pi /
-                ModifierDeckWidgetState._kDegreesPerRadian,
-            end: 0.0),
-        weight: 1,
-      ),
-    ]).animate(ctrl);
-
-    ctrl.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        widget.onComplete();
-      }
-    });
-    ctrl.forward();
-  }
-
-  @override
-  void dispose() {
-    _controller?.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final controller = _controller;
-    final translation = _translation;
-    final rotation = _rotation;
-    if (controller == null || translation == null || rotation == null) {
-      return widget.child;
-    }
-    return RepaintBoundary(
-      child: AnimatedBuilder(
-        animation: controller,
-        builder: (context, child) => Transform.translate(
-          offset: translation.value,
-          child: Transform.rotate(
-            angle: rotation.value,
-            child: child,
-          ),
-        ),
-        child: widget.child,
-      ),
-    );
-  }
-}
-
-class _ModifierDrawAnimationWidget extends StatefulWidget {
-  const _ModifierDrawAnimationWidget({
-    required super.key,
-    required this.child,
-    required this.startXOffset,
-    required this.xOffset,
-    required this.yOffset,
-    required this.onComplete,
-  });
-
-  final Widget child;
-  final double startXOffset;
-  final double xOffset;
-  final double yOffset;
-  final VoidCallback onComplete;
-
-  @override
-  State<_ModifierDrawAnimationWidget> createState() =>
-      _ModifierDrawAnimationWidgetState();
-}
-
-class _ModifierDrawAnimationWidgetState
-    extends State<_ModifierDrawAnimationWidget>
-    with SingleTickerProviderStateMixin {
-  static const double _maxScale = 4.0;
-  static const double _kAnimWeightPause = 2;
-
-  AnimationController? _controller;
-  Animation<Offset>? _translation;
-  Animation<double>? _scale;
-  Animation<double>? _rotation;
-
-  @override
-  void initState() {
-    super.initState();
-    final ctrl = AnimationController(
-      duration: const Duration(
-          milliseconds: ModifierDeckWidgetState.cardAnimationDuration),
-      vsync: this,
-    );
-    _controller = ctrl;
-
-    final start = Offset(widget.startXOffset, 0);
-    final center = Offset(widget.xOffset, widget.yOffset);
-
-    _translation = TweenSequence<Offset>([
-      TweenSequenceItem(tween: Tween(begin: start, end: center), weight: 1),
-      TweenSequenceItem(
-          tween: ConstantTween(center), weight: _kAnimWeightPause),
-      TweenSequenceItem(
-          tween: Tween(begin: center, end: Offset.zero), weight: 1),
-    ]).animate(ctrl);
-
-    _scale = TweenSequence<double>([
-      TweenSequenceItem(tween: Tween(begin: 1.0, end: _maxScale), weight: 1),
-      TweenSequenceItem(
-          tween: ConstantTween(_maxScale), weight: _kAnimWeightPause),
-      TweenSequenceItem(tween: Tween(begin: _maxScale, end: 1.0), weight: 1),
-    ]).animate(ctrl);
-
-    _rotation = Tween<double>(begin: math.pi, end: kTwoPI).animate(
-      CurvedAnimation(
-          parent: ctrl,
-          curve:
-              const Interval(0.0, ModifierDeckWidgetState._kRotationInterval)),
-    );
-
-    ctrl.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        widget.onComplete();
-      }
-    });
-    ctrl.forward();
-  }
-
-  @override
-  void dispose() {
-    _controller?.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final controller = _controller;
-    final translation = _translation;
-    final scale = _scale;
-    final rotation = _rotation;
-    if (controller == null ||
-        translation == null ||
-        scale == null ||
-        rotation == null) {
-      return widget.child;
-    }
-    return RepaintBoundary(
-      child: AnimatedBuilder(
-        animation: controller,
-        builder: (context, child) => Transform.translate(
-          offset: translation.value,
-          child: Transform.scale(
-            scale: scale.value,
-            child: Transform.rotate(
-              angle: rotation.value,
-              child: child,
-            ),
-          ),
-        ),
-        child: widget.child,
-      ),
-    );
   }
 }

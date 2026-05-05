@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/counter_button.dart';
-import 'package:frosthaven_assistant/Layout/menus/modifier_deck_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/ModifierDeckMenu/modifier_deck_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/perks_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_add_minus_one_command.dart';

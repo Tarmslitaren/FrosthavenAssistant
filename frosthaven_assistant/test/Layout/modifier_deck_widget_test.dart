@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:frosthaven_assistant/Layout/ModifierDeckWidget/modifier_deck_widget.dart';
+import 'package:frosthaven_assistant/Layout/menus/ModifierDeckMenu/modifier_deck_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/modifier_card_zoom.dart';
-import 'package:frosthaven_assistant/Layout/menus/modifier_deck_menu.dart';
-import 'package:frosthaven_assistant/Layout/modifier_deck_widget.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_modifier_card_command.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
@@ -148,15 +148,14 @@ void main() {
     testWidgets('card count text updates after drawing a card',
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
-      final deck =
-          GameMethods.getModifierDeck(monsterDeckName, gameState);
+      final deck = GameMethods.getModifierDeck(monsterDeckName, gameState);
       final countBefore = deck.drawPileSize;
 
       await pumpWidget(tester, monsterDeckName);
       expect(find.text(countBefore.toString()), findsAtLeast(1));
 
-      gameState.action(DrawModifierCardCommand(monsterDeckName,
-          gameState: gameState));
+      gameState.action(
+          DrawModifierCardCommand(monsterDeckName, gameState: gameState));
       await tester.pump();
 
       expect(find.text((countBefore - 1).toString()), findsAtLeast(1));

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Layout/monster_ability_card_widget.dart';
+import 'package:frosthaven_assistant/Layout/MonsterAbilityCardWidget/monster_ability_card_front.dart';
 import 'package:frosthaven_assistant/Model/monster_ability.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';

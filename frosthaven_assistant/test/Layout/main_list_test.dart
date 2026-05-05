@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/CharacterWidget/character_widget.dart';
+import 'package:frosthaven_assistant/Layout/MainList/main_list.dart';
+import 'package:frosthaven_assistant/Layout/MainList/main_list_item.dart';
 import 'package:frosthaven_assistant/Layout/background.dart';
-import 'package:frosthaven_assistant/Layout/main_list.dart';
 import 'package:frosthaven_assistant/Layout/monster_widget.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
@@ -63,22 +64,28 @@ void main() {
 
     testWidgets('renders CharacterWidget when a character is added',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+              gameState: getIt<GameState>())
+          .execute();
       await pumpWidget(tester);
       expect(find.byType(CharacterWidget), findsOneWidget);
     });
 
     testWidgets('renders MonsterWidget when a monster is added',
         (WidgetTester tester) async {
-      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>())
+          .execute();
       await pumpWidget(tester);
       expect(find.byType(MonsterWidget), findsOneWidget);
     });
 
     testWidgets('renders both CharacterWidget and MonsterWidget together',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
-      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+              gameState: getIt<GameState>())
+          .execute();
+      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>())
+          .execute();
       await pumpWidget(tester);
       expect(find.byType(CharacterWidget), findsOneWidget);
       expect(find.byType(MonsterWidget), findsOneWidget);
@@ -86,9 +93,11 @@ void main() {
 
     testWidgets('renders Item wrapper for each list element',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+              gameState: getIt<GameState>())
+          .execute();
       await pumpWidget(tester);
-      expect(find.byType(Item), findsAtLeast(1));
+      expect(find.byType(MainListItem), findsAtLeast(1));
     });
 
     testWidgets('scrollToTop does not crash when called with no clients',
@@ -104,8 +113,7 @@ void main() {
   group('FLIP animation', () {
     testWidgets('translates items when list order changes',
         (WidgetTester tester) async {
-      AddMonsterCommand('Zealot', 1, false,
-              gameState: getIt<GameState>())
+      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>())
           .execute();
       AddMonsterCommand('Vermling Raider', 1, false,
               gameState: getIt<GameState>())
@@ -126,7 +134,8 @@ void main() {
       final yBefore0 = tester.getTopLeft(monsterFinder.at(0)).dy;
       final yBefore1 = tester.getTopLeft(monsterFinder.at(1)).dy;
       expect(yBefore0, isNot(equals(yBefore1)),
-          reason: 'Monsters must start at different y-positions for FLIP to work');
+          reason:
+              'Monsters must start at different y-positions for FLIP to work');
 
       // Swap the two monsters.  ReorderListCommand calls updateList.notify()
       // internally, which fires _onUpdateList → _capturePositions + setState
@@ -162,15 +171,18 @@ void main() {
   group('Item widget', () {
     testWidgets('wraps CharacterWidget in AnimatedContainer',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
-      final character = getIt<GameState>().currentList
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+              gameState: getIt<GameState>())
+          .execute();
+      final character = getIt<GameState>()
+          .currentList
           .firstWhere((e) => e is Character) as Character;
       final originalOnError = FlutterError.onError;
       addTearDown(() => FlutterError.onError = originalOnError);
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(body: Item(data: character)),
+          home: Scaffold(body: MainListItem(data: character)),
         ),
       );
       await tester.pump();
@@ -181,15 +193,17 @@ void main() {
 
     testWidgets('wraps MonsterWidget in AnimatedContainer',
         (WidgetTester tester) async {
-      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
-      final monster = getIt<GameState>().currentList
+      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>())
+          .execute();
+      final monster = getIt<GameState>()
+          .currentList
           .firstWhere((e) => e is Monster) as Monster;
       final originalOnError = FlutterError.onError;
       addTearDown(() => FlutterError.onError = originalOnError);
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(body: Item(data: monster)),
+          home: Scaffold(body: MainListItem(data: monster)),
         ),
       );
       await tester.pump();

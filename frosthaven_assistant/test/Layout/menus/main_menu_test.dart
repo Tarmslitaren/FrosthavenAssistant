@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:frosthaven_assistant/Layout/menus/SelectScenarioMenu/select_scenario_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/SetLevelMenu/set_level_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/SettingsMenu/settings_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_character_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_monster_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_section_menu.dart';
@@ -9,9 +12,6 @@ import 'package:frosthaven_assistant/Layout/menus/loot_cards_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/main_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_character_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_monster_menu.dart';
-import 'package:frosthaven_assistant/Layout/menus/select_scenario_menu.dart';
-import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
-import 'package:frosthaven_assistant/Layout/menus/settings_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/hide_ally_deck_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_campaign_command.dart';

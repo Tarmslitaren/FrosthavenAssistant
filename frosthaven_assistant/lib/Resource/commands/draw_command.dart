@@ -1,4 +1,4 @@
-import '../../Layout/main_list.dart';
+import '../../Layout/MainList/main_list.dart';
 import '../enums.dart';
 import '../state/game_state.dart';
 
@@ -13,7 +13,8 @@ class DrawCommand extends Command {
     RoundMethods.sortByInitiative(stateAccess);
     RoundMethods.setRoundState(stateAccess, RoundState.playTurns);
     if (_gameState.currentList.isNotEmpty) {
-      _gameState.currentList.first.setTurnState(stateAccess, TurnsState.current);
+      _gameState.currentList.first
+          .setTurnState(stateAccess, TurnsState.current);
     }
 
     Future.delayed(const Duration(milliseconds: 600), () {
@@ -21,7 +22,6 @@ class DrawCommand extends Command {
       MainList.scrollToTop();
     });
   }
-
 
   @override
   String describe() {

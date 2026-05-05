@@ -6,8 +6,8 @@ import 'package:frosthaven_assistant/services/network/network_ui.dart';
 
 import '../Resource/settings.dart';
 import '../Resource/state/game_state.dart';
+import 'ModifierDeckWidget/modifier_deck_widget.dart';
 import 'bottom_bar_level_widget.dart';
-import 'modifier_deck_widget.dart';
 
 class BottomBar extends StatelessWidget {
   const BottomBar({super.key, this.settings, this.gameState});
@@ -48,7 +48,8 @@ class BottomBar extends StatelessWidget {
                                       opacity: vm.backgroundOpacity,
                                       image: ResizeImage(
                                           AssetImage(vm.backgroundImagePath),
-                                          height: (kBarHeight * barScale).toInt()),
+                                          height:
+                                              (kBarHeight * barScale).toInt()),
                                       fit: BoxFit.cover,
                                       repeat: ImageRepeat.repeatX),
                                 ),

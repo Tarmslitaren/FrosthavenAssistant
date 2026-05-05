@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:frosthaven_assistant/Model/scenario.dart';
 
-import '../../Layout/main_list.dart';
+import '../../Layout/MainList/main_list.dart';
 import '../enums.dart';
 import '../game_data.dart';
 import '../game_methods.dart';

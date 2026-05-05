@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../Resource/settings.dart';
 import '../Resource/state/game_state.dart';
 import '../Resource/ui_utils.dart';
-import 'menus/set_level_menu.dart';
+import 'menus/SetLevelMenu/set_level_menu.dart';
 import 'view_models/bottom_bar_level_widget_view_model.dart';
 
 class BottomBarLevelWidget extends StatelessWidget {

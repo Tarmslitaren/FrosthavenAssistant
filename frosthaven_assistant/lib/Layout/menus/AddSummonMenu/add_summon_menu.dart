@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/SetLevelMenu/set_level_menu.dart';
 import 'package:frosthaven_assistant/Model/summon_model.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
-import '../../Layout/widgets/modal_background.dart';
-import '../../Resource/commands/add_standee_command.dart';
-import '../../Resource/enums.dart';
-import '../../Resource/game_data.dart';
-import '../../Resource/settings.dart';
-import '../../Resource/stat_calculator.dart';
-import '../../Resource/state/game_state.dart';
-import '../../services/service_locator.dart';
+import '../../../Resource/commands/add_standee_command.dart';
+import '../../../Resource/enums.dart';
+import '../../../Resource/game_data.dart';
+import '../../../Resource/settings.dart';
+import '../../../Resource/stat_calculator.dart';
+import '../../../Resource/state/game_state.dart';
+import '../../../services/service_locator.dart';
+import '../../widgets/modal_background.dart';
 
 class AddSummonMenu extends StatefulWidget {
   const AddSummonMenu({
@@ -297,7 +297,6 @@ class _SummonGraphicButton extends StatelessWidget {
   final bool darkMode;
   final VoidCallback onPressed;
 
-
   @override
   Widget build(BuildContext context) {
     Color color = isSelected
@@ -336,7 +335,6 @@ class _SummonNrButton extends StatelessWidget {
   final bool isSelected;
   final bool darkMode;
   final VoidCallback onPressed;
-
 
   @override
   Widget build(BuildContext context) {

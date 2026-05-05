@@ -4,15 +4,16 @@ import 'package:frosthaven_assistant/Layout/widgets/menu_card.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_campaign_command.dart';
 
-import '../../Model/character_class.dart';
-import '../../Resource/commands/set_scenario_command.dart';
-import '../../Resource/game_data.dart';
-import '../../Resource/game_methods.dart';
-import '../../Resource/settings.dart';
-import '../../Resource/state/game_state.dart';
-import '../../Resource/ui_utils.dart';
-import '../../services/service_locator.dart';
-import 'numpad_menu.dart';
+import '../../../Resource/commands/set_scenario_command.dart';
+import '../../../Resource/game_data.dart';
+import '../../../Resource/game_methods.dart';
+import '../../../Resource/settings.dart';
+import '../../../Resource/state/game_state.dart';
+import '../../../Resource/ui_utils.dart';
+import '../../../services/service_locator.dart';
+import '../numpad_menu.dart';
+import 'scenario_tile.dart';
+import 'solo_tile.dart';
 
 class SelectScenarioMenu extends StatefulWidget {
   const SelectScenarioMenu({
@@ -276,11 +277,11 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
               items: _foundScenarios,
               itemBuilder: (context, index) =>
                   _gameState.currentCampaign.value == "Solo"
-                      ? _SoloTile(
+                      ? SoloTile(
                           name: _foundScenarios[index],
                           gameState: _gameState,
                           gameData: _gameData)
-                      : _ScenarioTile(
+                      : ScenarioTile(
                           name: _foundScenarios[index],
                           gameState: _gameState,
                           settings: _settings),
@@ -288,82 +289,5 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
             const SizedBox(height: kMenuCloseButtonSpacing),
           ],
         ));
-  }
-}
-
-class _SoloTile extends StatelessWidget {
-  static const int _kSoloNameIndex = 0;
-  static const int _kSoloTextIndex = 1;
-  const _SoloTile({
-    required this.name,
-    required this.gameState,
-    required this.gameData,
-  });
-
-  final String name;
-  final GameState gameState;
-  final GameData gameData;
-
-  @override
-  Widget build(BuildContext context) {
-    List<String> strings = name.split(':');
-    strings[0] = strings.first.replaceFirst(" ", "Å");
-    String nameAndCampaign = strings.first.split("Å")[1];
-    String characterName = nameAndCampaign.split("/")[_kSoloNameIndex];
-    String edition = nameAndCampaign.split("/")[_kSoloTextIndex];
-
-    String text = strings[_kSoloTextIndex];
-    for (String key in gameData.modelData.value.keys) {
-      for (CharacterClass character
-          in gameData.modelData.value[key]!.characters) {
-        if (character.name == characterName) {
-          if (character.hidden &&
-              !gameState.unlockedClasses.contains(character.id)) {
-            text = "???";
-          }
-          break;
-        }
-      }
-    }
-
-    return ListTile(
-      leading: Image(
-        height: kIconSize,
-        width: kIconSize,
-        fit: BoxFit.scaleDown,
-        image: AssetImage("assets/images/class-icons/$characterName.png"),
-      ),
-      title: Text(text, style: kTitleStyle),
-      trailing: Text("($edition)", softWrap: true, style: kSubtitleStyle),
-      onTap: () {
-        Navigator.pop(context);
-        gameState.action(SetScenarioCommand(name, false, gameState: gameState));
-      },
-    );
-  }
-}
-
-class _ScenarioTile extends StatelessWidget {
-  const _ScenarioTile({
-    required this.name,
-    required this.gameState,
-    required this.settings,
-  });
-
-  final String name;
-  final GameState gameState;
-  final Settings settings;
-
-  @override
-  Widget build(BuildContext context) {
-    String title =
-        settings.showScenarioNames.value ? name : name.split(' ').first;
-    return ListTile(
-      title: Text(title, style: kTitleStyle),
-      onTap: () {
-        Navigator.pop(context);
-        gameState.action(SetScenarioCommand(name, false, gameState: gameState));
-      },
-    );
   }
 }

@@ -10,8 +10,8 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
+import '../menus/ModifierDeckMenu/modifier_deck_menu.dart';
 import '../menus/modifier_card_zoom.dart';
-import '../menus/modifier_deck_menu.dart';
 
 class ModifierDeckViewModel {
   ModifierDeckViewModel(
@@ -64,8 +64,8 @@ class ModifierDeckViewModel {
 
   void openZoom(BuildContext context) {
     if (deck.discardPileIsNotEmpty) {
-      openDialog(context,
-          ModifierCardZoom(name: name, card: deck.discardPileTop));
+      openDialog(
+          context, ModifierCardZoom(name: name, card: deck.discardPileTop));
     }
   }
 }

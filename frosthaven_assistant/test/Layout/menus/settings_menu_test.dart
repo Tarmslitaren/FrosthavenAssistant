@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:frosthaven_assistant/Layout/menus/SettingsMenu/settings_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/save_menu.dart';
-import 'package:frosthaven_assistant/Layout/menus/settings_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_ally_deck_in_og_gloom_command.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
@@ -77,8 +77,8 @@ void main() {
       final before = settings.expireConditions.value;
       await pumpMenu(tester);
 
-      await tester.tap(
-          find.widgetWithText(CheckboxListTile, 'Expire Conditions'));
+      await tester
+          .tap(find.widgetWithText(CheckboxListTile, 'Expire Conditions'));
       await tester.pump();
 
       expect(settings.expireConditions.value, !before);
@@ -194,8 +194,7 @@ void main() {
       final before = settings.hideLootDeck.value;
       await pumpMenu(tester);
 
-      final finder =
-          find.widgetWithText(CheckboxListTile, 'Hide Loot Deck');
+      final finder = find.widgetWithText(CheckboxListTile, 'Hide Loot Deck');
       await tester.ensureVisible(finder);
       await tester.tap(finder);
       await tester.pump();
@@ -268,15 +267,14 @@ void main() {
       settings.showCustomContent.value = before;
     });
 
-    testWidgets(
-        'tapping Show Sections in Main Screen checkbox toggles setting',
+    testWidgets('tapping Show Sections in Main Screen checkbox toggles setting',
         (WidgetTester tester) async {
       final settings = getIt<Settings>();
       final before = settings.showSectionsInMainView.value;
       await pumpMenu(tester);
 
-      final finder = find.widgetWithText(
-          CheckboxListTile, 'Show Sections in Main Screen');
+      final finder =
+          find.widgetWithText(CheckboxListTile, 'Show Sections in Main Screen');
       await tester.ensureVisible(finder);
       await tester.tap(finder);
       await tester.pump();
@@ -359,12 +357,14 @@ void main() {
         (WidgetTester tester) async {
       await pumpMenu(tester);
 
-      final finder = find.widgetWithText(
-          ListTile, 'Clear unlocked characters and stuff');
+      final finder =
+          find.widgetWithText(ListTile, 'Clear unlocked characters and stuff');
       await tester.ensureVisible(finder);
       await tester.tap(finder);
       await tester.pump();
-      expect(find.widgetWithText(ListTile, 'Clear unlocked characters and stuff'), findsOneWidget);
+      expect(
+          find.widgetWithText(ListTile, 'Clear unlocked characters and stuff'),
+          findsOneWidget);
     });
 
     testWidgets('tapping Load/Save State opens SaveMenu',
@@ -379,7 +379,8 @@ void main() {
       expect(find.byType(SaveMenu), findsOneWidget);
     });
 
-    testWidgets('tapping Use Ally AMD in OG Gloomhaven checkbox toggles setting',
+    testWidgets(
+        'tapping Use Ally AMD in OG Gloomhaven checkbox toggles setting',
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
       final before = gameState.allyDeckInOGGloom.value;
@@ -393,7 +394,8 @@ void main() {
 
       expect(gameState.allyDeckInOGGloom.value, !before);
       // restore
-      getIt<GameState>().action(SetAllyDeckInOgGloomCommand(before, gameState: getIt<GameState>()));
+      getIt<GameState>().action(
+          SetAllyDeckInOgGloomCommand(before, gameState: getIt<GameState>()));
     });
   });
 }

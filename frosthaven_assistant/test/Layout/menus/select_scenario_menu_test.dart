@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frosthaven_assistant/Layout/menus/select_scenario_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/SelectScenarioMenu/select_scenario_menu.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
@@ -104,7 +104,8 @@ void main() {
       expect(find.textContaining('Town'), findsAtLeast(1));
     });
 
-    testWidgets('tapping Close dismisses the menu', (WidgetTester tester) async {
+    testWidgets('tapping Close dismisses the menu',
+        (WidgetTester tester) async {
       await pumpMenu(tester);
       await tester.tap(find.text('Close'));
       await tester.pumpAndSettle();
