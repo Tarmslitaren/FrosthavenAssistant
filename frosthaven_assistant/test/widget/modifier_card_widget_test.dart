@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
+import 'package:frosthaven_assistant/Layout/ModifierCardWidget/modifier_card_front.dart';
+import 'package:frosthaven_assistant/Layout/ModifierCardWidget/modifier_card_widget.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../command/test_helpers.dart';
@@ -21,15 +22,19 @@ void main() {
   }
 
   group('ModifierCardWidget', () {
-    testWidgets('revealed=false renders rear card', (WidgetTester tester) async {
+    testWidgets('revealed=false renders rear card',
+        (WidgetTester tester) async {
       final card = ModifierCard(CardType.add, 'minus1');
-      await pumpCard(tester, ModifierCardWidget(card: card, revealed: false, name: ''));
+      await pumpCard(
+          tester, ModifierCardWidget(card: card, revealed: false, name: ''));
       expect(find.byType(ModifierCardWidget), findsOneWidget);
     });
 
-    testWidgets('revealed=true renders front card', (WidgetTester tester) async {
+    testWidgets('revealed=true renders front card',
+        (WidgetTester tester) async {
       final card = ModifierCard(CardType.add, 'plus1');
-      await pumpCard(tester, ModifierCardWidget(card: card, revealed: true, name: ''));
+      await pumpCard(
+          tester, ModifierCardWidget(card: card, revealed: true, name: ''));
       expect(find.byType(ModifierCardWidget), findsOneWidget);
     });
 
@@ -52,7 +57,8 @@ void main() {
 
     testWidgets('buildFront with Military faction card renders without error',
         (WidgetTester tester) async {
-      final card = ModifierCard(CardType.add, 'Military-perks/plus1shield1flip');
+      final card =
+          ModifierCard(CardType.add, 'Military-perks/plus1shield1flip');
       final originalOnError = FlutterError.onError;
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pumpWidget(

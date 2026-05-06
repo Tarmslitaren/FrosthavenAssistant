@@ -7,7 +7,7 @@ import '../../Resource/commands/shuffle_amd_card_command.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
-import '../modifier_card_widget.dart';
+import '../ModifierCardWidget/modifier_card_front.dart';
 
 class SendToBottomMenu extends StatelessWidget {
   const SendToBottomMenu(

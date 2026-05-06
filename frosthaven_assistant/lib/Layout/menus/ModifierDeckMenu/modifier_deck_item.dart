@@ -3,7 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import '../../../Resource/state/game_state.dart';
-import '../../modifier_card_widget.dart';
+import '../../ModifierCardWidget/modifier_card_front.dart';
+import '../../ModifierCardWidget/modifier_card_rear.dart';
 
 class ModifierDeckItem extends StatelessWidget {
   static const double _kItemBaseHeight = 40.0;

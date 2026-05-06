@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
+import 'package:frosthaven_assistant/Layout/ModifierCardWidget/modifier_card_front.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_faction_card_command.dart';
 
 import '../../Layout/widgets/modal_background.dart';

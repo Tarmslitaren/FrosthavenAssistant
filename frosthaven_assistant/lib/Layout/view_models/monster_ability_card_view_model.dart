@@ -8,8 +8,8 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../../Resource/enums.dart';
 import '../../Resource/ui_utils.dart';
+import '../menus/AbilityCardsMenu/ability_cards_menu.dart';
 import '../menus/ability_card_zoom.dart';
-import '../menus/ability_cards_menu.dart';
 
 class MonsterAbilityCardViewModel {
   MonsterAbilityCardViewModel(this.monster,
@@ -42,7 +42,8 @@ class MonsterAbilityCardViewModel {
 
   MonsterAbilityState get deck {
     final d = GameMethods.getDeck(monster.type.deck);
-    if (d == null) throw StateError('Ability deck not found: ${monster.type.deck}');
+    if (d == null)
+      throw StateError('Ability deck not found: ${monster.type.deck}');
     return d;
   }
 

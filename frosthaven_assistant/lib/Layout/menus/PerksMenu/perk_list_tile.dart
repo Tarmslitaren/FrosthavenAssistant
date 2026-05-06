@@ -1,91 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Layout/widgets/scrollable_menu_card.dart';
 import 'package:frosthaven_assistant/Model/character_class.dart';
-import 'package:frosthaven_assistant/Resource/app_constants.dart';
-import 'package:frosthaven_assistant/Resource/commands/use_fh_perks_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/add_perk_command.dart';
 import 'package:frosthaven_assistant/Resource/line_builder/token_applier.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
-import '../../Resource/commands/add_perk_command.dart';
-import '../../Resource/game_methods.dart';
-import '../../services/service_locator.dart';
+import '../../../Resource/game_methods.dart';
+import '../../../services/service_locator.dart';
 
-const divider = Divider(
-  color: Colors.grey,
-  thickness: 1,
-  height: 16,
-  indent: 8,
-  endIndent: 8,
-);
-
-class PerksMenu extends StatelessWidget {
-  const PerksMenu({super.key, required this.character, this.gameState});
-  final Character character;
-  // injected for testing
-  final GameState? gameState;
-
-  @override
-  Widget build(BuildContext context) {
-    final gameState = this.gameState ?? getIt<GameState>();
-    return ListenableBuilder(
-        listenable: Listenable.merge([
-          character.characterState.useFHPerks,
-          character.characterState.perkListVersion,
-        ]),
-        builder: (context, child) {
-          final ScrollController scrollController = ScrollController();
-
-          final perksFH = character.characterClass.perksFH;
-          final bool hasFHPerkSet = perksFH.isNotEmpty;
-          final bool useFHPerks =
-              hasFHPerkSet && character.characterState.useFHPerks.value;
-          final perks = useFHPerks ? perksFH : character.characterClass.perks;
-
-          List<Widget> tiles = [];
-          tiles.add(Text(
-            "Add Perks",
-            style: kTitleStyle,
-          ));
-
-          if (hasFHPerkSet) {
-            tiles.add(CheckboxListTile(
-                title: Text(
-                  "Use Frosthaven Perks",
-                  style: kBodyStyle,
-                ),
-                value: useFHPerks,
-                onChanged: (on) {
-                  //setState(() {
-                  gameState.action(UseFHPerksCommand(character.id));
-                  // }
-                }));
-          }
-
-          for (int i = 0; i < perks.length; i++) {
-            tiles.add(divider);
-            tiles.add(
-                PerkListTile(character: character, index: i, perk: perks[i]));
-          }
-          tiles.add(divider);
-
-          return ScrollableMenuCard(
-              maxWidth: 300, child: Column(children: tiles));
-        });
-  }
-}
+const int _kDigit1 = 1;
+const int _kDigit2 = 2;
+const int _kDigit3 = 3;
+const int _kDigit4 = 4;
 
 class PerkListTile extends StatefulWidget {
-  const PerkListTile(
-      {super.key,
-      required this.character,
-      required this.index,
-      required this.perk,
-      this.gameState});
+  const PerkListTile({
+    super.key,
+    required this.character,
+    required this.index,
+    required this.perk,
+    this.gameState,
+  });
 
   final Character character;
   final int index;
   final PerkModel perk;
-  // injected for testing
   final GameState? gameState;
 
   @override
@@ -93,11 +31,6 @@ class PerkListTile extends StatefulWidget {
 }
 
 class PerkListTileState extends State<PerkListTile> {
-  static const int _kDigit1 = 1;
-  static const int _kDigit2 = 2;
-  static const int _kDigit3 = 3;
-  static const int _kDigit4 = 4;
-
   GameState get _gameState => widget.gameState ?? getIt<GameState>();
 
   String _cardText(String gfx) {
@@ -129,8 +62,7 @@ class PerkListTileState extends State<PerkListTile> {
       String ally = "";
       if (gfx.contains("ally")) {
         ally = ", %target%1 ally";
-        gfx = gfx.substring(
-            0, gfx.length - "ally".length); //should be %target% 1 ally?
+        gfx = gfx.substring(0, gfx.length - "ally".length);
       }
       if (gfx.contains("target")) {
         target = " %target% ${gfx.substring(gfx.length - 1)}";
@@ -149,7 +81,6 @@ class PerkListTileState extends State<PerkListTile> {
         mainMod = "%$gfx%";
       }
 
-      //self check
       bool positiveMod = gfx == "invisible" ||
           gfx == "heal" ||
           gfx == "strengthen" ||
@@ -171,7 +102,6 @@ class PerkListTileState extends State<PerkListTile> {
       }
 
       if (mainMod.isEmpty && target.isNotEmpty) {
-        //target is main mod
         target =
             "+ ${target.substring(target.length - 1, target.length)}%target%";
       }
@@ -182,18 +112,10 @@ class PerkListTileState extends State<PerkListTile> {
   }
 
   String _nrTextFromDigit(int digit) {
-    if (digit == _kDigit1) {
-      return "one ";
-    }
-    if (digit == _kDigit2) {
-      return "two ";
-    }
-    if (digit == _kDigit3) {
-      return "three ";
-    }
-    if (digit == _kDigit4) {
-      return "four ";
-    }
+    if (digit == _kDigit1) return "one ";
+    if (digit == _kDigit2) return "two ";
+    if (digit == _kDigit3) return "three ";
+    if (digit == _kDigit4) return "four ";
     return "";
   }
 
@@ -203,7 +125,6 @@ class PerkListTileState extends State<PerkListTile> {
 
     String description = widget.perk.text;
     if (description.isEmpty) {
-      //only works for remove and add same cards
       final adds = widget.perk.add;
       final removes = widget.perk.remove;
       description = "";
@@ -213,34 +134,23 @@ class PerkListTileState extends State<PerkListTile> {
       if (adds.isNotEmpty && removes.isEmpty) {
         description = "Add ";
         description += _nrTextFromDigit(addsAmount);
-        final addCard = adds.first;
-        description += "${_cardText(addCard)} card";
-        if (addsAmount > 1) {
-          description += "s";
-        }
+        description += "${_cardText(adds.first)} card";
+        if (addsAmount > 1) description += "s";
       } else if (adds.isEmpty && removes.isNotEmpty) {
         description = "Remove ";
         description += _nrTextFromDigit(removeAmount);
-        final removeCard = removes.first;
-        description += "${_cardText(removeCard)} card";
-        if (removeAmount > 1) {
-          description += "s";
-        }
+        description += "${_cardText(removes.first)} card";
+        if (removeAmount > 1) description += "s";
       } else if (adds.isNotEmpty && removes.isNotEmpty) {
         description = "Replace ";
         description += _nrTextFromDigit(removes.length);
         description += "${_cardText(removes.first)} card";
-        if (adds.length > 1) {
-          description += "s";
-        }
+        if (adds.length > 1) description += "s";
         description += " with ";
-        final addsAmount = adds.length;
-        description += _nrTextFromDigit(addsAmount);
-        final addCard = adds.first;
-        description += "${_cardText(addCard)} card";
-        if (addsAmount > 1) {
-          description += "s";
-        }
+        final addsAmount2 = adds.length;
+        description += _nrTextFromDigit(addsAmount2);
+        description += "${_cardText(adds.first)} card";
+        if (addsAmount2 > 1) description += "s";
       }
     }
 
@@ -249,7 +159,6 @@ class PerkListTileState extends State<PerkListTile> {
             (!added && GameMethods.canAddPerk(widget.character, widget.index));
 
     return CheckboxListTile(
-      //contentPadding: EdgeInsets.only(left: 14, right: 14),
       title: TokenApplier.applyTokensForPerks(description),
       enabled: enabled,
       onChanged: (bool? value) {

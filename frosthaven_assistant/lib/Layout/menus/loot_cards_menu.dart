@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/menus/LootCardEnhancementMenu/loot_card_enhancement_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/character_loot_menu.dart';
-import 'package:frosthaven_assistant/Layout/menus/loot_card_enhancement_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_loot_owner_menu.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_special_loot_card_command.dart';

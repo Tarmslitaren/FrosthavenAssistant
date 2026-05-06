@@ -2,7 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frosthaven_assistant/Layout/menus/ability_cards_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/AbilityCardsMenu/ability_card_list_item.dart';
+import 'package:frosthaven_assistant/Layout/menus/AbilityCardsMenu/ability_cards_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_card_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_ability_card_command.dart';
@@ -94,7 +95,7 @@ void main() {
       // Assert
       // After tapping '1', at least one card should be revealed.
       // We find the specific card by its key and check if it is revealed.
-      final item = tester.widget<Item>(find
+      final item = tester.widget<AbilityCardListItem>(find
           .byKey(Key(monsterAbilityState.discardPileTop.nr.toString()))
           .last
           .first);

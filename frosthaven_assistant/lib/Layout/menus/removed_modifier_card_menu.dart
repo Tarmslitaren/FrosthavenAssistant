@@ -2,7 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/return_amd_card_menu.dart';
-import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
+import 'package:frosthaven_assistant/Layout/ModifierCardWidget/modifier_card_front.dart';
+import 'package:frosthaven_assistant/Layout/ModifierCardWidget/modifier_card_rear.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 
 import '../../Resource/game_methods.dart';

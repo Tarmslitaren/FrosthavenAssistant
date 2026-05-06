@@ -3,14 +3,15 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import '../../../Resource/app_constants.dart';
+import '../../../Resource/commands/add_perk_command.dart';
 import '../../../Resource/commands/amd_add_minus_one_command.dart';
 import '../../../Resource/commands/amd_cassandra_special_command.dart';
 import '../../../Resource/commands/amd_imbue1_command.dart';
 import '../../../Resource/commands/amd_imbue2_command.dart';
 import '../../../Resource/commands/amd_remove_imbue_command.dart';
 import '../../../Resource/commands/amd_remove_minus_1_command.dart';
+import '../../../Resource/commands/amd_remove_minus_2_command.dart';
 import '../../../Resource/commands/amd_remove_plus_0_command.dart';
-import '../../../Resource/commands/add_perk_command.dart';
 import '../../../Resource/commands/bad_omen_command.dart';
 import '../../../Resource/commands/change_stat_commands/change_bless_command.dart';
 import '../../../Resource/commands/change_stat_commands/change_curse_command.dart';
@@ -20,14 +21,13 @@ import '../../../Resource/commands/corrosive_spew_command.dart';
 import '../../../Resource/commands/donate_cs_sanctuary_command.dart';
 import '../../../Resource/commands/remove_cs_party_card_command.dart';
 import '../../../Resource/commands/remove_cs_sanctuary_donation_command.dart';
-import '../../../Resource/commands/amd_remove_minus_2_command.dart';
 import '../../../Resource/game_methods.dart';
 import '../../../Resource/settings.dart';
 import '../../../Resource/state/game_state.dart';
 import '../../../Resource/ui_utils.dart';
 import '../../counter_button.dart';
+import '../PerksMenu/perks_menu.dart';
 import '../gh2e_faction_amd_card_menu.dart';
-import '../perks_menu.dart';
 import '../removed_modifier_card_menu.dart';
 import 'modifier_deck_party_button.dart';
 import 'modifier_deck_reveal_button.dart';
@@ -70,8 +70,7 @@ class ModifierDeckHeader extends StatelessWidget {
     }
 
     final bool isCharacter = name.isNotEmpty && name != "allies";
-    final character =
-        isCharacter ? GameMethods.getCharacterByName(name) : null;
+    final character = isCharacter ? GameMethods.getCharacterByName(name) : null;
     final badOmen = deck.badOmen.value;
     final corrosiveSpew = deck.corrosiveSpew.value;
 
@@ -147,8 +146,7 @@ class ModifierDeckHeader extends StatelessWidget {
                     },
                     child: const Text("Bad Omen"),
                   ),
-              if (badOmen > 0)
-                Text("BadOmensLeft: $badOmen", style: textStyle),
+              if (badOmen > 0) Text("BadOmensLeft: $badOmen", style: textStyle),
               if (name == "Ruinmaw" && !corrosiveSpew)
                 TextButton(
                   onPressed: () {
@@ -202,8 +200,7 @@ class ModifierDeckHeader extends StatelessWidget {
                       gameState
                           .action(AMDRemoveImbueCommand(gameState: gameState));
                     } else {
-                      gameState
-                          .action(AMDImbue1Command(gameState: gameState));
+                      gameState.action(AMDImbue1Command(gameState: gameState));
                     }
                   },
                   child: Text(imbuement > 0 ? "Remove Imbue" : "Imbue"),
@@ -218,8 +215,7 @@ class ModifierDeckHeader extends StatelessWidget {
               if (name.isEmpty && characterHail != null)
                 TextButton(
                   onPressed: () {
-                    gameState
-                        .action(AddPerkCommand("Hail", _kHailPerkIndex));
+                    gameState.action(AddPerkCommand("Hail", _kHailPerkIndex));
                   },
                   child: Text(
                     hasHailPerk ? "Remove Hail Perk" : "Add Hail Perk",
@@ -241,8 +237,8 @@ class ModifierDeckHeader extends StatelessWidget {
               if (hasCassandraPerk)
                 TextButton(
                   onPressed: () {
-                    gameState.action(AMDCassandraSpecialCommand(deck.name,
-                        !deck.cassandraSpecial.value,
+                    gameState.action(AMDCassandraSpecialCommand(
+                        deck.name, !deck.cassandraSpecial.value,
                         gameState: gameState));
                   },
                   child: Text(
@@ -263,9 +259,10 @@ class ModifierDeckHeader extends StatelessWidget {
                   onPressed: () {
                     donatedCS
                         ? gameState.action(RemoveCSSanctuaryDonationCommand(
-                            name, gameState: gameState))
-                        : gameState.action(
-                            DonateCSSanctuaryCommand(name, gameState: gameState));
+                            name,
+                            gameState: gameState))
+                        : gameState.action(DonateCSSanctuaryCommand(name,
+                            gameState: gameState));
                   },
                   child: Text(
                       donatedCS ? "Remove\nDonation" : "Donate to\nSanctuary"),
@@ -286,13 +283,10 @@ class ModifierDeckHeader extends StatelessWidget {
                             ...List.generate(
                               _kPartyButtonCount,
                               (i) => ModifierDeckPartyButton(
-                                  nr: i + 1,
-                                  gameState: gameState,
-                                  name: name),
+                                  nr: i + 1, gameState: gameState, name: name),
                             ),
                           ]),
-              if (isCharacter &&
-                  gameState.unlockedClasses.contains("Demons"))
+              if (isCharacter && gameState.unlockedClasses.contains("Demons"))
                 IconButton(
                   icon: Image.asset("assets/images/demons.png"),
                   onPressed: () {
@@ -311,13 +305,14 @@ class ModifierDeckHeader extends StatelessWidget {
                             faction: "Merchant-Guild", name: name));
                   },
                 ),
-              if (isCharacter &&
-                  gameState.unlockedClasses.contains("Military"))
+              if (isCharacter && gameState.unlockedClasses.contains("Military"))
                 IconButton(
                   icon: Image.asset("assets/images/military.png"),
                   onPressed: () {
-                    openDialog(context,
-                        GH2eFactionAMDCardMenu(faction: "Military", name: name));
+                    openDialog(
+                        context,
+                        GH2eFactionAMDCardMenu(
+                            faction: "Military", name: name));
                   },
                 ),
               CounterButton(

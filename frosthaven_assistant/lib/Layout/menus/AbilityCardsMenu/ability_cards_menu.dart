@@ -3,19 +3,18 @@ import 'dart:math';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_card_menu.dart';
-import 'package:frosthaven_assistant/Layout/MonsterAbilityCardWidget/monster_ability_card_front.dart';
-import 'package:frosthaven_assistant/Layout/MonsterAbilityCardWidget/monster_ability_card_rear.dart';
 import 'package:frosthaven_assistant/Model/monster_ability.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/activate_monster_type_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_ability_card_command.dart';
 import 'package:reorderables/reorderables.dart';
 
-import '../../Resource/commands/reorder_ability_list_command.dart';
-import '../../Resource/commands/shuffle_ability_card_command.dart';
-import '../../Resource/state/game_state.dart';
-import '../../Resource/ui_utils.dart';
-import '../../services/service_locator.dart';
+import '../../../Resource/commands/reorder_ability_list_command.dart';
+import '../../../Resource/commands/shuffle_ability_card_command.dart';
+import '../../../Resource/state/game_state.dart';
+import '../../../Resource/ui_utils.dart';
+import '../../../services/service_locator.dart';
+import 'ability_card_list_item.dart';
 
 class AbilityCardsMenu extends StatefulWidget {
   const AbilityCardsMenu(
@@ -79,7 +78,7 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
     List<Widget> list = [];
     for (final item in inputList) {
       final nrString = item.nr.toString();
-      Item value = Item(
+      AbilityCardListItem value = AbilityCardListItem(
           key: Key(nrString),
           data: item,
           monsterData: widget.monsterData,
@@ -278,38 +277,5 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
                             })),
                   ])));
         });
-  }
-}
-
-class Item extends StatelessWidget {
-  static const double _kScaleCardHeight = 40.0;
-  static const int _kScaleCardRows = 14;
-  static const double _kScaleMin = 0.5;
-  static const double _kListWidthRatio = 0.4;
-
-  const Item(
-      {super.key,
-      required this.data,
-      required this.revealed,
-      required this.monsterData});
-
-  final MonsterAbilityCardModel data;
-  final Monster monsterData;
-  final bool revealed;
-
-  @override
-  Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    double scale = max(
-        (screenSize.height / (_kScaleCardHeight * _kScaleCardRows)),
-        _kScaleMin);
-    if (screenSize.width * _kListWidthRatio < kAbilityCardWidth * scale) {
-      scale = screenSize.width * _kListWidthRatio / kAbilityCardWidth;
-    }
-
-    return revealed
-        ? MonsterAbilityCardFront(
-            card: data, data: monsterData, scale: scale, calculateAll: true)
-        : MonsterAbilityCardRear(scale: scale, size: -1, monster: monsterData);
   }
 }
