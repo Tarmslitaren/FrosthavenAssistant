@@ -8,11 +8,11 @@ import '../../../Resource/commands/change_stat_commands/change_enfeeble_command.
 import '../../../Resource/commands/change_stat_commands/change_health_command.dart';
 import '../../../Resource/commands/change_stat_commands/change_xp_command.dart';
 import '../../../Resource/enums.dart';
-import '../../../Resource/game_methods.dart';
 import '../../../Resource/settings.dart';
 import '../../../Resource/state/game_state.dart';
 import '../../../Resource/ui_utils.dart';
 import '../../counter_button.dart';
+import '../../view_models/status_menu_stat_column_view_model.dart';
 import '../SetLevelMenu/set_level_menu.dart';
 import '../set_character_level_menu.dart';
 import 'status_menu_stackable_condition_buttons.dart';
@@ -75,75 +75,23 @@ class StatusMenuStatColumn extends StatelessWidget {
     return ValueListenableBuilder<int>(
         valueListenable: gameState.commandIndex,
         builder: (context, value, child) {
-          ModifierDeck deck = gameState.modifierDeck;
-          if (isMonster) {
-            for (final item in gameState.currentList) {
-              if (item.id == monsterId) {
-                if (item is Monster &&
-                    item.isAlly &&
-                    (gameState.allyDeckInOGGloom.value ||
-                        !GameMethods.isOgGloomEdition())) {
-                  deck = gameState.modifierDeckAllies;
-                }
-              }
-            }
-          }
-          bool hasXp = false;
-          bool isObjective = false;
-          bool characterHasAmd = false;
-          if (isCharacter && !isSummon) {
-            hasXp = true;
-            for (final item in gameState.currentList) {
-              if (item.id == characterId && item is Character) {
-                if (GameMethods.isObjectiveOrEscort(item.characterClass)) {
-                  hasXp = false;
-                  isObjective = true;
-                } else {
-                  characterHasAmd = item.characterClass.perks.isNotEmpty;
-                  deck = item.characterState.modifierDeck;
-                }
-              }
-            }
-          }
+          final vm = StatusMenuStatColumnViewModel(
+            figure: figure,
+            isMonster: isMonster,
+            isCharacter: isCharacter,
+            isSummon: isSummon,
+            characterId: characterId,
+            monsterId: monsterId,
+            immunities: immunities,
+            hasVimthreader: hasVimthreader,
+            hasLifespeaker: hasLifespeaker,
+            hasIncarnate: hasIncarnate,
+            character: character,
+            gameState: gameState,
+            settings: settings,
+          );
 
-          final cId = characterId;
-          if (isSummon && cId != null) {
-            deck = GameMethods.getModifierDeck(cId, gameState);
-          }
-
-          bool canBeCursed = true;
-          for (final item in immunities) {
-            if (item.substring(1, item.length - 1) == "curse") {
-              canBeCursed = false;
-            }
-          }
-
-          final bool showCharacterAmd = characterHasAmd &&
-                  settings.showCharacterAMD.value &&
-                  isCharacter ||
-              isSummon;
-          final bool showMonsterAmd = settings.showAmdDeck.value &&
-              (isObjective || (isMonster && !isSummon));
-          final bool showAmd = showCharacterAmd || showMonsterAmd;
-          final isAlly = deck.name == "allies";
-
-          int nrOfEnfeebles = 0;
-          int nrOfEmpowers = 0;
-          if (hasVimthreader) {
-            nrOfEnfeebles++;
-            nrOfEmpowers++;
-          }
-          if (hasLifespeaker) {
-            nrOfEnfeebles++;
-          }
-          if (hasIncarnate) {
-            nrOfEnfeebles++;
-            nrOfEmpowers++;
-          }
-          final hasMoreThanOneEnfeeble = isMonster && nrOfEnfeebles > 1;
-          final hasMoreThanOneEmpower =
-              ((isCharacter || isAlly) && nrOfEmpowers > 1) ||
-                  isCharacter && character?.id == "Ruinmaw" && nrOfEmpowers > 0;
+          final deck = vm.deck;
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -161,11 +109,9 @@ class StatusMenuStatColumn extends StatelessWidget {
                   ownerId: ownerId,
                   scale: scale),
               const SizedBox(height: _kTopSpacing),
-              hasXp
+              vm.hasXp
                   ? CounterButton(
-                      notifier: figure is CharacterState
-                          ? (figure as CharacterState).xp
-                          : ValueNotifier<int>(0),
+                      notifier: vm.xpNotifier,
                       command: ChangeXPCommand(0, figureId, ownerId,
                           gameState: gameState),
                       maxValue: _kMaxXp,
@@ -176,11 +122,10 @@ class StatusMenuStatColumn extends StatelessWidget {
                       ownerId: ownerId,
                       scale: scale)
                   : Container(),
-              SizedBox(height: hasXp ? _kTopSpacing : 0),
+              SizedBox(height: vm.hasXp ? _kTopSpacing : 0),
               SizedBox(
-                  //todo? why this?
-                  height: !showCharacterAmd || isSummon ? _kTopSpacing : 0),
-              if (showAmd)
+                  height: !vm.showCharacterAmd || isSummon ? _kTopSpacing : 0),
+              if (vm.showAmd)
                 CounterButton(
                     notifier: deck.getRemovable("bless"),
                     command: ChangeBlessCommand(0, figureId, ownerId,
@@ -192,8 +137,8 @@ class StatusMenuStatColumn extends StatelessWidget {
                     figureId: figureId,
                     ownerId: ownerId,
                     scale: scale),
-              SizedBox(height: showCharacterAmd ? _kTopSpacing : 0),
-              if ((canBeCursed && showMonsterAmd) || showCharacterAmd)
+              SizedBox(height: vm.showCharacterAmd ? _kTopSpacing : 0),
+              if ((vm.canBeCursed && vm.showMonsterAmd) || vm.showCharacterAmd)
                 CounterButton(
                     notifier: deck.getRemovable("curse"),
                     command: ChangeCurseCommand(0, figureId, ownerId,
@@ -205,8 +150,8 @@ class StatusMenuStatColumn extends StatelessWidget {
                     figureId: figureId,
                     ownerId: ownerId,
                     scale: scale),
-              if (canBeCursed &&
-                  showMonsterAmd &&
+              if (vm.canBeCursed &&
+                  vm.showMonsterAmd &&
                   hasIncarnate &&
                   character == null)
                 CounterButton(
@@ -216,7 +161,7 @@ class StatusMenuStatColumn extends StatelessWidget {
                         gameState: gameState),
                     maxValue: _kMaxBlessCurse,
                     image: "assets/images/abilities/enfeeble_old.png",
-                    extraImage: hasMoreThanOneEnfeeble
+                    extraImage: vm.hasMoreThanOneEnfeeble
                         ? "assets/images/class-icons/Incarnate.png"
                         : null,
                     showTotalValue: true,
@@ -224,7 +169,7 @@ class StatusMenuStatColumn extends StatelessWidget {
                     figureId: figureId,
                     ownerId: ownerId,
                     scale: scale),
-              if (showAmd && (isCharacter || isAlly) && hasIncarnate)
+              if (vm.showAmd && (isCharacter || vm.isAlly) && hasIncarnate)
                 CounterButton(
                     notifier: deck.getRemovable("in-empower"),
                     command: ChangeEmpowerCommand(
@@ -232,7 +177,7 @@ class StatusMenuStatColumn extends StatelessWidget {
                         gameState: gameState),
                     maxValue: _kMaxBlessCurse,
                     image: "assets/images/abilities/empower_old.png",
-                    extraImage: hasMoreThanOneEmpower
+                    extraImage: vm.hasMoreThanOneEmpower
                         ? "assets/images/class-icons/Incarnate.png"
                         : null,
                     showTotalValue: true,
@@ -240,7 +185,7 @@ class StatusMenuStatColumn extends StatelessWidget {
                     figureId: figureId,
                     ownerId: ownerId,
                     scale: scale),
-              if (showAmd &&
+              if (vm.showAmd &&
                   (characterId == "Ruinmaw" || monsterId == "Ruinmaw"))
                 CounterButton(
                     notifier: deck.getRemovable("rm-empower"),
@@ -249,7 +194,7 @@ class StatusMenuStatColumn extends StatelessWidget {
                         gameState: gameState),
                     maxValue: _kMaxRuinmawEmpower,
                     image: "assets/images/abilities/empower_old.png",
-                    extraImage: hasMoreThanOneEmpower
+                    extraImage: vm.hasMoreThanOneEmpower
                         ? "assets/images/class-icons/Ruinmaw.png"
                         : null,
                     showTotalValue: true,
@@ -257,14 +202,14 @@ class StatusMenuStatColumn extends StatelessWidget {
                     figureId: figureId,
                     ownerId: ownerId,
                     scale: scale),
-              if (showAmd && (isCharacter || isAlly) && hasVimthreader)
+              if (vm.showAmd && (isCharacter || vm.isAlly) && hasVimthreader)
                 CounterButton(
                     notifier: deck.getRemovable("vi-empower"),
                     command: ChangeEmpowerCommand.deck(deck, "vi-empower",
                         gameState: gameState),
                     maxValue: _kMaxBlessCurse,
                     image: "assets/images/abilities/empower.png",
-                    extraImage: hasMoreThanOneEmpower
+                    extraImage: vm.hasMoreThanOneEmpower
                         ? "assets/images/class-icons/Vimthreader.png"
                         : null,
                     showTotalValue: true,
@@ -272,7 +217,7 @@ class StatusMenuStatColumn extends StatelessWidget {
                     figureId: "unknown",
                     ownerId: "unknown",
                     scale: scale),
-              if (showAmd && (isCharacter || isAlly) && hasVimthreader)
+              if (vm.showAmd && (isCharacter || vm.isAlly) && hasVimthreader)
                 CounterButton(
                     notifier: deck.getRemovable("vi-gr-empower"),
                     command: ChangeEmpowerCommand.deck(deck, "vi-gr-empower",
@@ -284,8 +229,8 @@ class StatusMenuStatColumn extends StatelessWidget {
                     figureId: "unknown",
                     ownerId: "unknown",
                     scale: scale),
-              if (canBeCursed &&
-                  showMonsterAmd &&
+              if (vm.canBeCursed &&
+                  vm.showMonsterAmd &&
                   (!isCharacter || !isSummon) &&
                   hasVimthreader)
                 CounterButton(
@@ -294,7 +239,7 @@ class StatusMenuStatColumn extends StatelessWidget {
                         gameState: gameState),
                     maxValue: _kMaxBlessCurse,
                     image: "assets/images/abilities/enfeeble.png",
-                    extraImage: hasMoreThanOneEnfeeble
+                    extraImage: vm.hasMoreThanOneEnfeeble
                         ? "assets/images/class-icons/Vimthreader.png"
                         : null,
                     showTotalValue: true,
@@ -302,8 +247,8 @@ class StatusMenuStatColumn extends StatelessWidget {
                     figureId: "unknown",
                     ownerId: "unknown",
                     scale: scale),
-              if (canBeCursed &&
-                  showMonsterAmd &&
+              if (vm.canBeCursed &&
+                  vm.showMonsterAmd &&
                   (!isCharacter || !isSummon) &&
                   hasVimthreader)
                 CounterButton(
@@ -317,7 +262,7 @@ class StatusMenuStatColumn extends StatelessWidget {
                     figureId: "unknown",
                     ownerId: "unknown",
                     scale: scale),
-              if (canBeCursed &&
+              if (vm.canBeCursed &&
                   (!isCharacter || characterId == "Lifespeaker") &&
                   hasLifespeaker)
                 CounterButton(
@@ -326,7 +271,7 @@ class StatusMenuStatColumn extends StatelessWidget {
                         gameState: gameState),
                     maxValue: _kMaxLifespeakerEnfeeble,
                     image: "assets/images/abilities/enfeeble.png",
-                    extraImage: hasMoreThanOneEnfeeble
+                    extraImage: vm.hasMoreThanOneEnfeeble
                         ? "assets/images/class-icons/Lifespeaker.png"
                         : null,
                     showTotalValue: true,
@@ -339,7 +284,6 @@ class StatusMenuStatColumn extends StatelessWidget {
                     notifier: figure.plague,
                     stackableCondition: Condition.plague,
                     maxValue: _kMaxPlague,
-                    //technically you can have infinite, but realistically not so much
                     image: "assets/images/abilities/plague.png",
                     figureId: figureId,
                     ownerId: ownerId,
@@ -350,13 +294,12 @@ class StatusMenuStatColumn extends StatelessWidget {
                     notifier: figure.chill,
                     stackableCondition: Condition.chill,
                     maxValue: _kMaxChill,
-                    //technically you can have infinite, but realistically not so much
                     image: "assets/images/abilities/chill.png",
                     figureId: figureId,
                     ownerId: ownerId,
                     scale: scale,
                     gameState: gameState),
-              SizedBox(height: canBeCursed ? _kTopSpacing : 0),
+              SizedBox(height: vm.canBeCursed ? _kTopSpacing : 0),
               Row(
                 children: [
                   SizedBox(
@@ -397,7 +340,7 @@ class StatusMenuStatColumn extends StatelessWidget {
                           }
                         },
                       )),
-                  if (!isObjective)
+                  if (!vm.isObjective)
                     Text(figure.level.value.toString(),
                         style: TextStyle(
                             fontSize: kFontSizeSmall * scale,

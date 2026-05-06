@@ -4,13 +4,8 @@ import 'package:frosthaven_assistant/Resource/commands/add_perk_command.dart';
 import 'package:frosthaven_assistant/Resource/line_builder/token_applier.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
-import '../../../Resource/game_methods.dart';
+import '../../../Layout/view_models/perk_list_tile_view_model.dart';
 import '../../../services/service_locator.dart';
-
-const int _kDigit1 = 1;
-const int _kDigit2 = 2;
-const int _kDigit3 = 3;
-const int _kDigit4 = 4;
 
 class PerkListTile extends StatefulWidget {
   const PerkListTile({
@@ -33,140 +28,23 @@ class PerkListTile extends StatefulWidget {
 class PerkListTileState extends State<PerkListTile> {
   GameState get _gameState => widget.gameState ?? getIt<GameState>();
 
-  String _cardText(String gfx) {
-    if (gfx.startsWith("perks/")) {
-      gfx = gfx.substring("perks/".length);
-    }
-    bool negative = gfx.startsWith("minus");
-    String retVal = "+";
-    if (negative) {
-      retVal = "-";
-      gfx = gfx.substring("minus".length);
-    } else {
-      gfx = gfx.substring("plus".length);
-    }
-    retVal += gfx[0]; //nr
-    if (gfx.length > 1) {
-      gfx = gfx.substring(1);
-      String flip = "";
-      String range = "";
-      String target = "";
-      if (gfx.endsWith("flip")) {
-        flip = "%flip%";
-        gfx = gfx.substring(0, gfx.length - "flip".length);
-      }
-      if (gfx.contains("range")) {
-        range = " %range% ${gfx.substring(gfx.length - 1)}";
-        gfx = gfx.substring(0, gfx.length - "range".length - 1);
-      }
-      String ally = "";
-      if (gfx.contains("ally")) {
-        ally = ", %target%1 ally";
-        gfx = gfx.substring(0, gfx.length - "ally".length);
-      }
-      if (gfx.contains("target")) {
-        target = " %target% ${gfx.substring(gfx.length - 1)}";
-        gfx = gfx.substring(0, gfx.length - "target".length - 1);
-      }
-      String mainMod = "";
-      String maybeNr = "";
-      if (gfx.length > 1) {
-        maybeNr = gfx.substring(gfx.length - 1);
-        int? nr = int.tryParse(maybeNr);
-        if (nr == null) {
-          maybeNr = "";
-        } else {
-          gfx = gfx.substring(0, gfx.length - 1);
-        }
-        mainMod = "%$gfx%";
-      }
-
-      bool positiveMod = gfx == "invisible" ||
-          gfx == "heal" ||
-          gfx == "strengthen" ||
-          gfx == "regenerate" ||
-          gfx == "bless" ||
-          gfx == "ward" ||
-          gfx == "safeguard" ||
-          gfx == "dodge";
-      if (ally.isEmpty && positiveMod && range.isEmpty) {
-        ally = ", self";
-      }
-
-      String quotes = "";
-      String initialQuoteSpace = "";
-      if (mainMod.isNotEmpty &&
-          (ally.isNotEmpty || maybeNr.isNotEmpty || range.isNotEmpty)) {
-        quotes = "\"";
-        initialQuoteSpace = " ";
-      }
-
-      if (mainMod.isEmpty && target.isNotEmpty) {
-        target =
-            "+ ${target.substring(target.length - 1, target.length)}%target%";
-      }
-
-      return "$retVal$initialQuoteSpace$quotes$mainMod$maybeNr$range$target$ally$quotes$flip";
-    }
-    return retVal;
-  }
-
-  String _nrTextFromDigit(int digit) {
-    if (digit == _kDigit1) return "one ";
-    if (digit == _kDigit2) return "two ";
-    if (digit == _kDigit3) return "three ";
-    if (digit == _kDigit4) return "four ";
-    return "";
-  }
-
   @override
   Widget build(BuildContext context) {
-    final bool added = widget.character.characterState.perkList[widget.index];
-
-    String description = widget.perk.text;
-    if (description.isEmpty) {
-      final adds = widget.perk.add;
-      final removes = widget.perk.remove;
-      description = "";
-      final removeAmount = removes.length;
-      final addsAmount = adds.length;
-
-      if (adds.isNotEmpty && removes.isEmpty) {
-        description = "Add ";
-        description += _nrTextFromDigit(addsAmount);
-        description += "${_cardText(adds.first)} card";
-        if (addsAmount > 1) description += "s";
-      } else if (adds.isEmpty && removes.isNotEmpty) {
-        description = "Remove ";
-        description += _nrTextFromDigit(removeAmount);
-        description += "${_cardText(removes.first)} card";
-        if (removeAmount > 1) description += "s";
-      } else if (adds.isNotEmpty && removes.isNotEmpty) {
-        description = "Replace ";
-        description += _nrTextFromDigit(removes.length);
-        description += "${_cardText(removes.first)} card";
-        if (adds.length > 1) description += "s";
-        description += " with ";
-        final addsAmount2 = adds.length;
-        description += _nrTextFromDigit(addsAmount2);
-        description += "${_cardText(adds.first)} card";
-        if (addsAmount2 > 1) description += "s";
-      }
-    }
-
-    bool enabled =
-        (added && GameMethods.canRemovePerk(widget.character, widget.index)) ||
-            (!added && GameMethods.canAddPerk(widget.character, widget.index));
+    final vm = PerkListTileViewModel(
+      character: widget.character,
+      index: widget.index,
+      perk: widget.perk,
+    );
 
     return CheckboxListTile(
-      title: TokenApplier.applyTokensForPerks(description),
-      enabled: enabled,
+      title: TokenApplier.applyTokensForPerks(vm.description),
+      enabled: vm.enabled,
       onChanged: (bool? value) {
         setState(() {
           _gameState.action(AddPerkCommand(widget.character.id, widget.index));
         });
       },
-      value: added,
+      value: vm.added,
     );
   }
 }

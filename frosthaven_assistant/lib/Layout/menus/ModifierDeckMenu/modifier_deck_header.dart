@@ -21,10 +21,10 @@ import '../../../Resource/commands/corrosive_spew_command.dart';
 import '../../../Resource/commands/donate_cs_sanctuary_command.dart';
 import '../../../Resource/commands/remove_cs_party_card_command.dart';
 import '../../../Resource/commands/remove_cs_sanctuary_donation_command.dart';
-import '../../../Resource/game_methods.dart';
 import '../../../Resource/settings.dart';
 import '../../../Resource/state/game_state.dart';
 import '../../../Resource/ui_utils.dart';
+import '../../view_models/modifier_deck_header_view_model.dart';
 import '../../counter_button.dart';
 import '../PerksMenu/perks_menu.dart';
 import '../gh2e_faction_amd_card_menu.dart';
@@ -40,10 +40,10 @@ class ModifierDeckHeader extends StatelessWidget {
   static const int _kMaxVimthreaderGrEmpower = 5;
   static const int _kMaxLifespeakerEnfeeble = 15;
   static const int _kAdvancedImbuementLevel = 2;
-  static const int _kHailPerkIndex = 17;
-  static const int _kCassandraPerkIndex = 15;
   static const int _kMaxRevealButtonNr = 6;
   static const int _kPartyButtonCount = 4;
+  static const int _kHailPerkIndex = 17;
+  static const int _kCassandraPerkIndex = 15;
 
   const ModifierDeckHeader({
     super.key,
@@ -61,68 +61,19 @@ class ModifierDeckHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-
-    bool hasDiviner = false;
-    for (final item in gameState.currentList) {
-      if (item is Character && item.characterClass.name == "Diviner") {
-        hasDiviner = true;
-      }
-    }
-
-    final bool isCharacter = name.isNotEmpty && name != "allies";
-    final character = isCharacter ? GameMethods.getCharacterByName(name) : null;
-    final badOmen = deck.badOmen.value;
-    final corrosiveSpew = deck.corrosiveSpew.value;
-
-    final characterHail = GameMethods.getCharacterByName("Hail");
-    final bool hasHailPerk = characterHail != null
-        ? characterHail.characterState.perkList[_kHailPerkIndex]
-        : false;
-
-    final characterCassandra = GameMethods.getCharacterByName("Cassandra");
-    final bool hasCassandraPerk = characterCassandra != null
-        ? characterCassandra.characterState.perkList[_kCassandraPerkIndex]
-        : false;
-
-    final monsterDeck = name.isEmpty;
-    final hasIncarnate =
-        GameMethods.getFigure("Incarnate", "Incarnate") != null;
-    final hasVimthreader =
-        GameMethods.getFigure("Vimthreader", "Vimthreader") != null;
-    final hasLifespeaker =
-        GameMethods.getFigure("Lifespeaker", "Lifespeaker") != null;
+    final vm = ModifierDeckHeaderViewModel(
+      deck: deck,
+      gameState: gameState,
+      settings: settings,
+      name: name,
+    );
 
     final imbuement = deck.imbuement.value;
-    final textStyle = kBodyBlackStyle;
-
-    final campaign = gameState.currentCampaign.value;
-    final bool isCSCampaign =
-        campaign == "Crimson Scales" || campaign == "Trail of Ashes";
-
-    final donatedCS = isCharacter && deck.hasCSSanctuary();
-    final addedPartyCard = isCharacter && deck.hasPartyCard();
-    final hasPlus0Card = deck.hasCard("plus0");
-
+    final badOmen = deck.badOmen.value;
+    final corrosiveSpew = deck.corrosiveSpew.value;
     final removedPile = deck.removedPileContents.toList();
     final drawPile = deck.drawPileContents.reversed.toList();
-
-    int nrOfEnfeebles = 0;
-    int nrOfEmpowers = 0;
-    if (hasVimthreader) {
-      nrOfEnfeebles++;
-      nrOfEmpowers++;
-    }
-    if (hasLifespeaker) {
-      nrOfEnfeebles++;
-    }
-    if (hasIncarnate) {
-      nrOfEnfeebles++;
-      nrOfEmpowers++;
-    }
-    final hasMoreThanOneEnfeeble = monsterDeck && nrOfEnfeebles > 1;
-    final hasMoreThanOneEmpower =
-        ((isCharacter || name == "allies") && nrOfEmpowers > 1) ||
-            isCharacter && character?.id == "Ruinmaw" && nrOfEmpowers > 0;
+    final textStyle = kBodyBlackStyle;
 
     return Container(
         width: screenWidth,
@@ -137,7 +88,7 @@ class ModifierDeckHeader extends StatelessWidget {
             runSpacing: 0,
             spacing: 0,
             children: [
-              if (hasDiviner && !isCharacter)
+              if (vm.hasDiviner && !vm.isCharacter)
                 if (badOmen == 0)
                   TextButton(
                     onPressed: () {
@@ -173,7 +124,7 @@ class ModifierDeckHeader extends StatelessWidget {
                 },
                 child: const Text("Remove -1 card"),
               ),
-              if (!isCharacter)
+              if (!vm.isCharacter)
                 TextButton(
                   onPressed: () {
                     gameState.action(AMDRemoveMinus2Command(name == "allies",
@@ -183,17 +134,18 @@ class ModifierDeckHeader extends StatelessWidget {
                     deck.hasMinus2() ? "Remove -2 card" : "-2 card removed",
                   ),
                 ),
-              if (isCharacter && (hasPlus0Card || deck.hasCard("plus0")))
+              if (vm.isCharacter && (vm.hasPlus0Card || deck.hasCard("plus0")))
                 TextButton(
                   onPressed: () {
-                    gameState.action(AmdRemovePlus0Command(name, hasPlus0Card,
+                    gameState.action(AmdRemovePlus0Command(
+                        name, vm.hasPlus0Card,
                         gameState: gameState));
                   },
                   child: Text(
-                    hasPlus0Card ? "Remove +0 card" : "+0 card removed",
+                    vm.hasPlus0Card ? "Remove +0 card" : "+0 card removed",
                   ),
                 ),
-              if (monsterDeck)
+              if (vm.monsterDeck)
                 TextButton(
                   onPressed: () {
                     if (deck.imbuement.value > 0) {
@@ -205,23 +157,23 @@ class ModifierDeckHeader extends StatelessWidget {
                   },
                   child: Text(imbuement > 0 ? "Remove Imbue" : "Imbue"),
                 ),
-              if (imbuement != _kAdvancedImbuementLevel && monsterDeck)
+              if (imbuement != _kAdvancedImbuementLevel && vm.monsterDeck)
                 TextButton(
                   onPressed: () {
                     gameState.action(AMDImbue2Command(gameState: gameState));
                   },
                   child: const Text("Advanced Imbue"),
                 ),
-              if (name.isEmpty && characterHail != null)
+              if (name.isEmpty && vm.characterHail != null)
                 TextButton(
                   onPressed: () {
                     gameState.action(AddPerkCommand("Hail", _kHailPerkIndex));
                   },
                   child: Text(
-                    hasHailPerk ? "Remove Hail Perk" : "Add Hail Perk",
+                    vm.hasHailPerk ? "Remove Hail Perk" : "Add Hail Perk",
                   ),
                 ),
-              if (characterCassandra != null &&
+              if (vm.characterCassandra != null &&
                   !settings.showCharacterAMD.value)
                 TextButton(
                   onPressed: () {
@@ -229,12 +181,12 @@ class ModifierDeckHeader extends StatelessWidget {
                         AddPerkCommand("Cassandra", _kCassandraPerkIndex));
                   },
                   child: Text(
-                    hasCassandraPerk
+                    vm.hasCassandraPerk
                         ? "Remove\nCassandra Perk"
                         : "Add\nCassandra Perk",
                   ),
                 ),
-              if (hasCassandraPerk)
+              if (vm.hasCassandraPerk)
                 TextButton(
                   onPressed: () {
                     gameState.action(AMDCassandraSpecialCommand(
@@ -254,10 +206,10 @@ class ModifierDeckHeader extends StatelessWidget {
                   },
                   child: Text("Removed: ${removedPile.length}"),
                 ),
-              if (isCSCampaign && isCharacter)
+              if (vm.isCSCampaign && vm.isCharacter)
                 TextButton(
                   onPressed: () {
-                    donatedCS
+                    vm.donatedCS
                         ? gameState.action(RemoveCSSanctuaryDonationCommand(
                             name,
                             gameState: gameState))
@@ -265,10 +217,10 @@ class ModifierDeckHeader extends StatelessWidget {
                             gameState: gameState));
                   },
                   child: Text(
-                      donatedCS ? "Remove\nDonation" : "Donate to\nSanctuary"),
+                      vm.donatedCS ? "Remove\nDonation" : "Donate to\nSanctuary"),
                 ),
-              if (isCSCampaign && isCharacter)
-                addedPartyCard
+              if (vm.isCSCampaign && vm.isCharacter)
+                vm.addedPartyCard
                     ? TextButton(
                         onPressed: () {
                           gameState.action(RemoveCSPartyCardCommand(name,
@@ -286,7 +238,7 @@ class ModifierDeckHeader extends StatelessWidget {
                                   nr: i + 1, gameState: gameState, name: name),
                             ),
                           ]),
-              if (isCharacter && gameState.unlockedClasses.contains("Demons"))
+              if (vm.isCharacter && gameState.unlockedClasses.contains("Demons"))
                 IconButton(
                   icon: Image.asset("assets/images/demons.png"),
                   onPressed: () {
@@ -294,7 +246,7 @@ class ModifierDeckHeader extends StatelessWidget {
                         GH2eFactionAMDCardMenu(faction: "Demons", name: name));
                   },
                 ),
-              if (isCharacter &&
+              if (vm.isCharacter &&
                   gameState.unlockedClasses.contains("Merchant-Guild"))
                 IconButton(
                   icon: Image.asset("assets/images/merchant-guild.png"),
@@ -305,7 +257,7 @@ class ModifierDeckHeader extends StatelessWidget {
                             faction: "Merchant-Guild", name: name));
                   },
                 ),
-              if (isCharacter && gameState.unlockedClasses.contains("Military"))
+              if (vm.isCharacter && gameState.unlockedClasses.contains("Military"))
                 IconButton(
                   icon: Image.asset("assets/images/military.png"),
                   onPressed: () {
@@ -335,14 +287,14 @@ class ModifierDeckHeader extends StatelessWidget {
                   figureId: "unknown",
                   ownerId: "unknown",
                   scale: 1),
-              if (hasIncarnate && !isCharacter)
+              if (vm.hasIncarnate && !vm.isCharacter)
                 CounterButton(
                     notifier: deck.getRemovable("in-enfeeble"),
                     command: ChangeEnfeebleCommand.deck(deck, "in-enfeeble",
                         gameState: gameState),
                     maxValue: _kMaxBlessCurse,
                     image: "assets/images/abilities/enfeeble_old.png",
-                    extraImage: hasMoreThanOneEnfeeble
+                    extraImage: vm.hasMoreThanOneEnfeeble
                         ? "assets/images/class-icons/Incarnate.png"
                         : null,
                     showTotalValue: true,
@@ -350,14 +302,14 @@ class ModifierDeckHeader extends StatelessWidget {
                     figureId: "unknown",
                     ownerId: "unknown",
                     scale: 1),
-              if ((isCharacter || name == "allies") && hasIncarnate)
+              if ((vm.isCharacter || name == "allies") && vm.hasIncarnate)
                 CounterButton(
                     notifier: deck.getRemovable("in-empower"),
                     command: ChangeEmpowerCommand.deck(deck, "in-empower",
                         gameState: gameState),
                     maxValue: _kMaxBlessCurse,
                     image: "assets/images/abilities/empower_old.png",
-                    extraImage: hasMoreThanOneEmpower
+                    extraImage: vm.hasMoreThanOneEmpower
                         ? "assets/images/class-icons/Incarnate.png"
                         : null,
                     showTotalValue: true,
@@ -372,7 +324,7 @@ class ModifierDeckHeader extends StatelessWidget {
                         gameState: gameState),
                     maxValue: _kMaxRuinmawEmpower,
                     image: "assets/images/abilities/empower_old.png",
-                    extraImage: hasMoreThanOneEmpower
+                    extraImage: vm.hasMoreThanOneEmpower
                         ? "assets/images/class-icons/Ruinmaw.png"
                         : null,
                     showTotalValue: true,
@@ -380,14 +332,14 @@ class ModifierDeckHeader extends StatelessWidget {
                     figureId: "unknown",
                     ownerId: "unknown",
                     scale: 1),
-              if ((isCharacter || name == "allies") && hasVimthreader)
+              if ((vm.isCharacter || name == "allies") && vm.hasVimthreader)
                 CounterButton(
                     notifier: deck.getRemovable("vi-empower"),
                     command: ChangeEmpowerCommand.deck(deck, "vi-empower",
                         gameState: gameState),
                     maxValue: _kMaxBlessCurse,
                     image: "assets/images/abilities/empower.png",
-                    extraImage: hasMoreThanOneEmpower
+                    extraImage: vm.hasMoreThanOneEmpower
                         ? "assets/images/class-icons/Vimthreader.png"
                         : null,
                     showTotalValue: true,
@@ -395,7 +347,7 @@ class ModifierDeckHeader extends StatelessWidget {
                     figureId: "unknown",
                     ownerId: "unknown",
                     scale: 1),
-              if ((isCharacter || name == "allies") && hasVimthreader)
+              if ((vm.isCharacter || name == "allies") && vm.hasVimthreader)
                 CounterButton(
                     notifier: deck.getRemovable("vi-gr-empower"),
                     command: ChangeEmpowerCommand.deck(deck, "vi-gr-empower",
@@ -407,14 +359,14 @@ class ModifierDeckHeader extends StatelessWidget {
                     figureId: "unknown",
                     ownerId: "unknown",
                     scale: 1),
-              if (!isCharacter && hasVimthreader)
+              if (!vm.isCharacter && vm.hasVimthreader)
                 CounterButton(
                     notifier: deck.getRemovable("vi-enfeeble"),
                     command: ChangeEnfeebleCommand.deck(deck, "vi-enfeeble",
                         gameState: gameState),
                     maxValue: _kMaxBlessCurse,
                     image: "assets/images/abilities/enfeeble.png",
-                    extraImage: hasMoreThanOneEnfeeble
+                    extraImage: vm.hasMoreThanOneEnfeeble
                         ? "assets/images/class-icons/Vimthreader.png"
                         : null,
                     showTotalValue: true,
@@ -422,7 +374,7 @@ class ModifierDeckHeader extends StatelessWidget {
                     figureId: "unknown",
                     ownerId: "unknown",
                     scale: 1),
-              if (!isCharacter && hasVimthreader)
+              if (!vm.isCharacter && vm.hasVimthreader)
                 CounterButton(
                     notifier: deck.getRemovable("vi-gr-enfeeble"),
                     command: ChangeEnfeebleCommand.deck(deck, "vi-gr-enfeeble",
@@ -434,14 +386,14 @@ class ModifierDeckHeader extends StatelessWidget {
                     figureId: "unknown",
                     ownerId: "unknown",
                     scale: 1),
-              if ((!isCharacter || name == "Lifespeaker") && hasLifespeaker)
+              if ((!vm.isCharacter || name == "Lifespeaker") && vm.hasLifespeaker)
                 CounterButton(
                     notifier: deck.getRemovable("li-enfeeble"),
                     command: ChangeEnfeebleCommand.deck(deck, "li-enfeeble",
                         gameState: gameState),
                     maxValue: _kMaxLifespeakerEnfeeble,
                     image: "assets/images/abilities/enfeeble.png",
-                    extraImage: hasMoreThanOneEnfeeble
+                    extraImage: vm.hasMoreThanOneEnfeeble
                         ? "assets/images/class-icons/Lifespeaker.png"
                         : null,
                     showTotalValue: true,
@@ -449,12 +401,12 @@ class ModifierDeckHeader extends StatelessWidget {
                     figureId: "unknown",
                     ownerId: "unknown",
                     scale: 1),
-              if (isCharacter &&
-                  character != null &&
-                  character.characterClass.perks.isNotEmpty)
+              if (vm.isCharacter &&
+                  vm.character != null &&
+                  vm.character!.characterClass.perks.isNotEmpty)
                 TextButton(
                   onPressed: () {
-                    openDialog(context, PerksMenu(character: character));
+                    openDialog(context, PerksMenu(character: vm.character!));
                   },
                   child: const Text("Perks"),
                 ),
