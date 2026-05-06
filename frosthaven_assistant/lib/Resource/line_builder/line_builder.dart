@@ -2,6 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/line_builder/frosthaven_converter.dart';
+import 'package:frosthaven_assistant/Resource/line_builder/line_styles.dart';
 import 'package:frosthaven_assistant/Resource/line_builder/stat_applier.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
@@ -10,35 +11,6 @@ import '../state/game_state.dart';
 
 class LineBuilder {
   static const bool debugColors = false;
-
-  // Line height constants
-  static const double _kLineHeightFH = 0.84;
-  static const double _kLineHeightGH = 0.85;
-  static const double _kLineHeightSmall = 0.8;
-  static const double _kLineHeightMidFH = 1.0;
-  static const double _kLineHeightDivider = 0.7;
-  static const double _kLineHeightDividerThin = 0.1;
-
-  // Font size constants
-  static const double _kDividerFontSize = 6.4;
-  static const double _kDividerThinFontSize = 4.8;
-  static const double _kDividerLetterSpacing = 1.6;
-  static const double _kSmallFontSizeCenter = 8.0;
-  static const double _kSmallFontSizeStat = 7.4;
-  static const double _kMidFontSizeFH = 9.52;
-  static const double _kMidFontSizeGH = 8.8;
-  static const double _kMidFontSizeGHStat = 9.9;
-  static const double _kNormalFontSizeFH = 13.1;
-  static const double _kNormalFontSizeGH = 12.56;
-  static const double _kNormalFontSizeStat = 11.2;
-
-  // Shadow
-  static const double _kShadowOffset = 0.4;
-  static const double _kShadowBlur = 1.0;
-
-  // Top padding ratios
-  static const double _kTopPaddingRatio = 0.25;
-  static const double _kTopPaddingMarkaziRatio = 0.1;
 
   // Image/icon scale factors
   static const double _kImageScaleBase = 0.8;
@@ -60,6 +32,7 @@ class LineBuilder {
 
   // Height mod for main-line icons (no scaling)
   static const double _kHeightModMainLine = 1.0;
+  static const double _kMidFontSizeGH = 8.8;
 
   // Margins and spacing
   static const double _kRightMarginNormal = 3.0;
@@ -121,16 +94,15 @@ class LineBuilder {
     return false;
   }
 
-  //get rid of this if it doesn't really help
   static double getTopPaddingForStyle(TextStyle style) {
     double height = style.fontSize ?? 0.0;
     bool markazi = style.fontFamily == "Markazi";
 
-    if (!markazi && style.height == _kLineHeightGH) {
-      return height * _kTopPaddingRatio;
+    if (!markazi && style.height == 0.85) {
+      return height * 0.25;
     }
-    if (markazi && style.height == _kLineHeightFH) {
-      return height * _kTopPaddingMarkaziRatio;
+    if (markazi && style.height == 0.84) {
+      return height * 0.1;
     }
     return 0;
   }
@@ -169,120 +141,13 @@ class LineBuilder {
       rowMainAxisAlignment = MainAxisAlignment.end;
     }
 
-    final shadow = Shadow(
-      offset: Offset(_kShadowOffset * scale, _kShadowOffset * scale),
-      color: left ? Colors.black54 : Colors.black87,
-      blurRadius: _kShadowBlur * scale,
+    final styles = LineStyles(
+      scale: scale,
+      left: left,
+      frosthavenStyle: frosthavenStyle,
+      alignment: alignment,
+      debugColors: debugColors,
     );
-    final dividerStyle = TextStyle(
-        fontFamily: 'Majalla',
-        leadingDistribution: TextLeadingDistribution.proportional,
-        color: left ? Colors.black : Colors.white,
-        fontSize: _kDividerFontSize * scale,
-        letterSpacing: _kDividerLetterSpacing * scale,
-        height: _kLineHeightDivider,
-        shadows: [shadow]);
-
-    final dividerStyleExtraThin = TextStyle(
-        fontFamily: 'Majalla',
-        leadingDistribution: TextLeadingDistribution.proportional,
-        color: left ? Colors.black : Colors.white,
-        fontSize: _kDividerThinFontSize * scale,
-        letterSpacing: _kDividerLetterSpacing * scale,
-        height: _kLineHeightDividerThin,
-        shadows: [shadow]);
-
-    final smallStyle = TextStyle(
-        fontFamily: 'Majalla',
-        color: left ? Colors.black : Colors.white,
-        fontSize: (alignment == CrossAxisAlignment.center
-                ? _kSmallFontSizeCenter
-                : _kSmallFontSizeStat) *
-            scale,
-        //sizes are larger on stat cards
-        height: _kLineHeightSmall,
-        backgroundColor: debugColors ? Colors.amber : null,
-        //0.85,
-        shadows: [shadow]);
-    bool isCenterAlignment = alignment == CrossAxisAlignment.center;
-    double centerMidFontSize =
-        frosthavenStyle ? _kMidFontSizeFH : _kMidFontSizeGH;
-    double nonCenterMidFontSize =
-        frosthavenStyle ? _kMidFontSizeGH : _kMidFontSizeGHStat;
-    double midFontSize =
-        isCenterAlignment ? centerMidFontSize : nonCenterMidFontSize;
-    double centerMidLineHeight =
-        frosthavenStyle ? _kLineHeightMidFH : _kLineHeightGH;
-    double midLineHeight =
-        isCenterAlignment ? centerMidLineHeight : _kLineHeightGH;
-    double centerNormalFontSize =
-        frosthavenStyle ? _kNormalFontSizeFH : _kNormalFontSizeGH;
-    double normalFontSize =
-        isCenterAlignment ? centerNormalFontSize : _kNormalFontSizeStat;
-    final midStyle = TextStyle(
-        backgroundColor: debugColors ? Colors.greenAccent : null,
-        leadingDistribution: TextLeadingDistribution.even,
-        fontFamily: 'Majalla',
-        color: left ? Colors.black : Colors.white,
-        fontSize: midFontSize * scale,
-        //sizes are larger on stat cards
-        height: midLineHeight,
-        // 0.9,
-        shadows: [shadow]);
-    final normalStyle = TextStyle(
-        //maybe slightly bigger between chars space?
-        //leadingDistribution: TextLeadingDistribution.even,
-        //textBaseline: TextBaseline.alphabetic,
-        fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
-        color: left ? Colors.black : Colors.white,
-        backgroundColor: debugColors ? Colors.lightGreen : null,
-        fontSize: normalFontSize * scale,
-        height: frosthavenStyle
-            ? _kLineHeightFH
-            : _kLineHeightGH, // needs to be at least one for the icon alignment...
-        //height is really low for gh style due to text not being center aligned in font - so to force to center the height is reduced. this is a shitty solution to a shitty problem.
-        // 0.84,
-
-        shadows: [shadow]);
-
-    final eliteStyle = TextStyle(
-        backgroundColor: debugColors ? Colors.lightGreen : null,
-        //leadingDistribution: TextLeadingDistribution.even,
-        //textBaseline: TextBaseline.alphabetic,
-        //maybe slightly bigger between chars space?
-        fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
-        color: Colors.yellow,
-        fontSize: frosthavenStyle
-            ? _kNormalFontSizeFH * scale
-            : _kNormalFontSizeGH * scale,
-        height: frosthavenStyle ? _kLineHeightFH : _kLineHeightGH,
-        shadows: [shadow]);
-
-    final eliteSmallStyle = TextStyle(
-        fontFamily: 'Majalla',
-        color: Colors.yellow,
-        fontSize: _kSmallFontSizeCenter * scale,
-        height: _kLineHeightMidFH,
-        shadows: [shadow]);
-    final eliteMidStyle = TextStyle(
-        leadingDistribution: TextLeadingDistribution.even,
-        fontFamily: 'Majalla',
-        color: Colors.yellow,
-        fontSize:
-            frosthavenStyle ? _kMidFontSizeFH * scale : _kMidFontSizeGH * scale,
-        height: frosthavenStyle ? _kLineHeightMidFH : _kLineHeightGH,
-        shadows: [shadow]);
-
-    final midStyleSquished = TextStyle(
-        backgroundColor: debugColors ? Colors.greenAccent : null,
-        leadingDistribution: TextLeadingDistribution.even,
-        fontFamily: 'Majalla',
-        color: left ? Colors.black : Colors.white,
-        fontSize: midFontSize * scale,
-        //sizes are larger on stat cards
-        height: _kLineHeightSmall,
-        // 0.9,
-        shadows: [shadow]);
 
     List<Widget> lines = [];
     List<String> localStrings = [];
@@ -326,7 +191,7 @@ class LineBuilder {
       String line = localStrings[i];
       String sizeToken = "";
       bool isRightPartOfLastLine = false;
-      var styleToUse = normalStyle;
+      var styleToUse = styles.normal;
       List<Widget> textPartListRowContent = [];
 
       //handle FH layout with gray background for sub-lines
@@ -518,13 +383,13 @@ class LineBuilder {
       }
       if (line.startsWith('*')) {
         sizeToken = '*';
-        styleToUse = smallStyle;
+        styleToUse = styles.small;
         line = line.substring(1, line.length);
         if (line.startsWith("....") || line.startsWith("*....")) {
-          styleToUse = dividerStyle;
+          styleToUse = styles.divider;
           if (line.startsWith('*')) {
             line = line.substring(1, line.length);
-            styleToUse = dividerStyleExtraThin;
+            styleToUse = styles.dividerThin;
           }
 
           if (frosthavenStyle || alignment == CrossAxisAlignment.start) {
@@ -534,7 +399,7 @@ class LineBuilder {
                   : Alignment.center,
               scale: 1 / (scale * _kDividerImageScale),
               //for some reason flutter likes scale to be inverted
-              height: styleToUse == dividerStyleExtraThin
+              height: styleToUse == styles.dividerThin
                   ? _kDividerThinImageHeight * scale
                   : _kDividerImageHeight * scale,
               width: _kDividerImageWidth *
@@ -564,11 +429,11 @@ class LineBuilder {
       }
       if (line.startsWith('^')) {
         sizeToken = '^';
-        styleToUse = midStyle;
+        styleToUse = styles.mid;
         line = line.substring(1, line.length);
         if (line.startsWith('^')) {
           //double ^^ : no means no, you bastard!
-          styleToUse = midStyleSquished;
+          styleToUse = styles.midSquished;
           line = line.substring(1, line.length);
         }
       }
@@ -649,10 +514,10 @@ class LineBuilder {
               textPartListRowContent.add(Container(
                   color: debugColors ? Colors.red : null,
                   padding: EdgeInsets.only(
-                      top: getTopPaddingForStyle(normalStyle) *
+                      top: getTopPaddingForStyle(styles.normal) *
                           _kUseFHHeightRatio),
                   child: Text(frosthavenStyle ? " :" : " : ",
-                      style: normalStyle)));
+                      style: styles.normal)));
             } else {
               double height = _getIconHeight(
                   iconToken, styleToUse.fontSize ?? 0.0, frosthavenStyle);
@@ -701,7 +566,7 @@ class LineBuilder {
                 }
               }
               bool mainLine =
-                  styleToUse == normalStyle || styleToUse == eliteStyle;
+                  styleToUse == styles.normal || styleToUse == styles.elite;
               EdgeInsetsGeometry margin = _getMarginForToken(
                   iconToken, height, mainLine, alignment, frosthavenStyle);
 
@@ -766,12 +631,12 @@ class LineBuilder {
         if (line[i] == "£") {
           //finish current part
           partStartIndex = i + 1;
-          if (styleToUse == normalStyle) {
-            styleToUse = eliteStyle;
-          } else if (styleToUse == smallStyle) {
-            styleToUse = eliteSmallStyle;
-          } else if (styleToUse == midStyle) {
-            styleToUse = eliteMidStyle;
+          if (styleToUse == styles.normal) {
+            styleToUse = styles.elite;
+          } else if (styleToUse == styles.small) {
+            styleToUse = styles.eliteSmall;
+          } else if (styleToUse == styles.mid) {
+            styleToUse = styles.eliteMid;
           }
         }
         if (line[i] == "Å") {
@@ -876,9 +741,6 @@ class LineBuilder {
     if (iconToken.contains("aoe")) {
       return height * _kAoeScaleRatio;
     }
-    //if(shouldOverflow(isFrosthavenStyle, iconToken, true)) {
-    //  return height * 1.2;
-    //}
     return height;
   }
 
