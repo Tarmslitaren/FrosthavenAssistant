@@ -66,8 +66,7 @@ void main() {
 
     test('returns null when character with initiative succeeds draw', () {
       final gs = getIt<GameState>();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: gs)
-          .execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
       final character =
           gs.currentList.firstWhere((e) => e is Character) as Character;
       (character.characterState.initiative as ValueNotifier<int>).value = 50;
@@ -89,10 +88,13 @@ void main() {
 
     test('marks current item as done in playTurns', () {
       final gs = getIt<GameState>();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: gs)
-          .execute();
-      AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: gs)
-          .execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      AddMonsterCommand(
+        'Ancient Artillery (FH)',
+        1,
+        false,
+        gameState: gs,
+      ).execute();
       DrawCommand(gameState: gs).execute();
       expect(gs.currentList.first.turnState.value, TurnsState.current);
 
@@ -109,8 +111,7 @@ void main() {
   group('GlobalHotkeysViewModel.undoActivation', () {
     test('does nothing when last command is not TurnDoneCommand', () {
       final gs = getIt<GameState>();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: gs)
-          .execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
       final indexBefore = gs.commandIndex.value;
       makeVm().undoActivation();
       expect(gs.commandIndex.value, indexBefore);
@@ -119,10 +120,13 @@ void main() {
 
     test('undoes when last command is TurnDoneCommand', () {
       final gs = getIt<GameState>();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: gs)
-          .execute();
-      AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: gs)
-          .execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      AddMonsterCommand(
+        'Ancient Artillery (FH)',
+        1,
+        false,
+        gameState: gs,
+      ).execute();
       DrawCommand(gameState: gs).execute();
       gs.action(TurnDoneCommand(gs.currentList.first.id, gameState: gs));
       final indexAfterTurnDone = gs.commandIndex.value;
@@ -139,8 +143,7 @@ void main() {
   group('GlobalHotkeysViewModel.undo/redo', () {
     test('undo decrements commandIndex', () {
       final gs = getIt<GameState>();
-      gs.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-          gameState: gs));
+      gs.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1));
       final indexAfterAdd = gs.commandIndex.value;
       makeVm().undo();
       expect(gs.commandIndex.value, indexAfterAdd - 1);
@@ -148,8 +151,7 @@ void main() {
 
     test('redo re-applies undone command', () {
       final gs = getIt<GameState>();
-      gs.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-          gameState: gs));
+      gs.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1));
       final indexAfterAdd = gs.commandIndex.value;
       makeVm().undo();
       makeVm().redo();

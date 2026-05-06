@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../Resource/app_constants.dart';
 import '../../Resource/enums.dart';
 import '../../Resource/scaling.dart';
 import '../../Resource/settings.dart';
@@ -103,12 +102,7 @@ class CharacterInternalWidgetState extends State<CharacterWidgetInternal> {
     double scale = getScaleByReference(context);
     double scaledHeight = CharacterWidgetInternal._kScaledHeight * scale;
 
-    final shadow = Shadow(
-      offset: Offset(kShadowOffset * scale,
-          kShadowOffset * scale),
-      color: Colors.black87,
-      blurRadius: kShadowOffset * scale,
-    );
+    final shadow = textShadow(scale);
 
     final character = widget.character;
     return SizedBox(

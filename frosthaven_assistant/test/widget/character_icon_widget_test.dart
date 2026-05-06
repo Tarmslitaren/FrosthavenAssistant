@@ -20,7 +20,10 @@ void main() {
   });
 
   Future<void> pumpIcon(
-      WidgetTester tester, Character character, bool isCharacter) async {
+    WidgetTester tester,
+    Character character,
+    bool isCharacter,
+  ) async {
     final originalOnError = FlutterError.onError;
     FlutterError.onError = ignoreOverflowErrors;
     await tester.pumpWidget(
@@ -42,40 +45,38 @@ void main() {
 
   group('CharacterIconWidget', () {
     testWidgets('renders Blinkblade icon image', (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-              gameState: getIt<GameState>())
-          .execute();
-      final character = getIt<GameState>()
-          .currentList
-          .firstWhere((e) => e.id == 'Blinkblade') as Character;
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      final character =
+          getIt<GameState>().currentList.firstWhere((e) => e.id == 'Blinkblade')
+              as Character;
       await pumpIcon(tester, character, true);
       expect(find.byType(Image), findsOneWidget);
     });
 
     testWidgets(
-        'Blinkblade icon uses character class color when isCharacter=true',
-        (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-              gameState: getIt<GameState>())
-          .execute();
-      final character = getIt<GameState>()
-          .currentList
-          .firstWhere((e) => e.id == 'Blinkblade') as Character;
-      await pumpIcon(tester, character, true);
+      'Blinkblade icon uses character class color when isCharacter=true',
+      (WidgetTester tester) async {
+        AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+        final character =
+            getIt<GameState>().currentList.firstWhere(
+                  (e) => e.id == 'Blinkblade',
+                )
+                as Character;
+        await pumpIcon(tester, character, true);
 
-      final img = tester.widget<Image>(find.byType(Image));
-      // When isCharacter=true, color is set to the character class color
-      expect(img.color, character.characterClass.color);
-    });
+        final img = tester.widget<Image>(find.byType(Image));
+        // When isCharacter=true, color is set to the character class color
+        expect(img.color, character.characterClass.color);
+      },
+    );
 
-    testWidgets('isCharacter=false renders image without color tint',
-        (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-              gameState: getIt<GameState>())
-          .execute();
-      final character = getIt<GameState>()
-          .currentList
-          .firstWhere((e) => e.id == 'Blinkblade') as Character;
+    testWidgets('isCharacter=false renders image without color tint', (
+      WidgetTester tester,
+    ) async {
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      final character =
+          getIt<GameState>().currentList.firstWhere((e) => e.id == 'Blinkblade')
+              as Character;
       await pumpIcon(tester, character, false);
 
       final img = tester.widget<Image>(find.byType(Image));
@@ -83,28 +84,26 @@ void main() {
       expect(img.color, isNull);
     });
 
-    testWidgets('non-Shattersong character does not render ShaderMask',
-        (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-              gameState: getIt<GameState>())
-          .execute();
-      final character = getIt<GameState>()
-          .currentList
-          .firstWhere((e) => e.id == 'Blinkblade') as Character;
+    testWidgets('non-Shattersong character does not render ShaderMask', (
+      WidgetTester tester,
+    ) async {
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      final character =
+          getIt<GameState>().currentList.firstWhere((e) => e.id == 'Blinkblade')
+              as Character;
       await pumpIcon(tester, character, true);
 
       // Only Shattersong uses ShaderMask; Blinkblade should not
       expect(find.byType(ShaderMask), findsNothing);
     });
 
-    testWidgets('renders Container with circular decoration',
-        (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-              gameState: getIt<GameState>())
-          .execute();
-      final character = getIt<GameState>()
-          .currentList
-          .firstWhere((e) => e.id == 'Blinkblade') as Character;
+    testWidgets('renders Container with circular decoration', (
+      WidgetTester tester,
+    ) async {
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      final character =
+          getIt<GameState>().currentList.firstWhere((e) => e.id == 'Blinkblade')
+              as Character;
       await pumpIcon(tester, character, true);
 
       final container = tester.widget<Container>(find.byType(Container).first);
@@ -112,14 +111,13 @@ void main() {
       expect(decoration.shape, BoxShape.circle);
     });
 
-    testWidgets('image asset path contains character class name',
-        (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-              gameState: getIt<GameState>())
-          .execute();
-      final character = getIt<GameState>()
-          .currentList
-          .firstWhere((e) => e.id == 'Blinkblade') as Character;
+    testWidgets('image asset path contains character class name', (
+      WidgetTester tester,
+    ) async {
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      final character =
+          getIt<GameState>().currentList.firstWhere((e) => e.id == 'Blinkblade')
+              as Character;
       await pumpIcon(tester, character, true);
 
       final img = tester.widget<Image>(find.byType(Image));
@@ -127,14 +125,13 @@ void main() {
       expect(assetImage.assetName, contains(character.characterClass.name));
     });
 
-    testWidgets('isCharacter=true applies class color to image',
-        (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-              gameState: getIt<GameState>())
-          .execute();
-      final character = getIt<GameState>()
-          .currentList
-          .firstWhere((e) => e.id == 'Blinkblade') as Character;
+    testWidgets('isCharacter=true applies class color to image', (
+      WidgetTester tester,
+    ) async {
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      final character =
+          getIt<GameState>().currentList.firstWhere((e) => e.id == 'Blinkblade')
+              as Character;
       await pumpIcon(tester, character, true);
 
       final img = tester.widget<Image>(find.byType(Image));
@@ -143,8 +140,9 @@ void main() {
       expect(img.color, character.characterClass.color);
     });
 
-    testWidgets('Shattersong character uses ShaderMask',
-        (WidgetTester tester) async {
+    testWidgets('Shattersong character uses ShaderMask', (
+      WidgetTester tester,
+    ) async {
       // Create a character with class name "Shattersong" directly
       const shattersongClass = CharacterClass(
         'Shattersong',
@@ -164,28 +162,26 @@ void main() {
       expect(find.byType(ShaderMask), findsOneWidget);
     });
 
-    testWidgets('isCharacter=false image has no color tint',
-        (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-              gameState: getIt<GameState>())
-          .execute();
-      final character = getIt<GameState>()
-          .currentList
-          .firstWhere((e) => e.id == 'Blinkblade') as Character;
+    testWidgets('isCharacter=false image has no color tint', (
+      WidgetTester tester,
+    ) async {
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      final character =
+          getIt<GameState>().currentList.firstWhere((e) => e.id == 'Blinkblade')
+              as Character;
       await pumpIcon(tester, character, false);
 
       final img = tester.widget<Image>(find.byType(Image));
       expect(img.color, isNull);
     });
 
-    testWidgets('scale parameter affects widget size',
-        (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-              gameState: getIt<GameState>())
-          .execute();
-      final character = getIt<GameState>()
-          .currentList
-          .firstWhere((e) => e.id == 'Blinkblade') as Character;
+    testWidgets('scale parameter affects widget size', (
+      WidgetTester tester,
+    ) async {
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      final character =
+          getIt<GameState>().currentList.firstWhere((e) => e.id == 'Blinkblade')
+              as Character;
 
       // Pump with scale=1.0
       final originalOnError = FlutterError.onError;

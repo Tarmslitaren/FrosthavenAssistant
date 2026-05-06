@@ -18,13 +18,19 @@ void main() {
   group('ClearUnlockedClassesCommand', () {
     test('should clear unlocked classes', () {
       // Arrange
-      AddCharacterCommand("Banner Spear", "Frosthaven", "Banny", 1,
-              gameState: getIt<GameState>())
-          .execute(); //test data BS is hidden class
+      AddCharacterCommand(
+        "Banner Spear",
+        "Frosthaven",
+        "Banny",
+        1,
+      ).execute(); //test data BS is hidden class
 
       final gameState = getIt<GameState>();
-      expect(gameState.unlockedClasses, isNotEmpty,
-          reason: "Prerequisite: A class should be unlocked.");
+      expect(
+        gameState.unlockedClasses,
+        isNotEmpty,
+        reason: "Prerequisite: A class should be unlocked.",
+      );
 
       final command = ClearUnlockedClassesCommand();
 

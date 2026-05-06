@@ -1,6 +1,5 @@
 // ignore_for_file: no-magic-number
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/view_models/loot_deck_view_model.dart';
@@ -11,7 +10,6 @@ import 'package:frosthaven_assistant/Resource/commands/draw_loot_card_command.da
 import 'package:frosthaven_assistant/Resource/commands/draw_modifier_card_command.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/game_data.dart';
-import 'package:frosthaven_assistant/Resource/game_event.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
@@ -37,21 +35,19 @@ void main() {
   // ── LootDeckViewModel ──────────────────────────────────────────────────────
 
   LootDeckViewModel makeLootVm() => LootDeckViewModel(
-        gameState: getIt<GameState>(),
-        gameData: getIt<GameData>(),
-        settings: getIt<Settings>(),
-      );
+    gameState: getIt<GameState>(),
+    gameData: getIt<GameData>(),
+    settings: getIt<Settings>(),
+  );
 
   group('LootDeckViewModel.shouldHide', () {
     test('false when deck has cards and hideLootDeck is false', () {
       // Testdata campaign loads with loot cards
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-              gameState: getIt<GameState>())
-          .execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
       final vm = makeLootVm();
       // If the loot deck has cards, shouldHide should be false.
-      final hasDeckCards = !vm.lootDeck.drawPileIsEmpty ||
-          !vm.lootDeck.discardPileIsEmpty;
+      final hasDeckCards =
+          !vm.lootDeck.drawPileIsEmpty || !vm.lootDeck.discardPileIsEmpty;
       if (hasDeckCards) {
         expect(vm.shouldHide, isFalse);
       }
@@ -70,9 +66,7 @@ void main() {
     });
 
     test('non-null when character has current turn', () {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-              gameState: getIt<GameState>())
-          .execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
       final gs = getIt<GameState>();
       final character =
           gs.currentList.firstWhere((e) => e is Character) as Character;
@@ -103,9 +97,7 @@ void main() {
     });
 
     test('true when last event is LootCardDrawnEvent', () {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-              gameState: getIt<GameState>())
-          .execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
       final gs = getIt<GameState>();
       final character =
           gs.currentList.firstWhere((e) => e is Character) as Character;
@@ -138,19 +130,22 @@ void main() {
   // ── ModifierDeckViewModel ──────────────────────────────────────────────────
 
   ModifierDeckViewModel makeModifierVm(String name) => ModifierDeckViewModel(
-        name,
-        gameState: getIt<GameState>(),
-        gameData: getIt<GameData>(),
-        settings: getIt<Settings>(),
-      );
+    name,
+    gameState: getIt<GameState>(),
+    gameData: getIt<GameData>(),
+    settings: getIt<Settings>(),
+  );
 
   group('ModifierDeckViewModel.deck', () {
-    test('can access the monster modifier deck (returns state.modifierDeck)', () {
-      // 'Monster' is not a character id, so getModifierDeck falls back to
-      // the main state.modifierDeck (used for monsters).
-      final vm = makeModifierVm('Monster');
-      expect(vm.deck, isNotNull);
-    });
+    test(
+      'can access the monster modifier deck (returns state.modifierDeck)',
+      () {
+        // 'Monster' is not a character id, so getModifierDeck falls back to
+        // the main state.modifierDeck (used for monsters).
+        final vm = makeModifierVm('Monster');
+        expect(vm.deck, isNotNull);
+      },
+    );
 
     test('deck for allies returns allies deck', () {
       final vm = makeModifierVm('allies');
@@ -165,9 +160,7 @@ void main() {
     });
 
     test('null when character deck but that character is not current', () {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-              gameState: getIt<GameState>())
-          .execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
       // Blinkblade deck name matches the character id.
       final vm = makeModifierVm('Blinkblade');
       // No current turn set → null

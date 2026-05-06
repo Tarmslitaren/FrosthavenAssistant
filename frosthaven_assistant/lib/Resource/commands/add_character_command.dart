@@ -2,20 +2,24 @@ import '../game_methods.dart';
 import '../state/game_state.dart';
 
 class AddCharacterCommand extends Command {
-  final GameState _gameState;
   final String _id;
   final String _edition;
   final int _level;
   final String? _display;
   Character? character;
 
-  AddCharacterCommand(this._id, this._edition, this._display, this._level,
-      {required GameState gameState})
-      : _gameState = gameState {
+  AddCharacterCommand(this._id, this._edition, this._display, this._level) {
     final created = CharacterMethods.createCharacter(
-        stateAccess, _id, _edition, _display, _level);
+      stateAccess,
+      _id,
+      _edition,
+      _display,
+      _level,
+    );
     if (created == null) {
-      throw StateError('AddCharacterCommand: character class not found: $_id (edition: $_edition)');
+      throw StateError(
+        'AddCharacterCommand: character class not found: $_id (edition: $_edition)',
+      );
     }
     character = created;
   }
@@ -34,7 +38,6 @@ class AddCharacterCommand extends Command {
     RoundMethods.updateForSpecialRules(stateAccess);
     ScenarioMethods.unlockClass(stateAccess, char.characterClass.id);
   }
-
 
   @override
   String describe() {

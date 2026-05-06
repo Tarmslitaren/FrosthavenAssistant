@@ -86,14 +86,7 @@ class LootCardFront extends StatelessWidget {
         width: LootCardWidget._kCardWidth * scale,
         height: LootCardWidget._kCardHeight * scale,
         decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black45,
-              blurRadius: kCardShadowBlur * scale,
-              offset: Offset(kCardShadowOffsetX * scale,
-                  kCardShadowOffsetY * scale), // Shadow position
-            ),
-          ],
+          boxShadow: [cardBoxShadow(scale)],
         ),
         child: RepaintBoundary(
           child: Stack(

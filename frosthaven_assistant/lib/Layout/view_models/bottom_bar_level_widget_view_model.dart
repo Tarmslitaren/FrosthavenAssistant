@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
+import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
@@ -36,11 +37,7 @@ class BottomBarLevelWidgetViewModel {
   TextStyle textStyle(double scaling) {
     final darkMode = _settings.darkMode.value;
     final fontH = _kFontSize * scaling;
-    final shadow = Shadow(
-      offset: Offset(kShadowOffset * scaling, kShadowOffset * scaling),
-      color: Colors.black87,
-      blurRadius: kShadowOffset * scaling,
-    );
+    final shadow = textShadow(scaling);
     return TextStyle(
         color: darkMode ? Colors.white : Colors.black,
         overflow: TextOverflow.fade,

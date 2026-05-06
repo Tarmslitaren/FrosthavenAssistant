@@ -19,9 +19,7 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-            gameState: getIt<GameState>())
-        .execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
   });
 
   Character getBlinkblade() =>
@@ -59,16 +57,19 @@ void main() {
       final character = getBlinkblade();
       await pumpWidget(tester, character);
       expect(
-        find.byWidgetPredicate((w) =>
-            w is Image &&
-            w.image is AssetImage &&
-            (w.image as AssetImage).assetName == 'assets/images/init.png'),
+        find.byWidgetPredicate(
+          (w) =>
+              w is Image &&
+              w.image is AssetImage &&
+              (w.image as AssetImage).assetName == 'assets/images/init.png',
+        ),
         findsOneWidget,
       );
     });
 
-    testWidgets('in chooseInitiative state shows TextField',
-        (WidgetTester tester) async {
+    testWidgets('in chooseInitiative state shows TextField', (
+      WidgetTester tester,
+    ) async {
       final gameState = getIt<GameState>();
       // Default state after clearList + addCharacter is chooseInitiative
       expect(gameState.roundState.value, RoundState.chooseInitiative);
@@ -77,8 +78,9 @@ void main() {
       expect(find.byType(TextField), findsOneWidget);
     });
 
-    testWidgets('in playTurns state shows text instead of TextField',
-        (WidgetTester tester) async {
+    testWidgets('in playTurns state shows text instead of TextField', (
+      WidgetTester tester,
+    ) async {
       final gameState = getIt<GameState>();
       // DrawCommand transitions to playTurns
       gameState.action(DrawCommand(gameState: getIt<GameState>()));
@@ -92,8 +94,9 @@ void main() {
       gameState.undo();
     });
 
-    testWidgets('shows no TextField in playTurns even with initiative > 0',
-        (WidgetTester tester) async {
+    testWidgets('shows no TextField in playTurns even with initiative > 0', (
+      WidgetTester tester,
+    ) async {
       final gameState = getIt<GameState>();
       final character = getBlinkblade();
       // Set initiative then advance to playTurns via DrawCommand
@@ -110,8 +113,9 @@ void main() {
       gameState.undo();
     });
 
-    testWidgets('shows empty text when initiative is 0 in playTurns',
-        (WidgetTester tester) async {
+    testWidgets('shows empty text when initiative is 0 in playTurns', (
+      WidgetTester tester,
+    ) async {
       final gameState = getIt<GameState>();
       final character = getBlinkblade();
       gameState.action(DrawCommand(gameState: getIt<GameState>()));
@@ -125,8 +129,9 @@ void main() {
       gameState.undo();
     });
 
-    testWidgets('can type into TextField in chooseInitiative state',
-        (WidgetTester tester) async {
+    testWidgets('can type into TextField in chooseInitiative state', (
+      WidgetTester tester,
+    ) async {
       final gameState = getIt<GameState>();
       expect(gameState.roundState.value, RoundState.chooseInitiative);
       final character = getBlinkblade();

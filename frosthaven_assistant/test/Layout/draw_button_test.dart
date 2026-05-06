@@ -27,9 +27,7 @@ void main() {
     FlutterError.onError = ignoreOverflowErrors;
     await tester.pumpWidget(
       const MaterialApp(
-        home: Scaffold(
-          body: Center(child: DrawButton()),
-        ),
+        home: Scaffold(body: Center(child: DrawButton())),
       ),
     );
     await tester.pump();
@@ -37,14 +35,16 @@ void main() {
   }
 
   group('DrawButton', () {
-    testWidgets('shows "Draw" in chooseInitiative state',
-        (WidgetTester tester) async {
+    testWidgets('shows "Draw" in chooseInitiative state', (
+      WidgetTester tester,
+    ) async {
       await pumpButton(tester);
       expect(find.text('Draw'), findsOneWidget);
     });
 
-    testWidgets('shows "Next Round" in playTurns state',
-        (WidgetTester tester) async {
+    testWidgets('shows "Next Round" in playTurns state', (
+      WidgetTester tester,
+    ) async {
       (getIt<GameState>().roundState as ValueNotifier<RoundState>).value =
           RoundState.playTurns;
       await pumpButton(tester);
@@ -62,22 +62,26 @@ void main() {
       expect(find.textContaining('3'), findsAtLeast(1));
     });
 
-    testWidgets('tapping with no characters in chooseInitiative does not crash',
-        (WidgetTester tester) async {
-      await pumpButton(tester);
-      // No characters → showToast is called, but does not throw
-      await tester.tap(find.byType(TextButton));
-      await tester.pump(const Duration(milliseconds: 300));
-      // Blocked: no characters, so state is unchanged
-      expect(getIt<GameState>().roundState.value, RoundState.chooseInitiative);
-    });
+    testWidgets(
+      'tapping with no characters in chooseInitiative does not crash',
+      (WidgetTester tester) async {
+        await pumpButton(tester);
+        // No characters → showToast is called, but does not throw
+        await tester.tap(find.byType(TextButton));
+        await tester.pump(const Duration(milliseconds: 300));
+        // Blocked: no characters, so state is unchanged
+        expect(
+          getIt<GameState>().roundState.value,
+          RoundState.chooseInitiative,
+        );
+      },
+    );
 
-    testWidgets('tapping in playTurns advances to next round',
-        (WidgetTester tester) async {
+    testWidgets('tapping in playTurns advances to next round', (
+      WidgetTester tester,
+    ) async {
       // NextRoundCommand calls currentList.last — needs at least one item
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-              gameState: getIt<GameState>())
-          .execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
       (getIt<GameState>().roundState as ValueNotifier<RoundState>).value =
           RoundState.playTurns;
       final roundBefore = getIt<GameState>().round.value;
@@ -94,31 +98,32 @@ void main() {
     });
 
     testWidgets(
-        'tapping Draw with character having initiative set executes DrawCommand',
-        (WidgetTester tester) async {
-      // Add a character and set their initiative
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-              gameState: getIt<GameState>())
-          .execute();
-      final gameState = getIt<GameState>();
-      final character =
-          gameState.currentList.firstWhere((e) => e is Character) as Character;
-      (character.characterState.initiative as ValueNotifier<int>).value = 50;
+      'tapping Draw with character having initiative set executes DrawCommand',
+      (WidgetTester tester) async {
+        // Add a character and set their initiative
+        AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+        final gameState = getIt<GameState>();
+        final character =
+            gameState.currentList.firstWhere((e) => e is Character)
+                as Character;
+        (character.characterState.initiative as ValueNotifier<int>).value = 50;
 
-      await pumpButton(tester);
-      final before = gameState.roundState.value;
-      await tester.tap(find.byType(TextButton));
-      await tester.pump();
-      await tester.pump(const Duration(milliseconds: 700));
+        await pumpButton(tester);
+        final before = gameState.roundState.value;
+        await tester.tap(find.byType(TextButton));
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 700));
 
-      // DrawCommand changes roundState from chooseInitiative to playTurns
-      expect(gameState.roundState.value, isNot(equals(before)));
-      // restore
-      gameState.undo();
-    });
+        // DrawCommand changes roundState from chooseInitiative to playTurns
+        expect(gameState.roundState.value, isNot(equals(before)));
+        // restore
+        gameState.undo();
+      },
+    );
 
-    testWidgets('renders Stack wrapping TextButton',
-        (WidgetTester tester) async {
+    testWidgets('renders Stack wrapping TextButton', (
+      WidgetTester tester,
+    ) async {
       await pumpButton(tester);
       expect(find.byType(Stack), findsAtLeast(1));
     });
@@ -128,8 +133,9 @@ void main() {
       expect(find.byType(RepaintBoundary), findsAtLeast(1));
     });
 
-    testWidgets('button text updates when roundState changes after render',
-        (WidgetTester tester) async {
+    testWidgets('button text updates when roundState changes after render', (
+      WidgetTester tester,
+    ) async {
       await pumpButton(tester);
       expect(find.text('Draw'), findsOneWidget);
 

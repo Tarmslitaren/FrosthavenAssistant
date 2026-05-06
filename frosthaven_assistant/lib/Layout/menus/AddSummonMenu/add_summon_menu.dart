@@ -224,14 +224,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                                   style: TextStyle(
                                       fontSize: kFontSizeTitle * scale,
                                       color: Colors.white,
-                                      shadows: [
-                                        Shadow(
-                                          offset: Offset(kShadowOffset * scale,
-                                              kShadowOffset * scale),
-                                          color: Colors.black87,
-                                          blurRadius: kShadowOffset * scale,
-                                        )
-                                      ])),
+                                      shadows: [textShadow(scale)])),
                           ]),
                           title: Text(_summonList[index].name,
                               style: getTitleTextStyle(scale)),

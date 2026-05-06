@@ -111,14 +111,7 @@ class MonsterBoxBody extends StatelessWidget {
                 width: width,
                 decoration: BoxDecoration(
                   color: Color(int.parse("7A000000", radix: _kHexRadix)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black45,
-                      blurRadius: kCardShadowBlur * scale,
-                      offset: Offset(kCardShadowOffsetX * scale,
-                          kCardShadowOffsetY * scale),
-                    ),
-                  ],
+                  boxShadow: [cardBoxShadow(scale)],
                 ),
                 child: Stack(alignment: Alignment.centerLeft, children: [
                   Image(

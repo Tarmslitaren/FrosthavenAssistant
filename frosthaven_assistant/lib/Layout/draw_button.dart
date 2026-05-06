@@ -37,11 +37,7 @@ class DrawButtonState extends State<DrawButton> {
         valueListenable: _vm.userScalingBars,
         builder: (context, value, child) {
           final scaling = _vm.userScalingBars.value;
-          final shadow = Shadow(
-            offset: Offset(kShadowOffset * scaling, kShadowOffset * scaling),
-            color: Colors.black87,
-            blurRadius: kShadowOffset * scaling,
-          );
+          final shadow = textShadow(scaling);
 
           return RepaintBoundary(
               child: Stack(alignment: Alignment.centerLeft, children: [

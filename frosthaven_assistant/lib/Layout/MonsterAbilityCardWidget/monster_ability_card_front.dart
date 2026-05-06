@@ -106,14 +106,7 @@ class MonsterAbilityCardFront extends StatelessWidget {
     return RepaintBoundary(
         child: Container(
             decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black45,
-                  blurRadius: kCardShadowBlur * scale,
-                  offset: Offset(kCardShadowOffsetX * scale,
-                      kCardShadowOffsetY * scale),
-                ),
-              ],
+              boxShadow: [cardBoxShadow(scale)],
             ),
             key: const ValueKey<int>(1),
             margin: EdgeInsets.all(kMonsterCardMargin * scale),

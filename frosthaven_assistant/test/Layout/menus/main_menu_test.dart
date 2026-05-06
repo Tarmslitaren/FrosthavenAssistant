@@ -80,8 +80,9 @@ void main() {
       expect(find.text('Settings'), findsOneWidget);
     });
 
-    testWidgets('tapping Set Scenario opens SelectScenarioMenu',
-        (WidgetTester tester) async {
+    testWidgets('tapping Set Scenario opens SelectScenarioMenu', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester);
       await tester.tap(find.text('Set Scenario'));
       await tester.pump();
@@ -89,8 +90,9 @@ void main() {
       expect(find.byType(SelectScenarioMenu), findsOneWidget);
     });
 
-    testWidgets('tapping Add Character opens AddCharacterMenu',
-        (WidgetTester tester) async {
+    testWidgets('tapping Add Character opens AddCharacterMenu', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester);
       await tester.tap(find.text('Add Character'));
       await tester.pump();
@@ -98,8 +100,9 @@ void main() {
       expect(find.byType(AddCharacterMenu), findsOneWidget);
     });
 
-    testWidgets('tapping Add Monsters opens AddMonsterMenu',
-        (WidgetTester tester) async {
+    testWidgets('tapping Add Monsters opens AddMonsterMenu', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester);
       await tester.scrollUntilVisible(find.text('Add Monsters'), 100);
       await tester.tap(find.text('Add Monsters'));
@@ -111,8 +114,9 @@ void main() {
       expect(find.byType(AddMonsterMenu), findsOneWidget);
     });
 
-    testWidgets('tapping Set Level opens SetLevelMenu',
-        (WidgetTester tester) async {
+    testWidgets('tapping Set Level opens SetLevelMenu', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester);
       await tester.scrollUntilVisible(find.text('Set Level'), 100);
       await tester.tap(find.text('Set Level'));
@@ -124,12 +128,13 @@ void main() {
       expect(find.byType(SetLevelMenu), findsOneWidget);
     });
 
-    testWidgets('tapping Undo calls undo on game state',
-        (WidgetTester tester) async {
+    testWidgets('tapping Undo calls undo on game state', (
+      WidgetTester tester,
+    ) async {
       // Do an action first so undo is enabled
-      getIt<GameState>().action(AddCharacterCommand(
-          'Blinkblade', 'Frosthaven', null, 1,
-          gameState: getIt<GameState>()));
+      getIt<GameState>().action(
+        AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1),
+      );
       final gameState = getIt<GameState>();
       final indexBefore = gameState.commandIndex.value;
 
@@ -140,12 +145,14 @@ void main() {
       expect(gameState.commandIndex.value, indexBefore - 1);
     });
 
-    testWidgets('tapping Redo calls redo on game state',
-        (WidgetTester tester) async {
+    testWidgets('tapping Redo calls redo on game state', (
+      WidgetTester tester,
+    ) async {
       final gameState = getIt<GameState>();
       // Do an action and undo it so redo is available
-      gameState.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-          gameState: getIt<GameState>()));
+      gameState.action(
+        AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1),
+      );
       gameState.undo();
       final indexBefore = gameState.commandIndex.value;
 
@@ -156,13 +163,16 @@ void main() {
       expect(gameState.commandIndex.value, indexBefore + 1);
     });
 
-    testWidgets('tapping Add Section opens AddSectionMenu',
-        (WidgetTester tester) async {
+    testWidgets('tapping Add Section opens AddSectionMenu', (
+      WidgetTester tester,
+    ) async {
       // Set up a valid scenario so AddSectionMenu can initialize
       SetCampaignCommand('Frosthaven').execute();
-      SetScenarioCommand('#0 Howling in the Snow', false,
-              gameState: getIt<GameState>())
-          .execute();
+      SetScenarioCommand(
+        '#0 Howling in the Snow',
+        false,
+        gameState: getIt<GameState>(),
+      ).execute();
 
       await pumpMenu(tester);
       await tester.scrollUntilVisible(find.text('Add Section'), 100);
@@ -172,8 +182,9 @@ void main() {
       expect(find.byType(AddSectionMenu), findsOneWidget);
     });
 
-    testWidgets('tapping Remove Characters opens RemoveCharacterMenu',
-        (WidgetTester tester) async {
+    testWidgets('tapping Remove Characters opens RemoveCharacterMenu', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester);
       await tester.scrollUntilVisible(find.text('Remove Characters'), 100);
       await tester.tap(find.text('Remove Characters'));
@@ -182,8 +193,9 @@ void main() {
       expect(find.byType(RemoveCharacterMenu), findsOneWidget);
     });
 
-    testWidgets('tapping Remove Monsters opens RemoveMonsterMenu',
-        (WidgetTester tester) async {
+    testWidgets('tapping Remove Monsters opens RemoveMonsterMenu', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester);
       await tester.scrollUntilVisible(find.text('Remove Monsters'), 100);
       await tester.tap(find.text('Remove Monsters'));
@@ -192,12 +204,16 @@ void main() {
       expect(find.byType(RemoveMonsterMenu), findsOneWidget);
     });
 
-    testWidgets('tapping Loot Deck Menu opens LootCardsMenu',
-        (WidgetTester tester) async {
+    testWidgets('tapping Loot Deck Menu opens LootCardsMenu', (
+      WidgetTester tester,
+    ) async {
       // Set Frosthaven campaign so Loot Deck Menu appears
       SetCampaignCommand('Frosthaven').execute();
-      SetScenarioCommand('custom', false, gameState: getIt<GameState>())
-          .execute();
+      SetScenarioCommand(
+        'custom',
+        false,
+        gameState: getIt<GameState>(),
+      ).execute();
 
       await pumpMenu(tester);
       await tester.scrollUntilVisible(find.text('Loot Deck Menu'), 100);
@@ -209,8 +225,9 @@ void main() {
       expect(find.byType(LootCardsMenu), findsOneWidget);
     });
 
-    testWidgets('tapping Settings opens SettingsMenu',
-        (WidgetTester tester) async {
+    testWidgets('tapping Settings opens SettingsMenu', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester);
       await tester.scrollUntilVisible(find.text('Settings'), 100);
       await tester.tap(find.text('Settings'));
@@ -222,48 +239,57 @@ void main() {
       expect(find.byType(SettingsMenu), findsOneWidget);
     });
 
-    testWidgets('Show Ally Attack Modifier Deck appears when showAmdDeck=true',
-        (WidgetTester tester) async {
-      final settings = getIt<Settings>();
-      final gameState = getIt<GameState>();
-      // Enable AMD deck and ensure ally deck is hidden
-      settings.showAmdDeck.value = true;
-      if (gameState.showAllyDeck.value) {
-        gameState.action(HideAllyDeckCommand());
-      }
+    testWidgets(
+      'Show Ally Attack Modifier Deck appears when showAmdDeck=true',
+      (WidgetTester tester) async {
+        final settings = getIt<Settings>();
+        final gameState = getIt<GameState>();
+        // Enable AMD deck and ensure ally deck is hidden
+        settings.showAmdDeck.value = true;
+        if (gameState.showAllyDeck.value) {
+          gameState.action(HideAllyDeckCommand());
+        }
 
-      await pumpMenu(tester);
-      await tester.scrollUntilVisible(
-          find.text('Show Ally Attack Modifier Deck'), 100);
-      expect(find.text('Show Ally Attack Modifier Deck'), findsOneWidget);
-    });
+        await pumpMenu(tester);
+        await tester.scrollUntilVisible(
+          find.text('Show Ally Attack Modifier Deck'),
+          100,
+        );
+        expect(find.text('Show Ally Attack Modifier Deck'), findsOneWidget);
+      },
+    );
 
     testWidgets(
-        'tapping Show Ally Attack Modifier Deck shows ally deck in game state',
-        (WidgetTester tester) async {
-      final settings = getIt<Settings>();
-      final gameState = getIt<GameState>();
-      settings.showAmdDeck.value = true;
-      if (gameState.showAllyDeck.value) {
-        gameState.action(HideAllyDeckCommand());
-      }
+      'tapping Show Ally Attack Modifier Deck shows ally deck in game state',
+      (WidgetTester tester) async {
+        final settings = getIt<Settings>();
+        final gameState = getIt<GameState>();
+        settings.showAmdDeck.value = true;
+        if (gameState.showAllyDeck.value) {
+          gameState.action(HideAllyDeckCommand());
+        }
 
-      await pumpMenu(tester);
-      await tester.scrollUntilVisible(
-          find.text('Show Ally Attack Modifier Deck'), 100);
-      await tester.tap(find.text('Show Ally Attack Modifier Deck'));
-      await tester.pump();
+        await pumpMenu(tester);
+        await tester.scrollUntilVisible(
+          find.text('Show Ally Attack Modifier Deck'),
+          100,
+        );
+        await tester.tap(find.text('Show Ally Attack Modifier Deck'));
+        await tester.pump();
 
-      expect(gameState.showAllyDeck.value, true);
-      gameState.undo();
-    });
+        expect(gameState.showAllyDeck.value, true);
+        gameState.undo();
+      },
+    );
 
-    testWidgets('undo text shows command description when available',
-        (WidgetTester tester) async {
+    testWidgets('undo text shows command description when available', (
+      WidgetTester tester,
+    ) async {
       final gameState = getIt<GameState>();
       // Do an action so there's a description
-      gameState.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-          gameState: getIt<GameState>()));
+      gameState.action(
+        AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1),
+      );
 
       await pumpMenu(tester);
       // Undo text should include the command description
@@ -271,14 +297,16 @@ void main() {
       gameState.undo();
     });
 
-    testWidgets('server mode renders undo/redo via server path',
-        (WidgetTester tester) async {
+    testWidgets('server mode renders undo/redo via server path', (
+      WidgetTester tester,
+    ) async {
       final settings = getIt<Settings>();
       final gameState = getIt<GameState>();
       // Enable server mode — covers undoEnabled/redoEnabled server branches
       settings.server.value = true;
-      gameState.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-          gameState: getIt<GameState>()));
+      gameState.action(
+        AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1),
+      );
 
       await pumpMenu(tester);
       expect(find.textContaining('Undo'), findsOneWidget);
@@ -289,8 +317,9 @@ void main() {
       gameState.undo();
     });
 
-    testWidgets('tapping Hide Ally Deck calls action when ally deck visible',
-        (WidgetTester tester) async {
+    testWidgets('tapping Hide Ally Deck calls action when ally deck visible', (
+      WidgetTester tester,
+    ) async {
       final settings = getIt<Settings>();
       final gameState = getIt<GameState>();
       settings.showAmdDeck.value = true;
@@ -301,7 +330,9 @@ void main() {
 
       await pumpMenu(tester);
       await tester.scrollUntilVisible(
-          find.text('Hide Ally Attack Modifier Deck'), 100);
+        find.text('Hide Ally Attack Modifier Deck'),
+        100,
+      );
       await tester.tap(find.text('Hide Ally Attack Modifier Deck'));
       await tester.pump();
 
@@ -311,21 +342,24 @@ void main() {
     });
 
     testWidgets(
-        'client connection section renders when lastKnownConnection is set',
-        (WidgetTester tester) async {
-      final settings = getIt<Settings>();
-      final originalConnection = settings.lastKnownConnection;
-      // Set a valid-looking connection address (not ending with '?')
-      settings.lastKnownConnection = '192.168.1.1';
+      'client connection section renders when lastKnownConnection is set',
+      (WidgetTester tester) async {
+        final settings = getIt<Settings>();
+        final originalConnection = settings.lastKnownConnection;
+        // Set a valid-looking connection address (not ending with '?')
+        settings.lastKnownConnection = '192.168.1.1';
 
-      await pumpMenu(tester);
-      // The client CheckboxListTile should now be visible
-      await tester.scrollUntilVisible(
-          find.textContaining('Connect as Client'), 100);
-      expect(find.textContaining('Connect as Client'), findsOneWidget);
+        await pumpMenu(tester);
+        // The client CheckboxListTile should now be visible
+        await tester.scrollUntilVisible(
+          find.textContaining('Connect as Client'),
+          100,
+        );
+        expect(find.textContaining('Connect as Client'), findsOneWidget);
 
-      // Restore
-      settings.lastKnownConnection = originalConnection;
-    });
+        // Restore
+        settings.lastKnownConnection = originalConnection;
+      },
+    );
   });
 }

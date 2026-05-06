@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
+import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 const double _kLegendImageHeight = 20.0;
 const double _kLegendLevelImageHeight = 15.0;
@@ -24,11 +25,7 @@ class LevelLegend extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shadow = Shadow(
-      offset: Offset(kShadowOffset * scale, kShadowOffset * scale),
-      color: Colors.black87,
-      blurRadius: kShadowOffset * scale,
-    );
+    final shadow = textShadow(scale);
     final textStyleLevelWidget = TextStyle(
         color: Colors.white,
         overflow: TextOverflow.fade,

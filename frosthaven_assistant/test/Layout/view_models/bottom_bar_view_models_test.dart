@@ -1,6 +1,5 @@
 // ignore_for_file: no-magic-number
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/view_models/bottom_bar_level_widget_view_model.dart';
@@ -37,14 +36,18 @@ void main() {
   group('BottomBarViewModel.isDarkMode', () {
     test('false by default', () {
       final vm = BottomBarViewModel(
-          settings: getIt<Settings>(), gameState: getIt<GameState>());
+        settings: getIt<Settings>(),
+        gameState: getIt<GameState>(),
+      );
       expect(vm.isDarkMode, isFalse);
     });
 
     test('true when darkMode setting is enabled', () {
       getIt<Settings>().darkMode.value = true;
       final vm = BottomBarViewModel(
-          settings: getIt<Settings>(), gameState: getIt<GameState>());
+        settings: getIt<Settings>(),
+        gameState: getIt<GameState>(),
+      );
       expect(vm.isDarkMode, isTrue);
     });
   });
@@ -53,14 +56,18 @@ void main() {
     test('transparent in light mode', () {
       getIt<Settings>().darkMode.value = false;
       final vm = BottomBarViewModel(
-          settings: getIt<Settings>(), gameState: getIt<GameState>());
+        settings: getIt<Settings>(),
+        gameState: getIt<GameState>(),
+      );
       expect(vm.backgroundColor, Colors.transparent);
     });
 
     test('black in dark mode', () {
       getIt<Settings>().darkMode.value = true;
       final vm = BottomBarViewModel(
-          settings: getIt<Settings>(), gameState: getIt<GameState>());
+        settings: getIt<Settings>(),
+        gameState: getIt<GameState>(),
+      );
       expect(vm.backgroundColor, Colors.black);
     });
   });
@@ -69,14 +76,18 @@ void main() {
     test('1.0 in light mode', () {
       getIt<Settings>().darkMode.value = false;
       final vm = BottomBarViewModel(
-          settings: getIt<Settings>(), gameState: getIt<GameState>());
+        settings: getIt<Settings>(),
+        gameState: getIt<GameState>(),
+      );
       expect(vm.backgroundOpacity, 1.0);
     });
 
     test('0.4 in dark mode', () {
       getIt<Settings>().darkMode.value = true;
       final vm = BottomBarViewModel(
-          settings: getIt<Settings>(), gameState: getIt<GameState>());
+        settings: getIt<Settings>(),
+        gameState: getIt<GameState>(),
+      );
       expect(vm.backgroundOpacity, closeTo(0.4, 0.001));
     });
   });
@@ -85,14 +96,18 @@ void main() {
     test('frosthaven image in light mode', () {
       getIt<Settings>().darkMode.value = false;
       final vm = BottomBarViewModel(
-          settings: getIt<Settings>(), gameState: getIt<GameState>());
+        settings: getIt<Settings>(),
+        gameState: getIt<GameState>(),
+      );
       expect(vm.backgroundImagePath, contains('frosthaven-bar'));
     });
 
     test('gloomhaven image in dark mode', () {
       getIt<Settings>().darkMode.value = true;
       final vm = BottomBarViewModel(
-          settings: getIt<Settings>(), gameState: getIt<GameState>());
+        settings: getIt<Settings>(),
+        gameState: getIt<GameState>(),
+      );
       expect(vm.backgroundImagePath, contains('gloomhaven-bar'));
     });
   });
@@ -100,13 +115,17 @@ void main() {
   group('BottomBarViewModel notifiers', () {
     test('userScalingBars listenable is exposed', () {
       final vm = BottomBarViewModel(
-          settings: getIt<Settings>(), gameState: getIt<GameState>());
+        settings: getIt<Settings>(),
+        gameState: getIt<GameState>(),
+      );
       expect(vm.userScalingBars, isNotNull);
     });
 
     test('darkMode listenable is exposed', () {
       final vm = BottomBarViewModel(
-          settings: getIt<Settings>(), gameState: getIt<GameState>());
+        settings: getIt<Settings>(),
+        gameState: getIt<GameState>(),
+      );
       expect(vm.darkMode, isNotNull);
     });
   });
@@ -120,7 +139,9 @@ void main() {
       (getIt<GameState>().scenario as ValueNotifier<String>).value =
           '#1 Algox Encampment';
       final vm = BottomBarLevelWidgetViewModel(
-          gameState: getIt<GameState>(), settings: getIt<Settings>());
+        gameState: getIt<GameState>(),
+        settings: getIt<Settings>(),
+      );
       expect(vm.formattedScenarioName, '#1 Algox Encampment');
     });
 
@@ -130,7 +151,9 @@ void main() {
       (getIt<GameState>().scenario as ValueNotifier<String>).value =
           'Blinkblade:Solo Scenario';
       final vm = BottomBarLevelWidgetViewModel(
-          gameState: getIt<GameState>(), settings: getIt<Settings>());
+        gameState: getIt<GameState>(),
+        settings: getIt<Settings>(),
+      );
       expect(vm.formattedScenarioName, 'Solo Scenario');
     });
 
@@ -140,14 +163,18 @@ void main() {
       (getIt<GameState>().scenario as ValueNotifier<String>).value =
           'NoColonScenario';
       final vm = BottomBarLevelWidgetViewModel(
-          gameState: getIt<GameState>(), settings: getIt<Settings>());
+        gameState: getIt<GameState>(),
+        settings: getIt<Settings>(),
+      );
       expect(vm.formattedScenarioName, 'NoColonScenario');
     });
 
     test('empty scenario name returns empty string', () {
       (getIt<GameState>().scenario as ValueNotifier<String>).value = '';
       final vm = BottomBarLevelWidgetViewModel(
-          gameState: getIt<GameState>(), settings: getIt<Settings>());
+        gameState: getIt<GameState>(),
+        settings: getIt<Settings>(),
+      );
       expect(vm.formattedScenarioName, '');
     });
   });
@@ -156,7 +183,9 @@ void main() {
     test('scales with userScalingBars', () {
       getIt<Settings>().userScalingBars.value = 2.0;
       final vm = BottomBarLevelWidgetViewModel(
-          gameState: getIt<GameState>(), settings: getIt<Settings>());
+        gameState: getIt<GameState>(),
+        settings: getIt<Settings>(),
+      );
       expect(vm.fontHeight, closeTo(28.0, 0.001)); // 14 * 2.0
       getIt<Settings>().userScalingBars.value = 1.0;
     });
@@ -164,7 +193,9 @@ void main() {
     test('14.0 at default scale of 1.0', () {
       getIt<Settings>().userScalingBars.value = 1.0;
       final vm = BottomBarLevelWidgetViewModel(
-          gameState: getIt<GameState>(), settings: getIt<Settings>());
+        gameState: getIt<GameState>(),
+        settings: getIt<Settings>(),
+      );
       expect(vm.fontHeight, closeTo(14.0, 0.001));
     });
   });
@@ -173,7 +204,9 @@ void main() {
     test('uses white text in dark mode', () {
       getIt<Settings>().darkMode.value = true;
       final vm = BottomBarLevelWidgetViewModel(
-          gameState: getIt<GameState>(), settings: getIt<Settings>());
+        gameState: getIt<GameState>(),
+        settings: getIt<Settings>(),
+      );
       final style = vm.textStyle(1.0);
       expect(style.color, Colors.white);
     });
@@ -181,7 +214,9 @@ void main() {
     test('uses black text in light mode', () {
       getIt<Settings>().darkMode.value = false;
       final vm = BottomBarLevelWidgetViewModel(
-          gameState: getIt<GameState>(), settings: getIt<Settings>());
+        gameState: getIt<GameState>(),
+        settings: getIt<Settings>(),
+      );
       final style = vm.textStyle(1.0);
       expect(style.color, Colors.black);
     });
@@ -189,7 +224,9 @@ void main() {
     test('dark mode has exactly one shadow', () {
       getIt<Settings>().darkMode.value = true;
       final vm = BottomBarLevelWidgetViewModel(
-          gameState: getIt<GameState>(), settings: getIt<Settings>());
+        gameState: getIt<GameState>(),
+        settings: getIt<Settings>(),
+      );
       final style = vm.textStyle(1.0);
       expect(style.shadows?.length, 1);
     });
@@ -197,14 +234,18 @@ void main() {
     test('light mode has two white glow shadows', () {
       getIt<Settings>().darkMode.value = false;
       final vm = BottomBarLevelWidgetViewModel(
-          gameState: getIt<GameState>(), settings: getIt<Settings>());
+        gameState: getIt<GameState>(),
+        settings: getIt<Settings>(),
+      );
       final style = vm.textStyle(1.0);
       expect(style.shadows?.length, 2);
     });
 
     test('scales font size with provided scaling', () {
       final vm = BottomBarLevelWidgetViewModel(
-          gameState: getIt<GameState>(), settings: getIt<Settings>());
+        gameState: getIt<GameState>(),
+        settings: getIt<Settings>(),
+      );
       final style = vm.textStyle(2.0);
       expect(style.fontSize, closeTo(28.0, 0.001));
     });
@@ -214,7 +255,9 @@ void main() {
     test('exposes current game level via notifier', () {
       (getIt<GameState>().level as ValueNotifier<int>).value = 4;
       final vm = BottomBarLevelWidgetViewModel(
-          gameState: getIt<GameState>(), settings: getIt<Settings>());
+        gameState: getIt<GameState>(),
+        settings: getIt<Settings>(),
+      );
       expect(vm.level.value, 4);
     });
   });
@@ -222,13 +265,17 @@ void main() {
   group('BottomBarLevelWidgetViewModel notifiers', () {
     test('scenario listenable is exposed', () {
       final vm = BottomBarLevelWidgetViewModel(
-          gameState: getIt<GameState>(), settings: getIt<Settings>());
+        gameState: getIt<GameState>(),
+        settings: getIt<Settings>(),
+      );
       expect(vm.scenario, isNotNull);
     });
 
     test('level listenable is exposed', () {
       final vm = BottomBarLevelWidgetViewModel(
-          gameState: getIt<GameState>(), settings: getIt<Settings>());
+        gameState: getIt<GameState>(),
+        settings: getIt<Settings>(),
+      );
       expect(vm.level, isNotNull);
     });
   });

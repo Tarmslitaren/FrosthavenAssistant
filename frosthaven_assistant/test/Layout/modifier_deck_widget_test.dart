@@ -42,27 +42,32 @@ void main() {
   }
 
   group('ModifierDeckWidget monster deck', () {
-    testWidgets('renders SizedBox with expected dimensions',
-        (WidgetTester tester) async {
+    testWidgets('renders SizedBox with expected dimensions', (
+      WidgetTester tester,
+    ) async {
       await pumpWidget(tester, monsterDeckName);
       expect(find.byType(SizedBox), findsAtLeast(1));
     });
 
-    testWidgets('renders InkWell for draw pile tap',
-        (WidgetTester tester) async {
+    testWidgets('renders InkWell for draw pile tap', (
+      WidgetTester tester,
+    ) async {
       await pumpWidget(tester, monsterDeckName);
       expect(find.byType(InkWell), findsAtLeast(1));
     });
 
     testWidgets('renders card count text', (WidgetTester tester) async {
-      final deck =
-          GameMethods.getModifierDeck(monsterDeckName, getIt<GameState>());
+      final deck = GameMethods.getModifierDeck(
+        monsterDeckName,
+        getIt<GameState>(),
+      );
       await pumpWidget(tester, monsterDeckName);
       expect(find.text(deck.drawPileSize.toString()), findsAtLeast(1));
     });
 
-    testWidgets('tapping draw pile draws a modifier card',
-        (WidgetTester tester) async {
+    testWidgets('tapping draw pile draws a modifier card', (
+      WidgetTester tester,
+    ) async {
       final gameState = getIt<GameState>();
       final deck = GameMethods.getModifierDeck(monsterDeckName, gameState);
       final before = deck.discardPileSize;
@@ -86,14 +91,19 @@ void main() {
       gameState.undo();
     });
 
-    testWidgets('shows "Shuffle & Draw" when draw pile is empty',
-        (WidgetTester tester) async {
+    testWidgets('shows "Shuffle & Draw" when draw pile is empty', (
+      WidgetTester tester,
+    ) async {
       final gameState = getIt<GameState>();
       final deck = GameMethods.getModifierDeck(monsterDeckName, gameState);
       // Drain the draw pile
       while (deck.drawPileIsNotEmpty) {
-        gameState.action(DrawModifierCardCommand(monsterDeckName,
-            gameState: getIt<GameState>()));
+        gameState.action(
+          DrawModifierCardCommand(
+            monsterDeckName,
+            gameState: getIt<GameState>(),
+          ),
+        );
       }
 
       await pumpWidget(tester, monsterDeckName);
@@ -105,12 +115,14 @@ void main() {
       }
     });
 
-    testWidgets('tapping discard pile opens ModifierDeckMenu',
-        (WidgetTester tester) async {
+    testWidgets('tapping discard pile opens ModifierDeckMenu', (
+      WidgetTester tester,
+    ) async {
       final gameState = getIt<GameState>();
       // Draw a card so discard pile has something
-      gameState.action(DrawModifierCardCommand(monsterDeckName,
-          gameState: getIt<GameState>()));
+      gameState.action(
+        DrawModifierCardCommand(monsterDeckName, gameState: getIt<GameState>()),
+      );
 
       await pumpWidget(tester, monsterDeckName);
       // The discard pile InkWell is the second one (draw pile is first)
@@ -124,29 +136,36 @@ void main() {
     });
 
     testWidgets(
-        'long press on discard pile opens ModifierCardZoom when not empty',
-        (WidgetTester tester) async {
-      final gameState = getIt<GameState>();
-      gameState.action(DrawModifierCardCommand(monsterDeckName,
-          gameState: getIt<GameState>()));
+      'long press on discard pile opens ModifierCardZoom when not empty',
+      (WidgetTester tester) async {
+        final gameState = getIt<GameState>();
+        gameState.action(
+          DrawModifierCardCommand(
+            monsterDeckName,
+            gameState: getIt<GameState>(),
+          ),
+        );
 
-      await pumpWidget(tester, monsterDeckName);
-      final inkWells = find.byType(InkWell);
-      await tester.longPress(inkWells.last);
-      await tester.pumpAndSettle();
-      expect(find.byType(ModifierCardZoom), findsOneWidget);
+        await pumpWidget(tester, monsterDeckName);
+        final inkWells = find.byType(InkWell);
+        await tester.longPress(inkWells.last);
+        await tester.pumpAndSettle();
+        expect(find.byType(ModifierCardZoom), findsOneWidget);
 
-      gameState.undo();
-    });
+        gameState.undo();
+      },
+    );
 
-    testWidgets('renders Row with draw and discard sections',
-        (WidgetTester tester) async {
+    testWidgets('renders Row with draw and discard sections', (
+      WidgetTester tester,
+    ) async {
       await pumpWidget(tester, monsterDeckName);
       expect(find.byType(Row), findsAtLeast(1));
     });
 
-    testWidgets('card count text updates after drawing a card',
-        (WidgetTester tester) async {
+    testWidgets('card count text updates after drawing a card', (
+      WidgetTester tester,
+    ) async {
       final gameState = getIt<GameState>();
       final deck = GameMethods.getModifierDeck(monsterDeckName, gameState);
       final countBefore = deck.drawPileSize;
@@ -155,7 +174,8 @@ void main() {
       expect(find.text(countBefore.toString()), findsAtLeast(1));
 
       gameState.action(
-          DrawModifierCardCommand(monsterDeckName, gameState: gameState));
+        DrawModifierCardCommand(monsterDeckName, gameState: gameState),
+      );
       await tester.pump();
 
       expect(find.text((countBefore - 1).toString()), findsAtLeast(1));
@@ -166,27 +186,30 @@ void main() {
   group('ModifierDeckWidget character deck', () {
     setUp(() {
       getIt<GameState>().clearList();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-              gameState: getIt<GameState>())
-          .execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
     });
 
-    testWidgets('renders without error for character deck',
-        (WidgetTester tester) async {
+    testWidgets('renders without error for character deck', (
+      WidgetTester tester,
+    ) async {
       await pumpWidget(tester, 'Blinkblade');
       expect(find.byType(ModifierDeckWidget), findsOneWidget);
     });
 
-    testWidgets('renders card count for character deck',
-        (WidgetTester tester) async {
-      final deck =
-          GameMethods.getModifierDeck('Blinkblade', getIt<GameState>());
+    testWidgets('renders card count for character deck', (
+      WidgetTester tester,
+    ) async {
+      final deck = GameMethods.getModifierDeck(
+        'Blinkblade',
+        getIt<GameState>(),
+      );
       await pumpWidget(tester, 'Blinkblade');
       expect(find.text(deck.drawPileSize.toString()), findsAtLeast(1));
     });
 
-    testWidgets('tapping draw pile draws a card from character deck',
-        (WidgetTester tester) async {
+    testWidgets('tapping draw pile draws a card from character deck', (
+      WidgetTester tester,
+    ) async {
       final gameState = getIt<GameState>();
       final deck = GameMethods.getModifierDeck('Blinkblade', gameState);
       final before = deck.discardPileSize;

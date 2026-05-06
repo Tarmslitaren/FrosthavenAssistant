@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
+import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 const double _kCardHeight = 39.0;
 const double _kRearMarkerBgSize = 27.0;
@@ -36,14 +37,7 @@ class ModifierCardRear extends StatelessWidget {
             width: kModifierCardBaseWidth * scale,
             height: _kCardHeight * scale,
             decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black45,
-                  blurRadius: kCardShadowBlur * scale,
-                  offset: Offset(kCardShadowOffsetX * scale,
-                      kCardShadowOffsetY * scale),
-                ),
-              ],
+              boxShadow: [cardBoxShadow(scale)],
             ),
             child: Stack(
               children: [

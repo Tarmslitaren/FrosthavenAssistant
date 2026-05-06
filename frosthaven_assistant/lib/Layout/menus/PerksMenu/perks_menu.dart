@@ -25,48 +25,47 @@ class PerksMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final gameState = this.gameState ?? getIt<GameState>();
     return ListenableBuilder(
-        listenable: Listenable.merge([
-          character.characterState.useFHPerks,
-          character.characterState.perkListVersion,
-        ]),
-        builder: (context, child) {
-          final ScrollController scrollController = ScrollController();
+      listenable: Listenable.merge([
+        character.characterState.useFHPerks,
+        character.characterState.perkListVersion,
+      ]),
+      builder: (context, child) {
+        final perksFH = character.characterClass.perksFH;
+        final bool hasFHPerkSet = perksFH.isNotEmpty;
+        final bool useFHPerks =
+            hasFHPerkSet && character.characterState.useFHPerks.value;
+        final perks = useFHPerks ? perksFH : character.characterClass.perks;
 
-          final perksFH = character.characterClass.perksFH;
-          final bool hasFHPerkSet = perksFH.isNotEmpty;
-          final bool useFHPerks =
-              hasFHPerkSet && character.characterState.useFHPerks.value;
-          final perks = useFHPerks ? perksFH : character.characterClass.perks;
+        List<Widget> tiles = [];
+        tiles.add(Text("Add Perks", style: kTitleStyle));
 
-          List<Widget> tiles = [];
-          tiles.add(Text(
-            "Add Perks",
-            style: kTitleStyle,
-          ));
+        if (hasFHPerkSet) {
+          tiles.add(
+            CheckboxListTile(
+              title: Text("Use Frosthaven Perks", style: kBodyStyle),
+              value: useFHPerks,
+              onChanged: (on) {
+                //setState(() {
+                gameState.action(UseFHPerksCommand(character.id));
+                // }
+              },
+            ),
+          );
+        }
 
-          if (hasFHPerkSet) {
-            tiles.add(CheckboxListTile(
-                title: Text(
-                  "Use Frosthaven Perks",
-                  style: kBodyStyle,
-                ),
-                value: useFHPerks,
-                onChanged: (on) {
-                  //setState(() {
-                  gameState.action(UseFHPerksCommand(character.id));
-                  // }
-                }));
-          }
-
-          for (int i = 0; i < perks.length; i++) {
-            tiles.add(divider);
-            tiles.add(
-                PerkListTile(character: character, index: i, perk: perks[i]));
-          }
+        for (int i = 0; i < perks.length; i++) {
           tiles.add(divider);
+          tiles.add(
+            PerkListTile(character: character, index: i, perk: perks[i]),
+          );
+        }
+        tiles.add(divider);
 
-          return ScrollableMenuCard(
-              maxWidth: 300, child: Column(children: tiles));
-        });
+        return ScrollableMenuCard(
+          maxWidth: 300,
+          child: Column(children: tiles),
+        );
+      },
+    );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
+import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 import '../../Resource/game_methods.dart';
 import '../view_models/monster_stat_card_view_model.dart';
@@ -33,14 +34,7 @@ class MonsterStatCardView extends StatelessWidget {
 
           return Container(
               decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black45,
-                    blurRadius: kCardShadowBlur * scale,
-                    offset: Offset(
-                        kCardShadowOffsetX * scale, kCardShadowOffsetY * scale),
-                  ),
-                ],
+                boxShadow: [cardBoxShadow(scale)],
               ),
               margin: EdgeInsets.all(kMonsterCardMargin * scale),
               child: isBoss

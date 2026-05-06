@@ -15,15 +15,14 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-            gameState: getIt<GameState>())
-        .execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
   });
 
   Character getBlinkblade() {
-    return getIt<GameState>()
-        .currentList
-        .firstWhere((item) => item.id == 'Blinkblade') as Character;
+    return getIt<GameState>().currentList.firstWhere(
+          (item) => item.id == 'Blinkblade',
+        )
+        as Character;
   }
 
   Future<void> pumpMenu(WidgetTester tester) async {
@@ -66,29 +65,33 @@ void main() {
       expect(find.text('Close'), findsOneWidget);
     });
 
-    testWidgets('perk checkbox updates reactively when perk added via command',
-        (WidgetTester tester) async {
-      final character = getBlinkblade();
-      await pumpMenu(tester);
+    testWidgets(
+      'perk checkbox updates reactively when perk added via command',
+      (WidgetTester tester) async {
+        final character = getBlinkblade();
+        await pumpMenu(tester);
 
-      // Perk 0 starts unchecked
-      expect(character.characterState.perkList[0], isFalse);
-      final tilesBefore =
-          tester.widgetList<CheckboxListTile>(find.byType(CheckboxListTile));
-      final checkedBefore = tilesBefore.where((t) => t.value == true).length;
+        // Perk 0 starts unchecked
+        expect(character.characterState.perkList[0], isFalse);
+        final tilesBefore = tester.widgetList<CheckboxListTile>(
+          find.byType(CheckboxListTile),
+        );
+        final checkedBefore = tilesBefore.where((t) => t.value == true).length;
 
-      // Add perk 0 via command (fires perkListVersion)
-      getIt<GameState>().action(AddPerkCommand(character.id, 0));
-      await tester.pump();
+        // Add perk 0 via command (fires perkListVersion)
+        getIt<GameState>().action(AddPerkCommand(character.id, 0));
+        await tester.pump();
 
-      expect(character.characterState.perkList[0], isTrue);
-      final tilesAfter =
-          tester.widgetList<CheckboxListTile>(find.byType(CheckboxListTile));
-      final checkedAfter = tilesAfter.where((t) => t.value == true).length;
-      expect(checkedAfter, greaterThan(checkedBefore));
+        expect(character.characterState.perkList[0], isTrue);
+        final tilesAfter = tester.widgetList<CheckboxListTile>(
+          find.byType(CheckboxListTile),
+        );
+        final checkedAfter = tilesAfter.where((t) => t.value == true).length;
+        expect(checkedAfter, greaterThan(checkedBefore));
 
-      // Restore
-      getIt<GameState>().action(AddPerkCommand(character.id, 0));
-    });
+        // Restore
+        getIt<GameState>().action(AddPerkCommand(character.id, 0));
+      },
+    );
   });
 }

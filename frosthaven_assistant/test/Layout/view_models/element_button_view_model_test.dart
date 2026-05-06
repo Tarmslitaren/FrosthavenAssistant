@@ -1,6 +1,5 @@
 // ignore_for_file: no-magic-number
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/view_models/element_button_view_model.dart';
@@ -33,10 +32,10 @@ void main() {
   });
 
   ElementButtonViewModel makeVm(Elements element) => ElementButtonViewModel(
-        element,
-        gameState: getIt<GameState>(),
-        settings: getIt<Settings>(),
-      );
+    element,
+    gameState: getIt<GameState>(),
+    settings: getIt<Settings>(),
+  );
 
   group('ElementButtonViewModel.elementState', () {
     test('fire starts as inert after game init', () {

@@ -18,11 +18,10 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinky', 1,
-            gameState: getIt<GameState>())
-        .execute();
-    character = getIt<GameState>().currentList.firstWhere((e) => e is Character)
-        as Character;
+    AddCharacterCommand('Banner Spear', 'Frosthaven', 'BS', 1).execute();
+    character =
+        getIt<GameState>().currentList.firstWhere((e) => e is Character)
+            as Character;
   });
 
   group('TurnDoneCommand', () {
@@ -47,8 +46,10 @@ void main() {
     });
 
     test('describe includes character id', () {
-      final command =
-          TurnDoneCommand(character.id, gameState: getIt<GameState>());
+      final command = TurnDoneCommand(
+        character.id,
+        gameState: getIt<GameState>(),
+      );
       expect(command.describe(), "${character.id}'s turn done");
     });
   });

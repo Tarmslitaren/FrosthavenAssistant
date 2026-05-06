@@ -17,11 +17,10 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinky', 1,
-            gameState: getIt<GameState>())
-        .execute();
-    character = getIt<GameState>().currentList.firstWhere((e) => e is Character)
-        as Character;
+    AddCharacterCommand('Banner Spear', 'Frosthaven', 'BS', 1).execute();
+    character =
+        getIt<GameState>().currentList.firstWhere((e) => e is Character)
+            as Character;
   });
 
   group('UseFHPerksCommand', () {

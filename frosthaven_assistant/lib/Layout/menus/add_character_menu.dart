@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Layout/widgets/filtered_list_view.dart';
-import 'package:frosthaven_assistant/Layout/widgets/menu_card.dart';
 import 'package:frosthaven_assistant/Layout/menus/save_character_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart';
+import 'package:frosthaven_assistant/Layout/widgets/filtered_list_view.dart';
+import 'package:frosthaven_assistant/Layout/widgets/menu_card.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 
 import '../../Model/character_class.dart';
@@ -91,7 +91,8 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
 
     if (!_settings.showCustomContent.value) {
       _allCharacters.removeWhere(
-          (character) => GameMethods.isCustomCampaign(character.edition));
+        (character) => GameMethods.isCustomCampaign(character.edition),
+      );
     }
 
     _foundCharacters = _allCharacters;
@@ -119,8 +120,10 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
       results = _allCharacters;
     } else {
       results = _allCharacters
-          .where((user) =>
-              user.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
+          .where(
+            (user) =>
+                user.name.toLowerCase().contains(enteredKeyword.toLowerCase()),
+          )
           .toList();
       final keyWord = enteredKeyword.toLowerCase();
       final bsLocal = bs;
@@ -159,8 +162,11 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
     }
 
     AddCharacterCommand command = AddCharacterCommand(
-        character.id, character.edition, display, 1,
-        gameState: _gameState);
+      character.id,
+      character.edition,
+      display,
+      1,
+    );
     _gameState.action(command);
 
     //open level menu
@@ -190,48 +196,41 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
   @override
   Widget build(BuildContext context) {
     return MenuCard(
-        maxWidth: _kMaxWidth,
-        cardMargin: const EdgeInsets.all(2),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 10,
-            ),
-            TextButton(
-              onPressed: () {
-                //open remove card menu
-                openDialog(context, SaveCharacterMenu());
-              },
-              child: Text(
-                "Load or Save Characters",
-                style: kTitleStyle,
+      maxWidth: _kMaxWidth,
+      cardMargin: const EdgeInsets.all(2),
+      child: Column(
+        children: [
+          const SizedBox(height: 10),
+          TextButton(
+            onPressed: () {
+              //open remove card menu
+              openDialog(context, SaveCharacterMenu());
+            },
+            child: Text("Load or Save Characters", style: kTitleStyle),
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 10),
+            child: TextField(
+              onChanged: (value) => _runFilter(value),
+              decoration: const InputDecoration(
+                labelText:
+                    'Add Character (type name for hidden character classes)',
+                suffixIcon: Icon(Icons.search),
               ),
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              child: TextField(
-                onChanged: (value) => _runFilter(value),
-                decoration: const InputDecoration(
-                    labelText:
-                        'Add Character (type name for hidden character classes)',
-                    suffixIcon: Icon(Icons.search)),
-              ),
+          ),
+          const SizedBox(height: 20),
+          FilteredListView(
+            items: _foundCharacters,
+            itemBuilder: (context, index) => CharacterTile(
+              character: _foundCharacters[index],
+              onSelect: _addCharacter,
+              disabled: _characterAlreadyAdded(_foundCharacters[index]),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            FilteredListView(
-              items: _foundCharacters,
-              itemBuilder: (context, index) => CharacterTile(
-                character: _foundCharacters[index],
-                onSelect: _addCharacter,
-                disabled: _characterAlreadyAdded(_foundCharacters[index]),
-              ),
-            ),
-            const SizedBox(
-              height: kMenuCloseButtonSpacing,
-            ),
-          ],
-        ));
+          ),
+          const SizedBox(height: kMenuCloseButtonSpacing),
+        ],
+      ),
+    );
   }
 }

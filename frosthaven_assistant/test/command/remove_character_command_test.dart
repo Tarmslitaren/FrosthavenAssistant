@@ -10,12 +10,11 @@ import 'test_helpers.dart';
 
 void _tests() {
   String oldState = gameState.toString();
-  AddCharacterCommand("Hatchet", "Jaws of the Lion", "Arnold", 9,
-          gameState: getIt<GameState>())
-      .execute();
-  RemoveCharacterCommand(List.of([gameState.currentList.last as Character]),
-          gameState: getIt<GameState>())
-      .execute();
+  AddCharacterCommand("Hatchet", "Jaws of the Lion", "Arnold", 9).execute();
+  RemoveCharacterCommand(
+    List.of([gameState.currentList.last as Character]),
+    gameState: getIt<GameState>(),
+  ).execute();
   test("removed ok", () {
     expect(gameState.currentList.isEmpty, true);
     expect(gameState.unlockedClasses.first, "Hatchet");

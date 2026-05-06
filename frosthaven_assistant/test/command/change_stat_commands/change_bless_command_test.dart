@@ -16,25 +16,44 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1, gameState: getIt<GameState>()).execute();
-    AddMonsterCommand("Zealot", 1, false, gameState: getIt<GameState>()).execute();
-    AddStandeeCommand(1, null, "Zealot", MonsterType.normal, false, gameState: getIt<GameState>());
+    AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1).execute();
+    AddMonsterCommand(
+      "Zealot",
+      1,
+      false,
+      gameState: getIt<GameState>(),
+    ).execute();
+    AddStandeeCommand(
+      1,
+      null,
+      "Zealot",
+      MonsterType.normal,
+      false,
+      gameState: getIt<GameState>(),
+    );
   });
 
   group('ChangeBlessCommand', () {
     test('should add a bless card to a character deck', () {
       // Arrange
       final character = getIt<GameState>().currentList.first as Character;
-      final command = ChangeBlessCommand(1, character.id, character.id, gameState: getIt<GameState>());
-      final initialBlessCount =
-          character.characterState.modifierDeck.getRemovable("bless").value;
+      final command = ChangeBlessCommand(
+        1,
+        character.id,
+        character.id,
+        gameState: getIt<GameState>(),
+      );
+      final initialBlessCount = character.characterState.modifierDeck
+          .getRemovable("bless")
+          .value;
 
       // Act
       command.execute();
 
       // Assert
-      final finalBlessCount =
-          character.characterState.modifierDeck.getRemovable("bless").value;
+      final finalBlessCount = character.characterState.modifierDeck
+          .getRemovable("bless")
+          .value;
       expect(finalBlessCount, initialBlessCount + 1);
       checkSaveState();
     });
@@ -42,18 +61,29 @@ void main() {
     test('should remove a bless card from a character deck', () {
       // Arrange
       final character = getIt<GameState>().currentList.first as Character;
-      ChangeBlessCommand(1, character.id, character.id, gameState: getIt<GameState>())
-          .execute(); // Add a bless first
-      final initialBlessCount =
-          character.characterState.modifierDeck.getRemovable("bless").value;
-      final command = ChangeBlessCommand(-1, character.id, character.id, gameState: getIt<GameState>());
+      ChangeBlessCommand(
+        1,
+        character.id,
+        character.id,
+        gameState: getIt<GameState>(),
+      ).execute(); // Add a bless first
+      final initialBlessCount = character.characterState.modifierDeck
+          .getRemovable("bless")
+          .value;
+      final command = ChangeBlessCommand(
+        -1,
+        character.id,
+        character.id,
+        gameState: getIt<GameState>(),
+      );
 
       // Act
       command.execute();
 
       // Assert
-      final finalBlessCount =
-          character.characterState.modifierDeck.getRemovable("bless").value;
+      final finalBlessCount = character.characterState.modifierDeck
+          .getRemovable("bless")
+          .value;
       expect(finalBlessCount, initialBlessCount - 1);
       checkSaveState();
     });
@@ -62,16 +92,22 @@ void main() {
       // Arrange
       final gameState = getIt<GameState>();
       final command = ChangeBlessCommand(
-          1, "Zealot", "Zealot", gameState: getIt<GameState>()); // Empty string for monster deck
-      final initialBlessCount =
-          gameState.modifierDeck.getRemovable("bless").value;
+        1,
+        "Zealot",
+        "Zealot",
+        gameState: getIt<GameState>(),
+      ); // Empty string for monster deck
+      final initialBlessCount = gameState.modifierDeck
+          .getRemovable("bless")
+          .value;
 
       // Act
       command.execute();
 
       // Assert
-      final finalBlessCount =
-          gameState.modifierDeck.getRemovable("bless").value;
+      final finalBlessCount = gameState.modifierDeck
+          .getRemovable("bless")
+          .value;
       expect(finalBlessCount, initialBlessCount + 1);
       checkSaveState();
     });
@@ -79,24 +115,41 @@ void main() {
     test('should remove a bless card from the monster deck', () {
       // Arrange
       final gameState = getIt<GameState>();
-      ChangeBlessCommand(1, "Zealot", "Zealot", gameState: getIt<GameState>()).execute(); // Add a bless first
-      final initialBlessCount =
-          gameState.modifierDeck.getRemovable("bless").value;
-      final command = ChangeBlessCommand(-1, "Zealot", "Zealot", gameState: getIt<GameState>());
+      ChangeBlessCommand(
+        1,
+        "Zealot",
+        "Zealot",
+        gameState: getIt<GameState>(),
+      ).execute(); // Add a bless first
+      final initialBlessCount = gameState.modifierDeck
+          .getRemovable("bless")
+          .value;
+      final command = ChangeBlessCommand(
+        -1,
+        "Zealot",
+        "Zealot",
+        gameState: getIt<GameState>(),
+      );
 
       // Act
       command.execute();
 
       // Assert
-      final finalBlessCount =
-          gameState.modifierDeck.getRemovable("bless").value;
+      final finalBlessCount = gameState.modifierDeck
+          .getRemovable("bless")
+          .value;
       expect(finalBlessCount, initialBlessCount - 1);
       checkSaveState();
     });
 
     test('describe should return correct string for adding bless', () {
       // Arrange
-      final command = ChangeBlessCommand(1, 'Blinkblade', 'Blinkblade', gameState: getIt<GameState>());
+      final command = ChangeBlessCommand(
+        1,
+        'Blinkblade',
+        'Blinkblade',
+        gameState: getIt<GameState>(),
+      );
 
       // Act & Assert
       expect(command.describe(), 'Add a Bless');
@@ -105,7 +158,12 @@ void main() {
 
     test('describe should return correct string for removing bless', () {
       // Arrange
-      final command = ChangeBlessCommand(-1, 'Blinkblade', 'Blinkblade', gameState: getIt<GameState>());
+      final command = ChangeBlessCommand(
+        -1,
+        'Blinkblade',
+        'Blinkblade',
+        gameState: getIt<GameState>(),
+      );
 
       // Act & Assert
       expect(command.describe(), 'Remove a Bless');
@@ -114,7 +172,12 @@ void main() {
 
     test('describe should return correct string for monster deck', () {
       // Arrange
-      final command = ChangeBlessCommand(1, "Zealot", "Zealot", gameState: getIt<GameState>());
+      final command = ChangeBlessCommand(
+        1,
+        "Zealot",
+        "Zealot",
+        gameState: getIt<GameState>(),
+      );
 
       // Act & Assert
       expect(command.describe(), 'Add a Bless');

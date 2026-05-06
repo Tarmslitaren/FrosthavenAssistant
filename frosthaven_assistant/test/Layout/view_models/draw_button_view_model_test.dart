@@ -23,10 +23,8 @@ void main() {
     (getIt<GameState>().totalRounds as ValueNotifier<int>).value = 1;
   });
 
-  DrawButtonViewModel makeVm() => DrawButtonViewModel(
-        gameState: getIt<GameState>(),
-        settings: getIt(),
-      );
+  DrawButtonViewModel makeVm() =>
+      DrawButtonViewModel(gameState: getIt<GameState>(), settings: getIt());
 
   group('DrawButtonViewModel.buttonText', () {
     test('returns "Draw" in chooseInitiative state', () {
@@ -47,12 +45,14 @@ void main() {
       expect(makeVm().roundText, '3');
     });
 
-    test('returns "round(total)" format when round differs from totalRounds',
-        () {
-      (getIt<GameState>().round as ValueNotifier<int>).value = 2;
-      (getIt<GameState>().totalRounds as ValueNotifier<int>).value = 5;
-      expect(makeVm().roundText, '2(5)');
-    });
+    test(
+      'returns "round(total)" format when round differs from totalRounds',
+      () {
+        (getIt<GameState>().round as ValueNotifier<int>).value = 2;
+        (getIt<GameState>().totalRounds as ValueNotifier<int>).value = 5;
+        expect(makeVm().roundText, '2(5)');
+      },
+    );
   });
 
   group('DrawButtonViewModel.buttonWidth', () {
@@ -76,9 +76,7 @@ void main() {
     });
 
     test('returns null (success) when character has initiative set', () {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-              gameState: getIt<GameState>())
-          .execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
       final gs = getIt<GameState>();
       final character =
           gs.currentList.firstWhere((e) => e is Character) as Character;

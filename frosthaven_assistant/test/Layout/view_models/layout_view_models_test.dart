@@ -37,10 +37,10 @@ void main() {
   // ── MainListViewModel ──────────────────────────────────────────────────────
 
   MainListViewModel makeListVm() => MainListViewModel(
-        gameState: getIt<GameState>(),
-        gameData: getIt<GameData>(),
-        settings: getIt<Settings>(),
-      );
+    gameState: getIt<GameState>(),
+    gameData: getIt<GameData>(),
+    settings: getIt<Settings>(),
+  );
 
   group('MainListViewModel.currentListLength', () {
     test('zero when list is empty', () {
@@ -48,28 +48,30 @@ void main() {
     });
 
     test('increases after adding a character', () {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-              gameState: getIt<GameState>())
-          .execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
       expect(makeListVm().currentListLength, 1);
       getIt<GameState>().undo();
     });
 
     test('increases after adding a monster', () {
-      AddMonsterCommand('Ancient Artillery (FH)', 1, false,
-              gameState: getIt<GameState>())
-          .execute();
+      AddMonsterCommand(
+        'Ancient Artillery (FH)',
+        1,
+        false,
+        gameState: getIt<GameState>(),
+      ).execute();
       expect(makeListVm().currentListLength, 1);
       getIt<GameState>().undo();
     });
 
     test('reflects multiple items', () {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-              gameState: getIt<GameState>())
-          .execute();
-      AddMonsterCommand('Ancient Artillery (FH)', 1, false,
-              gameState: getIt<GameState>())
-          .execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      AddMonsterCommand(
+        'Ancient Artillery (FH)',
+        1,
+        false,
+        gameState: getIt<GameState>(),
+      ).execute();
       expect(makeListVm().currentListLength, 2);
       getIt<GameState>().undo();
       getIt<GameState>().undo();
@@ -78,9 +80,7 @@ void main() {
 
   group('MainListViewModel.itemAt / itemIdAt', () {
     test('returns correct item at index 0', () {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-              gameState: getIt<GameState>())
-          .execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
       final vm = makeListVm();
       expect(vm.itemAt(0), isNotNull);
       expect(vm.itemIdAt(0), vm.itemAt(0).id);
@@ -88,12 +88,13 @@ void main() {
     });
 
     test('character is first when added before monster', () {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-              gameState: getIt<GameState>())
-          .execute();
-      AddMonsterCommand('Ancient Artillery (FH)', 1, false,
-              gameState: getIt<GameState>())
-          .execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      AddMonsterCommand(
+        'Ancient Artillery (FH)',
+        1,
+        false,
+        gameState: getIt<GameState>(),
+      ).execute();
       final vm = makeListVm();
       expect(vm.itemAt(0), isA<Character>());
       expect(vm.itemAt(1), isA<Monster>());
@@ -104,12 +105,13 @@ void main() {
 
   group('MainListViewModel.reorderItem', () {
     test('swaps two items by dispatching ReorderListCommand', () {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-              gameState: getIt<GameState>())
-          .execute();
-      AddMonsterCommand('Ancient Artillery (FH)', 1, false,
-              gameState: getIt<GameState>())
-          .execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      AddMonsterCommand(
+        'Ancient Artillery (FH)',
+        1,
+        false,
+        gameState: getIt<GameState>(),
+      ).execute();
       final vm = makeListVm();
       final firstIdBefore = vm.itemIdAt(0);
       final secondIdBefore = vm.itemIdAt(1);
@@ -147,10 +149,10 @@ void main() {
   // ── MainScaffoldViewModel ──────────────────────────────────────────────────
 
   MainScaffoldViewModel makeScaffoldVm() => MainScaffoldViewModel(
-        gameState: getIt<GameState>(),
-        settings: getIt<Settings>(),
-        gameData: getIt<GameData>(),
-      );
+    gameState: getIt<GameState>(),
+    settings: getIt<Settings>(),
+    gameData: getIt<GameData>(),
+  );
 
   group('MainScaffoldViewModel.isButtonsAndBugs', () {
     test('false for Frosthaven campaign', () {
@@ -220,10 +222,10 @@ void main() {
   // ── SectionListViewModel ───────────────────────────────────────────────────
 
   SectionListViewModel makeSectionVm() => SectionListViewModel(
-        settings: getIt<Settings>(),
-        gameData: getIt<GameData>(),
-        gameState: getIt<GameState>(),
-      );
+    settings: getIt<Settings>(),
+    gameData: getIt<GameData>(),
+    gameState: getIt<GameState>(),
+  );
 
   group('SectionListViewModel.sections', () {
     test('returns list (empty or populated) for current scenario', () {

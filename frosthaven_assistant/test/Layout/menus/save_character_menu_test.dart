@@ -16,9 +16,7 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-            gameState: getIt<GameState>())
-        .execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
   });
 
   Future<void> pumpMenu(WidgetTester tester) async {
@@ -48,8 +46,10 @@ void main() {
   group('SaveCharacterMenu', () {
     testWidgets('renders header text', (WidgetTester tester) async {
       await pumpMenu(tester);
-      expect(find.textContaining('Load, Save or Delete Characters'),
-          findsOneWidget);
+      expect(
+        find.textContaining('Load, Save or Delete Characters'),
+        findsOneWidget,
+      );
     });
 
     testWidgets('renders Add new Save label', (WidgetTester tester) async {
@@ -67,15 +67,17 @@ void main() {
       expect(find.text('Close'), findsOneWidget);
     });
 
-    testWidgets('renders character icon button for current characters',
-        (WidgetTester tester) async {
+    testWidgets('renders character icon button for current characters', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester);
       // Blinkblade character icon button should be shown
       expect(find.byType(IconButton), findsAtLeast(1));
     });
 
-    testWidgets('tapping character icon opens SaveCharacterModalMenu',
-        (WidgetTester tester) async {
+    testWidgets('tapping character icon opens SaveCharacterModalMenu', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester);
       final iconButtons = find.byType(IconButton);
       expect(iconButtons, findsAtLeast(1));
@@ -110,8 +112,9 @@ void main() {
       settings.characterSaves.value = before;
     });
 
-    testWidgets('tapping Close dismisses the menu',
-        (WidgetTester tester) async {
+    testWidgets('tapping Close dismisses the menu', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester);
       await tester.tap(find.text('Close'));
       await tester.pumpAndSettle();

@@ -43,10 +43,7 @@ void main() {
               autofocus: true,
               child: Column(
                 children: [
-                  if (includeTextField)
-                    const TextField(
-                      autofocus: true,
-                    ),
+                  if (includeTextField) const TextField(autofocus: true),
                   const SizedBox(height: 24, width: 24),
                 ],
               ),
@@ -72,8 +69,7 @@ void main() {
     testWidgets('ctrl z undoes and ctrl y redoes', (WidgetTester tester) async {
       final gameState = getIt<GameState>();
       gameState.action(
-        AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinkblade', 1,
-            gameState: getIt<GameState>()),
+        AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinkblade', 1),
       );
 
       await pumpHotkeys(tester);
@@ -86,17 +82,27 @@ void main() {
       expect(gameState.currentList, isNotEmpty);
     });
 
-    testWidgets('tab advances activation and shift tab undoes it',
-        (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinkblade', 1,
-              gameState: getIt<GameState>())
-          .execute();
-      AddCharacterCommand('Banner Spear', 'Frosthaven', 'Banner Spear', 1,
-              gameState: getIt<GameState>())
-          .execute();
+    testWidgets('tab advances activation and shift tab undoes it', (
+      WidgetTester tester,
+    ) async {
+      AddCharacterCommand(
+        'Blinkblade',
+        'Frosthaven',
+        'Blinkblade',
+        1,
+      ).execute();
+      AddCharacterCommand(
+        'Banner Spear',
+        'Frosthaven',
+        'Banner Spear',
+        1,
+      ).execute();
       SetInitCommand('Blinkblade', 25, gameState: getIt<GameState>()).execute();
-      SetInitCommand('Banner Spear', 30, gameState: getIt<GameState>())
-          .execute();
+      SetInitCommand(
+        'Banner Spear',
+        30,
+        gameState: getIt<GameState>(),
+      ).execute();
       final gameState = getIt<GameState>();
 
       gameState.action(DrawCommand(gameState: getIt<GameState>()));
@@ -119,9 +125,12 @@ void main() {
     });
 
     testWidgets('space runs draw action', (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinkblade', 1,
-              gameState: getIt<GameState>())
-          .execute();
+      AddCharacterCommand(
+        'Blinkblade',
+        'Frosthaven',
+        'Blinkblade',
+        1,
+      ).execute();
       SetInitCommand('Blinkblade', 25, gameState: getIt<GameState>()).execute();
       final gameState = getIt<GameState>();
 
@@ -150,11 +159,15 @@ void main() {
       expect(gameState.elementState[Elements.fire], ElementState.inert);
     });
 
-    testWidgets('shortcuts are ignored while text input is focused',
-        (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinkblade', 1,
-              gameState: getIt<GameState>())
-          .execute();
+    testWidgets('shortcuts are ignored while text input is focused', (
+      WidgetTester tester,
+    ) async {
+      AddCharacterCommand(
+        'Blinkblade',
+        'Frosthaven',
+        'Blinkblade',
+        1,
+      ).execute();
       final gameState = getIt<GameState>();
 
       await pumpHotkeys(tester, includeTextField: true);

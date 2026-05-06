@@ -19,11 +19,10 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-            gameState: getIt<GameState>())
-        .execute();
-    character = getIt<GameState>().currentList.firstWhere((e) => e is Character)
-        as Character;
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+    character =
+        getIt<GameState>().currentList.firstWhere((e) => e is Character)
+            as Character;
   });
 
   Future<void> pumpMenu(WidgetTester tester) async {
@@ -55,33 +54,42 @@ void main() {
   }
 
   group('SetCharacterLevelMenu', () {
-    testWidgets('renders the character name in the title',
-        (WidgetTester tester) async {
+    testWidgets('renders the character name in the title', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester);
-      expect(find.textContaining(character.characterState.display.value),
-          findsOneWidget);
+      expect(
+        find.textContaining(character.characterState.display.value),
+        findsOneWidget,
+      );
     });
 
-    testWidgets('renders level buttons 1 through 9',
-        (WidgetTester tester) async {
+    testWidgets('renders level buttons 1 through 9', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester);
       for (int i = 1; i <= 9; i++) {
         // Use findsAtLeast(1): some numbers may also appear in the health
         // counter (e.g. Blinkblade starts with 8 max health).
-        expect(find.text(i.toString()), findsAtLeast(1),
-            reason: 'Level button $i should be visible');
+        expect(
+          find.text(i.toString()),
+          findsAtLeast(1),
+          reason: 'Level button $i should be visible',
+        );
       }
     });
 
-    testWidgets('renders "Change name:" label and text field',
-        (WidgetTester tester) async {
+    testWidgets('renders "Change name:" label and text field', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester);
       expect(find.text('Change name:'), findsOneWidget);
       expect(find.byType(TextField), findsOneWidget);
     });
 
-    testWidgets('tapping a level button updates the character level',
-        (WidgetTester tester) async {
+    testWidgets('tapping a level button updates the character level', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester);
       final targetLevel = character.characterState.level.value == 1 ? 2 : 1;
 
@@ -93,37 +101,43 @@ void main() {
     });
 
     testWidgets(
-        'level button selection updates reactively when level changes via command',
-        (WidgetTester tester) async {
-      await pumpMenu(tester);
-      expect(character.characterState.level.value, 1);
+      'level button selection updates reactively when level changes via command',
+      (WidgetTester tester) async {
+        await pumpMenu(tester);
+        expect(character.characterState.level.value, 1);
 
-      // Change level externally (not through the button tap)
-      getIt<GameState>()
-          .action(SetCharacterLevelCommand(5, character.id));
-      await tester.pump();
+        // Change level externally (not through the button tap)
+        getIt<GameState>().action(SetCharacterLevelCommand(5, character.id));
+        await tester.pump();
 
-      // State updated
-      expect(character.characterState.level.value, 5);
-      // Buttons 1..9 still all rendered — widget rebuilt without crash
-      for (int i = 1; i <= 9; i++) {
-        expect(find.text(i.toString()), findsAtLeast(1),
-            reason: 'Level button $i should still be visible after reactive update');
-      }
-      // Level 5 button is now selected, so tapping level 1 should work (isCurrentlySelected=false)
-      await tester.tap(find.text('1').first);
-      await tester.pump();
-      expect(character.characterState.level.value, 1);
-    });
+        // State updated
+        expect(character.characterState.level.value, 5);
+        // Buttons 1..9 still all rendered — widget rebuilt without crash
+        for (int i = 1; i <= 9; i++) {
+          expect(
+            find.text(i.toString()),
+            findsAtLeast(1),
+            reason:
+                'Level button $i should still be visible after reactive update',
+          );
+        }
+        // Level 5 button is now selected, so tapping level 1 should work (isCurrentlySelected=false)
+        await tester.tap(find.text('1').first);
+        await tester.pump();
+        expect(character.characterState.level.value, 1);
+      },
+    );
 
-    testWidgets('entering a name in the text field triggers name change',
-        (WidgetTester tester) async {
+    testWidgets('entering a name in the text field triggers name change', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester);
 
       // The TextField is off-screen due to overflow so pointer events cannot
       // reach it. Set the controller text and invoke onSubmitted directly.
       final menuState = tester.state<SetCharacterLevelMenuState>(
-          find.byType(SetCharacterLevelMenu));
+        find.byType(SetCharacterLevelMenu),
+      );
       menuState.nameController.text = 'HeroName';
       final tf = tester.widget<TextField>(find.byType(TextField));
       tf.onSubmitted?.call('HeroName');

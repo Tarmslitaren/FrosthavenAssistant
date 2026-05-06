@@ -7,6 +7,7 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../Resource/game_methods.dart';
 import '../Resource/scaling.dart';
+import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
 
 class SelectHealthWheel extends StatefulWidget {
@@ -36,8 +37,6 @@ class SelectHealthWheelState extends State<SelectHealthWheel> {
   static const double _kScrollDeltaMin = 2.5;
   static const int _kIOSDivider = 2;
   static const double _kShadowOffset = 0.4;
-  static const double _kBoxShadowBlur = 4.0;
-  static const double _kBoxShadowOffsetX = 2.0;
   static const double _kWheelWidth = 140.0;
   static const double _kWheelHeight = 10.0;
   static const double _kSelectedWidth = 60.0;
@@ -140,14 +139,7 @@ class SelectHealthWheelState extends State<SelectHealthWheel> {
         quarterTurns: -1,
         child: Container(
             decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black45,
-                  blurRadius: _kBoxShadowBlur * scale,
-                  offset: Offset(_kBoxShadowOffsetX * scale,
-                      _kBoxShadowBlur * scale), // Shadow position
-                ),
-              ],
+              boxShadow: [cardBoxShadow(scale)],
             ),
             width: _kWheelWidth,
             height: _kWheelHeight,

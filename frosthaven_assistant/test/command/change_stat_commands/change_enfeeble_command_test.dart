@@ -16,8 +16,13 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', '', 1, gameState: getIt<GameState>()).execute();
-    AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: getIt<GameState>()).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1).execute();
+    AddMonsterCommand(
+      'Ancient Artillery (FH)',
+      1,
+      false,
+      gameState: getIt<GameState>(),
+    ).execute();
   });
 
   group('ChangeEnfeebleCommand', () {
@@ -25,15 +30,22 @@ void main() {
       final character =
           getIt<GameState>().currentList.firstWhere((e) => e is Character)
               as Character;
-      final initial =
-          character.characterState.modifierDeck.getRemovable('enfeeble').value;
+      final initial = character.characterState.modifierDeck
+          .getRemovable('enfeeble')
+          .value;
 
-      ChangeEnfeebleCommand(1, 'enfeeble', character.id, character.id, gameState: getIt<GameState>())
-          .execute();
+      ChangeEnfeebleCommand(
+        1,
+        'enfeeble',
+        character.id,
+        character.id,
+        gameState: getIt<GameState>(),
+      ).execute();
 
       expect(
-          character.characterState.modifierDeck.getRemovable('enfeeble').value,
-          initial + 1);
+        character.characterState.modifierDeck.getRemovable('enfeeble').value,
+        initial + 1,
+      );
       checkSaveState();
     });
 
@@ -42,55 +54,94 @@ void main() {
       final initial = gameState.modifierDeck.getRemovable('enfeeble').value;
 
       ChangeEnfeebleCommand(
-              1, 'enfeeble', 'Ancient Artillery (FH)', 'Ancient Artillery (FH)', gameState: getIt<GameState>())
-          .execute();
+        1,
+        'enfeeble',
+        'Ancient Artillery (FH)',
+        'Ancient Artillery (FH)',
+        gameState: getIt<GameState>(),
+      ).execute();
 
-      expect(gameState.modifierDeck.getRemovable('enfeeble').value,
-          initial + 1);
+      expect(
+        gameState.modifierDeck.getRemovable('enfeeble').value,
+        initial + 1,
+      );
     });
 
     test('describe should return "Add Enfeeble" when change is positive', () {
-      final command =
-          ChangeEnfeebleCommand(1, 'enfeeble', 'Blinkblade', 'Blinkblade', gameState: getIt<GameState>());
+      final command = ChangeEnfeebleCommand(
+        1,
+        'enfeeble',
+        'Blinkblade',
+        'Blinkblade',
+        gameState: getIt<GameState>(),
+      );
       expect(command.describe(), 'Add Enfeeble');
     });
 
-    test('describe should return "Remove Enfeeble" when change is negative',
-        () {
-      final command =
-          ChangeEnfeebleCommand(-1, 'enfeeble', 'Blinkblade', 'Blinkblade', gameState: getIt<GameState>());
-      expect(command.describe(), 'Remove Enfeeble');
-    });
+    test(
+      'describe should return "Remove Enfeeble" when change is negative',
+      () {
+        final command = ChangeEnfeebleCommand(
+          -1,
+          'enfeeble',
+          'Blinkblade',
+          'Blinkblade',
+          gameState: getIt<GameState>(),
+        );
+        expect(command.describe(), 'Remove Enfeeble');
+      },
+    );
 
     test('undo does not throw', () {
       final gs = getIt<GameState>();
       final character = gs.currentList.first as Character;
-      gs.action(ChangeEnfeebleCommand(1, 'enfeeble', character.id, character.id, gameState: getIt<GameState>()));
+      gs.action(
+        ChangeEnfeebleCommand(
+          1,
+          'enfeeble',
+          character.id,
+          character.id,
+          gameState: getIt<GameState>(),
+        ),
+      );
       expect(() => gs.undo(), returnsNormally);
     });
 
     test('.deck() named constructor targets the given deck directly', () {
       final deck = getIt<GameState>().modifierDeck;
       final before = deck.getRemovable('enfeeble').value;
-      ChangeEnfeebleCommand.deck(deck, 'enfeeble', gameState: getIt<GameState>()).execute();
+      ChangeEnfeebleCommand.deck(
+        deck,
+        'enfeeble',
+        gameState: getIt<GameState>(),
+      ).execute();
       // change defaults to 0 for .deck() constructor, so value unchanged
       expect(deck.getRemovable('enfeeble').value, before);
     });
 
     test('ally monster owner uses modifierDeckAllies', () {
       getIt<GameState>().clearList();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', '', 1, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1).execute();
       SetCampaignCommand('Jaws of the Lion').execute();
-      SetScenarioCommand('#6 Corrupted Research', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand(
+        '#6 Corrupted Research',
+        false,
+        gameState: getIt<GameState>(),
+      ).execute();
       final gs = getIt<GameState>();
-      final ratMonstrosity = gs.currentList
-          .whereType<Monster>()
-          .firstWhere((m) => m.id == 'Rat Monstrosity');
+      final ratMonstrosity = gs.currentList.whereType<Monster>().firstWhere(
+        (m) => m.id == 'Rat Monstrosity',
+      );
       expect(ratMonstrosity.isAlly, isTrue);
 
       final before = gs.modifierDeckAllies.getRemovable('enfeeble').value;
-      ChangeEnfeebleCommand(1, 'enfeeble', ratMonstrosity.id, ratMonstrosity.id, gameState: getIt<GameState>())
-          .execute();
+      ChangeEnfeebleCommand(
+        1,
+        'enfeeble',
+        ratMonstrosity.id,
+        ratMonstrosity.id,
+        gameState: getIt<GameState>(),
+      ).execute();
       expect(gs.modifierDeckAllies.getRemovable('enfeeble').value, before + 1);
     });
   });

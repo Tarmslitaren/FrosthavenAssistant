@@ -18,15 +18,17 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-            gameState: getIt<GameState>())
-        .execute();
-    character = getIt<GameState>().currentList.firstWhere((e) => e is Character)
-        as Character;
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+    character =
+        getIt<GameState>().currentList.firstWhere((e) => e is Character)
+            as Character;
   });
 
-  Future<void> pumpMenu(WidgetTester tester,
-      {bool saveOnly = false, Character? char}) async {
+  Future<void> pumpMenu(
+    WidgetTester tester, {
+    bool saveOnly = false,
+    Character? char,
+  }) async {
     final originalOnError = FlutterError.onError;
     addTearDown(() => FlutterError.onError = originalOnError);
     FlutterError.onError = ignoreOverflowErrors;
@@ -62,45 +64,51 @@ void main() {
       expect(find.text('Save'), findsOneWidget);
     });
 
-    testWidgets('renders Load and Delete buttons when saveOnly is false',
-        (WidgetTester tester) async {
+    testWidgets('renders Load and Delete buttons when saveOnly is false', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester, saveOnly: false, char: character);
       expect(find.text('Load'), findsOneWidget);
       expect(find.text('Delete'), findsOneWidget);
     });
 
-    testWidgets('does not render Load or Delete when saveOnly is true',
-        (WidgetTester tester) async {
+    testWidgets('does not render Load or Delete when saveOnly is true', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester, saveOnly: true, char: character);
       expect(find.text('Load'), findsNothing);
       expect(find.text('Delete'), findsNothing);
     });
 
-    testWidgets('renders Set save name label and text field',
-        (WidgetTester tester) async {
+    testWidgets('renders Set save name label and text field', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester, saveOnly: true, char: character);
       expect(find.text('Set save name:'), findsOneWidget);
       expect(find.byType(TextField), findsOneWidget);
     });
 
-    testWidgets('tapping Save button with character triggers save',
-        (WidgetTester tester) async {
+    testWidgets('tapping Save button with character triggers save', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester, saveOnly: false, char: character);
       await tester.tap(find.text('Save'));
       await tester.pumpAndSettle();
       expect(find.byType(SaveCharacterModalMenu), findsNothing);
     });
 
-    testWidgets('tapping Delete button closes dialog',
-        (WidgetTester tester) async {
+    testWidgets('tapping Delete button closes dialog', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester, saveOnly: false, char: character);
       await tester.tap(find.text('Delete'));
       await tester.pumpAndSettle();
       expect(find.byType(SaveCharacterModalMenu), findsNothing);
     });
 
-    testWidgets('tapping Load button closes dialog',
-        (WidgetTester tester) async {
+    testWidgets('tapping Load button closes dialog', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester, saveOnly: false, char: character);
       // Load button is the first button when saveOnly=false
       await tester.tap(find.text('Load'));

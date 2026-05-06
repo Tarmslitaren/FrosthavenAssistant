@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Resource/app_constants.dart';
+import '../../../Resource/ui_utils.dart';
 import '../../../Resource/commands/add_condition_command.dart';
 import '../../../Resource/commands/remove_condition_command.dart';
 import '../../../Resource/enums.dart';
@@ -64,14 +65,7 @@ class StatusMenuStackableConditionButtons extends StatelessWidget {
                           color: Colors.white,
                           height: _kTextHeight,
                           fontSize: kFontSizeBody * scale,
-                          shadows: [
-                            Shadow(
-                              offset: Offset(
-                                  kShadowOffset * scale, kShadowOffset * scale),
-                              color: Colors.black87,
-                              blurRadius: kShadowOffset * scale,
-                            )
-                          ])));
+                          shadows: [textShadow(scale)])));
             })
       ]),
       SizedBox(

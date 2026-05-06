@@ -31,13 +31,7 @@ class MonsterAbilityCardRear extends StatelessWidget {
         color: Colors.black);
     return Container(
         decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black45,
-              blurRadius: kCardShadowBlur * scale,
-              offset: Offset(kCardShadowOffsetX * scale, kCardShadowOffsetY * scale),
-            ),
-          ],
+          boxShadow: [cardBoxShadow(scale)],
         ),
         key: const ValueKey<int>(0),
         margin: EdgeInsets.all(kMonsterCardMargin * scale),

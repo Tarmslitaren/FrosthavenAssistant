@@ -12,10 +12,12 @@ import '../menus/AbilityCardsMenu/ability_cards_menu.dart';
 import '../menus/ability_card_zoom.dart';
 
 class MonsterAbilityCardViewModel {
-  MonsterAbilityCardViewModel(this.monster,
-      {GameState? gameState, Settings? settings})
-      : _gameState = gameState ?? getIt<GameState>(),
-        _settings = settings ?? getIt<Settings>();
+  MonsterAbilityCardViewModel(
+    this.monster, {
+    GameState? gameState,
+    Settings? settings,
+  }) : _gameState = gameState ?? getIt<GameState>(),
+       _settings = settings ?? getIt<Settings>();
 
   final Monster monster;
   final GameState _gameState;
@@ -42,25 +44,26 @@ class MonsterAbilityCardViewModel {
 
   MonsterAbilityState get deck {
     final d = GameMethods.getDeck(monster.type.deck);
-    if (d == null)
+    if (d == null) {
       throw StateError('Ability deck not found: ${monster.type.deck}');
+    }
     return d;
   }
 
   void openDeckMenu(BuildContext context) {
     openDialog(
-        context,
-        AbilityCardsMenu(
-          monsterAbilityState: deck,
-          monsterData: monster,
-        ));
+      context,
+      AbilityCardsMenu(monsterAbilityState: deck, monsterData: monster),
+    );
   }
 
   void openZoom(BuildContext context) {
     final card = currentCard;
     if (card != null) {
-      openDialog(context,
-          AbilityCardZoom(card: card, monster: monster, calculateAll: false));
+      openDialog(
+        context,
+        AbilityCardZoom(card: card, monster: monster, calculateAll: false),
+      );
     }
   }
 }

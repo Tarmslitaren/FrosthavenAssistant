@@ -17,11 +17,10 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinky', 1,
-            gameState: getIt<GameState>())
-        .execute();
-    character = getIt<GameState>().currentList.firstWhere((e) => e is Character)
-        as Character;
+    AddCharacterCommand('Banner Spear', 'Frosthaven', 'BS', 1).execute();
+    character =
+        getIt<GameState>().currentList.firstWhere((e) => e is Character)
+            as Character;
   });
 
   group('SetCharacterLevelCommand', () {
@@ -35,8 +34,10 @@ void main() {
     test('should update max health when level changes', () {
       final healthAtLevel1 = character.characterState.maxHealth.value;
       SetCharacterLevelCommand(5, character.id).execute();
-      expect(character.characterState.maxHealth.value,
-          greaterThanOrEqualTo(healthAtLevel1));
+      expect(
+        character.characterState.maxHealth.value,
+        greaterThanOrEqualTo(healthAtLevel1),
+      );
     });
 
     test('describe should include character id', () {

@@ -16,9 +16,13 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinky', 1, gameState: getIt<GameState>()).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', 'blinky', 1).execute();
     SetCampaignCommand('Frosthaven').execute();
-    SetScenarioCommand('custom', false, gameState: getIt<GameState>()).execute();
+    SetScenarioCommand(
+      'custom',
+      false,
+      gameState: getIt<GameState>(),
+    ).execute();
     DrawLootCardCommand(gameState: getIt<GameState>()).execute();
   });
 

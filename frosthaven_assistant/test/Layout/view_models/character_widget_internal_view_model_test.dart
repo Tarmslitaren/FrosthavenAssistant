@@ -22,21 +22,18 @@ void main() {
     getIt<GameState>().clearList();
     (getIt<GameState>().roundState as ValueNotifier<RoundState>).value =
         RoundState.chooseInitiative;
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-            gameState: getIt<GameState>())
-        .execute();
-    character = getIt<GameState>()
-        .currentList
-        .firstWhere((e) => e is Character) as Character;
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+    character =
+        getIt<GameState>().currentList.firstWhere((e) => e is Character)
+            as Character;
     (character.characterState.initiative as ValueNotifier<int>).value = 0;
   });
 
-  CharacterWidgetInternalViewModel makeVm() =>
-      CharacterWidgetInternalViewModel(
-        character,
-        gameState: getIt<GameState>(),
-        settings: getIt<Settings>(),
-      );
+  CharacterWidgetInternalViewModel makeVm() => CharacterWidgetInternalViewModel(
+    character,
+    gameState: getIt<GameState>(),
+    settings: getIt<Settings>(),
+  );
 
   group('CharacterWidgetInternalViewModel.isObjectiveOrEscort', () {
     test('returns false for a regular character', () {
@@ -102,16 +99,18 @@ void main() {
       expect(makeVm().handleInitTextChange('42'), isFalse);
     });
 
-    test('returns true and dispatches SetInitCommand for valid new initiative',
-        () {
-      final gs = getIt<GameState>();
-      final indexBefore = gs.commandIndex.value;
-      final result = makeVm().handleInitTextChange('55');
-      expect(result, isTrue);
-      expect(gs.commandIndex.value, greaterThan(indexBefore));
-      expect(character.characterState.initiative.value, 55);
-      gs.undo();
-    });
+    test(
+      'returns true and dispatches SetInitCommand for valid new initiative',
+      () {
+        final gs = getIt<GameState>();
+        final indexBefore = gs.commandIndex.value;
+        final result = makeVm().handleInitTextChange('55');
+        expect(result, isTrue);
+        expect(gs.commandIndex.value, greaterThan(indexBefore));
+        expect(character.characterState.initiative.value, 55);
+        gs.undo();
+      },
+    );
 
     test('handles valid single-digit initiative', () {
       final result = makeVm().handleInitTextChange('5');
@@ -129,8 +128,7 @@ void main() {
   group('CharacterWidgetInternalViewModel.endTurn', () {
     test('dispatches TurnDoneCommand and changes turnState', () {
       final gs = getIt<GameState>();
-      (gs.roundState as ValueNotifier<RoundState>).value =
-          RoundState.playTurns;
+      (gs.roundState as ValueNotifier<RoundState>).value = RoundState.playTurns;
       (character.turnState as ValueNotifier<TurnsState>).value =
           TurnsState.current;
       makeVm().endTurn();

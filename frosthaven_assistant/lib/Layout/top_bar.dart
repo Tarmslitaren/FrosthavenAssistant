@@ -23,11 +23,7 @@ class TopBar extends StatelessWidget {
         valueListenable: settings.userScalingBars,
         builder: (context, value, child) {
           final userScaling = settings.userScalingBars.value;
-          final shadow = Shadow(
-            offset: Offset(1 * userScaling, 1 * userScaling),
-            color: Colors.black87,
-            blurRadius: 1 * userScaling,
-          );
+          final shadow = textShadow(userScaling);
           return AppBar(
             iconTheme: const IconThemeData(color: Colors.white),
             leading: Listener(

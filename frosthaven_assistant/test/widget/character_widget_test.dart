@@ -19,9 +19,7 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-            gameState: getIt<GameState>())
-        .execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
   });
 
   Future<void> pumpCharacterWidget(WidgetTester tester) async {
@@ -46,14 +44,16 @@ void main() {
       expect(find.byType(CharacterWidget), findsOneWidget);
     });
 
-    testWidgets('shows InkWell for tap interaction',
-        (WidgetTester tester) async {
+    testWidgets('shows InkWell for tap interaction', (
+      WidgetTester tester,
+    ) async {
       await pumpCharacterWidget(tester);
       expect(find.byType(InkWell), findsAtLeast(1));
     });
 
-    testWidgets('tapping character widget opens StatusMenu',
-        (WidgetTester tester) async {
+    testWidgets('tapping character widget opens StatusMenu', (
+      WidgetTester tester,
+    ) async {
       final originalOnError = FlutterError.onError;
       FlutterError.onError = ignoreOverflowErrors;
       await pumpCharacterWidget(tester);
@@ -64,15 +64,14 @@ void main() {
       expect(find.byType(StatusMenu), findsOneWidget);
     });
 
-    testWidgets('returns empty Container when character not found',
-        (WidgetTester tester) async {
+    testWidgets('returns empty Container when character not found', (
+      WidgetTester tester,
+    ) async {
       final originalOnError = FlutterError.onError;
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pumpWidget(
         const MaterialApp(
-          home: Scaffold(
-            body: CharacterWidget(characterId: 'NonExistent'),
-          ),
+          home: Scaffold(body: CharacterWidget(characterId: 'NonExistent')),
         ),
       );
       await tester.pump();
@@ -86,8 +85,9 @@ void main() {
       expect(find.byType(ColorFiltered), findsAtLeast(1));
     });
 
-    testWidgets('renders health wheel when not in chooseInitiative round state',
-        (WidgetTester tester) async {
+    testWidgets('renders health wheel when not in chooseInitiative round state', (
+      WidgetTester tester,
+    ) async {
       // Draw changes roundState to playTurns, triggering buildWithHealthWheel path
       DrawCommand(gameState: getIt<GameState>()).execute();
       final originalOnError = FlutterError.onError;
@@ -108,10 +108,10 @@ void main() {
       expect(find.byType(CharacterWidget), findsOneWidget);
       // Reset round state (NextRoundCommand also has 600ms timer — pump past it)
       NextRoundCommand(
-              gameState: getIt<GameState>(),
-              gameData: getIt<GameData>(),
-              settings: getIt<Settings>())
-          .execute();
+        gameState: getIt<GameState>(),
+        gameData: getIt<GameData>(),
+        settings: getIt<Settings>(),
+      ).execute();
       await tester.pump(const Duration(milliseconds: 700));
     });
   });

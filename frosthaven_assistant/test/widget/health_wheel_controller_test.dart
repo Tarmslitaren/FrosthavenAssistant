@@ -14,7 +14,7 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
   });
 
   Future<void> pumpController(WidgetTester tester) async {
@@ -50,8 +50,9 @@ void main() {
       expect(find.byType(GestureDetector), findsOneWidget);
     });
 
-    testWidgets('horizontal drag gesture can be performed without error',
-        (WidgetTester tester) async {
+    testWidgets('horizontal drag gesture can be performed without error', (
+      WidgetTester tester,
+    ) async {
       final originalOnError = FlutterError.onError;
       FlutterError.onError = ignoreOverflowErrors;
       await pumpController(tester);
@@ -71,8 +72,9 @@ void main() {
       expect(find.text('child'), findsOneWidget);
     });
 
-    testWidgets('disposes without error when widget is removed',
-        (WidgetTester tester) async {
+    testWidgets('disposes without error when widget is removed', (
+      WidgetTester tester,
+    ) async {
       await pumpController(tester);
       // Replace widget tree — should trigger dispose
       await tester.pumpWidget(const MaterialApp(home: SizedBox()));

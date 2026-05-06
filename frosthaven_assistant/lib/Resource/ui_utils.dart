@@ -64,6 +64,18 @@ TextStyle getWhiteShadowStyle(double fontSize, Shadow shadow, {double? height}) 
   );
 }
 
+Shadow textShadow(double scale) => Shadow(
+  offset: Offset(kShadowOffset * scale, kShadowOffset * scale),
+  color: Colors.black87,
+  blurRadius: kShadowOffset * scale,
+);
+
+BoxShadow cardBoxShadow(double scale) => BoxShadow(
+  color: Colors.black45,
+  blurRadius: kCardShadowBlur * scale,
+  offset: Offset(kCardShadowOffsetX * scale, kCardShadowOffsetY * scale),
+);
+
 bool isLargeTablet(BuildContext context) {
   double screenWidth = MediaQuery.of(context).size.width;
   double screenHeight = MediaQuery.of(context).size.height;

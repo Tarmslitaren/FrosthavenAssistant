@@ -16,19 +16,21 @@ void main() {
   late Character character;
 
   setUp(() {
-    AddCharacterCommand('Blinkblade', 'Frosthaven', "Blinky", 1,
-            gameState: getIt<GameState>())
-        .execute();
-    character = getIt<GameState>().currentList.firstWhere((e) => e is Character)
-        as Character;
+    AddCharacterCommand('Blinkblade', 'Frosthaven', "Blinky", 1).execute();
+    character =
+        getIt<GameState>().currentList.firstWhere((e) => e is Character)
+            as Character;
   });
 
   group('ChangeNameCommand', () {
     test('should change a character\'s name', () {
       // Arrange
       final newName = 'BlinkyTheBlade';
-      final command = ChangeNameCommand(newName, character.id,
-          gameState: getIt<GameState>());
+      final command = ChangeNameCommand(
+        newName,
+        character.id,
+        gameState: getIt<GameState>(),
+      );
       final initialName = character.characterState.display.value;
       expect(initialName, 'Blinky');
 
@@ -43,8 +45,11 @@ void main() {
 
     test('describe should return correct string', () {
       // Arrange
-      final command = ChangeNameCommand('NewName', 'Blinkblade',
-          gameState: getIt<GameState>());
+      final command = ChangeNameCommand(
+        'NewName',
+        'Blinkblade',
+        gameState: getIt<GameState>(),
+      );
 
       // Act & Assert
       expect(command.describe(), 'change character name');

@@ -3,7 +3,6 @@ import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_scenario_command.dart';
 import 'package:frosthaven_assistant/Resource/game_data.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
-import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 import '../../../Model/character_class.dart';
 

@@ -28,11 +28,10 @@ void main() {
     getIt<Settings>().server.value = false;
     getIt<Settings>().client.value = ClientState.disconnected;
     CharacterWidgetInternal.localCharacterInitChanges.clear();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
-            gameState: getIt<GameState>())
-        .execute();
-    character = getIt<GameState>().currentList.firstWhere((e) => e is Character)
-        as Character;
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+    character =
+        getIt<GameState>().currentList.firstWhere((e) => e is Character)
+            as Character;
     (character.characterState.health as ValueNotifier<int>).value = 10;
     (character.characterState.initiative as ValueNotifier<int>).value = 0;
   });
@@ -44,10 +43,10 @@ void main() {
   });
 
   InitiativeWidgetViewModel makeVm() => InitiativeWidgetViewModel(
-        character,
-        gameState: getIt<GameState>(),
-        settings: getIt<Settings>(),
-      );
+    character,
+    gameState: getIt<GameState>(),
+    settings: getIt<Settings>(),
+  );
 
   group('InitiativeWidgetViewModel.isChooseInitiative', () {
     test('true when roundState is chooseInitiative', () {

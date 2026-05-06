@@ -23,76 +23,112 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', '', 1,
-            gameState: getIt<GameState>())
-        .execute();
-    AddMonsterCommand('Ancient Artillery (FH)', 1, false,
-            gameState: getIt<GameState>())
-        .execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1).execute();
+    AddMonsterCommand(
+      'Ancient Artillery (FH)',
+      1,
+      false,
+      gameState: getIt<GameState>(),
+    ).execute();
     AddStandeeCommand(
-            1, null, 'Ancient Artillery (FH)', MonsterType.normal, false,
-            gameState: getIt<GameState>())
-        .execute();
+      1,
+      null,
+      'Ancient Artillery (FH)',
+      MonsterType.normal,
+      false,
+      gameState: getIt<GameState>(),
+    ).execute();
 
-    character = getIt<GameState>().currentList.firstWhere((e) => e is Character)
-        as Character;
-    monster = getIt<GameState>().currentList.firstWhere((e) => e is Monster)
-        as Monster;
+    character =
+        getIt<GameState>().currentList.firstWhere((e) => e is Character)
+            as Character;
+    monster =
+        getIt<GameState>().currentList.firstWhere((e) => e is Monster)
+            as Monster;
     monsterInstance = monster.monsterInstances.first;
   });
 
   group('RemoveConditionCommand', () {
     test('should remove a condition from a character', () {
-      AddConditionCommand(Condition.poison, character.id, character.id,
-              gameState: getIt<GameState>())
-          .execute();
-      expect(character.characterState.conditions.value,
-          contains(Condition.poison));
+      AddConditionCommand(
+        Condition.poison,
+        character.id,
+        character.id,
+        gameState: getIt<GameState>(),
+      ).execute();
+      expect(
+        character.characterState.conditions.value,
+        contains(Condition.poison),
+      );
 
-      RemoveConditionCommand(Condition.poison, character.id, character.id,
-              gameState: getIt<GameState>())
-          .execute();
+      RemoveConditionCommand(
+        Condition.poison,
+        character.id,
+        character.id,
+        gameState: getIt<GameState>(),
+      ).execute();
 
-      expect(character.characterState.conditions.value,
-          isNot(contains(Condition.poison)));
+      expect(
+        character.characterState.conditions.value,
+        isNot(contains(Condition.poison)),
+      );
       checkSaveState();
     });
 
     test('should remove a condition from a monster instance', () {
-      AddConditionCommand(Condition.wound, monsterInstance.getId(), monster.id,
-              gameState: getIt<GameState>())
-          .execute();
+      AddConditionCommand(
+        Condition.wound,
+        monsterInstance.getId(),
+        monster.id,
+        gameState: getIt<GameState>(),
+      ).execute();
       expect(monsterInstance.conditions.value, contains(Condition.wound));
 
       RemoveConditionCommand(
-              Condition.wound, monsterInstance.getId(), monster.id,
-              gameState: getIt<GameState>())
-          .execute();
+        Condition.wound,
+        monsterInstance.getId(),
+        monster.id,
+        gameState: getIt<GameState>(),
+      ).execute();
 
       expect(
-          monsterInstance.conditions.value, isNot(contains(Condition.wound)));
+        monsterInstance.conditions.value,
+        isNot(contains(Condition.wound)),
+      );
     });
 
     test('should decrement chill counter when removing chill', () {
-      AddConditionCommand(Condition.chill, character.id, character.id,
-              gameState: getIt<GameState>())
-          .execute();
-      AddConditionCommand(Condition.chill, character.id, character.id,
-              gameState: getIt<GameState>())
-          .execute();
+      AddConditionCommand(
+        Condition.chill,
+        character.id,
+        character.id,
+        gameState: getIt<GameState>(),
+      ).execute();
+      AddConditionCommand(
+        Condition.chill,
+        character.id,
+        character.id,
+        gameState: getIt<GameState>(),
+      ).execute();
       expect(character.characterState.chill.value, 2);
 
-      RemoveConditionCommand(Condition.chill, character.id, character.id,
-              gameState: getIt<GameState>())
-          .execute();
+      RemoveConditionCommand(
+        Condition.chill,
+        character.id,
+        character.id,
+        gameState: getIt<GameState>(),
+      ).execute();
 
       expect(character.characterState.chill.value, 1);
     });
 
     test('describe should return correct string', () {
       final command = RemoveConditionCommand(
-          Condition.stun, character.id, character.id,
-          gameState: getIt<GameState>());
+        Condition.stun,
+        character.id,
+        character.id,
+        gameState: getIt<GameState>(),
+      );
       expect(command.describe(), 'Remove condition: stun');
     });
   });

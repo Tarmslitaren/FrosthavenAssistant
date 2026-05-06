@@ -18,29 +18,37 @@ void main() {
     test('should restore game state from serialized data', () {
       getIt<GameState>().clearList();
       SetCampaignCommand('Jaws of the Lion').execute();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', 'SaveTest', 1, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', 'SaveTest', 1).execute();
       final savedData = getIt<GameState>().toString();
 
       // Change state
       getIt<GameState>().clearList();
 
       // Restore
-      LoadSaveCommand('test save', savedData, gameState: getIt<GameState>()).execute();
+      LoadSaveCommand(
+        'test save',
+        savedData,
+        gameState: getIt<GameState>(),
+      ).execute();
 
       expect(getIt<GameState>().currentList.whereType<Character>().length, 1);
       expect(
-          getIt<GameState>()
-              .currentList
-              .whereType<Character>()
-              .first
-              .characterState
-              .display
-              .value,
-          'SaveTest');
+        getIt<GameState>().currentList
+            .whereType<Character>()
+            .first
+            .characterState
+            .display
+            .value,
+        'SaveTest',
+      );
     });
 
     test('describe includes save name', () {
-      final command = LoadSaveCommand('my save', '{}', gameState: getIt<GameState>());
+      final command = LoadSaveCommand(
+        'my save',
+        '{}',
+        gameState: getIt<GameState>(),
+      );
       expect(command.describe(), 'Load saved game: my save');
     });
   });
@@ -49,28 +57,40 @@ void main() {
     test('should load a character from serialized character data', () {
       getIt<GameState>().clearList();
       SetCampaignCommand('Frosthaven').execute();
-      SetScenarioCommand('custom', false, gameState: getIt<GameState>()).execute();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', 'OrigName', 1, gameState: getIt<GameState>()).execute();
-      final character = getIt<GameState>()
-          .currentList
-          .firstWhere((e) => e is Character) as Character;
+      SetScenarioCommand(
+        'custom',
+        false,
+        gameState: getIt<GameState>(),
+      ).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', 'OrigName', 1).execute();
+      final character =
+          getIt<GameState>().currentList.firstWhere((e) => e is Character)
+              as Character;
       final charData = character.toSave();
 
       // Remove the character
       getIt<GameState>().clearList();
 
       // Reload from save data
-      LoadCharacterSaveCommand('Blinkblade', charData, gameState: getIt<GameState>()).execute();
+      LoadCharacterSaveCommand(
+        'Blinkblade',
+        charData,
+        gameState: getIt<GameState>(),
+      ).execute();
 
-      final loaded = getIt<GameState>()
-          .currentList
-          .firstWhere((e) => e is Character) as Character;
+      final loaded =
+          getIt<GameState>().currentList.firstWhere((e) => e is Character)
+              as Character;
       expect(loaded.id, 'Blinkblade');
       expect(loaded.characterState.display.value, 'OrigName');
     });
 
     test('describe includes save name', () {
-      final command = LoadCharacterSaveCommand('Blinkblade', '{}', gameState: getIt<GameState>());
+      final command = LoadCharacterSaveCommand(
+        'Blinkblade',
+        '{}',
+        gameState: getIt<GameState>(),
+      );
       expect(command.describe(), 'Load saved character: Blinkblade');
     });
   });

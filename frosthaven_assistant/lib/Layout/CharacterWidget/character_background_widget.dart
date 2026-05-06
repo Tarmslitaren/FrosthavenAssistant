@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../Resource/app_constants.dart';
+import '../../Resource/ui_utils.dart';
 import '../../Resource/state/game_state.dart';
 
 class CharacterBackgroundWidget extends StatelessWidget {
@@ -106,13 +106,7 @@ class CharacterBackgroundWidget extends StatelessWidget {
       width: CharacterBackgroundWidget._kWidth * scale,
       height: CharacterBackgroundWidget._kHeight * scale,
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black45,
-            blurRadius: kCardShadowBlur * scale,
-            offset: Offset(kCardShadowOffsetX * scale, kCardShadowOffsetY * scale),
-          ),
-        ],
+        boxShadow: [cardBoxShadow(scale)],
         image: DecorationImage(
           fit: BoxFit.fill,
           colorFilter: hasGradient

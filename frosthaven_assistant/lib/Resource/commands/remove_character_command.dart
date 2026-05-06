@@ -2,11 +2,9 @@ import '../game_methods.dart';
 import '../state/game_state.dart';
 
 class RemoveCharacterCommand extends Command {
-  final GameState _gameState;
   final List<Character> names;
 
-  RemoveCharacterCommand(this.names, {required GameState gameState})
-      : _gameState = gameState;
+  RemoveCharacterCommand(this.names, {required GameState gameState});
 
   @override
   void execute() {
@@ -17,7 +15,6 @@ class RemoveCharacterCommand extends Command {
       ScenarioMethods.applyDifficulty(stateAccess);
     }
   }
-
 
   @override
   String describe() {

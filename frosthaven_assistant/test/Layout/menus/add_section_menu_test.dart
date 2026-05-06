@@ -16,10 +16,14 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
     // Set up a Frosthaven scenario that has sections in the test data
     SetCampaignCommand('Frosthaven').execute();
-    SetScenarioCommand('#0 Howling in the Snow', false, gameState: getIt<GameState>()).execute();
+    SetScenarioCommand(
+      '#0 Howling in the Snow',
+      false,
+      gameState: getIt<GameState>(),
+    ).execute();
   });
 
   Future<void> pumpMenu(WidgetTester tester) async {
@@ -59,8 +63,9 @@ void main() {
       expect(find.text('Close'), findsOneWidget);
     });
 
-    testWidgets('typing in search field filters section list',
-        (WidgetTester tester) async {
+    testWidgets('typing in search field filters section list', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester);
       await tester.enterText(find.byType(TextField), 'zzz_no_match');
       await tester.pump();
@@ -68,8 +73,9 @@ void main() {
       expect(find.text('No results found'), findsOneWidget);
     });
 
-    testWidgets('clearing search field restores full list',
-        (WidgetTester tester) async {
+    testWidgets('clearing search field restores full list', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester);
       // Type something, then clear
       await tester.enterText(find.byType(TextField), 'x');
@@ -79,8 +85,9 @@ void main() {
       expect(find.byType(TextField), findsOneWidget);
     });
 
-    testWidgets('tapping Close dismisses the menu',
-        (WidgetTester tester) async {
+    testWidgets('tapping Close dismisses the menu', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester);
       await tester.tap(find.text('Close'));
       await tester.pump();
@@ -88,8 +95,9 @@ void main() {
       expect(find.byType(AddSectionMenu), findsNothing);
     });
 
-    testWidgets('typing partial name shows matching sections',
-        (WidgetTester tester) async {
+    testWidgets('typing partial name shows matching sections', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester);
       // '#0.1 The Frozen Depths' is the section in testData scenario #0
       await tester.enterText(find.byType(TextField), 'Frozen');
@@ -97,8 +105,9 @@ void main() {
       expect(find.text('No results found'), findsNothing);
     });
 
-    testWidgets('tapping a section item in the list triggers action',
-        (WidgetTester tester) async {
+    testWidgets('tapping a section item in the list triggers action', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester);
       expect(find.byType(TextField), findsOneWidget);
       // With empty search, any visible section should be tappable

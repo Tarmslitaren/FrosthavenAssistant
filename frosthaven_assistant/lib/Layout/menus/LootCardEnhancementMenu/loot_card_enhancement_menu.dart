@@ -34,8 +34,9 @@ class LootCardEnhancementMenu extends StatelessWidget {
     if (type == "corpsecap") return _gameState.lootDeck.corpsecapPool[index];
     if (type == "flamefruit") return _gameState.lootDeck.flamefruitPool[index];
     if (type == "rockroot") return _gameState.lootDeck.rockrootPool[index];
-    if (type == "snowthistle")
+    if (type == "snowthistle") {
       return _gameState.lootDeck.snowthistlePool[index];
+    }
     if (type == "coin") return _gameState.lootDeck.coinPool[index];
     return null;
   }
@@ -44,45 +45,76 @@ class LootCardEnhancementMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScrollableMenuCard(
       maxWidth: kMenuNarrowWidth,
-      child: Column(children: [
-        const Text("Loot Card Enhancements", style: kTitleStyle),
-        MaterialSection(type: "hide", gameState: _gameState, getCard: _getCard),
-        MaterialSection(
-            type: "lumber", gameState: _gameState, getCard: _getCard),
-        MaterialSection(
-            type: "metal", gameState: _gameState, getCard: _getCard),
-        HerbSection(
-            type: "arrowvine", gameState: _gameState, getCard: _getCard),
-        HerbSection(type: "axenut", gameState: _gameState, getCard: _getCard),
-        HerbSection(
-            type: "corpsecap", gameState: _gameState, getCard: _getCard),
-        HerbSection(
-            type: "flamefruit", gameState: _gameState, getCard: _getCard),
-        HerbSection(type: "rockroot", gameState: _gameState, getCard: _getCard),
-        HerbSection(
-            type: "snowthistle", gameState: _gameState, getCard: _getCard),
-        LootTypeHeader(type: "coin", amount: "1"),
-        CoinRowsSection(
+      child: Column(
+        children: [
+          const Text("Loot Card Enhancements", style: kTitleStyle),
+          MaterialSection(
+            type: "hide",
+            gameState: _gameState,
+            getCard: _getCard,
+          ),
+          MaterialSection(
+            type: "lumber",
+            gameState: _gameState,
+            getCard: _getCard,
+          ),
+          MaterialSection(
+            type: "metal",
+            gameState: _gameState,
+            getCard: _getCard,
+          ),
+          HerbSection(
+            type: "arrowvine",
+            gameState: _gameState,
+            getCard: _getCard,
+          ),
+          HerbSection(type: "axenut", gameState: _gameState, getCard: _getCard),
+          HerbSection(
+            type: "corpsecap",
+            gameState: _gameState,
+            getCard: _getCard,
+          ),
+          HerbSection(
+            type: "flamefruit",
+            gameState: _gameState,
+            getCard: _getCard,
+          ),
+          HerbSection(
+            type: "rockroot",
+            gameState: _gameState,
+            getCard: _getCard,
+          ),
+          HerbSection(
+            type: "snowthistle",
+            gameState: _gameState,
+            getCard: _getCard,
+          ),
+          LootTypeHeader(type: "coin", amount: "1"),
+          CoinRowsSection(
             start: 0,
             rows: _kCoin1Rows,
             gameState: _gameState,
-            getCard: _getCard),
-        const Divider(),
-        LootTypeHeader(type: "coin", amount: "2"),
-        CoinRowsSection(
+            getCard: _getCard,
+          ),
+          const Divider(),
+          LootTypeHeader(type: "coin", amount: "2"),
+          CoinRowsSection(
             start: _kCoin2Start,
             rows: _kCoin2Rows,
             gameState: _gameState,
-            getCard: _getCard),
-        const Divider(),
-        LootTypeHeader(type: "coin", amount: "3"),
-        LootCardRow(
+            getCard: _getCard,
+          ),
+          const Divider(),
+          LootTypeHeader(type: "coin", amount: "3"),
+          LootCardRow(
             type: "coin",
             start: _kCoin3Start,
             count: _kCoin3Count,
             gameState: _gameState,
-            getCard: _getCard),
-      ]),
+            getCard: _getCard,
+          ),
+        ],
+      ),
     );
   }
 }

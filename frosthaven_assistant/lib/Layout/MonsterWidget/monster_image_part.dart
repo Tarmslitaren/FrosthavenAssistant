@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../Resource/app_constants.dart';
 import '../../Resource/enums.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/ui_utils.dart';
@@ -29,11 +28,7 @@ class MonsterImagePart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shadow = Shadow(
-      offset: Offset(kShadowOffset * scale, kShadowOffset * scale),
-      color: Colors.black87,
-      blurRadius: kShadowOffset * scale,
-    );
+    final shadow = textShadow(scale);
     return RepaintBoundary(
         child: Stack(alignment: Alignment.bottomCenter, children: [
       Container(
