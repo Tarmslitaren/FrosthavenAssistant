@@ -5,11 +5,11 @@ import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/chan
 import 'package:frosthaven_assistant/Resource/commands/set_auto_level_adjust_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_solo_command.dart';
 
-import '../../../Resource/game_methods.dart';
 import '../../../Resource/settings.dart';
 import '../../../Resource/state/game_state.dart';
 import '../../../Resource/ui_utils.dart';
 import '../../../services/service_locator.dart';
+import '../../view_models/set_level_menu_view_model.dart';
 import '../../widgets/modal_background.dart';
 import 'difficulty_button.dart';
 import 'level_button.dart';
@@ -48,49 +48,18 @@ class SetLevelMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String title = "Set Scenario Level";
-    if (monster != null) {
-      String name = monster?.type.display ?? "";
-      if (monster?.type.display.endsWith("y") ?? false) {
-        name = "${name.substring(0, name.length - 1)}ie";
-      }
-      title = "Set $name's level";
-    }
-    //if summon:
-    bool isSummon = monster == null && figure is MonsterInstance;
-    if (isSummon) {
-      title = "Set ${(figure as MonsterInstance).name}'s max health";
-    }
+    final vm = SetLevelMenuViewModel(
+      monster: monster,
+      figure: figure,
+      characterId: characterId,
+    );
 
-    String name = "";
-    String ownerId = "";
-    String figureId = "";
-    if (monster != null) {
-      name = monster?.type.display ?? "";
-      ownerId = monster?.id ?? "";
-    } else if (figure is CharacterState) {
-      figureId = (figure as CharacterState).display.value;
-      ownerId = name;
-    }
-    if (figure is MonsterInstance) {
-      name = (figure as MonsterInstance).name;
-      int nr = (figure as MonsterInstance).standeeNr;
-      String gfx = (figure as MonsterInstance).gfx;
-      figureId = name + gfx + nr.toString();
-      if (characterId != null) {
-        ownerId = characterId ?? "";
-      }
-    }
-
-    bool showLegend = figure == null;
-
-    bool darkMode = _settings.darkMode.value;
-
-    double scale = getModalMenuScale(context);
+    final bool darkMode = _settings.darkMode.value;
+    final double scale = getModalMenuScale(context);
 
     return ModalBackground(
         width: SetLevelMenu._kMenuWidth * scale,
-        height: showLegend
+        height: vm.showLegend
             ? SetLevelMenu._kMenuHeightWithLegend * scale
             : SetLevelMenu._kMenuHeightNoLegend * scale,
         child: Stack(children: [
@@ -100,8 +69,8 @@ class SetLevelMenu extends StatelessWidget {
               SizedBox(
                 height: kMenuTopPadding * scale,
               ),
-              Text(title, style: getTitleTextStyle(scale)),
-              if (!isSummon)
+              Text(vm.title, style: getTitleTextStyle(scale)),
+              if (!vm.isSummon)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
@@ -114,7 +83,7 @@ class SetLevelMenu extends StatelessWidget {
                         settings: _settings),
                   ),
                 ),
-              if (!isSummon)
+              if (!vm.isSummon)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
@@ -184,17 +153,17 @@ class SetLevelMenu extends StatelessWidget {
                   CounterButton(
                       // ignore: avoid-non-null-assertion, obviously non null
                       notifier: figure!.maxHealth,
-                      command: ChangeMaxHealthCommand(0, figureId, ownerId,
+                      command: ChangeMaxHealthCommand(0, vm.figureId, vm.ownerId,
                           gameState: _gameState),
                       maxValue: SetLevelMenu._kMaxHealth,
                       image: "assets/images/abilities/heal.png",
                       showTotalValue: true,
                       color: Colors.red,
-                      figureId: figureId,
-                      ownerId: ownerId,
+                      figureId: vm.figureId,
+                      ownerId: vm.ownerId,
                       scale: scale)
                 ]),
-              if (showLegend)
+              if (vm.showLegend)
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -202,22 +171,22 @@ class SetLevelMenu extends StatelessWidget {
                     LevelLegend(
                         name: "trap damage",
                         gfx: "assets/images/psd/traps-fh.png",
-                        value: ": ${GameMethods.getTrapValue()}",
+                        value: ": ${vm.trapValue}",
                         scale: scale),
                     LevelLegend(
                         name: "hazardous terrain damage",
                         gfx: "assets/images/psd/hazard-fh.png",
-                        value: ": ${GameMethods.getHazardValue()}",
+                        value: ": ${vm.hazardValue}",
                         scale: scale),
                     LevelLegend(
                         name: "experience added",
                         gfx: "assets/images/psd/xp.png",
-                        value: ": +${GameMethods.getXPValue()}",
+                        value: ": +${vm.xpValue}",
                         scale: scale),
                     LevelLegend(
                         name: "gold coin value",
                         gfx: "assets/images/psd/coins-fh.png",
-                        value: ": x${GameMethods.getCoinValue()}",
+                        value: ": x${vm.coinValue}",
                         scale: scale),
                     LevelLegend(
                         name: "level",
