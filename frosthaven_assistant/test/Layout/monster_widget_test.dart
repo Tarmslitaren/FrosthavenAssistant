@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/MonsterAbilityCardWidget/monster_ability_card_widget.dart';
 import 'package:frosthaven_assistant/Layout/MonsterStatCardWidget/monster_stat_card_widget.dart';
-import 'package:frosthaven_assistant/Layout/monster_widget.dart';
+import 'package:frosthaven_assistant/Layout/MonsterWidget/monster_widget.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_standee_command.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';

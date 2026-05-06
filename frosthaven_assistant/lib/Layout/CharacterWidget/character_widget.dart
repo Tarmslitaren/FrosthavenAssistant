@@ -7,8 +7,8 @@ import '../../Resource/color_matrices.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
+import '../MonsterBox/monster_box.dart';
 import '../health_wheel_controller.dart';
-import '../monster_box.dart';
 import '../view_models/character_view_model.dart';
 import 'character_widget_internal.dart';
 
@@ -82,8 +82,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
         (index) => AnimatedSize(
               //not really needed now
               key: Key(index.toString()),
-              duration: const Duration(
-                  milliseconds: kAnimationDurationMs),
+              duration: const Duration(milliseconds: kAnimationDurationMs),
               child: MonsterBox(
                   key: Key(summonList[index].getId()),
                   figureId: summonList[index].name +

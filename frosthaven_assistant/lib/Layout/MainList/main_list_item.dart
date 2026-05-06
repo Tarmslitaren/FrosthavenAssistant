@@ -4,8 +4,8 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../CharacterWidget/character_widget.dart';
-import '../monster_box.dart';
-import '../monster_widget.dart';
+import '../MonsterBox/monster_box.dart';
+import '../MonsterWidget/monster_widget.dart';
 
 class MainListItem extends StatelessWidget {
   static const double _kCharacterHeight = 60.0;

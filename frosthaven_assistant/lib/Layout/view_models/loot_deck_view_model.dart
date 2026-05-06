@@ -10,13 +10,11 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
-import '../menus/loot_cards_menu.dart';
+import '../menus/LootCardsMenu/loot_cards_menu.dart';
 
 class LootDeckViewModel {
   LootDeckViewModel(
-      {GameState? gameState,
-      GameData? gameData,
-      Settings? settings})
+      {GameState? gameState, GameData? gameData, Settings? settings})
       : _gameState = gameState ?? getIt<GameState>(),
         _gameData = gameData ?? getIt<GameData>(),
         _settings = settings ?? getIt<Settings>();

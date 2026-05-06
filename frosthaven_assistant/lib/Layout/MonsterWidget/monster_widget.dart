@@ -1,16 +1,15 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/MonsterAbilityCardWidget/monster_ability_card_widget.dart';
-import 'package:frosthaven_assistant/Layout/monster_box.dart';
+import 'package:frosthaven_assistant/Layout/MonsterBox/monster_box.dart';
 import 'package:frosthaven_assistant/Layout/view_models/monster_widget_view_model.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
-import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
-import '../Resource/color_matrices.dart';
-import '../Resource/ui_utils.dart';
-import 'MonsterStatCardWidget/monster_stat_card_widget.dart';
+import '../../Resource/color_matrices.dart';
+import '../MonsterStatCardWidget/monster_stat_card_widget.dart';
+import 'monster_image_part.dart';
 
 class MonsterWidget extends StatefulWidget {
   MonsterWidget({super.key, required this.data, this.gameState});
@@ -24,12 +23,6 @@ class MonsterWidget extends StatefulWidget {
 
 class MonsterWidgetState extends State<MonsterWidget> {
   static const double _kSpacing = 2.0;
-  static const double _kImageMarginV = 4.0;
-  static const double _kElevation = 8.0;
-  static const double _kImageTopMargin = 2.0;
-  static const double _kNameWidthRatio = 0.95;
-  static const double _kNameMarginBottom = 2.0;
-  static const double _kFontSize = 14.4;
   static const double _kScaledHeight = 96.0;
   static const double _kMarginH = 3.2;
 
@@ -88,49 +81,6 @@ class MonsterWidgetState extends State<MonsterWidget> {
     );
   }
 
-  Widget _buildImagePart(double height, double scale) {
-    final shadow = Shadow(
-      offset: Offset(kShadowOffset * scale, kShadowOffset * scale),
-      color: Colors.black87,
-      blurRadius: kShadowOffset * scale,
-    );
-    return RepaintBoundary(
-        child: Stack(alignment: Alignment.bottomCenter, children: [
-      Container(
-          margin: EdgeInsets.only(
-              bottom: _kImageMarginV * scale, top: _kImageMarginV * scale),
-          child: PhysicalShape(
-            color: _vm.turnState == TurnsState.current
-                ? Colors.tealAccent
-                : Colors.transparent,
-            shadowColor: Colors.black,
-            elevation: _kElevation,
-            clipper: const ShapeBorderClipper(shape: CircleBorder()),
-            child: Container(
-              margin: EdgeInsets.only(bottom: 0, top: _kImageTopMargin * scale),
-              child: Image(
-                fit: BoxFit.contain,
-                height: height,
-                width: height,
-                image: AssetImage(
-                    "assets/images/monsters/${widget.data.type.gfx}.png"),
-              ),
-            ),
-          )),
-      Container(
-          width: height * _kNameWidthRatio,
-          alignment: Alignment.bottomCenter,
-          margin: EdgeInsets.only(
-              bottom: _vm.frosthavenStyle ? _kNameMarginBottom * scale : 0),
-          child: Text(
-            textAlign: TextAlign.center,
-            widget.data.type.display,
-            style: getCardTitleStyle(
-                _kFontSize * scale, shadow, _vm.frosthavenStyle),
-          ))
-    ]));
-  }
-
   @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
@@ -155,8 +105,16 @@ class MonsterWidgetState extends State<MonsterWidget> {
                               onTap: () {
                                 _vm.endTurn();
                               },
-                              child: _buildImagePart(height, scale))
-                          : _buildImagePart(height, scale),
+                              child: MonsterImagePart(
+                                  data: widget.data,
+                                  scale: scale,
+                                  height: height,
+                                  vm: _vm))
+                          : MonsterImagePart(
+                              data: widget.data,
+                              scale: scale,
+                              height: height,
+                              vm: _vm),
                       RepaintBoundary(
                           child: MonsterAbilityCardWidget(data: widget.data)),
                       RepaintBoundary(

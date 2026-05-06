@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frosthaven_assistant/Layout/menus/auto_add_standee_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/AutoAddStandeeMenu/auto_add_standee_menu.dart';
 import 'package:frosthaven_assistant/Model/room.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_standee_command.dart';
@@ -17,7 +17,8 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
+    AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>())
+        .execute();
   });
 
   Future<void> pumpMenu(WidgetTester tester) async {
@@ -55,7 +56,8 @@ void main() {
       expect(find.textContaining('Zealot'), findsAtLeast(1));
     });
 
-    testWidgets('renders numbered standee buttons', (WidgetTester tester) async {
+    testWidgets('renders numbered standee buttons',
+        (WidgetTester tester) async {
       await pumpMenu(tester);
       // Standee buttons 1 through some number should be visible
       expect(find.text('1'), findsAtLeast(1));
@@ -74,8 +76,8 @@ void main() {
     testWidgets('tapping standee button 1 adds a standee to the monster',
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
-      final monster = gameState.currentList
-          .firstWhere((e) => e is Monster) as Monster;
+      final monster =
+          gameState.currentList.firstWhere((e) => e is Monster) as Monster;
       final instancesBefore = monster.monsterInstances.length;
 
       await pumpMenu(tester);
@@ -121,8 +123,9 @@ void main() {
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
       // Add standee 1 so it's already out
-      gameState.action(
-          AddStandeeCommand(1, null, 'Zealot', MonsterType.normal, false, gameState: getIt<GameState>()));
+      gameState.action(AddStandeeCommand(
+          1, null, 'Zealot', MonsterType.normal, false,
+          gameState: getIt<GameState>()));
 
       await pumpMenu(tester);
       // Button '1' should still render (greyed out, but visible)
@@ -153,7 +156,9 @@ void main() {
   group('AutoAddStandeeMenu large standee count', () {
     setUp(() {
       getIt<GameState>().clearList();
-      AddMonsterCommand('Rat Monstrosity', 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Rat Monstrosity', 1, false,
+              gameState: getIt<GameState>())
+          .execute();
     });
 
     Future<void> pumpLargeMenu(WidgetTester tester) async {
@@ -184,7 +189,8 @@ void main() {
       FlutterError.onError = originalOnError;
     }
 
-    testWidgets('monster with 10 standees renders buttons through 10 and pluralizes name',
+    testWidgets(
+        'monster with 10 standees renders buttons through 10 and pluralizes name',
         (WidgetTester tester) async {
       await pumpLargeMenu(tester);
       // Rat Monstrosity ends with 'y' → _pluralize → 'Monstrosities'
@@ -198,8 +204,11 @@ void main() {
   group('AutoAddStandeeMenu two-monster progression', () {
     setUp(() {
       getIt<GameState>().clearList();
-      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
-      AddMonsterCommand('Vermling Raider', 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>())
+          .execute();
+      AddMonsterCommand('Vermling Raider', 1, false,
+              gameState: getIt<GameState>())
+          .execute();
     });
 
     testWidgets('while-loop skips zero-standee monster to next',

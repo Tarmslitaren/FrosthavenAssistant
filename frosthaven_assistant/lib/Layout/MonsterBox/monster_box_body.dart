@@ -1,100 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
-import 'package:frosthaven_assistant/Layout/condition_icon.dart';
-import 'package:frosthaven_assistant/Resource/app_constants.dart';
-import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
-import '../Resource/color_matrices.dart';
-import '../Resource/enums.dart';
-import '../Resource/game_methods.dart';
-import '../Resource/settings.dart';
-import '../Resource/ui_utils.dart';
-import 'health_wheel_controller.dart';
-import 'menus/StatusMenu/status_menu.dart';
-import 'view_models/monster_box_view_model.dart';
+import '../../Resource/app_constants.dart';
+import '../../Resource/color_matrices.dart';
+import '../../Resource/enums.dart';
+import '../../Resource/state/game_state.dart';
+import '../../Resource/ui_utils.dart';
+import '../condition_icon.dart';
+import '../view_models/monster_box_view_model.dart';
 
-class MonsterBox extends StatelessWidget {
-  static const double conditionSize = 14;
-  static const double _kBaseWidth = 47.0;
-  static const double _kBoxHeight = 30.0;
-  static const double _kShadowOffset = 0.4;
-  static const double _kImageMarginLeft = 3.0;
-  static const double _kImageMarginTop = 3.0;
-  static const double _kImageMarginBottom = 2.0;
-  static const double _kImageHeight = 100.0;
-  static const double _kImageWidth = 17.0;
-  static const double _kStandeeWidth = 22.0;
-  static const double _kStandeeTop = 1.0;
-  static const double _kHealthLeftSmall = 23.0;
-  static const double _kHealthLeftLarge = 22.0;
-  static const double _kBloodIconHeight = 7.0;
-  static const double _kHealthMarginBottom = 2.0;
-  static const double _kHealthWidthLarge = 21.0;
-  static const double _kHealthWidthSmall = 16.8;
-  static const double _kSpacerWidthLarge = 4.5;
-  static const double _kSpacerWidthSmall = 6.5;
-  static const double _kProgressBarMarginBottom = 2.5;
-  static const double _kProgressBarMarginLeft = 2.5;
-  static const double _kProgressBarMarginRight = 2.7;
-  static const double _kProgressBarWidth = 42.0;
-  static const double _kProgressBarSize = 4.0;
-  static const double _kProgressBarBorderWidth = 0.5;
-  static const int _kHealthLargeThreshold = 99;
-  static const double _kAnimationOffset = 30.0;
-  static const int _kFlipAnimationDurationMs = 600;
-  static const int _kConditionRowDivisor = 2;
-  static const int _kHexRadix = 16;
+const double _kBoxHeight = 30.0;
+const double _kBaseWidth = 47.0;
+const double _kShadowOffset = 0.4;
+const double _kConditionSize = 14.0;
+const double _kImageMarginLeft = 3.0;
+const double _kImageMarginTop = 3.0;
+const double _kImageMarginBottom = 2.0;
+const double _kImageHeight = 100.0;
+const double _kImageWidth = 17.0;
+const double _kStandeeWidth = 22.0;
+const double _kStandeeTop = 1.0;
+const double _kHealthLeftSmall = 23.0;
+const double _kHealthLeftLarge = 22.0;
+const double _kBloodIconHeight = 7.0;
+const double _kHealthMarginBottom = 2.0;
+const double _kHealthWidthLarge = 21.0;
+const double _kHealthWidthSmall = 16.8;
+const double _kSpacerWidthLarge = 4.5;
+const double _kSpacerWidthSmall = 6.5;
+const double _kProgressBarMarginBottom = 2.5;
+const double _kProgressBarMarginLeft = 2.5;
+const double _kProgressBarMarginRight = 2.7;
+const double _kProgressBarWidth = 42.0;
+const double _kProgressBarSize = 4.0;
+const double _kProgressBarBorderWidth = 0.5;
+const int _kHealthLargeThreshold = 99;
+const int _kHexRadix = 16;
 
-  MonsterBox(
-      {super.key,
-      required this.figureId,
-      required this.ownerId,
-      required this.displayStartAnimation,
-      required this.blockInput,
-      required this.scale,
-      this.gameState,
-      this.settings})
-      : data = _resolveData(ownerId, figureId);
+class MonsterBoxBody extends StatelessWidget {
+  const MonsterBoxBody({
+    super.key,
+    required this.scale,
+    required this.width,
+    required this.data,
+    required this.vm,
+  });
 
-  static MonsterInstance _resolveData(String? ownerId, String figureId) {
-    final figure = GameMethods.getFigure(ownerId, figureId);
-    if (figure is! MonsterInstance) {
-      throw StateError(
-          'MonsterBox: expected MonsterInstance for $ownerId/$figureId, got ${figure.runtimeType}');
-    }
-    return figure;
-  }
-
-  // injected for testing
-  final GameState? gameState;
-  final Settings? settings;
-
-  static double getWidth(double scale, MonsterInstance data) {
-    double width = _kBaseWidth;
-    final length = data.conditions.value.length;
-    width += conditionSize * length / _kConditionRowDivisor;
-    if (length % _kConditionRowDivisor != 0) {
-      width += conditionSize / _kConditionRowDivisor;
-    }
-    width = width * scale;
-    return width;
-  }
-
-  final String figureId;
-  final String? ownerId;
-  final String displayStartAnimation;
-  final bool blockInput;
   final double scale;
-
+  final double width;
   final MonsterInstance data;
+  final MonsterBoxViewModel vm;
 
-  List<Widget> _createConditionList(double scale, MonsterBoxViewModel vm) {
+  List<Widget> _createConditionList() {
     final owner = vm.ownerItem;
     if (owner == null) return [];
     return data.conditions.value
         .map((condition) => ConditionIcon(
               condition,
-              MonsterBox.conditionSize,
+              _kConditionSize,
               owner,
               data,
               scale: scale,
@@ -102,7 +65,8 @@ class MonsterBox extends StatelessWidget {
         .toList();
   }
 
-  Widget _buildInternal(double scale, double width, MonsterBoxViewModel vm) {
+  @override
+  Widget build(BuildContext context) {
     final color = vm.color;
     String imagePath = "assets/images/tombstone.png";
     if (data.type == MonsterType.summon) {
@@ -240,7 +204,7 @@ class MonsterBox extends StatelessWidget {
                                       alignment: WrapAlignment.center,
                                       crossAxisAlignment:
                                           WrapCrossAlignment.center,
-                                      children: _createConditionList(scale, vm),
+                                      children: _createConditionList(),
                                     ));
                               }),
                         ])),
@@ -273,80 +237,5 @@ class MonsterBox extends StatelessWidget {
                             );
                           }))
                 ]))));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final vm = MonsterBoxViewModel(data,
-        ownerId: ownerId, gameState: gameState, settings: settings);
-    final width = MonsterBox.getWidth(scale, data);
-
-    Widget innerWidget = RepaintBoundary(
-      child: AnimatedContainer(
-          key: Key(data.getId()),
-          width: width,
-          curve: Curves.easeInOut,
-          duration: const Duration(milliseconds: kAnimationDurationMs),
-          child: ValueListenableBuilder<int>(
-              valueListenable: data.health,
-              builder: (context, value, child) {
-                final alive = vm.isAlive;
-                final double offset = -_kAnimationOffset * scale;
-                final child = _buildInternal(scale, width, vm);
-
-                if (displayStartAnimation != figureId) {
-                  return TweenAnimationBuilder<Offset>(
-                      tween: Tween(
-                        begin: Offset.zero,
-                        end: (!alive && !blockInput)
-                            ? Offset(0, -offset)
-                            : Offset.zero,
-                      ),
-                      duration: const Duration(
-                          milliseconds: _kFlipAnimationDurationMs),
-                      curve: Curves.linear,
-                      builder: (context, translation, _) => Transform.translate(
-                          offset: translation, child: child));
-                }
-
-                return TweenAnimationBuilder<Offset>(
-                    tween: Tween(
-                      begin: Offset(0, alive ? offset : 0),
-                      end: Offset(0, alive ? 0 : -offset),
-                    ),
-                    duration:
-                        const Duration(milliseconds: _kFlipAnimationDurationMs),
-                    curve: Curves.linear,
-                    builder: (context, translation, _) => Transform.translate(
-                        offset: translation,
-                        child: AnimatedOpacity(
-                          opacity: alive ? 1.0 : 0.0,
-                          duration: const Duration(
-                              milliseconds: _kFlipAnimationDurationMs),
-                          child: child,
-                        )));
-              })),
-    );
-
-    return Material(
-        color: Colors.transparent,
-        child: InkWell(
-            onTap: () {
-              if (!blockInput) {
-                openDialog(
-                  context,
-                  StatusMenu(
-                      figureId: data.getId(),
-                      monsterId: vm.monsterId,
-                      characterId: vm.characterId),
-                );
-              }
-            },
-            child: vm.useHealthWheel
-                ? HealthWheelController(
-                    figureId: data.getId(),
-                    ownerId: ownerId,
-                    child: innerWidget)
-                : innerWidget));
   }
 }

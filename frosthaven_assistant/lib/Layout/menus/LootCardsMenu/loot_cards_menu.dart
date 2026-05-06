@@ -3,17 +3,16 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/LootCardEnhancementMenu/loot_card_enhancement_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/character_loot_menu.dart';
-import 'package:frosthaven_assistant/Layout/menus/set_loot_owner_menu.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_special_loot_card_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/return_loot_card_command.dart';
 
-import '../../Resource/commands/remove__special_loot_card_command.dart';
-import '../../Resource/state/game_state.dart';
-import '../../Resource/ui_utils.dart';
-import '../../services/service_locator.dart';
-import '../loot_card_widget.dart';
-import 'add_loot_card_menu.dart';
+import '../../../Resource/commands/remove__special_loot_card_command.dart';
+import '../../../Resource/state/game_state.dart';
+import '../../../Resource/ui_utils.dart';
+import '../../../services/service_locator.dart';
+import '../add_loot_card_menu.dart';
+import 'loot_card_list_item.dart';
 
 class LootCardsMenu extends StatefulWidget {
   const LootCardsMenu({
@@ -43,7 +42,8 @@ class LootCardsMenuState extends State<LootCardsMenu> {
     List<Widget> list = [];
     for (int index = 0; index < inputList.length; index++) {
       final item = inputList[index];
-      Item value = Item(key: Key(index.toString()), data: item);
+      LootCardListItem value =
+          LootCardListItem(key: Key(index.toString()), data: item);
       list.add(value);
     }
     return list;
@@ -214,30 +214,5 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                             })),
                   ])));
         });
-  }
-}
-
-class Item extends StatelessWidget {
-  static const double _kItemMaxWidth = 200.0;
-  static const double _kMaxScale = 3.0;
-  static const double _kItemMargin = 2.0;
-
-  const Item({super.key, required this.data});
-  final LootCard data;
-
-  @override
-  Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double scale = min(_kMaxScale, screenWidth / _kItemMaxWidth);
-
-    final Widget child = LootCardFront(card: data, scale: scale);
-
-    return Container(
-        margin: EdgeInsets.all(_kItemMargin * scale),
-        child: InkWell(
-            onTap: () {
-              openDialog(context, SetLootOwnerMenu(card: data));
-            },
-            child: child));
   }
 }

@@ -9,7 +9,7 @@ import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
-import '../monster_box.dart';
+import '../MonsterBox/monster_box.dart';
 
 class MainListViewModel {
   static const double _kCharacterHeight = 60.0;

@@ -5,8 +5,8 @@ import '../../../Resource/enums.dart';
 import '../../../Resource/game_methods.dart';
 import '../../../Resource/state/game_state.dart';
 import '../../../Resource/ui_utils.dart';
+import '../../MonsterBox/monster_box.dart';
 import '../../condition_icon.dart';
-import '../../monster_box.dart';
 
 class StatusMenuHeader extends StatelessWidget {
   static const double _kHeaderHeight = 28.0;
@@ -49,73 +49,70 @@ class StatusMenuHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
         height: _kHeaderHeight * scale,
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text(name, style: getTitleTextStyle(getModalMenuScale(context))),
-              if (figure is MonsterInstance)
-                ListenableBuilder(
-                    listenable: gameState.updateList,
-                    builder: (context, child) {
-                      //handle case when health is changed to zero: don't instantiate monster box
-                      if (GameMethods.getFigure(ownerId, figureId) == null) {
-                        //todo: should somehow pop context in case dead by health wheel
-                        return Container();
-                      }
-                      return Row(children: [
-                        if (hasShield)
-                          Container(
-                              height: _kHeaderHeight * scale,
-                              margin: EdgeInsets.only(
-                                  top: _kConditionMarginTop * scale,
-                                  right: _kConditionMarginRight * scale),
-                              child: ConditionIcon(
-                                Condition.shield,
-                                _kConditionIconSize * scale,
-                                owner,
-                                figure,
-                                scale: scale,
-                              )),
-                        if (hasRetaliate)
-                          Container(
-                              height: _kHeaderHeight * scale,
-                              margin: EdgeInsets.only(
-                                  top: _kConditionMarginTop * scale,
-                                  right: _kConditionMarginRight * scale),
-                              child: ConditionIcon(
-                                Condition.retaliate,
-                                _kConditionIconSize * scale,
-                                owner,
-                                figure,
-                                scale: scale,
-                              )),
-                        Container(
-                            height: _kHeaderHeight * scale,
-                            margin: EdgeInsets.only(
-                                top: _kConditionMarginTop * scale),
-                            child: MonsterBox(
-                                figureId: figureId,
-                                ownerId: ownerId,
-                                displayStartAnimation: "",
-                                blockInput: true,
-                                scale: scale * _kMonsterBoxScale))
-                      ]);
-                    }),
-              if (isIceWraith)
-                TextButton(
-                    clipBehavior: Clip.hardEdge,
-                    style: TextButton.styleFrom(
-                      padding: EdgeInsets.only(
-                          right: _kSummonPaddingRight * scale),
-                    ),
-                    onPressed: () {
-                      gameState.action(IceWraithChangeFormCommand(
-                          isElite, ownerId, figureId,
-                          gameState: gameState));
-                      onIceWraithSwitch();
-                    },
-                    child: Text("                     Switch Form",
-                        style: getButtonTextStyle(scale)))
-            ]));
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          Text(name, style: getTitleTextStyle(getModalMenuScale(context))),
+          if (figure is MonsterInstance)
+            ListenableBuilder(
+                listenable: gameState.updateList,
+                builder: (context, child) {
+                  //handle case when health is changed to zero: don't instantiate monster box
+                  if (GameMethods.getFigure(ownerId, figureId) == null) {
+                    //todo: should somehow pop context in case dead by health wheel
+                    return Container();
+                  }
+                  return Row(children: [
+                    if (hasShield)
+                      Container(
+                          height: _kHeaderHeight * scale,
+                          margin: EdgeInsets.only(
+                              top: _kConditionMarginTop * scale,
+                              right: _kConditionMarginRight * scale),
+                          child: ConditionIcon(
+                            Condition.shield,
+                            _kConditionIconSize * scale,
+                            owner,
+                            figure,
+                            scale: scale,
+                          )),
+                    if (hasRetaliate)
+                      Container(
+                          height: _kHeaderHeight * scale,
+                          margin: EdgeInsets.only(
+                              top: _kConditionMarginTop * scale,
+                              right: _kConditionMarginRight * scale),
+                          child: ConditionIcon(
+                            Condition.retaliate,
+                            _kConditionIconSize * scale,
+                            owner,
+                            figure,
+                            scale: scale,
+                          )),
+                    Container(
+                        height: _kHeaderHeight * scale,
+                        margin:
+                            EdgeInsets.only(top: _kConditionMarginTop * scale),
+                        child: MonsterBox(
+                            figureId: figureId,
+                            ownerId: ownerId,
+                            displayStartAnimation: "",
+                            blockInput: true,
+                            scale: scale * _kMonsterBoxScale))
+                  ]);
+                }),
+          if (isIceWraith)
+            TextButton(
+                clipBehavior: Clip.hardEdge,
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.only(right: _kSummonPaddingRight * scale),
+                ),
+                onPressed: () {
+                  gameState.action(IceWraithChangeFormCommand(
+                      isElite, ownerId, figureId,
+                      gameState: gameState));
+                  onIceWraithSwitch();
+                },
+                child: Text("                     Switch Form",
+                    style: getButtonTextStyle(scale)))
+        ]));
   }
 }

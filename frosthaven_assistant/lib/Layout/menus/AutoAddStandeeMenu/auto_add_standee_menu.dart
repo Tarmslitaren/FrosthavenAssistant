@@ -1,18 +1,18 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Layout/widgets/standee_nr_button.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
-import '../../Layout/widgets/modal_background.dart';
-import '../../Model/room.dart';
-import '../../Resource/app_constants.dart';
-import '../../Resource/commands/add_standee_command.dart';
-import '../../Resource/commands/change_stat_commands/change_health_command.dart';
-import '../../Resource/enums.dart';
-import '../../Resource/game_methods.dart';
-import '../../Resource/settings.dart';
-import '../../Resource/state/game_state.dart';
-import '../../services/service_locator.dart';
+import '../../../Model/room.dart';
+import '../../../Resource/app_constants.dart';
+import '../../../Resource/commands/add_standee_command.dart';
+import '../../../Resource/commands/change_stat_commands/change_health_command.dart';
+import '../../../Resource/enums.dart';
+import '../../../Resource/game_methods.dart';
+import '../../../Resource/settings.dart';
+import '../../../Resource/state/game_state.dart';
+import '../../../services/service_locator.dart';
+import '../../widgets/modal_background.dart';
+import 'standee_button_grid.dart';
 
 class AutoAddStandeeMenu extends StatefulWidget {
   const AutoAddStandeeMenu({
@@ -33,8 +33,6 @@ class AutoAddStandeeMenu extends StatefulWidget {
 }
 
 class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
-  static const int _kButtonRowSize = 4;
-  static const double _kButtonSpacerHeight = 20.0;
   static const double _kMenuWidth = 250.0;
   static const double _kHeightBase = 140.0;
   static const double _kHeightRow2 = 172.0;
@@ -43,8 +41,8 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
   static const int _kCharIndexMax = 4;
   static const int _kBothTypesMultiplier = 2;
   static const int _kKillHealth = -10000;
-  static const int _kStandeesRow2Threshold = _kButtonRowSize;
-  static const int _kStandeesRow3Threshold = _kButtonRowSize * 2;
+  static const int _kStandeesRow2Threshold = 4;
+  static const int _kStandeesRow3Threshold = 8;
 
   GameState get _gameState => widget.gameState ?? getIt<GameState>();
   Settings get _settings => widget.settings ?? getIt<Settings>();
@@ -168,65 +166,6 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
     }
   }
 
-  String _pluralize(String text) {
-    if (text.endsWith("s")) {
-      return text;
-    }
-    if (text.endsWith("y")) {
-      return "${text.substring(0, text.length - 1)}ies";
-    }
-    return "${text}s";
-  }
-
-  Widget _buildButtonGrid(double scale, Monster monster, bool elite,
-      int nrOfStandees, int nrLeft, int nrOfElite, int nrOfNormal) {
-    String text = elite
-        ? "Add $nrLeft Elite ${monster.type.display}"
-        : "Add $nrLeft Normal ${monster.type.display}";
-    if (nrLeft > 1) {
-      text = _pluralize(text);
-    }
-
-    final rows = <Widget>[];
-    for (int start = 1; start <= nrOfStandees; start += _kButtonRowSize) {
-      final end = (start + _kButtonRowSize - 1).clamp(1, nrOfStandees);
-      rows.add(Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: List.generate(
-          end - start + 1,
-          (i) {
-            final nr = start + i;
-            bool boss = monster.type.levels.first.boss != null;
-            MonsterType type = elite
-                ? MonsterType.elite
-                : (boss ? MonsterType.boss : MonsterType.normal);
-            Color color =
-                elite ? Colors.yellow : (boss ? Colors.red : Colors.white);
-            bool isOut =
-                _isStandeeOut(nr, monster, elite, nrOfElite, nrOfNormal);
-            if (isOut) color = Colors.grey;
-            return StandeeNrButton(
-              nr: nr,
-              scale: scale,
-              color: color,
-              onPressed: () => _handleStandeePress(
-                  nr, monster, type, elite, isOut, nrOfElite, nrOfNormal),
-            );
-          },
-        ),
-      ));
-    }
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        SizedBox(height: _kButtonSpacerHeight * scale),
-        Text(text, style: getTitleTextStyle(scale)),
-        ...rows,
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     int characterIndex = GameMethods.getCurrentCharacterAmount()
@@ -343,23 +282,27 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                       Column(
                         children: [
                           if (nrOfElite > 0)
-                            _buildButtonGrid(
-                                scale,
-                                monster,
-                                true,
-                                nrOfStandees,
-                                nrOfElite - currentEliteAdded,
-                                nrOfElite,
-                                nrOfNormal),
+                            StandeeButtonGrid(
+                                scale: scale,
+                                monster: monster,
+                                elite: true,
+                                nrOfStandees: nrOfStandees,
+                                nrLeft: nrOfElite - currentEliteAdded,
+                                nrOfElite: nrOfElite,
+                                nrOfNormal: nrOfNormal,
+                                isStandeeOut: _isStandeeOut,
+                                onStandeePress: _handleStandeePress),
                           if (nrOfNormal > 0)
-                            _buildButtonGrid(
-                                scale,
-                                monster,
-                                false,
-                                nrOfStandees,
-                                nrOfNormal - currentNormalAdded,
-                                nrOfElite,
-                                nrOfNormal),
+                            StandeeButtonGrid(
+                                scale: scale,
+                                monster: monster,
+                                elite: false,
+                                nrOfStandees: nrOfStandees,
+                                nrLeft: nrOfNormal - currentNormalAdded,
+                                nrOfElite: nrOfElite,
+                                nrOfNormal: nrOfNormal,
+                                isStandeeOut: _isStandeeOut,
+                                onStandeePress: _handleStandeePress),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -400,4 +343,3 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
         });
   }
 }
-

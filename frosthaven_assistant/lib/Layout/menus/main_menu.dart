@@ -1,12 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/menus/LootCardsMenu/loot_cards_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/SelectScenarioMenu/select_scenario_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/SetLevelMenu/set_level_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/SettingsMenu/settings_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_character_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_section_menu.dart';
-import 'package:frosthaven_assistant/Layout/menus/loot_cards_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_character_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_monster_menu.dart';
 import 'package:frosthaven_assistant/Layout/view_models/main_menu_view_model.dart';

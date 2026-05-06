@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/menus/LootCardEnhancementMenu/loot_card_enhancement_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/LootCardsMenu/loot_cards_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/character_loot_menu.dart';
-import 'package:frosthaven_assistant/Layout/menus/loot_cards_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_special_loot_card_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_loot_card_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/remove__special_loot_card_command.dart';
