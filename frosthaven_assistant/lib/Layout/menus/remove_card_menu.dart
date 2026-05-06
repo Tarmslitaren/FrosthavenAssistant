@@ -4,6 +4,7 @@ import 'package:frosthaven_assistant/Resource/commands/remove_card_command.dart'
 import 'package:frosthaven_assistant/Resource/commands/reorder_ability_list_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/shuffle_drawn_ability_card_command.dart';
 
+import '../../Layout/view_models/remove_card_menu_view_model.dart';
 import '../../Layout/widgets/modal_background.dart';
 import '../../Resource/app_constants.dart';
 import '../../Resource/state/game_state.dart';
@@ -26,27 +27,13 @@ class RemoveCardMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isInDrawPile = false;
-    for (final item in _gameState.currentAbilityDecks) {
-      if (item.name == card.deck) {
-        final list = item.drawPileContents.toList();
-        for (int i = 0; i < list.length; i++) {
-          if (list[i].nr == card.nr) {
-            isInDrawPile = true;
-            break;
-          }
-        }
-        break;
-      }
-    }
+    final vm = RemoveCardMenuViewModel(card, gameState: _gameState);
 
     return ModalBackground(
         width: kMenuNarrowWidth,
         height: _kModalHeight,
         child: Column(children: [
-          const SizedBox(
-            height: 10,
-          ),
+          const SizedBox(height: 10),
           TextButton(
               onPressed: () {
                 _gameState
@@ -55,39 +42,18 @@ class RemoveCardMenu extends StatelessWidget {
               },
               child: Text("Remove ${card.title}\n(card nr: ${card.nr})",
                   textAlign: TextAlign.center, style: kButtonLabelStyle)),
-          const SizedBox(
-            height: 10,
-          ),
-          if (isInDrawPile)
+          const SizedBox(height: 10),
+          if (vm.isInDrawPile)
             TextButton(
                 onPressed: () {
-                  int oldIndex = 0;
-                  int newIndex = 0;
-                  //todo: no logic in ui
-                  for (final item in _gameState.currentAbilityDecks) {
-                    if (item.name == card.deck) {
-                      final list = item.drawPileContents.toList();
-                      for (int i = 0; i < list.length; i++) {
-                        if (list[i].nr == card.nr) {
-                          oldIndex = i;
-                          break;
-                        }
-                      }
-                      break;
-                    }
-                  }
                   _gameState.action(ReorderAbilityListCommand(
-                      card.deck, newIndex, oldIndex,
+                      card.deck, 0, vm.drawPileIndex,
                       gameState: _gameState));
-
                   Navigator.pop(context);
                 },
                 child: const Text("Send to Bottom", style: kButtonLabelStyle)),
-          if (isInDrawPile)
-            const SizedBox(
-              height: 10,
-            ),
-          if (isInDrawPile)
+          if (vm.isInDrawPile) const SizedBox(height: 10),
+          if (vm.isInDrawPile)
             TextButton(
                 onPressed: () {
                   _gameState.action(ShuffleDrawnAbilityCardCommand(card.deck));

@@ -1,16 +1,14 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 
 import '../../Resource/commands/add_condition_command.dart';
 import '../../Resource/commands/remove_condition_command.dart';
 import '../../Resource/enums.dart';
-import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
-import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 import '../condition_icon.dart';
+import '../view_models/condition_button_view_model.dart';
 
 class ConditionButton extends StatelessWidget {
   static const double _kIconSize = 24.0;
@@ -40,114 +38,73 @@ class ConditionButton extends StatelessWidget {
   final List<String> immunities;
   final double scale;
 
-  bool _isConditionActive(Condition condition, FigureState figure) {
-    bool isActive = false;
-    for (final item in figure.conditions.value) {
-      if (item == condition) {
-        isActive = true;
-        break;
-      }
-    }
-    return isActive;
-  }
-
   @override
   Widget build(BuildContext context) {
-    bool enabled = true;
-    String suffix = "";
-    if (GameMethods.isFrosthavenStyle(null)) {
-      suffix = "_fh";
-    }
-    String imagePath = "assets/images/abilities/${condition.name}.png";
-    if (condition.name.contains("character")) {
-      imagePath = "assets/images/class-icons/${condition.getName()}.png";
-    } else if (suffix.isNotEmpty && hasGHVersion(condition.name)) {
-      imagePath = "assets/images/abilities/${condition.getName()}$suffix.png";
-    }
-    for (final item in immunities) {
-      if (condition.name.contains(item.substring(1, item.length - 1))) {
-        enabled = false;
-      }
-      final immunity = item.substring(1, item.length - 1);
-      if (immunity == "poison" && condition == Condition.infect) {
-        enabled = false;
-      }
-      if (immunity == "wound" && condition == Condition.rupture) {
-        enabled = false;
-      }
-      //immobilize or muddle: also chill - doesn't matter: monster can't be chilled and players don't have immunities.
-    }
-    final gameState = this.gameState ?? getIt<GameState>();
-    final settings = this.settings ?? getIt<Settings>();
-    final figure = GameMethods.getFigure(ownerId, figureId);
+    final gs = gameState ?? getIt<GameState>();
+    final vm = ConditionButtonViewModel(
+      condition: condition,
+      figureId: figureId,
+      ownerId: ownerId,
+      immunities: immunities,
+      gameState: gs,
+      settings: settings ?? getIt<Settings>(),
+    );
+
+    final figure = vm.figure;
     if (figure == null) {
       return const SizedBox(width: 0, height: 0);
     }
+
     return ListenableBuilder(
-        listenable: Listenable.merge([figure.conditions, settings.darkMode]),
+        listenable: Listenable.merge([figure.conditions, vm.darkModeListenable]),
         builder: (context, child) {
+          final isActive = vm.isActive;
+          final imagePath = vm.imagePath;
+          final enabled = vm.enabled;
+
           Color color = Colors.transparent;
-
-          //todo: fix this logic (move to viewmodel))
-          final ListItemData owner = gameState.currentList
-                  .firstWhereOrNull((item) => item.id == ownerId) ??
-              ListItemData();
-
-          bool isActive = _isConditionActive(condition, figure);
           if (isActive) {
-            color = settings.darkMode.value ? Colors.white : Colors.black;
-          }
-          bool isCharacter = condition.name.contains("character");
-          Color classColor = Colors.transparent;
-          if (isCharacter) {
-            final characters = GameMethods.getCurrentCharacters();
-            classColor = characters
-                .where((element) =>
-                    element.characterClass.name == condition.getName())
-                .first
-                .characterClass
-                .color;
+            color = vm.isDarkMode ? Colors.white : Colors.black;
           }
 
-          Widget inactiveIcon = isCharacter
+          Widget inactiveIcon = vm.isCharacter
               ? Stack(alignment: Alignment.center, children: [
                   Image(
-                      color: classColor,
+                      color: vm.classColor,
                       colorBlendMode: BlendMode.modulate,
                       height: _kIconSize * scale,
                       filterQuality: FilterQuality.medium,
                       image: const AssetImage(
                           "assets/images/psd/class-token-bg.png")),
                   Image(
-                      height: (_kIconSize * scale * _kClassTokenScale),
-                      width: (_kIconSize * scale * _kClassTokenScale),
+                      height: _kIconSize * scale * _kClassTokenScale,
+                      width: _kIconSize * scale * _kClassTokenScale,
                       image: AssetImage(imagePath),
                       filterQuality: FilterQuality.medium),
                 ])
               : Image.asset(
                   filterQuality: FilterQuality.medium,
-                  //needed because of the edges
                   height: _kIconSize * scale,
                   width: _kIconSize * scale,
                   imagePath);
+
           Widget enabledIcon = isActive
               ? ConditionIcon(
                   condition,
                   _kIconSize * scale,
-                  owner,
+                  vm.owner,
                   figure,
                   scale: scale,
                 )
               : inactiveIcon;
+
           return Container(
               width: kConditionButtonSize * scale,
               height: kConditionButtonSize * scale,
               padding: EdgeInsets.zero,
               margin: EdgeInsets.all(1 * scale),
               decoration: BoxDecoration(
-                  border: Border.all(
-                    color: color,
-                  ),
+                  border: Border.all(color: color),
                   borderRadius: BorderRadius.all(
                       Radius.circular(kRoundButtonBorderRadius * scale))),
               child: IconButton(
@@ -162,17 +119,14 @@ class ConditionButton extends StatelessWidget {
                               child: Image(
                                 height: _kDisabledIconSize * scale,
                                 filterQuality: FilterQuality.medium,
-                                //needed because of the edges
                                 image: AssetImage(imagePath),
                               )),
                           Positioned(
-                              //should be 19  but there is a clipping issue
                               left: _kImmuneLeft * scale,
                               top: _kImmuneTop * scale,
                               child: Image(
                                 height: _kImmuneSize * scale,
                                 filterQuality: FilterQuality.medium,
-                                //needed because of the edges
                                 image: const AssetImage(
                                     "assets/images/psd/immune.png"),
                               )),
@@ -181,13 +135,13 @@ class ConditionButton extends StatelessWidget {
                 onPressed: enabled
                     ? () {
                         if (!isActive) {
-                          gameState.action(AddConditionCommand(
+                          gs.action(AddConditionCommand(
                               condition, figureId, ownerId,
-                              gameState: gameState));
+                              gameState: gs));
                         } else {
-                          gameState.action(RemoveConditionCommand(
+                          gs.action(RemoveConditionCommand(
                               condition, figureId, ownerId,
-                              gameState: gameState));
+                              gameState: gs));
                         }
                       }
                     : null,

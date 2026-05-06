@@ -34,7 +34,6 @@ class CharacterMethods {
         //must be a perk card
 
         //find missing card from perk list
-        //todo: maybe easier to find from card list? get all starting with a 'P' then go through and remove first fitting
 
         for (int i = 0; i < perks.length; i++) {
           //check if other perk added the card previously
