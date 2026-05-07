@@ -6,36 +6,24 @@ import 'package:frosthaven_assistant/Layout/view_models/element_button_view_mode
 import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
-import 'package:frosthaven_assistant/services/service_locator.dart';
 
-import '../../command/test_helpers.dart';
+import '../../unit_helpers.dart';
 
 void main() {
-  setUpAll(() async {
-    await setUpGame();
-  });
+  late GameState gameState;
+  late Settings settings;
+
+  setUpAll(initTestBinding);
 
   setUp(() {
-    getIt<GameState>().clearList();
-    getIt<GameState>().undo();
-    // restore all elements to inert (undo any element state changes)
-    for (final element in Elements.values) {
-      while (getIt<GameState>().elementState[element] != ElementState.inert) {
-        getIt<GameState>().undo();
-      }
-    }
-    getIt<Settings>().darkMode.value = false;
-  });
-
-  tearDown(() {
-    getIt<Settings>().darkMode.value = false;
+    (gameState, settings) = makeGameAndSettings();
   });
 
   ElementButtonViewModel makeVm(Elements element) => ElementButtonViewModel(
-    element,
-    gameState: getIt<GameState>(),
-    settings: getIt<Settings>(),
-  );
+        element,
+        gameState: gameState,
+        settings: settings,
+      );
 
   group('ElementButtonViewModel.elementState', () {
     test('fire starts as inert after game init', () {
@@ -46,19 +34,15 @@ void main() {
       final vm = makeVm(Elements.fire);
       vm.imbue();
       expect(vm.elementState, ElementState.full);
-      getIt<GameState>().undo();
     });
 
     test('elementState is half after imbue with half=true', () {
       final vm = makeVm(Elements.ice);
       vm.imbue(half: true);
       expect(vm.elementState, ElementState.half);
-      getIt<GameState>().undo();
     });
 
-    test('elementState returns null for element not in map (impossible in '
-        'practice, but covers the nullable return type)', () {
-      // All elements are initialised, so all should return non-null.
+    test('elementState returns non-null for all elements', () {
       for (final element in Elements.values) {
         expect(makeVm(element).elementState, isNotNull);
       }
@@ -67,26 +51,24 @@ void main() {
 
   group('ElementButtonViewModel.iconColor', () {
     test('returns Colors.black in light mode when element is inert', () {
-      getIt<Settings>().darkMode.value = false;
+      settings.darkMode.value = false;
       expect(makeVm(Elements.fire).iconColor, Colors.black);
     });
 
     test('returns null in light mode when element is full', () {
-      getIt<Settings>().darkMode.value = false;
+      settings.darkMode.value = false;
       final vm = makeVm(Elements.earth);
       vm.imbue();
       expect(vm.iconColor, isNull);
-      getIt<GameState>().undo();
     });
 
     test('returns null in dark mode regardless of element state', () {
-      getIt<Settings>().darkMode.value = true;
+      settings.darkMode.value = true;
       expect(makeVm(Elements.fire).iconColor, isNull);
     });
 
     test('returns null in dark mode even when element is inert', () {
-      getIt<Settings>().darkMode.value = true;
-      // inert element
+      settings.darkMode.value = true;
       expect(makeVm(Elements.air).elementState, ElementState.inert);
       expect(makeVm(Elements.air).iconColor, isNull);
     });
@@ -98,7 +80,6 @@ void main() {
       expect(vm.elementState, ElementState.inert);
       vm.tap();
       expect(vm.elementState, ElementState.full);
-      getIt<GameState>().undo();
     });
 
     test('uses element when full', () {
@@ -107,8 +88,6 @@ void main() {
       expect(vm.elementState, ElementState.full);
       vm.tap();
       expect(vm.elementState, ElementState.inert);
-      getIt<GameState>().undo();
-      getIt<GameState>().undo();
     });
 
     test('uses element when half', () {
@@ -117,8 +96,6 @@ void main() {
       expect(vm.elementState, ElementState.half);
       vm.tap();
       expect(vm.elementState, ElementState.inert);
-      getIt<GameState>().undo();
-      getIt<GameState>().undo();
     });
   });
 

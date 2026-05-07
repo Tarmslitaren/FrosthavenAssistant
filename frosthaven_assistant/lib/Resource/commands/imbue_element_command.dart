@@ -4,12 +4,15 @@ import '../state/game_state.dart';
 class ImbueElementCommand extends Command {
   final Elements element;
   final bool half;
+  final GameState? _gameState;
 
-  ImbueElementCommand(this.element, this.half);
+  ImbueElementCommand(this.element, this.half, {GameState? gameState})
+      : _gameState = gameState;
 
   @override
   void execute() {
-    ElementMethods.imbueElement(stateAccess, element, half);
+    ElementMethods.imbueElement(stateAccess, element, half,
+        gameState: _gameState);
   }
 
   @override

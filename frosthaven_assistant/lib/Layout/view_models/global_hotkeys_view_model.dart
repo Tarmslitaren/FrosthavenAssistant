@@ -25,10 +25,10 @@ class GlobalHotkeysViewModel {
     final elementState = _gameState.elementState[element];
     if (elementState == ElementState.half ||
         elementState == ElementState.full) {
-      _gameState.action(UseElementCommand(element));
+      _gameState.action(UseElementCommand(element, gameState: _gameState));
       return;
     }
-    _gameState.action(ImbueElementCommand(element, false));
+    _gameState.action(ImbueElementCommand(element, false, gameState: _gameState));
   }
 
   void advanceActivation() {

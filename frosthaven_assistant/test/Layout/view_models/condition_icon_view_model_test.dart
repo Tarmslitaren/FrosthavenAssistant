@@ -5,21 +5,24 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/view_models/condition_icon_view_model.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
-import 'package:frosthaven_assistant/services/service_locator.dart';
+import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
-import '../../command/test_helpers.dart';
+import '../../unit_helpers.dart';
 
 void main() {
-  setUpAll(() async {
-    await setUpGame();
-  });
+  late Settings settings;
+  late GameState gameState;
+
+  setUpAll(initTestBinding);
 
   setUp(() {
-    getIt<Settings>().expireConditions.value = true;
+    (gameState, settings) = makeGameAndSettings();
+    settings.expireConditions.value = true;
   });
 
   ConditionIconViewModel makeVm() => ConditionIconViewModel(
-        settings: getIt<Settings>(),
+        settings: settings,
+        gameState: gameState,
       );
 
   // ── isCharacterCondition ───────────────────────────────────────────────────
@@ -209,13 +212,13 @@ void main() {
     });
 
     test('true for stun added previous turn when expireConditions=false', () {
-      getIt<Settings>().expireConditions.value = false;
+      settings.expireConditions.value = false;
       expect(makeVm().shouldAnimateOnTurnEnd(
           Condition.stun, [], [Condition.stun]), isTrue);
     });
 
     test('false for stun added previous turn when expireConditions=true', () {
-      getIt<Settings>().expireConditions.value = true;
+      settings.expireConditions.value = true;
       expect(makeVm().shouldAnimateOnTurnEnd(
           Condition.stun, [], [Condition.stun]), isFalse);
     });

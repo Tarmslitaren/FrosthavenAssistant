@@ -12,7 +12,7 @@ import '../MonsterStatCardWidget/monster_stat_card_widget.dart';
 import 'monster_image_part.dart';
 
 class MonsterWidget extends StatefulWidget {
-  MonsterWidget({super.key, required this.data, this.gameState});
+  const MonsterWidget({super.key, required this.data, this.gameState});
 
   final Monster data;
   final GameState? gameState;

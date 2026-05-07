@@ -36,16 +36,16 @@ class ElementButtonViewModel {
 
   // Actions
   void imbue({bool half = false}) {
-    _gameState.action(ImbueElementCommand(element, half));
+    _gameState.action(ImbueElementCommand(element, half, gameState: _gameState));
   }
 
   /// Tap: use if active, imbue if inert.
   void tap() {
     final state = elementState;
     if (state == ElementState.half || state == ElementState.full) {
-      _gameState.action(UseElementCommand(element));
+      _gameState.action(UseElementCommand(element, gameState: _gameState));
     } else {
-      _gameState.action(ImbueElementCommand(element, false));
+      _gameState.action(ImbueElementCommand(element, false, gameState: _gameState));
     }
   }
 }

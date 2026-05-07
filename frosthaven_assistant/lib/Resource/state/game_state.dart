@@ -285,7 +285,7 @@ abstract class Command {
   //private class so only this class and it's children is allowed to change state
   _StateModifier stateAccess = _StateModifier();
   void execute();
-  void onUndo() => null;
+  void onUndo() {}
   String describe();
 
   /// The [GameEvent] this command produces. Defaults to [NoEvent].

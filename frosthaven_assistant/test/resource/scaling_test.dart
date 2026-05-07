@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
-
-import '../command/test_helpers.dart';
+import 'package:frosthaven_assistant/Resource/settings.dart';
+import 'package:frosthaven_assistant/services/service_locator.dart';
 
 void main() {
-  setUpAll(() async {
-    await setUpGame();
+  setUpAll(() {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    getIt.registerLazySingleton<Settings>(() => Settings());
   });
+
+  tearDownAll(getIt.reset);
 
   group('scaling', () {
     test('setMaxWidth does not throw', () {

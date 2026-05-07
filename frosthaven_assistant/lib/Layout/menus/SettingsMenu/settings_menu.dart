@@ -274,40 +274,33 @@ class SettingsMenuState extends State<SettingsMenu> {
               },
             ),
             const Text("Style:", style: kTitleStyle),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Row(
-                  children: [
-                    Radio(
-                        value: Style.frosthaven,
-                        groupValue: settings.style.value,
-                        onChanged: (index) {
-                          setState(() {
-                            settings.style.value = Style.frosthaven;
-                            settings.saveToDisk();
-                            _gameState.updateList.notify();
-                          });
-                        }),
-                    const Text('Frosthaven')
-                  ],
-                ),
-                Row(
-                  children: [
-                    Radio(
-                        value: Style.original,
-                        groupValue: settings.style.value,
-                        onChanged: (index) {
-                          setState(() {
-                            settings.style.value = Style.original;
-                            settings.saveToDisk();
-                            _gameState.updateList.notify();
-                          });
-                        }),
-                    const Text('Original')
-                  ],
-                ),
-              ],
+            RadioGroup<Style>(
+              groupValue: settings.style.value,
+              onChanged: (value) {
+                if (value == null) return;
+                setState(() {
+                  settings.style.value = value;
+                  settings.saveToDisk();
+                  _gameState.updateList.notify();
+                });
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Row(
+                    children: [
+                      Radio<Style>(value: Style.frosthaven),
+                      const Text('Frosthaven'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Radio<Style>(value: Style.original),
+                      const Text('Original'),
+                    ],
+                  ),
+                ],
+              ),
             ),
             ListTile(
                 title: const Text("Clear unlocked characters and stuff"),

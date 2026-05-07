@@ -114,6 +114,6 @@ class MainState extends State<MyHomePage>
 
   @override
   void onWindowFocus() {
-    setState(() => null);
+    setState(() {});
   }
 }

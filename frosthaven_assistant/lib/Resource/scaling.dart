@@ -10,7 +10,7 @@ double get maxWidth =>
     _kMaxListWidth * getIt<Settings>().userScalingMainList.value;
 const double referenceWidth = 412.0;
 
-void setMaxWidth() => null;
+void setMaxWidth() {}
 
 double getScaleByReference(BuildContext context) {
   return _scaleByReference(context, referenceWidth, maxWidth);
