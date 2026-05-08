@@ -24,10 +24,10 @@
         {"text": "Add one \"%ward%, %regenerate%, self\"%flip% card","adds": [ "perks/unique/co4"]},
         {"text": "Add one \"%ward%, %regenerate%, self\"%flip% card","adds": [ "perks/unique/co4"]},
         {"text": "Add one -2 %brittle% and one  +3 \"%brittle%, self\" card","adds": ["perks/minus2brittle", "perks/unique/co5"]},
-        {"text": "Ignore item - 1 effects and remove one +0 card","removes": ["plus0"]},
-        {"text": "At the start of each scenario you may perform \"%strengthen%, %wound%, self\" or \"%ward%, %immobilize%, self\""},
-        {"text": "Once each scenario, avoid an Overdrive exhaustion check"},
-        {"text": "Once each scenario, during your turn, remove any number of negative conditions you have"}
+        {"text": "Ignore item - 1 effects and remove one +0 card.","removes": ["plus0"]},
+        {"text": "At the start of each scenario you may perform \"%strengthen%, %wound%, self\" or \"%ward%, %immobilize%, self\"."},
+        {"text": "Once each scenario, avoid an Overdrive exhaustion check."},
+        {"text": "Once each scenario, during your turn, remove any number of negative conditions you have."}
       ]
     },
     {
@@ -54,9 +54,9 @@
         {"text": "Add one +1 \"Place this card in your active area. On your next commanded attack, discard this card to add + 2 %attack%\" card","adds": [ "perks/unique/wi4"]},
         {"text": "Add one +1 \"Place this card in your active area. On your next commanded attack, discard this card to add + 2 %attack%\" card","adds": [ "perks/unique/wi4"]},
         {"text": "Add one +1 \"Place this card in your active area. On your next commanded attack, discard this card to add + 2 %attack%\" card","adds": [ "perks/unique/wi4"]},
-        {"text": "Ignore scenario effects and treat all Essence' as Stable during one round each scenario"},
-        {"text": "Remove one +0 card and whenever you or one of your allies would suffer exactly %damage% 2, that figure may lose %ward% to suffer no %damage% instead","removes": ["plus0"]},
-        {"text": "At the start of each scenario, you may %any%"}
+        {"text": "Ignore scenario effects and treat all Essence' as Stable during one round each scenario."},
+        {"text": "Remove one +0 card and whenever you or one of your allies would suffer exactly %damage% 2, that figure may lose %ward% to suffer no %damage% instead.","removes": ["plus0"]},
+        {"text": "At the start of each scenario, you may %any%."}
       ]
     },
     {
@@ -80,11 +80,11 @@
         {"text": "Add one +1 %disarm% \"!%air%%earth%\" card","adds": [ "perks/unique/wb4"]},
         {"text": "Add one +1 %disarm% \"!%air%%earth%\" card","adds": [ "perks/unique/wb4"]},
         {"text": "Add one \"%heal% 1, self\"%light%%flip% card and one \"%heal% 1, self\"%earth%%flip% ","adds": [ "perks/unique/wb5", "perks/unique/wb6"]},
-        {"text": "Add one +X where X is the number of elements you have consumed this turn","adds": [ "perks/unique/wb7"]},
-        {"text": "Add one +X where X is the number of elements you have consumed this turn","adds": [ "perks/unique/wb7"]},
-        {"text": "Whenever you consume an element as a mandatory part of an action, you may generate that same element"},
-        {"text": "At the start of each scenario, %any%"},
-        {"text": "Whenever you long rest, %any%"}
+        {"text": "Add one +X where X is the number of elements you have consumed this turn.","adds": [ "perks/unique/wb7"]},
+        {"text": "Add one +X where X is the number of elements you have consumed this turn.","adds": [ "perks/unique/wb7"]},
+        {"text": "Whenever you consume an element as a mandatory part of an action, you may generate that same element."},
+        {"text": "At the start of each scenario, %any%."},
+        {"text": "Whenever you long rest, %any%."}
       ]
     },
     {
@@ -108,11 +108,11 @@
         {"text": "Replace one +0 with one +1 \"You may discard a Speed card to add + 1 %attack% and %muddle%\" card","removes": ["plus0"],"adds": [ "perks/unique/lr2"]},
         {"adds": [ "perks/plus1disarm"]},
         {"adds": [ "perks/plus1disarm"]},
-        {"text": "Add one %ward% %range% 3%flip% card and one %bless% %range% 3%flip% card","adds": [ "perks/plus0wardrange3flip","perks/plus0blessrange3flip"]},
-        {"text": "Add one %ward% %range% 3%flip% card and one %bless% %range% 3%flip% card","adds": [ "perks/plus0wardrange3flip","perks/plus0blessrange3flip"]},
-        {"text": "Ignore scenario effects and when you suffer damage during your turn, you may ignore %ward%"},
-        {"text": "[double] Whenever you draw a %bless%, perform %ward% %target% 1 ally. If that ally already has %ward%, %heal% 1 that ally"},
-        {"text": "Once each scenario, you may use all of your played cards for their standard action and ignore damage from Speeds that turn"}
+        {"text": "Add one %ward% %range% 3%flip% card and one %bless% %range% 3%flip% card.","adds": [ "perks/plus0wardrange3flip","perks/plus0blessrange3flip"]},
+        {"text": "Add one %ward% %range% 3%flip% card and one %bless% %range% 3%flip% card.","adds": [ "perks/plus0wardrange3flip","perks/plus0blessrange3flip"]},
+        {"text": "Ignore scenario effects and when you suffer damage during your turn, you may ignore %ward%."},
+        {"text": "[double] Whenever you draw a %bless%, perform %ward% %target% 1 ally. If that ally already has %ward%, %heal% 1 that ally."},
+        {"text": "Once each scenario, you may use all of your played cards for their standard action and ignore damage from Speeds that turn."}
       ]
     },
     {
@@ -160,7 +160,7 @@
         {"text": "Add one +1 \"Add + 2 %attack% and suffer %damage% 1 if Lifespeaker has at least 2 Icons\"%flip% card","adds": [ "perks/unique/li4"]},
         {"text": "Add one +1 \"Add + 2 %attack% and suffer %damage% 1 if Lifespeaker has at least 2 Icons\"%flip% card","adds": [ "perks/unique/li4"]},
         {"text": "Ignore scenario effects and at the start of each of your turns, any number of times, perform: - 1 Icon: Move the character token on one of your persistent abilities backwards one slot."},
-        {"text": "Once each scenario, you may gain up to three %enfeeble% cards to gain the same amount of Icons"},
+        {"text": "Once each scenario, you may gain up to three %enfeeble% cards to gain the same amount of Icons."},
         {"text": "[triple] Whenever an enemy draws an %enfeeble% card, that enemy reduces the value of their attack by 1 and suffers %damage% 1 after the attack."}
       ]
     },
@@ -193,11 +193,11 @@
         {"text": "Add two %pierce% 2 %poison% %flip% cards","adds": [ "perks/unique/vt2","perks/unique/vt2"]},
         {"adds": [ "perks/plus0heal1range1flip","perks/plus0heal1range1flip","perks/plus0heal1range1flip"]},
         {"adds": [ "perks/plus0heal1range1flip","perks/plus0heal1range1flip","perks/plus0heal1range1flip"]},
-        {"text": "Ignore scenario effects and remove one +0 card","removes": ["plus0"]},
-        {"text": "Ignore item - 1 effects and remove one +0 card","removes": ["plus0"]},
-        {"text": "Whenever you short rest, one adjacent enemy suffers %damage% 1, and you perform \"%heal% 1, self\""},
-        {"text": "[double] At the start of each scenario, you may suffer %damage% 1 to grant all allies and self %move% 3"},
-        {"text": "Once each scenario, remove all negative conditions you have. One adjacent enemy suffers %damage% equal to the number of conditions removed"}
+        {"text": "Ignore scenario effects and remove one +0 card.","removes": ["plus0"]},
+        {"text": "Ignore item - 1 effects and remove one +0 card.","removes": ["plus0"]},
+        {"text": "Whenever you short rest, one adjacent enemy suffers %damage% 1, and you perform \"%heal% 1, self\"."},
+        {"text": "[double] At the start of each scenario, you may suffer %damage% 1 to grant all allies and self %move% 3."},
+        {"text": "Once each scenario, remove all negative conditions you have. One adjacent enemy suffers %damage% equal to the number of conditions removed."}
       ]
     },
     {
@@ -237,10 +237,10 @@
         {"text": "Add two +1 \"If you drew this as part of a Experiment ability, +2 instead\" cards","adds": [ "perks/unique/al3","perks/unique/al3"]},
         {"text": "Add one %fireice%%flip% card, one %earthfire%%flip% card, and one %iceearth%%flip% card, card","adds": [ "perks/plus0fireiceflip","perks/plus0earthfireflip","perks/plus0iceearthflip"]},
         {"text": "Add one %fireice%%flip% card, one %earthfire%%flip% card, and one %iceearth%%flip% card, card","adds": [ "perks/plus0fireiceflip","perks/plus0earthfireflip","perks/plus0iceearthflip"]},
-        {"text": "Ignore scenario effects and remove one +0 card","removes": ["plus0"]},
-        {"text": "Whenever you rest, you may %use%%any% to %any%"},
-        {"text": "Whenever you consume a potion small item, you may place one Vial Token on an active Experiment card"},
-        {"text": "[double] At the end of your turns during which you performed no attacks and you are not performing a long rest, %fire% or %ice% or %earth%"}
+        {"text": "Ignore scenario effects and remove one +0 card.","removes": ["plus0"]},
+        {"text": "Whenever you rest, you may %use%%any% to %any%."},
+        {"text": "Whenever you consume a potion small item, you may place one Vial Token on an active Experiment card."},
+        {"text": "[double] At the end of your turns during which you performed no attacks and you are not performing a long rest, %fire% or %ice% or %earth%."}
       ]
     },
     {
@@ -273,10 +273,10 @@
         {"text": "Add one +1 %push% 2, %immobilize% %flip% cards","adds": [ "perks/unique/vp1"]},
         {"adds": [ "perks/plus0heal1flip","perks/plus0heal1flip"]},
         {"adds": [ "perks/plus0curseflip","perks/plus0curseflip"]},
-        {"text": "Ignore scenario effects and add two +1 cards","adds": ["plus1","plus1"]},
-        {"text": "Unlock The Astral Plane and start each scenario with %invisible%"},
+        {"text": "Ignore scenario effects and add two +1 cards.","adds": ["plus1","plus1"]},
+        {"text": "Unlock The Astral Plane and start each scenario with %invisible%."},
         {"text": "Whenever you long rest, you may perform \"%teleport% 2\""},
-        {"text": "[double] Once each scenario, during your turn, place one Veil token in a hex within %range% 4"}
+        {"text": "[double] Once each scenario, during your turn, place one Veil token in a hex within %range% 4."}
       ]
     },
     {
@@ -323,9 +323,9 @@
         {"adds": [ "perks/plus2light"]},
         {"removes": ["plus0"],"adds": [ "perks/plus1regenerateflip"]},
         {"removes": ["plus0"],"adds": [ "perks/plus1regenerateflip"]},
-        {"text": "[double] Your summons gain %retaliate% 1. Whenever one of your summons dies, perform: Recharge Barrier 3"},
-        {"text": "At the end of each of your rests, perform: Recharge Barrier 1 and Project Barrier %range% 4"},
-        {"text": "[double] Once each scenario, at the end of an ally's turn, perform: Recharge Barrier 5 and Project Barrier, %target% that ally"}
+        {"text": "[double] Your summons gain %retaliate% 1. Whenever one of your summons dies, perform: Recharge Barrier 3."},
+        {"text": "At the end of each of your rests, perform: Recharge Barrier 1 and Project Barrier %range% 4."},
+        {"text": "[double] Once each scenario, at the end of an ally's turn, perform: Recharge Barrier 5 and Project Barrier, %target% that ally."}
       ]
     },
     {
@@ -392,9 +392,9 @@
         {"text": "Add two \"%heal% 1, %target% 1 figure adjacent to Fog\"%flip% card","adds": [ "perks/unique/ew4","perks/unique/ew4"]},
         {"text": "Add two \"%heal% 1, %target% 1 figure adjacent to Fog\"%flip% card","adds": [ "perks/unique/ew4","perks/unique/ew4"]},
         {"text": "Ignore scenario effects and add two +1 cards","adds": [ "plus1","plus1"]},
-        {"text": "[double] At the end of your turn, if you are adjacent to Fog and have not moved this turn, you may perform: %move% 1"},
-        {"text": "Once per round, when a door is opened, you may relocate a Fog token to a hex within %range% 1 of the opened door"},
-        {"text": "Enemies gain - 1 %retaliate% for each adjacent Fog token"}
+        {"text": "[double] At the end of your turn, if you are adjacent to Fog and have not moved this turn, you may perform: %move% 1."},
+        {"text": "Once per round, when a door is opened, you may relocate a Fog token to a hex within %range% 1 of the opened door."},
+        {"text": "Enemies gain - 1 %retaliate% for each adjacent Fog token."}
       ]
     },
     {
@@ -500,9 +500,9 @@
         {"text": "Add one +1 \"All Latched enemies suffer %damage% 1\" card","adds": [ "perks/unique/sc3"]},
         {"text": "Add one +1 \"All Latched enemies suffer %damage% 1\" card","adds": [ "perks/unique/sc3"]},
         {"text": "Ignore scenario effects and add one +1 card","adds": [ "plus1"]},
-        {"text": "You may summon Critter summons in adjacent occupied hexes"},
-        {"text": "[double] Once per scenario, when you or an ally would suffer %damage% from an attack, remove a Latched summon from the attacker or the target to negate the damage instead"},
-        {"text": "[double] At the start of each scenario, you may play a card from your hand to perform a summon action of the card"}
+        {"text": "You may summon Critter summons in adjacent occupied hexes."},
+        {"text": "[double] Once per scenario, when you or an ally would suffer %damage% from an attack, remove a Latched summon from the attacker or the target to negate the damage instead."},
+        {"text": "[double] At the start of each scenario, you may play a card from your hand to perform a summon action of the card."}
       ]
     },
     {
@@ -528,9 +528,9 @@
         {"text": "Add one +0 %heal% 1, %ward%, self %flip% card","adds": [ "perks/unique/gt3"]},
         {"text": "Add one +0 %heal% 1, %ward%, self %flip% card","adds": [ "perks/unique/gt3"]},
         {"text": "Add one +0 %heal% 1, %ward%, self %flip% card","adds": [ "perks/unique/gt3"]},
-        {"text": "Ignore item - 1 effects and whenever you would gain %brittle%, prevent the condition"},
-        {"text": "whenever one of your ally's heals would cause your hit point value to increase beyond your maximum hit point value, gain that much Glacier"},
-        {"text": "[triple] Whenever you end your turn adjacent to icy terrain, perform %heal% 1, self"}
+        {"text": "Ignore item - 1 effects and whenever you would gain %brittle%, prevent the condition."},
+        {"text": "whenever one of your ally's heals would cause your hit point value to increase beyond your maximum hit point value, gain that much Glacier."},
+        {"text": "[triple] Whenever you end your turn adjacent to icy terrain, perform %heal% 1, self."}
       ]
     },
     {
@@ -556,10 +556,10 @@
         {"text": "Add one +0 \"Place this card in your active area. The next time you force an enemy to move, discard this card and that enemy suffers %damage% 2\"%flip% card","adds": [ "perks/unique/jt2"]},
         {"text": "Add one +0 \"Place this card in your active area. The next time you force an enemy to move, discard this card and that enemy suffers %damage% 2\"%flip% card","adds": [ "perks/unique/jt2"]},
         {"text": "Add one +2 \"If you are not Stacked, after this attack ability, %teleport% the other Twin to your hex and become Stacked\" card","adds": [ "perks/unique/jt3"]},
-        {"text": "Ignore scenario effects and add two \"Swing 2\"%flip% cards","adds": [ "perks/unique/jt4","perks/unique/jt4"]},
-        {"text": "If you are not Stacked, you may end your movement in a hex occupied by an ally to become Stacked on top of the ally"},
-        {"text": "[double] You may bring an additional 2-handed hand item into each scenario"},
-        {"text": "Your forced movement can move allies through enemies, and enemies through allies"}
+        {"text": "Ignore scenario effects and add two \"Swing 2\"%flip% cards.","adds": [ "perks/unique/jt4","perks/unique/jt4"]},
+        {"text": "If you are not Stacked, you may end your movement in a hex occupied by an ally to become Stacked on top of the ally."},
+        {"text": "[double] You may bring an additional 2-handed hand item into each scenario."},
+        {"text": "Your forced movement can move allies through enemies, and enemies through allies."}
       ]
     },
     {
@@ -682,10 +682,10 @@
         {"adds": [ "perks/plus1poisonflip"]},
         {"adds": [ "perks/plus2earthlight"]},
         {"adds": [ "perks/plus2earthlight"]},
-        {"text": "Ignore item - 1 effects and add one +1 card","adds": [ "plus1"]},
-        {"text": "Whenever you declare a long rest, oyu may move one of your summons to your discard pile to perform %ward%, self"},
-        {"text": "Once each scenario, when your summon would suffer %damage%, negate the %damage%, %teleport% to the hex occupied by that summon, and place that summon in an empty hex closest to you"},
-        {"text": "[triple] Your summons gain advantage on all attacks performed while adjacent to you"}
+        {"text": "Ignore item - 1 effects and add one +1 card.","adds": [ "plus1"]},
+        {"text": "Whenever you declare a long rest, oyu may move one of your summons to your discard pile to perform %ward%, self."},
+        {"text": "Once each scenario, when your summon would suffer %damage%, negate the %damage%, %teleport% to the hex occupied by that summon, and place that summon in an empty hex closest to you."},
+        {"text": "[triple] Your summons gain advantage on all attacks performed while adjacent to you."}
       ]
     },
     {
@@ -713,9 +713,163 @@
         {"text": "Add one +1 \"%ward%, %target% 1 figure that has %regenerate%\"%flip% card","adds": [ "perks/unique/vi4"]},
         {"text": "Add one +1 \"%ward%, %target% 1 figure that has %regenerate%\"%flip% card","adds": [ "perks/unique/vi4"]},
         {"text": "Add one +1 \"%ward%, %target% 1 figure that has %regenerate%\"%flip% card","adds": [ "perks/unique/vi4"]},
-        {"text": "Once each scenario, you may gain %wound% to Infuse Life"},
-        {"text": "Whenever you long rest, consume Life to infuse Life"},
-        {"text": "Whenever you control the attack of an enemy, you may have the enemy use your attach modifier deck"}
+        {"text": "Once each scenario, you may gain %wound% to Infuse Life."},
+        {"text": "Whenever you long rest, consume Life to infuse Life."},
+        {"text": "Whenever you control the attack of an enemy, you may have the enemy use your attach modifier deck."}
+      ]
+    },
+    {
+      "name": "Powdercoat",
+      "color": "FFFF944B",
+      "colorSecondary": "ff40291A",
+      "edition": "CCUG",
+      "health": [6,7,8,9,10,11,12,13,14],
+      "hidden": false,
+      "summons": {
+        "Travel Companion": {
+          "level": 1,
+          "health": 4,
+          "standees": 1,
+          "gfx": "POW travel companion",
+          "move": 3
+        }
+      },
+      "perks": [
+        {"removes": ["minus2"],"adds": [ "plus0"]},
+        {"removes": ["minus1"],"adds": [ "plus1"]},
+        {"removes": ["minus1"],"adds": [ "plus1"]},
+        {"removes": ["minus1"],"adds": [ "plus1"]},
+        {"text": "Replace one +0 card with one +1 \"Add + 2 %attack% if drawn during a Munitions ability\" card","removes": ["plus0"],"adds": [ "perks/unique/po1"]},
+        {"text": "Replace one +0 card with one +1 \"Add + 2 %attack% if drawn during a Munitions ability\" card","removes": ["plus0"],"adds": [ "perks/unique/po1"]},
+        {"text": "Replace one +0 card with one +1 %wound% or %immobilize% card","removes": ["plus0"],"adds": [ "perks/unique/po2"]},
+        {"text": "Replace one +0 card with one +1 %wound% or %immobilize% card","removes": ["plus0"],"adds": [ "perks/unique/po2"]},
+        {"adds": [ "perks/plus2fire"]},
+        {"adds": [ "perks/plus2fire"]},
+        {"text": "Add one +1 \"All enemies adjacent to the target suffer %damage% 1\"%flip% card","adds": [ "perks/unique/po3"]},
+        {"text": "Add one +1 \"All enemies adjacent to the target suffer %damage% 1\"%flip% card","adds": [ "perks/unique/po3"]},
+        {"adds": [ "perks/plus1heal1ally", "perks/plus1heal1ally"]},
+        {"text": "Ignore scenario effects and add one +1 %flip% card.", "adds": [ "perks/plus1flip"]},
+        {"text": "You may place Kegs in hexes containing difficult terrain."},
+        {"text": "Whenever one of your allies destroys a Keg, that figure may perform %heal% 2, self."},
+        {"text": "[double] Once each scenario, when you place or relocate a Keg you may destroy it."}
+      ]
+    },
+    {
+      "name": "Rekindled",
+      "color": "FFC2845A",
+      "colorSecondary": "ff40648B",
+      "edition": "CCUG",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": false,
+      "summons": {
+        "Bonfire Helper": {
+          "level": 1,
+          "health": 6,
+          "standees": 1,
+          "gfx": "REK bonfire helper",
+          "move": 2,
+          "attack": 2
+        },
+        "Living Bonfire": {
+          "level": 5,
+          "health": 7,
+          "standees": 1,
+          "gfx": "REK living bonfire",
+          "move": 2,
+          "attack": 3
+        },
+        "Fire Sprite": {
+          "level": 9,
+          "health": 1,
+          "standees": 1,
+          "gfx": "REK fire sprite",
+          "move": 5,
+          "attack": 2
+        }
+      },
+      "perks": [
+        {"removes": ["minus2"],"adds": [ "plus0"]},
+        {"text": "Replace one -1 card with one -1 \"Grant one ally: %attack% 2\"%flip% card","removes": ["minus1"],"adds": [ "perks/unique/re1"]},
+        {"text": "Replace one -1 card with one -1 \"Grant one ally: %attack% 2\"%flip% card","removes": ["minus1"],"adds": [ "perks/unique/re1"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0fire"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0fire"]},
+        {"text": "Replace one +0 card with one +1 \"Add + 2 %attack% if you have two or more Bonfire in your active area\" card","removes": ["plus0"],"adds": [ "perks/unique/re2"]},
+        {"text": "Replace one +0 card with one +1 \"Add + 2 %attack% if you have two or more Bonfire in your active area\" card","removes": ["plus0"],"adds": [ "perks/unique/re2"]},
+        {"text": "Replace one +0 card with one +1 \"Add + 2 %attack% if you have two or more Bonfire in your active area\" card","removes": ["plus0"],"adds": [ "perks/unique/re2"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1disarm"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1disarm"]},
+        {"text": "Add one +1 \"Place a Bonfire in a hex adjacent to or occupied by the target of the attack\" card","adds": [ "perks/unique/re3"]},
+        {"text": "Add one +1 \"Place a Bonfire in a hex adjacent to or occupied by the target of the attack\" card","adds": [ "perks/unique/re3"]},
+        {"text": "Ignore scenario effects and add one \"%bless%, %target% 1 ally\"%flip% card.","adds": [ "perks/plus0bless1allyflip"]},
+        {"text": "Whenever you rest, perform: %strengthen%, %target% 1 ally within %range% 2 of a Bonfire."},
+        {"text": "[double] On your first turn each scenario, you may play three cards instead of two."},
+        {"text": "[double] Once per scenario, when you would suffer damage, you may %teleport% to an unoccupied Bonfire to negate the damage."}
+      ]
+    },
+    {
+      "name": "Skyreader",
+      "color": "FFB3E4F8",
+      "colorSecondary": "ff363B58",
+      "edition": "CCUG",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": false,
+      "summons": {
+        "Ancestral Spirit": {
+          "level": 1,
+          "health": 7,
+          "standees": 1,
+          "gfx": "SKY ancestral spirit",
+          "move": 2,
+          "attack": 2
+        }
+      },
+      "perks": [
+        {"text": "Replace one -2 card with one -1 \"Gain 1 Star Token\" card","removes": ["minus2"],"adds": [ "perks/unique/sky1"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0lightdark"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0lightdark"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0lightdark"]},
+        {"removes": ["minus1"],"adds": [ "plus1"]},
+        {"removes": ["minus1"],"adds": [ "plus1"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1bless1ally"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1bless1ally"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1curse"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1curse"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus0heal2range2flip"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus0heal2range2flip"]},
+        {"text": "Ignore scenario effects and start each scenario with %safeguard%."},
+        {"text": "[double] Once each scenario, whenever you perform a constellation action with a lost icon, gain 3 star Token."},
+        {"text": "Whenever you perform a constellation action with a lost icon, each character may gain 1 experience."},
+        {"text": "[double] At the start of each scenario, you may %light%%dark%. Whenever you long rest, you may %lightdark%."}
+      ]
+    },
+    {
+      "name": "Swarmshift",
+      "color": "FF7597A0",
+      "colorSecondary": "FF7597A0",
+      "edition": "CCUG",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": false,
+      "summons": {
+      },
+      "perks": [
+        {"removes": ["minus1"],"adds": [ "plus1"]},
+        {"removes": ["minus1"],"adds": [ "plus1"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0shield1flip"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0shield1flip"]},
+        {"text": "Replace one +0 card with one +1 \"Add + 1 %attack% for each active Hivecall\" card","removes": ["plus0"],"adds": [ "perks/unique/swa1"]},
+        {"text": "Replace one +0 card with one +1 \"Add + 1 %attack% for each active Hivecall\" card","removes": ["plus0"],"adds": [ "perks/unique/swa1"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1immobilize"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1immobilize"]},
+        {"adds": [ "perks/plus0heal1flip","perks/plus0heal1flip"]},
+        {"adds": [ "perks/plus0heal1flip","perks/plus0heal1flip"]},
+        {"text": "Add one +1 \"Gain 1 Hive Token\" card","adds": [ "perks/unique/swa2"]},
+        {"text": "Add one +1 \"Gain 1 Hive Token\" card","adds": [ "perks/unique/swa2"]},
+        {"adds": [ "perks/plus2earth"]},
+        {"adds": [ "perks/plus2earth"]},
+        {"text": "Ignore item - 1 effects and add one +1 card","adds": [ "plus1"]},
+        {"text": "Whenever you complete a long rest, you may gain %poison% to gain 1 Hive Token."},
+        {"text": "Whenever you short rest, you may -1 Hive Token to Refresh two of your spent items."},
+        {"text": "Whenever you spend 2 or more Hive tokens in a turn, you may %earth%."}
       ]
     }
   ],
