@@ -1,3 +1,4 @@
+import '../../game_event.dart';
 import '../../game_methods.dart';
 import '../../state/game_state.dart';
 import 'change_stat_command.dart';
@@ -28,6 +29,9 @@ class ChangeHealthCommand extends ChangeStatCommand {
       }
     }
   }
+
+  @override
+  GameEvent get event => HealthChangedEvent(figureId, ownerId ?? '', change);
 
   @override
   String describe() {

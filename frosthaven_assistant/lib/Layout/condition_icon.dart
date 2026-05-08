@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../Resource/enums.dart';
+import '../Resource/game_event.dart';
 import '../Resource/game_methods.dart';
 import '../Resource/settings.dart';
 import '../Resource/state/game_state.dart';
@@ -57,8 +58,16 @@ class ConditionIconState extends State<ConditionIcon>
   Animation<double>? _shakeAngle;
 
   int _previousHealth = 0;
+  bool _suppressNextEventAnim = false;
 
   final animate = ValueNotifier<bool>(false);
+
+  // Returns the figureId used by ChangeHealthCommand to identify this figure.
+  String _figureId() {
+    final fig = widget.figure;
+    if (fig is MonsterInstance) return fig.getId();
+    return widget.owner.id;
+  }
 
   @override
   void initState() {
@@ -66,6 +75,7 @@ class ConditionIconState extends State<ConditionIcon>
     _previousHealth = widget.figure.health.value;
     widget.figure.health.addListener(_onHealthChanged);
     widget.owner.turnState.addListener(_onTurnStateChanged);
+    _vm.gameState.lastEvent.addListener(_onLastEventChanged);
 
     final ctrl = AnimationController(
       duration: const Duration(milliseconds: 333),
@@ -87,6 +97,7 @@ class ConditionIconState extends State<ConditionIcon>
   void dispose() {
     widget.figure.health.removeListener(_onHealthChanged);
     widget.owner.turnState.removeListener(_onTurnStateChanged);
+    _vm.gameState.lastEvent.removeListener(_onLastEventChanged);
     _shakeController?.dispose();
     super.dispose();
   }
@@ -101,9 +112,15 @@ class ConditionIconState extends State<ConditionIcon>
   void _onHealthChanged() {
     final newHealth = widget.figure.health.value;
     if (newHealth < _previousHealth) {
-      if (_vm.shouldAnimateOnDamage(widget.condition)) _runAnimation();
+      if (_vm.shouldAnimateOnDamage(widget.condition)) {
+        _runAnimation();
+        _suppressNextEventAnim = true;
+      }
     } else if (newHealth > _previousHealth) {
-      if (_vm.shouldAnimateOnHeal(widget.condition)) _runAnimation();
+      if (_vm.shouldAnimateOnHeal(widget.condition)) {
+        _runAnimation();
+        _suppressNextEventAnim = true;
+      }
     }
     _previousHealth = newHealth;
   }
@@ -116,7 +133,34 @@ class ConditionIconState extends State<ConditionIcon>
       if (_vm.shouldAnimateOnTurnEnd(
         widget.condition,
         widget.figure.conditionsAddedThisTurn,
-        widget.figure.conditionsAddedPreviousTurn,
+      )) {
+        _runAnimation();
+        _suppressNextEventAnim = true;
+      }
+    }
+  }
+
+  void _onLastEventChanged() {
+    if (_suppressNextEventAnim) {
+      _suppressNextEventAnim = false;
+      return;
+    }
+    final event = _vm.gameState.lastEvent.value;
+    if (event is HealthChangedEvent) {
+      final matches = event.ownerId.isEmpty
+          ? event.figureId == widget.owner.id
+          : event.figureId == _figureId() && event.ownerId == widget.owner.id;
+      if (matches) {
+        if (event.change < 0) {
+          if (_vm.shouldAnimateOnDamage(widget.condition)) _runAnimation();
+        } else if (event.change > 0) {
+          if (_vm.shouldAnimateOnHeal(widget.condition)) _runAnimation();
+        }
+      }
+    } else if (event is TurnDoneEvent && event.id == widget.owner.id) {
+      if (_vm.shouldAnimateOnTurnEnd(
+        widget.condition,
+        widget.figure.conditionsAddedThisTurn,
       )) {
         _runAnimation();
       }

@@ -20,10 +20,8 @@ void main() {
     settings.expireConditions.value = true;
   });
 
-  ConditionIconViewModel makeVm() => ConditionIconViewModel(
-        settings: settings,
-        gameState: gameState,
-      );
+  ConditionIconViewModel makeVm() =>
+      ConditionIconViewModel(settings: settings, gameState: gameState);
 
   // ── isCharacterCondition ───────────────────────────────────────────────────
 
@@ -32,9 +30,12 @@ void main() {
       final vm = makeVm();
       for (final c in Condition.values) {
         final expected = c.name.contains('character');
-        expect(vm.isCharacterCondition(c), expected,
-            reason:
-                'Condition.${c.name} → isCharacterCondition should be $expected');
+        expect(
+          vm.isCharacterCondition(c),
+          expected,
+          reason:
+              'Condition.${c.name} → isCharacterCondition should be $expected',
+        );
       }
     });
 
@@ -57,8 +58,11 @@ void main() {
         Condition.infect,
       ];
       for (final c in standard) {
-        expect(vm.isCharacterCondition(c), isFalse,
-            reason: 'Condition.${c.name} should not be a character condition');
+        expect(
+          vm.isCharacterCondition(c),
+          isFalse,
+          reason: 'Condition.${c.name} should not be a character condition',
+        );
       }
     });
 
@@ -85,15 +89,23 @@ void main() {
         Condition.brittle,
       ];
       for (final c in standard) {
-        expect(vm.classColorFor(c), Colors.transparent,
-            reason: 'Expected transparent for Condition.${c.name}');
+        expect(
+          vm.classColorFor(c),
+          Colors.transparent,
+          reason: 'Expected transparent for Condition.${c.name}',
+        );
       }
     });
 
-    test('returns transparent for character condition when no character loaded',
-        () {
-      expect(makeVm().classColorFor(Condition.character1), Colors.transparent);
-    });
+    test(
+      'returns transparent for character condition when no character loaded',
+      () {
+        expect(
+          makeVm().classColorFor(Condition.character1),
+          Colors.transparent,
+        );
+      },
+    );
   });
 
   // ── shouldAnimateOnDamage ──────────────────────────────────────────────────
@@ -109,8 +121,11 @@ void main() {
         Condition.retaliate,
         Condition.brittle,
       ]) {
-        expect(vm.shouldAnimateOnDamage(c), isTrue,
-            reason: '${c.name} should animate on damage');
+        expect(
+          vm.shouldAnimateOnDamage(c),
+          isTrue,
+          reason: '${c.name} should animate on damage',
+        );
       }
     });
 
@@ -129,8 +144,11 @@ void main() {
         Condition.bane,
         Condition.muddle,
       ]) {
-        expect(vm.shouldAnimateOnDamage(c), isFalse,
-            reason: '${c.name} should NOT animate on damage');
+        expect(
+          vm.shouldAnimateOnDamage(c),
+          isFalse,
+          reason: '${c.name} should NOT animate on damage',
+        );
       }
     });
   });
@@ -147,8 +165,11 @@ void main() {
         Condition.infect,
         Condition.brittle,
       ]) {
-        expect(vm.shouldAnimateOnHeal(c), isTrue,
-            reason: '${c.name} should animate on heal');
+        expect(
+          vm.shouldAnimateOnHeal(c),
+          isTrue,
+          reason: '${c.name} should animate on heal',
+        );
       }
     });
 
@@ -167,8 +188,11 @@ void main() {
         Condition.retaliate,
         Condition.muddle,
       ]) {
-        expect(vm.shouldAnimateOnHeal(c), isFalse,
-            reason: '${c.name} should NOT animate on heal');
+        expect(
+          vm.shouldAnimateOnHeal(c),
+          isFalse,
+          reason: '${c.name} should NOT animate on heal',
+        );
       }
     });
   });
@@ -193,8 +217,11 @@ void main() {
         Condition.rupture,
         Condition.brittle,
       ]) {
-        expect(vm.shouldAnimateOnTurnStart(c), isFalse,
-            reason: '${c.name} should NOT animate on turn start');
+        expect(
+          vm.shouldAnimateOnTurnStart(c),
+          isFalse,
+          reason: '${c.name} should NOT animate on turn start',
+        );
       }
     });
   });
@@ -203,28 +230,28 @@ void main() {
 
   group('ConditionIconViewModel.shouldAnimateOnTurnEnd', () {
     test('true for bane when NOT added this turn', () {
-      expect(makeVm().shouldAnimateOnTurnEnd(Condition.bane, [], []), isTrue);
+      expect(makeVm().shouldAnimateOnTurnEnd(Condition.bane, []), isTrue);
     });
 
     test('false for bane when added this turn', () {
-      expect(makeVm().shouldAnimateOnTurnEnd(
-          Condition.bane, [Condition.bane], []), isFalse);
+      expect(
+        makeVm().shouldAnimateOnTurnEnd(Condition.bane, [Condition.bane]),
+        isFalse,
+      );
     });
 
     test('true for stun added previous turn when expireConditions=false', () {
       settings.expireConditions.value = false;
-      expect(makeVm().shouldAnimateOnTurnEnd(
-          Condition.stun, [], [Condition.stun]), isTrue);
+      expect(makeVm().shouldAnimateOnTurnEnd(Condition.stun, []), isTrue);
     });
 
     test('false for stun added previous turn when expireConditions=true', () {
       settings.expireConditions.value = true;
-      expect(makeVm().shouldAnimateOnTurnEnd(
-          Condition.stun, [], [Condition.stun]), isFalse);
+      expect(makeVm().shouldAnimateOnTurnEnd(Condition.stun, []), isFalse);
     });
 
     test('false for wound at turn end (wound is turn-start, not turn-end)', () {
-      expect(makeVm().shouldAnimateOnTurnEnd(Condition.wound, [], []), isFalse);
+      expect(makeVm().shouldAnimateOnTurnEnd(Condition.wound, []), isFalse);
     });
   });
 }

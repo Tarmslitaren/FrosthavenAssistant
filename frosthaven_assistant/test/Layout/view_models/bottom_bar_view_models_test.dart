@@ -1,7 +1,6 @@
 // ignore_for_file: no-magic-number
 
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/view_models/bottom_bar_level_widget_view_model.dart';
 import 'package:frosthaven_assistant/Layout/view_models/bottom_bar_view_model.dart';
@@ -94,7 +93,8 @@ void main() {
   group('BottomBarLevelWidgetViewModel.formattedScenarioName', () {
     test('returns full name for non-solo campaign', () {
       (gameState.currentCampaign as ValueNotifier<String>).value = 'Frosthaven';
-      (gameState.scenario as ValueNotifier<String>).value = '#1 Algox Encampment';
+      (gameState.scenario as ValueNotifier<String>).value =
+          '#1 Algox Encampment';
       final vm = BottomBarLevelWidgetViewModel(
         gameState: gameState,
         settings: settings,

@@ -12,6 +12,7 @@ class ConditionIconViewModel {
 
   final Settings _settings;
   final GameState _gameState;
+  GameState get gameState => _gameState;
 
   bool shouldAnimateOnDamage(Condition condition) =>
       condition.name.contains("poison") ||
@@ -37,26 +38,10 @@ class ConditionIconViewModel {
   bool shouldAnimateOnTurnEnd(
     Condition condition,
     Iterable<Condition> addedThisTurn,
-    Iterable<Condition> addedPreviousTurn,
   ) {
-    if (condition == Condition.bane && !addedThisTurn.contains(condition)) {
-      return true;
-    }
-    if (addedPreviousTurn.contains(condition)) {
-      if (!_settings.expireConditions.value) {
-        if (condition == Condition.chill ||
-            condition == Condition.stun ||
-            condition == Condition.disarm ||
-            condition == Condition.immobilize ||
-            condition == Condition.invisible ||
-            condition == Condition.strengthen ||
-            condition == Condition.muddle ||
-            condition == Condition.impair) {
-          return true;
-        }
-      }
-    }
-    return false;
+    if (addedThisTurn.contains(condition)) return false;
+    if (condition == Condition.bane) return true;
+    return !_settings.expireConditions.value && GameMethods.canExpire(condition);
   }
 
   bool isCharacterCondition(Condition condition) =>

@@ -18,6 +18,14 @@ sealed class GameEvent {
         return const LootCardDrawnEvent();
       case 'modifierCardDrawn':
         return ModifierCardDrawnEvent(data['deck'] as String? ?? '');
+      case 'healthChanged':
+        return HealthChangedEvent(
+          data['figureId'] as String? ?? '',
+          data['ownerId'] as String? ?? '',
+          data['change'] as int? ?? 0,
+        );
+      case 'turnDone':
+        return TurnDoneEvent(data['id'] as String? ?? '');
       default:
         return const NoEvent();
     }
@@ -58,4 +66,32 @@ class ModifierCardDrawnEvent extends GameEvent {
   @override
   Map<String, dynamic> toJson() =>
       {'type': 'modifierCardDrawn', 'deck': deckName};
+}
+
+/// A figure's health changed. [change] is positive for healing, negative for damage.
+/// [ownerId] is empty when [figureId] directly identifies the list item (character case).
+class HealthChangedEvent extends GameEvent {
+  const HealthChangedEvent(this.figureId, this.ownerId, this.change);
+
+  final String figureId;
+  final String ownerId;
+  final int change;
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'type': 'healthChanged',
+        'figureId': figureId,
+        'ownerId': ownerId,
+        'change': change,
+      };
+}
+
+/// A figure's turn was marked as done.
+class TurnDoneEvent extends GameEvent {
+  const TurnDoneEvent(this.id);
+
+  final String id;
+
+  @override
+  Map<String, dynamic> toJson() => {'type': 'turnDone', 'id': id};
 }
