@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:frosthaven_assistant/Resource/game_event.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant_server/game_server.dart';
@@ -94,12 +95,13 @@ class Server extends GameServer {
         state: _lastSavedState(),
       ).encode());
     } else if (message.index > _gameState.commandIndex.value) {
-      _gameState.commandIndex.value = message.index;
       if (message.index >= 0) {
-        _gameState.insertReceivedDescription(
-            _gameState.commandIndex.value, message.description);
+        _gameState.insertReceivedDescription(message.index, message.description);
       }
       _gameState.loadFromData(message.data);
+      // Set event before commandIndex fires so VLB callbacks see it.
+      _gameState.lastEvent.value = GameEvent.fromJsonString(message.eventJson);
+      _gameState.commandIndex.value = message.index;
       _gameState.save();
       _gameState.updateAllUI();
       sendToOthers(
