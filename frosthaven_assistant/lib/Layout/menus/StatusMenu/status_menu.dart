@@ -44,85 +44,90 @@ class StatusMenuState extends State<StatusMenu> {
 
   @override
   Widget build(BuildContext context) {
-    final vm = StatusMenuViewModel(
-      figureId: widget.figureId,
-      monsterId: widget.monsterId,
-      characterId: widget.characterId,
-      gameState: _gameState,
-      settings: _settings,
+    return ListenableBuilder(
+      listenable: _gameState.commandIndex,
+      builder: (context, child) {
+        final vm = StatusMenuViewModel(
+          figureId: widget.figureId,
+          monsterId: widget.monsterId,
+          characterId: widget.characterId,
+          gameState: _gameState,
+          settings: _settings,
+        );
+
+        final figure = vm.figure;
+        if (figure == null) {
+          Navigator.pop(context);
+          return const SizedBox(height: 0, width: 0);
+        }
+
+        final owner = vm.owner;
+        if (owner == null) {
+          Navigator.pop(context);
+          return const SizedBox(height: 0, width: 0);
+        }
+
+        double scale = getModalMenuScale(context);
+        int nrOfCharacters = GameMethods.getCurrentCharacterAmount();
+
+        return Wrap(children: [
+          ModalBackground(
+              width: StatusMenu._kMenuWidth * scale,
+              child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                StatusMenuHeader(
+                  name: vm.name,
+                  figure: figure,
+                  scale: scale,
+                  hasShield: vm.hasShield,
+                  hasRetaliate: vm.hasRetaliate,
+                  owner: owner,
+                  figureId: widget.figureId,
+                  ownerId: vm.ownerId,
+                  isIceWraith: vm.isIceWraith,
+                  isElite: vm.isElite,
+                  gameState: _gameState,
+                  onIceWraithSwitch: () => setState(() {}),
+                ),
+                Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                  StatusMenuStatColumn(
+                    figure: figure,
+                    scale: scale,
+                    isMonster: vm.isMonster,
+                    isCharacter: vm.isCharacter,
+                    isSummon: vm.isSummon,
+                    characterId: widget.characterId,
+                    monsterId: widget.monsterId,
+                    immunities: vm.immunities,
+                    hasVimthreader: vm.hasVimthreader,
+                    hasLifespeaker: vm.hasLifespeaker,
+                    hasIncarnate: vm.hasIncarnate,
+                    character: vm.character,
+                    hasPlagueHerald: vm.hasPlagueHerald,
+                    figureId: widget.figureId,
+                    ownerId: vm.ownerId,
+                    monster: vm.monster,
+                    showCustomContent: vm.showCustomContent,
+                    gameState: _gameState,
+                    settings: _settings,
+                  ),
+                  StatusMenuConditionPanel(
+                    figureId: widget.figureId,
+                    ownerId: vm.ownerId,
+                    immunities: vm.immunities,
+                    scale: scale,
+                    isMonster: vm.isMonster,
+                    isCharacter: vm.isCharacter,
+                    isSummon: vm.isSummon,
+                    nrOfCharacters: nrOfCharacters,
+                    showCustomContent: vm.showCustomContent,
+                    hasMireFoot: vm.hasMireFoot,
+                    gameState: _gameState,
+                    settings: _settings,
+                  ),
+                ])
+              ]))
+        ]);
+      },
     );
-
-    final figure = vm.figure;
-    if (figure == null) {
-      Navigator.pop(context);
-      return const SizedBox(height: 0, width: 0);
-    }
-
-    final owner = vm.owner;
-    if (owner == null) {
-      Navigator.pop(context);
-      return const SizedBox(height: 0, width: 0);
-    }
-
-    double scale = getModalMenuScale(context);
-    int nrOfCharacters = GameMethods.getCurrentCharacterAmount();
-
-    return Wrap(children: [
-      ModalBackground(
-          width: StatusMenu._kMenuWidth * scale,
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            StatusMenuHeader(
-              name: vm.name,
-              figure: figure,
-              scale: scale,
-              hasShield: vm.hasShield,
-              hasRetaliate: vm.hasRetaliate,
-              owner: owner,
-              figureId: widget.figureId,
-              ownerId: vm.ownerId,
-              isIceWraith: vm.isIceWraith,
-              isElite: vm.isElite,
-              gameState: _gameState,
-              onIceWraithSwitch: () => setState(() {}),
-            ),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-              StatusMenuStatColumn(
-                figure: figure,
-                scale: scale,
-                isMonster: vm.isMonster,
-                isCharacter: vm.isCharacter,
-                isSummon: vm.isSummon,
-                characterId: widget.characterId,
-                monsterId: widget.monsterId,
-                immunities: vm.immunities,
-                hasVimthreader: vm.hasVimthreader,
-                hasLifespeaker: vm.hasLifespeaker,
-                hasIncarnate: vm.hasIncarnate,
-                character: vm.character,
-                hasPlagueHerald: vm.hasPlagueHerald,
-                figureId: widget.figureId,
-                ownerId: vm.ownerId,
-                monster: vm.monster,
-                showCustomContent: vm.showCustomContent,
-                gameState: _gameState,
-                settings: _settings,
-              ),
-              StatusMenuConditionPanel(
-                figureId: widget.figureId,
-                ownerId: vm.ownerId,
-                immunities: vm.immunities,
-                scale: scale,
-                isMonster: vm.isMonster,
-                isCharacter: vm.isCharacter,
-                isSummon: vm.isSummon,
-                nrOfCharacters: nrOfCharacters,
-                showCustomContent: vm.showCustomContent,
-                hasMireFoot: vm.hasMireFoot,
-                gameState: _gameState,
-                settings: _settings,
-              ),
-            ])
-          ]))
-    ]);
   }
 }
