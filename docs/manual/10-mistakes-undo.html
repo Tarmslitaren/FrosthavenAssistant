@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>§10 Mistakes, Undo, and Customization — X-Haven Assistant Manual</title>
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+<!-- BEGIN GENERATED SIDEBAR -->
+<nav class="sidebar-nav"><ol class="sidebar-toc">
+  <li>
+    <a href="01-welcome.html"><span class="num">§1</span> Welcome</a>
+  </li>
+  <li>
+    <a href="02-quick-start.html"><span class="num">§2</span> Quick Start</a>
+  </li>
+  <li>
+    <a href="03-anatomy.html"><span class="num">§3</span> The Main Screen</a>
+  </li>
+  <li>
+    <a href="04-setting-up.html"><span class="num">§4</span> Setting Up</a>
+  </li>
+  <li>
+    <a href="05-round-step-by-step.html"><span class="num">§5</span> A Round, Step by Step</a>
+  </li>
+  <li>
+    <a href="06-special-mechanics.html"><span class="num">§6</span> Special Scenario Mechanics</a>
+  </li>
+  <li>
+    <a href="07-frosthaven.html"><span class="num">§7</span> Frosthaven Specifics</a>
+  </li>
+  <li>
+    <a href="08-edition-differences.html"><span class="num">§8</span> Edition Differences</a>
+  </li>
+  <li>
+    <a href="09-multiplayer.html"><span class="num">§9</span> Multiplayer</a>
+  </li>
+  <li class="active">
+    <a href="10-mistakes-undo.html"><span class="num">§10</span> Mistakes, Undo, Customization</a>
+    <ol class="sub-toc">
+      <li><a href="#s10-1"><span class="num">§10.1</span> Undo and redo</a></li>
+      <li><a href="#s10-2"><span class="num">§10.2</span> If something looks wrong with the data</a></li>
+      <li><a href="#s10-3"><span class="num">§10.3</span> House rules</a></li>
+    </ol>
+  </li>
+  <li>
+    <a href="11-settings.html"><span class="num">§11</span> Settings Reference</a>
+  </li>
+  <li>
+    <a href="12-walkthrough.html"><span class="num">§12</span> Walkthrough: Black Barrow</a>
+  </li>
+  <li>
+    <a href="13-reference.html"><span class="num">§13</span> Reference Appendix</a>
+  </li>
+</ol></nav>
+<!-- END GENERATED SIDEBAR -->
+</aside>
+<main class="content">
+<nav class="chapter-nav">
+  <a href="09-multiplayer.html">← §9</a> &middot; <a href="index.html">Contents</a> &middot; <a href="11-settings.html">§11 →</a>
+</nav>
+<h1>X-Haven Assistant — User Manual</h1>
+<!-- BEGIN GENERATED SUBTOC -->
+<nav class="chapter-toc">
+  <h2>In this chapter</h2>
+  <ol>
+    <li><a href="#s10-1"><span class="num">§10.1</span> Undo and redo</a></li>
+    <li><a href="#s10-2"><span class="num">§10.2</span> If something looks wrong with the data</a></li>
+    <li><a href="#s10-3"><span class="num">§10.3</span> House rules</a></li>
+  </ol>
+</nav>
+<!-- END GENERATED SUBTOC -->
+<section id="s10">
+<h2><span class="secnum">§10</span>Mistakes, Undo, and Customization</h2>
+
+<h3 id="s10-1"><span class="secnum">§10.1</span>Undo and redo</h3>
+<p>The mental model to hold for this section: the app draws a hard line between <strong>shared state</strong> and <strong>player preferences</strong>.</p>
+<ul>
+  <li><strong>Shared state</strong> is the campaign — HP, conditions, initiatives, modifier draws, element imbues, scenario setup. Every modification is a <em>command</em>: it goes into a stream that syncs across all connected clients and can be undone.</li>
+  <li><strong>Player preferences</strong> are your local settings — theme, scaling, language, which house-rule toggles your copy of the app uses. Preferences are written to local storage on the device that changed them. They never enter the command stream, never sync, and Undo never sees them.</li>
+</ul>
+<p>Sidebar drawer → <strong>Undo</strong> reverses the last command in the shared stream. The drawer entry shows what would be undone (e.g., <em>Undo: Imbue element fire</em>), so you can confirm before tapping. <strong>Redo</strong> replays it. Because the stream is shared, an Undo on any connected client rolls the action back for everyone.</p>
+<p>What gets undone (shared state — flows through the command stream):</p>
+<ul>
+  <li>HP / condition / XP changes on characters and monsters</li>
+  <li>Standee adds / removes</li>
+  <li>Element imbue / use</li>
+  <li>Initiative entries</li>
+  <li>Modifier deck draws</li>
+  <li>Round advances</li>
+  <li>Adding / removing characters and monsters</li>
+  <li>Setting a scenario / adding a section</li>
+</ul>
+<p>What does <em>not</em> get undone (player preferences and local-only writes — never enter the command stream):</p>
+<ul>
+  <li><strong>Settings.</strong> Toggling dark mode, scaling, language, or any other Settings menu item is a preference. It only changes the device that toggled it.</li>
+  <li><strong>Network connection state.</strong> Connect/disconnect doesn't roll back through Undo.</li>
+  <li><strong>Saved-character library.</strong> Loading or saving a character writes to local storage outside the command stream.</li>
+</ul>
+<p>The undo stack is unbounded in practice (limited by available memory). After hundreds of commands in a session, you can still wind all the way back to scenario start — useful for "wait, what was the HP before that crit?" forensic reconstruction. Undo persists across saves, so closing and reopening the app preserves your history.</p>
+
+<h3 id="s10-2"><span class="secnum">§10.2</span>If something looks wrong with the data</h3>
+<p>The app's data files (monster ability decks, scenario rosters, class stats) are hand-curated from the rulebooks. With thousands of stat-card numbers and ability cards, occasional mistakes are inevitable.</p>
+<p>If you notice a discrepancy:</p>
+<ol>
+  <li>Confirm against the official rulebook or errata.</li>
+  <li>File an issue at <a href="https://github.com/Tarmslitaren/FrosthavenAssistant/issues">github.com/Tarmslitaren/FrosthavenAssistant/issues</a> with the scenario number, monster type, and what's wrong.</li>
+  <li>In the meantime, work around using <em>Custom Difficulty</em> (<a href="04-setting-up.html#s4-5">§4.5</a>) — override the specific stat for the affected standee.</li>
+</ol>
+<p>Data fixes are easy contributions. The JSON files are at <code>frosthaven_assistant/assets/data/editions/&lt;Edition&gt;.json</code> if you want to PR a fix yourself.</p>
+
+<h3 id="s10-3"><span class="secnum">§10.3</span>House rules</h3>
+<p>The app supports a few common house rules out of the box. The <strong>Scope</strong> column maps each rule onto the §10.1 distinction: <em>Shared state</em> rules ride the command stream and sync to every connected client (and are undoable); <em>Local preference</em> rules are per-device toggles that don't sync — every player at the table needs to set them on their own client if you want consistent behavior.</p>
+<table>
+  <thead><tr><th>Rule</th><th>Setting</th><th>Scope</th><th>When to use</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Open initiative</strong></td>
+      <td>Settings → disable initiative secrecy (<a href="09-multiplayer.html#s9-6">§9.6</a>)</td>
+      <td>Local preference</td>
+      <td>Groups that don't care about hidden initiative reveals — initiatives become visible on your client as soon as they're entered.</td>
+    </tr>
+    <tr>
+      <td><strong>Auto-expire conditions</strong></td>
+      <td>Settings → <em>Auto-expire conditions</em></td>
+      <td>Local preference</td>
+      <td>Groups playing strict RAW: end-of-round Wound / Poison / Stun / Disarm / Immobilize / Muddle clear automatically. Turn it off if your table prefers to decide manually for edge cases.</td>
+    </tr>
+    <tr>
+      <td><strong>Custom monster HP</strong></td>
+      <td>Long-press a stat card → set max HP</td>
+      <td>Shared state</td>
+      <td>One-off scenario tweaks — a monster's printed HP doesn't fit your house ruling. The change syncs and can be undone.</td>
+    </tr>
+    <tr>
+      <td><strong>Custom scenario level</strong></td>
+      <td>Level widget on the bottom bar → difficulty offset (<a href="04-setting-up.html#s4-5">§4.5</a>)</td>
+      <td>Shared state</td>
+      <td>Easy / Hard difficulty adjustments — applies to the whole scenario and to every connected client.</td>
+    </tr>
+    <tr>
+      <td><strong>No standees</strong></td>
+      <td>Settings → <em>No standees</em></td>
+      <td>Local preference</td>
+      <td>Groups that don't use physical standees — hides standee numbers throughout and tracks aggregate HP per type instead.</td>
+    </tr>
+  </tbody>
+</table>
+<p>House rules that the app doesn't support directly (e.g., custom modifier-deck composition) typically need a manual workaround using the Add Monster + perks system, or a feature request.</p>
+</section>
+<nav class="chapter-nav">
+  <a href="09-multiplayer.html">← §9</a> &middot; <a href="index.html">Contents</a> &middot; <a href="11-settings.html">§11 →</a>
+</nav>
+</main>
+</div>
+</body>
+</html>

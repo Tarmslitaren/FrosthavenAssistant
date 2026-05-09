@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>§2 Quick Start: Your First Scenario (Black Barrow) — X-Haven Assistant Manual</title>
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+<!-- BEGIN GENERATED SIDEBAR -->
+<nav class="sidebar-nav"><ol class="sidebar-toc">
+  <li>
+    <a href="01-welcome.html"><span class="num">§1</span> Welcome</a>
+  </li>
+  <li class="active">
+    <a href="02-quick-start.html"><span class="num">§2</span> Quick Start</a>
+    <ol class="sub-toc">
+      <li><a href="#s2-1"><span class="num">§2.1</span> Install and launch</a></li>
+      <li><a href="#s2-2"><span class="num">§2.2</span> Add your character</a></li>
+      <li><a href="#s2-3"><span class="num">§2.3</span> Set the scenario</a></li>
+      <li><a href="#s2-4"><span class="num">§2.4</span> Round 1: draw monster abilities</a></li>
+      <li><a href="#s2-5"><span class="num">§2.5</span> Round 1: set initiative</a></li>
+      <li><a href="#s2-6"><span class="num">§2.6</span> Round 1: first combat exchange</a></li>
+      <li><a href="#s2-7"><span class="num">§2.7</span> Round end: Next Round</a></li>
+      <li><a href="#s2-8"><span class="num">§2.8</span> What stays physical, what the app tracks</a></li>
+      <li><a href="#s2-9"><span class="num">§2.9</span> When to use Undo</a></li>
+    </ol>
+  </li>
+  <li>
+    <a href="03-anatomy.html"><span class="num">§3</span> The Main Screen</a>
+  </li>
+  <li>
+    <a href="04-setting-up.html"><span class="num">§4</span> Setting Up</a>
+  </li>
+  <li>
+    <a href="05-round-step-by-step.html"><span class="num">§5</span> A Round, Step by Step</a>
+  </li>
+  <li>
+    <a href="06-special-mechanics.html"><span class="num">§6</span> Special Scenario Mechanics</a>
+  </li>
+  <li>
+    <a href="07-frosthaven.html"><span class="num">§7</span> Frosthaven Specifics</a>
+  </li>
+  <li>
+    <a href="08-edition-differences.html"><span class="num">§8</span> Edition Differences</a>
+  </li>
+  <li>
+    <a href="09-multiplayer.html"><span class="num">§9</span> Multiplayer</a>
+  </li>
+  <li>
+    <a href="10-mistakes-undo.html"><span class="num">§10</span> Mistakes, Undo, Customization</a>
+  </li>
+  <li>
+    <a href="11-settings.html"><span class="num">§11</span> Settings Reference</a>
+  </li>
+  <li>
+    <a href="12-walkthrough.html"><span class="num">§12</span> Walkthrough: Black Barrow</a>
+  </li>
+  <li>
+    <a href="13-reference.html"><span class="num">§13</span> Reference Appendix</a>
+  </li>
+</ol></nav>
+<!-- END GENERATED SIDEBAR -->
+</aside>
+<main class="content">
+<nav class="chapter-nav">
+  <a href="01-welcome.html">← §1</a> &middot; <a href="index.html">Contents</a> &middot; <a href="03-anatomy.html">§3 →</a>
+</nav>
+<h1>X-Haven Assistant — User Manual</h1>
+<!-- BEGIN GENERATED SUBTOC -->
+<nav class="chapter-toc">
+  <h2>In this chapter</h2>
+  <ol>
+    <li><a href="#s2-1"><span class="num">§2.1</span> Install and launch</a></li>
+    <li><a href="#s2-2"><span class="num">§2.2</span> Add your character</a></li>
+    <li><a href="#s2-3"><span class="num">§2.3</span> Set the scenario</a></li>
+    <li><a href="#s2-4"><span class="num">§2.4</span> Round 1: draw monster abilities</a></li>
+    <li><a href="#s2-5"><span class="num">§2.5</span> Round 1: set initiative</a></li>
+    <li><a href="#s2-6"><span class="num">§2.6</span> Round 1: first combat exchange</a></li>
+    <li><a href="#s2-7"><span class="num">§2.7</span> Round end: Next Round</a></li>
+    <li><a href="#s2-8"><span class="num">§2.8</span> What stays physical, what the app tracks</a></li>
+    <li><a href="#s2-9"><span class="num">§2.9</span> When to use Undo</a></li>
+  </ol>
+</nav>
+<!-- END GENERATED SUBTOC -->
+<section id="s2">
+<h2><span class="secnum">§2</span>Quick Start: Your First Scenario (Black Barrow)</h2>
+
+<p>This chapter walks from "I just installed the app" to "we just finished round 1 of Gloomhaven Scenario 1." The example is <strong>Black Barrow</strong> with a single character: a level 1 <strong>Brute</strong>. Two starting rooms, two monster types, no special rules — small enough to walk end-to-end.</p>
+
+<div class="note"><strong>Why Black Barrow?</strong> Gloomhaven's rulebook also uses Scenario 1 to teach the game. Mirroring it here lets you read the manual and the rulebook side by side and see the same scenario from both angles — game rules from the rulebook, app behavior from this manual.</div>
+
+<h3 id="s2-1"><span class="secnum">§2.1</span>Install and launch</h3>
+<p>Install from the platform store (or build from source — see the project README). On first launch the app opens to an empty <em>Main Screen</em>: a top bar (elements), a near-empty body (the main list), and a bottom bar with round controls. The hamburger menu (<code>≡</code>) in the corner opens the sidebar drawer; that's where every menu lives.</p>
+<figure id="fig-2-1">
+  <img src="../screenshots/manual/s2-1-fresh-app.jpg" alt="X-Haven Assistant on first launch — empty main screen">
+  <figcaption><strong>Figure 2.1.</strong> First-launch state. Top bar: hamburger menu, "X-haven Assistant" title, six element icons. Body: empty (textured background). Bottom bar: <em>Draw</em> button, scenario stat icons (no scenario set yet so they're stubs), level widget, attack modifier deck card.</figcaption>
+</figure>
+
+<h3 id="s2-2"><span class="secnum">§2.2</span>Add your character</h3>
+<p>Open the sidebar (<code>≡</code>) → <strong>Add Character</strong>. Pick <strong>Brute</strong>. (For this walkthrough we'll also add a <strong>Spellweaver</strong> so we can talk about elements in <a href="#s2-7">§2.7</a>.) Each appears in the main list with a banner showing class color, name, level, max HP, and an empty initiative slot. The Add Character menu is documented in <a href="04-setting-up.html#s4-1">§4.1</a> with a screenshot of the picker.</p>
+
+<h3 id="s2-3"><span class="secnum">§2.3</span>Set the scenario</h3>
+<p>Open the sidebar → <strong>Set Scenario</strong> → <strong>Gloomhaven</strong> → <strong>1: Black Barrow</strong>. The app auto-populates:</p>
+<ul>
+  <li><strong>Bandit Guard</strong> — normal and elite ability decks</li>
+  <li><strong>Bandit Archer</strong> — normal and elite ability decks</li>
+  <li>Scenario stat line in the bottom bar (level, trap damage, hazardous terrain damage, XP bonus, coin multiplier)</li>
+</ul>
+<p>It does <em>not</em> place individual standees — those go on the table physically. The app tracks each standee once you tap to add it during play (see <a href="#s2-6">§2.6</a>).</p>
+<figure id="fig-2-2">
+  <img src="../screenshots/manual/s2-3-scenario-active.jpg" alt="Black Barrow set up — Brute and Spellweaver in the main list, Bandit Guard and Bandit Archer monster widgets visible">
+  <figcaption><strong>Figure 2.2.</strong> Black Barrow set up with a Brute and a Spellweaver (this walkthrough uses both — Brute for melee, Spellweaver for the element discussion in <a href="#s2-7">§2.7</a>). Bandit Guard widget shows one normal and one elite standee already added; Bandit Archer below has one normal. Bottom bar: scenario stats now populated (level / trap / hazardous / XP / coin).</figcaption>
+</figure>
+
+<h3 id="s2-4"><span class="secnum">§2.4</span>Round 1: draw monster abilities</h3>
+<p>Each player picks two cards from their hand (physical, on the table). When the group is ready, tap the <strong>Draw</strong> button in the bottom bar. The app reveals the top ability card for each active monster type — so you'll see the Bandit Guard's drawn card and the Bandit Archer's drawn card.</p>
+
+<div class="note"><strong>Test ref.</strong> The Draw button's behavior is implemented by <code>DrawButton</code> in <code>lib/Layout/draw_button.dart</code>. The same button morphs into "Next Round" when the round is over (see <a href="#s2-7">§2.7</a>) — see also <a href="https://github.com/Tarmslitaren/FrosthavenAssistant/issues/135">upstream issue #135</a> on the morphing-button race.</div>
+
+<h3 id="s2-5"><span class="secnum">§2.5</span>Round 1: set initiative</h3>
+<p>Each character's initiative is the lower of their two chosen cards. Tap the empty initiative slot under the Brute's banner. A numpad menu opens; enter the value. The main list reorders by initiative as soon as you confirm.</p>
+<p>Each monster type's initiative is shown on its currently-drawn ability card and is set automatically — you do not enter monster initiative yourself.</p>
+
+<h3 id="s2-6"><span class="secnum">§2.6</span>Round 1: first combat exchange</h3>
+<p>Play in initiative order. When it is the Brute's turn:</p>
+<ol>
+  <li>Move the physical Brute mini on the map.</li>
+  <li>Resolve the attack physically (declare target, roll modifier deck, etc.).</li>
+  <li>In the app, tap the <strong>Bandit Guard</strong> standee menu — pick the standee number you attacked. The standee menu opens.</li>
+  <li>Tap the <strong>HP</strong> control to subtract damage.</li>
+  <li>If the modifier card you drew applies a condition (Wound, Poison, etc.), tap the condition icon in the same menu.</li>
+</ol>
+<p>For the monster's turn: the ability card is already revealed (<a href="#s2-4">§2.4</a>); resolve it physically against the targeted character; tap the character widget's HP control to apply damage.</p>
+
+<h3 id="s2-7"><span class="secnum">§2.7</span>Round end: Next Round</h3>
+<p>When all figures have acted and the round is over, the <strong>Draw</strong> button's label changes to <strong>Next Round</strong>. Tap it. The round counter advances; monster ability decks reshuffle if any drew a "shuffle" card; conditions decrement per the rules (Poison, Wound, etc., behave per the app's auto-expire setting — see <a href="11-settings.html#s11">§11</a>).</p>
+<p><strong>Elements decay too.</strong> Suppose during this round the Spellweaver played an ability that creates a fire element. Tap the fire icon in the top bar to mark it infused. At round end, full elements step down to <em>waning</em> (half-filled circle); waning elements step down to <em>inert</em>. So the fire you just created will be <em>waning</em> after Next Round, and gone the round after that.</p>
+<figure id="fig-2-3">
+  <img src="../screenshots/manual/s2-7-elements-after-cast.jpg" alt="Top bar with fire infused after a Spellweaver cast">
+  <figcaption><strong>Figure 2.3.</strong> After the Spellweaver casts a fire ability — fire icon shows the orange-red "full" state. The Brute (or anyone with a fire-consuming ability) can use this on a later turn before it decays. See <a href="03-anatomy.html#s3-2">§3.2</a> for the full element lifecycle.</figcaption>
+</figure>
+
+<div class="note"><strong>Caveat — morphing button race.</strong> Because the same button serves Draw and Next Round, a stray double-tap at the moment the round ends can resolve as Draw → Next Round in quick succession. <a href="https://github.com/Tarmslitaren/FrosthavenAssistant/issues/135">Issue #135</a> tracks this. If you see initiative reset unexpectedly, that's the cause; <em>Undo</em> (<a href="10-mistakes-undo.html#s10">§10</a>) reverses it.</div>
+
+<h3 id="s2-8"><span class="secnum">§2.8</span>What stays physical, what the app tracks</h3>
+<p>The app tracks: monster HP, character HP, conditions, initiative, round number, modifier deck state, elements, scenario stats. The table tracks: positions, line of sight, range, terrain, characters' chosen cards, items, loot in hand. Treat the app as a smart scoreboard, not a substitute for the map.</p>
+
+<h3 id="s2-9"><span class="secnum">§2.9</span>When to use Undo</h3>
+<p>Sidebar → <strong>Undo</strong>. Reverses the last app action: damage, condition, initiative entry, draws, round advance. Up to 250 levels deep. Use it freely — Undo is a recovery mechanism, not a confession.</p>
+
+<p>That's enough to play round 1. <a href="12-walkthrough.html#s12">§12</a> walks the rest of the scenario; <a href="05-round-step-by-step.html#s5">§5</a> goes deeper on each round-step interaction.</p>
+</section>
+<nav class="chapter-nav">
+  <a href="01-welcome.html">← §1</a> &middot; <a href="index.html">Contents</a> &middot; <a href="03-anatomy.html">§3 →</a>
+</nav>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>§11 Settings Reference — X-Haven Assistant Manual</title>
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+<!-- BEGIN GENERATED SIDEBAR -->
+<nav class="sidebar-nav"><ol class="sidebar-toc">
+  <li>
+    <a href="01-welcome.html"><span class="num">§1</span> Welcome</a>
+  </li>
+  <li>
+    <a href="02-quick-start.html"><span class="num">§2</span> Quick Start</a>
+  </li>
+  <li>
+    <a href="03-anatomy.html"><span class="num">§3</span> The Main Screen</a>
+  </li>
+  <li>
+    <a href="04-setting-up.html"><span class="num">§4</span> Setting Up</a>
+  </li>
+  <li>
+    <a href="05-round-step-by-step.html"><span class="num">§5</span> A Round, Step by Step</a>
+  </li>
+  <li>
+    <a href="06-special-mechanics.html"><span class="num">§6</span> Special Scenario Mechanics</a>
+  </li>
+  <li>
+    <a href="07-frosthaven.html"><span class="num">§7</span> Frosthaven Specifics</a>
+  </li>
+  <li>
+    <a href="08-edition-differences.html"><span class="num">§8</span> Edition Differences</a>
+  </li>
+  <li>
+    <a href="09-multiplayer.html"><span class="num">§9</span> Multiplayer</a>
+  </li>
+  <li>
+    <a href="10-mistakes-undo.html"><span class="num">§10</span> Mistakes, Undo, Customization</a>
+  </li>
+  <li class="active">
+    <a href="11-settings.html"><span class="num">§11</span> Settings Reference</a>
+    <ol class="sub-toc">
+      <li><a href="#s11-1"><span class="num">§11.1</span> Display and layout</a></li>
+      <li><a href="#s11-2"><span class="num">§11.2</span> Round-flow behavior</a></li>
+      <li><a href="#s11-3"><span class="num">§11.3</span> Display filters and content</a></li>
+      <li><a href="#s11-4"><span class="num">§11.4</span> Networking</a></li>
+      <li><a href="#s11-5"><span class="num">§11.5</span> State management</a></li>
+    </ol>
+  </li>
+  <li>
+    <a href="12-walkthrough.html"><span class="num">§12</span> Walkthrough: Black Barrow</a>
+  </li>
+  <li>
+    <a href="13-reference.html"><span class="num">§13</span> Reference Appendix</a>
+  </li>
+</ol></nav>
+<!-- END GENERATED SIDEBAR -->
+</aside>
+<main class="content">
+<nav class="chapter-nav">
+  <a href="10-mistakes-undo.html">← §10</a> &middot; <a href="index.html">Contents</a> &middot; <a href="12-walkthrough.html">§12 →</a>
+</nav>
+<h1>X-Haven Assistant — User Manual</h1>
+<!-- BEGIN GENERATED SUBTOC -->
+<nav class="chapter-toc">
+  <h2>In this chapter</h2>
+  <ol>
+    <li><a href="#s11-1"><span class="num">§11.1</span> Display and layout</a></li>
+    <li><a href="#s11-2"><span class="num">§11.2</span> Round-flow behavior</a></li>
+    <li><a href="#s11-3"><span class="num">§11.3</span> Display filters and content</a></li>
+    <li><a href="#s11-4"><span class="num">§11.4</span> Networking</a></li>
+    <li><a href="#s11-5"><span class="num">§11.5</span> State management</a></li>
+  </ol>
+</nav>
+<!-- END GENERATED SUBTOC -->
+<section id="s11">
+<h2><span class="secnum">§11</span>Settings Reference</h2>
+
+<p>Sidebar drawer → <strong>Settings</strong> opens the settings menu (<code>SettingsMenu</code>, <code>lib/Layout/menus/settings_menu.dart</code>). The README enumerates every option; this section covers the ones that materially change app behavior. The table below is grouped by intent.</p>
+
+<table>
+  <thead>
+    <tr><th>Setting</th><th>Type</th><th>What it does</th><th>Default</th></tr>
+  </thead>
+  <tbody>
+    <tr class="group"><th colspan="4" id="s11-1"><span class="group-num">§11.1</span>Display and layout</th></tr>
+    <tr>
+      <td><strong>Dark mode</strong></td>
+      <td>Toggle</td>
+      <td>Switches the bar backgrounds and overall palette to a darker variant. Independent of the <em>Frosthaven</em> style (also in this menu).</td>
+      <td>Off</td>
+    </tr>
+    <tr>
+      <td><strong>App Bar Scaling</strong></td>
+      <td>Slider</td>
+      <td>Resizes the top and bottom bars. Useful on tablets where the default is too small. The corresponding <code>userScalingBars</code> value listenable cascades to most widget sizes.</td>
+      <td>1.6 (desktop) / 1.0 (mobile)</td>
+    </tr>
+    <tr>
+      <td><strong>Main List Scaling</strong></td>
+      <td>Slider</td>
+      <td>Resizes the main list (banners + monster widgets). Set independently from bar scaling.</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <td><strong>Fullscreen</strong></td>
+      <td>Toggle (desktop / Android)</td>
+      <td>Hides the OS title bar; useful for game-day setups. Not shown on iOS.</td>
+      <td>On</td>
+    </tr>
+    <tr>
+      <td><strong>Stat card text shimmers</strong></td>
+      <td>Toggle</td>
+      <td>Cosmetic — animates monster ability text. Some find it festive; others find it distracting.</td>
+      <td>On (desktop) / Off (mobile)</td>
+    </tr>
+
+    <tr class="group"><th colspan="4" id="s11-2"><span class="group-num">§11.2</span>Round-flow behavior</th></tr>
+    <tr>
+      <td><strong>Soft numpad for input</strong></td>
+      <td>Toggle</td>
+      <td>When on, tapping an initiative slot opens the in-app numpad (<a href="05-round-step-by-step.html#s5-3">§5.3</a>). When off — the default — tapping the slot opens your OS numeric keyboard instead.</td>
+      <td>Off</td>
+    </tr>
+    <tr>
+      <td><strong>Don't ask for initiative</strong></td>
+      <td>Toggle</td>
+      <td>Skips the initiative-entry step entirely; useful for groups using a separate initiative tool or playing with always-open initiative.</td>
+      <td>On</td>
+    </tr>
+    <tr>
+      <td><strong>Expire Conditions</strong></td>
+      <td>Toggle</td>
+      <td>Auto-decrements end-of-round conditions per the rulebook (<a href="10-mistakes-undo.html#s10-3">§10.3</a>).</td>
+      <td>On</td>
+    </tr>
+    <tr>
+      <td><strong>Auto Add Standees</strong></td>
+      <td>Toggle</td>
+      <td>Triggers the auto-spawn dialog (<a href="06-special-mechanics.html#s6-4">§6.4</a>) when sections introduce monsters.</td>
+      <td>On</td>
+    </tr>
+    <tr>
+      <td><strong>Auto Add Timed Spawns</strong></td>
+      <td>Toggle</td>
+      <td>Same idea but for scenarios with time-based (round-N) spawns rather than section-based.</td>
+      <td>On</td>
+    </tr>
+    <tr>
+      <td><strong>Random Standees</strong></td>
+      <td>Toggle</td>
+      <td>Randomizes which standee number is added rather than picking the lowest available. Tabletop-style draw-from-bag emulation.</td>
+      <td>Off</td>
+    </tr>
+    <tr>
+      <td><strong>Use Frosthaven Hazardous Terrain Calculation in OG Gloomhaven</strong></td>
+      <td>Toggle</td>
+      <td>Applies the Frosthaven hazardous-terrain damage rule (per-step) to original Gloomhaven scenarios as well. Off restores the legacy Gloomhaven calculation. Field: <code>fhHazTerrainCalcInOGGloom</code>.</td>
+      <td>On</td>
+    </tr>
+
+    <tr class="group"><th colspan="4" id="s11-3"><span class="group-num">§11.3</span>Display filters and content</th></tr>
+    <tr>
+      <td><strong>Don't track Standees</strong></td>
+      <td>Toggle</td>
+      <td>Hides standee numbers and presents monster types as aggregate HP pools (<a href="10-mistakes-undo.html#s10-3">§10.3</a>).</td>
+      <td>Off</td>
+    </tr>
+    <tr>
+      <td><strong>No Calculations</strong></td>
+      <td>Toggle</td>
+      <td>Disables the auto-applied modifier-card math; players resolve attack modifiers manually. Used by groups who prefer to do the math themselves.</td>
+      <td>Off</td>
+    </tr>
+    <tr>
+      <td><strong>Hide Loot Deck</strong></td>
+      <td>Toggle</td>
+      <td>Hides the Frosthaven loot-deck UI even on Frosthaven scenarios. For groups who want to track loot by hand.</td>
+      <td>Off</td>
+    </tr>
+    <tr>
+      <td><strong>Show Scenario names in list</strong></td>
+      <td>Toggle</td>
+      <td>Adds the scenario name to the title; useful when running multiple groups.</td>
+      <td>On</td>
+    </tr>
+    <tr>
+      <td><strong>Show Battle Goal Reminder</strong></td>
+      <td>Toggle</td>
+      <td>Surfaces a battle-goal toast at scenario start.</td>
+      <td>On</td>
+    </tr>
+    <tr>
+      <td><strong>Show Attack Modifier Decks</strong></td>
+      <td>Toggle</td>
+      <td>Toggles AMD visibility globally.</td>
+      <td>On</td>
+    </tr>
+    <tr>
+      <td><strong>Show Custom Content</strong></td>
+      <td>Toggle</td>
+      <td>Enables fan-made content (Crimson Scales, Trail of Ashes, Seeker of Xorn, CCUG editions).</td>
+      <td>On</td>
+    </tr>
+    <tr>
+      <td><strong>Show Sections in Main Screen</strong></td>
+      <td>Toggle</td>
+      <td>Shows scenario section markers (auto-spawn triggers, see <a href="06-special-mechanics.html#s6-4">§6.4</a>) inline in the main list. Off hides the section row. Field: <code>showSectionsInMainView</code>.</td>
+      <td>On</td>
+    </tr>
+    <tr>
+      <td><strong>Show Round Special Rule Reminders</strong></td>
+      <td>Toggle</td>
+      <td>Surfaces round-special-rule reminders during scenarios (<a href="06-special-mechanics.html#s6-3">§6.3</a>). Field: <code>showReminders</code>.</td>
+      <td>On</td>
+    </tr>
+    <tr>
+      <td><strong>Show character Attack Modifier Decks</strong></td>
+      <td>Toggle</td>
+      <td>Toggles per-character AMD visibility (independent of the global <em>Show Attack Modifier Decks</em> toggle above). Field: <code>showCharacterAMD</code>.</td>
+      <td>On</td>
+    </tr>
+    <tr>
+      <td><strong>Enable health wheel</strong></td>
+      <td>Toggle</td>
+      <td>Shows the radial health-wheel control on character/monster widgets for tap-to-adjust HP. Off falls back to plus/minus controls only. Field: <code>enableHeathWheel</code>.</td>
+      <td>On</td>
+    </tr>
+    <tr>
+      <td><strong>Use Ally Attack Modifier Deck in OG Gloomhaven</strong></td>
+      <td>Toggle</td>
+      <td>Applies the shared ally AMD (Frosthaven-style) to original Gloomhaven scenarios. Off keeps OG Gloomhaven without an ally deck. Field: <code>allyDeckInOGGloom</code>.</td>
+      <td>On</td>
+    </tr>
+    <tr>
+      <td><strong>Unlock specials</strong></td>
+      <td>Action</td>
+      <td>Opens the special-unlocks dialog, which reveals the hidden Frosthaven character classes (those that show as <code>???</code> in <a href="04-setting-up.html#s4-1">§4.1</a>).</td>
+      <td>—</td>
+    </tr>
+
+    <tr class="group"><th colspan="4" id="s11-4"><span class="group-num">§11.4</span>Networking</th></tr>
+    <tr><td colspan="4" style="font-style:italic; color:var(--muted); background:#fbfbfb;">Network behavior — last-known address, startup connect, server lifecycle — is documented in <a href="09-multiplayer.html#s9">§9</a>. There is no auto-reconnect on foreground; <em>Connect on startup</em> below is the only automatic reconnect path. Controls below.</td></tr>
+    <tr>
+      <td><strong>Connect as Client</strong></td>
+      <td>Toggle</td>
+      <td>Connects this device to a host using the IP and port below. Disabled while a server is running locally; status row shows <em>Connecting…</em> / <em>Connected</em>.</td>
+      <td>Off</td>
+    </tr>
+    <tr>
+      <td><strong>server ip address</strong></td>
+      <td>Text field</td>
+      <td>Last-known host address used by the client connect button.</td>
+      <td>192.168.1.???</td>
+    </tr>
+    <tr>
+      <td><strong>port</strong></td>
+      <td>Text field (numeric)</td>
+      <td>TCP port for client connect / host server.</td>
+      <td>4567</td>
+    </tr>
+    <tr>
+      <td><strong>Start Host Server</strong></td>
+      <td>Toggle</td>
+      <td>Starts a host on this device using the port above; flips to <em>Stop Server</em> while running.</td>
+      <td>Off</td>
+    </tr>
+    <tr>
+      <td><strong>Outgoing IPv6</strong></td>
+      <td>Dropdown</td>
+      <td>Picks which local interface to advertise when hosting (multi-homed machines only).</td>
+      <td>First detected interface</td>
+    </tr>
+    <tr>
+      <td><strong>Connect on startup</strong></td>
+      <td>Toggle</td>
+      <td>If on, the app attempts a single client connect to the last-known address roughly two seconds after launch (<code>connectClientOnStartup</code> in <code>lib/Resource/settings.dart</code>). Does not run on resume from background — see <a href="09-multiplayer.html#s9-4">§9.4</a>.</td>
+      <td>Off</td>
+    </tr>
+
+    <tr class="group"><th colspan="4" id="s11-5"><span class="group-num">§11.5</span>State management</th></tr>
+    <tr>
+      <td><strong>Load/Save State</strong></td>
+      <td>Action</td>
+      <td>Opens the save menu. Save the entire current game state to a file (or load from one). Useful for moving a session between devices, sharing a problem state for bug reports, or resuming a paused scenario weeks later.</td>
+      <td>—</td>
+    </tr>
+  </tbody>
+</table>
+</section>
+<nav class="chapter-nav">
+  <a href="10-mistakes-undo.html">← §10</a> &middot; <a href="index.html">Contents</a> &middot; <a href="12-walkthrough.html">§12 →</a>
+</nav>
+</main>
+</div>
+</body>
+</html>

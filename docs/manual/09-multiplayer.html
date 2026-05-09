@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>§9 Multiplayer — X-Haven Assistant Manual</title>
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+<!-- BEGIN GENERATED SIDEBAR -->
+<nav class="sidebar-nav"><ol class="sidebar-toc">
+  <li>
+    <a href="01-welcome.html"><span class="num">§1</span> Welcome</a>
+  </li>
+  <li>
+    <a href="02-quick-start.html"><span class="num">§2</span> Quick Start</a>
+  </li>
+  <li>
+    <a href="03-anatomy.html"><span class="num">§3</span> The Main Screen</a>
+  </li>
+  <li>
+    <a href="04-setting-up.html"><span class="num">§4</span> Setting Up</a>
+  </li>
+  <li>
+    <a href="05-round-step-by-step.html"><span class="num">§5</span> A Round, Step by Step</a>
+  </li>
+  <li>
+    <a href="06-special-mechanics.html"><span class="num">§6</span> Special Scenario Mechanics</a>
+  </li>
+  <li>
+    <a href="07-frosthaven.html"><span class="num">§7</span> Frosthaven Specifics</a>
+  </li>
+  <li>
+    <a href="08-edition-differences.html"><span class="num">§8</span> Edition Differences</a>
+  </li>
+  <li class="active">
+    <a href="09-multiplayer.html"><span class="num">§9</span> Multiplayer</a>
+    <ol class="sub-toc">
+      <li><a href="#s9-1"><span class="num">§9.1</span> Hosting</a></li>
+      <li><a href="#s9-2"><span class="num">§9.2</span> Joining</a></li>
+      <li><a href="#s9-3"><span class="num">§9.3</span> What's synced, what isn't</a></li>
+      <li><a href="#s9-4"><span class="num">§9.4</span> Disconnect behavior</a></li>
+      <li><a href="#s9-5"><span class="num">§9.5</span> Conflict resolution</a></li>
+      <li><a href="#s9-6"><span class="num">§9.6</span> Initiative secrecy</a></li>
+    </ol>
+  </li>
+  <li>
+    <a href="10-mistakes-undo.html"><span class="num">§10</span> Mistakes, Undo, Customization</a>
+  </li>
+  <li>
+    <a href="11-settings.html"><span class="num">§11</span> Settings Reference</a>
+  </li>
+  <li>
+    <a href="12-walkthrough.html"><span class="num">§12</span> Walkthrough: Black Barrow</a>
+  </li>
+  <li>
+    <a href="13-reference.html"><span class="num">§13</span> Reference Appendix</a>
+  </li>
+</ol></nav>
+<!-- END GENERATED SIDEBAR -->
+</aside>
+<main class="content">
+<nav class="chapter-nav">
+  <a href="08-edition-differences.html">← §8</a> &middot; <a href="index.html">Contents</a> &middot; <a href="10-mistakes-undo.html">§10 →</a>
+</nav>
+<h1>X-Haven Assistant — User Manual</h1>
+<!-- BEGIN GENERATED SUBTOC -->
+<nav class="chapter-toc">
+  <h2>In this chapter</h2>
+  <ol>
+    <li><a href="#s9-1"><span class="num">§9.1</span> Hosting</a></li>
+    <li><a href="#s9-2"><span class="num">§9.2</span> Joining</a></li>
+    <li><a href="#s9-3"><span class="num">§9.3</span> What's synced, what isn't</a></li>
+    <li><a href="#s9-4"><span class="num">§9.4</span> Disconnect behavior</a></li>
+    <li><a href="#s9-5"><span class="num">§9.5</span> Conflict resolution</a></li>
+    <li><a href="#s9-6"><span class="num">§9.6</span> Initiative secrecy</a></li>
+  </ol>
+</nav>
+<!-- END GENERATED SUBTOC -->
+<section id="s9">
+<h2><span class="secnum">§9</span>Multiplayer</h2>
+
+<p>The app supports a host/client model for sharing game state across multiple devices around the table. One device hosts; others connect as clients. The host's state is authoritative.</p>
+
+<p>Both hosting and joining are configured from the same place: open the sidebar drawer (≡), tap <strong>Settings</strong>, and scroll to the <em>Connect devices on local wifi:</em> subsection. That subsection holds two sibling controls — <strong>Connect as Client</strong> (with a server-IP-address text field and a port field) and <strong>Start Host Server</strong> (with a dropdown of detected local IPs and a port field). Toggling one disables the other: a single device hosts or joins, not both.</p>
+
+<h3 id="s9-1"><span class="secnum">§9.1</span>Hosting</h3>
+<p>≡ → <strong>Settings</strong> → <em>Connect devices on local wifi:</em> → <strong>Start Host Server</strong>. The dropdown immediately below the checkbox lists the local interfaces the device discovered; pick the address you want to advertise, then tap the checkbox to start listening. That's the address clients on the same LAN should type into their own <em>server ip address</em> field.</p>
+<figure id="fig-9-1">
+  <img src="../screenshots/manual/s9-1-host-server.png" alt="Settings dialog cropped to the host-server portion: Start Host Server checkbox, IPv6 dropdown, port field">
+  <figcaption><strong>Figure 9.1.</strong> The host-server portion of the Settings dialog. <strong>Start Host Server</strong> toggles the listener; the dropdown below shows the local interface addresses the device detected (here an RFC 4193 unique-local example, <code>fd12:3456:789a::1</code> — the IPv6 analog of IPv4 RFC1918 private space). The <em>port</em> field defaults to <code>4567</code>. Once the checkbox is on, the label flips to <strong>Stop Server</strong>; while the server is up, the <strong>Connect as Client</strong> row above (visible in <a href="#fig-9-2">Figure 9.2</a>) becomes disabled.</figcaption>
+</figure>
+<p>The server listens on the chosen address and port; the address shown is the one to share. Server lifecycle is implemented in <code>lib/services/network/server.dart</code>; the standalone variant lives in <code>frosthaven_assistant_server/lib/standalone_server.dart</code> for headless hosts.</p>
+<p><strong>No password / no auth handshake.</strong> The server accepts any client that knows the address and port — there is no shared-secret prompt, certificate check, or PIN exchange. Access control is by network reachability: a client either has a route to the host's IPv6 and the right port, or it doesn't. This is fine for trusted LAN play; do not expose the host to the public internet without a tunnel or VPN.</p>
+<p><strong>Caveats.</strong> Hosting from a phone over cellular usually doesn't work — most carriers block inbound connections. LAN hosting from a desktop is the most reliable; LAN hosting from a tablet is fine if it stays awake (consider the <em>Wakelock</em> setting on Android, which is on by default for this reason). Port forwarding is required for hosting across the public internet — most groups don't bother.</p>
+
+<h3 id="s9-2"><span class="secnum">§9.2</span>Joining</h3>
+<p>≡ → <strong>Settings</strong> → <em>Connect devices on local wifi:</em> → <strong>Connect as Client</strong>. Type the host's address into the <em>server ip address</em> field, set the port if it differs from the default, and tick the checkbox. The text field remembers the last successfully-connected address, so reconnecting on the same network is usually a one-tap operation. On successful connect, the server's full state is pushed to the client and replaces whatever was there locally.</p>
+<figure id="fig-9-2">
+  <img src="../screenshots/manual/s9-2-connect-to-server.png" alt="Settings dialog cropped to the client portion: Connect as Client checkbox, server-ip-address field, port field">
+  <figcaption><strong>Figure 9.2.</strong> The client portion of the Settings dialog. The <em>Connect devices on local wifi:</em> header anchors the subsection. The <em>server ip address</em> field carries the last-known host address (here <code>fd12:3456:789a::1</code>); the <em>port</em> field defaults to <code>4567</code>. Tapping <strong>Connect as Client</strong> initiates the connection — the label cycles through <em>Connecting…</em> and lands at <em>Connected as Client</em> on success. <strong>Start Host Server</strong> peeks in below the port field; running it on this device disables the client row above (compare <a href="#fig-9-1">Figure 9.1</a>).</figcaption>
+</figure>
+<p>The first connect of a session reads from the server; subsequent commands flow bidirectionally. Both host and clients can issue commands — the server arbitrates ordering via <em>command index</em> (see <a href="#s9-5">§9.5</a>).</p>
+
+<h3 id="s9-3"><span class="secnum">§9.3</span>What's synced, what isn't</h3>
+<table>
+  <thead><tr><th>State</th><th>Synced?</th></tr></thead>
+  <tbody>
+    <tr><td>Characters, monsters, standees, HP, conditions, initiative, round, modifier decks, elements</td><td><strong>Yes</strong> (this is "game state")</td></tr>
+    <tr><td>Loot deck contents, character loot, sanctuary state</td><td><strong>Yes</strong></td></tr>
+    <tr><td>Undo / Redo history</td><td><strong>Yes</strong></td></tr>
+    <tr><td>Settings (theme, scaling, soft numpad, etc.)</td><td><strong>No</strong> — local per device</td></tr>
+    <tr><td>Saved characters / character library</td><td><strong>No</strong> — local per device</td></tr>
+    <tr><td>Network connection state (last-known address)</td><td><strong>No</strong> — local per device</td></tr>
+  </tbody>
+</table>
+<p>The split is intentional: settings are per-user preferences (one player likes dark mode, another doesn't); game state is per-table.</p>
+
+<h3 id="s9-4"><span class="secnum">§9.4</span>Disconnect behavior</h3>
+<p>If a client loses connection (Wi-Fi drop, app backgrounded, host quits), the app surfaces an "error / disconnected / lost" toast via <code>NetworkUI</code> (<a href="03-anatomy.html#s3-4">§3.4</a>) with a <em>Retry</em> option. Tapping retry re-establishes the connection using the last known address.</p>
+<p>Mobile clients backgrounded for too long may have their connection torn down by the OS. On foregrounding, the toast surfaces and the user can retry — there is no foreground auto-reconnect. If <em>Connect on startup</em> (<a href="11-settings.html#s11-4">§11.4</a>) is enabled, the app will attempt to reconnect on the next launch using the last-known address; this fires once roughly two seconds after launch and does not run on resume from background.</p>
+<p>Host disconnect (host kills the app or loses power) is not graceful — clients will receive disconnect notifications. The host's state is preserved on its device; bringing the host back up and reconnecting clients restores the session at the last persisted command index.</p>
+
+<h3 id="s9-5"><span class="secnum">§9.5</span>Conflict resolution</h3>
+<p>Every command (HP change, condition toggle, draw, etc.) is tagged with a monotonic <strong>command index</strong>. The server is the source of truth for the index; clients submit commands relative to the server's current index.</p>
+<p>The dedup logic lives in <code>frosthaven_assistant/lib/services/network/server.dart</code> (lines 64–94, the <code>updateStateFromMessage</code> method): if an incoming message's index is greater than the server's current index, it advances and broadcasts; if equal or lower, the message is logged and ignored. This is what protects the system from the most common multi-client races, including the morphing-button concern from <a href="https://github.com/Tarmslitaren/FrosthavenAssistant/issues/135">issue #135</a> — two near-simultaneous Next Round commands from different clients hit the server with the same index, and only the first lands.</p>
+<p><strong>Wire format.</strong> The state-sync envelope is JSON: <code>{"i":N,"d":"desc","e":{event},"s":"gamestate"}</code>. Commit <code>f193068c</code> replaced the older text-delimited <code>Index:N…Description:…GameState:…</code> framing, which had no escaping and corrupted whenever game content contained one of those keywords. The legacy format is still parsed for backwards compatibility with older peers but is no longer emitted by current message producers.</p>
+<p><strong>Out-of-sync notification.</strong> If a client's local state diverges from the server (typically because of a missed broadcast), the next command issued will be rejected and a toast surfaces ("out of sync — reconnect"). Reconnecting fetches the server's authoritative state and replaces local.</p>
+
+<h3 id="s9-6"><span class="secnum">§9.6</span>Initiative secrecy</h3>
+<p>The classic Gloomhaven simultaneous-reveal moment: each player chooses cards in secret, initiative is revealed at the same time. The app supports this in network play by masking initiative values on devices that didn't enter them. All values reveal simultaneously when the round transitions to <code>playTurns</code> (the <code>DrawCommand</code>, fired when the host advances past initiative entry).</p>
+<p><strong>How the mask works.</strong> Secrecy is a per-device UI mask, not a server-side hide. The actual initiative value broadcasts to every connected client as part of normal state sync — but the <code>InitiativeWidget</code> displays <em>??</em> for any character whose initiative this device did not type into the local input field (see <code>CharacterWidgetInternal.localCharacterInitChanges</code> in <code>frosthaven_assistant/lib/Layout/CharacterWidget/</code>). The set of "characters I entered" is local to each device and is cleared on transition to <code>playTurns</code>.</p>
+<p><strong>Edge case: modifying an entered value.</strong> While the round is still in <code>chooseInitiative</code>, the entering client can re-type their value. The new value broadcasts immediately as a fresh <code>SetInitCommand</code> — but it remains masked as <em>??</em> on other clients, just like the original entry was. The reveal still happens at the <code>playTurns</code> transition, not on modify. (The cheating vector this guards against — peeking at others' inits before committing your own — isn't possible in the first place because the masks are uniform during <code>chooseInitiative</code>.)</p>
+<p><strong>Items that change initiative (Gloomhaven boots, etc.).</strong> The app does not model items, so an item-driven initiative change looks identical to a manual edit: the player retypes their initiative into the same input field, and the same <code>SetInitCommand</code> path runs. The same secrecy applies — the new value broadcasts and stays masked on other clients until the next <code>playTurns</code> transition. There is no special "item used" notification; from the app's perspective, a Hide Armor reveal and a fat-fingered correction are the same event.</p>
+<p>Initiative secrecy is configurable per-table; if your group plays open initiative, the setting in <a href="11-settings.html#s11">§11</a> exposes values immediately on entry.</p>
+</section>
+<nav class="chapter-nav">
+  <a href="08-edition-differences.html">← §8</a> &middot; <a href="index.html">Contents</a> &middot; <a href="10-mistakes-undo.html">§10 →</a>
+</nav>
+</main>
+</div>
+</body>
+</html>

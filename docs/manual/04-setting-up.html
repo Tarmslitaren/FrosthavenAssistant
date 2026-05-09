@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>§4 Setting Up — X-Haven Assistant Manual</title>
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+<!-- BEGIN GENERATED SIDEBAR -->
+<nav class="sidebar-nav"><ol class="sidebar-toc">
+  <li>
+    <a href="01-welcome.html"><span class="num">§1</span> Welcome</a>
+  </li>
+  <li>
+    <a href="02-quick-start.html"><span class="num">§2</span> Quick Start</a>
+  </li>
+  <li>
+    <a href="03-anatomy.html"><span class="num">§3</span> The Main Screen</a>
+  </li>
+  <li class="active">
+    <a href="04-setting-up.html"><span class="num">§4</span> Setting Up</a>
+    <ol class="sub-toc">
+      <li><a href="#s4-1"><span class="num">§4.1</span> Adding characters</a></li>
+      <li><a href="#s4-2"><span class="num">§4.2</span> Setting a scenario</a></li>
+      <li><a href="#s4-3"><span class="num">§4.3</span> Adding monsters manually</a></li>
+      <li><a href="#s4-4"><span class="num">§4.4</span> Adding sections</a></li>
+      <li><a href="#s4-5"><span class="num">§4.5</span> Custom difficulty</a></li>
+    </ol>
+  </li>
+  <li>
+    <a href="05-round-step-by-step.html"><span class="num">§5</span> A Round, Step by Step</a>
+  </li>
+  <li>
+    <a href="06-special-mechanics.html"><span class="num">§6</span> Special Scenario Mechanics</a>
+  </li>
+  <li>
+    <a href="07-frosthaven.html"><span class="num">§7</span> Frosthaven Specifics</a>
+  </li>
+  <li>
+    <a href="08-edition-differences.html"><span class="num">§8</span> Edition Differences</a>
+  </li>
+  <li>
+    <a href="09-multiplayer.html"><span class="num">§9</span> Multiplayer</a>
+  </li>
+  <li>
+    <a href="10-mistakes-undo.html"><span class="num">§10</span> Mistakes, Undo, Customization</a>
+  </li>
+  <li>
+    <a href="11-settings.html"><span class="num">§11</span> Settings Reference</a>
+  </li>
+  <li>
+    <a href="12-walkthrough.html"><span class="num">§12</span> Walkthrough: Black Barrow</a>
+  </li>
+  <li>
+    <a href="13-reference.html"><span class="num">§13</span> Reference Appendix</a>
+  </li>
+</ol></nav>
+<!-- END GENERATED SIDEBAR -->
+</aside>
+<main class="content">
+<nav class="chapter-nav">
+  <a href="03-anatomy.html">← §3</a> &middot; <a href="index.html">Contents</a> &middot; <a href="05-round-step-by-step.html">§5 →</a>
+</nav>
+<h1>X-Haven Assistant — User Manual</h1>
+<!-- BEGIN GENERATED SUBTOC -->
+<nav class="chapter-toc">
+  <h2>In this chapter</h2>
+  <ol>
+    <li><a href="#s4-1"><span class="num">§4.1</span> Adding characters</a></li>
+    <li><a href="#s4-2"><span class="num">§4.2</span> Setting a scenario</a></li>
+    <li><a href="#s4-3"><span class="num">§4.3</span> Adding monsters manually</a></li>
+    <li><a href="#s4-4"><span class="num">§4.4</span> Adding sections</a></li>
+    <li><a href="#s4-5"><span class="num">§4.5</span> Custom difficulty</a></li>
+  </ol>
+</nav>
+<!-- END GENERATED SUBTOC -->
+<section id="s4">
+<h2><span class="secnum">§4</span>Setting Up</h2>
+
+<h3 id="s4-1"><span class="secnum">§4.1</span>Character lifecycle: create, save, remove, load</h3>
+
+<p>Characters in the app go through four operations across a campaign: <strong>create</strong> them when they join the party, <strong>save</strong> them between sessions, <strong>remove</strong> them when the scenario ends or someone retires, and <strong>load</strong> them back when the next scenario starts. All four live behind the <em>Add Character</em> menu and its <em>Load or Save Characters</em> sub-menu — close enough together that you'll bounce between them in a single session.</p>
+
+<p>The walkthrough below uses three characters to motivate each step:</p>
+<ul>
+  <li><strong>Brute</strong> — the manual's anchor character; melee, simple, level 1 to start.</li>
+  <li><strong>Spellweaver</strong> — added partway through to demonstrate elements (<a href="02-quick-start.html#s2-7">§2.7</a>).</li>
+  <li><strong>Tinkerer</strong> — added later to demonstrate the "new character joins an existing party" path.</li>
+</ul>
+
+<h4>Create</h4>
+<p>Sidebar (<a href="03-anatomy.html#s3-5">§3.5</a>) → <strong>Add Character</strong>. The menu (<code>AddCharacterMenu</code>, <code>lib/Layout/menus/add_character_menu.dart</code>) lists every class the app knows about, sorted with the current campaign's classes first.</p>
+<figure id="fig-4-1">
+  <img src="../screenshots/manual/s4-1-add-character-menu.jpg" alt="Add Character menu">
+  <figcaption><strong>Figure 4.1.</strong> The Add Character menu. Each row is one class: colored class icon, class name, edition tag in parentheses. Top-of-list <em>Escort</em> and <em>Objective</em> are scenario-construct "characters" rather than playable classes (see <a href="06-special-mechanics.html#s6-1">§6.1</a>). The <code>???</code> entry is a placeholder for a hidden/locked Frosthaven class — typing its name in the search field reveals it. The <strong>Load or Save Characters</strong> banner at the top opens the persistence menu (covered below).</figcaption>
+</figure>
+<p>Tap a class to add it at level 1 with the default name. To start above level 1, do two steps: add at 1, then <strong>Set Level</strong> on the sidebar (or tap the level on the character banner). To rename, tap the name on the banner — purely cosmetic, doesn't affect game state.</p>
+
+<p><em>Walkthrough — assemble the starting party.</em> Tap Add Character, pick <strong>Brute</strong>. The Brute appears in the main list (orange-and-blue banner with the horned-helm icon). Repeat: Add Character → <strong>Spellweaver</strong>. The two banners stack in the order added; the list will reorder by initiative once the round starts.</p>
+
+<h4>Save</h4>
+<p>From the Add Character menu, tap the <strong>Load or Save Characters</strong> banner at the top. This opens <code>SaveCharacterMenu</code> (<code>lib/Layout/menus/save_character_menu.dart</code>), which lists every character currently in the party and every previously-saved character on this device.</p>
+<p>To save a character: enter a <em>save name</em> (e.g., <code>Tuesday Crew</code>) and tap the save row for the character. Behind the scenes the app stores everything that's character-specific — class, name, level, current HP, conditions, XP, summons, and the full perk-checkbox state — keyed by <code>"&lt;save name&gt;\n&lt;character id&gt;"</code> in shared preferences (<code>Settings.saveCharacterState</code>, <code>lib/Resource/settings.dart</code>). The save survives app restart and device reboot.</p>
+<p>Practically: save names group your party. Save Brute and Spellweaver under the same name (<code>Tuesday Crew</code>) and they'll come back together when you load. Save the Spellweaver alone under <code>solo-spellweaver-experiment</code> and you've got a separate slot for one-off play.</p>
+
+<p><em>Walkthrough — between scenarios.</em> Your group just finished Black Barrow. Brute earned 14 XP and bought a perk; Spellweaver dropped to 4/8 HP and is still poisoned. Save both: <strong>Load or Save Characters</strong> → name it <code>Tuesday Crew, end of #1</code> → tap save on each row. The current state — including the lingering Poison — is now persisted exactly as it stands.</p>
+
+<h4>Remove</h4>
+<p>Sidebar → <strong>Remove Characters</strong> opens <code>RemoveCharacterMenu</code> (<code>lib/Layout/menus/remove_character_menu.dart</code>). Each row is a tap-to-remove for one character; <strong>Remove All</strong> at the top clears the list in one go.</p>
+<p>Removing a character does <em>not</em> delete its save. Your <code>Tuesday Crew</code> save is still there — <em>Remove</em> just takes the character off the active main list. Use this:</p>
+<ul>
+  <li>At scenario end, before loading the next scenario's roster.</li>
+  <li>When a player can't make a session, save their character and remove it for the night.</li>
+  <li>When you accidentally added the wrong class.</li>
+</ul>
+
+<p><em>Walkthrough — clearing the table.</em> Saved both characters above; now sidebar → <strong>Remove Characters</strong> → <strong>Remove All</strong>. Main list is empty. The Tuesday Crew save is still on disk; nothing in-progress was lost.</p>
+
+<h4>Load</h4>
+<p>Back in the Add Character menu, the <strong>Load or Save Characters</strong> banner also offers loading. The save list shows every character ever saved, grouped by save name. Tap a character entry to load it — the character returns to the main list with the exact state it had when saved (HP, conditions, perks, level, XP). Saves stay on disk after loading; you can load the same save multiple times if needed.</p>
+<p>Loaded characters merge into the current main list. If you've already added a Brute and you load a saved Brute, you'll have two Brutes in the list (different ids — the app distinguishes them). To replace rather than append, remove first then load.</p>
+
+<p><em>Walkthrough — next session, with a new face.</em> Open the app: empty main list. <strong>Add Character</strong> → <strong>Load or Save Characters</strong> → tap the saved Brute under <code>Tuesday Crew, end of #1</code>, then the saved Spellweaver. Both come back at their saved levels and HP. The Spellweaver is still poisoned — clear that with <em>Undo</em> if it shouldn't carry, or just tap the Poison icon on the banner to remove it.</p>
+<p>The party's friend is in town this week and will play a Tinkerer. Sidebar → <strong>Add Character</strong> → <strong>Tinkerer</strong>. The Tinkerer joins at level 1; Set Level on the sidebar to bring them up to the party's level. They have no perks — the player will pick those during their first scenario per the rulebook. Save the Tinkerer at end of session under the same <code>Tuesday Crew</code> name to keep the roster aligned.</p>
+
+<div class="note"><strong>Starting HP edge cases.</strong> Some perks and items grant <em>+max HP</em>. The app starts characters at the class's stock max HP for the chosen level — if a perk should add to max HP, adjust on the banner (long-press the HP control). Once you've set it and saved, the modified max HP is part of the save. Tracked at upstream issue <a href="https://github.com/Tarmslitaren/FrosthavenAssistant/issues/213">#213</a>.</div>
+
+<h3 id="s4-2"><span class="secnum">§4.2</span>Setting a scenario</h3>
+<p>Sidebar → <strong>Set Scenario</strong>. The menu (<code>SelectScenarioMenu</code>, <code>lib/Layout/menus/select_scenario_menu.dart</code>) has two parts:</p>
+<ol>
+  <li><strong>Campaign picker</strong> at the top — switches between editions (Gloomhaven, Frosthaven, Jaws of the Lion, etc.). Switching campaign changes which scenarios appear in the list below; characters from other editions remain in the main list.</li>
+  <li><strong>Scenario list</strong> — every scenario the picked campaign knows about, sorted by scenario number. The <code>custom</code> entry at the top is a blank scenario for ad-hoc setups.</li>
+</ol>
+<figure id="fig-4-2">
+  <img src="../screenshots/manual/s4-2-select-scenario-menu.jpg" alt="Set Scenario menu">
+  <figcaption><strong>Figure 4.2.</strong> Set Scenario menu, with the Jaws of the Lion campaign active. Each row is a scenario — tap to set it. The "Set Scenario" line just under the campaign picker is a numeric quick-jump (type a number to jump to that scenario).</figcaption>
+</figure>
+<p><strong>What setting a scenario does.</strong> Auto-populates monster types in the main list (<a href="03-anatomy.html#s3-3">§3.3</a>), the scenario stat line in the bottom bar (<a href="03-anatomy.html#s3-4">§3.4</a>), and any scenario-specific reminders (<a href="06-special-mechanics.html#s6-3">§6.3</a>). It does <em>not</em> place individual standees — those are added by tapping the monster widget's <code>+</code> control during play. Battle goals are also not tracked (kept on physical cards by design); <a href="https://github.com/Tarmslitaren/FrosthavenAssistant/pull/250">PR #250</a> covers Buttons &amp; Bugs single-character-mode considerations.</p>
+
+<h3 id="s4-3"><span class="secnum">§4.3</span>Adding monsters manually</h3>
+<p>Sidebar → <strong>Add Monsters</strong>. Distinct from <a href="#s4-2">§4.2 Set Scenario</a>: <em>Set Scenario</em> auto-populates a fixed roster, while <strong>Add Monsters</strong> (<code>AddMonsterMenu</code>) adds an arbitrary monster type to the current main list.</p>
+<figure id="fig-4-3">
+  <img src="../screenshots/manual/s4-3-add-monster-menu.jpg" alt="Add Monsters menu">
+  <figcaption><strong>Figure 4.3.</strong> Add Monsters menu. Filter checkboxes (top): <em>Show Bosses</em>, <em>Show Scenario Special Monsters</em>, <em>Add as Ally</em>. The "Add Monster" search field accepts a name fragment. The list below is filtered by the active edition shown in <em>Show monsters from</em>.</figcaption>
+</figure>
+<p>Use cases:</p>
+<ul>
+  <li><strong>Custom scenarios.</strong> Building a one-off encounter outside any published scenario.</li>
+  <li><strong>Mid-scenario reinforcements not from a section.</strong> Some scenario texts say "spawn an X" without an associated section card — add it manually here.</li>
+  <li><strong>Allies.</strong> Toggle <em>Add as Ally</em> to add the monster on the character side (uses the allies AMD). Useful for special scenario figures controlled by the players.</li>
+</ul>
+<p>Tapping a monster type adds it at the current scenario level. Standees for the new type are then added through the monster widget's <code>+</code> control.</p>
+
+<h3 id="s4-4"><span class="secnum">§4.4</span>Adding sections</h3>
+<p>Sidebar → <strong>Add Section</strong>. The menu (<code>AddSectionMenu</code>) lists the sections defined for the currently-set scenario that haven't yet been added. Use it when the scenario book reveals a section card mid-play — typically when a door is opened, a tile is unlocked, or a trigger fires.</p>
+<figure id="fig-4-4">
+  <img src="../screenshots/manual/s4-4-add-section-menu.png" alt="Add Section menu">
+  <figcaption><strong>Figure 4.4.</strong> Add Section menu, showing the three sections of Gloomhaven 2E #19 <em>Military Outpost</em>. Sections still pending appear in dark text; once added, an entry switches to a muted blue-grey to mark it as already in play. Most Gloomhaven 1E scenarios (including <em>Black Barrow</em>, the §2/§3 anchor) carry no sections, so this capture switches anchor to a 2E scenario.</figcaption>
+</figure>
+<p>Adding a section auto-spawns the section's monsters into the main list, applies any scenario rules listed for that section, and surfaces the section's reminders. Sections that introduce monsters of types already present add additional standees of that type rather than duplicating the monster widget.</p>
+<div class="note"><strong>Initiative timing.</strong> Per upstream issue <a href="https://github.com/Tarmslitaren/FrosthavenAssistant/issues/121">#121</a>, monsters added mid-round should be inserted into the existing initiative order using the section's drawn ability card, not skipped to next round. The app handles this when a section is added mid-round.</div>
+
+<h3 id="s4-5"><span class="secnum">§4.5</span>Custom difficulty</h3>
+<p>Difficulty adjustments come in three flavors, each at a different scope:</p>
+<figure id="fig-4-5">
+  <img src="../screenshots/manual/s4-5-set-level-menu.png" alt="Set Scenario Level menu">
+  <figcaption><strong>Figure 4.5.</strong> The <em>Set Scenario Level</em> menu (<code>SetLevelMenu</code>) — the global form, opened via the bottom bar's level widget (<a href="03-anatomy.html#s3-4">§3.4</a>). Levels 0–7 across the top, then <em>Solo</em> and <em>Automatic Scenario Level</em> toggles, then a <em>Difficulty</em> offset row (−1 / 0 / +1 / +2 / +3). The legend at the bottom resolves the chosen level into the four scenario constants — trap damage, hazardous terrain damage, experience added, gold coin value — plus the effective monster level. Per-monster and per-standee variants of this menu (long-press on a stat card) replace the legend with override controls.</figcaption>
+</figure>
+<ul>
+  <li><strong>Scenario level (global)</strong> — tap the level widget on the bottom bar (<a href="03-anatomy.html#s3-4">§3.4</a>). The <em>Set Level</em> menu (<code>SetLevelMenu</code>) lets you pick a level 0–7 and apply a difficulty offset (Easy −1, Normal 0, Hard +1, etc.). Affects every monster's stats simultaneously. The legend at the bottom of the menu shows the resulting numeric monster level for the chosen scenario level + difficulty.</li>
+  <li><strong>Per-monster level</strong> — long-press a monster type's stat card to override its level. Useful for elite-only re-leveling, or for scenarios where the rules call out a single monster at a different level.</li>
+  <li><strong>Per-monster max HP</strong> — same menu offers a max-HP override for one specific standee. House-rule territory; most groups never touch this.</li>
+</ul>
+<p>The bottom-bar level widget is also where you'd set <em>auto-level adjust</em> (the app re-computes scenario level based on character levels) and <em>solo mode</em> (single-character scaling). These persist across scenarios and are stored in settings, not game state — they survive a fresh "Set Scenario."</p>
+</section>
+<nav class="chapter-nav">
+  <a href="03-anatomy.html">← §3</a> &middot; <a href="index.html">Contents</a> &middot; <a href="05-round-step-by-step.html">§5 →</a>
+</nav>
+</main>
+</div>
+</body>
+</html>

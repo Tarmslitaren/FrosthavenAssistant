@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>§5 A Round, Step by Step — X-Haven Assistant Manual</title>
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+<!-- BEGIN GENERATED SIDEBAR -->
+<nav class="sidebar-nav"><ol class="sidebar-toc">
+  <li>
+    <a href="01-welcome.html"><span class="num">§1</span> Welcome</a>
+  </li>
+  <li>
+    <a href="02-quick-start.html"><span class="num">§2</span> Quick Start</a>
+  </li>
+  <li>
+    <a href="03-anatomy.html"><span class="num">§3</span> The Main Screen</a>
+  </li>
+  <li>
+    <a href="04-setting-up.html"><span class="num">§4</span> Setting Up</a>
+  </li>
+  <li class="active">
+    <a href="05-round-step-by-step.html"><span class="num">§5</span> A Round, Step by Step</a>
+    <ol class="sub-toc">
+      <li><a href="#s5-1"><span class="num">§5.1</span> Card selection (player phase)</a></li>
+      <li><a href="#s5-2"><span class="num">§5.2</span> Drawing monster abilities</a></li>
+      <li><a href="#s5-3"><span class="num">§5.3</span> Setting initiative</a></li>
+      <li><a href="#s5-4"><span class="num">§5.4</span> Sorting and acting</a></li>
+      <li><a href="#s5-5"><span class="num">§5.5</span> During a turn</a></li>
+      <li><a href="#s5-6"><span class="num">§5.6</span> Modifier decks (AMD)</a></li>
+      <li><a href="#s5-7"><span class="num">§5.7</span> Elements</a></li>
+      <li><a href="#s5-8"><span class="num">§5.8</span> Ending a turn / round</a></li>
+    </ol>
+  </li>
+  <li>
+    <a href="06-special-mechanics.html"><span class="num">§6</span> Special Scenario Mechanics</a>
+  </li>
+  <li>
+    <a href="07-frosthaven.html"><span class="num">§7</span> Frosthaven Specifics</a>
+  </li>
+  <li>
+    <a href="08-edition-differences.html"><span class="num">§8</span> Edition Differences</a>
+  </li>
+  <li>
+    <a href="09-multiplayer.html"><span class="num">§9</span> Multiplayer</a>
+  </li>
+  <li>
+    <a href="10-mistakes-undo.html"><span class="num">§10</span> Mistakes, Undo, Customization</a>
+  </li>
+  <li>
+    <a href="11-settings.html"><span class="num">§11</span> Settings Reference</a>
+  </li>
+  <li>
+    <a href="12-walkthrough.html"><span class="num">§12</span> Walkthrough: Black Barrow</a>
+  </li>
+  <li>
+    <a href="13-reference.html"><span class="num">§13</span> Reference Appendix</a>
+  </li>
+</ol></nav>
+<!-- END GENERATED SIDEBAR -->
+</aside>
+<main class="content">
+<nav class="chapter-nav">
+  <a href="04-setting-up.html">← §4</a> &middot; <a href="index.html">Contents</a> &middot; <a href="06-special-mechanics.html">§6 →</a>
+</nav>
+<h1>X-Haven Assistant — User Manual</h1>
+<!-- BEGIN GENERATED SUBTOC -->
+<nav class="chapter-toc">
+  <h2>In this chapter</h2>
+  <ol>
+    <li><a href="#s5-1"><span class="num">§5.1</span> Card selection (player phase)</a></li>
+    <li><a href="#s5-2"><span class="num">§5.2</span> Drawing monster abilities</a></li>
+    <li><a href="#s5-3"><span class="num">§5.3</span> Setting initiative</a></li>
+    <li><a href="#s5-4"><span class="num">§5.4</span> Sorting and acting</a></li>
+    <li><a href="#s5-5"><span class="num">§5.5</span> During a turn</a></li>
+    <li><a href="#s5-6"><span class="num">§5.6</span> Modifier decks (AMD)</a></li>
+    <li><a href="#s5-7"><span class="num">§5.7</span> Elements</a></li>
+    <li><a href="#s5-8"><span class="num">§5.8</span> Ending a turn / round</a></li>
+  </ol>
+</nav>
+<!-- END GENERATED SUBTOC -->
+<section id="s5">
+<h2><span class="secnum">§5</span>A Round, Step by Step</h2>
+
+<p>The round structure mirrors the rulebook's: card selection (physical), drawing monster abilities, setting initiative, sorting and acting, ending the round. The app participates in steps 2–5; step 1 stays on the table.</p>
+
+<h3 id="s5-1"><span class="secnum">§5.1</span>Card selection (player phase)</h3>
+<p>Each player chooses two ability cards from their hand and places them face-down. The app does not enforce, track, or even know about the player's hand — card management is purely physical. The app's role begins once the group is ready to draw.</p>
+<p>What this means in practice: there is no "submit cards" or "ready" interaction in the app. Just play physically and tap <strong>Draw</strong> when everyone is ready.</p>
+
+<h3 id="s5-2"><span class="secnum">§5.2</span>Drawing monster abilities</h3>
+<p>Tap the <strong>Draw</strong> button on the bottom bar (<a href="03-anatomy.html#s3-4">§3.4</a>). The button is implemented by <code>DrawButton</code> in <code>lib/Layout/draw_button.dart</code>.</p>
+<p>What happens on Draw:</p>
+<ol>
+  <li>Every active monster type's ability deck reveals its top card. The card appears in the monster widget on the main list.</li>
+  <li>The round state moves from <code>chooseInitiative</code> to <code>playTurns</code> (visible internally; affects the button's label, see below).</li>
+  <li>The button's label morphs from <strong>Draw</strong> to <strong>Next Round</strong>.</li>
+  <li>The round counter on the button face shows the current round number; in scenarios with a fixed round count, it reads as <code>3(8)</code> meaning round 3 of 8.</li>
+</ol>
+<p>If you tap Draw when the round state isn't ready (e.g., already in <code>playTurns</code>), the button's <code>runAction</code> returns a "blocked" message that surfaces as a toast — no state change.</p>
+
+<h3 id="s5-3"><span class="secnum">§5.3</span>Setting initiative</h3>
+<p>Each character's initiative is the lower of their two chosen cards (rules-side). To enter it in the app: tap the empty initiative slot under the character's banner. By default, this brings up your platform's <strong>OS numeric keyboard</strong> (the regular system keypad — iOS, Android, or desktop, whatever your device provides). Type the two-digit initiative; on the second digit, the field auto-unfocuses and the value is committed (no explicit confirm tap needed).</p>
+<p><strong>Opt-in: Soft numpad.</strong> If you'd rather have an in-app numpad — useful on platforms where the OS keyboard is slow to surface, or on multi-window desktop layouts where the system IME is intrusive — enable <em>Soft numpad for input</em> in Settings (<a href="11-settings.html#s11-2">§11.2</a>). With the toggle on, tapping the initiative slot opens the numpad shown in Figure 5.1 instead of the OS keyboard. The two-digit auto-confirm behavior is the same. The toggle is off by default.</p>
+<figure id="fig-5-1">
+  <img src="../screenshots/manual/s5-3-numpad-menu.jpg" alt="In-app numpad menu opened over the dimmed main scaffold">
+  <figcaption><strong>Figure 5.1.</strong> The in-app Soft numpad — only appears if <em>Soft numpad for input</em> is enabled in Settings (<a href="11-settings.html#s11-2">§11.2</a>). Centered card popup over the dimmed app; 3×3 grid of digits 1–9 with 0 below center; two-digit max — entering a second digit auto-confirms and dismisses the menu. With the setting off (the default), tapping the slot opens your OS numeric keyboard instead and the same two-digit auto-confirm applies.</figcaption>
+</figure>
+<p>Monster initiatives are <em>not</em> entered manually — they're set automatically from the drawn ability card's printed initiative.</p>
+<p><strong>Secret initiative (network play).</strong> When connected to a server (<a href="09-multiplayer.html#s9">§9</a>), client characters' initiatives can be hidden from other clients until the round resolves. The rule has an edge case: <em>modifying</em> an already-entered initiative reveals it to other clients (otherwise mid-round adjustments would leak the value).</p>
+
+<h3 id="s5-4"><span class="secnum">§5.4</span>Sorting and acting</h3>
+<p>Once <em>all</em> figures have an initiative (characters from the numpad, monsters from their drawn cards), the main list reorders by initiative ascending — lowest first. Ties break by figure type per the rulebook; the app respects this automatically.</p>
+<p>Reading the list: the topmost figure with no <em>acted</em> indicator is who acts next. As each figure resolves their turn, tap their banner's banner-icon corner — the icon shifts to <em>acted</em> state, and the next figure is highlighted as up next.</p>
+<p><strong>Manual reorder.</strong> For ties or scenario-specific overrides, long-press a banner and drag to a new position. This bypasses initiative ordering and is local to the current round only — the next round's draw resets the order.</p>
+
+<h3 id="s5-5"><span class="secnum">§5.5</span>During a turn</h3>
+<p>The app's job during a turn is to track HP, conditions, XP, and summons. Everything else (movement, attacks, line-of-sight, range) stays on the table.</p>
+<h4>Character widget</h4>
+<p>The character banner (<code>CharacterWidget</code>, <code>lib/Layout/CharacterWidget/</code>) exposes:</p>
+<ul>
+  <li><strong>HP control</strong> — tap to subtract one (most common), long-press to open a numpad for direct entry. Healing: add via the same control.</li>
+  <li><strong>Conditions row</strong> — tap a condition icon to toggle. Conditions render as small round tokens under HP; the icon set is the rulebook's. See <a href="03-anatomy.html#s3-7">§3.7</a> for the glyph vocabulary.</li>
+  <li><strong>XP counter</strong> — small star widget. Tap to increment.</li>
+  <li><strong>Summons (<code>+</code>)</strong> — adds a summon figure tracked under the character. Summons get their own HP / conditions / initiative.</li>
+  <li><strong>Acted indicator</strong> — small banner-icon in the corner; tap when the character finishes acting.</li>
+</ul>
+<h4>Monster standee menu</h4>
+<p>Each monster standee on the monster widget is its own tappable target. Tapping a standee opens its <em>status menu</em> with HP control, conditions, and a level pip. Promotion (e.g., from normal to elite mid-scenario) happens here — though the rules rarely call for it.</p>
+<p>If a monster's HP reaches 0, the standee is automatically removed from the list. The character equivalent (HP 0) leaves the banner in the list as <em>exhausted</em> — physically you remove the character from the table, but the banner stays so the app retains the position for end-of-scenario XP/coin computation.</p>
+
+<h3 id="s5-6"><span class="secnum">§5.6</span>Modifier decks (AMD)</h3>
+<p>Each monster faction has its own attack modifier deck. Each character also has their own. The app tracks all of them.</p>
+<ul>
+  <li><strong>Monster AMD</strong> — single deck shared by all monsters and bosses (per rulebook). Visible on the bottom bar (<a href="03-anatomy.html#s3-4">§3.4</a>) and inline above the bottom bar.</li>
+  <li><strong>Character AMDs</strong> — one per character, with their personally-purchased perks applied. Visible above each character's banner area on screens wide enough to fit, or accessible via the character widget.</li>
+  <li><strong>Allies AMD</strong> — appears when at least one allied figure is present (see <a href="04-setting-up.html#s4-3">§4.3</a> Add as Ally). Its visibility is also toggleable from the sidebar drawer.</li>
+</ul>
+<p><strong>Drawing.</strong> Tap the deck to draw the next card. The drawn card persists until the figure's turn ends; tap the deck again to advance. Special cards (Curse, Bless, +2/Stun, etc.) have their effects applied automatically when drawn — Bless/Curse are removed from the deck after one use; +2/anything resolves as the modifier plus the named condition. Rolling cards (the rolling-modifier symbol) chain visually as a small stack.</p>
+<p><strong>Discard / shuffle.</strong> Cards drawn during a round stay in the discard pile. At the end of the round the deck doesn't shuffle automatically — only specific cards (the shuffle-trigger card, or special abilities) cause a shuffle. The app handles all of this automatically.</p>
+<p><strong>Advantage / disadvantage.</strong> Long-press the deck to draw two cards instead of one; the rules-relevant one (per advantage/disadvantage) is highlighted. Single-tap dismisses both.</p>
+<p><strong>Perks.</strong> Configured in the perks menu off the character widget. Each perk you check applies its modification to the AMD: removing −1s, replacing −2s with rolling cards, adding +2 Wound, etc. Perks persist with the character via the character save/load system (<a href="04-setting-up.html#s4-1">§4.1</a>).</p>
+
+<h3 id="s5-7"><span class="secnum">§5.7</span>Elements</h3>
+<p>See <a href="03-anatomy.html#s3-2">§3.2</a> for the visual states. During a round, elements move through their lifecycle automatically:</p>
+<ul>
+  <li>Tap an inert element → <strong>full</strong>.</li>
+  <li>Tap a full element → <strong>inert</strong> (a "use" — typically when an ability consumes the element).</li>
+  <li>Long-press an inert element → <strong>waning</strong> (rare; for scenario-start element conditions).</li>
+  <li>At round end (when <em>Next Round</em> is tapped, see <a href="#s5-8">§5.8</a>), the cycle decays: <strong>full → waning → inert</strong>.</li>
+</ul>
+<p>The Elementalist class (Gloomhaven 2E) has perks that change the decay behavior — the app handles this automatically when an Elementalist is in the party with the relevant perk checked.</p>
+
+<h3 id="s5-8"><span class="secnum">§5.8</span>Ending a turn / round</h3>
+<p>A turn ends when the figure has resolved their action and you've tapped the <em>acted</em> indicator on their banner. The round ends when every figure has acted.</p>
+<p>To advance to the next round, tap the (now-relabelled) <strong>Next Round</strong> button on the bottom bar. What happens:</p>
+<ol>
+  <li>Round counter increments.</li>
+  <li>Element states decay one step.</li>
+  <li>Auto-expire conditions decrement (Wound deals damage; Poison stays through draws but expires per rules; Stun/Disarm/Immobilize/Muddle expire at round end if <em>Auto-expire conditions</em> is enabled in settings).</li>
+  <li>Acted indicators reset; banners go back to "ready to act."</li>
+  <li>Draws are <em>not</em> automatic — you tap <strong>Draw</strong> again to start the next round (so the button morphs back to <strong>Draw</strong>).</li>
+</ol>
+<div class="note"><strong>Caveat — morphing button race (<a href="https://github.com/Tarmslitaren/FrosthavenAssistant/issues/135">#135</a>).</strong> Because the same button serves Draw and Next Round, a stray double-tap at the boundary can resolve as Next Round → Draw in quick succession, advancing the round and immediately drawing for the next. The visible symptom is initiative resetting unexpectedly. Recovery: <em>Undo</em> twice (<a href="10-mistakes-undo.html#s10-1">§10.1</a>). Local UI debounce is the appropriate fix; the multi-client manifestation is already handled by the protocol's <code>commandIndex</code> dedup at <code>server.dart:64–94</code> (<code>updateStateFromMessage</code>). Note that the wire format is now a JSON envelope (<code>{"i":N,"d":"…","e":{…},"s":"…"}</code>) since commit <code>f193068c</code>; the older text-delimited framing remains as a legacy-compat fallback.</div>
+</section>
+<nav class="chapter-nav">
+  <a href="04-setting-up.html">← §4</a> &middot; <a href="index.html">Contents</a> &middot; <a href="06-special-mechanics.html">§6 →</a>
+</nav>
+</main>
+</div>
+</body>
+</html>
