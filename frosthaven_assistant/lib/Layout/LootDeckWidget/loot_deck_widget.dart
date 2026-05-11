@@ -44,22 +44,25 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
 
   LootDeckViewModel? _vmInstance;
   LootDeckViewModel get _vm => _vmInstance ??= LootDeckViewModel(
-      gameState: widget.gameState,
-      gameData: widget.gameData,
-      settings: widget.settings);
+    gameState: widget.gameState,
+    gameData: widget.gameData,
+    settings: widget.settings,
+  );
   bool _animationsEnabled = false;
 
   Widget _buildStayAnimation(Widget child, double userScalingBars) {
     return Container(
-        margin: EdgeInsets.only(left: cardWidth * userScalingBars),
-        child: child);
+      margin: EdgeInsets.only(left: cardWidth * userScalingBars),
+      child: child,
+    );
   }
 
   Widget _buildSlideAnimation(Widget child, Key key, double userScalingBars) {
     if (!_animationsEnabled) {
       return Container(
-          margin: EdgeInsets.only(left: cardWidth * userScalingBars),
-          child: child);
+        margin: EdgeInsets.only(left: cardWidth * userScalingBars),
+        child: child,
+      );
     }
     return LootSlideAnimationWidget(
       key: key,
@@ -70,7 +73,11 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
   }
 
   Widget _buildDrawAnimation(
-      Widget child, Key key, BuildContext context, double userScalingBars) {
+    Widget child,
+    Key key,
+    BuildContext context,
+    double userScalingBars,
+  ) {
     if (!_animationsEnabled || context.globalPaintBounds == null) {
       return child;
     }
@@ -79,8 +86,9 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
     final double startXOffset = -width;
 
     final globalPaintBounds = context.globalPaintBounds;
-    final screenSpaceOffset =
-        globalPaintBounds != null ? globalPaintBounds.topLeft : Offset.zero;
+    final screenSpaceOffset = globalPaintBounds != null
+        ? globalPaintBounds.topLeft
+        : Offset.zero;
     final screenSpaceY = screenSpaceOffset.dy;
     final screenSpaceX = screenSpaceOffset.dx - startXOffset;
 
@@ -106,174 +114,206 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Object>(
-        valueListenable: _vm.modelData,
-        builder: (context, value, child) {
-          return _buildContent();
-        });
+      valueListenable: _vm.modelData,
+      builder: (context, value, child) {
+        return _buildContent();
+      },
+    );
   }
 
   Widget _buildContent() {
     bool isAnimating = false;
 
     return ValueListenableBuilder<double>(
-        valueListenable: _vm.userScalingBars,
-        builder: (context, value, child) {
-          final userScalingBars = _vm.userScalingBars.value;
-          return SizedBox(
-            width: LootDeckWidgetState._kWidgetWidth * userScalingBars,
-            height: kModifierCardBaseWidth * userScalingBars,
-            child: ListenableBuilder(
-                listenable: Listenable.merge([_vm.lastEvent, _vm.cardCount]),
-                builder: (context, child) {
-                  if (!_animationsEnabled) {
-                    _animationsEnabled = _vm.initAnimationEnabled();
-                  }
-                  if (_vm.shouldHide) {
-                    return Container();
-                  }
+      valueListenable: _vm.userScalingBars,
+      builder: (context, value, child) {
+        final userScalingBars = _vm.userScalingBars.value;
+        return SizedBox(
+          width: LootDeckWidgetState._kWidgetWidth * userScalingBars,
+          height: kModifierCardBaseWidth * userScalingBars,
+          child: ListenableBuilder(
+            listenable: Listenable.merge([_vm.lastEvent, _vm.cardCount]),
+            builder: (context, child) {
+              if (!_animationsEnabled) {
+                _animationsEnabled = _vm.initAnimationEnabled();
+              }
+              if (_vm.shouldHide) {
+                return Container();
+              }
 
-                  final deck = _vm.lootDeck;
-                  final currentCharacterColor = _vm.currentCharacterColor;
-                  final currentCharacterName = _vm.currentCharacterName;
-                  final discardPileSize = deck.discardPileSize;
-                  final discardPileList = deck.discardPileContents.toList();
+              final deck = _vm.lootDeck;
+              final currentCharacterColor = _vm.currentCharacterColor;
+              final currentCharacterName = _vm.currentCharacterName;
+              final discardPileSize = deck.discardPileSize;
+              final discardPileList = deck.discardPileContents.toList();
 
-                  return RepaintBoundary(
-                      child: Row(
-                    children: [
-                      InkWell(
-                          onTap: () {
-                            if (deck.drawPileIsNotEmpty) {
-                              setState(() {
-                                _animationsEnabled = true;
-                                _vm.drawCard();
-                              });
-                            }
-                          },
-                          child: Stack(children: [
-                            deck.drawPileIsNotEmpty
-                                ? LootCardWidget(
-                                    card: deck.drawPileTop,
-                                    revealed: isAnimating)
-                                : Container(
-                                    width: LootDeckWidgetState._kCardW *
-                                        userScalingBars,
-                                    height: kModifierCardBaseWidth *
-                                        userScalingBars,
-                                    color: Color(_kTransparentBlack)),
-                            Positioned(
-                                bottom: 0,
-                                right: kSmallMargin * userScalingBars,
-                                child: Text(
-                                  deck.drawPileSize.toString(),
-                                  style: TextStyle(
-                                      fontSize: kDeckFontSize * userScalingBars,
-                                      color: Colors.white,
-                                      shadows: [
-                                        Shadow(
-                                            offset: Offset(
-                                                kShadowOffset * userScalingBars,
-                                                kShadowOffset *
-                                                    userScalingBars),
-                                            color: Colors.black)
-                                      ]),
-                                )),
-                            if (currentCharacterName != null)
-                              Positioned(
-                                height: LootDeckWidgetState._kIconSize *
-                                    userScalingBars,
-                                width: LootDeckWidgetState._kIconSize *
-                                    userScalingBars,
-                                top: LootDeckWidgetState._kIconTopMargin *
-                                    userScalingBars,
-                                left: kSmallMargin * userScalingBars,
-                                child: Image(
-                                  color: currentCharacterColor,
-                                  image: AssetImage(
-                                      'assets/images/class-icons/$currentCharacterName.png'),
+              return RepaintBoundary(
+                child: Row(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        if (deck.drawPileIsNotEmpty) {
+                          setState(() {
+                            _animationsEnabled = true;
+                            _vm.drawCard();
+                          });
+                        }
+                      },
+                      child: Stack(
+                        children: [
+                          deck.drawPileIsNotEmpty
+                              ? LootCardWidget(
+                                  card: deck.drawPileTop,
+                                  revealed: isAnimating,
+                                )
+                              : Container(
+                                  width:
+                                      LootDeckWidgetState._kCardW *
+                                      userScalingBars,
+                                  height:
+                                      kModifierCardBaseWidth * userScalingBars,
+                                  color: Color(_kTransparentBlack),
                                 ),
-                              )
-                          ])),
-                      SizedBox(
-                        width: kSmallMargin * userScalingBars,
-                      ),
-                      InkWell(
-                          onTap: () {
-                            _vm.openLootMenu(context);
-                          },
-                          child: Stack(children: [
-                            Container(
-                              margin: EdgeInsets.only(
-                                  top: kSmallMargin /
-                                      LootDeckWidgetState._kCenterDivisor *
-                                      userScalingBars),
-                              width: LootDeckWidgetState._kDiscardWidth *
-                                  userScalingBars,
-                              height: LootDeckWidgetState._kDiscardHeight *
-                                  userScalingBars,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(
-                                    LootDeckWidgetState._kDiscardBorderRadius *
-                                        userScalingBars)),
-                                border: Border.fromBorderSide(
-                                    const BorderSide(color: Colors.white70)),
-                                color: Color(_kTransparentBlack),
+                          Positioned(
+                            bottom: 0,
+                            right: kSmallMargin * userScalingBars,
+                            child: Text(
+                              deck.drawPileSize.toString(),
+                              style: TextStyle(
+                                fontSize: kDeckFontSize * userScalingBars,
+                                color: Colors.white,
+                                shadows: [
+                                  Shadow(
+                                    offset: Offset(
+                                      kShadowOffset * userScalingBars,
+                                      kShadowOffset * userScalingBars,
+                                    ),
+                                    color: Colors.black,
+                                  ),
+                                ],
                               ),
                             ),
-                            discardPileSize >
-                                    LootDeckWidgetState
-                                        ._kDiscardShowThirdMinSize
-                                ? _buildStayAnimation(
-                                    RotationTransition(
-                                        turns: AlwaysStoppedAnimation(
-                                            LootDeckWidgetState
-                                                ._kCardRotationTurns),
-                                        child: LootCardWidget(
-                                          card: discardPileList[
-                                              discardPileSize -
-                                                  LootDeckWidgetState
-                                                      ._kDiscardThirdFromEnd],
-                                          revealed: true,
-                                        )),
-                                    userScalingBars)
-                                : Container(),
-                            discardPileSize > 1
-                                ? _buildSlideAnimation(
-                                    RotationTransition(
-                                        turns: AlwaysStoppedAnimation(
-                                            LootDeckWidgetState
-                                                ._kCardRotationTurns),
-                                        child: LootCardWidget(
-                                          card: discardPileList[
-                                              discardPileSize -
-                                                  LootDeckWidgetState
-                                                      ._kDiscardSecondFromEnd],
-                                          revealed: true,
-                                        )),
-                                    Key(deck.discardPileSize.toString()),
-                                    userScalingBars)
-                                : Container(),
-                            deck.discardPileIsNotEmpty
-                                ? _buildDrawAnimation(
-                                    LootCardWidget(
-                                      key: Key(discardPileSize.toString()),
-                                      card: deck.discardPileTop,
+                          ),
+                          if (currentCharacterName != null &&
+                              deck.drawPileIsNotEmpty)
+                            Positioned(
+                              height:
+                                  LootDeckWidgetState._kIconSize *
+                                  userScalingBars,
+                              width:
+                                  LootDeckWidgetState._kIconSize *
+                                  userScalingBars,
+                              top:
+                                  LootDeckWidgetState._kIconTopMargin *
+                                  userScalingBars,
+                              left: kSmallMargin * userScalingBars,
+                              child: Image(
+                                color: currentCharacterColor,
+                                image: AssetImage(
+                                  'assets/images/class-icons/$currentCharacterName.png',
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: kSmallMargin * userScalingBars),
+                    InkWell(
+                      onTap: () {
+                        _vm.openLootMenu(context);
+                      },
+                      child: Stack(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(
+                              top:
+                                  kSmallMargin /
+                                  LootDeckWidgetState._kCenterDivisor *
+                                  userScalingBars,
+                            ),
+                            width:
+                                LootDeckWidgetState._kDiscardWidth *
+                                userScalingBars,
+                            height:
+                                LootDeckWidgetState._kDiscardHeight *
+                                userScalingBars,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(
+                                  LootDeckWidgetState._kDiscardBorderRadius *
+                                      userScalingBars,
+                                ),
+                              ),
+                              border: Border.fromBorderSide(
+                                const BorderSide(color: Colors.white70),
+                              ),
+                              color: Color(_kTransparentBlack),
+                            ),
+                          ),
+                          discardPileSize >
+                                  LootDeckWidgetState._kDiscardShowThirdMinSize
+                              ? _buildStayAnimation(
+                                  RotationTransition(
+                                    turns: AlwaysStoppedAnimation(
+                                      LootDeckWidgetState._kCardRotationTurns,
+                                    ),
+                                    child: LootCardWidget(
+                                      card:
+                                          discardPileList[discardPileSize -
+                                              LootDeckWidgetState
+                                                  ._kDiscardThirdFromEnd],
                                       revealed: true,
                                     ),
-                                    Key((-deck.discardPileSize).toString()),
-                                    context,
-                                    userScalingBars)
-                                : SizedBox(
-                                    width: LootDeckWidgetState._kCardW *
-                                        userScalingBars,
-                                    height: kModifierCardBaseWidth *
-                                        userScalingBars,
                                   ),
-                          ]))
-                    ],
-                  ));
-                }),
-          );
-        });
+                                  userScalingBars,
+                                )
+                              : Container(),
+                          discardPileSize > 1
+                              ? _buildSlideAnimation(
+                                  RotationTransition(
+                                    turns: AlwaysStoppedAnimation(
+                                      LootDeckWidgetState._kCardRotationTurns,
+                                    ),
+                                    child: LootCardWidget(
+                                      card:
+                                          discardPileList[discardPileSize -
+                                              LootDeckWidgetState
+                                                  ._kDiscardSecondFromEnd],
+                                      revealed: true,
+                                    ),
+                                  ),
+                                  Key(deck.discardPileSize.toString()),
+                                  userScalingBars,
+                                )
+                              : Container(),
+                          deck.discardPileIsNotEmpty
+                              ? _buildDrawAnimation(
+                                  LootCardWidget(
+                                    key: Key(discardPileSize.toString()),
+                                    card: deck.discardPileTop,
+                                    revealed: true,
+                                  ),
+                                  Key((-deck.discardPileSize).toString()),
+                                  context,
+                                  userScalingBars,
+                                )
+                              : SizedBox(
+                                  width:
+                                      LootDeckWidgetState._kCardW *
+                                      userScalingBars,
+                                  height:
+                                      kModifierCardBaseWidth * userScalingBars,
+                                ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        );
+      },
+    );
   }
 }
