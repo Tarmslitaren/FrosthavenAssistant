@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>§7 Frosthaven Specifics — X-Haven Assistant Manual</title>
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+<!-- BEGIN GENERATED SIDEBAR -->
+<nav class="sidebar-nav"><ol class="sidebar-toc">
+  <li>
+    <a href="01-welcome.html"><span class="num">§1</span> Welcome</a>
+  </li>
+  <li>
+    <a href="02-quick-start.html"><span class="num">§2</span> Quick Start</a>
+  </li>
+  <li>
+    <a href="03-anatomy.html"><span class="num">§3</span> The Main Screen</a>
+  </li>
+  <li>
+    <a href="04-setting-up.html"><span class="num">§4</span> Setting Up</a>
+  </li>
+  <li>
+    <a href="05-round-step-by-step.html"><span class="num">§5</span> A Round, Step by Step</a>
+  </li>
+  <li>
+    <a href="06-special-mechanics.html"><span class="num">§6</span> Special Scenario Mechanics</a>
+  </li>
+  <li class="active">
+    <a href="07-frosthaven.html"><span class="num">§7</span> Frosthaven Specifics</a>
+    <ol class="sub-toc">
+      <li><a href="#s7-1"><span class="num">§7.1</span> Loot deck</a></li>
+      <li><a href="#s7-2"><span class="num">§7.2</span> Sanctuary deck</a></li>
+      <li><a href="#s7-3"><span class="num">§7.3</span> Buttons &amp; Bugs differences</a></li>
+    </ol>
+  </li>
+  <li>
+    <a href="08-edition-differences.html"><span class="num">§8</span> Edition Differences</a>
+  </li>
+  <li>
+    <a href="09-multiplayer.html"><span class="num">§9</span> Multiplayer</a>
+  </li>
+  <li>
+    <a href="10-mistakes-undo.html"><span class="num">§10</span> Mistakes, Undo, Customization</a>
+  </li>
+  <li>
+    <a href="11-settings.html"><span class="num">§11</span> Settings Reference</a>
+  </li>
+  <li>
+    <a href="12-walkthrough.html"><span class="num">§12</span> Walkthrough: Black Barrow</a>
+  </li>
+  <li>
+    <a href="13-reference.html"><span class="num">§13</span> Reference Appendix</a>
+  </li>
+</ol></nav>
+<!-- END GENERATED SIDEBAR -->
+</aside>
+<main class="content">
+<nav class="chapter-nav">
+  <a href="06-special-mechanics.html">← §6</a> &middot; <a href="index.html">Contents</a> &middot; <a href="08-edition-differences.html">§8 →</a>
+</nav>
+<h1>X-Haven Assistant — User Manual</h1>
+<!-- BEGIN GENERATED SUBTOC -->
+<nav class="chapter-toc">
+  <h2>In this chapter</h2>
+  <ol>
+    <li><a href="#s7-1"><span class="num">§7.1</span> Loot deck</a></li>
+    <li><a href="#s7-2"><span class="num">§7.2</span> Sanctuary deck</a></li>
+    <li><a href="#s7-3"><span class="num">§7.3</span> Buttons &amp; Bugs differences</a></li>
+  </ol>
+</nav>
+<!-- END GENERATED SUBTOC -->
+<section id="s7">
+<h2><span class="secnum">§7</span>Frosthaven Specifics</h2>
+
+<p>Frosthaven adds mechanics that don't exist in Gloomhaven. The app handles them only when a Frosthaven scenario is active.</p>
+
+<h3 id="s7-1"><span class="secnum">§7.1</span>Loot deck</h3>
+<p>Frosthaven's loot deck replaces Gloomhaven's coin tokens with a deck of cards covering money, materials (lumber, hide, metal), and herbs (arrowvine, axenut, corpsecap, flamefruit, rockroot, snowthistle).</p>
+<p>The app composes the loot deck automatically from character count: each player adds a fixed contribution of money cards, plus material and herb cards based on the scenario's loot pool. The full composition is visible via <strong>Loot Deck Menu</strong> on the sidebar (<a href="03-anatomy.html#s3-5">§3.5</a>) — only present when a Frosthaven scenario is active.</p>
+<p><strong>Drawing.</strong> When a character looses (per the rulebook's looting rules), tap their character widget's loot affordance to draw the top card. The card is attributed to that character — at scenario end the app totals each character's hauls. Looting from a hex with a specific resource type (e.g., "loot 1 lumber") draws from the deck filtered to that resource.</p>
+<p><strong>Enhancement.</strong> Loot enhancements (cards that add +1 to a resource type, etc.) are configured in the loot deck menu via <code>LootCardEnhancementMenu</code>. Enhancements persist with the character's saved data — load a character into a future scenario and their enhancements come along.</p>
+<p><strong>Persistence.</strong> Money cards in particular: the app retains running totals so you don't have to re-enter wallet contents between scenarios. This is the loot deck's most quality-of-life-positive feature in Frosthaven play.</p>
+
+<h3 id="s7-2"><span class="secnum">§7.2</span>Sanctuary deck</h3>
+<p>The sanctuary deck (Crimson Scales / Trail of Ashes territory; Frosthaven uses a related mechanic) tracks favors and donations made to the Sanctuary of the Great Oak. The app exposes it as a separate deck reachable from the modifier deck menu when a relevant scenario is active.</p>
+<p>The most common interaction is the <em>donate</em> command (<code>DonateCsSanctuaryCommand</code>) — a player donates 10 gold during a town visit, drawing a card from the sanctuary deck. The card's effect (typically a permanent buff or modifier-deck change for the next scenario) is recorded against the donating character.</p>
+<p>This deck is not present in vanilla Gloomhaven or Jaws of the Lion campaigns; switching to those campaigns hides the deck entirely.</p>
+
+<h3 id="s7-3"><span class="secnum">§7.3</span>Buttons &amp; Bugs differences</h3>
+<p>Buttons &amp; Bugs (a Frosthaven solo expansion) plays as a single-character variant. There is no dedicated predicate function for this mode — instead, several layout files perform an inline string compare against the active campaign value, e.g. <code>getIt&lt;GameState&gt;().currentCampaign.value == "Buttons and Bugs"</code>. The same comparison appears in <code>lib/Layout/main_scaffold.dart</code> (line 235), <code>bottom_bar.dart</code> (line 65), <code>monster_box.dart</code> (line 275), and <code>monster_stat_card_widget.dart</code> (line 51). Each call site adjusts its own slice of the layout:</p>
+<ul>
+  <li><strong>Modifier deck position.</strong> The on-bar attack modifier deck is suppressed when in Buttons &amp; Bugs mode; the deck appears inline with the single character instead.</li>
+  <li><strong>Battle goals hidden by default.</strong> Buttons &amp; Bugs scenarios hide the battle-goal interaction the app surfaces in other modes — <a href="https://github.com/Tarmslitaren/FrosthavenAssistant/pull/250">PR #250</a> covers the scope.</li>
+  <li><strong>Single-character scaling.</strong> Solo mode (<a href="04-setting-up.html#s4-5">§4.5</a>) re-scales monster HP/damage for the one-character party size automatically.</li>
+</ul>
+<p>If you're running a multi-character Frosthaven campaign and accidentally pick a Buttons &amp; Bugs scenario, the layout shift is the most obvious tell — switch back via <strong>Set Scenario</strong> (<a href="04-setting-up.html#s4-2">§4.2</a>).</p>
+</section>
+<nav class="chapter-nav">
+  <a href="06-special-mechanics.html">← §6</a> &middot; <a href="index.html">Contents</a> &middot; <a href="08-edition-differences.html">§8 →</a>
+</nav>
+</main>
+</div>
+</body>
+</html>

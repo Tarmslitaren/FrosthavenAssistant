@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>§6 Special Scenario Mechanics — X-Haven Assistant Manual</title>
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+<!-- BEGIN GENERATED SIDEBAR -->
+<nav class="sidebar-nav"><ol class="sidebar-toc">
+  <li>
+    <a href="01-welcome.html"><span class="num">§1</span> Welcome</a>
+  </li>
+  <li>
+    <a href="02-quick-start.html"><span class="num">§2</span> Quick Start</a>
+  </li>
+  <li>
+    <a href="03-anatomy.html"><span class="num">§3</span> The Main Screen</a>
+  </li>
+  <li>
+    <a href="04-setting-up.html"><span class="num">§4</span> Setting Up</a>
+  </li>
+  <li>
+    <a href="05-round-step-by-step.html"><span class="num">§5</span> A Round, Step by Step</a>
+  </li>
+  <li class="active">
+    <a href="06-special-mechanics.html"><span class="num">§6</span> Special Scenario Mechanics</a>
+    <ol class="sub-toc">
+      <li><a href="#s6-1"><span class="num">§6.1</span> Objectives and escorts</a></li>
+      <li><a href="#s6-2"><span class="num">§6.2</span> Allies</a></li>
+      <li><a href="#s6-3"><span class="num">§6.3</span> Timers and reminders</a></li>
+      <li><a href="#s6-4"><span class="num">§6.4</span> Spawns</a></li>
+      <li><a href="#s6-5"><span class="num">§6.5</span> Named and boss monsters</a></li>
+      <li><a href="#s6-6"><span class="num">§6.6</span> Standee limits</a></li>
+    </ol>
+  </li>
+  <li>
+    <a href="07-frosthaven.html"><span class="num">§7</span> Frosthaven Specifics</a>
+  </li>
+  <li>
+    <a href="08-edition-differences.html"><span class="num">§8</span> Edition Differences</a>
+  </li>
+  <li>
+    <a href="09-multiplayer.html"><span class="num">§9</span> Multiplayer</a>
+  </li>
+  <li>
+    <a href="10-mistakes-undo.html"><span class="num">§10</span> Mistakes, Undo, Customization</a>
+  </li>
+  <li>
+    <a href="11-settings.html"><span class="num">§11</span> Settings Reference</a>
+  </li>
+  <li>
+    <a href="12-walkthrough.html"><span class="num">§12</span> Walkthrough: Black Barrow</a>
+  </li>
+  <li>
+    <a href="13-reference.html"><span class="num">§13</span> Reference Appendix</a>
+  </li>
+</ol></nav>
+<!-- END GENERATED SIDEBAR -->
+</aside>
+<main class="content">
+<nav class="chapter-nav">
+  <a href="05-round-step-by-step.html">← §5</a> &middot; <a href="index.html">Contents</a> &middot; <a href="07-frosthaven.html">§7 →</a>
+</nav>
+<h1>X-Haven Assistant — User Manual</h1>
+<!-- BEGIN GENERATED SUBTOC -->
+<nav class="chapter-toc">
+  <h2>In this chapter</h2>
+  <ol>
+    <li><a href="#s6-1"><span class="num">§6.1</span> Objectives and escorts</a></li>
+    <li><a href="#s6-2"><span class="num">§6.2</span> Allies</a></li>
+    <li><a href="#s6-3"><span class="num">§6.3</span> Timers and reminders</a></li>
+    <li><a href="#s6-4"><span class="num">§6.4</span> Spawns</a></li>
+    <li><a href="#s6-5"><span class="num">§6.5</span> Named and boss monsters</a></li>
+    <li><a href="#s6-6"><span class="num">§6.6</span> Standee limits</a></li>
+  </ol>
+</nav>
+<!-- END GENERATED SUBTOC -->
+<section id="s6">
+<h2><span class="secnum">§6</span>Special Scenario Mechanics</h2>
+
+<p>Beyond the core round loop, scenarios introduce mechanics the app handles in special ways. This section catalogs them.</p>
+
+<h3 id="s6-1"><span class="secnum">§6.1</span>Objectives and escorts</h3>
+<p>Objectives ("destroy the artifact," "protect the prisoner," "open the gate") and escorts ("the alchemist follows the party") are represented as <em>characters</em> in the main list rather than monsters. They use the <code>Objective</code> and <code>Escort</code> classes from the <code>na</code> (not-applicable) edition (<a href="04-setting-up.html#s4-1">§4.1</a>).</p>
+<p>Why characters and not monsters? Because they need an initiative slot, an HP bar, and conditions — exactly the character widget's affordances — but they don't draw modifier cards from the player AMDs and they don't earn XP. The <code>na</code> edition's classes provide that "character minus AMD/XP" shape.</p>
+<p>HP and initiative for objectives/escorts are typically dictated by the scenario book — set them via the character widget on add, or via <strong>Set Level</strong>. <code>GameMethods.isObjectiveOrEscort</code> is the predicate the app uses to special-case their behavior throughout the codebase.</p>
+
+<h3 id="s6-2"><span class="secnum">§6.2</span>Allies</h3>
+<p>Allies are NPC figures controlled by the players that act on their initiative. Mechanically they're monsters (with monster ability cards), but they fight on the players' side and use a separate <em>allies attack modifier deck</em> (a copy of the basic monster AMD without curses).</p>
+<p>Add an ally either by toggling <em>Add as Ally</em> in the Add Monsters menu (<a href="04-setting-up.html#s4-3">§4.3</a>) when adding the figure, or by promoting an existing monster type via the sidebar drawer's <em>Show Ally Attack Modifier Deck</em> toggle (<a href="03-anatomy.html#s3-5">§3.5</a>) when the scenario brings allies into play mid-game.</p>
+<p>Allies turn the second AMD card on the bottom bar visible. When no allies are active, the deck is hidden to keep the bar uncluttered.</p>
+
+<h3 id="s6-3"><span class="secnum">§6.3</span>Timers and reminders</h3>
+<p>Some scenarios specify start-of-round, mid-round, or end-of-round reminders ("at the start of round 3, spawn an Earth Demon"; "at the end of any round in which the artifact has been destroyed, the scenario ends"). The app surfaces these as toast notifications at the relevant moment, sourced from the scenario's data file.</p>
+<p>Reminder visibility is controlled by the <em>Show Reminders</em> setting (<a href="11-settings.html#s11">§11</a>). Default on. They auto-dismiss after a few seconds; tap to dismiss early.</p>
+
+<h3 id="s6-4"><span class="secnum">§6.4</span>Spawns</h3>
+<p>Spawns come in two flavors:</p>
+<ul>
+  <li><strong>Section-driven spawns.</strong> When you reveal a section via <strong>Add Section</strong> (<a href="04-setting-up.html#s4-4">§4.4</a>), the section's monster list is added to the main list automatically. This is the common case.</li>
+  <li><strong>Auto-spawn (room reveal).</strong> When <em>Auto-add spawns</em> is enabled in settings (<a href="11-settings.html#s11">§11</a>), the app prompts to add the next section's monsters when triggers fire. The trigger surfaces as a dialog (<code>AutoAddStandeeMenu</code>) over the main screen — confirm to add, or dismiss to skip.</li>
+</ul>
+<p>For one-off spawns not covered by sections (e.g., a scenario rule that says "spawn a Bandit Guard adjacent to the leader"), use <strong>Add Monsters</strong> for a new type or just tap <code>+</code> on an existing monster widget for an additional standee.</p>
+
+<h3 id="s6-5"><span class="secnum">§6.5</span>Named and boss monsters</h3>
+<p>Bosses (<code>MonsterType.boss</code>) differ from normal/elite monsters in three ways:</p>
+<ol>
+  <li><strong>Custom ability deck.</strong> Bosses have their own ability cards rather than drawing from the type-shared deck.</li>
+  <li><strong>Higher HP scaling.</strong> Boss HP scales differently with scenario level (per the rulebook); the app's stat tables encode this.</li>
+  <li><strong>Single standee.</strong> Bosses are typically unique — one standee, no normal/elite variants.</li>
+</ol>
+<p>Named monsters (e.g., specific characters that aren't bosses but aren't generic enemies either) follow the boss code path with a unique frame style. The Add Monsters menu's <em>Show Bosses</em> filter (<a href="04-setting-up.html#s4-3">§4.3</a>) toggles their visibility in the picker.</p>
+
+<h3 id="s6-6"><span class="secnum">§6.6</span>Standee limits</h3>
+<p>Each monster type has a hard cap on simultaneously-active standees (typically 6 normal + 4 elite, varying by edition). The app enforces this: tapping <code>+</code> on a fully-spawned monster type refuses the add and surfaces a toast naming the limit.</p>
+<p>If the rules ever call for exceeding the limit (rare; usually only via specific scenario rules), the workaround is to remove an existing standee first. The app does not yet provide a "force-add over limit" affordance — file a feature request if your scenario needs one.</p>
+</section>
+<nav class="chapter-nav">
+  <a href="05-round-step-by-step.html">← §5</a> &middot; <a href="index.html">Contents</a> &middot; <a href="07-frosthaven.html">§7 →</a>
+</nav>
+</main>
+</div>
+</body>
+</html>
