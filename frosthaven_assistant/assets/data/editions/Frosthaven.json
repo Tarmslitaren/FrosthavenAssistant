@@ -9140,7 +9140,7 @@
           "type": "Timer",
           "startOfRound": true,
           "list": [6,8],
-          "note": "Spawn Elite Lurker Clawcrusher at C. For 3-4 characters, spawn another Lurker clawcrusher at B. It is elite for 4 characters.",
+          "note": "Spawn Lurker Soldier at C. it is Elite for 4 characters. Spawn Lurker Mindsnipper at D. It is elite for 3-4 characters.",
           "name": "spawn 3"
         },
         {
@@ -9154,7 +9154,7 @@
           "type": "Timer",
           "startOfRound": true,
           "list": [10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],
-          "note": "Spawn Lurker Clawcrusher at B. It is elite for 4 characters. Spawn at E: Lurker Soldier, elite for 3-4 characters. One Lurker Wavethrower or two for 3-4 characters.",
+          "note": "Spawn Elite Lurker Clawcrusher at C. For 3-4 characters also Lurker Clawcrusher at B. It is elite for 4 characters",
           "name": "spawn 5"
         }
       ]
