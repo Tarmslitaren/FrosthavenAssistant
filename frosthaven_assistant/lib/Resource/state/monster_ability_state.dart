@@ -79,16 +79,18 @@ class MonsterAbilityState {
 
   void draw(_StateModifier _, {GameState? gameState}) {
     //put top of draw pile on discard pile
-    _discardPile.push(_drawPile.pop());
+    if (_drawPile.isNotEmpty) {
+      _discardPile.push(_drawPile.pop());
+    }
     _lastRoundDrawn = (gameState ?? getIt<GameState>()).totalRounds.value;
   }
 
   Map<String, dynamic> toJson() => {
-        'name': name,
-        'drawPile': _drawPile.getList().map((c) => c.toJson()).toList(),
-        'discardPile': _discardPile.getList().map((c) => c.toJson()).toList(),
-        'lastRoundDrawn': lastRoundDrawn,
-      };
+    'name': name,
+    'drawPile': _drawPile.getList().map((c) => c.toJson()).toList(),
+    'discardPile': _discardPile.getList().map((c) => c.toJson()).toList(),
+    'lastRoundDrawn': lastRoundDrawn,
+  };
 
   @override
   String toString() => json.encode(toJson());

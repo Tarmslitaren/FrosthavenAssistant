@@ -251,15 +251,15 @@ class ModifierDeck {
   }
 
   bool hasHail() {
-    if (_discardPile
-            .getList()
-            .firstWhereOrNull((item) => item.gfx == "special/hail") !=
+    if (_discardPile.getList().firstWhereOrNull(
+          (item) => item.gfx == "special/hail",
+        ) !=
         null) {
       return true;
     }
-    if (_drawPile
-            .getList()
-            .firstWhereOrNull((item) => item.gfx == "special/hail") !=
+    if (_drawPile.getList().firstWhereOrNull(
+          (item) => item.gfx == "special/hail",
+        ) !=
         null) {
       return true;
     }
@@ -290,31 +290,31 @@ class ModifierDeck {
   }
 
   bool hasMinus1() {
-    return _drawPile
-                .getList()
-                .firstWhereOrNull((element) => element.gfx == "minus1") !=
+    return _drawPile.getList().firstWhereOrNull(
+              (element) => element.gfx == "minus1",
+            ) !=
             null ||
-        _discardPile
-                .getList()
-                .firstWhereOrNull((element) => element.gfx == "minus1") !=
+        _discardPile.getList().firstWhereOrNull(
+              (element) => element.gfx == "minus1",
+            ) !=
             null;
   }
 
   bool hasMinus2() {
-    return !(_removedPile
-            .getList()
-            .firstWhereOrNull((element) => element.gfx == "minus2") !=
+    return !(_removedPile.getList().firstWhereOrNull(
+          (element) => element.gfx == "minus2",
+        ) !=
         null);
   }
 
   bool hasNull() {
-    return _drawPile
-                .getList()
-                .firstWhereOrNull((element) => element.gfx == "nullAttack") !=
+    return _drawPile.getList().firstWhereOrNull(
+              (element) => element.gfx == "nullAttack",
+            ) !=
             null ||
-        _discardPile
-                .getList()
-                .firstWhereOrNull((element) => element.gfx == "nullAttack") !=
+        _discardPile.getList().firstWhereOrNull(
+              (element) => element.gfx == "nullAttack",
+            ) !=
             null;
   }
 
@@ -337,7 +337,7 @@ class ModifierDeck {
         _drawPile.getList().firstWhereOrNull((test) => test.gfx == gfx) != null;
     final discardPileHas =
         _discardPile.getList().firstWhereOrNull((test) => test.gfx == gfx) !=
-            null;
+        null;
     return (drawPileHas || discardPileHas);
   }
 
@@ -471,15 +471,17 @@ class ModifierDeck {
       _shuffle();
     }
     //put top of draw pile on discard pile
-    ModifierCard card = _drawPile.pop();
-    if (card.type == CardType.multiply) {
-      _needsShuffle = true;
-    }
+    if (_drawPile.isNotEmpty) {
+      ModifierCard card = _drawPile.pop();
+      if (card.type == CardType.multiply) {
+        _needsShuffle = true;
+      }
 
-    if (_removables[card.gfx] != null) {
-      addRemovableValue(_StateModifier(), card.gfx, -1);
+      if (_removables[card.gfx] != null) {
+        addRemovableValue(_StateModifier(), card.gfx, -1);
+      }
+      _discardPile.push(card);
     }
-    _discardPile.push(card);
   }
 
   void reorderCards(_StateModifier s, int newIndex, int oldIndex) {
@@ -504,16 +506,16 @@ class ModifierDeck {
   }
 
   Map<String, dynamic> toJson() => {
-        'addedMinusOnes': _addedMinusOnes.value,
-        'imbuement': _imbuement.value,
-        'badOmen': _badOmen.value,
-        'corrosiveSpew': _corrosiveSpew.value,
-        'revealed': _revealedCount.value,
-        'cassandra': _cassandraSpecial.value,
-        'drawPile': _drawPile.getList().map((c) => c.toJson()).toList(),
-        'removedPile': _removedPile.getList().map((c) => c.toJson()).toList(),
-        'discardPile': _discardPile.getList().map((c) => c.toJson()).toList(),
-      };
+    'addedMinusOnes': _addedMinusOnes.value,
+    'imbuement': _imbuement.value,
+    'badOmen': _badOmen.value,
+    'corrosiveSpew': _corrosiveSpew.value,
+    'revealed': _revealedCount.value,
+    'cassandra': _cassandraSpecial.value,
+    'drawPile': _drawPile.getList().map((c) => c.toJson()).toList(),
+    'removedPile': _removedPile.getList().map((c) => c.toJson()).toList(),
+    'discardPile': _discardPile.getList().map((c) => c.toJson()).toList(),
+  };
 
   @override
   String toString() => json.encode(toJson());
@@ -532,7 +534,9 @@ class ModifierDeck {
   }
 
   List<ModifierCard> _getCardsFromJson(
-      Map<String, dynamic> modifierDeckData, String deckId) {
+    Map<String, dynamic> modifierDeckData,
+    String deckId,
+  ) {
     List<ModifierCard> newList = [];
     for (final item in modifierDeckData[deckId] as List) {
       String gfx = item["gfx"];
@@ -586,8 +590,9 @@ class ModifierDeck {
   }
 
   ModifierCard? _removeCardFromDrawPile(String gfx) {
-    final card =
-        _drawPile.getList().lastWhereOrNull((element) => element.gfx == gfx);
+    final card = _drawPile.getList().lastWhereOrNull(
+      (element) => element.gfx == gfx,
+    );
     if (card != null) {
       _drawPile.remove(card);
       _drawPile.shuffle();
@@ -670,9 +675,9 @@ class ModifierDeck {
       return true;
     }
     if (gfx == "P4" && name == "Nightshroud") {
-      if (GameMethods.getCharacterByName("Nightshroud")
-              ?.characterClass
-              .edition ==
+      if (GameMethods.getCharacterByName(
+            "Nightshroud",
+          )?.characterClass.edition ==
           "Gloomhaven 2nd Edition") {
         return true;
       }

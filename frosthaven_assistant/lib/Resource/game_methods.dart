@@ -106,7 +106,8 @@ class GameMethods {
   static bool isInactiveForRule(String monsterId, {GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
     final rule = gs.scenarioSpecialRules.firstWhereOrNull(
-        (rule) => rule.type == "InactiveMonster" && rule.name == monsterId);
+      (rule) => rule.type == "InactiveMonster" && rule.name == monsterId,
+    );
     if (rule != null && rule.list.contains(gs.round.value)) {
       return true;
     }
@@ -386,8 +387,11 @@ class GameMethods {
     return available[Random().nextInt(available.length)];
   }
 
-  static FigureState? getFigure(String? ownerId, String figureId,
-      {GameState? gameState}) {
+  static FigureState? getFigure(
+    String? ownerId,
+    String figureId, {
+    GameState? gameState,
+  }) {
     final gs = gameState ?? getIt<GameState>();
     for (final item in gs.currentList) {
       if (item.id == figureId) {
@@ -416,8 +420,11 @@ class GameMethods {
     return null;
   }
 
-  static String getFigureIdFromNr(String ownerId, int nr,
-      {GameState? gameState}) {
+  static String getFigureIdFromNr(
+    String ownerId,
+    int nr, {
+    GameState? gameState,
+  }) {
     final gs = gameState ?? getIt<GameState>();
     for (final item in gs.currentList) {
       if (item.id == ownerId) {
@@ -462,22 +469,24 @@ class GameMethods {
 
   static bool canExpire(Condition condition) {
     if (
-        //don't remove bane because user need to remember to remove 10hp as well
-        condition == Condition.strengthen ||
-            condition == Condition.stun ||
-            condition == Condition.immobilize ||
-            condition == Condition.muddle ||
-            condition == Condition.invisible ||
-            condition == Condition.disarm ||
-            condition == Condition.chill ||
-            condition == Condition.impair) {
+    //don't remove bane because user need to remember to remove 10hp as well
+    condition == Condition.strengthen ||
+        condition == Condition.stun ||
+        condition == Condition.immobilize ||
+        condition == Condition.muddle ||
+        condition == Condition.invisible ||
+        condition == Condition.disarm ||
+        condition == Condition.chill ||
+        condition == Condition.impair) {
       return true;
     }
     return false;
   }
 
-  static bool isFrosthavenStyledEdition(String edition,
-      {GameState? gameState}) {
+  static bool isFrosthavenStyledEdition(
+    String edition, {
+    GameState? gameState,
+  }) {
     final gs = gameState ?? getIt<GameState>();
     String scenario = gs.scenario.value;
     if (edition == "Solo") {
@@ -495,6 +504,7 @@ class GameMethods {
     return edition == "Frosthaven" ||
         edition == "Buttons and Bugs" ||
         edition == "Gloomhaven 2nd Edition" ||
+        edition == "Skulls in the Snow" ||
         edition == "Mercenary Packs";
   }
 
@@ -508,11 +518,15 @@ class GameMethods {
     return false;
   }
 
-  static bool isFrosthavenStyle(MonsterModel? monster,
-      {GameState? gameState, Settings? settings}) {
+  static bool isFrosthavenStyle(
+    MonsterModel? monster, {
+    GameState? gameState,
+    Settings? settings,
+  }) {
     final gs = gameState ?? getIt<GameState>();
     //frosthaven monster
-    final monsterFrostHavenStyledEdition = monster != null &&
+    final monsterFrostHavenStyledEdition =
+        monster != null &&
         isFrosthavenStyledEdition(monster.edition, gameState: gs);
     if (monsterFrostHavenStyledEdition) {
       return true;
@@ -573,20 +587,24 @@ class GameMethods {
     List<ModifierCard> retVal = [];
     if (faction == "Demons") {
       retVal.add(ModifierCard(CardType.add, "Demons-perks/plus1any"));
-      retVal
-          .add(ModifierCard(CardType.add, "Demons-perks/plus1retaliate1flip"));
+      retVal.add(
+        ModifierCard(CardType.add, "Demons-perks/plus1retaliate1flip"),
+      );
       retVal.add(ModifierCard(CardType.add, "Demons-perks/plus0wardallyflip"));
       retVal.add(ModifierCard(CardType.add, "Demons-perks/unique/fuck3"));
     } else if (faction == "Merchant-Guild") {
       retVal.add(ModifierCard(CardType.add, "Merchant-Guild-perks/plus1curse"));
       retVal.add(ModifierCard(CardType.add, "Merchant-Guild-perks/plus1wound"));
       retVal.add(
-          ModifierCard(CardType.add, "Merchant-Guild-perks/plus0heal2flip"));
-      retVal
-          .add(ModifierCard(CardType.add, "Merchant-Guild-perks/unique/fuck2"));
+        ModifierCard(CardType.add, "Merchant-Guild-perks/plus0heal2flip"),
+      );
+      retVal.add(
+        ModifierCard(CardType.add, "Merchant-Guild-perks/unique/fuck2"),
+      );
     } else if (faction == "Military") {
       retVal.add(
-          ModifierCard(CardType.add, "Military-perks/plus1strengthenally"));
+        ModifierCard(CardType.add, "Military-perks/plus1strengthenally"),
+      );
       retVal.add(ModifierCard(CardType.add, "Military-perks/plus1shield1flip"));
       retVal.add(ModifierCard(CardType.add, "Military-perks/plus1push2flip"));
       retVal.add(ModifierCard(CardType.add, "Military-perks/unique/fuck1"));
@@ -604,21 +622,38 @@ class GameMethods {
     return false;
   }
 
-  static bool hasRetaliate(Monster monster, MonsterInstance figure,
-      {GameState? gameState}) {
-    return _monsterHasConditionOnCards(monster, figure, "%retaliate%",
-        gameState: gameState);
+  static bool hasRetaliate(
+    Monster monster,
+    MonsterInstance figure, {
+    GameState? gameState,
+  }) {
+    return _monsterHasConditionOnCards(
+      monster,
+      figure,
+      "%retaliate%",
+      gameState: gameState,
+    );
   }
 
-  static bool hasShield(Monster monster, MonsterInstance figure,
-      {GameState? gameState}) {
-    return _monsterHasConditionOnCards(monster, figure, "%shield%",
-        gameState: gameState);
+  static bool hasShield(
+    Monster monster,
+    MonsterInstance figure, {
+    GameState? gameState,
+  }) {
+    return _monsterHasConditionOnCards(
+      monster,
+      figure,
+      "%shield%",
+      gameState: gameState,
+    );
   }
 
   static bool _monsterHasConditionOnCards(
-      Monster monster, MonsterInstance figure, String condition,
-      {GameState? gameState}) {
+    Monster monster,
+    MonsterInstance figure,
+    String condition, {
+    GameState? gameState,
+  }) {
     bool hasCondition = false;
     //check innate value
 
@@ -626,11 +661,11 @@ class GameMethods {
     if (figure.type == MonsterType.normal) {
       hasCondition =
           level.normal?.attributes.indexWhere((i) => i.contains(condition)) !=
-              -1;
+          -1;
     } else if (figure.type == MonsterType.elite) {
       hasCondition =
           level.elite?.attributes.indexWhere((i) => i.contains(condition)) !=
-              -1;
+          -1;
     } else if (figure.type == MonsterType.boss) {
       hasCondition =
           level.boss?.attributes.indexWhere((i) => i.contains(condition)) != -1;
@@ -640,8 +675,9 @@ class GameMethods {
     if (deck != null &&
         deck.discardPileIsNotEmpty &&
         monster.turnState.value != TurnsState.notDone) {
-      if (deck.discardPileTop.lines
-              .firstWhereOrNull((item) => item.contains(condition)) !=
+      if (deck.discardPileTop.lines.firstWhereOrNull(
+            (item) => item.contains(condition),
+          ) !=
           null) {
         return true;
       }

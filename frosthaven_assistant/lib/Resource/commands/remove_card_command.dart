@@ -7,7 +7,7 @@ class RemoveCardCommand extends Command {
   final GameState _gameState;
 
   RemoveCardCommand(this.card, {required GameState gameState})
-      : _gameState = gameState;
+    : _gameState = gameState;
   @override
   void execute() {
     for (final deck in _gameState.currentAbilityDecks) {
@@ -25,7 +25,6 @@ class RemoveCardCommand extends Command {
           }
         }
         deck.shuffle(stateAccess);
-        deck.draw(stateAccess);
         break;
       }
     }
