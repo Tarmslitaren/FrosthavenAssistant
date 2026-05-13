@@ -1,8 +1,8 @@
 {
-  "SS1": [
+  "1": [
     {
       "start": {
-        "City Guard SS1 (FH)": {
+        "City Guard SS1": {
           "normal": [0,0,0],
           "elite": [2, 1, 0]
         },
@@ -45,246 +45,436 @@
       }
     }
   ],
-  "SoX2": [
+  "2": [
     {
-      "A3": {
-        "Lurker": {
-          "normal": [
-            0,
-            1,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
+      "start": {
+        "Ice Wraith": {
+          "normal": [1,1, 2],
+          "elite": [1, 1, 2]
         },
-        "Water Eel": {
-          "normal": [
-            2,
-            2,
-            4
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+        "Shrike Fiend": {
+          "normal": [1, 2, 2],
+          "elite": [1, 2, 2]
         },
-        "Living Spirit": {
-          "normal": [
-            1,
-            0,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+        "Frenzied Sniper": {
+          "normal": [1, 1, 1],
+          "elite": [0,0,0]
         }
       }
     },
     {
-      "J2b": {
-        "Water Eel": {
-          "normal": [
-            0,
-            1,
-            2
-          ],
-          "elite": [
-            1,
-            0,
-            0
-          ]
+      "1": {
+        "Ice Wraith": {
+          "normal": [0,0, 1],
+          "elite": [1, 1, 1]
         },
-        "Lurker": {
-          "normal": [
-            0,
-            1,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
-        },
-        "Living Spirit": {
-          "normal": [
-            1,
-            0,
-            1
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+        "Burrowing Blade": {
+          "normal": [1, 1, 2],
+          "elite": [1, 2, 2]
         }
       }
     },
     {
-      "J1b": {
-        "Water Eel": {
-          "normal": [
-            0,
-            1,
-            2
-          ],
-          "elite": [
-            1,
-            0,
-            0
-          ]
+      "2": {
+        "Burrowing Blade": {
+          "normal": [2, 1, 0],
+          "elite": [0, 1, 2]
         },
-        "Lurker": {
-          "normal": [
-            0,
-            1,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
-        },
-        "Living Spirit": {
-          "normal": [
-            1,
-            0,
-            1
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+        "Shrike Fiend": {
+          "normal": [0, 1, 2],
+          "elite": [1, 1, 1]
         }
       }
     }
   ],
-  "SoX3": [
+  "3": [
     {
-      "G1": {
-        "Ancient Artillery": {
-          "normal": [
-            0,
-            2,
-            4
-          ],
-          "elite": [
-            2,
-            0,
-            0
-          ]
+      "start": {
+        "Frozen Corpse": {
+          "normal": [1,0,0],
+          "elite": [0, 1, 1]
         },
-        "Stone Golem": {
-          "normal": [
-            0,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+        "Ooze (FH)": {
+          "normal": [3, 2, 0],
+          "elite": [0, 1, 3]
         }
       }
     },
     {
-      "H3b(1)": {
-        "Night Demon #SoX3 Special": {
-          "normal": [
-            2,
-            2,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            4
-          ]
+      "1": {
+        "Frozen Corpse": {
+          "normal": [0,0,2],
+          "elite": [1, 1, 1]
         },
-        "Stone Golem": {
-          "normal": [
-            1,
-            0,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+        "Ooze (FH)": {
+          "normal": [1, 2, 2],
+          "elite": [1, 2, 2]
         }
       }
     },
     {
-      "A2b": {
-        "Ancient Artillery": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+      "2": {
+        "Frozen Corpse": {
+          "normal": [2,3,4],
+          "elite": [0,0,0]
+        },
+        "Ooze (FH)": {
+          "normal": [2, 0, 0],
+          "elite": [0, 2, 2]
+        },
+        "Harrower Infester (SS3)": {
+          "normal": [3,2,0],
+          "elite": [1, 2, 4]
+        }
+      }
+    }
+  ],
+  "4": [
+    {
+      "start": {
+        "Forest Imp (FH)": {
+          "normal": [0,1,1],
+          "elite": [2, 3, 3]
+        },
+        "Harrower Infester (FH)": {
+          "normal": [2, 1, 0],
+          "elite": [0, 1, 2]
+        },
+        "Rending Drake (FH)": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
         }
       }
     },
     {
-      "A4b": {
-        "Ancient Artillery": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+      "spawn 1": {
+        "Harrower Infester (FH)": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        },
+        "Forest Imp (FH)": {
+          "normal": [1,0,0],
+          "elite": [0, 1, 1]
+        },
+        "Rending Drake (FH)": {
+          "normal": [1, 2, 3],
+          "elite": [0, 0, 0]
         }
       }
     },
     {
-      "A1b": {
-        "Ancient Artillery": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+      "spawn 2": {
+        "Harrower Infester (FH)": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        },
+        "Forest Imp (FH)": {
+          "normal": [0,0,0],
+          "elite": [2, 3, 4]
         }
       }
     },
     {
-      "A3b": {
-        "Ancient Artillery": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+      "spawn 3": {
+        "Harrower Infester (FH)": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        },
+        "Rending Drake (FH)": {
+          "normal": [2, 3, 4],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 4": {
+        "Harrower Infester (FH)": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        },
+        "Forest Imp (FH)": {
+          "normal": [1,1,0],
+          "elite": [0, 0, 1]
+        },
+        "Rending Drake (FH)": {
+          "normal": [1, 2, 3],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 5": {
+        "Harrower Infester (FH)": {
+          "normal": [2, 1, 0],
+          "elite": [0, 1, 2]
+        }
+      }
+    }
+  ],
+  "5": [
+    {
+      "start": {
+        "Living Doom": {
+          "normal": [0,1,0],
+          "elite": [1, 1, 2]
+        },
+        "Living Spirit (FH)": {
+          "normal": [2, 1, 0],
+          "elite": [0, 1, 2]
+        },
+        "Ruined Machine": {
+          "normal": [2, 2, 2],
+          "elite": [1, 2, 3]
+        }
+      }
+    },
+    {
+      "1": {
+        "Living Doom": {
+          "normal": [1,0,0],
+          "elite": [0, 1, 1]
+        },
+        "Ruined Machine": {
+          "normal": [0,0,0],
+          "elite": [2, 2, 4]
+        }
+      }
+    },
+    {
+      "2": {
+        "Living Doom": {
+          "normal": [1,1,0],
+          "elite": [0, 0, 1]
+        },
+        "Living Spirit (FH)": {
+          "normal": [2,0,0],
+          "elite": [0, 2, 2]
+        },
+        "Ruined Machine": {
+          "normal": [0,1,2],
+          "elite": [1,1,1]
+        }
+      }
+    },
+    {
+      "spawn 1": {
+        "Hound (FH)": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        }
+      }
+    },
+    {
+      "spawn 2": {
+        "Hound (FH)": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        }
+      }
+    }
+  ],
+  "6": [
+    {
+      "start": {
+        "Burrowing Blade": {
+          "normal": [0,1,0],
+          "elite": [1, 1, 1]
+        },
+        "Deep Terror (FH)": {
+          "normal": [1, 1, 0],
+          "elite": [1, 2, 3]
+        },
+        "Frozen Corpse": {
+          "normal": [1,2,3],
+          "elite": [0,0,0]
+        }
+      }
+    },
+    {
+      "1": {
+        "Burrowing Blade": {
+          "normal": [2,3,4],
+          "elite": [0,0,0]
+        },
+        "Deep Terror (FH)": {
+          "normal": [0,0, 0],
+          "elite": [2,3,4]
+        },
+        "Frozen Corpse": {
+          "normal": [0,0,0],
+          "elite": [0,1,1]
+        }
+      }
+    },
+    {
+      "2": {
+        "Burrowing Blade": {
+          "normal": [0,0,0],
+          "elite": [1, 1, 2]
+        },
+        "Deep Terror (FH)": {
+          "normal": [0,0,0],
+          "elite": [1, 1, 1]
+        },
+        "Frozen Corpse": {
+          "normal": [0,0,0],
+          "elite": [1,2,2]
+        }
+      }
+    },
+    {
+      "3": {
+        "Burrowing Blade": {
+          "normal": [0,1,2],
+          "elite": [1, 1, 1]
+        },
+        "Deep Terror (FH)": {
+          "normal": [2, 2, 1],
+          "elite": [0, 1, 3]
+        },
+        "Frozen Corpse": {
+          "normal": [2,3,4],
+          "elite": [0,0,0]
+        }
+      }
+    }
+  ],
+  "7": [
+    {
+      "start": {
+        "Burrowing Blade": {
+          "normal": [0,0,0],
+          "elite": [1, 2, 2]
+        }
+      }
+    },
+    {
+      "spawn 1": {
+        "Harrower Infester (FH)": {
+          "normal": [1,1, 0],
+          "elite": [0,0,1]
+        }
+      }
+    }
+  ],
+  "8": [
+    {
+      "start": {
+        "Harrower Infester (FH)": {
+          "normal": [2,1, 0],
+          "elite": [2,3,4]
+        },
+        "Living Bones (FH)": {
+          "normal": [2,2,2],
+          "elite": [1, 2, 3]
+        }
+      }
+    },
+    {
+      "1": {
+        "Harrower Infester (FH)": {
+          "normal": [0,1, 0],
+          "elite": [1,1,2]
+        },
+        "Living Bones (FH)": {
+          "normal": [2,1,0],
+          "elite": [0, 1, 2]
+        },
+        "Ooze (FH)": {
+          "normal": [2,1,2],
+          "elite": [0, 1, 1]
+        }
+      }
+    },
+    {
+      "2": {
+        "Harrower Infester (FH)": {
+          "normal": [0,1,2],
+          "elite": [1,1,1]
+        },
+        "Living Bones (FH)": {
+          "normal": [2,2,0],
+          "elite": [1, 2, 4]
+        },
+        "Ooze (FH)": {
+          "normal": [2,2,0],
+          "elite": [1, 2, 4]
+        }
+      }
+    },
+    {
+      "spawn 1": {
+        "Hound (FH)": {
+          "normal": [0,0, 0],
+          "elite": [1,1,1]
+        }
+      }
+    }
+  ],
+  "9": [
+    {
+      "start": {
+        "Frost Demon (FH)": {
+          "normal": [1,2, 1],
+          "elite": [0,0,1]
+        },
+        "Living Bones (FH)": {
+          "normal": [1,1,2],
+          "elite": [0,0,0]
+        },
+        "Snow Imp": {
+          "normal": [2,2, 1],
+          "elite": [1,1,2]
+        },
+        "Wind Demon (FH)": {
+          "normal": [1,0, 0],
+          "elite": [0,1,1]
+        }
+      }
+    },
+    {
+      "1": {
+        "Frost Demon (FH)": {
+          "normal": [1,1, 0],
+          "elite": [0,0,1]
+        },
+        "Living Bones (FH)": {
+          "normal": [2,1,0],
+          "elite": [1,2,3]
+        },
+        "Snow Imp": {
+          "normal": [1,2, 1],
+          "elite": [0,0,1]
+        },
+        "Wind Demon (FH)": {
+          "normal": [0,1, 1],
+          "elite": [0,0,0]
+        }
+      }
+    },
+    {
+      "2": {
+        "Frost Demon (FH)": {
+          "normal": [2,1,0],
+          "elite": [0,1,2]
+        },
+        "Wind Demon (FH)": {
+          "normal": [0,1,2],
+          "elite": [1,1,1]
+        }
+      }
+    }
+  ],
+  "10": [
+    {
+      "start": {
+        "Harrower Infester (SS10)": {
+          "normal": [0,1, 2],
+          "elite": [1,1,1]
+        },
+        "Ooze (FH)": {
+          "normal": [1,2,2],
+          "elite": [0,0,0]
         }
       }
     }
