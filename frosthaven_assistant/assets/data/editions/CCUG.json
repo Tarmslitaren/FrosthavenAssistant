@@ -871,6 +871,64 @@
         {"text": "Whenever you short rest, you may -1 Hive Token to Refresh two of your spent items."},
         {"text": "Whenever you spend 2 or more Hive tokens in a turn, you may %earth%."}
       ]
+    },
+    {
+      "name": "Tunnelforge",
+      "color": "FF919191",
+      "colorSecondary": "FFBF9A6A",
+      "edition": "CCUG",
+      "health": [6,7,8,9,10,11,12,13,14],
+      "hidden": false,
+      "summons": {
+      },
+      "perks": [
+        {"removes": ["minus2"]},
+        {"text": "Replace one -1 card with one \"After this attack ability, move one Tunnel up to two hexes\" card","removes": ["minus1"],"adds": [ "perks/unique/tu1"]},
+        {"text": "Replace one -1 card with one \"After this attack ability, move one Tunnel up to two hexes\" card","removes": ["minus1"],"adds": [ "perks/unique/tu1"]},
+        {"text": "Replace one -1 card with one \"After this attack ability, move one Tunnel up to two hexes\" card","removes": ["minus1"],"adds": [ "perks/unique/tu1"]},
+        {"text": "Replace one -1 card with one \"-1 %rupture%, %push% 1\" card","removes": ["minus1"],"adds": [ "perks/unique/tu4"]},
+        {"text": "Replace one -1 card with one \"-1 %rupture%, %push% 1\" card","removes": ["minus1"],"adds": [ "perks/unique/tu4"]},
+        {"text": "Replace one +0 card with one +1 \"After this attack ability, perform: %move% 2\"%flip% card","removes": ["plus0"],"adds": [ "perks/unique/tu3"]},
+        {"text": "Replace one +0 card with one +1 \"After this attack ability, perform: %move% 2\"%flip% card","removes": ["plus0"],"adds": [ "perks/unique/tu3"]},
+        {"text": "Replace one +0 card with one \"All enemies within %range% 1 of a Tunnel suffer %damage% 1","removes": ["plus0"],"adds": [ "perks/unique/tu2"]},
+        {"text": "Replace one +0 card with one \"All enemies within %range% 1 of a Tunnel suffer %damage% 1","removes": ["plus0"],"adds": [ "perks/unique/tu2"]},
+        {"adds": [ "perks/plus2earth"]},
+        {"adds": [ "perks/plus2earth"]},
+        {"text": "Add one +0 %disarm%%flip% card and one +0 %muddle%%flip% card","adds": [ "perks/plus0disarmflip", "perks/plus0muddleflip" ]},
+        {"text": "Add one +0 %disarm%%flip% card and one +0 %muddle%%flip% card","adds": [ "perks/plus0disarmflip", "perks/plus0muddleflip" ]},
+        {"text": "Allies may treat each hex with a Tunnel as adjacent to each other hex with a Tunnel during their move abilities. Ignore the effects of difficult terrain."},
+        {"text": "Once each scenario, during your turn, move a Tunnel up to 4 hexes. This movement may enter an unlocked door to open it."},
+        {"text": "[double] Once each scenario, during your turn, one ally may play a card from their hand to perform the bottom action of the card."}
+      ]
+    },
+    {
+      "name": "Mechanist",
+      "color": "FF008EDF",
+      "colorSecondary": "FF0E2637",
+      "edition": "CCUG",
+      "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
+      "hidden": false,
+      "summons": {
+      },
+      "perks": [
+        {"removes": ["minus1"],"adds": [ "perks/plus0any"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0any"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0shield1flip"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0shield1flip"]},
+        {"text": "Replace one +0 card with one +0 \"Add + 1 %attack% for each Loadout in your active area\" card","removes": ["plus0"],"adds": [ "perks/unique/ma1"]},
+        {"text": "Replace one +0 card with one +0 \"Add + 1 %attack% for each Loadout in your active area\" card","removes": ["plus0"],"adds": [ "perks/unique/ma1"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus0woundflip", "perks/plus0woundflip"]},
+        {"text": "Add one +1 %fire%%air% card and one +1 %ice%%earth% card","adds": [ "perks/plus1fireair", "perks/plus1iceearth" ]},
+        {"text": "Add one +1 %fire%%air% card and one +1 %ice%%earth% card","adds": [ "perks/plus1fireair", "perks/plus1iceearth" ]},
+        {"text": "Add one +1 \"After this attack ability, Configure\" card","adds": [ "perks/unique/ma2"]},
+        {"text": "Add one +1 \"After this attack ability, Configure\" card","adds": [ "perks/unique/ma2"]},
+        {"adds": [ "perks/plus0heal1flip","perks/plus0heal1flip"]},
+        {"adds": [ "perks/plus0heal1flip","perks/plus0heal1flip"]},
+        {"text": "Ignore item - 1 effects and add one +1 card.","adds": [ "plus1"]},
+        {"text": "Whenever you perform a long rest, %any%."},
+        {"text": "Once per round, when an enemy consumes an element that matches one of your Loadout elements, infuse that element."},
+        {"text": "[double] Whenever you become exhausted, first perform: %move% 4 %jump%, %attack% X %target% all enemies within two hexes, where X is the number of Loadouts in your active area."}
+      ]
     }
   ],
   "monsterAbilities": [
