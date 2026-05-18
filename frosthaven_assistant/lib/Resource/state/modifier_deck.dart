@@ -661,7 +661,7 @@ class ModifierDeck {
     final revealCount = _revealedCount.value;
     List<ModifierCard> revealed = [];
     for (int i = 0; i < _revealedCount.value; i++) {
-      revealed.add(_drawPile.pop());
+      revealed.insert(0, _drawPile.pop());
     }
     _shuffle();
     _revealedCount.value = revealCount;
