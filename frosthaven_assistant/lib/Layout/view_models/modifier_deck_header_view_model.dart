@@ -26,7 +26,8 @@ class ModifierDeckHeaderViewModel {
       isCharacter ? GameMethods.getCharacterByName(name) : null;
 
   bool get hasDiviner => gameState.currentList.any(
-      (item) => item is Character && item.characterClass.name == "Diviner");
+    (item) => item is Character && item.characterClass.name == "Diviner",
+  );
 
   Character? get characterHail => GameMethods.getCharacterByName("Hail");
 
@@ -48,6 +49,9 @@ class ModifierDeckHeaderViewModel {
 
   bool get hasLifespeaker =>
       GameMethods.getFigure("Lifespeaker", "Lifespeaker") != null;
+
+  bool get hasCassandra =>
+      GameMethods.getFigure("Cassandra", "Cassandra") != null;
 
   bool get isCSCampaign {
     final campaign = gameState.currentCampaign.value;
