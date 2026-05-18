@@ -268,8 +268,8 @@ class ModifierDeck {
 
   void addMinusOne(_StateModifier _) {
     _addedMinusOnes.value++;
-    _drawPile.add(ModifierCard(CardType.add, "minus1"));
-    _drawPile.shuffle();
+    _drawPile.insert(0, ModifierCard(CardType.add, "minus1"));
+    _shuffleDrawPileRespectCassandra();
     _revealedCount.value = 0;
     if (_addedMinusOnes.value < 0) {
       //do not add/remove extra minus ones to removed pile
@@ -629,7 +629,7 @@ class ModifierDeck {
           }
           _drawPile.insert(size - position, ModifierCard(CardType.remove, gfx));
         } else {
-          _drawPile.push(ModifierCard(CardType.remove, gfx));
+          _drawPile.insert(0, ModifierCard(CardType.remove, gfx));
         }
       }
     } else {
@@ -639,7 +639,7 @@ class ModifierDeck {
       }
     }
     if (shuffle) {
-      _drawPile.shuffle();
+      _shuffleDrawPileRespectCassandra();
     }
   }
 
@@ -667,6 +667,22 @@ class ModifierDeck {
     _revealedCount.value = revealCount;
     for (int i = 0; i < _revealedCount.value; i++) {
       _drawPile.add(revealed[i]);
+    }
+  }
+
+  void _shuffleDrawPileRespectCassandra() {
+    if (_cassandraSpecial.value) {
+      //dont shuffle the revealed cards
+      List<ModifierCard> revealed = [];
+      for (int i = 0; i < _revealedCount.value; i++) {
+        revealed.insert(0, _drawPile.pop());
+      }
+      _drawPile.shuffle();
+      for (int i = 0; i < _revealedCount.value; i++) {
+        _drawPile.add(revealed[i]);
+      }
+    } else {
+      _drawPile.shuffle();
     }
   }
 
