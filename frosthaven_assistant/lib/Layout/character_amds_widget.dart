@@ -121,96 +121,105 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
     if (!_vm.showCharacterAmd) {
       return Container();
     }
-    final characterAmount = _vm.characterAmount;
-    if (characterAmount == 0) {
-      return Container();
-    }
+    return ListenableBuilder(
+        listenable: _vm.currentListNotifier,
+        builder: (context, child) {
+          final characterAmount = _vm.characterAmount;
+          if (characterAmount == 0) {
+            return Container();
+          }
 
-    final currentCharacter = _vm.currentCharacter;
-    final roundState = _vm.roundState;
-    final canShowOneDeck = _vm.canShowOneDeck;
-    final duration = const Duration(milliseconds: 500);
-    final barScale = _vm.barScale;
-    final offsets = _getOffsets(characterAmount);
-    const text = "Character Decks";
+          final currentCharacter = _vm.currentCharacter;
+          final roundState = _vm.roundState;
+          final canShowOneDeck = _vm.canShowOneDeck;
+          const duration = Duration(milliseconds: 500);
+          final barScale = _vm.barScale;
+          final offsets = _getOffsets(characterAmount);
+          const text = "Character Decks";
 
-    return RepaintBoundary(
-        child: TweenAnimationBuilder<Offset>(
-            tween: Tween(begin: offsets.first, end: offsets.last),
-            duration: duration,
-            curve: Easing.standard,
-            builder: (context, offset, child) =>
-                Transform.translate(offset: offset, child: child),
-            child: Column(children: [
-              ElevatedButton(
-                  onPressed: () => {
-                        setState(() {
-                          if (roundState == RoundState.chooseInitiative) {
-                            if (_openStateUserIntentChooseInit ==
-                                _OpenState.noOpen) {
-                              _openStateUserIntentChooseInit =
-                                  _OpenState.allOpen;
-                            } else if (_openStateUserIntentChooseInit ==
-                                _OpenState.allOpen) {
-                              _openStateUserIntentChooseInit =
-                                  _OpenState.noOpen;
-                            }
-                          } else {
-                            if (canShowOneDeck) {
-                              if (_openStateUserIntentPlayTurns ==
-                                  _OpenState.oneOpen) {
-                                _openStateUserIntentPlayTurns =
-                                    _OpenState.allOpen;
-                              } else if (_openStateUserIntentPlayTurns ==
-                                  _OpenState.allOpen) {
-                                _openStateUserIntentPlayTurns =
-                                    _OpenState.oneOpen;
-                              } else if (_openStateUserIntentPlayTurns ==
-                                  _OpenState.noOpen) {
-                                _openStateUserIntentPlayTurns =
-                                    _OpenState.oneOpen;
-                              }
-                            } else {
-                              if (_openStateUserIntentPlayTurns ==
-                                  _OpenState.noOpen) {
-                                _openStateUserIntentPlayTurns =
-                                    _OpenState.allOpen;
-                              } else if (_openStateUserIntentPlayTurns ==
-                                  _OpenState.allOpen) {
-                                _openStateUserIntentPlayTurns =
-                                    _OpenState.oneOpen;
-                              } else if (_openStateUserIntentPlayTurns ==
-                                  _OpenState.oneOpen) {
-                                _openStateUserIntentPlayTurns =
-                                    _OpenState.allOpen;
-                              }
-                            }
-                          }
-                        })
-                      },
-                  child: const Text(text)),
-              RepaintBoundary(
-                  child: AnimatedOpacity(
-                      opacity: _lastState == _OpenState.noOpen ? 0.0 : 1.0,
-                      duration: duration,
-                      curve: Easing.standard,
-                      child: (_openStateUserIntentPlayTurns ==
-                                  _OpenState.oneOpen &&
-                              canShowOneDeck)
-                          ? Container(
-                              margin:
-                                  EdgeInsets.only(top: _kDeckMargin * barScale),
-                              child: ModifierDeckWidget(
-                                  name: currentCharacter?.id ?? ''))
-                          : Column(
-                              children: _vm.charsWithPerks
-                                  .map((item) => Container(
-                                      margin: EdgeInsets.only(
-                                          top: _kDeckMargin * barScale),
-                                      child: ModifierDeckWidget(name: item.id)))
-                                  .toList(),
-                            )))
-            ])));
+          return RepaintBoundary(
+              child: TweenAnimationBuilder<Offset>(
+                  tween: Tween(begin: offsets.first, end: offsets.last),
+                  duration: duration,
+                  curve: Easing.standard,
+                  builder: (context, offset, child) =>
+                      Transform.translate(offset: offset, child: child),
+                  child: Column(children: [
+                    ElevatedButton(
+                        onPressed: () => {
+                              setState(() {
+                                if (roundState == RoundState.chooseInitiative) {
+                                  if (_openStateUserIntentChooseInit ==
+                                      _OpenState.noOpen) {
+                                    _openStateUserIntentChooseInit =
+                                        _OpenState.allOpen;
+                                  } else if (_openStateUserIntentChooseInit ==
+                                      _OpenState.allOpen) {
+                                    _openStateUserIntentChooseInit =
+                                        _OpenState.noOpen;
+                                  }
+                                } else {
+                                  if (canShowOneDeck) {
+                                    if (_openStateUserIntentPlayTurns ==
+                                        _OpenState.oneOpen) {
+                                      _openStateUserIntentPlayTurns =
+                                          _OpenState.allOpen;
+                                    } else if (_openStateUserIntentPlayTurns ==
+                                        _OpenState.allOpen) {
+                                      _openStateUserIntentPlayTurns =
+                                          _OpenState.oneOpen;
+                                    } else if (_openStateUserIntentPlayTurns ==
+                                        _OpenState.noOpen) {
+                                      _openStateUserIntentPlayTurns =
+                                          _OpenState.oneOpen;
+                                    }
+                                  } else {
+                                    if (_openStateUserIntentPlayTurns ==
+                                        _OpenState.noOpen) {
+                                      _openStateUserIntentPlayTurns =
+                                          _OpenState.allOpen;
+                                    } else if (_openStateUserIntentPlayTurns ==
+                                        _OpenState.allOpen) {
+                                      _openStateUserIntentPlayTurns =
+                                          _OpenState.oneOpen;
+                                    } else if (_openStateUserIntentPlayTurns ==
+                                        _OpenState.oneOpen) {
+                                      _openStateUserIntentPlayTurns =
+                                          _OpenState.allOpen;
+                                    }
+                                  }
+                                }
+                              })
+                            },
+                        child: const Text(text)),
+                    RepaintBoundary(
+                        child: AnimatedOpacity(
+                            opacity:
+                                _lastState == _OpenState.noOpen ? 0.0 : 1.0,
+                            duration: duration,
+                            curve: Easing.standard,
+                            child: (_openStateUserIntentPlayTurns ==
+                                        _OpenState.oneOpen &&
+                                    canShowOneDeck)
+                                ? Container(
+                                    margin: EdgeInsets.only(
+                                        top: _kDeckMargin * barScale),
+                                    child: ModifierDeckWidget(
+                                        key: ValueKey(
+                                            currentCharacter?.id ?? ''),
+                                        name: currentCharacter?.id ?? ''))
+                                : Column(
+                                    children: _vm.charsWithPerks
+                                        .map((item) => Container(
+                                            margin: EdgeInsets.only(
+                                                top: _kDeckMargin * barScale),
+                                            child: ModifierDeckWidget(
+                                                key: ValueKey(item.id),
+                                                name: item.id)))
+                                        .toList(),
+                                  )))
+                  ])));
+        });
   }
 }
 

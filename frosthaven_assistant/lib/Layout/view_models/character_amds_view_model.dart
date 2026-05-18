@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
@@ -11,6 +12,8 @@ class CharacterAmdsViewModel {
 
   final GameState _gameState;
   final Settings _settings;
+
+  Listenable get currentListNotifier => _gameState.currentListNotifier;
 
   bool get showCharacterAmd => _settings.showCharacterAMD.value;
 

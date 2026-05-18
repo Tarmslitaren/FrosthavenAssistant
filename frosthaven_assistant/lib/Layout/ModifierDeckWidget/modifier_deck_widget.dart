@@ -134,7 +134,8 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
             width: ModifierDeckWidgetState._kWidgetWidth * userScalingBars,
             height: ModifierDeckWidgetState._kCardHeight * userScalingBars,
             child: ListenableBuilder(
-                listenable: Listenable.merge([_vm.lastEvent, _vm.cardCount]),
+                listenable: Listenable.merge(
+                    [_vm.lastEvent, _vm.cardCount, _vm.revealedCount]),
                 builder: (context, child) {
                   if (!_animationsEnabled) {
                     _animationsEnabled = _vm.initAnimationEnabled();

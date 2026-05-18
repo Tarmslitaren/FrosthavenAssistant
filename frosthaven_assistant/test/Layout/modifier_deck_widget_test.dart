@@ -2,9 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:frosthaven_assistant/Layout/ModifierCardWidget/modifier_card_front.dart';
+import 'package:frosthaven_assistant/Layout/ModifierCardWidget/modifier_card_rear.dart';
 import 'package:frosthaven_assistant/Layout/ModifierDeckWidget/modifier_deck_widget.dart';
 import 'package:frosthaven_assistant/Layout/menus/ModifierDeckMenu/modifier_deck_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/modifier_card_zoom.dart';
+import 'package:frosthaven_assistant/Resource/commands/amd_reveal_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_modifier_card_command.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
@@ -228,5 +231,102 @@ void main() {
       expect(deck.discardPileSize, before + 1);
       gameState.undo();
     });
+  });
+
+  group('ModifierDeckWidget revealedCount', () {
+    testWidgets('draw pile top card shows backside when revealedCount is 0', (
+      WidgetTester tester,
+    ) async {
+      final gameState = getIt<GameState>();
+      final deck = GameMethods.getModifierDeck(monsterDeckName, gameState);
+      expect(deck.revealedCount.value, 0);
+
+      await pumpWidget(tester, monsterDeckName);
+
+      expect(find.byType(ModifierCardRear), findsOneWidget);
+    });
+
+    testWidgets('draw pile top card shows frontside when revealedCount > 0', (
+      WidgetTester tester,
+    ) async {
+      final gameState = getIt<GameState>();
+      gameState.action(
+        AMDRevealCommand(
+          amount: 1,
+          name: monsterDeckName,
+          gameState: gameState,
+        ),
+      );
+
+      await pumpWidget(tester, monsterDeckName);
+
+      expect(find.byType(ModifierCardFront), findsOneWidget);
+
+      gameState.undo();
+    });
+
+    testWidgets(
+      'widget updates reactively when revealedCount changes from 0 to 1',
+      (WidgetTester tester) async {
+        final gameState = getIt<GameState>();
+        final deck = GameMethods.getModifierDeck(monsterDeckName, gameState);
+        expect(deck.revealedCount.value, 0);
+
+        await pumpWidget(tester, monsterDeckName);
+        expect(find.byType(ModifierCardRear), findsOneWidget);
+
+        final originalOnError = FlutterError.onError;
+        addTearDown(() => FlutterError.onError = originalOnError);
+        FlutterError.onError = ignoreOverflowErrors;
+        gameState.action(
+          AMDRevealCommand(
+            amount: 1,
+            name: monsterDeckName,
+            gameState: gameState,
+          ),
+        );
+        await tester.pump();
+        FlutterError.onError = originalOnError;
+
+        expect(find.byType(ModifierCardFront), findsOneWidget);
+
+        gameState.undo();
+      },
+    );
+
+    testWidgets(
+      'widget updates reactively when revealedCount changes from 1 to 0',
+      (WidgetTester tester) async {
+        final gameState = getIt<GameState>();
+        gameState.action(
+          AMDRevealCommand(
+            amount: 1,
+            name: monsterDeckName,
+            gameState: gameState,
+          ),
+        );
+
+        await pumpWidget(tester, monsterDeckName);
+        expect(find.byType(ModifierCardFront), findsOneWidget);
+
+        final originalOnError = FlutterError.onError;
+        addTearDown(() => FlutterError.onError = originalOnError);
+        FlutterError.onError = ignoreOverflowErrors;
+        gameState.action(
+          AMDRevealCommand(
+            amount: 0,
+            name: monsterDeckName,
+            gameState: gameState,
+          ),
+        );
+        await tester.pump();
+        FlutterError.onError = originalOnError;
+
+        expect(find.byType(ModifierCardRear), findsOneWidget);
+
+        gameState.undo();
+        gameState.undo();
+      },
+    );
   });
 }
