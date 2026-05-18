@@ -682,6 +682,7 @@ class ModifierDeck {
         _drawPile.add(revealed[i]);
       }
     } else {
+      _revealedCount.value = 0;
       _drawPile.shuffle();
     }
   }
