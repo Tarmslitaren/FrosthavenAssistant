@@ -283,7 +283,7 @@ abstract class GameServer {
       //version mismatch
       setNetworkMessage("Client version mismatch. Please update. Client $version Server $serverVersion");
       sendToOnly(
-          "Error: Server Version is $serverVersion. client version is $version. Please update your client.",
+          "Error: Server Version is $serverVersion. client version is $version. Please update.",
           client);
     } else {
       sendInitResponse(client);

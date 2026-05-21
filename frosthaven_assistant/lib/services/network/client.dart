@@ -21,17 +21,17 @@ class Client {
   final Network _network;
   final Settings _settings;
 
-  Client(
-      {GameState? gameState,
-      Communication? communication,
-      Connection? connection,
-      Network? network,
-      Settings? settings})
-      : _gameState = gameState ?? getIt<GameState>(),
-        _communication = communication ?? getIt<Communication>(),
-        _connection = connection ?? getIt<Connection>(),
-        _network = network ?? getIt<Network>(),
-        _settings = settings ?? getIt<Settings>();
+  Client({
+    GameState? gameState,
+    Communication? communication,
+    Connection? connection,
+    Network? network,
+    Settings? settings,
+  }) : _gameState = gameState ?? getIt<GameState>(),
+       _communication = communication ?? getIt<Communication>(),
+       _connection = connection ?? getIt<Connection>(),
+       _network = network ?? getIt<Network>(),
+       _settings = settings ?? getIt<Settings>();
 
   Future<void> connect(String address) async {
     _serverResponsive = true;
@@ -39,24 +39,27 @@ class Client {
       int port = int.parse(_settings.lastKnownPort);
       debugPrint("port nr: ${port.toString()}");
       final socket = await _connection.connect(address, port);
-      runZonedGuarded(() {
-        _settings.client.value = ClientState.connected;
-        String info =
-            'Client Connected to: ${socket.remoteAddress.address}:${socket.remotePort}';
-        debugPrint(info);
-        _gameState.clearLocalCommands();
-        _network.networkMessage.value = info;
-        if (Platform.isAndroid || Platform.isIOS) {
-          _settings.connectClientOnStartup = true;
-        }
-        _settings.saveToDisk();
-        _send("init version:${_network.server.serverVersion}");
-        _sendPing();
-        _listen();
-      }, (error, stack) {
-        debugPrint('Client zone error: $error\n$stack');
-        _network.networkMessage.value = 'Client error: $error';
-      });
+      runZonedGuarded(
+        () {
+          _settings.client.value = ClientState.connected;
+          String info =
+              'Client Connected to: ${socket.remoteAddress.address}:${socket.remotePort}';
+          debugPrint(info);
+          _gameState.clearLocalCommands();
+          _network.networkMessage.value = info;
+          if (Platform.isAndroid || Platform.isIOS) {
+            _settings.connectClientOnStartup = true;
+          }
+          _settings.saveToDisk();
+          _send("init version:${_network.server.serverVersion}");
+          _sendPing();
+          _listen();
+        },
+        (error, stack) {
+          debugPrint('Client zone error: $error\n$stack');
+          _network.networkMessage.value = 'Client error: $error';
+        },
+      );
     } catch (error) {
       debugPrint("client error: $error");
       _network.networkMessage.value = "client error: $error";
@@ -103,7 +106,7 @@ class Client {
   void onListenDone() {
     debugPrint('Lost connection to server.');
     if (_serverResponsive) {
-      _network.networkMessage.value = "Lost connection to server";
+      _network.networkMessage.value += " Lost connection to server";
     }
     _connection.removeAll();
     _cleanup();
@@ -147,14 +150,17 @@ class Client {
     if (envelope != null) {
       final GameEvent event = GameEvent.fromJsonString(envelope.eventJson);
       debugPrint(
-          'Client Receive Data, index: ${envelope.index}, event:${event.runtimeType}');
+        'Client Receive Data, index: ${envelope.index}, event:${event.runtimeType}',
+      );
       _gameState.loadFromData(envelope.state);
       // Set event before commandIndex fires so VLB callbacks see it.
       _gameState.lastEvent.value = event;
       _gameState.commandIndex.value = envelope.index;
       _gameState.updateAllUI();
       Future.delayed(
-          const Duration(milliseconds: 100), () => _gameState.save());
+        const Duration(milliseconds: 100),
+        () => _gameState.save(),
+      );
     } else if (message.startsWith("Index:")) {
       // Legacy text format: "Index:NDescription:textEvent:{...}GameState:state"
       List<String> messageParts1 = message.split("Description:");
@@ -174,7 +180,8 @@ class Client {
       }
 
       debugPrint(
-          'Client Receive Data, index: $indexString, event:${event.runtimeType}');
+        'Client Receive Data, index: $indexString, event:${event.runtimeType}',
+      );
 
       _gameState.loadFromData(data);
       int newIndex = int.tryParse(indexString) ?? -1;
@@ -183,7 +190,9 @@ class Client {
       _gameState.commandIndex.value = newIndex;
       _gameState.updateAllUI();
       Future.delayed(
-          const Duration(milliseconds: 100), () => _gameState.save());
+        const Duration(milliseconds: 100),
+        () => _gameState.save(),
+      );
     } else if (message.startsWith("Error")) {
       _network.networkMessage.value = message;
       disconnect(message);
