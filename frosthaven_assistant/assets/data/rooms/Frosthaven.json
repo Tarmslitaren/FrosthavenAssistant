@@ -89,7 +89,7 @@
     },
     {
       "894 Feral": {
-        "Hound": {
+        "Hound (FH)": {
           "normal": [
             0,
             1,
@@ -153,7 +153,7 @@
             2
           ]
         },
-        "Vermling Scout": {
+        "Vermling Scout (FH)": {
           "normal": [
             1,
             3,
@@ -169,7 +169,7 @@
     },
     {
       "896 Swarming": {
-        "Forest Imp": {
+        "Forest Imp (FH)": {
           "normal": [
             1,
             2,
@@ -181,7 +181,7 @@
             2
           ]
         },
-        "Harrower Infester": {
+        "Harrower Infester (FH)": {
           "normal": [
             1,
             2,
@@ -209,7 +209,7 @@
     },
     {
       "897 Traitorous": {
-        "Chaos Demon": {
+        "Chaos Demon (FH)": {
           "normal": [
             2,
             2,
@@ -221,7 +221,7 @@
             1
           ]
         },
-        "City Guard": {
+        "City Guard (FH)": {
           "normal": [
             1,
             2,
@@ -237,7 +237,7 @@
     },
     {
       "898 Bleak": {
-        "Living Bones": {
+        "Living Bones (FH)": {
           "normal": [
             1,
             2,
@@ -261,7 +261,7 @@
             1
           ]
         },
-        "Living Spirit": {
+        "Living Spirit (FH)": {
           "normal": [
             1,
             1,
@@ -277,7 +277,7 @@
     },
     {
       "899 Sapping": {
-        "Frost Demon": {
+        "Frost Demon (FH)": {
           "normal": [
             1,
             1,
@@ -329,7 +329,7 @@
             2
           ]
         },
-        "Living Bones": {
+        "Living Bones (FH)": {
           "normal": [
             1,
             2,
@@ -465,7 +465,7 @@
     },
     {
       "904 Abandoned": {
-        "Ancient Artillery": {
+        "Ancient Artillery (FH)": {
           "normal": [
             3,
             2,
@@ -561,7 +561,7 @@
     },
     {
       "907 Unsettling": {
-        "Black Imp": {
+        "Black Imp (FH)": {
           "normal": [
             1,
             2,
@@ -573,7 +573,7 @@
             2
           ]
         },
-        "Chaos Demon": {
+        "Chaos Demon (FH)": {
           "normal": [
             2,
             3,
@@ -585,7 +585,7 @@
             1
           ]
         },
-        "Ooze": {
+        "Ooze (FH)": {
           "normal": [
             0,
             1,
@@ -601,7 +601,7 @@
     },
     {
       "908 Taloned": {
-        "Rending Drake": {
+        "Rending Drake (FH)": {
           "normal": [
             2,
             1,
@@ -641,7 +641,7 @@
             1
           ]
         },
-        "Spitting Drake": {
+        "Spitting Drake (FH)": {
           "normal": [
             2,
             1,
@@ -657,7 +657,7 @@
     },
     {
       "910 Dirty": {
-        "Earth Demon": {
+        "Earth Demon (FH)": {
           "normal": [
             2,
             1,
@@ -669,7 +669,7 @@
             1
           ]
         },
-        "Forest Imp": {
+        "Forest Imp (FH)": {
           "normal": [
             1,
             2,
@@ -681,7 +681,7 @@
             0
           ]
         },
-        "Ooze": {
+        "Ooze (FH)": {
           "normal": [
             2,
             1,
@@ -697,7 +697,7 @@
     },
     {
       "911 Grave": {
-        "Deep Terror": {
+        "Deep Terror (FH)": {
           "normal": [
             1,
             1,
@@ -721,7 +721,7 @@
             1
           ]
         },
-        "Night Demon": {
+        "Night Demon (FH)": {
           "normal": [
             2,
             2,
@@ -749,7 +749,7 @@
             3
           ]
         },
-        "Sun Demon": {
+        "Sun Demon (FH)": {
           "normal": [
             2,
             2,
@@ -765,7 +765,7 @@
     },
     {
       "913 Scorching": {
-        "Flame Demon": {
+        "Flame Demon (FH)": {
           "normal": [
             1,
             1,
@@ -805,7 +805,7 @@
             2
           ]
         },
-        "Wind Demon": {
+        "Wind Demon (FH)": {
           "normal": [
             2,
             3,
