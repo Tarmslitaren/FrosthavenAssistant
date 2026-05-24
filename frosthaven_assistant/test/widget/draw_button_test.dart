@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/draw_button.dart';
@@ -82,6 +84,42 @@ void main() {
       // Drain DrawCommand's deferred 600ms scroll Future before the test ends.
       await tester.pump(const Duration(milliseconds: 600));
       gs.undo();
+    });
+
+    testWidgets('roundState change via loadFromData (network broadcast) '
+        'triggers the same lockout', (WidgetTester tester) async {
+      final gs = getIt<GameState>();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      SetInitCommand('Blinkblade', 25, gameState: gs).execute();
+
+      await pumpDrawButton(tester);
+      expect(findTextButton(tester).onPressed, isNotNull,
+          reason: 'button should start enabled in chooseInitiative');
+
+      // Simulate a server broadcast: snapshot the current state, flip the
+      // roundState field, and feed it back through the same loadFromData
+      // entry point used by services/network/client.dart on a state update.
+      // The DrawButton lockout subscribes to a ValueNotifier on roundState,
+      // so it can't tell whether the change came from a local DrawCommand
+      // or from a remote peer's broadcast — both end up calling
+      // gameState._roundState.value = ... in GameSaveState.load.
+      final snapshot = json.decode(gs.toString()) as Map<String, dynamic>;
+      snapshot['roundState'] = RoundState.playTurns.index;
+      gs.loadFromData(json.encode(snapshot));
+      await tester.pump();
+
+      // Lockout engages just as in the local-action test above.
+      await tester.pump(const Duration(milliseconds: 50));
+      expect(findTextButton(tester).onPressed, isNull,
+          reason: 'button should be disabled after a network-driven '
+              'roundState change');
+      expect(gs.roundState.value, RoundState.playTurns,
+          reason: 'loadFromData should have advanced roundState');
+
+      // Lockout expires.
+      await tester.pump(const Duration(milliseconds: 400));
+      expect(findTextButton(tester).onPressed, isNotNull,
+          reason: 'button should re-enable after lockout expires');
     });
 
     testWidgets('lockout fades the button (AnimatedOpacity < 1.0)',
