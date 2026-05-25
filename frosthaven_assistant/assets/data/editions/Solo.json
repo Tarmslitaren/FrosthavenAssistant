@@ -2118,7 +2118,7 @@
 				{
 					"level": 4, "health": "10xC", "move": 3, "attack": 4,
 					"immunities": [ "%disarm%", "%curse%", "%stun%"],
-					"special1": [ "%move% + 1", "%attack% + 1", "^%range% 3","^%target% c", "^%wound%"],
+					"special1": [ "%move% + 1", "%attack% - 1", "^%range% 3","^%target% c", "^%wound%"],
 					"special2": [ "^Follow the room's Special Rules"]
 				},
 				{
