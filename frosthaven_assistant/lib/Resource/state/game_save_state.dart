@@ -114,17 +114,19 @@ class GameSaveState {
         }
         gameState._unlockedClassesVersion.value++;
 
-        //ability decks
+        //ability decks — update existing instances in-place to preserve listeners
         final decks = data['currentAbilityDecks'] as List;
-        gameState._currentAbilityDecks.clear();
+        final List<MonsterAbilityState> newAbilityDecks = [];
         for (Map<String, dynamic> item in decks) {
-          MonsterAbilityState state = MonsterAbilityState(item["name"]);
+          final String deckName = item["name"] as String;
+          // Prototype has the full initialized card set; used only for nr lookups.
+          final proto = MonsterAbilityState(deckName);
 
           List<MonsterAbilityCardModel> newDrawList = [];
           List drawPile = item["drawPile"] as List;
-          for (final item in drawPile) {
-            int nr = item["nr"];
-            for (final card in state._drawPile.getList()) {
+          for (final cardItem in drawPile) {
+            int nr = cardItem["nr"];
+            for (final card in proto._drawPile.getList()) {
               if (card.nr == nr) {
                 newDrawList.add(card);
                 break;
@@ -132,25 +134,34 @@ class GameSaveState {
             }
           }
           List<MonsterAbilityCardModel> newDiscardList = [];
-          for (final item in item["discardPile"] as List) {
-            int nr = item["nr"];
-            for (final card in state._drawPile.getList()) {
+          for (final cardItem in item["discardPile"] as List) {
+            int nr = cardItem["nr"];
+            for (final card in proto._drawPile.getList()) {
               if (card.nr == nr) {
                 newDiscardList.add(card);
                 break;
               }
             }
           }
-          if (item.containsKey("lastRoundDrawn")) {
-            state._lastRoundDrawn = item["lastRoundDrawn"];
-          }
 
+          // Reuse existing state to preserve drawPileVersion listeners; fall
+          // back to the prototype for monsters newly added from a remote device.
+          final state = gameState._currentAbilityDecks
+                  .firstWhereOrNull((s) => s.name == deckName) ??
+              proto;
+
+          if (item.containsKey("lastRoundDrawn")) {
+            state._lastRoundDrawn = item["lastRoundDrawn"] as int;
+          }
           state._drawPile.clear();
           state._discardPile.clear();
           state._drawPile.setList(newDrawList);
           state._discardPile.setList(newDiscardList);
-          gameState._currentAbilityDecks.add(state);
+          state.drawPileVersion.value++;
+          newAbilityDecks.add(state);
         }
+        gameState._currentAbilityDecks.clear();
+        gameState._currentAbilityDecks.addAll(newAbilityDecks);
 
         _loadModifierDeck('modifierDeck', data, gameState);
         _loadModifierDeck('modifierDeckAllies', data, gameState);
