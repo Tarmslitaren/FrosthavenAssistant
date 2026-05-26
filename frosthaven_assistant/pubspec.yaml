@@ -45,7 +45,7 @@ dependencies:
 
   dotted_border: ^3.1.0
   animated_text_kit: ^4.3.0
-  network_info_plus: ^7.0.0
+  network_info_plus: ^8.1.0
   dart_ipify: ^1.1.1 #get outgoing ip
   connectivity_plus: ^7.1.0 #poll for network changes
   shared_preferences: ^2.5.5 #pinned at 2.4.0 due to some issue (https://github.com/flutter/flutter/issues/161796)
@@ -59,7 +59,7 @@ dependencies:
   override_text_scale_factor: ^1.0.2
   collection: ^1.19.0
   show_fps: ^1.1.0
-  sentry_flutter: ^8.0.0
+  sentry_flutter: ^8.14.2
 
   window_size:
     git:
