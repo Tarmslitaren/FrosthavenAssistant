@@ -37,48 +37,56 @@ class RemoveAMDCardMenu extends StatelessWidget {
       scale = kCardZoomDefaultScale * (screenSize.width / cardWidth);
     }
     return Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ModifierCardFront(card: card, name: name, scale: scale),
-          const SizedBox(
-            height: kMenuTopPadding,
-          ),
-          ModalBackground(
-              width: kMenuNarrowWidth,
-              height: _kModalHeight,
-              child: Column(children: [
-                const SizedBox(
-                  height: kMenuTopPadding,
-                ),
-                TextButton(
-                    onPressed: () {
-                      _gameState.action(RemoveAMDCardCommand(index, name,
-                          gameState: _gameState));
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ModifierCardFront(card: card, name: name, scale: scale),
+        const SizedBox(height: kMenuTopPadding),
+        ModalBackground(
+          width: kMenuNarrowWidth,
+          height: _kModalHeight,
+          child: Column(
+            children: [
+              const SizedBox(height: kMenuTopPadding),
+              TextButton(
+                onPressed: () {
+                  _gameState.action(
+                    RemoveAMDCardCommand(
+                      index: index,
+                      name: name,
+                      gameState: _gameState,
+                    ),
+                  );
 
-                      Navigator.pop(context);
-                    },
-                    child: const Text("Remove card?",
-                        textAlign: TextAlign.center, style: kButtonLabelStyle)),
-                const SizedBox(
-                  height: kMenuTopPadding,
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  "Remove card?",
+                  textAlign: TextAlign.center,
+                  style: kButtonLabelStyle,
                 ),
-                TextButton(
-                  onPressed: () {
-                    _gameState.action(ReturnModifierCardCommand(name));
-                    final deck = GameMethods.getModifierDeck(name, _gameState);
-                    //if last card, remove modal
-                    if (deck.discardPileIsEmpty) {
-                      Navigator.pop(context);
-                    }
-                  },
-                  child: const Text("Return top card",
-                      textAlign: TextAlign.center, style: kButtonLabelStyle),
+              ),
+              const SizedBox(height: kMenuTopPadding),
+              TextButton(
+                onPressed: () {
+                  _gameState.action(ReturnModifierCardCommand(name));
+                  final deck = GameMethods.getModifierDeck(name, _gameState);
+                  //if last card, remove modal
+                  if (deck.discardPileIsEmpty) {
+                    Navigator.pop(context);
+                  }
+                },
+                child: const Text(
+                  "Return top card",
+                  textAlign: TextAlign.center,
+                  style: kButtonLabelStyle,
                 ),
-                const SizedBox(
-                  height: kMenuTopPadding,
-                ),
-              ]))
-        ]);
+              ),
+              const SizedBox(height: kMenuTopPadding),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }

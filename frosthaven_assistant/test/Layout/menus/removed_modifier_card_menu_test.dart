@@ -20,7 +20,11 @@ void main() {
     getIt<GameState>().clearList();
     // Draw a card to populate the discard pile, then remove it to the removed pile
     DrawModifierCardCommand(deckName, gameState: getIt<GameState>()).execute();
-    RemoveAMDCardCommand(0, deckName, gameState: getIt<GameState>()).execute();
+    RemoveAMDCardCommand(
+      index: 0,
+      name: deckName,
+      gameState: getIt<GameState>(),
+    ).execute();
   });
 
   Future<void> pumpMenu(WidgetTester tester) async {
@@ -53,8 +57,9 @@ void main() {
       expect(find.textContaining('Removed cards'), findsOneWidget);
     });
 
-    testWidgets('renders removed cards in the list',
-        (WidgetTester tester) async {
+    testWidgets('renders removed cards in the list', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester);
       final deck = getIt<GameState>().modifierDeck;
       final removedCount = deck.removedPileSize;

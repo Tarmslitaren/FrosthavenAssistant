@@ -123,9 +123,12 @@ class ModifierDeck {
     _corrosiveSpew.value = modifierDeckData.containsKey('corrosiveSpew')
         ? modifierDeckData["corrosiveSpew"] as bool
         : false;
-    _revealedCount.value = modifierDeckData.containsKey('revealed')
-        ? modifierDeckData["revealed"] as int
-        : 0;
+    _revealedCount.value = min(
+      modifierDeckData.containsKey('revealed')
+          ? modifierDeckData["revealed"] as int
+          : 0,
+      drawPileSize,
+    );
     _cassandraSpecial.value = modifierDeckData.containsKey('cassandra')
         ? modifierDeckData["cassandra"] as bool
         : false;
@@ -355,9 +358,29 @@ class ModifierDeck {
     }
   }
 
+  void removeCardFromDrawPile(_StateModifier _, int index) {
+    final card = _drawPile.removeAt(index);
+    _removedPile.add(card);
+    if (card.gfx == "minus1") {
+      _addedMinusOnes.value--;
+    }
+    if (_revealedCount.value > _drawPile.size() - 1 - index) {
+      _revealedCount.value--;
+    }
+  }
+
   void returnCardToDiscard(_StateModifier _, int index) {
     final card = _removedPile.removeAt(index);
     _discardPile.add(card);
+    if (card.gfx == "minus1") {
+      _addedMinusOnes.value++;
+    }
+  }
+
+  void returnCardToDrawPileFromRemoved(_StateModifier _, int index) {
+    final card = _removedPile.removeAt(index);
+    _drawPile.add(card);
+    _revealedCount.value++;
     if (card.gfx == "minus1") {
       _addedMinusOnes.value++;
     }

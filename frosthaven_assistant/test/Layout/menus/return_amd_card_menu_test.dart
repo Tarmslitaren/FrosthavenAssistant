@@ -20,7 +20,11 @@ void main() {
     getIt<GameState>().clearList();
     // Draw then remove a card to populate the removed pile
     DrawModifierCardCommand(deckName, gameState: getIt<GameState>()).execute();
-    RemoveAMDCardCommand(0, deckName, gameState: getIt<GameState>()).execute();
+    RemoveAMDCardCommand(
+      index: 0,
+      name: deckName,
+      gameState: getIt<GameState>(),
+    ).execute();
   });
 
   Future<void> pumpMenu(WidgetTester tester) async {
@@ -48,26 +52,28 @@ void main() {
   }
 
   group('ReturnAMDCardMenu', () {
-    testWidgets('renders the "Return card to discard pile" button',
-        (WidgetTester tester) async {
+    testWidgets('renders the "Return card to discard pile" button', (
+      WidgetTester tester,
+    ) async {
       await pumpMenu(tester);
       expect(find.text('Return card to discard pile'), findsOneWidget);
     });
 
     testWidgets(
-        'tapping the button returns the card to the discard pile and closes the dialog',
-        (WidgetTester tester) async {
-      final deck = getIt<GameState>().modifierDeck;
-      final removedBefore = deck.removedPileSize;
-      final discardBefore = deck.discardPileSize;
-      await pumpMenu(tester);
+      'tapping the button returns the card to the discard pile and closes the dialog',
+      (WidgetTester tester) async {
+        final deck = getIt<GameState>().modifierDeck;
+        final removedBefore = deck.removedPileSize;
+        final discardBefore = deck.discardPileSize;
+        await pumpMenu(tester);
 
-      await tester.tap(find.text('Return card to discard pile'));
-      await tester.pumpAndSettle();
+        await tester.tap(find.text('Return card to discard pile'));
+        await tester.pumpAndSettle();
 
-      expect(find.byType(ReturnAMDCardMenu), findsNothing);
-      expect(deck.removedPileSize, removedBefore - 1);
-      expect(deck.discardPileSize, discardBefore + 1);
-    });
+        expect(find.byType(ReturnAMDCardMenu), findsNothing);
+        expect(deck.removedPileSize, removedBefore - 1);
+        expect(deck.discardPileSize, discardBefore + 1);
+      },
+    );
   });
 }

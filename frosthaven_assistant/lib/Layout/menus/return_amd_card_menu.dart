@@ -21,7 +21,7 @@ class ReturnAMDCardMenu extends StatelessWidget {
 
   final GameState? gameState;
 
-  static const double _kModalHeight = 120.0;
+  static const double _kModalHeight = 220.0;
   static const double _kInnerSpacing = 35.0;
 
   GameState get _gameState => gameState ?? getIt<GameState>();
@@ -37,32 +37,58 @@ class ReturnAMDCardMenu extends StatelessWidget {
       scale = kCardZoomDefaultScale * (screenSize.width / cardWidth);
     }
     return Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ModifierCardFront(card: card, name: name, scale: scale),
-          const SizedBox(
-            height: kMenuTopPadding,
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ModifierCardFront(card: card, name: name, scale: scale),
+        const SizedBox(height: kMenuTopPadding),
+        ModalBackground(
+          width: kMenuNarrowWidth,
+          height: _kModalHeight,
+          child: Column(
+            children: [
+              const SizedBox(height: _kInnerSpacing),
+              TextButton(
+                onPressed: () {
+                  _gameState.action(
+                    ReturnRemovedAMDCardCommand(
+                      index: index,
+                      name: name,
+                      gameState: _gameState,
+                    ),
+                  );
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  "Return card to discard pile",
+                  textAlign: TextAlign.center,
+                  style: kButtonLabelStyle,
+                ),
+              ),
+              const SizedBox(height: _kInnerSpacing),
+              TextButton(
+                onPressed: () {
+                  _gameState.action(
+                    ReturnRemovedAMDCardCommand(
+                      index: index,
+                      name: name,
+                      toDrawPile: true,
+                      gameState: _gameState,
+                    ),
+                  );
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  "Return card to draw pile",
+                  textAlign: TextAlign.center,
+                  style: kButtonLabelStyle,
+                ),
+              ),
+              const SizedBox(height: kMenuTopPadding),
+            ],
           ),
-          ModalBackground(
-              width: kMenuNarrowWidth,
-              height: _kModalHeight,
-              child: Column(children: [
-                const SizedBox(
-                  height: _kInnerSpacing,
-                ),
-                TextButton(
-                    onPressed: () {
-                      _gameState.action(ReturnRemovedAMDCardCommand(index, name,
-                          gameState: _gameState));
-                      Navigator.pop(context);
-                    },
-                    child: const Text("Return card to discard pile",
-                        textAlign: TextAlign.center, style: kButtonLabelStyle)),
-                const SizedBox(
-                  height: kMenuTopPadding,
-                ),
-              ]))
-        ]);
+        ),
+      ],
+    );
   }
 }

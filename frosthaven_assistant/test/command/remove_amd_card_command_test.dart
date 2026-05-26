@@ -19,7 +19,11 @@ void main() {
       final discardBefore = deck.discardPileSize;
       final removedBefore = deck.removedPileSize;
 
-      RemoveAMDCardCommand(0, '', gameState: getIt<GameState>()).execute();
+      RemoveAMDCardCommand(
+        index: 0,
+        name: '',
+        gameState: getIt<GameState>(),
+      ).execute();
 
       expect(deck.discardPileSize, discardBefore - 1);
       expect(deck.removedPileSize, removedBefore + 1);
@@ -27,7 +31,11 @@ void main() {
     });
 
     test('describe returns correct string', () {
-      final command = RemoveAMDCardCommand(0, '', gameState: getIt<GameState>());
+      final command = RemoveAMDCardCommand(
+        index: 0,
+        name: '',
+        gameState: getIt<GameState>(),
+      );
       expect(command.describe(), 'Remove amd card');
     });
   });
@@ -35,12 +43,20 @@ void main() {
   group('ReturnRemovedAMDCardCommand', () {
     test('should move card from removed pile back to discard', () {
       DrawModifierCardCommand('', gameState: getIt<GameState>()).execute();
-      RemoveAMDCardCommand(0, '', gameState: getIt<GameState>()).execute();
+      RemoveAMDCardCommand(
+        index: 0,
+        name: '',
+        gameState: getIt<GameState>(),
+      ).execute();
       final deck = getIt<GameState>().modifierDeck;
       final discardBefore = deck.discardPileSize;
       final removedBefore = deck.removedPileSize;
 
-      ReturnRemovedAMDCardCommand(0, '', gameState: getIt<GameState>()).execute();
+      ReturnRemovedAMDCardCommand(
+        index: 0,
+        name: '',
+        gameState: getIt<GameState>(),
+      ).execute();
 
       expect(deck.removedPileSize, removedBefore - 1);
       expect(deck.discardPileSize, discardBefore + 1);
@@ -48,7 +64,11 @@ void main() {
     });
 
     test('describe returns correct string', () {
-      final command = ReturnRemovedAMDCardCommand(0, '', gameState: getIt<GameState>());
+      final command = ReturnRemovedAMDCardCommand(
+        index: 0,
+        name: '',
+        gameState: getIt<GameState>(),
+      );
       expect(command.describe(), 'Return removed amd card');
     });
   });
