@@ -279,13 +279,13 @@ abstract class GameServer {
       sendToOnly("Error: malformed init message (non-integer version).", client);
       return;
     }
-    if (version != serverVersion) {
+    if (version < serverVersion) {
       //version mismatch
       setNetworkMessage("Client version mismatch. Please update. Client $version Server $serverVersion");
       sendToOnly(
           "Error: Server Version is $serverVersion. client version is $version. Please update.",
           client);
-    } else {
+    }  else {
       sendInitResponse(client);
     }
   }
