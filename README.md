@@ -132,6 +132,17 @@ This will walk you through app installation through your first scenario.
   - To start a server, be sure to be on a wifi network and press 'start host server' from the settings menu.
   - To connect to a server in a local network, type in the local ip of the server (usually 192.168.something) and press 'Connect as client'.
 
+## Keyboard shortcuts
+
+| Shortcut | Action |
+| --- | --- |
+| Ctrl/Cmd+Z | Undo |
+| Ctrl/Cmd+Y | Redo |
+| Tab | Advance the current activation |
+| Shift+Tab | Undo the most recent activation step |
+| Space | Trigger draw-or-next-round |
+| 1-6 | Toggle the six elements: fire, ice, air, earth, light, dark |
+
 ## Connection Usage
 
 ### Starting
@@ -151,17 +162,13 @@ This will walk you through app installation through your first scenario.
 
 ## Known Issues
 - Severe flickering on lineage os 16, 17 and 18 on older phones using adreno 300 series graphic chip.
-- Some animations will not play, (and some may play when they shouldn't) when receiving updates over wifi.
+- Some animations may not play, (and some may play when they shouldn't) when receiving updates over wifi.
 - When trying to connect without a server on same network, may result in a lot of error messages shown when it tries connecting.
 - A device sharing a wifi-hotspot can not connect itself.
 - Initiative is secret while not originating from your own device in a network. It will stop being secret if you do modify it yourself.
 - Some text alignment issues with small texts on small screens.
 - When connected and the server device goes to background, the connection may be broken. Try to avoid having the server device's app go to background.
 - All data is added by hand. Please report any error in a ticket on Github.
-
-## Roadmap
-- Next:
-  - More minor improvements
 
 ## Developer Notes for adding game data
 
