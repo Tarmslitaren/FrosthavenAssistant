@@ -218,8 +218,9 @@ class MainMenu extends StatelessWidget {
                 onTap: () {
                   final Uri toLaunch = Uri(
                     scheme: 'https',
-                    host: 'www.github.com',
-                    path: 'Tarmslitaren/FrosthavenAssistant',
+                    host: 'tarmslitaren.github.io',
+                    path:
+                        'FrosthavenAssistant/docs/manual', //https://tarmslitaren.github.io/FrosthavenAssistant/docs/manual/
                     fragment: "#readme",
                   );
                   _launchUrlInBrowser(toLaunch);
