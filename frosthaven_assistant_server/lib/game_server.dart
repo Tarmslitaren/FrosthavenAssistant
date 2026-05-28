@@ -16,6 +16,11 @@ abstract class GameServer {
 
   final int serverVersion = 1400;
 
+  // Addresses of clients rejected for version mismatch, keyed by the string
+  // produced by safeGetClientAddress() at connection time.  Checked in onDone
+  // so that "Client left." does not overwrite the mismatch error message.
+  final Set<String> _versionRejectedClients = {};
+
   ServerSocket? _serverSocket;
   ServerSocket? get serverSocket {
     return _serverSocket;
@@ -180,6 +185,10 @@ abstract class GameServer {
     client.setOption(SocketOption.tcpNoDelay, true);
     client.encoding = utf8;
 
+    // Capture address now, before any close, so the onDone closure can use it
+    // even after the socket is destroyed.
+    final String clientAddr = safeGetClientAddress(client);
+
     logHandleConnection(client);
 
     addClientConnection(client);
@@ -233,8 +242,14 @@ abstract class GameServer {
         onDone: () {
           if (serverEnabled) {
             removeClientConnection(client);
-            log('Client left');
-            setNetworkMessage('Client left.');
+            if (_versionRejectedClients.remove(clientAddr)) {
+              // Version-mismatch rejection: the mismatch message is already
+              // displayed — don't overwrite it with "Client left."
+              log('Rejected old-version client disconnected: $clientAddr');
+            } else {
+              log('Client left');
+              setNetworkMessage('Client left.');
+            }
           }
         },
       );
@@ -282,9 +297,21 @@ abstract class GameServer {
     if (version < serverVersion) {
       //version mismatch
       setNetworkMessage("Client version mismatch. Please update. Client $version Server $serverVersion");
-      sendToOnly(
-          "Error: Server Version is $serverVersion. client version is $version. Please update.",
-          client);
+
+      if(version < 1400) {
+        // Register before destroying so the onDone handler sees it and does not
+        // overwrite the mismatch message with "Client left."
+        _versionRejectedClients.add(safeGetClientAddress(client));
+        // Write error in old-style S3nD:[EOM] framing directly to the socket so
+        // clients older than 1400 (which cannot parse JSON envelopes) still receive
+        // a readable rejection. Then remove the connection so it cannot receive new-
+        // style messages that the old client cannot handle.
+        client.write(
+            "S3nD:Error: Server Version is $serverVersion. client version is $version. Please update.[EOM]");
+        removeClientConnection(client);
+      } else {
+        sendToOnly("Error: Server Version is $serverVersion. client version is $version. Please update.", client);
+      }
     }  else {
       sendInitResponse(client);
     }

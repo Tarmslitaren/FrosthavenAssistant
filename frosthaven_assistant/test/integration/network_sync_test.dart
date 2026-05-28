@@ -86,7 +86,7 @@ class WireClient {
 
   /// Sends the init handshake and returns the decoded init-response envelope.
   Future<StateEnvelope> doInit() async {
-    send('init version:1302');
+    send('init version:1400');
     final raw = await receive();
     final envelope = StateEnvelope.tryDecode(raw);
     assert(
