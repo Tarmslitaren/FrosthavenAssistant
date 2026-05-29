@@ -191,6 +191,21 @@ void main() {
 
       expect(raw, startsWith('Error:'));
     });
+
+    test('old client using legacy version: key returns user-friendly Error',
+        () async {
+      final client = await WireClient.connect('127.0.0.1', _serverPort);
+      addTearDown(client.close);
+
+      client.send('init version:1302'); // pre-protocolVersion old format
+      final raw = await client.receive();
+
+      expect(raw, startsWith('Error:'),
+          reason: 'Old clients must get a clear rejection');
+      expect(raw.toLowerCase(), isNot(contains('malformed')),
+          reason: '"malformed init message" is confusing to end-users; '
+              'the message must tell them to update instead');
+    });
   });
 
   // ── State propagation ─────────────────────────────────────────────────────────

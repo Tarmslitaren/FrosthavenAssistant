@@ -240,6 +240,13 @@ abstract class GameServer {
   }
 
   void handleInitMessage(String message, Socket client){
+    // Old clients (≤v1.13.7) send "init version:NNNN" — give a friendly
+    // rejection rather than a confusing "malformed" error.
+    if (message.contains("version:") && !message.contains("protocolVersion:")) {
+      setNetworkMessage("Old client attempted to connect. Please update the app.");
+      sendToOnly("Error: Your app is outdated. Please update to connect.", client);
+      return;
+    }
     List<String> initMessageParts = message.split("protocolVersion:");
     if (initMessageParts.length < 2) {
       sendToOnly("Error: malformed init message (missing protocolVersion field).", client);
