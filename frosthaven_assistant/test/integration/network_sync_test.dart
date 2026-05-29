@@ -192,10 +192,11 @@ void main() {
       expect(raw, startsWith('Error:'));
     });
 
-    test('old client using legacy version: key returns user-friendly Error',
-        () async {
+    test('old client using legacy version: key returns user-friendly Error '
+        'and has its connection closed', () async {
       final client = await WireClient.connect('127.0.0.1', _serverPort);
-      addTearDown(client.close);
+      // No addTearDown — server closes the connection; client.close() would
+      // throw on an already-destroyed socket.
 
       client.send('init version:1302'); // pre-protocolVersion old format
       final raw = await client.receive();
@@ -205,6 +206,14 @@ void main() {
       expect(raw.toLowerCase(), isNot(contains('malformed')),
           reason: '"malformed init message" is confusing to end-users; '
               'the message must tell them to update instead');
+
+      // Server must close the connection after rejecting.
+      // WireClient.onDone completes pending futures with StateError.
+      await expectLater(
+        client.receive(timeout: const Duration(milliseconds: 500)),
+        throwsA(isA<StateError>()),
+        reason: 'Server must close the socket after sending the rejection',
+      );
     });
   });
 

@@ -19,6 +19,10 @@ abstract class GameServer {
   /// classes, campaigns) must NOT bump this number.
   static const int protocolVersion = 1;
 
+  // Sockets rejected for version mismatch.  Checked in onDone so that
+  // "Client left." does not overwrite the rejection message.
+  final Set<Socket> _rejectedClients = {};
+
   ServerSocket? _serverSocket;
   ServerSocket? get serverSocket {
     return _serverSocket;
@@ -200,8 +204,12 @@ abstract class GameServer {
         onDone: () {
           if (serverEnabled) {
             removeClientConnection(client);
-            log('Client left');
-            setNetworkMessage('Client left.');
+            if (_rejectedClients.remove(client)) {
+              log('Rejected old-version client disconnected');
+            } else {
+              log('Client left');
+              setNetworkMessage('Client left.');
+            }
           }
         },
       );
@@ -241,10 +249,12 @@ abstract class GameServer {
 
   void handleInitMessage(String message, Socket client){
     // Old clients (≤v1.13.7) send "init version:NNNN" — give a friendly
-    // rejection rather than a confusing "malformed" error.
+    // rejection rather than a confusing "malformed" error, then close the socket.
     if (message.contains("version:") && !message.contains("protocolVersion:")) {
       setNetworkMessage("Old client attempted to connect. Please update the app.");
       sendToOnly("Error: Your app is outdated. Please update to connect.", client);
+      _rejectedClients.add(client);
+      removeClientConnection(client);
       return;
     }
     List<String> initMessageParts = message.split("protocolVersion:");
