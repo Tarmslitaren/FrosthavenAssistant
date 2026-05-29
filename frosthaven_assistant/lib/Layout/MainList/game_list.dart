@@ -237,7 +237,8 @@ class _GameListState extends State<GameList> {
     itemsPerColumn = max(itemsPerColumn, itemsColumn2);
     double paddingBottom = _kHalfHeightFactor * screenSize.height;
 
-    return ReorderableWrap(
+    return ExcludeSemantics(
+      child: ReorderableWrap(
       padding: EdgeInsets.only(bottom: paddingBottom),
       scrollAnimationDuration: const Duration(milliseconds: 400),
       reorderAnimationDuration: const Duration(milliseconds: 400),
@@ -251,6 +252,7 @@ class _GameListState extends State<GameList> {
         widget.vm.reorderItem(oldIndex, newIndex);
       },
       children: _cachedChildren,
+    ),
     );
   }
 }
