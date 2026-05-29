@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:frosthaven_assistant/services/network/communication.dart';
 import 'package:frosthaven_assistant/services/network/network.dart';
+import 'package:frosthaven_assistant_server/game_server.dart';
 
 import '../../Resource/game_event.dart';
 import '../../Resource/settings.dart';
@@ -51,7 +52,7 @@ class Client {
             _settings.connectClientOnStartup = true;
           }
           _settings.saveToDisk();
-          _send("init version:${_network.server.serverVersion}");
+          _send("init protocolVersion:${GameServer.protocolVersion}");
           _sendPing();
           _listen();
         },
@@ -145,7 +146,6 @@ class Client {
           "Your state was not up to date, try again.";
     }
 
-    // Try new JSON envelope format first, fall back to legacy text format.
     final StateEnvelope? envelope = StateEnvelope.tryDecode(message);
     if (envelope != null) {
       final GameEvent event = GameEvent.fromJsonString(envelope.eventJson);
@@ -156,38 +156,6 @@ class Client {
       // Set event before commandIndex fires so VLB callbacks see it.
       _gameState.lastEvent.value = event;
       _gameState.commandIndex.value = envelope.index;
-      _gameState.updateAllUI();
-      Future.delayed(
-        const Duration(milliseconds: 100),
-        () => _gameState.save(),
-      );
-    } else if (message.startsWith("Index:")) {
-      // Legacy text format: "Index:NDescription:textEvent:{...}GameState:state"
-      List<String> messageParts1 = message.split("Description:");
-      String indexString = messageParts1.first.substring("Index:".length);
-      final String afterDescription = messageParts1[1];
-
-      GameEvent event = const NoEvent();
-      String data;
-      if (afterDescription.contains("Event:")) {
-        List<String> messageParts2 = afterDescription.split("Event:");
-        List<String> messageParts3 = messageParts2[1].split("GameState:");
-        event = GameEvent.fromJsonString(messageParts3.first);
-        data = messageParts3[1];
-      } else {
-        // Backwards-compatible: older server without Event field.
-        data = afterDescription.split("GameState:")[1];
-      }
-
-      debugPrint(
-        'Client Receive Data, index: $indexString, event:${event.runtimeType}',
-      );
-
-      _gameState.loadFromData(data);
-      int newIndex = int.tryParse(indexString) ?? -1;
-      // Set event before commandIndex fires so VLB callbacks see it.
-      _gameState.lastEvent.value = event;
-      _gameState.commandIndex.value = newIndex;
       _gameState.updateAllUI();
       Future.delayed(
         const Duration(milliseconds: 100),

@@ -11,9 +11,6 @@ import 'connection.dart';
 ///
 /// The inner content (between `S3nD:` and `[EOM]`) is a JSON object:
 /// `{"i": index, "d": "description", "e": {event_object}, "s": "gamestate"}`
-///
-/// The previous text-delimited format (`Index:NDescription:...GameState:...`)
-/// is still accepted on receive for backwards compatibility with older peers.
 class StateEnvelope {
   // ignore: prefer-match-file-name, file contains multiple communication types
   final int index;

@@ -14,12 +14,10 @@ class StateUpdateMessage {
 
 abstract class GameServer {
 
-  final int serverVersion = 1400;
-
-  // Addresses of clients rejected for version mismatch, keyed by the string
-  // produced by safeGetClientAddress() at connection time.  Checked in onDone
-  // so that "Client left." does not overwrite the mismatch error message.
-  final Set<String> _versionRejectedClients = {};
+  /// Wire-protocol version. Increment this ONLY when the message format itself
+  /// changes (e.g. envelope fields added/removed). Game-data additions (new
+  /// classes, campaigns) must NOT bump this number.
+  static const int protocolVersion = 1;
 
   ServerSocket? _serverSocket;
   ServerSocket? get serverSocket {
@@ -92,42 +90,6 @@ abstract class GameServer {
     }
   }
 
-  StateUpdateMessage parseStateUpdateMessage(String message) {
-    // Try new JSON envelope format first.
-    final StateUpdateMessage? envelope = tryDecodeStateEnvelope(message);
-    if (envelope != null) return envelope;
-
-    // Legacy text format: "Index:NDescription:textEvent:{...}GameState:state"
-    List<String> messageParts1 = message.split("Description:");
-    String indexString = messageParts1[0].substring("Index:".length);
-    final String afterDescription = messageParts1[1];
-
-    String description;
-    String eventJson;
-    String data;
-
-    if (afterDescription.contains("Event:")) {
-      List<String> parts2 = afterDescription.split("Event:");
-      description = parts2[0];
-      List<String> parts3 = parts2[1].split("GameState:");
-      eventJson = parts3[0];
-      data = parts3[1];
-    } else {
-      // Backwards-compatible: older client without Event field.
-      List<String> parts2 = afterDescription.split("GameState:");
-      description = parts2[0];
-      eventJson = '{"type":"none"}';
-      data = parts2[1];
-    }
-
-    StateUpdateMessage result = StateUpdateMessage();
-    result.indexString = indexString;
-    result.index = int.tryParse(indexString) ?? -1;
-    result.description = description;
-    result.eventJson = eventJson;
-    result.data = data;
-    return result;
-  }
 
   Future<void> startServerInternal(String ip, int port) async {
     try {
@@ -185,10 +147,6 @@ abstract class GameServer {
     client.setOption(SocketOption.tcpNoDelay, true);
     client.encoding = utf8;
 
-    // Capture address now, before any close, so the onDone closure can use it
-    // even after the socket is destroyed.
-    final String clientAddr = safeGetClientAddress(client);
-
     logHandleConnection(client);
 
     addClientConnection(client);
@@ -242,14 +200,8 @@ abstract class GameServer {
         onDone: () {
           if (serverEnabled) {
             removeClientConnection(client);
-            if (_versionRejectedClients.remove(clientAddr)) {
-              // Version-mismatch rejection: the mismatch message is already
-              // displayed — don't overwrite it with "Client left."
-              log('Rejected old-version client disconnected: $clientAddr');
-            } else {
-              log('Client left');
-              setNetworkMessage('Client left.');
-            }
+            log('Client left');
+            setNetworkMessage('Client left.');
           }
         },
       );
@@ -263,7 +215,7 @@ abstract class GameServer {
   /// appropriate handler.  Framing (S3nD:/[EOM] extraction) is done by
   /// [handleConnection] before calling this method.
   void processMessages(String message, Socket client){
-    if (message.startsWith("Index:") || message.startsWith("{")) {
+    if (message.startsWith("{")) {
       handleIndexMessage(message, client);
     } else if (message.startsWith("init")) {
       handleInitMessage(message, client);
@@ -279,40 +231,32 @@ abstract class GameServer {
   }
 
   void handleIndexMessage(String message, Socket client){
-    StateUpdateMessage parsedMessage = parseStateUpdateMessage(message);
-    updateStateFromMessage(parsedMessage, client);
+    final StateUpdateMessage? parsed = tryDecodeStateEnvelope(message);
+    if (parsed == null) {
+      log('Received malformed state message from ${safeGetClientAddress(client)}, ignoring.');
+      return;
+    }
+    updateStateFromMessage(parsed, client);
   }
 
   void handleInitMessage(String message, Socket client){
-    List<String> initMessageParts = message.split("version:");
+    List<String> initMessageParts = message.split("protocolVersion:");
     if (initMessageParts.length < 2) {
-      sendToOnly("Error: malformed init message (missing version field).", client);
+      sendToOnly("Error: malformed init message (missing protocolVersion field).", client);
       return;
     }
     final int? version = int.tryParse(initMessageParts[1]);
     if (version == null) {
-      sendToOnly("Error: malformed init message (non-integer version).", client);
+      sendToOnly("Error: malformed init message (non-integer protocolVersion).", client);
       return;
     }
-    if (version < serverVersion) {
-      //version mismatch
-      setNetworkMessage("Client version mismatch. Please update. Client $version Server $serverVersion");
-
-      if(version < 1400) {
-        // Register before destroying so the onDone handler sees it and does not
-        // overwrite the mismatch message with "Client left."
-        _versionRejectedClients.add(safeGetClientAddress(client));
-        // Write error in old-style S3nD:[EOM] framing directly to the socket so
-        // clients older than 1400 (which cannot parse JSON envelopes) still receive
-        // a readable rejection. Then remove the connection so it cannot receive new-
-        // style messages that the old client cannot handle.
-        client.write(
-            "S3nD:Error: Server Version is $serverVersion. client version is $version. Please update.[EOM]");
-        removeClientConnection(client);
-      } else {
-        sendToOnly("Error: Server Version is $serverVersion. client version is $version. Please update.", client);
-      }
-    }  else {
+    if (version != protocolVersion) {
+      setNetworkMessage(
+          "Protocol version mismatch. Client $version, server $protocolVersion. Please update.");
+      sendToOnly(
+          "Error: Protocol version mismatch. Client $version, server $protocolVersion. Please update.",
+          client);
+    } else {
       sendInitResponse(client);
     }
   }
