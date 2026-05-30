@@ -23,6 +23,7 @@ class LootCardWidget extends StatelessWidget {
   static const double _kOwnerIconSize = 15.0;
   static const double _kOwnerIconTop = 2.0;
   static const double _kOwnerIconRight = 2.0;
+  static const double _kOwnerIconShadowOffset = 3.0;
 
   LootCardWidget(
       {super.key, required this.card, required bool revealed, this.settings}) {
@@ -158,11 +159,27 @@ class LootCardFront extends StatelessWidget {
                     width: LootCardWidget._kOwnerIconSize * scale,
                     top: LootCardWidget._kOwnerIconTop * scale,
                     right: LootCardWidget._kOwnerIconRight * scale,
-                    child: Image(
-                        fit: BoxFit.scaleDown,
-                        color: Colors.black,
-                        image: AssetImage(
-                            'assets/images/class-icons/${card.owner}.png')),
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        Transform.translate(
+                          offset: Offset(
+                            LootCardWidget._kOwnerIconShadowOffset * scale,
+                            LootCardWidget._kOwnerIconShadowOffset * scale,
+                          ),
+                          child: Image(
+                              fit: BoxFit.scaleDown,
+                              color: Colors.black,
+                              image: AssetImage(
+                                  'assets/images/class-icons/${card.owner}.png')),
+                        ),
+                        Image(
+                            fit: BoxFit.scaleDown,
+                            color: Colors.white,
+                            image: AssetImage(
+                                'assets/images/class-icons/${card.owner}.png')),
+                      ],
+                    ),
                   )
               ]),
         ));
