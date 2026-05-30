@@ -23,7 +23,7 @@ class LootCardWidget extends StatelessWidget {
   static const double _kOwnerIconSize = 15.0;
   static const double _kOwnerIconTop = 2.0;
   static const double _kOwnerIconRight = 2.0;
-  static const double _kOwnerIconShadowOffset = 3.0;
+  static const double _kOwnerIconShadowOffset = 1.0;
 
   LootCardWidget(
       {super.key, required this.card, required bool revealed, this.settings}) {

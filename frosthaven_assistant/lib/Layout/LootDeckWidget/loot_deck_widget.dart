@@ -32,7 +32,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
   static const double _kWidgetWidth = 94.0;
   static const double _kIconSize = 35.0;
   static const double _kIconTopMargin = 12.0;
-  static const double _kIconShadowOffset = 7.0;
+  static const double _kIconShadowOffset = 2.0;
   static const double _kDiscardWidth = 39.0;
   static const double _kDiscardHeight = 57.6666;
   static const double _kDiscardBorderRadius = 5.0;
