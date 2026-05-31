@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
+import 'package:frosthaven_assistant/services/android_foreground_service.dart';
 import 'package:frosthaven_assistant/services/network/client.dart';
 import 'package:frosthaven_assistant/services/network/network.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
@@ -30,8 +31,19 @@ class MainState extends State<MyHomePage>
 
   @override
   void dispose() {
+    if (Platform.isAndroid) {
+      _settings.server.removeListener(_onServerChanged);
+    }
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
+  }
+
+  void _onServerChanged() {
+    if (_settings.server.value) {
+      AndroidForegroundService.start();
+    } else {
+      AndroidForegroundService.stop();
+    }
   }
 
   @override
@@ -94,6 +106,10 @@ class MainState extends State<MyHomePage>
     _client = getIt<Client>();
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+
+    if (Platform.isAndroid) {
+      _settings.server.addListener(_onServerChanged);
+    }
 
     if (Platform.isAndroid || Platform.isIOS) {
       KeyboardVisibilityController().onChange.listen((bool visible) {
