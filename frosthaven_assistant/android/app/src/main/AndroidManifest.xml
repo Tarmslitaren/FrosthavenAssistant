@@ -4,8 +4,10 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <!-- Required on Android 14+ for network-facing foreground services -->
+    <!-- connectedDevice FGS type requires FOREGROUND_SERVICE_CONNECTED_DEVICE
+         plus at least one actual connection permission (CHANGE_WIFI_STATE for TCP) -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-feature android:name="android.software.leanback" android:required="false" />
