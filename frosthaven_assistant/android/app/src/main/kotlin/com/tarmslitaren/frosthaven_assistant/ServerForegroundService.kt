@@ -6,6 +6,7 @@ import android.app.NotificationManager
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.IBinder
 
 class ServerForegroundService : Service() {
@@ -35,18 +36,26 @@ class ServerForegroundService : Service() {
                 "Game Server",
                 NotificationManager.IMPORTANCE_LOW
             ).apply {
-                description = "Keeps the X-haven server running while the app is in the background"
+                description =
+                    "Keeps the X-haven server running while the app is in the background"
             }
         )
 
-        val notification = Notification.Builder(this, CHANNEL_ID)
+        val builder = Notification.Builder(this, CHANNEL_ID)
             .setContentTitle("X-haven Server Running")
             .setContentText("Clients can connect and play")
-            .setSmallIcon(R.mipmap.launcher_icon)
+            // Use a built-in system drawable — notification small icons must be
+            // alpha-only drawables, not mipmap launcher icons.
+            .setSmallIcon(android.R.drawable.stat_notify_sync_noanim)
             .setOngoing(true)
-            .build()
 
-        startForeground(NOTIFICATION_ID, notification)
+        // Android 12+ defers FGS notifications for up to 10 s when the app
+        // is in the foreground.  FOREGROUND_SERVICE_IMMEDIATE disables that.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            builder.setForegroundServiceBehavior(Notification.FOREGROUND_SERVICE_IMMEDIATE)
+        }
+
+        startForeground(NOTIFICATION_ID, builder.build())
         return START_NOT_STICKY
     }
 

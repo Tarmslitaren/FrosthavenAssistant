@@ -11,6 +11,10 @@ class MainActivity : FlutterActivity() {
             "com.tarmslitaren.frosthaven_assistant/foreground_service"
     }
 
+    // Use the engine cached by MainApplication so Activity recreation does
+    // not restart the Dart VM or close the server socket.
+    override fun getCachedEngineId(): String = MainApplication.ENGINE_ID
+
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL)

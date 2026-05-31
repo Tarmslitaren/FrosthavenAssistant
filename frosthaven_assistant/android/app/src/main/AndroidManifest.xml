@@ -14,7 +14,7 @@
     <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
     <application
         android:label="X-haven Assistant"
-        android:name="${applicationName}"
+        android:name=".MainApplication"
         android:banner="@drawable/atv_banner_small"
         android:icon="@mipmap/launcher_icon">
         <activity
