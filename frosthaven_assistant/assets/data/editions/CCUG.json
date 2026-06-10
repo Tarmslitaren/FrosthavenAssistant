@@ -683,7 +683,7 @@
         {"adds": [ "perks/plus2earthlight"]},
         {"adds": [ "perks/plus2earthlight"]},
         {"text": "Ignore item - 1 effects and add one +1 card.","adds": [ "plus1"]},
-        {"text": "Whenever you declare a long rest, oyu may move one of your summons to your discard pile to perform %ward%, self."},
+        {"text": "Whenever you declare a long rest, you may move one of your summons to your discard pile to perform %ward%, self."},
         {"text": "Once each scenario, when your summon would suffer %damage%, negate the %damage%, %teleport% to the hex occupied by that summon, and place that summon in an empty hex closest to you."},
         {"text": "[triple] Your summons gain advantage on all attacks performed while adjacent to you."}
       ]
@@ -928,6 +928,69 @@
         {"text": "Whenever you perform a long rest, %any%."},
         {"text": "Once per round, when an enemy consumes an element that matches one of your Loadout elements, infuse that element."},
         {"text": "[double] Whenever you become exhausted, first perform: %move% 4 %jump%, %attack% X %target% all enemies within two hexes, where X is the number of Loadouts in your active area."}
+      ]
+    },
+    {
+      "name": "Twilight",
+      "color": "FFFBDEA2",
+      "colorSecondary": "FF492258",
+      "edition": "CCUG",
+      "health": [6,7,8,9,10,11,12,13,14],
+      "hidden": false,
+      "summons": {
+        "Sun Spirit": {
+          "level": 1,
+          "health": 3,
+          "standees": 1,
+          "gfx": "TWI sun spirit",
+          "move": 2,
+          "attack": 0,
+          "range": 2
+        },
+        "Night Spirit": {
+          "level": 1,
+          "health": 5,
+          "standees": 1,
+          "gfx": "TWI night spirit",
+          "move": 2,
+          "attack": 1
+        },
+        "Herald of Twilight": {
+          "level": 5,
+          "health": 8,
+          "standees": 1,
+          "gfx": "TWI herald of twilight",
+          "move": 2,
+          "attack": 3
+        },
+        "Twilight's Echo": {
+          "level": 9,
+          "health": 3,
+          "standees": 1,
+          "gfx": "TWI twilight's echo",
+          "move": 2,
+          "attack": 2,
+          "range": 3
+        }
+      },
+      "perks": [
+        {"removes": ["minus2"],"adds": [ "plus0"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0curse"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0curse"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0lightdark"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0lightdark"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1ward1ally"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1ward1ally"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1ward1ally"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus0bless1allyflip"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus0bless1allyflip"]},
+        {"text": "Add one +2 \"Move your form token forward or backward one space\" card","adds": [ "perks/unique/tw1"]},
+        {"text": "Add one +2 \"Move your form token forward or backward one space\" card","adds": [ "perks/unique/tw1"]},
+        {"adds": [ "perks/plus1disarm"]},
+        {"text": "Ignore scenario effects and add two +1 cards.","adds": [ "plus1","plus1"]},
+        {"text": "Once each scenario, when you short rest, first restore either all of your Day cards or all of your Night cards and place your form token on any space."},
+        {"text": "Once each scenario, when any character ally would become exhausted by suffering %damage%, you may suffer %damage% 2 to reduce their hit point value to 1 instead."},
+        {"text": "[double] At the start of each scenario you may play one level 1 card from your hand to perform a persistent loss action of the card."}
       ]
     }
   ],
