@@ -1,3 +1,5 @@
+import 'dart:ui' show ImageFilter;
+
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/view_models/loot_deck_view_model.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
@@ -32,6 +34,9 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
   static const double _kWidgetWidth = 94.0;
   static const double _kIconSize = 35.0;
   static const double _kIconTopMargin = 12.0;
+  static const double _kIconShadowOffset = 2.0;
+  static const double _kIconShadowBlur = 1.5;
+  static const Color _kIconShadowColor = Colors.black54;
   static const double _kDiscardWidth = 39.0;
   static const double _kDiscardHeight = 57.6666;
   static const double _kDiscardBorderRadius = 5.0;
@@ -142,7 +147,6 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
               }
 
               final deck = _vm.lootDeck;
-              final currentCharacterColor = _vm.currentCharacterColor;
               final currentCharacterName = _vm.currentCharacterName;
               final discardPileSize = deck.discardPileSize;
               final discardPileList = deck.discardPileContents.toList();
@@ -207,11 +211,44 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                   LootDeckWidgetState._kIconTopMargin *
                                   userScalingBars,
                               left: kSmallMargin * userScalingBars,
-                              child: Image(
-                                color: currentCharacterColor,
-                                image: AssetImage(
-                                  'assets/images/class-icons/$currentCharacterName.png',
-                                ),
+                              child: Stack(
+                                clipBehavior: Clip.none,
+                                children: [
+                                  Transform.translate(
+                                    offset: Offset(
+                                      LootDeckWidgetState._kIconShadowOffset *
+                                          userScalingBars,
+                                      LootDeckWidgetState._kIconShadowOffset *
+                                          userScalingBars,
+                                    ),
+                                    child: ImageFiltered(
+                                      imageFilter: ImageFilter.blur(
+                                        sigmaX:
+                                            LootDeckWidgetState
+                                                ._kIconShadowBlur *
+                                            userScalingBars,
+                                        sigmaY:
+                                            LootDeckWidgetState
+                                                ._kIconShadowBlur *
+                                            userScalingBars,
+                                      ),
+                                      child: Image(
+                                        color:
+                                            LootDeckWidgetState
+                                                ._kIconShadowColor,
+                                        image: AssetImage(
+                                          'assets/images/class-icons/$currentCharacterName.png',
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Image(
+                                    color: Colors.white,
+                                    image: AssetImage(
+                                      'assets/images/class-icons/$currentCharacterName.png',
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                         ],

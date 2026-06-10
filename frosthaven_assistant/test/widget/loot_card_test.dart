@@ -144,6 +144,43 @@ void main() {
       // Owner image should be rendered (Image widgets exist)
       expect(find.byType(Image), findsAtLeast(1));
     });
+
+    testWidgets('owner icon renders drop-shadow stack (blur + translate)',
+        (WidgetTester tester) async {
+      final card = makeCard(owner: 'Blinkblade');
+      final originalOnError = FlutterError.onError;
+      FlutterError.onError = ignoreOverflowErrors;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: LootCardFront(card: card, scale: 1.0),
+          ),
+        ),
+      );
+      FlutterError.onError = originalOnError;
+      // The owner icon's drop-shadow layer is a Transform.translate wrapping
+      // an ImageFiltered (ImageFilter.blur) wrapping a black-tinted Image.
+      // The ImageFiltered is the load-bearing assertion — without it, the
+      // shadow would render crisp and the soft-halo effect would be lost.
+      expect(find.byType(ImageFiltered), findsOneWidget);
+    });
+
+    testWidgets('empty owner does not render drop-shadow stack',
+        (WidgetTester tester) async {
+      final card = makeCard(owner: '');
+      final originalOnError = FlutterError.onError;
+      FlutterError.onError = ignoreOverflowErrors;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: LootCardFront(card: card, scale: 1.0),
+          ),
+        ),
+      );
+      FlutterError.onError = originalOnError;
+      // No owner → no shadow layer
+      expect(find.byType(ImageFiltered), findsNothing);
+    });
   });
 
   group('LootCardWidget buildRear', () {
