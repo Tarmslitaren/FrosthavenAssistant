@@ -34,6 +34,10 @@ class MainState extends State<MyHomePage>
     if (Platform.isAndroid) {
       _settings.server.removeListener(_onServerChanged);
     }
+    if (!kIsWeb &&
+        (Platform.isLinux || Platform.isWindows || Platform.isMacOS)) {
+      windowManager.removeListener(this);
+    }
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
@@ -109,6 +113,11 @@ class MainState extends State<MyHomePage>
 
     if (Platform.isAndroid) {
       _settings.server.addListener(_onServerChanged);
+    }
+
+    if (!kIsWeb &&
+        (Platform.isLinux || Platform.isWindows || Platform.isMacOS)) {
+      windowManager.addListener(this);
     }
 
     if (Platform.isAndroid || Platform.isIOS) {

@@ -40,6 +40,7 @@ Future<void> main() async {
   const minScreenHeight = 600.0;
 
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    await windowManager.ensureInitialized();
     setWindowTitle(title);
     if (!Platform.isMacOS) {
       windowManager.setMinimumSize(const Size(minScreenWidth, minScreenHeight));
