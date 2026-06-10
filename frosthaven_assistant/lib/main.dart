@@ -129,7 +129,7 @@ class MyApp extends StatelessWidget {
         if (child == null) {
           return const SizedBox.shrink();
         }
-        return GlobalHotkeys(child: child);
+        return ExcludeSemantics(child: GlobalHotkeys(child: child));
       },
       home: ShowFPS(
           alignment: Alignment.topRight,
