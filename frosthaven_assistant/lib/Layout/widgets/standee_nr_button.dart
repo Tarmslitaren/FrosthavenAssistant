@@ -18,23 +18,34 @@ class StandeeNrButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shadow = Shadow(
-      offset: Offset(kShadowOffset * scale, kShadowOffset * scale),
-      color: Colors.black87,
-      blurRadius: kShadowOffset,
-    );
+    // Stack-based shadow avoids TextStyle.shadows, which Impeller renders at the
+    // Dialog's save-layer origin instead of the text's position on iOS.
     return SizedBox(
       width: kButtonSize * scale,
       height: kButtonSize * scale,
       child: TextButton(
         onPressed: onPressed,
-        child: Text(
-          nr.toString(),
-          style: TextStyle(
-            color: color,
-            fontSize: kFontSizeTitle * scale,
-            shadows: [shadow],
-          ),
+        child: Stack(
+          children: [
+            Positioned(
+              left: kShadowOffset * scale,
+              top: kShadowOffset * scale,
+              child: Text(
+                nr.toString(),
+                style: TextStyle(
+                  color: Colors.black87,
+                  fontSize: kFontSizeTitle * scale,
+                ),
+              ),
+            ),
+            Text(
+              nr.toString(),
+              style: TextStyle(
+                color: color,
+                fontSize: kFontSizeTitle * scale,
+              ),
+            ),
+          ],
         ),
       ),
     );

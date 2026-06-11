@@ -116,19 +116,33 @@ class CharacterWidgetState extends State<CharacterWidget> {
             builder: (context, child) {
               final double scale = getScaleByReference(context);
 
-              Widget inner = PhysicalShape(
-                  color:
-                      vm.isCurrentTurn ? Colors.tealAccent : Colors.transparent,
-                  shadowColor: Colors.black,
-                  elevation: CharacterWidget._kElevation,
-                  clipper:
-                      const ShapeBorderClipper(shape: RoundedRectangleBorder()),
+              // DecoratedBox instead of PhysicalShape: avoids creating a
+              // PhysicalModelLayer (compositing save layer), which causes
+              // TextStyle.shadows to paint at wrong coords on iOS/Impeller.
+              Widget inner = DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: vm.isCurrentTurn
+                        ? Colors.tealAccent
+                        : Colors.transparent,
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black38,
+                        blurRadius: CharacterWidget._kElevation,
+                        offset: Offset(0, CharacterWidget._kElevation / 4),
+                      )
+                    ],
+                  ),
                   child: CharacterWidgetInternal(
                     character: character,
                     isCharacter: isCharacter,
                     characterId: character.id,
                     initPreset: widget.initPreset,
                   ));
+
+              // Only apply ColorFiltered when actually graying out: the
+              // identity-matrix variant still creates a save layer on Impeller.
+              final Widget characterContent =
+                  _buildCharacterContent(vm, character, isCharacter, inner);
 
               return Column(mainAxisSize: MainAxisSize.max, children: [
                 Container(
@@ -145,12 +159,11 @@ class CharacterWidgetState extends State<CharacterWidget> {
                         return buildMonsterBoxGrid(scale, character);
                       }),
                 ),
-                ColorFiltered(
-                    colorFilter: vm.notGrayScale
-                        ? ColorFilter.matrix(identity)
-                        : ColorFilter.matrix(grayScale),
-                    child: _buildCharacterContent(
-                        vm, character, isCharacter, inner))
+                vm.notGrayScale
+                    ? characterContent
+                    : ColorFiltered(
+                        colorFilter: ColorFilter.matrix(grayScale),
+                        child: characterContent)
               ]);
             }));
   }

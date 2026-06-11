@@ -126,14 +126,33 @@ class InitiativeWidget extends StatelessWidget {
               if (isCharacter) {
                 initTextFieldController.clear();
               }
+              // Stack-based shadow: TextStyle.shadows paint at the wrong
+              // position on iOS/Impeller when the widget is inside a
+              // RepaintBoundary (each list item has one), so we replicate the
+              // shadow with an offset dark text layer instead.
               return Container(
                   height: InitiativeWidget._kDisplayHeight * scale,
                   width: InitiativeWidget._kTextFieldWidth * scale,
                   margin: EdgeInsets.only(left: InitiativeWidget._kMarginLeft * scale),
-                  child: Text(
-                    vm.initiativeDisplayText(initiative),
-                    textAlign: TextAlign.center,
-                    style: initTextStyle,
+                  alignment: Alignment.center,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        left: kShadowOffset * scale,
+                        top: kShadowOffset * scale,
+                        child: Text(
+                          vm.initiativeDisplayText(initiative),
+                          style: initTextStyle.copyWith(
+                            color: Colors.black87,
+                            shadows: const [],
+                          ),
+                        ),
+                      ),
+                      Text(
+                        vm.initiativeDisplayText(initiative),
+                        style: initTextStyle.copyWith(shadows: const []),
+                      ),
+                    ],
                   ));
             }
           }),
