@@ -10,9 +10,23 @@
 struct _MyApplication {
   GtkApplication parent_instance;
   char** dart_entrypoint_arguments;
+  FlView* view;
 };
 
 G_DEFINE_TYPE(MyApplication, my_application, GTK_TYPE_APPLICATION)
+
+// Removes FlView before the window is destroyed so the Flutter engine can
+// release its OpenGL resources while the GL context is still valid.
+static gboolean my_application_on_window_delete_event(GtkWidget* widget,
+                                                       GdkEvent* event,
+                                                       gpointer user_data) {
+  MyApplication* self = MY_APPLICATION(user_data);
+  if (self->view != nullptr) {
+    gtk_container_remove(GTK_CONTAINER(widget), GTK_WIDGET(self->view));
+    self->view = nullptr;
+  }
+  return FALSE;
+}
 
 // Implements GApplication::activate.
 static void my_application_activate(GApplication* application) {
@@ -53,13 +67,16 @@ static void my_application_activate(GApplication* application) {
   g_autoptr(FlDartProject) project = fl_dart_project_new();
   fl_dart_project_set_dart_entrypoint_arguments(project, self->dart_entrypoint_arguments);
 
-  FlView* view = fl_view_new(project);
-  gtk_widget_show(GTK_WIDGET(view));
-  gtk_container_add(GTK_CONTAINER(window), GTK_WIDGET(view));
+  self->view = fl_view_new(project);
+  gtk_widget_show(GTK_WIDGET(self->view));
+  gtk_container_add(GTK_CONTAINER(window), GTK_WIDGET(self->view));
 
-  fl_register_plugins(FL_PLUGIN_REGISTRY(view));
+  fl_register_plugins(FL_PLUGIN_REGISTRY(self->view));
 
-  gtk_widget_grab_focus(GTK_WIDGET(view));
+  gtk_widget_grab_focus(GTK_WIDGET(self->view));
+
+  g_signal_connect(window, "delete-event",
+                   G_CALLBACK(my_application_on_window_delete_event), self);
 }
 
 // Implements GApplication::local_command_line.
@@ -85,6 +102,7 @@ static gboolean my_application_local_command_line(GApplication* application, gch
 static void my_application_dispose(GObject* object) {
   MyApplication* self = MY_APPLICATION(object);
   g_clear_pointer(&self->dart_entrypoint_arguments, g_strfreev);
+  self->view = nullptr;
   G_OBJECT_CLASS(my_application_parent_class)->dispose(object);
 }
 
