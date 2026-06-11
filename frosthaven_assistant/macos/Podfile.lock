@@ -1,83 +1,26 @@
 PODS:
-  - connectivity_plus (0.0.1):
-    - FlutterMacOS
   - FlutterMacOS (1.0.0)
-  - network_info_plus (0.0.1):
-    - FlutterMacOS
-  - package_info_plus (0.0.1):
-    - FlutterMacOS
   - screen_retriever_macos (0.0.1):
-    - FlutterMacOS
-  - Sentry/HybridSDK (8.46.0)
-  - sentry_flutter (8.14.2):
-    - Flutter
-    - FlutterMacOS
-    - Sentry/HybridSDK (= 8.46.0)
-  - shared_preferences_foundation (0.0.1):
-    - Flutter
-    - FlutterMacOS
-  - url_launcher_macos (0.0.1):
-    - FlutterMacOS
-  - wakelock_plus (0.0.1):
-    - FlutterMacOS
-  - window_manager (0.5.0):
     - FlutterMacOS
   - window_size (0.0.2):
     - FlutterMacOS
 
 DEPENDENCIES:
-  - connectivity_plus (from `Flutter/ephemeral/.symlinks/plugins/connectivity_plus/macos`)
   - FlutterMacOS (from `Flutter/ephemeral`)
-  - network_info_plus (from `Flutter/ephemeral/.symlinks/plugins/network_info_plus/macos`)
-  - package_info_plus (from `Flutter/ephemeral/.symlinks/plugins/package_info_plus/macos`)
   - screen_retriever_macos (from `Flutter/ephemeral/.symlinks/plugins/screen_retriever_macos/macos`)
-  - sentry_flutter (from `Flutter/ephemeral/.symlinks/plugins/sentry_flutter/macos`)
-  - shared_preferences_foundation (from `Flutter/ephemeral/.symlinks/plugins/shared_preferences_foundation/darwin`)
-  - url_launcher_macos (from `Flutter/ephemeral/.symlinks/plugins/url_launcher_macos/macos`)
-  - wakelock_plus (from `Flutter/ephemeral/.symlinks/plugins/wakelock_plus/macos`)
-  - window_manager (from `Flutter/ephemeral/.symlinks/plugins/window_manager/macos`)
   - window_size (from `Flutter/ephemeral/.symlinks/plugins/window_size/macos`)
 
-SPEC REPOS:
-  trunk:
-    - Sentry
-
 EXTERNAL SOURCES:
-  connectivity_plus:
-    :path: Flutter/ephemeral/.symlinks/plugins/connectivity_plus/macos
   FlutterMacOS:
     :path: Flutter/ephemeral
-  network_info_plus:
-    :path: Flutter/ephemeral/.symlinks/plugins/network_info_plus/macos
-  package_info_plus:
-    :path: Flutter/ephemeral/.symlinks/plugins/package_info_plus/macos
   screen_retriever_macos:
     :path: Flutter/ephemeral/.symlinks/plugins/screen_retriever_macos/macos
-  sentry_flutter:
-    :path: Flutter/ephemeral/.symlinks/plugins/sentry_flutter/macos
-  shared_preferences_foundation:
-    :path: Flutter/ephemeral/.symlinks/plugins/shared_preferences_foundation/darwin
-  url_launcher_macos:
-    :path: Flutter/ephemeral/.symlinks/plugins/url_launcher_macos/macos
-  wakelock_plus:
-    :path: Flutter/ephemeral/.symlinks/plugins/wakelock_plus/macos
-  window_manager:
-    :path: Flutter/ephemeral/.symlinks/plugins/window_manager/macos
   window_size:
     :path: Flutter/ephemeral/.symlinks/plugins/window_size/macos
 
 SPEC CHECKSUMS:
-  connectivity_plus: 4adf20a405e25b42b9c9f87feff8f4b6fde18a4e
   FlutterMacOS: d0db08ddef1a9af05a5ec4b724367152bb0500b1
-  network_info_plus: 21d1cd6a015ccb2fdff06a1fbfa88d54b4e92f61
-  package_info_plus: f0052d280d17aa382b932f399edf32507174e870
   screen_retriever_macos: 452e51764a9e1cdb74b3c541238795849f21557f
-  Sentry: da60d980b197a46db0b35ea12cb8f39af48d8854
-  sentry_flutter: 27892878729f42701297c628eb90e7c6529f3684
-  shared_preferences_foundation: 7036424c3d8ec98dfe75ff1667cb0cd531ec82bb
-  url_launcher_macos: f87a979182d112f911de6820aefddaf56ee9fbfd
-  wakelock_plus: 917609be14d812ddd9e9528876538b2263aaa03b
-  window_manager: b729e31d38fb04905235df9ea896128991cad99e
   window_size: 4bd15034e6e3d0720fd77928a7c42e5492cfece9
 
 PODFILE CHECKSUM: 9ebaf0ce3d369aaa26a9ea0e159195ed94724cf3
