@@ -15,6 +15,9 @@ class RemoveMonsterCommand extends Command {
     if (names.length > 1) {
       return "Remove all monsters";
     }
-    return "Remove ${names.first.type.display}";
+    if(names.isNotEmpty) {
+      return "Remove ${names.first.type.display}";
+    }
+    return "Remove no monsters";
   }
 }

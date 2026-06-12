@@ -44,8 +44,10 @@ class RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
             ListTile(
               title: const Text("Remove All", style: kTitleStyle),
               onTap: () {
-                _gameState.action(RemoveMonsterCommand(currentMonsters,
+                if (GameMethods.getCurrentMonsters(gameState: _gameState).isNotEmpty) {
+                  _gameState.action(RemoveMonsterCommand(currentMonsters,
                     gameState: _gameState)); //
+                }
                 Navigator.pop(context);
               },
             ),
