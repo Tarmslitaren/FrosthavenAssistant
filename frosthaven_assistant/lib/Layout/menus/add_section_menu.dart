@@ -76,6 +76,9 @@ class AddSectionMenuState extends State<AddSectionMenu> {
           .toList();
       results = results.where((element) => !element.contains("spawn")).toList();
     } else {
+      if (_gameState.scenario.value == "custom") {
+        return;
+      }
       results = _gameData.modelData.value[_gameState.currentCampaign.value]!
           .scenarios[_gameState.scenario.value]!.sections
           .map((e) => e.name)
