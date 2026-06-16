@@ -21,6 +21,9 @@ class RemoveCharacterCommand extends Command {
     if (names.length > 1) {
       return "Remove all characters";
     }
-    return "Remove ${names.first.id}";
+    if(names.isNotEmpty) {
+      return "Remove ${names.first.id}";
+    }
+    return "Remove no characters";
   }
 }
