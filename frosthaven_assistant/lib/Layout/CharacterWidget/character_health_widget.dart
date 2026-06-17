@@ -111,18 +111,29 @@ class CharacterHealthInnerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final frosthavenStyle = GameMethods.isFrosthavenStyle(null);
-    final health = character.characterState.health.value.toString();
-    final maxHealth = character.characterState.maxHealth.value.toString();
     return Row(children: [
       Image(
         fit: BoxFit.contain,
         height: scaledHeight * CharacterHealthWidget._kBloodHeightRatio,
         image: const AssetImage("assets/images/blood.png"),
       ),
-      Text(
-        frosthavenStyle ? '$health/$maxHealth' : '$health / $maxHealth',
-        style: getCardTitleStyle(kFontSizeBody * scale, shadow, frosthavenStyle),
+      ValueListenableBuilder<int>(
+        valueListenable: character.characterState.health,
+        builder: (context, healthValue, child) {
+          return ValueListenableBuilder<int>(
+            valueListenable: character.characterState.maxHealth,
+            builder: (context, maxHealthValue, child) {
+              final frosthavenStyle = GameMethods.isFrosthavenStyle(null);
+              return Text(
+                frosthavenStyle
+                    ? '$healthValue/$maxHealthValue'
+                    : '$healthValue / $maxHealthValue',
+                style: getCardTitleStyle(
+                    kFontSizeBody * scale, shadow, frosthavenStyle),
+              );
+            },
+          );
+        },
       ),
       //add conditions here
       ValueListenableBuilder<List<Condition>>(

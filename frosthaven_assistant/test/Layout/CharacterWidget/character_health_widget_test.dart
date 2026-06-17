@@ -5,6 +5,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/CharacterWidget/character_health_widget.dart';
 import 'package:frosthaven_assistant/Layout/health_wheel_controller.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_health_command.dart';
+import 'package:frosthaven_assistant/Resource/enums.dart' show Style;
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart'
     show Character, GameState;
@@ -95,6 +97,37 @@ void main() {
 
         expect(find.byType(HealthWheelController), findsNothing);
         expect(find.byType(CharacterHealthInnerWidget), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'health text updates immediately when health changes via command',
+      (WidgetTester tester) async {
+        await pumpWidget(tester);
+
+        final initialHealth = character.characterState.health.value;
+        final maxHealth = character.characterState.maxHealth.value;
+        // Use Settings to determine the text format (no spaces in FH style).
+        final isFH = getIt<Settings>().style.value == Style.frosthaven;
+        final sep = isFH ? '/' : ' / ';
+        final initialText = '$initialHealth$sep$maxHealth';
+        final updatedText = '${initialHealth - 2}$sep$maxHealth';
+
+        expect(find.text(initialText), findsOneWidget,
+            reason: 'Initial health text should be rendered');
+
+        getIt<GameState>().action(ChangeHealthCommand(
+          -2,
+          character.id,
+          character.id,
+          gameState: getIt<GameState>(),
+        ));
+        await tester.pump();
+
+        expect(find.text(updatedText), findsOneWidget,
+            reason: 'Health text must update immediately after ChangeHealthCommand');
+        expect(find.text(initialText), findsNothing,
+            reason: 'Stale health text must no longer appear');
       },
     );
   });
