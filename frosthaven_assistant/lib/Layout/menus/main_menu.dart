@@ -71,7 +71,7 @@ class MainMenu extends StatelessWidget {
                     Positioned(
                       right: 6,
                       bottom: 0,
-                      child: Text("Version 1.14.0"),
+                      child: Text("Version 1.14.1"),
                     ),
                   ],
                 ),
