@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/services/android_foreground_service.dart';
@@ -57,6 +58,9 @@ class MainState extends State<MyHomePage>
         //this happens all the time on pc, disable this for pc.
         _network.appInBackground = false;
         log("app in resumed");
+        if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) {
+          WakelockPlus.enable().ignore();
+        }
         rebuildAllChildren(
             context); //might be a bit performance heavy, but ensures app state visually up to date with server.
         if (_network.clientDisconnectedWhileInBackground ||
@@ -118,6 +122,11 @@ class MainState extends State<MyHomePage>
     if (!kIsWeb &&
         (Platform.isLinux || Platform.isWindows || Platform.isMacOS)) {
       windowManager.addListener(this);
+    }
+
+    if (!kIsWeb &&
+        (Platform.isAndroid || Platform.isIOS)) {
+      WakelockPlus.enable().ignore();
     }
 
     if (Platform.isAndroid || Platform.isIOS) {

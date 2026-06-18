@@ -11,7 +11,6 @@ import 'package:frosthaven_assistant/main_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:show_fps/show_fps.dart';
-import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:window_size/window_size.dart';
 
@@ -105,9 +104,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //debugInvertOversizedImages = true;
-
-    //call after keyboard
-    WakelockPlus.enable();
 
     try {
       //initialize game
