@@ -59,7 +59,7 @@ dependencies:
   override_text_scale_factor: ^1.0.2
   collection: ^1.19.0
   show_fps: ^1.1.0
-  sentry_flutter: ^9.0.0
+  sentry_flutter: ^8.0.0 #need to pin to ver 8, or up the min android skd to 26 due to bug in sentry
 
   window_size:
     git:
