@@ -74,17 +74,25 @@ class Communication {
   }
 
   void sendToAllExcept(Socket client, String data) {
-    // Snapshot the list: sendTo may remove a dead socket from _connection,
-    // which would corrupt iteration over the live internal list.
+    // Snapshot the list: _writeToSocket may remove a dead socket from
+    // _connection, which would corrupt iteration over the live internal list.
     final sockets = List.of(_connection.getAll());
-    // Compare both address AND port: multiple clients from the same host
-    // (e.g. all on loopback in tests, or same-device multi-window) share the
-    // same remoteAddress but have distinct remotePort values.
-    final recipients = sockets.where((x) =>
-        x.remoteAddress != client.remoteAddress ||
-        x.remotePort != client.remotePort);
-    for (final socket in recipients) {
-      sendTo(socket, data);
+    for (final socket in sockets) {
+      // Compare both address AND port: multiple clients from the same host
+      // (e.g. all on loopback in tests, or same-device multi-window) share the
+      // same remoteAddress but have distinct remotePort values.
+      // Accessing remoteAddress/remotePort throws SocketException if the socket
+      // was closed between the snapshot and this iteration — treat it as dead.
+      bool isOther;
+      try {
+        isOther = socket.remoteAddress != client.remoteAddress ||
+            socket.remotePort != client.remotePort;
+      } on SocketException catch (e) {
+        log('Removing dead socket in sendToAllExcept: $e');
+        _connection.remove(socket);
+        continue;
+      }
+      if (isOther) sendTo(socket, data);
     }
   }
 

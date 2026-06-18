@@ -119,6 +119,32 @@ void main() {
     });
   });
 
+  // Regression test for "SocketException: Socket has been closed" in
+  // sendToAllExcept. A socket's remoteAddress/remotePort throw when the socket
+  // is closed between the snapshot and the predicate check. Before the fix the
+  // SocketException escaped the where-lambda and propagated to Sentry.
+  group('sendToAllExcept closed-socket handling', () {
+    test('does not throw and removes socket when remoteAddress throws', () {
+      final connection = MockConnection();
+      final sut = Communication(connection: connection);
+      final closedSocket = MockSocket();
+      final liveSocket = MockSocket();
+      final excludedSocket = MockSocket();
+
+      when(connection.getAll()).thenReturn([closedSocket, liveSocket]);
+      when(closedSocket.remoteAddress)
+          .thenThrow(const SocketException('Socket has been closed'));
+      when(excludedSocket.remoteAddress).thenReturn(InternetAddress.anyIPv6);
+      when(excludedSocket.remotePort).thenReturn(_randomPortNumber);
+      when(liveSocket.remoteAddress).thenReturn(InternetAddress.loopbackIPv4);
+      when(liveSocket.remotePort).thenReturn(12345);
+
+      expect(() => sut.sendToAllExcept(excludedSocket, 'data'), returnsNormally);
+      verify(connection.remove(closedSocket));
+      verify(liveSocket.write(any));
+    });
+  });
+
   // Regression tests for OSError errno=32 (EPIPE — "Broken pipe").
   // A client can disconnect between the time it was last seen alive and the
   // next write. socket.write() then throws SocketException. Before the fix
