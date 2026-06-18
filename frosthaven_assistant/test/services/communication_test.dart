@@ -118,6 +118,41 @@ void main() {
       expect(() => _sut.sendTo(null, data), throwsAssertionError);
     });
   });
+
+  // Regression tests for OSError errno=32 (EPIPE — "Broken pipe").
+  // A client can disconnect between the time it was last seen alive and the
+  // next write. socket.write() then throws SocketException. Before the fix
+  // that exception was unhandled and propagated to Sentry as a crash.
+  group('write failure handling (EPIPE / errno 32)', () {
+    test('sendTo does not throw and removes the dead socket', () {
+      final connection = MockConnection();
+      final sut = Communication(connection: connection);
+      final deadSocket = MockSocket();
+      when(deadSocket.write(any)).thenThrow(const SocketException(
+        'Write failed (OS Error: Broken pipe, errno = 32)',
+        osError: OSError('Broken pipe', 32),
+      ));
+
+      expect(() => sut.sendTo(deadSocket, 'ping'), returnsNormally);
+      verify(connection.remove(deadSocket));
+    });
+
+    test('sendToAll continues to live sockets after one write fails', () {
+      final connection = MockConnection();
+      final sut = Communication(connection: connection);
+      final deadSocket = MockSocket();
+      final liveSocket = MockSocket();
+      when(connection.getAll()).thenReturn([deadSocket, liveSocket]);
+      when(deadSocket.write(any)).thenThrow(const SocketException(
+        'Write failed (OS Error: Broken pipe, errno = 32)',
+        osError: OSError('Broken pipe', 32),
+      ));
+
+      expect(() => sut.sendToAll('ping'), returnsNormally);
+      verify(connection.remove(deadSocket));
+      verify(liveSocket.write(any));
+    });
+  });
 }
 
 String _createValidMessage({String data = "Message"}) {

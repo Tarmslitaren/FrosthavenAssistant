@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -73,7 +74,9 @@ class Communication {
   }
 
   void sendToAllExcept(Socket client, String data) {
-    final sockets = _connection.getAll();
+    // Snapshot the list: sendTo may remove a dead socket from _connection,
+    // which would corrupt iteration over the live internal list.
+    final sockets = List.of(_connection.getAll());
     // Compare both address AND port: multiple clients from the same host
     // (e.g. all on loopback in tests, or same-device multi-window) share the
     // same remoteAddress but have distinct remotePort values.
@@ -92,14 +95,26 @@ class Communication {
       debugPrint('Communication.sendTo: null socket, message dropped: "$data"');
       return;
     }
-    socket.write(_composeMessageFrom(data));
+    _writeToSocket(socket, _composeMessageFrom(data));
   }
 
   void sendToAll(String data) {
     final message = _composeMessageFrom(data);
-    final sockets = _connection.getAll();
+    // Snapshot: _writeToSocket may remove a dead socket from _connection mid-loop.
+    final sockets = List.of(_connection.getAll());
     for (final socket in sockets) {
+      _writeToSocket(socket, message);
+    }
+  }
+
+  void _writeToSocket(Socket socket, String message) {
+    try {
       socket.write(message);
+    } on SocketException catch (e) {
+      // EPIPE (errno 32) and similar write errors mean the remote end closed
+      // before we noticed. Remove the dead socket so future sends skip it.
+      log('Write failed, removing dead socket: $e');
+      _connection.remove(socket);
     }
   }
 
