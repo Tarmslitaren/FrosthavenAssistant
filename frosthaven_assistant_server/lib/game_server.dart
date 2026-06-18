@@ -190,14 +190,17 @@ abstract class GameServer {
         },
         // handle errors
         onError: (error) {
-          log(error.toString());
-          setNetworkMessage(error.toString());
-          // Tolerate aborted connections if we're in a consistent state (i.e.,
-          // not mid-message). This is particularly relevant for iOS clients,
-          // where the app usually doesn't get a chance to close the socket
-          // gracefully when the device is locked.
+          // errno 103 (ECONNABORTED): the OS killed this client's socket
+          // (app backgrounded, screen locked, network switch). Treat it the
+          // same as a clean disconnect — remove only this client and keep the
+          // server running for everyone else.
           if (error is SocketException && error.osError?.errorCode == 103) {
-            stopServer(error.toString());
+            log('Client aborted connection (errno 103): ${safeGetClientAddress(client)}');
+            removeClientConnection(client);
+            setNetworkMessage('Client left.');
+          } else {
+            log(error.toString());
+            setNetworkMessage(error.toString());
           }
         },
         // handle the client closing the connection
