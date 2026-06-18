@@ -3,6 +3,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_level_command.dart';
+import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
@@ -154,6 +155,29 @@ void main() {
         expect(gs.currentList.any((e) => e.id == 'Zealot'), isTrue);
         gs.undo();
         expect(gs.currentList.any((e) => e.id == 'Zealot'), isFalse);
+      });
+    });
+
+    group('redo after connection reset in server mode', () {
+      // Regression test for: ArgumentError: RangeError (length): Invalid value:
+      // Valid value range is empty: -1 in ActionHandler.redo when a stale client
+      // sends "redo" after the server resets its command history on reconnect.
+      test('does not crash when commandIndex is -1 after connection reset', () {
+        final gs = getIt<GameState>();
+        final settings = getIt<Settings>();
+
+        // Build some history so gameSaveStates has an entry to retain.
+        gs.action(SetLevelCommand(3, null));
+
+        // Simulate the server-side connection-reset sequence:
+        // commandIndex → -1, command/description lists cleared, last save state kept.
+        gs.commandIndex.value = -1;
+        gs.resetCommandHistory();
+
+        // Stale client sends "redo" before it has re-synced with the server.
+        settings.server.value = true;
+        expect(() => gs.redo(), returnsNormally);
+        settings.server.value = false;
       });
     });
   });

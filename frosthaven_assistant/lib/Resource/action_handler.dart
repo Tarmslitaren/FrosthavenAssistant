@@ -155,7 +155,7 @@ class ActionHandler {
         final nextIdx = idx + 1;
         final nextState =
             (nextIdx < _gameSaveStates.length) ? _gameSaveStates[nextIdx] : null;
-        if (idx < _commandDescriptions.length && nextState != null) {
+        if (idx >= 0 && idx < _commandDescriptions.length && nextState != null) {
           log('server sends, redo index: $idx, description:${_commandDescriptions[idx]}');
           _network.server.send(StateEnvelope(
             index: idx,
