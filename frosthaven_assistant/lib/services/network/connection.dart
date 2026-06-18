@@ -84,7 +84,7 @@ class Connection {
   bool _isClosed(Socket socket) {
     try {
       socket.remoteAddress;
-      socket.port;
+      socket.remotePort;
       return false;
     } on SocketException catch (_) {
       return true;

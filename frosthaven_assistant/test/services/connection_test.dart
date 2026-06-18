@@ -131,6 +131,34 @@ void main() {
     verify(socketToDisconnect.destroy());
   });
 
+  // Regression test for OSError errno=107 (ENOTCONN — "Transport endpoint is
+  // not connected"). The OS can leave a socket in a state where remoteAddress
+  // is still readable but remotePort throws. Before the fix, _isClosed() only
+  // probed the local port so it returned false, and the _find() where-lambda
+  // then crashed on x.remotePort with an unhandled OSError.
+  test('remove does not crash when remotePort throws errno 107 (ENOTCONN)', () {
+    // arrange
+    final sut = Connection();
+    final socket = MockSocket();
+
+    // Socket starts fully alive — add it successfully.
+    when(socket.remoteAddress).thenReturn(InternetAddress.anyIPv6);
+    when(socket.remotePort).thenReturn(_randomPortNumber);
+    sut.add(socket);
+
+    // Socket transitions to half-dead: remoteAddress still accessible but
+    // remotePort now throws ENOTCONN, as happens when the OS tears down the
+    // connection after the client app goes to the background.
+    when(socket.remotePort).thenThrow(const SocketException(
+      'Transport endpoint is not connected',
+      osError: OSError('Transport endpoint is not connected', 107),
+    ));
+
+    // act & assert — must not propagate the OSError
+    expect(() => sut.remove(socket), returnsNormally);
+    verify(socket.destroy());
+  });
+
   test('established returns true if socket was added', () {
     // arrange
     final sut = Connection();
