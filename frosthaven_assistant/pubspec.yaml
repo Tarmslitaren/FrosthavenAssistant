@@ -72,6 +72,10 @@ dependencies:
 
 
 
+dependency_overrides:
+  show_fps:
+    path: packages/show_fps
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

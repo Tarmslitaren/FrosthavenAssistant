@@ -10,7 +10,6 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/main_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'package:show_fps/show_fps.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:window_size/window_size.dart';
 
@@ -128,11 +127,7 @@ class MyApp extends StatelessWidget {
         }
         return ExcludeSemantics(child: GlobalHotkeys(child: child));
       },
-      home: ShowFPS(
-          alignment: Alignment.topRight,
-          visible: !kReleaseMode && false,
-          showChart: true,
-          child: const MyHomePage(title: title)),
+      home: const MyHomePage(title: title),
     );
   }
 }

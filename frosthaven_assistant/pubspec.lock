@@ -939,10 +939,9 @@ packages:
   show_fps:
     dependency: "direct main"
     description:
-      name: show_fps
-      sha256: "48c285891bee5285fadc81b55fd9be2239b417a3ea5cd400bdb8f5b10c1ec923"
-      url: "https://pub.dev"
-    source: hosted
+      path: "packages/show_fps"
+      relative: true
+    source: path
     version: "1.1.0"
   sky_engine:
     dependency: transitive
