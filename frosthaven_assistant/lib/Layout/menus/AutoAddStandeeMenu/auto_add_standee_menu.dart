@@ -50,6 +50,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
   bool addAsSummon = false;
   int currentMonsterIndex = 0;
   int startCommandIndex = 0;
+  bool _closing = false;
 
   List<List<int>> initialEliteAdded = [];
   List<List<int>> initialNormalAdded = [];
@@ -86,11 +87,23 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
     }
   }
 
+  // Guards against multiple Navigator.pop calls being scheduled in the same
+  // frame. closeOrNext() can be reached more than once per user action because
+  // the ValueListenableBuilder in build() re-runs its builder on every parent
+  // rebuild (setState from _handleStandeePress fires after commandIndex
+  // already changed). The mounted check handles the case where the widget is
+  // fully disposed before the callback fires.
+  void _scheduleClose() {
+    if (_closing) return;
+    _closing = true;
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      if (mounted) Navigator.pop(context);
+    });
+  }
+
   void closeOrNext() {
     if (currentMonsterIndex + 1 >= widget.monsterData.length) {
-      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-        Navigator.pop(context);
-      });
+      _scheduleClose();
     } else {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
         setState(() {
@@ -177,9 +190,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
         builder: (context, value, child) {
           //handle undo from other device - needs to be same index?
           if (startCommandIndex > _gameState.commandIndex.value) {
-            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-              Navigator.pop(context);
-            });
+            _scheduleClose();
             return TextButton(
                 child: const Text(
                   'Close',
@@ -208,9 +219,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                   (element) => element.id == data.name && element is Monster)
               as Monster?;
           if (monster == null) {
-            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-              Navigator.pop(context);
-            });
+            _scheduleClose();
             return TextButton(
                 child: const Text(
                   'Close',
