@@ -148,7 +148,15 @@ abstract class GameServer {
   }
 
   void handleConnection(Socket client) {
-    client.setOption(SocketOption.tcpNoDelay, true);
+    try {
+      client.setOption(SocketOption.tcpNoDelay, true);
+    } on SocketException catch (e) {
+      // Client disconnected between accept() and handleConnection — socket is
+      // already invalid. Destroy it and skip setup.
+      log('Client disconnected before setup (errno 22): $e');
+      client.destroy();
+      return;
+    }
     client.encoding = utf8;
 
     logHandleConnection(client);
