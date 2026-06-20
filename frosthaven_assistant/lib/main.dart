@@ -22,6 +22,7 @@ import 'Resource/theme_switcher.dart';
 const _benignSocketErrno = <int>{
   9,     // EBADF          – bad file descriptor (socket already closed)
   32,    // EPIPE          – broken pipe (client disconnected mid-write)
+  54,    // ECONNRESET     – connection reset by peer (macOS/iOS)
   60,    // ETIMEDOUT      – operation timed out (macOS/iOS)
   64,    // EHOSTDOWN      – host is down (macOS/BSD)
   103,   // ECONNABORTED   – software caused connection abort (Android/Linux)
