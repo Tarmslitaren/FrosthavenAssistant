@@ -94,7 +94,12 @@ class ActionHandler {
     bool isClient = _settings.client.value == ClientState.connected;
     if (!isClient) {
       if (commandIndex.value >= 0) {
-        final saveState = _gameSaveStates[commandIndex.value];
+        // Guard against out-of-bounds access: in the server multiplayer path
+        // updateStateFromMessage sets commandIndex directly then calls save()
+        // once, which can leave commandIndex >= gameSaveStates.length.
+        final saveState = commandIndex.value < _gameSaveStates.length
+            ? _gameSaveStates[commandIndex.value]
+            : null;
         if (saveState != null) {
           saveState.load(_gameState);
           saveState.saveToDisk(_gameState);

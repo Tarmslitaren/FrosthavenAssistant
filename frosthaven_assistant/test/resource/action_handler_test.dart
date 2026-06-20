@@ -158,6 +158,41 @@ void main() {
       });
     });
 
+    group('undo with commandIndex beyond gameSaveStates (Sentry regression)', () {
+      // Regression test for:
+      // ArgumentError: RangeError (length): Invalid value: Not in inclusive range 0..1079: 1080
+      // ActionHandler.undo — crash when commandIndex >= gameSaveStates.length.
+      //
+      // Cause: in the server multiplayer path, Server.updateStateFromMessage sets
+      // commandIndex.value = message.index directly, then calls save().  After a
+      // resetState() (history cleared) a client that was ahead can send a message
+      // whose index ends up beyond the current gameSaveStates length after save().
+      // A subsequent "undo" message from any client then crashes at
+      // _gameSaveStates[commandIndex.value] with no upper-bound guard.
+      test('does not crash when commandIndex >= gameSaveStates.length', () {
+        final gs = getIt<GameState>();
+        final settings = getIt<Settings>();
+
+        // Build a small amount of history.
+        gs.action(SetLevelCommand(3, null));
+        gs.action(SetLevelCommand(4, null));
+
+        // Advance commandIndex past the end of gameSaveStates, simulating the
+        // server receiving a state message whose index was not matched by a save().
+        gs.commandIndex.value = gs.gameSaveStates.length; // one beyond valid range
+
+        // A client sends "undo" — the server calls undoState() → undo().
+        // This must not throw a RangeError.
+        settings.server.value = true;
+        expect(() => gs.undo(), returnsNormally);
+        settings.server.value = false;
+
+        // Restore a clean state for subsequent tests.
+        gs.commandIndex.value = -1;
+        gs.resetCommandHistory();
+      });
+    });
+
     group('redo after connection reset in server mode', () {
       // Regression test for: ArgumentError: RangeError (length): Invalid value:
       // Valid value range is empty: -1 in ActionHandler.redo when a stale client
