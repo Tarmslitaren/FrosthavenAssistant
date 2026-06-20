@@ -16,6 +16,28 @@ import 'package:window_size/window_size.dart';
 import 'Resource/game_data.dart';
 import 'Resource/theme_switcher.dart';
 
+// SocketExceptions caused by normal TCP connection lifecycle events (client
+// disconnects, network changes, timeouts). These are handled gracefully in
+// the networking layer and should not consume the Sentry error quota.
+const _benignSocketErrno = <int>{
+  9,     // EBADF          – bad file descriptor (socket already closed)
+  32,    // EPIPE          – broken pipe (client disconnected mid-write)
+  60,    // ETIMEDOUT      – operation timed out (macOS/iOS)
+  64,    // EHOSTDOWN      – host is down (macOS/BSD)
+  103,   // ECONNABORTED   – software caused connection abort (Android/Linux)
+  107,   // ENOTCONN       – transport endpoint not connected
+  110,   // ETIMEDOUT      – operation timed out (Linux)
+  113,   // EHOSTUNREACH   – no route to host
+  121,   // ERROR_SEM_TIMEOUT – semaphore timeout (Windows)
+  10054, // WSAECONNRESET  – connection forcibly closed by remote host (Windows)
+};
+
+bool _isBenignNetworkError(Object error) {
+  if (error is! SocketException) return false;
+  final errno = error.osError?.errorCode;
+  return errno != null && _benignSocketErrno.contains(errno);
+}
+
 const title = 'X-haven Assistant';
 
 void _enablePlatformOverrideForDesktop() {
@@ -50,14 +72,16 @@ Future<void> main() async {
 
   FlutterError.onError = (details) {
     if (kReleaseMode) {
-      Sentry.captureException(details.exception, stackTrace: details.stack);
+      if (!_isBenignNetworkError(details.exception)) {
+        Sentry.captureException(details.exception, stackTrace: details.stack);
+      }
     } else {
       FlutterError.dumpErrorToConsole(details);
     }
   };
 
   PlatformDispatcher.instance.onError = (error, stack) {
-    if (kReleaseMode) {
+    if (kReleaseMode && !_isBenignNetworkError(error)) {
       Sentry.captureException(error, stackTrace: stack);
     }
     return true;
