@@ -60,8 +60,10 @@ void main() {
 
     testWidgets('renders standee number buttons', (WidgetTester tester) async {
       await pumpMenu(tester);
-      expect(find.text('1'), findsOneWidget);
-      expect(find.text('2'), findsOneWidget);
+      // StandeeNrButton renders each number twice (shadow + main text) so
+      // there are 2 Text widgets per standee number.
+      expect(find.text('1'), findsNWidgets(2));
+      expect(find.text('2'), findsNWidgets(2));
     });
 
     testWidgets('renders the "Summoned:" checkbox',
@@ -76,7 +78,10 @@ void main() {
       await pumpMenu(tester);
       expect(monster.monsterInstances.length, 0);
 
-      await tester.tap(find.text('1'));
+      // Use StandeeNrButton predicate to avoid ambiguity — each button renders
+      // the number twice (shadow + main text), so find.text('1') finds 2 widgets.
+      await tester.tap(
+          find.byWidgetPredicate((w) => w is StandeeNrButton && w.nr == 1));
       await tester.pumpAndSettle();
 
       final updated = getIt<GameState>()
@@ -96,7 +101,8 @@ void main() {
       await pumpMenu(tester);
       final countBefore = monster.monsterInstances.length;
 
-      await tester.tap(find.text('1'));
+      await tester.tap(
+          find.byWidgetPredicate((w) => w is StandeeNrButton && w.nr == 1));
       await tester.pumpAndSettle();
 
       expect(monster.monsterInstances.length, countBefore);

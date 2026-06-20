@@ -5,6 +5,7 @@ import 'package:frosthaven_assistant/Layout/menus/StatusMenu/status_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/next_round_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/turn_done_command.dart';
 import 'package:frosthaven_assistant/Resource/game_data.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
@@ -80,9 +81,35 @@ void main() {
       expect(find.byType(CharacterWidget), findsOneWidget);
     });
 
-    testWidgets('renders ColorFiltered widget', (WidgetTester tester) async {
-      await pumpCharacterWidget(tester);
+    testWidgets('renders ColorFiltered widget when character turn is done',
+        (WidgetTester tester) async {
+      final gs = getIt<GameState>();
+      // ColorFiltered is only applied when notGrayScale is false (turn done in
+      // playTurns). Draw to enter playTurns, then mark the character's turn done.
+      DrawCommand(gameState: gs).execute();
+      TurnDoneCommand('Blinkblade', gameState: gs).execute();
+      final originalOnError = FlutterError.onError;
+      FlutterError.onError = ignoreOverflowErrors;
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: SingleChildScrollView(
+              child: CharacterWidget(characterId: 'Blinkblade'),
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 700));
+      FlutterError.onError = originalOnError;
       expect(find.byType(ColorFiltered), findsAtLeast(1));
+      // Reset round state for subsequent tests.
+      NextRoundCommand(
+        gameState: gs,
+        gameData: getIt<GameData>(),
+        settings: getIt<Settings>(),
+      ).execute();
+      await tester.pump(const Duration(milliseconds: 700));
     });
 
     testWidgets('renders health wheel when not in chooseInitiative round state', (
