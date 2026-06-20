@@ -25,6 +25,7 @@ const _benignSocketErrno = <int>{
   60,    // ETIMEDOUT      – operation timed out (macOS/iOS)
   64,    // EHOSTDOWN      – host is down (macOS/BSD)
   103,   // ECONNABORTED   – software caused connection abort (Android/Linux)
+  104,   // ECONNRESET     – connection reset by peer (Linux/Android)
   107,   // ENOTCONN       – transport endpoint not connected
   110,   // ETIMEDOUT      – operation timed out (Linux)
   113,   // EHOSTUNREACH   – no route to host
