@@ -221,5 +221,53 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('non-dismissible'), findsOneWidget);
     });
+
+    // Regression test for Sentry crash:
+    //   TypeError: Null check operator used on a null value
+    //   #0 Navigator.of (navigator.dart:2937)  ← navigator! on null
+    //   #1 showDialog
+    //   #2 openDialogWithDismissOption (ui_utils.dart:138)
+    //   #3 openDialog (ui_utils.dart:124)
+    //   #4 CharacterViewModel.openStatusMenu (character_view_model.dart:39)
+    //   #5 CharacterWidgetState.build.<fn> (character_widget.dart:113)
+    //
+    // Root cause: race condition between pointer-down and pointer-up where
+    // the CharacterWidget is deactivated mid-gesture.  During deactivation,
+    // Flutter sets element._parent = null before calling element.deactivate()
+    // but disposes gesture recognizers only later in unmount().  If the
+    // pointer-up fires in that window, handleTap runs with a context whose
+    // _parent is null, so findAncestorStateOfType<NavigatorState>() returns
+    // null immediately, and navigator! crashes.
+    //
+    // Fix: guard openDialogWithDismissOption with Navigator.maybeOf so that
+    // showDialog is never called when no Navigator is reachable.
+    //
+    // This test covers the simpler case (active context, no Navigator ancestor)
+    // which produces the identical null from Navigator.maybeOf.
+    testWidgets(
+        'openDialog silently no-ops when context has no Navigator ancestor',
+        (tester) async {
+      BuildContext? capturedContext;
+      await tester.pumpWidget(
+        Directionality(
+          textDirection: TextDirection.ltr,
+          child: Builder(
+            builder: (context) {
+              capturedContext = context;
+              return const SizedBox.shrink();
+            },
+          ),
+        ),
+      );
+
+      // Precondition: this context has no Navigator ancestor.
+      expect(Navigator.maybeOf(capturedContext!), isNull);
+
+      // Without the fix, showDialog is called and crashes:
+      //   - debug mode: FlutterError from debugCheckHasMaterialLocalizations
+      //   - release mode: TypeError from navigator! in Navigator.of
+      // With the fix, openDialogWithDismissOption returns early — no crash.
+      openDialog(capturedContext!, const Text('test'));
+    });
   });
 }
