@@ -30,6 +30,7 @@ const _benignSocketErrno = <int>{
   110,   // ETIMEDOUT      – operation timed out (Linux)
   113,   // EHOSTUNREACH   – no route to host
   121,   // ERROR_SEM_TIMEOUT – semaphore timeout (Windows)
+  10053, // WSAECONNABORTED – connection aborted by local software (Windows)
   10054, // WSAECONNRESET  – connection forcibly closed by remote host (Windows)
 };
 
