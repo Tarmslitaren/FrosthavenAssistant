@@ -100,9 +100,8 @@ Future<void> main() async {
 
   await SentryFlutter.init(
     (options) {
-      // TODO: should sentry account be secret?
       options.dsn = kReleaseMode
-          ? 'https://724e200e79e66374173bda0192f05101@o4511228276703232.ingest.de.sentry.io/4511228279914576'
+          ? const String.fromEnvironment('SENTRY_DSN')
           : '';
     },
     appRunner: () =>
