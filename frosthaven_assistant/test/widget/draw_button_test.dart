@@ -25,8 +25,11 @@ void main() {
     // Reset roundState so each test starts from a known baseline.
     // RoundMethods.setRoundState requires a state-modifier token, so we
     // round-trip via undo() if a prior test left us in playTurns.
+    // Guard on commandIndex >= 0: undo() is a no-op when commandIndex < 0,
+    // so using gameSaveStates.isNotEmpty as the guard creates an infinite loop
+    // if roundState was modified outside the command system (e.g. loadFromData).
     while (gs.roundState.value != RoundState.chooseInitiative &&
-        gs.gameSaveStates.isNotEmpty) {
+        gs.commandIndex.value >= 0) {
       gs.undo();
     }
   });
@@ -103,7 +106,8 @@ void main() {
       // so it can't tell whether the change came from a local DrawCommand
       // or from a remote peer's broadcast — both end up calling
       // gameState._roundState.value = ... in GameSaveState.load.
-      final snapshot = json.decode(gs.toString()) as Map<String, dynamic>;
+      final originalJson = gs.toString();
+      final snapshot = json.decode(originalJson) as Map<String, dynamic>;
       snapshot['roundState'] = RoundState.playTurns.index;
       gs.loadFromData(json.encode(snapshot));
       await tester.pump();
@@ -120,6 +124,12 @@ void main() {
       await tester.pump(const Duration(milliseconds: 400));
       expect(findTextButton(tester).onPressed, isNotNull,
           reason: 'button should re-enable after lockout expires');
+
+      // Restore original state (chooseInitiative) so the next test does not
+      // inherit a playTurns roundState that loadFromData cannot undo.
+      gs.loadFromData(originalJson);
+      // Drain the 300ms lockout timer that the roundState change triggers.
+      await tester.pump(const Duration(milliseconds: 300));
     });
 
     testWidgets('lockout fades the button (AnimatedOpacity < 1.0)',
