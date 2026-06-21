@@ -15,6 +15,7 @@ import 'package:window_manager/window_manager.dart';
 
 import 'Resource/game_data.dart';
 import 'Resource/theme_switcher.dart';
+import 'services/translation_service.dart';
 
 // SocketExceptions caused by normal TCP connection lifecycle events (client
 // disconnects, network changes, timeouts). These are handled gracefully in
@@ -115,6 +116,7 @@ class MyApp extends StatelessWidget {
       await getIt<GameData>().loadData("assets/data/");
       getIt<GameState>().load();
       await getIt<Settings>().init();
+      await getIt<TranslationService>().load(getIt<Settings>().locale.value);
       loading.value = false;
     } catch (error, stack) {
       Sentry.captureException(error, stackTrace: stack);

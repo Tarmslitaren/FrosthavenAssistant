@@ -51,6 +51,7 @@ class Settings {
   final softNumpadInput = ValueNotifier<bool>(false);
 
   final style = ValueNotifier<Style>(Style.original);
+  final locale = ValueNotifier<String>('en');
 
   final saves = ValueNotifier<Map<String, String>>({});
   final characterSaves = ValueNotifier<Map<String, String>>({});
@@ -321,6 +322,10 @@ class Settings {
         enableHeathWheel.value = data["enableHeathWheel"];
       }
 
+      if (data["locale"] != null) {
+        locale.value = data["locale"];
+      }
+
       if (data["saves"] != null) {
         Map<String, dynamic> map = data["saves"];
         for (final key in map.keys) {
@@ -372,6 +377,7 @@ class Settings {
         '"fhHazTerrainCalcInOGGloom": ${fhHazTerrainCalcInOGGloom.value}, '
         '"showCharacterAMD": ${showCharacterAMD.value}, '
         '"enableHeathWheel": ${enableHeathWheel.value}, '
+        '"locale": "${locale.value}", '
         '"saves": ${jsonEncode(saves.value)}, '
         '"characterSaves": ${jsonEncode(characterSaves.value)}, '
         '"connectClientOnStartup": $connectClientOnStartup, '

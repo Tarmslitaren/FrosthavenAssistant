@@ -8,6 +8,7 @@ import 'package:get_it/get_it.dart';
 import '../Resource/game_data.dart';
 import 'network/communication.dart';
 import 'network/network.dart';
+import 'translation_service.dart';
 
 final getIt = GetIt.instance;
 
@@ -24,4 +25,5 @@ void setupGetIt() {
   getIt.registerLazySingleton<Network>(() => Network());
   getIt.registerLazySingleton<Connection>(() => Connection());
   getIt.registerLazySingleton<Client>(() => Client());
+  getIt.registerLazySingleton<TranslationService>(() => TranslationService());
 }
