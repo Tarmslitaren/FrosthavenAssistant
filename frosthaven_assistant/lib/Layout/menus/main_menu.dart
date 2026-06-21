@@ -57,10 +57,10 @@ class MainMenu extends StatelessWidget {
           return ListView(
             padding: EdgeInsets.zero,
             children: [
-              const DrawerHeader(
+              DrawerHeader(
                 padding: EdgeInsets.zero,
                 margin: EdgeInsets.zero,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.blue,
                   image: DecorationImage(
                     fit: BoxFit.fitWidth,
