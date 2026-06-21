@@ -6,6 +6,7 @@ import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
+import 'package:frosthaven_assistant/services/translation_service.dart';
 
 import '../../Resource/line_builder/line_builder.dart';
 import '../view_models/monster_stat_card_view_model.dart';
@@ -179,7 +180,7 @@ class MonsterStatBossLayout extends StatelessWidget {
                               width: _kBossSpecialWidth * scale,
                               child: RepaintBoundary(
                                   child: LineBuilder.createLines(
-                                      bossOtherAttributes,
+                                      bossOtherAttributes.map((s) => getIt<TranslationService>().t(s)).toList(),
                                       false,
                                       false,
                                       false,
@@ -207,9 +208,11 @@ class MonsterStatBossLayout extends StatelessWidget {
                                   width: _kBossSpecialWidth * scale,
                                   child: RepaintBoundary(
                                       child: LineBuilder.createLines(
-                                          data.type.levels[data.level.value]
-                                                  .boss?.special1 ??
-                                              [],
+                                          (data.type.levels[data.level.value]
+                                                      .boss?.special1 ??
+                                                  [])
+                                              .map((s) => getIt<TranslationService>().t(s))
+                                              .toList(),
                                           false,
                                           !noCalculationSetting,
                                           false,
@@ -238,9 +241,11 @@ class MonsterStatBossLayout extends StatelessWidget {
                                   width: _kBossSpecialWidth * scale,
                                   child: RepaintBoundary(
                                       child: LineBuilder.createLines(
-                                          data.type.levels[data.level.value]
-                                                  .boss?.special2 ??
-                                              [],
+                                          (data.type.levels[data.level.value]
+                                                      .boss?.special2 ??
+                                                  [])
+                                              .map((s) => getIt<TranslationService>().t(s))
+                                              .toList(),
                                           false,
                                           !noCalculationSetting,
                                           false,

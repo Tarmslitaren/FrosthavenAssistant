@@ -196,7 +196,7 @@ class MonsterAbilityCardFront extends StatelessWidget {
                     height: _kTitleAreaHeight * scale,
                     width: kAbilityCardWidth * scale,
                     child: LineBuilder.createLines(
-                        card.lines,
+                        card.lines.map((s) => getIt<TranslationService>().t(s)).toList(),
                         false,
                         !settings_.noCalculation.value,
                         calculateAll,

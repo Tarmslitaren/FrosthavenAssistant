@@ -143,7 +143,7 @@ class MonsterStatNormalLayout extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                   LineBuilder.createLines(
-                      normal?.attributes ?? [],
+                      (normal?.attributes ?? []).map((s) => getIt<TranslationService>().t(s)).toList(),
                       true,
                       false,
                       false,
@@ -178,7 +178,7 @@ class MonsterStatNormalLayout extends StatelessWidget {
           top: _kNormalAttribTop * scale,
           child: RepaintBoundary(
               child: LineBuilder.createLines(
-                  elite?.attributes ?? [],
+                  (elite?.attributes ?? []).map((s) => getIt<TranslationService>().t(s)).toList(),
                   false,
                   false,
                   false,

@@ -1,4 +1,9 @@
 {
+  "_translatorNotes": {
+    "soloScenarioNames": "Solo scenario name keys have the format '#N CharacterName/Edition: Scenario Title'. Only translate the 'Scenario Title' part after the colon. Do NOT translate 'CharacterName' or 'Edition' — they are parsed at runtime to look up the character icon and edition label.",
+    "cardTextPrefixes": "Card text strings starting with '^' or '^^' must keep those prefix characters in the translated value. They control line layout, not content.",
+    "tokenPlaceholders": "Strings containing %token% placeholders (e.g. %attack%, %range%, %poison%) must keep those placeholders unchanged in the translated value."
+  },
   "names": {
     "Bandit Guard": "Bandit Guard",
     "Bandit Archer": "Bandit Archer",
