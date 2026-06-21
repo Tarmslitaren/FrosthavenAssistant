@@ -11,7 +11,6 @@ import 'package:frosthaven_assistant/main_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:window_manager/window_manager.dart';
-import 'package:window_size/window_size.dart';
 
 import 'Resource/game_data.dart';
 import 'Resource/theme_switcher.dart';
@@ -64,13 +63,9 @@ Future<void> main() async {
 
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await windowManager.ensureInitialized();
-    setWindowTitle(title);
-    if (!Platform.isMacOS) {
-      windowManager.setMinimumSize(const Size(minScreenWidth, minScreenHeight));
-    }
-    setWindowMinSize(const Size(minScreenWidth,
-        minScreenHeight)); //when updating flutter you may need to re-set these values in main.cpp
-    setWindowMaxSize(Size.infinite);
+    windowManager.setTitle(title);
+    windowManager.setMinimumSize(const Size(minScreenWidth, minScreenHeight));
+    windowManager.setMaximumSize(Size.infinite);
   }
 
   FlutterError.onError = (details) {
