@@ -9,6 +9,7 @@ import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/main_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -41,6 +42,7 @@ bool _isBenignNetworkError(Object error) {
 }
 
 const title = 'X-haven Assistant';
+String appVersion = '';
 
 void _enablePlatformOverrideForDesktop() {
   if (kDebugMode && !kIsWeb && (Platform.isWindows || Platform.isLinux)) {
@@ -51,6 +53,7 @@ void _enablePlatformOverrideForDesktop() {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupGetIt();
+  appVersion = (await PackageInfo.fromPlatform()).version;
 
   _enablePlatformOverrideForDesktop();
   //debugPrintRebuildDirtyWidgets = true;

@@ -12,6 +12,7 @@ import 'package:frosthaven_assistant/Layout/menus/remove_monster_menu.dart';
 import 'package:frosthaven_assistant/Layout/view_models/main_menu_view_model.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/network/client.dart';
+import 'package:frosthaven_assistant/main.dart' show appVersion;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -71,7 +72,7 @@ class MainMenu extends StatelessWidget {
                     Positioned(
                       right: 6,
                       bottom: 0,
-                      child: Text("Version 1.14.1"),
+                      child: Text("Version $appVersion"),
                     ),
                   ],
                 ),

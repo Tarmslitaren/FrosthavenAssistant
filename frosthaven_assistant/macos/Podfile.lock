@@ -1,27 +1,15 @@
 PODS:
   - FlutterMacOS (1.0.0)
-  - screen_retriever_macos (0.0.1):
-    - FlutterMacOS
-  - window_size (0.0.2):
-    - FlutterMacOS
 
 DEPENDENCIES:
   - FlutterMacOS (from `Flutter/ephemeral`)
-  - screen_retriever_macos (from `Flutter/ephemeral/.symlinks/plugins/screen_retriever_macos/macos`)
-  - window_size (from `Flutter/ephemeral/.symlinks/plugins/window_size/macos`)
 
 EXTERNAL SOURCES:
   FlutterMacOS:
     :path: Flutter/ephemeral
-  screen_retriever_macos:
-    :path: Flutter/ephemeral/.symlinks/plugins/screen_retriever_macos/macos
-  window_size:
-    :path: Flutter/ephemeral/.symlinks/plugins/window_size/macos
 
 SPEC CHECKSUMS:
   FlutterMacOS: d0db08ddef1a9af05a5ec4b724367152bb0500b1
-  screen_retriever_macos: 452e51764a9e1cdb74b3c541238795849f21557f
-  window_size: 4bd15034e6e3d0720fd77928a7c42e5492cfece9
 
 PODFILE CHECKSUM: 9ebaf0ce3d369aaa26a9ea0e159195ed94724cf3
 
