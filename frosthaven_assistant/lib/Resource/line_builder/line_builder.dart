@@ -152,6 +152,7 @@ class LineBuilder {
     List<Widget> lines = [];
     List<String> localStrings = [];
     localStrings.addAll(strings);
+    localStrings = FrosthavenConverter.expandEmbeddedNewlines(localStrings);
     List<Widget> lastLineTextPartListRowContent = [];
 
     if (frosthavenStyle) {

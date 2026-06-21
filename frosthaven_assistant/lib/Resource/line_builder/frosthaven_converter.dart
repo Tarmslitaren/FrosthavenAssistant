@@ -24,6 +24,27 @@ class FrosthavenConverter {
   static const int _kLookback = 2;
   static const int _kElementPairCount = 2;
 
+  static List<String> expandEmbeddedNewlines(List<String> lines) {
+    List<String> result = [];
+    for (String line in lines) {
+      if (!line.contains('\n')) {
+        result.add(line);
+        continue;
+      }
+      List<String> parts = line.split('\n');
+      result.add(parts[0]);
+      String outerPrefix = parts[0].startsWith('^^')
+          ? '^^'
+          : parts[0].startsWith('^')
+              ? '^'
+              : '';
+      for (int i = 1; i < parts.length; i++) {
+        result.add(outerPrefix + parts[i]);
+      }
+    }
+    return result;
+  }
+
   static List<String> convertLinesToFH(List<String> lines, bool applyStats) {
     //move lines up when they should
     //add container markers here as well
