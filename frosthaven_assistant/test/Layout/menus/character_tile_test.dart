@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/menus/character_tile.dart';
 import 'package:frosthaven_assistant/Model/character_class.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
+import 'package:frosthaven_assistant/services/translation_service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/mockito.dart';
 
@@ -48,6 +49,7 @@ void main() {
   setUp(() {
     mockGameState = MockGameState();
     getIt.registerSingleton<GameState>(mockGameState);
+    getIt.registerSingleton<TranslationService>(TranslationService());
   });
 
   tearDown(() {

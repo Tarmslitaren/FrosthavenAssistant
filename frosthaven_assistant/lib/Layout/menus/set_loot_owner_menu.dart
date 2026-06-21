@@ -8,6 +8,7 @@ import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
+import '../../services/translation_service.dart';
 
 class SetLootOwnerMenu extends StatelessWidget {
   static const double _kMenuHeight = 280.0;
@@ -89,7 +90,7 @@ class _CharacterButton extends StatelessWidget {
                   "assets/images/class-icons/${character.characterClass.name}.png"),
             ),
             const SizedBox(width: SetLootOwnerMenu._kRowSpacing),
-            Text(character.characterState.display.value,
+            Text(getIt<TranslationService>().t(character.characterState.display.value),
                 textAlign: TextAlign.center, style: getTitleTextStyle(1))
           ]))
     ]);

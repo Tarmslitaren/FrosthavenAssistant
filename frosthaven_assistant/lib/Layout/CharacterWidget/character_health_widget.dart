@@ -6,6 +6,8 @@ import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/ui_utils.dart';
+import '../../services/service_locator.dart';
+import '../../services/translation_service.dart';
 import '../condition_icon.dart';
 import '../health_wheel_controller.dart';
 import '../view_models/character_health_widget_view_model.dart';
@@ -47,7 +49,7 @@ class CharacterHealthWidget extends StatelessWidget {
                 valueListenable: character.characterState.display,
                 builder: (context, value, child) {
                   return Text(
-                    character.characterState.display.value,
+                    getIt<TranslationService>().t(value),
                     style: getCardTitleStyle(
                         vm.frosthavenStyle
                             ? CharacterHealthWidget._kFontSizeFH * scale

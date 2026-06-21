@@ -4,6 +4,8 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import '../../../Layout/widgets/standee_nr_button.dart';
 import '../../../Resource/enums.dart';
 import '../../../Resource/ui_utils.dart';
+import '../../../services/service_locator.dart';
+import '../../../services/translation_service.dart';
 
 const double _kButtonSpacerHeight = 20.0;
 const int _kButtonRowSize = 4;
@@ -46,9 +48,10 @@ class StandeeButtonGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final displayName = getIt<TranslationService>().t(monster.type.display);
     String text = elite
-        ? "Add $nrLeft Elite ${monster.type.display}"
-        : "Add $nrLeft Normal ${monster.type.display}";
+        ? "Add $nrLeft Elite $displayName"
+        : "Add $nrLeft Normal $displayName";
     if (nrLeft > 1) {
       text = _pluralize(text);
     }

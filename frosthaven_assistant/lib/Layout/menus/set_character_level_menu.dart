@@ -10,6 +10,7 @@ import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
+import '../../services/translation_service.dart';
 import '../counter_button.dart';
 
 class SetCharacterLevelMenu extends StatefulWidget {
@@ -84,8 +85,8 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                   builder: (context, value, child) {
                     return Text(
                         isObjective
-                            ? "Set ${widget.character.characterState.display.value}'s Health"
-                            : "Set ${widget.character.characterState.display.value}'s Level",
+                            ? "Set ${getIt<TranslationService>().t(value)}'s Health"
+                            : "Set ${getIt<TranslationService>().t(value)}'s Level",
                         style: getTitleTextStyle(scale));
                   }),
               if (!isObjective)

@@ -6,6 +6,7 @@ import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
+import 'package:frosthaven_assistant/services/translation_service.dart';
 
 import '../../Resource/line_builder/line_builder.dart';
 import 'condition_list_builder.dart';
@@ -106,7 +107,7 @@ class MonsterStatNormalLayout extends StatelessWidget {
             top: _kTitleTop * scale,
             child: Text(
               textAlign: TextAlign.center,
-              data.type.display,
+              getIt<TranslationService>().t(data.type.display),
               style: getCardTitleStyle(
                   _kTitleFontSize * scale, shadow, frosthavenStyle,
                   height: 1),

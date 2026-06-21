@@ -5,6 +5,7 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../../Resource/game_methods.dart';
 import '../../services/service_locator.dart';
+import '../../services/translation_service.dart';
 
 class CharacterLootMenu extends StatefulWidget {
   const CharacterLootMenu({super.key, this.gameState});
@@ -49,7 +50,7 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
           for (Character character in characters)
             _CharacterLootWidget(
                 characterId: character.characterClass.id,
-                characterName: character.characterState.display.value,
+                characterName: getIt<TranslationService>().t(character.characterState.display.value),
                 gameState: _gameState),
         ],
       ),

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../Resource/enums.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/ui_utils.dart';
+import '../../services/service_locator.dart';
+import '../../services/translation_service.dart';
 import '../view_models/monster_widget_view_model.dart';
 
 const double _kImageMarginV = 4.0;
@@ -59,7 +61,7 @@ class MonsterImagePart extends StatelessWidget {
               bottom: vm.frosthavenStyle ? _kNameMarginBottom * scale : 0),
           child: Text(
             textAlign: TextAlign.center,
-            data.type.display,
+            getIt<TranslationService>().t(data.type.display),
             style: getCardTitleStyle(_kFontSize * scale, shadow, vm.frosthavenStyle),
           ))
     ]));

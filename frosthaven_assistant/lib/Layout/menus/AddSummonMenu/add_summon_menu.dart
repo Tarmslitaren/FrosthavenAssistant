@@ -13,6 +13,7 @@ import '../../../Resource/settings.dart';
 import '../../../Resource/stat_calculator.dart';
 import '../../../Resource/state/game_state.dart';
 import '../../../services/service_locator.dart';
+import '../../../services/translation_service.dart';
 import '../../widgets/modal_background.dart';
 
 class AddSummonMenu extends StatefulWidget {
@@ -226,7 +227,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                                       color: Colors.white,
                                       shadows: [textShadow(scale)])),
                           ]),
-                          title: Text(_summonList[index].name,
+                          title: Text(getIt<TranslationService>().t(_summonList[index].name),
                               style: getTitleTextStyle(scale)),
                           onTap: () {
                             setState(() {

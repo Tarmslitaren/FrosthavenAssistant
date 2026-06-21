@@ -20,7 +20,20 @@ class TranslationService extends ChangeNotifier {
           await rootBundle.loadString('assets/i18n/$locale.json');
       final Map<String, dynamic> data =
           jsonDecode(jsonString) as Map<String, dynamic>;
-      _translations = data.cast<String, String>();
+      final Map<String, String> flat = {};
+      for (final entry in data.entries) {
+        final value = entry.value;
+        if (value is Map<String, dynamic>) {
+          for (final inner in value.entries) {
+            if (inner.value is String) {
+              flat[inner.key] = inner.value as String;
+            }
+          }
+        } else if (value is String) {
+          flat[entry.key] = value;
+        }
+      }
+      _translations = flat;
     } catch (e) {
       if (kDebugMode) {
         debugPrint('TranslationService: failed to load locale "$locale": $e');

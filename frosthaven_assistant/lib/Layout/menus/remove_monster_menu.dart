@@ -6,6 +6,7 @@ import '../../Resource/commands/remove_monster_command.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
+import '../../services/translation_service.dart';
 
 class RemoveMonsterMenu extends StatefulWidget {
   const RemoveMonsterMenu({
@@ -60,7 +61,7 @@ class RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
                     height: _kIconHeight,
                     "assets/images/monsters/${currentMonsters[index].type.gfx}.png",
                   ),
-                  title: Text(currentMonsters[index].type.display,
+                  title: Text(getIt<TranslationService>().t(currentMonsters[index].type.display),
                       style: kTitleStyle),
                   trailing: Text("(${currentMonsters[index].type.edition})",
                       style: kSubtitleStyle),

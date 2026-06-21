@@ -4,6 +4,7 @@ import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
+import 'package:frosthaven_assistant/services/translation_service.dart';
 
 class StatusMenuViewModel {
   StatusMenuViewModel({
@@ -54,10 +55,10 @@ class StatusMenuViewModel {
     final fig = figure;
     final mon = monster;
     if (fig is MonsterInstance && mon != null) {
-      return "${mon.type.display} ${fig.standeeNr}";
+      return "${getIt<TranslationService>().t(mon.type.display)} ${fig.standeeNr}";
     }
     if (fig is CharacterState && character != null) {
-      return character!.characterClass.name;
+      return getIt<TranslationService>().t(character!.characterClass.name);
     }
     if (monsterId != null) return monsterId!;
     if (characterId != null) return characterId!;

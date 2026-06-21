@@ -10,6 +10,7 @@ import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
+import '../../services/translation_service.dart';
 
 class AddMonsterMenu extends StatefulWidget {
   static const double _kMaxWidth = 450.0;
@@ -143,7 +144,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
       if (item != "na") {
         if (!GameMethods.isCustomCampaign(item) ||
             _settings.showCustomContent.value) {
-          retVal.add(DropdownMenuItem<String>(value: item, child: Text(item)));
+          retVal.add(DropdownMenuItem<String>(value: item, child: Text(getIt<TranslationService>().t(item))));
         }
       }
     }
@@ -220,8 +221,8 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                 ),
                 title: Text(
                     _foundMonsters[index].hidden
-                        ? "${_foundMonsters[index].display} (special)"
-                        : _foundMonsters[index].display,
+                        ? "${getIt<TranslationService>().t(_foundMonsters[index].display)} (special)"
+                        : getIt<TranslationService>().t(_foundMonsters[index].display),
                     style: TextStyle(
                         fontSize: kFontSizeTitle,
                         color: _monsterAlreadyAdded(_foundMonsters[index].name)

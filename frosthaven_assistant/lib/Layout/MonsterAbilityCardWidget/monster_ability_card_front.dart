@@ -6,6 +6,7 @@ import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
+import 'package:frosthaven_assistant/services/translation_service.dart';
 
 import '../../Resource/game_methods.dart';
 import '../../Resource/line_builder/line_builder.dart';
@@ -138,7 +139,7 @@ class MonsterAbilityCardFront extends StatelessWidget {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Text(
-                            card.title,
+                            getIt<TranslationService>().t(card.title),
                             style: getCardTitleStyle(
                                 frosthavenStyle
                                     ? _kTitleFontSizeFh * scale

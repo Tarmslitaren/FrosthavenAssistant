@@ -5,6 +5,7 @@ import '../../Resource/app_constants.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
+import '../../services/translation_service.dart';
 
 class CharacterTile extends StatelessWidget {
   const CharacterTile(
@@ -44,7 +45,7 @@ class CharacterTile extends StatelessWidget {
         filterQuality: FilterQuality.medium,
       ),
       title: Text(
-          character.hidden && !characterUnlocked ? "???" : character.name,
+          character.hidden && !characterUnlocked ? "???" : getIt<TranslationService>().t(character.name),
           style: TextStyle(
               fontSize: kFontSizeTitle,
               color: disabled ? Colors.grey : Colors.black)),

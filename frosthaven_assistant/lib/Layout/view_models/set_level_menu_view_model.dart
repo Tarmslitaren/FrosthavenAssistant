@@ -1,5 +1,7 @@
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
+import 'package:frosthaven_assistant/services/service_locator.dart';
+import 'package:frosthaven_assistant/services/translation_service.dart';
 
 class SetLevelMenuViewModel {
   const SetLevelMenuViewModel({
@@ -18,20 +20,20 @@ class SetLevelMenuViewModel {
 
   String get title {
     if (monster != null) {
-      String n = monster!.type.display;
+      String n = getIt<TranslationService>().t(monster!.type.display);
       if (n.endsWith("y")) {
         n = "${n.substring(0, n.length - 1)}ie";
       }
       return "Set $n's level";
     }
     if (isSummon) {
-      return "Set ${(figure as MonsterInstance).name}'s max health";
+      return "Set ${getIt<TranslationService>().t((figure as MonsterInstance).name)}'s max health";
     }
     return "Set Scenario Level";
   }
 
   String get name {
-    if (monster != null) return monster!.type.display;
+    if (monster != null) return getIt<TranslationService>().t(monster!.type.display);
     if (figure is MonsterInstance) return (figure as MonsterInstance).name;
     return "";
   }
