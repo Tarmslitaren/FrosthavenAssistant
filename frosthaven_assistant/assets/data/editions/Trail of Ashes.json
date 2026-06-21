@@ -2056,9 +2056,7 @@
             "attack": 3,
             "attributes": [
               "%retaliate% 1",
-              "^^Retaliate only",
-              "^^applies before",
-              "^^its turn"
+              "^^Retaliate only\napplies before\nits turn"
             ]
           },
           "elite": {
@@ -2069,9 +2067,7 @@
               "%retaliate% 1",
               "^%range% 2",
               "[newLine]",
-              "^^Retaliate only",
-              "^^applies before",
-              "^^its turn"
+              "^^Retaliate only\napplies before\nits turn"
             ]
           }
         },
@@ -2085,9 +2081,7 @@
               "%retaliate% 1",
               "^%range% 2",
               "[newLine]",
-              "^^Retaliate only",
-              "^^applies before",
-              "^^its turn"
+              "^^Retaliate only\napplies before\nits turn"
             ]
           },
           "elite": {
@@ -2098,9 +2092,7 @@
               "%retaliate% 2",
               "^%range% 2",
               "[newLine]",
-              "^^Retaliate only",
-              "^^applies before",
-              "^^its turn"
+              "^^Retaliate only\napplies before\nits turn"
             ]
           }
         },
@@ -2114,9 +2106,7 @@
               "%retaliate% 2",
               "^%range% 2",
               "[newLine]",
-              "^^Retaliate only",
-              "^^applies before",
-              "^^its turn"
+              "^^Retaliate only\napplies before\nits turn"
             ]
           },
           "elite": {
@@ -2127,9 +2117,7 @@
               "%retaliate% 2",
               "^%range% 3",
               "[newLine]",
-              "^^Retaliate only",
-              "^^applies before",
-              "^^its turn"
+              "^^Retaliate only\napplies before\nits turn"
             ]
           }
         },
@@ -2143,9 +2131,7 @@
               "%retaliate% 2",
               "^%range% 3",
               "[newLine]",
-              "^^Retaliate only",
-              "^^applies before",
-              "^^its turn"
+              "^^Retaliate only\napplies before\nits turn"
             ]
           },
           "elite": {
@@ -2156,9 +2142,7 @@
               "%retaliate% 3",
               "^%range% 3",
               "[newLine]",
-              "^^Retaliate only",
-              "^^applies before",
-              "^^its turn"
+              "^^Retaliate only\napplies before\nits turn"
             ]
           }
         },
@@ -2172,9 +2156,7 @@
               "%retaliate% 2",
               "^%range% 3",
               "[newLine]",
-              "^^Retaliate only",
-              "^^applies before",
-              "^^its turn"
+              "^^Retaliate only\napplies before\nits turn"
             ]
           },
           "elite": {
@@ -2185,9 +2167,7 @@
               "%retaliate% 3",
               "^%range% 3",
               "[newLine]",
-              "^^Retaliate only",
-              "^^applies before",
-              "^^its turn"
+              "^^Retaliate only\napplies before\nits turn"
             ]
           }
         },
@@ -2201,9 +2181,7 @@
               "%retaliate% 3",
               "^%range% 3",
               "[newLine]",
-              "^^Retaliate only",
-              "^^applies before",
-              "^^its turn"
+              "^^Retaliate only\napplies before\nits turn"
             ]
           },
           "elite": {
@@ -2214,9 +2192,7 @@
               "%retaliate% 4",
               "^%range% 3",
               "[newLine]",
-              "^^Retaliate only",
-              "^^applies before",
-              "^^its turn"
+              "^^Retaliate only\napplies before\nits turn"
             ]
           }
         },
@@ -2230,9 +2206,7 @@
               "%retaliate% 4",
               "^%range% 3",
               "[newLine]",
-              "^^Retaliate only",
-              "^^applies before",
-              "^^its turn"
+              "^^Retaliate only\napplies before\nits turn"
             ]
           },
           "elite": {
@@ -2243,9 +2217,7 @@
               "%retaliate% 4",
               "^%range% 4",
               "[newLine]",
-              "^^Retaliate only",
-              "^^applies before",
-              "^^its turn"
+              "^^Retaliate only\napplies before\nits turn"
             ]
           }
         },
@@ -2259,9 +2231,7 @@
               "%retaliate% 5",
               "^%range% 3",
               "[newLine]",
-              "^^Retaliate only",
-              "^^applies before",
-              "^^its turn"
+              "^^Retaliate only\napplies before\nits turn"
             ]
           },
           "elite": {
@@ -2272,9 +2242,7 @@
               "%retaliate% 5",
               "^%range% 4",
               "[newLine]",
-              "^^Retaliate only",
-              "^^applies before",
-              "^^its turn"
+              "^^Retaliate only\napplies before\nits turn"
             ]
           }
         }

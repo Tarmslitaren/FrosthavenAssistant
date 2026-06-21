@@ -5357,10 +5357,7 @@
             "move": 1,
             "attack": 2,
             "attributes": [
-              "^^All attacks",
-              "^^targeting",
-              "^^Black Imp gain",
-              "^^disadvantage",
+              "^^All attacks\ntargeting\nBlack Imp gain\ndisadvantage",
               "%poison%"
             ]
           }
@@ -5380,10 +5377,7 @@
             "move": 1,
             "attack": 3,
             "attributes": [
-              "^^All attacks",
-              "^^targeting",
-              "^^Black Imp gain",
-              "^^disadvantage",
+              "^^All attacks\ntargeting\nBlack Imp gain\ndisadvantage",
               "%poison%"
             ]
           }
@@ -5403,10 +5397,7 @@
             "move": 1,
             "attack": 3,
             "attributes": [
-              "^^All attacks",
-              "^^targeting",
-              "^^Black Imp gain",
-              "^^disadvantage",
+              "^^All attacks\ntargeting\nBlack Imp gain\ndisadvantage",
               "%poison%"
             ]
           }
@@ -5426,10 +5417,7 @@
             "move": 1,
             "attack": 4,
             "attributes": [
-              "^^All attacks",
-              "^^targeting",
-              "^^Black Imp gain",
-              "^^disadvantage",
+              "^^All attacks\ntargeting\nBlack Imp gain\ndisadvantage",
               "%poison%"
             ]
           }
@@ -5449,10 +5437,7 @@
             "move": 1,
             "attack": 4,
             "attributes": [
-              "^^All attacks",
-              "^^targeting",
-              "^^Black Imp gain",
-              "^^disadvantage",
+              "^^All attacks\ntargeting\nBlack Imp gain\ndisadvantage",
               "%poison%"
             ]
           }
@@ -5535,10 +5520,7 @@
             "move": 2,
             "attack": 2,
             "attributes": [
-              "^^All attacks",
-              "^^targeting",
-              "^^Black Imp gain",
-              "^^disadvantage",
+              "^^All attacks\ntargeting\nBlack Imp gain\ndisadvantage",
               "%poison%"
             ]
           }
@@ -5558,10 +5540,7 @@
             "move": 2,
             "attack": 3,
             "attributes": [
-              "^^All attacks",
-              "^^targeting",
-              "^^Black Imp gain",
-              "^^disadvantage",
+              "^^All attacks\ntargeting\nBlack Imp gain\ndisadvantage",
               "%poison%"
             ]
           }
@@ -5581,10 +5560,7 @@
             "move": 2,
             "attack": 3,
             "attributes": [
-              "^^All attacks",
-              "^^targeting",
-              "^^Black Imp gain",
-              "^^disadvantage",
+              "^^All attacks\ntargeting\nBlack Imp gain\ndisadvantage",
               "%poison%"
             ]
           }
@@ -5604,10 +5580,7 @@
             "move": 2,
             "attack": 4,
             "attributes": [
-              "^^All attacks",
-              "^^targeting",
-              "^^Black Imp gain",
-              "^^disadvantage",
+              "^^All attacks\ntargeting\nBlack Imp gain\ndisadvantage",
               "%poison%"
             ]
           }
@@ -5627,10 +5600,7 @@
             "move": 2,
             "attack": 4,
             "attributes": [
-              "^^All attacks",
-              "^^targeting",
-              "^^Black Imp gain",
-              "^^disadvantage",
+              "^^All attacks\ntargeting\nBlack Imp gain\ndisadvantage",
               "%poison%"
             ]
           }
@@ -7048,13 +7018,7 @@
             "move": 2,
             "attack": 1,
             "attributes": [
-              "^^Living Bones,",
-              "^^Living Corpses",
-              "^^and Living Spirits",
-              "^^within %range% 3 gain",
-              "^^advantage on",
-              "^^all their",
-              "^^attacks"
+              "^^Living Bones,\nLiving Corpses\nand Living Spirits\nwithin %range% 3 gain\nadvantage on\nall their\nattacks"
             ]
           },
           "elite": {
@@ -7062,13 +7026,7 @@
             "move": 2,
             "attack": 2,
             "attributes": [
-              "^^Living Bones,",
-              "^^Living Corpses",
-              "^^and Living Spirits",
-              "^^within %range% 3 gain",
-              "^^advantage on",
-              "^^all their",
-              "^^attacks"
+              "^^Living Bones,\nLiving Corpses\nand Living Spirits\nwithin %range% 3 gain\nadvantage on\nall their\nattacks"
             ]
           }
         },
@@ -7079,13 +7037,7 @@
             "move": 2,
             "attack": 2,
             "attributes": [
-              "^^Living Bones,",
-              "^^Living Corpses",
-              "^^and Living Spirits",
-              "^^within %range% 3 gain",
-              "^^advantage on",
-              "^^all their",
-              "^^attacks"
+              "^^Living Bones,\nLiving Corpses\nand Living Spirits\nwithin %range% 3 gain\nadvantage on\nall their\nattacks"
             ]
           },
           "elite": {
@@ -7093,13 +7045,7 @@
             "move": 2,
             "attack": 3,
             "attributes": [
-              "^^Living Bones,",
-              "^^Living Corpses",
-              "^^and Living Spirits",
-              "^^within %range% 3 gain",
-              "^^advantage on",
-              "^^all their",
-              "^^attacks"
+              "^^Living Bones,\nLiving Corpses\nand Living Spirits\nwithin %range% 3 gain\nadvantage on\nall their\nattacks"
             ]
           }
         },
@@ -7110,13 +7056,7 @@
             "move": 3,
             "attack": 2,
             "attributes": [
-              "^^Living Bones,",
-              "^^Living Corpses",
-              "^^and Living Spirits",
-              "^^within %range% 3 gain",
-              "^^advantage on",
-              "^^all their",
-              "^^attacks"
+              "^^Living Bones,\nLiving Corpses\nand Living Spirits\nwithin %range% 3 gain\nadvantage on\nall their\nattacks"
             ]
           },
           "elite": {
@@ -7124,13 +7064,7 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^Living Bones,",
-              "^^Living Corpses",
-              "^^and Living Spirits",
-              "^^within %range% 3 gain",
-              "^^advantage on",
-              "^^all their",
-              "^^attacks"
+              "^^Living Bones,\nLiving Corpses\nand Living Spirits\nwithin %range% 3 gain\nadvantage on\nall their\nattacks"
             ]
           }
         },
@@ -7141,13 +7075,7 @@
             "move": 3,
             "attack": 2,
             "attributes": [
-              "^^Living Bones,",
-              "^^Living Corpses",
-              "^^and Living Spirits",
-              "^^within %range% 3 gain",
-              "^^advantage on",
-              "^^all their",
-              "^^attacks"
+              "^^Living Bones,\nLiving Corpses\nand Living Spirits\nwithin %range% 3 gain\nadvantage on\nall their\nattacks"
             ]
           },
           "elite": {
@@ -7155,13 +7083,7 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^Living Bones,",
-              "^^Living Corpses",
-              "^^and Living Spirits",
-              "^^within %range% 3 gain",
-              "^^advantage on",
-              "^^all their",
-              "^^attacks"
+              "^^Living Bones,\nLiving Corpses\nand Living Spirits\nwithin %range% 3 gain\nadvantage on\nall their\nattacks"
             ]
           }
         },
@@ -7172,13 +7094,7 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^Living Bones,",
-              "^^Living Corpses",
-              "^^and Living Spirits",
-              "^^within %range% 3 gain",
-              "^^advantage on",
-              "^^all their",
-              "^^attacks"
+              "^^Living Bones,\nLiving Corpses\nand Living Spirits\nwithin %range% 3 gain\nadvantage on\nall their\nattacks"
             ]
           },
           "elite": {
@@ -7186,13 +7102,7 @@
             "move": 3,
             "attack": 4,
             "attributes": [
-              "^^Living Bones,",
-              "^^Living Corpses",
-              "^^and Living Spirits",
-              "^^within %range% 3 gain",
-              "^^advantage on",
-              "^^all their",
-              "^^attacks"
+              "^^Living Bones,\nLiving Corpses\nand Living Spirits\nwithin %range% 3 gain\nadvantage on\nall their\nattacks"
             ]
           }
         },
@@ -7203,13 +7113,7 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^Living Bones,",
-              "^^Living Corpses",
-              "^^and Living Spirits",
-              "^^within %range% 3 gain",
-              "^^advantage on",
-              "^^all their",
-              "^^attacks"
+              "^^Living Bones,\nLiving Corpses\nand Living Spirits\nwithin %range% 3 gain\nadvantage on\nall their\nattacks"
             ]
           },
           "elite": {
@@ -7217,13 +7121,7 @@
             "move": 3,
             "attack": 4,
             "attributes": [
-              "^^Living Bones,",
-              "^^Living Corpses",
-              "^^and Living Spirits",
-              "^^within %range% 3 gain",
-              "^^advantage on",
-              "^^all their",
-              "^^attacks"
+              "^^Living Bones,\nLiving Corpses\nand Living Spirits\nwithin %range% 3 gain\nadvantage on\nall their\nattacks"
             ]
           }
         },
@@ -7234,13 +7132,7 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^Living Bones,",
-              "^^Living Corpses",
-              "^^and Living Spirits",
-              "^^within %range% 3 gain",
-              "^^advantage on",
-              "^^all their",
-              "^^attacks"
+              "^^Living Bones,\nLiving Corpses\nand Living Spirits\nwithin %range% 3 gain\nadvantage on\nall their\nattacks"
             ]
           },
           "elite": {
@@ -7248,13 +7140,7 @@
             "move": 3,
             "attack": 4,
             "attributes": [
-              "^^Living Bones,",
-              "^^Living Corpses",
-              "^^and Living Spirits",
-              "^^within %range% 3 gain",
-              "^^advantage on",
-              "^^all their",
-              "^^attacks"
+              "^^Living Bones,\nLiving Corpses\nand Living Spirits\nwithin %range% 3 gain\nadvantage on\nall their\nattacks"
             ]
           }
         },
@@ -7265,13 +7151,7 @@
             "move": 3,
             "attack": 4,
             "attributes": [
-              "^^Living Bones,",
-              "^^Living Corpses",
-              "^^and Living Spirits",
-              "^^within %range% 3 gain",
-              "^^advantage on",
-              "^^all their",
-              "^^attacks"
+              "^^Living Bones,\nLiving Corpses\nand Living Spirits\nwithin %range% 3 gain\nadvantage on\nall their\nattacks"
             ]
           },
           "elite": {
@@ -7279,13 +7159,7 @@
             "move": 3,
             "attack": 5,
             "attributes": [
-              "^^Living Bones,",
-              "^^Living Corpses",
-              "^^and Living Spirits",
-              "^^within %range% 3 gain",
-              "^^advantage on",
-              "^^all their",
-              "^^attacks"
+              "^^Living Bones,\nLiving Corpses\nand Living Spirits\nwithin %range% 3 gain\nadvantage on\nall their\nattacks"
             ]
           }
         }
@@ -9786,8 +9660,7 @@
             "move": 1,
             "attack": 2,
             "attributes": [
-              "^^Adds %safeguard% to",
-              "^^all its heals"
+              "^^Adds %safeguard% to\nall its heals"
             ]
           },
           "elite": {
@@ -9795,8 +9668,7 @@
             "move": 2,
             "attack": 3,
             "attributes": [
-              "^^Adds %safeguard% to",
-              "^^all its heals"
+              "^^Adds %safeguard% to\nall its heals"
             ]
           }
         },
@@ -9807,8 +9679,7 @@
             "move": 1,
             "attack": 2,
             "attributes": [
-              "^^Adds %safeguard% to",
-              "^^all its heals"
+              "^^Adds %safeguard% to\nall its heals"
             ]
           },
           "elite": {
@@ -9816,8 +9687,7 @@
             "move": 2,
             "attack": 3,
             "attributes": [
-              "^^Adds %safeguard% to",
-              "^^all its heals"
+              "^^Adds %safeguard% to\nall its heals"
             ]
           }
         },
@@ -9828,8 +9698,7 @@
             "move": 2,
             "attack": 2,
             "attributes": [
-              "^^Adds %safeguard% to",
-              "^^all its heals"
+              "^^Adds %safeguard% to\nall its heals"
             ]
           },
           "elite": {
@@ -9837,8 +9706,7 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^Adds %safeguard% to",
-              "^^all its heals"
+              "^^Adds %safeguard% to\nall its heals"
             ]
           }
         },
@@ -9849,8 +9717,7 @@
             "move": 2,
             "attack": 2,
             "attributes": [
-              "^^Adds %safeguard% to",
-              "^^all its heals"
+              "^^Adds %safeguard% to\nall its heals"
             ]
           },
           "elite": {
@@ -9858,8 +9725,7 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^Adds %safeguard% to",
-              "^^all its heals"
+              "^^Adds %safeguard% to\nall its heals"
             ]
           }
         },
@@ -9870,8 +9736,7 @@
             "move": 2,
             "attack": 3,
             "attributes": [
-              "^^Adds %safeguard% to",
-              "^^all its heals"
+              "^^Adds %safeguard% to\nall its heals"
             ]
           },
           "elite": {
@@ -9879,8 +9744,7 @@
             "move": 3,
             "attack": 4,
             "attributes": [
-              "^^Adds %safeguard% to",
-              "^^all its heals"
+              "^^Adds %safeguard% to\nall its heals"
             ]
           }
         },
@@ -9891,8 +9755,7 @@
             "move": 2,
             "attack": 3,
             "attributes": [
-              "^^Adds %safeguard% to",
-              "^^all its heals"
+              "^^Adds %safeguard% to\nall its heals"
             ]
           },
           "elite": {
@@ -9900,8 +9763,7 @@
             "move": 3,
             "attack": 4,
             "attributes": [
-              "^^Adds %safeguard% to",
-              "^^all its heals"
+              "^^Adds %safeguard% to\nall its heals"
             ]
           }
         },
@@ -9912,8 +9774,7 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^Adds %safeguard% to",
-              "^^all its heals"
+              "^^Adds %safeguard% to\nall its heals"
             ]
           },
           "elite": {
@@ -9921,8 +9782,7 @@
             "move": 4,
             "attack": 4,
             "attributes": [
-              "^^Adds %safeguard% to",
-              "^^all its heals"
+              "^^Adds %safeguard% to\nall its heals"
             ]
           }
         },
@@ -9933,8 +9793,7 @@
             "move": 3,
             "attack": 4,
             "attributes": [
-              "^^Adds %safeguard% to",
-              "^^all its heals"
+              "^^Adds %safeguard% to\nall its heals"
             ]
           },
           "elite": {
@@ -9942,8 +9801,7 @@
             "move": 4,
             "attack": 5,
             "attributes": [
-              "^^Adds %safeguard% to",
-              "^^all its heals"
+              "^^Adds %safeguard% to\nall its heals"
             ]
           }
         }
@@ -11313,10 +11171,8 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           },
           "elite": {
@@ -11324,10 +11180,8 @@
             "move": 4,
             "attack": 4,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           }
         },
@@ -11338,10 +11192,8 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           },
           "elite": {
@@ -11349,10 +11201,8 @@
             "move": 4,
             "attack": 4,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           }
         },
@@ -11363,10 +11213,8 @@
             "move": 3,
             "attack": 4,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           },
           "elite": {
@@ -11374,10 +11222,8 @@
             "move": 4,
             "attack": 4,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           }
         },
@@ -11388,10 +11234,8 @@
             "move": 4,
             "attack": 4,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           },
           "elite": {
@@ -11399,10 +11243,8 @@
             "move": 4,
             "attack": 5,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           }
         },
@@ -11413,10 +11255,8 @@
             "move": 4,
             "attack": 5,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           },
           "elite": {
@@ -11424,10 +11264,8 @@
             "move": 5,
             "attack": 5,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           }
         },
@@ -11438,10 +11276,8 @@
             "move": 4,
             "attack": 5,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           },
           "elite": {
@@ -11449,10 +11285,8 @@
             "move": 5,
             "attack": 6,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           }
         },
@@ -11463,10 +11297,8 @@
             "move": 4,
             "attack": 5,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           },
           "elite": {
@@ -11474,10 +11306,8 @@
             "move": 5,
             "attack": 7,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           }
         },
@@ -11488,10 +11318,8 @@
             "move": 4,
             "attack": 6,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           },
           "elite": {
@@ -11499,10 +11327,8 @@
             "move": 5,
             "attack": 8,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           }
         }

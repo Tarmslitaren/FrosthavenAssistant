@@ -7352,8 +7352,7 @@
             "attack": 3,
             "range": 4,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage",
+              "^^Attackers gain\nDisadvantage",
               "%poison%"
             ]
           }
@@ -7375,8 +7374,7 @@
             "attack": 3,
             "range": 4,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage",
+              "^^Attackers gain\nDisadvantage",
               "%poison%"
             ]
           }
@@ -7398,8 +7396,7 @@
             "attack": 3,
             "range": 5,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage",
+              "^^Attackers gain\nDisadvantage",
               "%poison%"
             ]
           }
@@ -7421,8 +7418,7 @@
             "attack": 4,
             "range": 5,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage",
+              "^^Attackers gain\nDisadvantage",
               "%poison%"
             ]
           }
@@ -7444,8 +7440,7 @@
             "attack": 4,
             "range": 5,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage",
+              "^^Attackers gain\nDisadvantage",
               "%poison%"
             ]
           }
@@ -11541,8 +11536,7 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           },
           "elite": {
@@ -11550,8 +11544,7 @@
             "move": 4,
             "attack": 4,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           }
         },
@@ -11562,8 +11555,7 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           },
           "elite": {
@@ -11571,8 +11563,7 @@
             "move": 4,
             "attack": 4,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           }
         },
@@ -11583,8 +11574,7 @@
             "move": 3,
             "attack": 4,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           },
           "elite": {
@@ -11592,8 +11582,7 @@
             "move": 4,
             "attack": 4,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           }
         },
@@ -11604,8 +11593,7 @@
             "move": 4,
             "attack": 4,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           },
           "elite": {
@@ -11613,8 +11601,7 @@
             "move": 4,
             "attack": 5,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           }
         },
@@ -11625,8 +11612,7 @@
             "move": 4,
             "attack": 5,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           },
           "elite": {
@@ -11634,8 +11620,7 @@
             "move": 5,
             "attack": 5,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           }
         },
@@ -11646,8 +11631,7 @@
             "move": 4,
             "attack": 5,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           },
           "elite": {
@@ -11655,8 +11639,7 @@
             "move": 5,
             "attack": 6,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           }
         },
@@ -11667,8 +11650,7 @@
             "move": 4,
             "attack": 5,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           },
           "elite": {
@@ -11676,8 +11658,7 @@
             "move": 5,
             "attack": 6,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           }
         },
@@ -11688,8 +11669,7 @@
             "move": 4,
             "attack": 6,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           },
           "elite": {
@@ -11697,8 +11677,7 @@
             "move": 5,
             "attack": 8,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           }
         }

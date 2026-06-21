@@ -3298,9 +3298,7 @@
             "move": 1,
             "attack": 1,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 1 damage"
+              "^^On death, all\nadjacent figures\nsuffer 1 damage"
             ]
           },
           "elite": {
@@ -3308,9 +3306,7 @@
             "move": 1,
             "attack": 2,
             "attributes": [
-              "^^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 1 damage"
+              "^^On death, all\nadjacent figures\nsuffer 1 damage"
             ]
           }
         },
@@ -3321,9 +3317,7 @@
             "move": 1,
             "attack": 2,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 1 damage"
+              "^^On death, all\nadjacent figures\nsuffer 1 damage"
             ]
           },
           "elite": {
@@ -3331,9 +3325,7 @@
             "move": 1,
             "attack": 2,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 2 damage",
+              "^^On death, all\nadjacent figures\nsuffer 2 damage",
               "^Advantage"
             ]
           }
@@ -3345,9 +3337,7 @@
             "move": 2,
             "attack": 2,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 1 damage"
+              "^^On death, all\nadjacent figures\nsuffer 1 damage"
             ]
           },
           "elite": {
@@ -3355,9 +3345,7 @@
             "move": 1,
             "attack": 3,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 2 damage",
+              "^^On death, all\nadjacent figures\nsuffer 2 damage",
               "^Advantage"
             ]
           }
@@ -3369,9 +3357,7 @@
             "move": 2,
             "attack": 3,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 2 damage"
+              "^^On death, all\nadjacent figures\nsuffer 2 damage"
             ]
           },
           "elite": {
@@ -3379,9 +3365,7 @@
             "move": 2,
             "attack": 3,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 2 damage",
+              "^^On death, all\nadjacent figures\nsuffer 2 damage",
               "^Advantage"
             ]
           }
@@ -3393,9 +3377,7 @@
             "move": 2,
             "attack": 3,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 2 damage"
+              "^^On death, all\nadjacent figures\nsuffer 2 damage"
             ]
           },
           "elite": {
@@ -3403,9 +3385,7 @@
             "move": 2,
             "attack": 3,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 3 damage",
+              "^^On death, all\nadjacent figures\nsuffer 3 damage",
               "^Advantage"
             ]
           }
@@ -3417,9 +3397,7 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 2 damage"
+              "^^On death, all\nadjacent figures\nsuffer 2 damage"
             ]
           },
           "elite": {
@@ -3427,9 +3405,7 @@
             "move": 2,
             "attack": 4,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 3 damage",
+              "^^On death, all\nadjacent figures\nsuffer 3 damage",
               "^Advantage"
             ]
           }
@@ -3441,9 +3417,7 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 3 damage"
+              "^^On death, all\nadjacent figures\nsuffer 3 damage"
             ]
           },
           "elite": {
@@ -3451,9 +3425,7 @@
             "move": 3,
             "attack": 4,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 3 damage",
+              "^^On death, all\nadjacent figures\nsuffer 3 damage",
               "^Advantage"
             ]
           }
@@ -3465,9 +3437,7 @@
             "move": 3,
             "attack": 4,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 3 damage"
+              "^^On death, all\nadjacent figures\nsuffer 3 damage"
             ]
           },
           "elite": {
@@ -3475,9 +3445,7 @@
             "move": 3,
             "attack": 5,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 4 damage",
+              "^^On death, all\nadjacent figures\nsuffer 4 damage",
               "^Advantage"
             ]
           }
@@ -3652,9 +3620,7 @@
             "move": 2,
             "attack": 2,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 1 damage"
+              "^^On death, all\nadjacent figures\nsuffer 1 damage"
             ]
           },
           "elite": {
@@ -3662,9 +3628,7 @@
             "move": 2,
             "attack": 3,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 1 damage"
+              "^^On death, all\nadjacent figures\nsuffer 1 damage"
             ]
           }
         },
@@ -3675,9 +3639,7 @@
             "move": 2,
             "attack": 2,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 2 damage"
+              "^^On death, all\nadjacent figures\nsuffer 2 damage"
             ]
           },
           "elite": {
@@ -3685,9 +3647,7 @@
             "move": 2,
             "attack": 3,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 3 damage",
+              "^^On death, all\nadjacent figures\nsuffer 3 damage",
               "%shield% 1"
             ]
           }
@@ -3699,9 +3659,7 @@
             "move": 2,
             "attack": 3,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 2 damage"
+              "^^On death, all\nadjacent figures\nsuffer 2 damage"
             ]
           },
           "elite": {
@@ -3709,9 +3667,7 @@
             "move": 2,
             "attack": 4,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 3 damage",
+              "^^On death, all\nadjacent figures\nsuffer 3 damage",
               "%shield% 1"
             ]
           }
@@ -3723,9 +3679,7 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 3 damage"
+              "^^On death, all\nadjacent figures\nsuffer 3 damage"
             ]
           },
           "elite": {
@@ -3733,9 +3687,7 @@
             "move": 3,
             "attack": 4,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 4 damage",
+              "^^On death, all\nadjacent figures\nsuffer 4 damage",
               "%shield% 1"
             ]
           }
@@ -3747,9 +3699,7 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 3 damage",
+              "^^On death, all\nadjacent figures\nsuffer 3 damage",
               "%shield% 1"
             ]
           },
@@ -3758,9 +3708,7 @@
             "move": 3,
             "attack": 4,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 4 damage",
+              "^^On death, all\nadjacent figures\nsuffer 4 damage",
               "%shield% 2"
             ]
           }
@@ -3772,9 +3720,7 @@
             "move": 3,
             "attack": 4,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 3 damage",
+              "^^On death, all\nadjacent figures\nsuffer 3 damage",
               "%shield% 1"
             ]
           },
@@ -3783,9 +3729,7 @@
             "move": 3,
             "attack": 5,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 5 damage",
+              "^^On death, all\nadjacent figures\nsuffer 5 damage",
               "%shield% 2"
             ]
           }
@@ -3797,9 +3741,7 @@
             "move": 3,
             "attack": 4,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 3 damage",
+              "^^On death, all\nadjacent figures\nsuffer 3 damage",
               "%shield% 1"
             ]
           },
@@ -3808,9 +3750,7 @@
             "move": 3,
             "attack": 6,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 5 damage",
+              "^^On death, all\nadjacent figures\nsuffer 5 damage",
               "%shield% 2"
             ]
           }
@@ -3822,9 +3762,7 @@
             "move": 3,
             "attack": 5,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 4 damage",
+              "^^On death, all\nadjacent figures\nsuffer 4 damage",
               "%shield% 1"
             ]
           },
@@ -3833,9 +3771,7 @@
             "move": 3,
             "attack": 6,
             "attributes": [
-              "^^On death, all",
-              "^^adjacent figures",
-              "^^suffer 5 damage",
+              "^^On death, all\nadjacent figures\nsuffer 5 damage",
               "%shield% 3"
             ]
           }
@@ -5728,8 +5664,7 @@
             "move": 1,
             "attack": 3,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage",
+              "^^Attackers gain\nDisadvantage",
               "%poison%"
             ]
           }
@@ -5750,8 +5685,7 @@
             "move": 1,
             "attack": 3,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage",
+              "^^Attackers gain\nDisadvantage",
               "%poison%"
             ]
           }
@@ -5771,8 +5705,7 @@
             "move": 1,
             "attack": 3,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage",
+              "^^Attackers gain\nDisadvantage",
               "%poison%"
             ]
           }
@@ -5792,8 +5725,7 @@
             "move": 1,
             "attack": 4,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage",
+              "^^Attackers gain\nDisadvantage",
               "%poison%"
             ]
           }
@@ -5813,8 +5745,7 @@
             "move": 1,
             "attack": 4,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage",
+              "^^Attackers gain\nDisadvantage",
               "%poison%"
             ]
           }

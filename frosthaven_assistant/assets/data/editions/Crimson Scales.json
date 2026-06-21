@@ -7871,9 +7871,7 @@
             "attack": 3,
             "attributes": [
               "%shield% 1",
-              "^^Shield only",
-              "^^applies before",
-              "^^its turn"
+              "^^Shield only\napplies before\nits turn"
             ]
           },
           "elite": {
@@ -7882,9 +7880,7 @@
             "attack": 3,
             "attributes": [
               "%shield% 1",
-              "^^Shield only",
-              "^^applies before",
-              "^^its turn"
+              "^^Shield only\napplies before\nits turn"
             ]
           }
         },
@@ -7896,9 +7892,7 @@
             "attack": 3,
             "attributes": [
               "%shield% 1",
-              "^^Shield only",
-              "^^applies before",
-              "^^its turn"
+              "^^Shield only\napplies before\nits turn"
             ]
           },
           "elite": {
@@ -7907,9 +7901,7 @@
             "attack": 3,
             "attributes": [
               "%shield% 2",
-              "^^Shield only",
-              "^^applies before",
-              "^^its turn"
+              "^^Shield only\napplies before\nits turn"
             ]
           }
         },
@@ -7921,9 +7913,7 @@
             "attack": 4,
             "attributes": [
               "%shield% 1",
-              "^^Shield only",
-              "^^applies before",
-              "^^its turn"
+              "^^Shield only\napplies before\nits turn"
             ]
           },
           "elite": {
@@ -7932,9 +7922,7 @@
             "attack": 4,
             "attributes": [
               "%shield% 2",
-              "^^Shield only",
-              "^^applies before",
-              "^^its turn"
+              "^^Shield only\napplies before\nits turn"
             ]
           }
         },
@@ -7946,9 +7934,7 @@
             "attack": 4,
             "attributes": [
               "%shield% 2",
-              "^^Shield only",
-              "^^applies before",
-              "^^its turn"
+              "^^Shield only\napplies before\nits turn"
             ]
           },
           "elite": {
@@ -7957,9 +7943,7 @@
             "attack": 4,
             "attributes": [
               "%shield% 3",
-              "^^Shield only",
-              "^^applies before",
-              "^^its turn"
+              "^^Shield only\napplies before\nits turn"
             ]
           }
         },
@@ -7971,9 +7955,7 @@
             "attack": 4,
             "attributes": [
               "%shield% 3",
-              "^^Shield only",
-              "^^applies before",
-              "^^its turn"
+              "^^Shield only\napplies before\nits turn"
             ]
           },
           "elite": {
@@ -7982,9 +7964,7 @@
             "attack": 5,
             "attributes": [
               "%shield% 4",
-              "^^Shield only",
-              "^^applies before",
-              "^^its turn"
+              "^^Shield only\napplies before\nits turn"
             ]
           }
         },
@@ -7996,9 +7976,7 @@
             "attack": 5,
             "attributes": [
               "%shield% 3",
-              "^^Shield only",
-              "^^applies before",
-              "^^its turn"
+              "^^Shield only\napplies before\nits turn"
             ]
           },
           "elite": {
@@ -8007,9 +7985,7 @@
             "attack": 5,
             "attributes": [
               "%shield% 4",
-              "^^Shield only",
-              "^^applies before",
-              "^^its turn"
+              "^^Shield only\napplies before\nits turn"
             ]
           }
         },
@@ -8021,9 +7997,7 @@
             "attack": 5,
             "attributes": [
               "%shield% 4",
-              "^^Shield only",
-              "^^applies before",
-              "^^its turn"
+              "^^Shield only\napplies before\nits turn"
             ]
           },
           "elite": {
@@ -8032,9 +8006,7 @@
             "attack": 6,
             "attributes": [
               "%shield% 5",
-              "^^Shield only",
-              "^^applies before",
-              "^^its turn"
+              "^^Shield only\napplies before\nits turn"
             ]
           }
         },
@@ -8046,9 +8018,7 @@
             "attack": 6,
             "attributes": [
               "%shield% 4",
-              "^^Shield only",
-              "^^applies before",
-              "^^its turn"
+              "^^Shield only\napplies before\nits turn"
             ]
           },
           "elite": {
@@ -8057,9 +8027,7 @@
             "attack": 6,
             "attributes": [
               "%shield% 6",
-              "^^Shield only",
-              "^^applies before",
-              "^^its turn"
+              "^^Shield only\napplies before\nits turn"
             ]
           }
         }
@@ -8416,13 +8384,9 @@
             "move": 2,
             "attack": 2,
             "attributes": [
-              "^^Unaffected by",
-              "^^water hexes",
+              "^^Unaffected by\nwater hexes",
               "^^%shield% 2%",
-              "^^Shield only",
-              "^^applies on",
-              "^^ranged",
-              "^^attacks"
+              "^^Shield only\napplies on\nranged\nattacks"
             ]
           },
           "elite": {
@@ -8430,13 +8394,9 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^Unaffected by",
-              "^^water hexes",
+              "^^Unaffected by\nwater hexes",
               "^^%shield% 2%",
-              "^^Shield only",
-              "^^applies on",
-              "^^ranged",
-              "^^attacks"
+              "^^Shield only\napplies on\nranged\nattacks"
             ]
           }
         },
@@ -8447,13 +8407,9 @@
             "move": 2,
             "attack": 3,
             "attributes": [
-              "^^Unaffected by",
-              "^^water hexes",
+              "^^Unaffected by\nwater hexes",
               "^^%shield% 2%",
-              "^^Shield only",
-              "^^applies on",
-              "^^ranged",
-              "^^attacks"
+              "^^Shield only\napplies on\nranged\nattacks"
             ]
           },
           "elite": {
@@ -8461,13 +8417,9 @@
             "move": 3,
             "attack": 4,
             "attributes": [
-              "^^Unaffected by",
-              "^^water hexes",
+              "^^Unaffected by\nwater hexes",
               "^^%shield% 2%",
-              "^^Shield only",
-              "^^applies on",
-              "^^ranged",
-              "^^attacks"
+              "^^Shield only\napplies on\nranged\nattacks"
             ]
           }
         },
@@ -8478,13 +8430,9 @@
             "move": 2,
             "attack": 3,
             "attributes": [
-              "^^Unaffected by",
-              "^^water hexes",
+              "^^Unaffected by\nwater hexes",
               "^^%shield% 2%",
-              "^^Shield only",
-              "^^applies on",
-              "^^ranged",
-              "^^attacks"
+              "^^Shield only\napplies on\nranged\nattacks"
             ]
           },
           "elite": {
@@ -8492,13 +8440,9 @@
             "move": 3,
             "attack": 4,
             "attributes": [
-              "^^Unaffected by",
-              "^^water hexes",
+              "^^Unaffected by\nwater hexes",
               "^^%shield% 2%",
-              "^^Shield only",
-              "^^applies on",
-              "^^ranged",
-              "^^attacks"
+              "^^Shield only\napplies on\nranged\nattacks"
             ]
           }
         },
@@ -8509,13 +8453,9 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^Unaffected by",
-              "^^water hexes",
+              "^^Unaffected by\nwater hexes",
               "^^%shield% 2%",
-              "^^Shield only",
-              "^^applies on",
-              "^^ranged",
-              "^^attacks"
+              "^^Shield only\napplies on\nranged\nattacks"
             ]
           },
           "elite": {
@@ -8523,13 +8463,9 @@
             "move": 4,
             "attack": 4,
             "attributes": [
-              "^^Unaffected by",
-              "^^water hexes",
+              "^^Unaffected by\nwater hexes",
               "^^%shield% 2%",
-              "^^Shield only",
-              "^^applies on",
-              "^^ranged",
-              "^^attacks"
+              "^^Shield only\napplies on\nranged\nattacks"
             ]
           }
         },
@@ -8540,13 +8476,9 @@
             "move": 3,
             "attack": 4,
             "attributes": [
-              "^^Unaffected by",
-              "^^water hexes",
+              "^^Unaffected by\nwater hexes",
               "^^%shield% 2%",
-              "^^Shield only",
-              "^^applies on",
-              "^^ranged",
-              "^^attacks"
+              "^^Shield only\napplies on\nranged\nattacks"
             ]
           },
           "elite": {
@@ -8554,13 +8486,9 @@
             "move": 4,
             "attack": 5,
             "attributes": [
-              "^^Unaffected by",
-              "^^water hexes",
+              "^^Unaffected by\nwater hexes",
               "^^%shield% 2%",
-              "^^Shield only",
-              "^^applies on",
-              "^^ranged",
-              "^^attacks"
+              "^^Shield only\napplies on\nranged\nattacks"
             ]
           }
         },
@@ -8571,13 +8499,9 @@
             "move": 3,
             "attack": 4,
             "attributes": [
-              "^^Unaffected by",
-              "^^water hexes",
+              "^^Unaffected by\nwater hexes",
               "^^%shield% 2%",
-              "^^Shield only",
-              "^^applies on",
-              "^^ranged",
-              "^^attacks"
+              "^^Shield only\napplies on\nranged\nattacks"
             ]
           },
           "elite": {
@@ -8585,13 +8509,9 @@
             "move": 4,
             "attack": 5,
             "attributes": [
-              "^^Unaffected by",
-              "^^water hexes",
+              "^^Unaffected by\nwater hexes",
               "^^%shield% 2%",
-              "^^Shield only",
-              "^^applies on",
-              "^^ranged",
-              "^^attacks"
+              "^^Shield only\napplies on\nranged\nattacks"
             ]
           }
         },
@@ -8602,13 +8522,9 @@
             "move": 4,
             "attack": 4,
             "attributes": [
-              "^^Unaffected by",
-              "^^water hexes",
+              "^^Unaffected by\nwater hexes",
               "^^%shield% 2%",
-              "^^Shield only",
-              "^^applies on",
-              "^^ranged",
-              "^^attacks"
+              "^^Shield only\napplies on\nranged\nattacks"
             ]
           },
           "elite": {
@@ -8616,13 +8532,9 @@
             "move": 5,
             "attack": 5,
             "attributes": [
-              "^^Unaffected by",
-              "^^water hexes",
+              "^^Unaffected by\nwater hexes",
               "^^%shield% 2%",
-              "^^Shield only",
-              "^^applies on",
-              "^^ranged",
-              "^^attacks"
+              "^^Shield only\napplies on\nranged\nattacks"
             ]
           }
         },
@@ -8633,13 +8545,9 @@
             "move": 4,
             "attack": 5,
             "attributes": [
-              "^^Unaffected by",
-              "^^water hexes",
+              "^^Unaffected by\nwater hexes",
               "^^%shield% 2%",
-              "^^Shield only",
-              "^^applies on",
-              "^^ranged",
-              "^^attacks"
+              "^^Shield only\napplies on\nranged\nattacks"
             ]
           },
           "elite": {
@@ -8647,13 +8555,9 @@
             "move": 5,
             "attack": 6,
             "attributes": [
-              "^^Unaffected by",
-              "^^water hexes",
+              "^^Unaffected by\nwater hexes",
               "^^%shield% 4%",
-              "^^Shield only",
-              "^^applies on",
-              "^^ranged",
-              "^^attacks"
+              "^^Shield only\napplies on\nranged\nattacks"
             ]
           }
         }
@@ -11558,8 +11462,7 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           },
           "elite": {
@@ -11567,8 +11470,7 @@
             "move": 3,
             "attack": 4,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           }
         },
@@ -11579,8 +11481,7 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           },
           "elite": {
@@ -11588,8 +11489,7 @@
             "move": 3,
             "attack": 4,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           }
         },
@@ -11600,8 +11500,7 @@
             "move": 4,
             "attack": 3,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           },
           "elite": {
@@ -11609,8 +11508,7 @@
             "move": 4,
             "attack": 4,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           }
         },
@@ -11621,8 +11519,7 @@
             "move": 4,
             "attack": 4,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           },
           "elite": {
@@ -11630,8 +11527,7 @@
             "move": 4,
             "attack": 5,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           }
         },
@@ -11642,8 +11538,7 @@
             "move": 4,
             "attack": 4,
             "attributes": [
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           },
           "elite": {
@@ -11653,8 +11548,7 @@
             "attributes": [
               "%wound%",
               "*",
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           }
         },
@@ -11667,8 +11561,7 @@
             "attributes": [
               "%wound%",
               "*",
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           },
           "elite": {
@@ -11678,8 +11571,7 @@
             "attributes": [
               "%wound%",
               "*",
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           }
         },
@@ -11692,8 +11584,7 @@
             "attributes": [
               "%wound%",
               "*",
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           },
           "elite": {
@@ -11703,8 +11594,7 @@
             "attributes": [
               "%wound%",
               "*",
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           }
         },
@@ -11717,8 +11607,7 @@
             "attributes": [
               "%wound%",
               "*",
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           },
           "elite": {
@@ -11728,8 +11617,7 @@
             "attributes": [
               "%wound%",
               "*",
-              "^^Attackers gain",
-              "^^Disadvantage"
+              "^^Attackers gain\nDisadvantage"
             ]
           }
         }
@@ -14777,8 +14665,7 @@
             "attributes": [
               "^^On death:",
               "^^%attack% + 0",
-              "^^%target% all",
-              "^^adjacent"
+              "^^%target% all\nadjacent"
             ]
           },
           "elite": {
@@ -14788,8 +14675,7 @@
             "attributes": [
               "^^On death:",
               "^^%attack% + 0",
-              "^^%target% all",
-              "^^adjacent"
+              "^^%target% all\nadjacent"
             ]
           }
         },
@@ -14803,8 +14689,7 @@
               "^^%retaliate% 1",
               "^^On death:",
               "^^%attack% + 0",
-              "^^%target% all",
-              "^^adjacent"
+              "^^%target% all\nadjacent"
             ]
           },
           "elite": {
@@ -14815,8 +14700,7 @@
               "^^%retaliate% 2",
               "^^On death:",
               "^^%attack% + 0",
-              "^^%target% all",
-              "^^adjacent"
+              "^^%target% all\nadjacent"
             ]
           }
         },
@@ -14830,8 +14714,7 @@
               "^^%retaliate% 1",
               "^^On death:",
               "^^attack + 0",
-              "^^%target% all",
-              "^^adjacent"
+              "^^%target% all\nadjacent"
             ]
           },
           "elite": {
@@ -14842,8 +14725,7 @@
               "^^%retaliate% 2",
               "^^On death:",
               "^^attack + 0",
-              "^^%target% all",
-              "^^adjacent"
+              "^^%target% all\nadjacent"
             ]
           }
         },
@@ -14857,8 +14739,7 @@
               "^^%retaliate% 1",
               "^^On death:",
               "^^%attack% + 0",
-              "^^%target% all",
-              "^^adjacent"
+              "^^%target% all\nadjacent"
             ]
           },
           "elite": {
@@ -14869,8 +14750,7 @@
               "^^%retaliate% 2",
               "^^On death:",
               "^^%attack% + 0",
-              "^^%target% all",
-              "^^adjacent"
+              "^^%target% all\nadjacent"
             ]
           }
         },
@@ -14884,8 +14764,7 @@
               "^^%retaliate% 1",
               "^^On death:",
               "^^%attack% + 0",
-              "^^%target% all",
-              "^^adjacent"
+              "^^%target% all\nadjacent"
             ]
           },
           "elite": {
@@ -14896,8 +14775,7 @@
               "^^%retaliate% 2",
               "^^On death:",
               "^^%attack% + 0",
-              "^^%target% all",
-              "^^adjacent"
+              "^^%target% all\nadjacent"
             ]
           }
         },
@@ -14911,8 +14789,7 @@
               "^^%retaliate% 2",
               "^^On death:",
               "^^%attack% + 0",
-              "^^%target% all",
-              "^^adjacent"
+              "^^%target% all\nadjacent"
             ]
           },
           "elite": {
@@ -14923,8 +14800,7 @@
               "^^%retaliate% 3",
               "^^On death:",
               "^^%attack% + 0",
-              "^^%target% all",
-              "^^adjacent"
+              "^^%target% all\nadjacent"
             ]
           }
         },
@@ -14938,8 +14814,7 @@
               "^^%retaliate% 2",
               "^^On death:",
               "^^%attack% + 0",
-              "^^%target% all",
-              "^^adjacent"
+              "^^%target% all\nadjacent"
             ]
           },
           "elite": {
@@ -14950,8 +14825,7 @@
               "^^%retaliate% 3",
               "^^On death:",
               "^^%attack% + 0",
-              "^^%target% all",
-              "^^adjacent"
+              "^^%target% all\nadjacent"
             ]
           }
         },
@@ -14965,8 +14839,7 @@
               "^^%retaliate% 2",
               "^^On death:",
               "^^%attack% + 0",
-              "^^%target% all",
-              "^^adjacent"
+              "^^%target% all\nadjacent"
             ]
           },
           "elite": {
@@ -14977,8 +14850,7 @@
               "^^%retaliate% 4",
               "^^On death:",
               "^^%attack% + 0",
-              "^^%target% all",
-              "^^adjacent"
+              "^^%target% all\nadjacent"
             ]
           }
         }

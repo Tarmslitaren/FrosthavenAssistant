@@ -973,8 +973,7 @@
             "move": 4,
             "attack": 4,
             "attributes": [
-              "^Attackers gain",
-              "^disadvantage",
+              "^Attackers gain\ndisadvantage",
               "%poison%"
             ]
           }
@@ -994,8 +993,7 @@
             "move": 4,
             "attack": 5,
             "attributes": [
-              "^Attackers gain",
-              "^disadvantage",
+              "^Attackers gain\ndisadvantage",
               "%poison%"
             ]
           }
@@ -1015,8 +1013,7 @@
             "move": 4,
             "attack": 5,
             "attributes": [
-              "^Attackers gain",
-              "^disadvantage",
+              "^Attackers gain\ndisadvantage",
               "%poison%"
             ]
           }
@@ -1036,8 +1033,7 @@
             "move": 4,
             "attack": 6,
             "attributes": [
-              "^Attackers gain",
-              "^disadvantage",
+              "^Attackers gain\ndisadvantage",
               "%poison%"
             ]
           }
@@ -1057,8 +1053,7 @@
             "move": 5,
             "attack": 6,
             "attributes": [
-              "^Attackers gain",
-              "^disadvantage",
+              "^Attackers gain\ndisadvantage",
               "%poison%"
             ]
           }
@@ -2440,11 +2435,9 @@
             "move": 2,
             "attack": 4,
             "attributes": [
-              "^All adjacent",
-              "^allies add",
+              "^All adjacent\nallies add",
               "^+1 %attack%",
-              "^to all",
-              "^attacks"
+              "^to all\nattacks"
             ]
           }
         },
@@ -2463,11 +2456,9 @@
             "move": 3,
             "attack": 4,
             "attributes": [
-              "^All adjacent",
-              "^allies add",
+              "^All adjacent\nallies add",
               "^+1 %attack%",
-              "^to all",
-              "^attacks"
+              "^to all\nattacks"
             ]
           }
         },
@@ -2486,11 +2477,9 @@
             "move": 3,
             "attack": 5,
             "attributes": [
-              "^All adjacent",
-              "^allies add",
+              "^All adjacent\nallies add",
               "^+2 %attack%",
-              "^to all",
-              "^attacks"
+              "^to all\nattacks"
             ]
           }
         },
@@ -2509,11 +2498,9 @@
             "move": 3,
             "attack": 5,
             "attributes": [
-              "^All adjacent",
-              "^allies add",
+              "^All adjacent\nallies add",
               "^+2 %attack%",
-              "^to all",
-              "^attacks"
+              "^to all\nattacks"
             ]
           }
         },
@@ -2532,11 +2519,9 @@
             "move": 3,
             "attack": 6,
             "attributes": [
-              "^All adjacent",
-              "^allies add",
+              "^All adjacent\nallies add",
               "^+2 %attack%",
-              "^to all",
-              "^attacks"
+              "^to all\nattacks"
             ]
           }
         }
@@ -4467,8 +4452,7 @@
             "attack": 4,
             "attributes": [
               "Advantage",
-              "^Attackers gain",
-              "^disadvantage",
+              "^Attackers gain\ndisadvantage",
               "%poison%"
             ],
             "immunities": [
@@ -4496,8 +4480,7 @@
             "attack": 5,
             "attributes": [
               "Advantage",
-              "^Attackers gain",
-              "^disadvantage",
+              "^Attackers gain\ndisadvantage",
               "%poison%"
             ],
             "immunities": [
@@ -4525,8 +4508,7 @@
             "attack": 5,
             "attributes": [
               "Advantage",
-              "^Attackers gain",
-              "^disadvantage",
+              "^Attackers gain\ndisadvantage",
               "%poison%"
             ],
             "immunities": [
@@ -4554,8 +4536,7 @@
             "attack": 6,
             "attributes": [
               "Advantage",
-              "^Attackers gain",
-              "^disadvantage",
+              "^Attackers gain\ndisadvantage",
               "%poison%"
             ],
             "immunities": [
@@ -4583,8 +4564,7 @@
             "attack": 6,
             "attributes": [
               "Advantage",
-              "^Attackers gain",
-              "^disadvantage",
+              "^Attackers gain\ndisadvantage",
               "%poison%"
             ],
             "immunities": [
@@ -4744,8 +4724,7 @@
             "move": 1,
             "attack": 3,
             "attributes": [
-              "^^can't be",
-              "^^damaged"
+              "^^can't be\ndamaged"
             ]
           },
           "elite": {
@@ -4754,8 +4733,7 @@
             "attack": 4,
             "attributes": [
               "%shield% 1",
-              "^^can't be",
-              "^^damaged"
+              "^^can't be\ndamaged"
             ]
           }
         },
@@ -4767,8 +4745,7 @@
             "attack": 3,
             "attributes": [
               "%shield% 1",
-              "^^can't be",
-              "^^damaged"
+              "^^can't be\ndamaged"
             ]
           },
           "elite": {
@@ -4777,8 +4754,7 @@
             "attack": 4,
             "attributes": [
               "%shield% 2",
-              "^^can't be",
-              "^^damaged"
+              "^^can't be\ndamaged"
             ]
           }
         },
@@ -4790,8 +4766,7 @@
             "attack": 4,
             "attributes": [
               "%shield% 1",
-              "^^can't be",
-              "^^damaged"
+              "^^can't be\ndamaged"
             ]
           },
           "elite": {
@@ -4800,8 +4775,7 @@
             "attack": 5,
             "attributes": [
               "%shield% 2",
-              "^^can't be",
-              "^^damaged"
+              "^^can't be\ndamaged"
             ]
           }
         },
@@ -4813,8 +4787,7 @@
             "attack": 4,
             "attributes": [
               "%shield% 2",
-              "^^can't be",
-              "^^damaged"
+              "^^can't be\ndamaged"
             ]
           },
           "elite": {
@@ -4823,8 +4796,7 @@
             "attack": 5,
             "attributes": [
               "%shield% 3",
-              "^^can't be",
-              "^^damaged"
+              "^^can't be\ndamaged"
             ]
           }
         },
@@ -4836,8 +4808,7 @@
             "attack": 4,
             "attributes": [
               "%shield% 2",
-              "^^can't be",
-              "^^damaged"
+              "^^can't be\ndamaged"
             ]
           },
           "elite": {
@@ -4846,8 +4817,7 @@
             "attack": 6,
             "attributes": [
               "%shield% 3",
-              "^^can't be",
-              "^^damaged"
+              "^^can't be\ndamaged"
             ]
           }
         },
@@ -4859,8 +4829,7 @@
             "attack": 5,
             "attributes": [
               "%shield% 2",
-              "^^can't be",
-              "^^damaged"
+              "^^can't be\ndamaged"
             ]
           },
           "elite": {
@@ -4869,8 +4838,7 @@
             "attack": 6,
             "attributes": [
               "%shield% 3",
-              "^^can't be",
-              "^^damaged"
+              "^^can't be\ndamaged"
             ]
           }
         },
@@ -4882,8 +4850,7 @@
             "attack": 5,
             "attributes": [
               "%shield% 2",
-              "^^can't be",
-              "^^damaged"
+              "^^can't be\ndamaged"
             ]
           },
           "elite": {
@@ -4892,8 +4859,7 @@
             "attack": 7,
             "attributes": [
               "%shield% 3",
-              "^^can't be",
-              "^^damaged"
+              "^^can't be\ndamaged"
             ]
           }
         },
@@ -4905,8 +4871,7 @@
             "attack": 5,
             "attributes": [
               "%shield% 3",
-              "^^can't be",
-              "^^damaged"
+              "^^can't be\ndamaged"
             ]
           },
           "elite": {
@@ -4915,8 +4880,7 @@
             "attack": 7,
             "attributes": [
               "%shield% 4",
-              "^^can't be",
-              "^^damaged"
+              "^^can't be\ndamaged"
             ]
           }
         }

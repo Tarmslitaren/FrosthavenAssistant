@@ -7482,10 +7482,7 @@
             "move": 1,
             "attack": 2,
             "attributes": [
-              "^^All attacks",
-              "^^targeting",
-              "^^Black Imp gain",
-              "^^disadvantage",
+              "^^All attacks\ntargeting\nBlack Imp gain\ndisadvantage",
               "%poison%"
             ]
           }
@@ -7505,10 +7502,7 @@
             "move": 1,
             "attack": 3,
             "attributes": [
-              "^^All attacks",
-              "^^targeting",
-              "^^Black Imp gain",
-              "^^disadvantage",
+              "^^All attacks\ntargeting\nBlack Imp gain\ndisadvantage",
               "%poison%"
             ]
           }
@@ -7528,10 +7522,7 @@
             "move": 1,
             "attack": 3,
             "attributes": [
-              "^^All attacks",
-              "^^targeting",
-              "^^Black Imp gain",
-              "^^disadvantage",
+              "^^All attacks\ntargeting\nBlack Imp gain\ndisadvantage",
               "%poison%"
             ]
           }
@@ -7551,10 +7542,7 @@
             "move": 1,
             "attack": 4,
             "attributes": [
-              "^^All attacks",
-              "^^targeting",
-              "^^Black Imp gain",
-              "^^disadvantage",
+              "^^All attacks\ntargeting\nBlack Imp gain\ndisadvantage",
               "%poison%"
             ]
           }
@@ -7574,10 +7562,7 @@
             "move": 1,
             "attack": 4,
             "attributes": [
-              "^^All attacks",
-              "^^targeting",
-              "^^Black Imp gain",
-              "^^disadvantage",
+              "^^All attacks\ntargeting\nBlack Imp gain\ndisadvantage",
               "%poison%"
             ]
           }
@@ -10957,10 +10942,8 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           },
           "elite": {
@@ -10968,10 +10951,8 @@
             "move": 4,
             "attack": 4,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           }
         },
@@ -10982,10 +10963,8 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           },
           "elite": {
@@ -10993,10 +10972,8 @@
             "move": 4,
             "attack": 4,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           }
         },
@@ -11007,10 +10984,8 @@
             "move": 3,
             "attack": 4,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           },
           "elite": {
@@ -11018,10 +10993,8 @@
             "move": 4,
             "attack": 4,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           }
         },
@@ -11032,10 +11005,8 @@
             "move": 4,
             "attack": 4,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           },
           "elite": {
@@ -11043,10 +11014,8 @@
             "move": 4,
             "attack": 5,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           }
         },
@@ -11057,10 +11026,8 @@
             "move": 4,
             "attack": 5,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           },
           "elite": {
@@ -11068,10 +11035,8 @@
             "move": 5,
             "attack": 5,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           }
         },
@@ -11082,10 +11047,8 @@
             "move": 4,
             "attack": 5,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           },
           "elite": {
@@ -11093,10 +11056,8 @@
             "move": 5,
             "attack": 6,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           }
         },
@@ -11107,10 +11068,8 @@
             "move": 4,
             "attack": 5,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           },
           "elite": {
@@ -11118,10 +11077,8 @@
             "move": 5,
             "attack": 7,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           }
         },
@@ -11132,10 +11089,8 @@
             "move": 4,
             "attack": 6,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           },
           "elite": {
@@ -11143,10 +11098,8 @@
             "move": 5,
             "attack": 8,
             "attributes": [
-              "^^All attacks",
-              "^^targeting Night",
-              "^^Demon gain",
-              "^^disadvantage"
+              "^^All attacks\ntargeting Night",
+              "^^Demon gain\ndisadvantage"
             ]
           }
         }
@@ -16448,10 +16401,7 @@
             "move": 2,
             "attack": 2,
             "attributes": [
-              "^^Treat water hexes",
-              "^^as corridors and",
-              "^^non-water hexes",
-              "^^as obstacles"
+              "^^Treat water hexes\nas corridors and\nnon-water hexes\nas obstacles"
             ]
           },
           "elite": {
@@ -16459,10 +16409,7 @@
             "move": 3,
             "attack": 2,
             "attributes": [
-              "^^Treat water hexes",
-              "^^as corridors and",
-              "^^non-water hexes",
-              "^^as obstacles"
+              "^^Treat water hexes\nas corridors and\nnon-water hexes\nas obstacles"
             ]
           }
         },
@@ -16473,10 +16420,7 @@
             "move": 2,
             "attack": 2,
             "attributes": [
-              "^^Treat water hexes",
-              "^^as corridors and",
-              "^^non-water hexes",
-              "^^as obstacles"
+              "^^Treat water hexes\nas corridors and\nnon-water hexes\nas obstacles"
             ]
           },
           "elite": {
@@ -16484,10 +16428,7 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^Treat water hexes",
-              "^^as corridors and",
-              "^^non-water hexes",
-              "^^as obstacles"
+              "^^Treat water hexes\nas corridors and\nnon-water hexes\nas obstacles"
             ]
           }
         },
@@ -16498,10 +16439,7 @@
             "move": 3,
             "attack": 2,
             "attributes": [
-              "^^Treat water hexes",
-              "^^as corridors and",
-              "^^non-water hexes",
-              "^^as obstacles"
+              "^^Treat water hexes\nas corridors and\nnon-water hexes\nas obstacles"
             ]
           },
           "elite": {
@@ -16509,10 +16447,7 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^Treat water hexes",
-              "^^as corridors and",
-              "^^non-water hexes",
-              "^^as obstacles"
+              "^^Treat water hexes\nas corridors and\nnon-water hexes\nas obstacles"
             ]
           }
         },
@@ -16523,10 +16458,7 @@
             "move": 3,
             "attack": 2,
             "attributes": [
-              "^^Treat water hexes",
-              "^^as corridors and",
-              "^^non-water hexes",
-              "^^as obstacles"
+              "^^Treat water hexes\nas corridors and\nnon-water hexes\nas obstacles"
             ]
           },
           "elite": {
@@ -16534,10 +16466,7 @@
             "move": 4,
             "attack": 3,
             "attributes": [
-              "^^Treat water hexes",
-              "^^as corridors and",
-              "^^non-water hexes",
-              "^^as obstacles"
+              "^^Treat water hexes\nas corridors and\nnon-water hexes\nas obstacles"
             ]
           }
         },
@@ -16548,10 +16477,7 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^Treat water hexes",
-              "^^as corridors and",
-              "^^non-water hexes",
-              "^^as obstacles"
+              "^^Treat water hexes\nas corridors and\nnon-water hexes\nas obstacles"
             ]
           },
           "elite": {
@@ -16559,10 +16485,7 @@
             "move": 4,
             "attack": 4,
             "attributes": [
-              "^^Treat water hexes",
-              "^^as corridors and",
-              "^^non-water hexes",
-              "^^as obstacles"
+              "^^Treat water hexes\nas corridors and\nnon-water hexes\nas obstacles"
             ]
           }
         },
@@ -16573,10 +16496,7 @@
             "move": 3,
             "attack": 3,
             "attributes": [
-              "^^Treat water hexes",
-              "^^as corridors and",
-              "^^non-water hexes",
-              "^^as obstacles"
+              "^^Treat water hexes\nas corridors and\nnon-water hexes\nas obstacles"
             ]
           },
           "elite": {
@@ -16584,10 +16504,7 @@
             "move": 4,
             "attack": 4,
             "attributes": [
-              "^^Treat water hexes",
-              "^^as corridors and",
-              "^^non-water hexes",
-              "^^as obstacles"
+              "^^Treat water hexes\nas corridors and\nnon-water hexes\nas obstacles"
             ]
           }
         },
@@ -16598,10 +16515,7 @@
             "move": 4,
             "attack": 3,
             "attributes": [
-              "^^Treat water hexes",
-              "^^as corridors and",
-              "^^non-water hexes",
-              "^^as obstacles"
+              "^^Treat water hexes\nas corridors and\nnon-water hexes\nas obstacles"
             ]
           },
           "elite": {
@@ -16609,10 +16523,7 @@
             "move": 4,
             "attack": 5,
             "attributes": [
-              "^^Treat water hexes",
-              "^^as corridors and",
-              "^^non-water hexes",
-              "^^as obstacles"
+              "^^Treat water hexes\nas corridors and\nnon-water hexes\nas obstacles"
             ]
           }
         },
@@ -16623,10 +16534,7 @@
             "move": 4,
             "attack": 4,
             "attributes": [
-              "^^Treat water hexes",
-              "^^as corridors and",
-              "^^non-water hexes",
-              "^^as obstacles"
+              "^^Treat water hexes\nas corridors and\nnon-water hexes\nas obstacles"
             ]
           },
           "elite": {
@@ -16634,10 +16542,7 @@
             "move": 4,
             "attack": 6,
             "attributes": [
-              "^^Treat water hexes",
-              "^^as corridors and",
-              "^^non-water hexes",
-              "^^as obstacles"
+              "^^Treat water hexes\nas corridors and\nnon-water hexes\nas obstacles"
             ]
           }
         }
