@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import '../game_methods.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class LoadCharacterSaveCommand extends Command {
   String saveName;
@@ -33,6 +34,6 @@ class LoadCharacterSaveCommand extends Command {
 
   @override
   String describe() {
-    return "Load saved character: $saveName";
+    return commandL10n.cmdLoadCharacter(saveName);
   }
 }

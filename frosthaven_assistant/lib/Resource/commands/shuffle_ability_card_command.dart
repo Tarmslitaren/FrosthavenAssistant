@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 
 import '../game_methods.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class ShuffleAbilityCardCommand extends Command {
   final String ownerId;
@@ -19,6 +20,6 @@ class ShuffleAbilityCardCommand extends Command {
 
   @override
   String describe() {
-    return "Extra ability deck shuffle";
+    return commandL10n.cmdExtraAbilityShuffle;
   }
 }

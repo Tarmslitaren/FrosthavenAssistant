@@ -1,4 +1,5 @@
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class LoadSaveCommand extends Command {
   String saveName;
@@ -16,6 +17,6 @@ class LoadSaveCommand extends Command {
 
   @override
   String describe() {
-    return "Load saved game: $saveName";
+    return commandL10n.cmdLoadGame(saveName);
   }
 }

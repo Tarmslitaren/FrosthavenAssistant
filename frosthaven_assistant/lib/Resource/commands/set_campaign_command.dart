@@ -1,4 +1,5 @@
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class SetCampaignCommand extends Command {
   SetCampaignCommand(this.campaign);
@@ -12,6 +13,6 @@ class SetCampaignCommand extends Command {
 
   @override
   String describe() {
-    return "set $campaign campaign";
+    return commandL10n.cmdSetCampaign(campaign);
   }
 }

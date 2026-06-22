@@ -1,5 +1,6 @@
 import '../game_methods.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class AmdAddMinusOneCommand extends Command {
   String name;
@@ -16,6 +17,6 @@ class AmdAddMinusOneCommand extends Command {
 
   @override
   String describe() {
-    return "Add minus one";
+    return commandL10n.cmdAddMinusOne;
   }
 }

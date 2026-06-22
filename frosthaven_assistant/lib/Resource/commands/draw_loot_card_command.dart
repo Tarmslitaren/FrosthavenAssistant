@@ -1,5 +1,6 @@
 import '../game_event.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class DrawLootCardCommand extends Command {
   final GameState _gameState;
@@ -16,7 +17,7 @@ class DrawLootCardCommand extends Command {
 
   @override
   String describe() {
-    return "Draw loot card";
+    return commandL10n.cmdDrawLootCard;
   }
 
   @override

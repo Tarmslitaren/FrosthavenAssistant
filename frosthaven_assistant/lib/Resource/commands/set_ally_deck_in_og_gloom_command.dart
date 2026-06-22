@@ -1,4 +1,5 @@
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class SetAllyDeckInOgGloomCommand extends Command {
   final GameState _gameState;
@@ -16,8 +17,8 @@ class SetAllyDeckInOgGloomCommand extends Command {
   @override
   String describe() {
     if (!set) {
-      return "No ally deck in 1st edition Gloomhaven campaigns";
+      return commandL10n.cmdNoAllyDeckInOgGloom;
     }
-    return "Use Ally Deck in 1st edition Gloomhaven Campaigns";
+    return commandL10n.cmdUseAllyDeckInOgGloom;
   }
 }

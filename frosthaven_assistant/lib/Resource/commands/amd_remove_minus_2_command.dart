@@ -1,4 +1,5 @@
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class AMDRemoveMinus2Command extends Command {
   bool allies;
@@ -24,6 +25,6 @@ class AMDRemoveMinus2Command extends Command {
 
   @override
   String describe() {
-    return remove ? "Remove minus two" : "Add back minus two";
+    return remove ? commandL10n.cmdRemoveMinusTwo : commandL10n.cmdAddBackMinusTwo;
   }
 }

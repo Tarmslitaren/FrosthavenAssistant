@@ -1,6 +1,7 @@
 import '../../game_methods.dart';
 import '../../state/game_state.dart';
 import 'change_stat_command.dart';
+import '../command_l10n.dart';
 
 class ChangeEmpowerCommand extends ChangeStatCommand {
   final String gfx;
@@ -34,8 +35,8 @@ class ChangeEmpowerCommand extends ChangeStatCommand {
   @override
   String describe() {
     if (change > 0) {
-      return "Add Empower";
+      return commandL10n.cmdAddEmpower;
     }
-    return "Remove Empower";
+    return commandL10n.cmdRemoveEmpower;
   }
 }

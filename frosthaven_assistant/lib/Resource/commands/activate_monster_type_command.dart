@@ -1,6 +1,7 @@
 import '../enums.dart';
 import '../game_methods.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class ActivateMonsterTypeCommand extends Command {
   final String name;
@@ -46,8 +47,8 @@ class ActivateMonsterTypeCommand extends Command {
   @override
   String describe() {
     if (activate) {
-      return "Activate $name";
+      return commandL10n.cmdActivateMonster(name);
     }
-    return "Deactivate $name";
+    return commandL10n.cmdDeactivateMonster(name);
   }
 }

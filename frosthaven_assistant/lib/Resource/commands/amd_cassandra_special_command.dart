@@ -1,6 +1,7 @@
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class AMDCassandraSpecialCommand extends Command {
   String deckId;
@@ -19,8 +20,8 @@ class AMDCassandraSpecialCommand extends Command {
   @override
   String describe() {
     if (on) {
-      return "Leave revealed cards on top of $deckId deck";
+      return commandL10n.cmdCassandraLeaveRevealed(deckId);
     }
-    return "Cassandra Special turned off for $deckId deck";
+    return commandL10n.cmdCassandraSpecialOff(deckId);
   }
 }

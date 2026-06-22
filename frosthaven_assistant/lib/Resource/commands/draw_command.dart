@@ -1,6 +1,7 @@
 import '../../Layout/MainList/main_list.dart';
 import '../enums.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class DrawCommand extends Command {
   final GameState _gameState;
@@ -25,6 +26,6 @@ class DrawCommand extends Command {
 
   @override
   String describe() {
-    return "Draw";
+    return commandL10n.cmdDraw;
   }
 }

@@ -611,4 +611,417 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get lootAmount2For23 => '2 for 2-3 characters';
+
+  @override
+  String cmdActivateMonster(String name) {
+    return 'Activate $name';
+  }
+
+  @override
+  String cmdDeactivateMonster(String name) {
+    return 'Deactivate $name';
+  }
+
+  @override
+  String cmdAddCharacter(String id) {
+    return 'Add $id';
+  }
+
+  @override
+  String cmdAddCondition(String condition) {
+    return 'Add condition: $condition';
+  }
+
+  @override
+  String cmdRemoveCondition(String condition) {
+    return 'Remove condition: $condition';
+  }
+
+  @override
+  String cmdAddPartyCard(String character, String type) {
+    return '$character add party card $type';
+  }
+
+  @override
+  String cmdRemovePartyCard(String character) {
+    return '$character remove party card';
+  }
+
+  @override
+  String cmdAddFactionCard(String character) {
+    return '$character add faction card';
+  }
+
+  @override
+  String cmdRemoveFactionCard(String character) {
+    return '$character remove faction card';
+  }
+
+  @override
+  String cmdAddLootCard(String type) {
+    return 'Add $type Loot Card';
+  }
+
+  @override
+  String cmdAddMonster(String name) {
+    return 'Add $name';
+  }
+
+  @override
+  String cmdAddSpecialLootCard(int nr) {
+    return 'Add Special loot card $nr';
+  }
+
+  @override
+  String cmdRemoveSpecialLootCard(int nr) {
+    return 'Remove Special loot card $nr';
+  }
+
+  @override
+  String get cmdAddMinusOne => 'Add minus one';
+
+  @override
+  String get cmdRemoveMinusOne => 'Remove minus one';
+
+  @override
+  String get cmdRemoveMinusTwo => 'Remove minus two';
+
+  @override
+  String get cmdAddBackMinusTwo => 'Add back minus two';
+
+  @override
+  String get cmdRemovePlusZero => 'Remove plus zero';
+
+  @override
+  String get cmdAddBackPlusZero => 'Add back plus zero';
+
+  @override
+  String cmdRevealModifierCards(int count) {
+    return 'Reveal $count modifier cards';
+  }
+
+  @override
+  String cmdCassandraLeaveRevealed(String deck) {
+    return 'Leave revealed cards on top of $deck deck';
+  }
+
+  @override
+  String cmdCassandraSpecialOff(String deck) {
+    return 'Cassandra Special turned off for $deck deck';
+  }
+
+  @override
+  String get cmdImbueMonsterDeck => 'Imbue Monster Deck';
+
+  @override
+  String get cmdAdvancedImbueMonsterDeck => 'Advanced Imbue Monster Deck';
+
+  @override
+  String get cmdRemoveImbueMonsterDeck => 'Remove Imbuement';
+
+  @override
+  String get cmdChangeName => 'Change character name';
+
+  @override
+  String get cmdAddBless => 'Add a Bless';
+
+  @override
+  String get cmdRemoveBless => 'Remove a Bless';
+
+  @override
+  String get cmdAddCurse => 'Add a Curse';
+
+  @override
+  String get cmdRemoveCurse => 'Remove a Curse';
+
+  @override
+  String get cmdAddEmpower => 'Add Empower';
+
+  @override
+  String get cmdRemoveEmpower => 'Remove Empower';
+
+  @override
+  String get cmdAddEnfeeble => 'Add Enfeeble';
+
+  @override
+  String get cmdRemoveEnfeeble => 'Remove Enfeeble';
+
+  @override
+  String cmdIncreaseMaxHealth(String owner) {
+    return 'Increase $owner\'s max health';
+  }
+
+  @override
+  String cmdDecreaseMaxHealth(String owner) {
+    return 'Decrease $owner\'s max health';
+  }
+
+  @override
+  String get cmdChangeStat => 'Change stat';
+
+  @override
+  String cmdIncreaseXp(String figure, int amount) {
+    return 'Increase $figure\'s xp by $amount';
+  }
+
+  @override
+  String cmdDecreaseXp(String figure, int amount) {
+    return 'Decrease $figure\'s xp by $amount';
+  }
+
+  @override
+  String get cmdClearUnlockedClasses => 'Clear unlocked classes';
+
+  @override
+  String cmdDonateSanctuary(String character) {
+    return '$character donate to sanctuary';
+  }
+
+  @override
+  String cmdRemoveSanctuaryDonation(String character) {
+    return 'Remove $character\'s donation';
+  }
+
+  @override
+  String get cmdDrawExtraAbilityCard => 'Draw extra ability card';
+
+  @override
+  String get cmdDraw => 'Draw';
+
+  @override
+  String get cmdDrawLootCard => 'Draw loot card';
+
+  @override
+  String cmdDrawModifierCard(String name) {
+    return 'Draw $name modifier card';
+  }
+
+  @override
+  String get cmdRemoveLootEnhancement => 'Remove Loot Enhancement';
+
+  @override
+  String get cmdAddLootEnhancement => 'Add Loot Enhancement';
+
+  @override
+  String get cmdHideAllyDeck => 'Hide Ally Deck';
+
+  @override
+  String get cmdShowAllyDeck => 'Show Ally Deck';
+
+  @override
+  String get cmdIceWraithTurnNormal => 'Ice Wraith turn normal';
+
+  @override
+  String get cmdIceWraithTurnElite => 'Ice Wraith turn elite';
+
+  @override
+  String cmdImbueElement(String element) {
+    return 'Imbue element $element';
+  }
+
+  @override
+  String cmdUseElement(String element) {
+    return 'Use Element $element';
+  }
+
+  @override
+  String cmdLoadCharacter(String name) {
+    return 'Load saved character: $name';
+  }
+
+  @override
+  String cmdLoadGame(String name) {
+    return 'Load saved game: $name';
+  }
+
+  @override
+  String get cmdNextRound => 'Next Round';
+
+  @override
+  String get cmdRemoveAmdCard => 'Remove AMD card';
+
+  @override
+  String cmdRemoveCard(String deck, int nr) {
+    return 'Remove $deck card nr $nr';
+  }
+
+  @override
+  String get cmdRemoveAllCharacters => 'Remove all characters';
+
+  @override
+  String cmdRemoveCharacter(String id) {
+    return 'Remove $id';
+  }
+
+  @override
+  String get cmdRemoveAllMonsters => 'Remove all monsters';
+
+  @override
+  String cmdRemoveMonster(String name) {
+    return 'Remove $name';
+  }
+
+  @override
+  String get cmdReorderAbilityCards => 'Reorder Ability Cards';
+
+  @override
+  String get cmdReorderList => 'Reorder List';
+
+  @override
+  String get cmdReorderModifierCards => 'Reorder Modifier Cards';
+
+  @override
+  String get cmdReturnLootCard => 'Return loot card';
+
+  @override
+  String get cmdReturnModifierCard => 'Return modifier card to top';
+
+  @override
+  String get cmdReturnRemovedAmdCard => 'Return removed AMD card';
+
+  @override
+  String get cmdNoAllyDeckInOgGloom =>
+      'No ally deck in 1st edition Gloomhaven campaigns';
+
+  @override
+  String get cmdUseAllyDeckInOgGloom =>
+      'Use Ally Deck in 1st edition Gloomhaven Campaigns';
+
+  @override
+  String cmdMarkAsSummon(String owner) {
+    return 'Mark $owner as summon';
+  }
+
+  @override
+  String cmdRemoveSummonMark(String owner) {
+    return 'Remove $owner\'s summon mark';
+  }
+
+  @override
+  String get cmdAutoLevelOn => 'Turn automatic level update on';
+
+  @override
+  String get cmdAutoLevelOff => 'Turn automatic level update off';
+
+  @override
+  String cmdSetCampaign(String campaign) {
+    return 'Set $campaign campaign';
+  }
+
+  @override
+  String cmdSetCharacterLevel(String character) {
+    return 'Set $character\'s Level';
+  }
+
+  @override
+  String cmdSetDifficulty(String difficulty) {
+    return 'Set difficulty level to $difficulty';
+  }
+
+  @override
+  String cmdSetInitiative(String character) {
+    return 'Set initiative of $character';
+  }
+
+  @override
+  String cmdSetMonsterLevel(String monster) {
+    return 'Set $monster\'s level';
+  }
+
+  @override
+  String get cmdSetLootOwner => 'Set loot card owner';
+
+  @override
+  String get cmdSetScenario => 'Set Scenario';
+
+  @override
+  String get cmdSetSoloOn => 'Set solo level recommendation on';
+
+  @override
+  String get cmdSetSoloOff => 'Set solo level recommendation off';
+
+  @override
+  String get cmdExtraAbilityShuffle => 'Extra ability deck shuffle';
+
+  @override
+  String get cmdExtraAmdShuffle => 'Extra AMD deck shuffle';
+
+  @override
+  String get cmdDrawnAbilityShuffle => 'Drawn ability deck shuffle';
+
+  @override
+  String get cmdDontTrackStandees => 'Don\'t track standees';
+
+  @override
+  String get cmdTrackStandees => 'Track standees';
+
+  @override
+  String cmdTurnDone(String id) {
+    return '$id\'s turn done';
+  }
+
+  @override
+  String cmdAddPerk(String character, int index) {
+    return 'Add \'$character\' Perk $index';
+  }
+
+  @override
+  String cmdRemovePerk(String character, int index) {
+    return 'Remove \'$character\' Perk $index';
+  }
+
+  @override
+  String cmdUnlock(String id) {
+    return 'Unlock $id';
+  }
+
+  @override
+  String cmdLock(String id) {
+    return 'Lock $id';
+  }
+
+  @override
+  String get cmdSetLevel => 'Set Level';
+
+  @override
+  String get cmdAddSection => 'Add Section';
+
+  @override
+  String cmdAddStandee(String name, int nr) {
+    return 'Add $name $nr';
+  }
+
+  @override
+  String get cmdDrawMonsterModifierCard => 'Draw monster modifier card';
+
+  @override
+  String cmdIncreaseHealth(String figure, int amount) {
+    return 'Increase $figure\'s health by $amount';
+  }
+
+  @override
+  String cmdKill(String owner) {
+    return 'Kill $owner';
+  }
+
+  @override
+  String cmdDecreaseHealth(String owner, int amount) {
+    return 'Decrease $owner\'s health by $amount';
+  }
+
+  @override
+  String cmdUseFhPerks(String character) {
+    return '$character use Frosthaven Perks';
+  }
+
+  @override
+  String cmdDontUseFhPerks(String character) {
+    return '$character don\'t use Frosthaven Perks';
+  }
+
+  @override
+  String get cmdRemoveNoCharacters => 'Remove no characters';
+
+  @override
+  String get cmdRemoveNoMonsters => 'Remove no monsters';
 }

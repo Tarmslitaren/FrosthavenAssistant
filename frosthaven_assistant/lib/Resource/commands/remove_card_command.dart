@@ -1,6 +1,7 @@
 import 'package:frosthaven_assistant/Model/monster_ability.dart';
 
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class RemoveCardCommand extends Command {
   final MonsterAbilityCardModel card;
@@ -32,6 +33,6 @@ class RemoveCardCommand extends Command {
 
   @override
   String describe() {
-    return "Remove ${card.deck} card nr ${card.nr}";
+    return commandL10n.cmdRemoveCard(card.deck, card.nr);
   }
 }

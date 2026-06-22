@@ -1,6 +1,7 @@
 import '../../enums.dart';
 import '../../game_methods.dart';
 import '../../state/game_state.dart';
+import '../command_l10n.dart';
 
 abstract class ChangeStatCommand extends Command {
   final String? ownerId;
@@ -83,6 +84,6 @@ abstract class ChangeStatCommand extends Command {
 
   @override
   String describe() {
-    return "change stat";
+    return commandL10n.cmdChangeStat;
   }
 }

@@ -2,6 +2,7 @@ import 'package:frosthaven_assistant/Resource/enums.dart';
 
 import '../game_methods.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class IceWraithChangeFormCommand extends Command {
   IceWraithChangeFormCommand(this.isElite, this.ownerId, this.figureId,
@@ -27,8 +28,8 @@ class IceWraithChangeFormCommand extends Command {
   @override
   String describe() {
     if (!isElite) {
-      return "Ice Wraith turn normal";
+      return commandL10n.cmdIceWraithTurnNormal;
     }
-    return "Ice Wraith turn elite";
+    return commandL10n.cmdIceWraithTurnElite;
   }
 }

@@ -1,5 +1,6 @@
 import '../enums.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class ImbueElementCommand extends Command {
   final Elements element;
@@ -17,6 +18,6 @@ class ImbueElementCommand extends Command {
 
   @override
   String describe() {
-    return "Imbue element ${element.name}";
+    return commandL10n.cmdImbueElement(element.name);
   }
 }

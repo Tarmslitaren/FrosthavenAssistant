@@ -1,4 +1,5 @@
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class SetSoloCommand extends Command {
   SetSoloCommand(this.solo);
@@ -14,8 +15,8 @@ class SetSoloCommand extends Command {
   @override
   String describe() {
     if (solo) {
-      return "set solo level recommendation";
+      return commandL10n.cmdSetSoloOn;
     }
-    return "set regular level recommendation";
+    return commandL10n.cmdSetSoloOff;
   }
 }

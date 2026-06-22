@@ -1,5 +1,6 @@
 import '../game_methods.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class DonateCSSanctuaryCommand extends Command {
   final String characterId;
@@ -16,6 +17,6 @@ class DonateCSSanctuaryCommand extends Command {
 
   @override
   String describe() {
-    return "$characterId donate to sanctuary";
+    return commandL10n.cmdDonateSanctuary(characterId);
   }
 }

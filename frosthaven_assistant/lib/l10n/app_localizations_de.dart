@@ -623,4 +623,417 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get lootAmount2For23 => '2 für 2-3 Spieler';
+
+  @override
+  String cmdActivateMonster(String name) {
+    return '$name aktivieren';
+  }
+
+  @override
+  String cmdDeactivateMonster(String name) {
+    return '$name deaktivieren';
+  }
+
+  @override
+  String cmdAddCharacter(String id) {
+    return '$id hinzufügen';
+  }
+
+  @override
+  String cmdAddCondition(String condition) {
+    return 'Zustand hinzufügen: $condition';
+  }
+
+  @override
+  String cmdRemoveCondition(String condition) {
+    return 'Zustand entfernen: $condition';
+  }
+
+  @override
+  String cmdAddPartyCard(String character, String type) {
+    return '$character Gruppenk. $type hinzufügen';
+  }
+
+  @override
+  String cmdRemovePartyCard(String character) {
+    return '$character Gruppenkarte entfernen';
+  }
+
+  @override
+  String cmdAddFactionCard(String character) {
+    return '$character Fraktionskarte hinzufügen';
+  }
+
+  @override
+  String cmdRemoveFactionCard(String character) {
+    return '$character Fraktionskarte entfernen';
+  }
+
+  @override
+  String cmdAddLootCard(String type) {
+    return '$type-Plünderungskarte hinzufügen';
+  }
+
+  @override
+  String cmdAddMonster(String name) {
+    return '$name hinzufügen';
+  }
+
+  @override
+  String cmdAddSpecialLootCard(int nr) {
+    return 'Sonderplünderungskarte $nr hinzufügen';
+  }
+
+  @override
+  String cmdRemoveSpecialLootCard(int nr) {
+    return 'Sonderplünderungskarte $nr entfernen';
+  }
+
+  @override
+  String get cmdAddMinusOne => '-1 hinzufügen';
+
+  @override
+  String get cmdRemoveMinusOne => '-1 entfernen';
+
+  @override
+  String get cmdRemoveMinusTwo => '-2 entfernen';
+
+  @override
+  String get cmdAddBackMinusTwo => '-2 zurücklegen';
+
+  @override
+  String get cmdRemovePlusZero => '+0 entfernen';
+
+  @override
+  String get cmdAddBackPlusZero => '+0 zurücklegen';
+
+  @override
+  String cmdRevealModifierCards(int count) {
+    return '$count Modifikatorkarten aufdecken';
+  }
+
+  @override
+  String cmdCassandraLeaveRevealed(String deck) {
+    return 'Aufgedeckte Karten oben auf Stapel $deck lassen';
+  }
+
+  @override
+  String cmdCassandraSpecialOff(String deck) {
+    return 'Kassandra-Spezial für Stapel $deck deaktiviert';
+  }
+
+  @override
+  String get cmdImbueMonsterDeck => 'Monsterstapel einbetten';
+
+  @override
+  String get cmdAdvancedImbueMonsterDeck => 'Monsterstapel erweitert einbetten';
+
+  @override
+  String get cmdRemoveImbueMonsterDeck => 'Einbettung entfernen';
+
+  @override
+  String get cmdChangeName => 'Charaktername ändern';
+
+  @override
+  String get cmdAddBless => 'Segen hinzufügen';
+
+  @override
+  String get cmdRemoveBless => 'Segen entfernen';
+
+  @override
+  String get cmdAddCurse => 'Fluch hinzufügen';
+
+  @override
+  String get cmdRemoveCurse => 'Fluch entfernen';
+
+  @override
+  String get cmdAddEmpower => 'Stärkung hinzufügen';
+
+  @override
+  String get cmdRemoveEmpower => 'Stärkung entfernen';
+
+  @override
+  String get cmdAddEnfeeble => 'Schwächung hinzufügen';
+
+  @override
+  String get cmdRemoveEnfeeble => 'Schwächung entfernen';
+
+  @override
+  String cmdIncreaseMaxHealth(String owner) {
+    return 'Maximale Lebenspunkte von $owner erhöhen';
+  }
+
+  @override
+  String cmdDecreaseMaxHealth(String owner) {
+    return 'Maximale Lebenspunkte von $owner verringern';
+  }
+
+  @override
+  String get cmdChangeStat => 'Statuswert ändern';
+
+  @override
+  String cmdIncreaseXp(String figure, int amount) {
+    return 'EP von $figure um $amount erhöhen';
+  }
+
+  @override
+  String cmdDecreaseXp(String figure, int amount) {
+    return 'EP von $figure um $amount verringern';
+  }
+
+  @override
+  String get cmdClearUnlockedClasses => 'Freigeschaltete Klassen zurücksetzen';
+
+  @override
+  String cmdDonateSanctuary(String character) {
+    return '$character spendet an Heiligtum';
+  }
+
+  @override
+  String cmdRemoveSanctuaryDonation(String character) {
+    return 'Spende von $character entfernen';
+  }
+
+  @override
+  String get cmdDrawExtraAbilityCard => 'Zusätzliche Fähigkeitskarte ziehen';
+
+  @override
+  String get cmdDraw => 'Ziehen';
+
+  @override
+  String get cmdDrawLootCard => 'Plünderungskarte ziehen';
+
+  @override
+  String cmdDrawModifierCard(String name) {
+    return '$name-Modifikatorkarte ziehen';
+  }
+
+  @override
+  String get cmdRemoveLootEnhancement => 'Plünderungsverbesserung entfernen';
+
+  @override
+  String get cmdAddLootEnhancement => 'Plünderungsverbesserung hinzufügen';
+
+  @override
+  String get cmdHideAllyDeck => 'Verbündeten-Stapel ausblenden';
+
+  @override
+  String get cmdShowAllyDeck => 'Verbündeten-Stapel anzeigen';
+
+  @override
+  String get cmdIceWraithTurnNormal => 'Eisgeist wird normal';
+
+  @override
+  String get cmdIceWraithTurnElite => 'Eisgeist wird Elite';
+
+  @override
+  String cmdImbueElement(String element) {
+    return 'Element $element einbetten';
+  }
+
+  @override
+  String cmdUseElement(String element) {
+    return 'Element $element verbrauchen';
+  }
+
+  @override
+  String cmdLoadCharacter(String name) {
+    return 'Gespeicherten Charakter laden: $name';
+  }
+
+  @override
+  String cmdLoadGame(String name) {
+    return 'Gespeichertes Spiel laden: $name';
+  }
+
+  @override
+  String get cmdNextRound => 'Nächste Runde';
+
+  @override
+  String get cmdRemoveAmdCard => 'AMD-Karte entfernen';
+
+  @override
+  String cmdRemoveCard(String deck, int nr) {
+    return '$deck-Karte Nr. $nr entfernen';
+  }
+
+  @override
+  String get cmdRemoveAllCharacters => 'Alle Charaktere entfernen';
+
+  @override
+  String cmdRemoveCharacter(String id) {
+    return '$id entfernen';
+  }
+
+  @override
+  String get cmdRemoveAllMonsters => 'Alle Monster entfernen';
+
+  @override
+  String cmdRemoveMonster(String name) {
+    return '$name entfernen';
+  }
+
+  @override
+  String get cmdReorderAbilityCards => 'Fähigkeitskarten neu anordnen';
+
+  @override
+  String get cmdReorderList => 'Liste neu anordnen';
+
+  @override
+  String get cmdReorderModifierCards => 'Modifikatorkarten neu anordnen';
+
+  @override
+  String get cmdReturnLootCard => 'Plünderungskarte zurücklegen';
+
+  @override
+  String get cmdReturnModifierCard => 'Modifikatorkarte nach oben zurücklegen';
+
+  @override
+  String get cmdReturnRemovedAmdCard => 'Entfernte AMD-Karte zurücklegen';
+
+  @override
+  String get cmdNoAllyDeckInOgGloom =>
+      'Kein Verbündeten-Stapel in 1. Edition Gloomhaven';
+
+  @override
+  String get cmdUseAllyDeckInOgGloom =>
+      'Verbündeten-Stapel in 1. Edition Gloomhaven verwenden';
+
+  @override
+  String cmdMarkAsSummon(String owner) {
+    return '$owner als Beschworenen markieren';
+  }
+
+  @override
+  String cmdRemoveSummonMark(String owner) {
+    return '$owner\'s Beschwörungsmarkierung entfernen';
+  }
+
+  @override
+  String get cmdAutoLevelOn => 'Automatische Stufenaktualisierung ein';
+
+  @override
+  String get cmdAutoLevelOff => 'Automatische Stufenaktualisierung aus';
+
+  @override
+  String cmdSetCampaign(String campaign) {
+    return 'Kampagne $campaign festlegen';
+  }
+
+  @override
+  String cmdSetCharacterLevel(String character) {
+    return 'Stufe von $character festlegen';
+  }
+
+  @override
+  String cmdSetDifficulty(String difficulty) {
+    return 'Schwierigkeitsgrad auf $difficulty festlegen';
+  }
+
+  @override
+  String cmdSetInitiative(String character) {
+    return 'Initiative von $character festlegen';
+  }
+
+  @override
+  String cmdSetMonsterLevel(String monster) {
+    return 'Stufe von $monster festlegen';
+  }
+
+  @override
+  String get cmdSetLootOwner => 'Besitzer der Plünderungskarte festlegen';
+
+  @override
+  String get cmdSetScenario => 'Szenario festlegen';
+
+  @override
+  String get cmdSetSoloOn => 'Solo-Stufenempfehlung ein';
+
+  @override
+  String get cmdSetSoloOff => 'Solo-Stufenempfehlung aus';
+
+  @override
+  String get cmdExtraAbilityShuffle => 'Fähigkeitsstapel zusätzlich mischen';
+
+  @override
+  String get cmdExtraAmdShuffle => 'AMD-Stapel zusätzlich mischen';
+
+  @override
+  String get cmdDrawnAbilityShuffle => 'Gezogenen Fähigkeitsstapel mischen';
+
+  @override
+  String get cmdDontTrackStandees => 'Figuren nicht verfolgen';
+
+  @override
+  String get cmdTrackStandees => 'Figuren verfolgen';
+
+  @override
+  String cmdTurnDone(String id) {
+    return 'Zug von $id beendet';
+  }
+
+  @override
+  String cmdAddPerk(String character, int index) {
+    return 'Vorteil $index für \'$character\' hinzufügen';
+  }
+
+  @override
+  String cmdRemovePerk(String character, int index) {
+    return 'Vorteil $index für \'$character\' entfernen';
+  }
+
+  @override
+  String cmdUnlock(String id) {
+    return '$id freischalten';
+  }
+
+  @override
+  String cmdLock(String id) {
+    return '$id sperren';
+  }
+
+  @override
+  String get cmdSetLevel => 'Stufe festlegen';
+
+  @override
+  String get cmdAddSection => 'Abschnitt hinzufügen';
+
+  @override
+  String cmdAddStandee(String name, int nr) {
+    return '$name $nr hinzufügen';
+  }
+
+  @override
+  String get cmdDrawMonsterModifierCard => 'Monstertmodifikatorkarte ziehen';
+
+  @override
+  String cmdIncreaseHealth(String figure, int amount) {
+    return 'Lebenspunkte von $figure um $amount erhöhen';
+  }
+
+  @override
+  String cmdKill(String owner) {
+    return '$owner besiegen';
+  }
+
+  @override
+  String cmdDecreaseHealth(String owner, int amount) {
+    return 'Lebenspunkte von $owner um $amount verringern';
+  }
+
+  @override
+  String cmdUseFhPerks(String character) {
+    return '$character verwendet Frosthaven-Vorteile';
+  }
+
+  @override
+  String cmdDontUseFhPerks(String character) {
+    return '$character verwendet keine Frosthaven-Vorteile';
+  }
+
+  @override
+  String get cmdRemoveNoCharacters => 'Keine Charaktere entfernt';
+
+  @override
+  String get cmdRemoveNoMonsters => 'Keine Monster entfernt';
 }

@@ -1,4 +1,5 @@
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class SetDifficultyCommand extends Command {
   SetDifficultyCommand(this.difficulty, {required GameState gameState})
@@ -15,6 +16,6 @@ class SetDifficultyCommand extends Command {
 
   @override
   String describe() {
-    return "set difficulty level to $difficulty";
+    return commandL10n.cmdSetDifficulty(difficulty.toString());
   }
 }

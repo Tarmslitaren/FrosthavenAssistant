@@ -1,6 +1,7 @@
 import '../../game_methods.dart';
 import '../../state/game_state.dart';
 import 'change_stat_command.dart';
+import '../command_l10n.dart';
 
 class ChangeMaxHealthCommand extends ChangeStatCommand {
   ChangeMaxHealthCommand(super.change, super.figureId, super.ownerId,
@@ -32,8 +33,8 @@ class ChangeMaxHealthCommand extends ChangeStatCommand {
   @override
   String describe() {
     if (change > 0) {
-      return "Increase $ownerId's max health";
+      return commandL10n.cmdIncreaseMaxHealth(ownerId ?? '');
     }
-    return "Decrease $ownerId's max health";
+    return commandL10n.cmdDecreaseMaxHealth(ownerId ?? '');
   }
 }

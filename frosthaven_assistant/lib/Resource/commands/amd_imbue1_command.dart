@@ -1,4 +1,5 @@
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class AMDImbue1Command extends Command {
   final GameState _gameState;
@@ -13,6 +14,6 @@ class AMDImbue1Command extends Command {
 
   @override
   String describe() {
-    return "Imbue Monster Deck";
+    return commandL10n.cmdImbueMonsterDeck;
   }
 }

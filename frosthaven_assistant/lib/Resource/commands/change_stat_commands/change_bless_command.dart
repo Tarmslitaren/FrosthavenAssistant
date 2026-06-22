@@ -1,6 +1,7 @@
 import '../../game_methods.dart';
 import '../../state/game_state.dart';
 import 'change_stat_command.dart';
+import '../command_l10n.dart';
 
 class ChangeBlessCommand extends ChangeStatCommand {
   ModifierDeck? deck;
@@ -34,8 +35,8 @@ class ChangeBlessCommand extends ChangeStatCommand {
   @override
   String describe() {
     if (change > 0) {
-      return "Add a Bless";
+      return commandL10n.cmdAddBless;
     }
-    return "Remove a Bless";
+    return commandL10n.cmdRemoveBless;
   }
 }

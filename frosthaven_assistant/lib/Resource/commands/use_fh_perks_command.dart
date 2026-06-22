@@ -1,5 +1,6 @@
 import '../game_methods.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class UseFHPerksCommand extends Command {
   final String characterId;
@@ -17,12 +18,11 @@ class UseFHPerksCommand extends Command {
   @override
   String describe() {
     Character? character = GameMethods.getCharacterByName(characterId);
-    bool use =
-        character != null ? character.characterState.useFHPerks.value : false;
-    String add = "don't use";
+    final charId = character?.id ?? characterId;
+    final use = character?.characterState.useFHPerks.value ?? false;
     if (use) {
-      add = "use";
+      return commandL10n.cmdUseFhPerks(charId);
     }
-    return "${character?.id} $add Frosthaven Perks";
+    return commandL10n.cmdDontUseFhPerks(charId);
   }
 }

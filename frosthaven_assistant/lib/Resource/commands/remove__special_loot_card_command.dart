@@ -1,4 +1,5 @@
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class RemoveSpecialLootCardCommand extends Command {
   static const int _kCard1418 = 1418;
@@ -22,6 +23,6 @@ class RemoveSpecialLootCardCommand extends Command {
 
   @override
   String describe() {
-    return "Remove Special loot card ${nr.toString()}";
+    return commandL10n.cmdRemoveSpecialLootCard(nr);
   }
 }

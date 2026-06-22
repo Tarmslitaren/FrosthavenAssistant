@@ -1,4 +1,5 @@
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class RemoveMonsterCommand extends Command {
   final List<Monster> names;
@@ -13,11 +14,11 @@ class RemoveMonsterCommand extends Command {
   @override
   String describe() {
     if (names.length > 1) {
-      return "Remove all monsters";
+      return commandL10n.cmdRemoveAllMonsters;
     }
     if(names.isNotEmpty) {
-      return "Remove ${names.first.type.display}";
+      return commandL10n.cmdRemoveMonster(names.first.type.display);
     }
-    return "Remove no monsters";
+    return commandL10n.cmdRemoveNoMonsters;
   }
 }

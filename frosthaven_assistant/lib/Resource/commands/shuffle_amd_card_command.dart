@@ -1,5 +1,6 @@
 import '../game_methods.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class ShuffleAMDCardCommand extends Command {
   final String name;
@@ -16,6 +17,6 @@ class ShuffleAMDCardCommand extends Command {
 
   @override
   String describe() {
-    return "Extra AMD deck shuffle";
+    return commandL10n.cmdExtraAmdShuffle;
   }
 }

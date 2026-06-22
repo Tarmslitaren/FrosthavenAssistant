@@ -1,4 +1,5 @@
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class AddMonsterCommand extends Command {
   final String _name;
@@ -24,6 +25,6 @@ class AddMonsterCommand extends Command {
 
   @override
   String describe() {
-    return "Add ${monster?.type.display ?? ''}";
+    return commandL10n.cmdAddMonster(monster?.type.display ?? '');
   }
 }

@@ -1,5 +1,6 @@
 import '../game_methods.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class CorrosiveSpewCommand extends Command {
   final GameState _gameState;
@@ -14,6 +15,6 @@ class CorrosiveSpewCommand extends Command {
 
   @override
   String describe() {
-    return "Corrosive Spew";
+    return commandL10n.corrosiveSpew;
   }
 }

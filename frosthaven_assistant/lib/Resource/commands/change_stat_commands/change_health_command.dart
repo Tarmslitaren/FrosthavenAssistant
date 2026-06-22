@@ -2,6 +2,7 @@ import '../../game_event.dart';
 import '../../game_methods.dart';
 import '../../state/game_state.dart';
 import 'change_stat_command.dart';
+import '../command_l10n.dart';
 
 class ChangeHealthCommand extends ChangeStatCommand {
   ChangeHealthCommand(super.change, super.figureId, super.ownerId,
@@ -37,13 +38,13 @@ class ChangeHealthCommand extends ChangeStatCommand {
   String describe() {
     if (change > 0) {
       //TODO: looks bad
-      return "Increase $figureId's health by $change";
+      return commandL10n.cmdIncreaseHealth(figureId, change);
     }
     FigureState? figure = GameMethods.getFigure(ownerId, figureId);
     if (figure == null || figure.health.value <= 0) {
-      return "Kill $ownerId";
+      return commandL10n.cmdKill(ownerId ?? '');
     }
     //TODO: incorrect for character summons
-    return "Decrease $ownerId's health by ${-change}";
+    return commandL10n.cmdDecreaseHealth(ownerId ?? '', -change);
   }
 }

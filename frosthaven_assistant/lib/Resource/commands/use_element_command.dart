@@ -1,5 +1,6 @@
 import '../enums.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class UseElementCommand extends Command {
   final Elements element;
@@ -15,6 +16,6 @@ class UseElementCommand extends Command {
 
   @override
   String describe() {
-    return "Use Element ${element.name}";
+    return commandL10n.cmdUseElement(element.name);
   }
 }

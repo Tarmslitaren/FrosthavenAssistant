@@ -1,5 +1,6 @@
 import '../game_methods.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class AddPerkCommand extends Command {
   final String characterId;
@@ -18,12 +19,10 @@ class AddPerkCommand extends Command {
   @override
   String describe() {
     Character? character = GameMethods.getCharacterByName(characterId);
-    String add = "Add";
-    if (character != null) {
-      if (!character.characterState.perkList[index]) {
-        add = "Remove";
-      }
+    final charId = character?.id ?? characterId;
+    if (character != null && !character.characterState.perkList[index]) {
+      return commandL10n.cmdRemovePerk(charId, index);
     }
-    return "$add '${character?.id}' Perk no: $index";
+    return commandL10n.cmdAddPerk(charId, index);
   }
 }

@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 
 import '../game_methods.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class DrawAbilityCardCommand extends Command {
   final String ownerId;
@@ -21,6 +22,6 @@ class DrawAbilityCardCommand extends Command {
 
   @override
   String describe() {
-    return "Draw extra ability card";
+    return commandL10n.cmdDrawExtraAbilityCard;
   }
 }

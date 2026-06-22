@@ -1,4 +1,5 @@
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class SetScenarioCommand extends Command {
   final String _scenario;
@@ -18,8 +19,8 @@ class SetScenarioCommand extends Command {
   @override
   String describe() {
     if (!_section) {
-      return "Set Scenario";
+      return commandL10n.cmdSetScenario;
     }
-    return "Add Section";
+    return commandL10n.cmdAddSection;
   }
 }

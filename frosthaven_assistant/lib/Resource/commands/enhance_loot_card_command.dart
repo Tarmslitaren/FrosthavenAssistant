@@ -1,4 +1,5 @@
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class EnhanceLootCardCommand extends Command {
   EnhanceLootCardCommand(this.id, this.value, this.resourceType,
@@ -17,8 +18,8 @@ class EnhanceLootCardCommand extends Command {
   @override
   String describe() {
     if (value <= 0) {
-      return "Remove Loot Enhancement";
+      return commandL10n.cmdRemoveLootEnhancement;
     }
-    return "Add Loot Enhancement";
+    return commandL10n.cmdAddLootEnhancement;
   }
 }

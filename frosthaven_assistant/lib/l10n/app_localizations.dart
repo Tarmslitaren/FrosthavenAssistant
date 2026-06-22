@@ -1201,6 +1201,636 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'2 for 2-3 characters'**
   String get lootAmount2For23;
+
+  /// No description provided for @cmdActivateMonster.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate {name}'**
+  String cmdActivateMonster(String name);
+
+  /// No description provided for @cmdDeactivateMonster.
+  ///
+  /// In en, this message translates to:
+  /// **'Deactivate {name}'**
+  String cmdDeactivateMonster(String name);
+
+  /// No description provided for @cmdAddCharacter.
+  ///
+  /// In en, this message translates to:
+  /// **'Add {id}'**
+  String cmdAddCharacter(String id);
+
+  /// No description provided for @cmdAddCondition.
+  ///
+  /// In en, this message translates to:
+  /// **'Add condition: {condition}'**
+  String cmdAddCondition(String condition);
+
+  /// No description provided for @cmdRemoveCondition.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove condition: {condition}'**
+  String cmdRemoveCondition(String condition);
+
+  /// No description provided for @cmdAddPartyCard.
+  ///
+  /// In en, this message translates to:
+  /// **'{character} add party card {type}'**
+  String cmdAddPartyCard(String character, String type);
+
+  /// No description provided for @cmdRemovePartyCard.
+  ///
+  /// In en, this message translates to:
+  /// **'{character} remove party card'**
+  String cmdRemovePartyCard(String character);
+
+  /// No description provided for @cmdAddFactionCard.
+  ///
+  /// In en, this message translates to:
+  /// **'{character} add faction card'**
+  String cmdAddFactionCard(String character);
+
+  /// No description provided for @cmdRemoveFactionCard.
+  ///
+  /// In en, this message translates to:
+  /// **'{character} remove faction card'**
+  String cmdRemoveFactionCard(String character);
+
+  /// No description provided for @cmdAddLootCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Add {type} Loot Card'**
+  String cmdAddLootCard(String type);
+
+  /// No description provided for @cmdAddMonster.
+  ///
+  /// In en, this message translates to:
+  /// **'Add {name}'**
+  String cmdAddMonster(String name);
+
+  /// No description provided for @cmdAddSpecialLootCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Special loot card {nr}'**
+  String cmdAddSpecialLootCard(int nr);
+
+  /// No description provided for @cmdRemoveSpecialLootCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove Special loot card {nr}'**
+  String cmdRemoveSpecialLootCard(int nr);
+
+  /// No description provided for @cmdAddMinusOne.
+  ///
+  /// In en, this message translates to:
+  /// **'Add minus one'**
+  String get cmdAddMinusOne;
+
+  /// No description provided for @cmdRemoveMinusOne.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove minus one'**
+  String get cmdRemoveMinusOne;
+
+  /// No description provided for @cmdRemoveMinusTwo.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove minus two'**
+  String get cmdRemoveMinusTwo;
+
+  /// No description provided for @cmdAddBackMinusTwo.
+  ///
+  /// In en, this message translates to:
+  /// **'Add back minus two'**
+  String get cmdAddBackMinusTwo;
+
+  /// No description provided for @cmdRemovePlusZero.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove plus zero'**
+  String get cmdRemovePlusZero;
+
+  /// No description provided for @cmdAddBackPlusZero.
+  ///
+  /// In en, this message translates to:
+  /// **'Add back plus zero'**
+  String get cmdAddBackPlusZero;
+
+  /// No description provided for @cmdRevealModifierCards.
+  ///
+  /// In en, this message translates to:
+  /// **'Reveal {count} modifier cards'**
+  String cmdRevealModifierCards(int count);
+
+  /// No description provided for @cmdCassandraLeaveRevealed.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave revealed cards on top of {deck} deck'**
+  String cmdCassandraLeaveRevealed(String deck);
+
+  /// No description provided for @cmdCassandraSpecialOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Cassandra Special turned off for {deck} deck'**
+  String cmdCassandraSpecialOff(String deck);
+
+  /// No description provided for @cmdImbueMonsterDeck.
+  ///
+  /// In en, this message translates to:
+  /// **'Imbue Monster Deck'**
+  String get cmdImbueMonsterDeck;
+
+  /// No description provided for @cmdAdvancedImbueMonsterDeck.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced Imbue Monster Deck'**
+  String get cmdAdvancedImbueMonsterDeck;
+
+  /// No description provided for @cmdRemoveImbueMonsterDeck.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove Imbuement'**
+  String get cmdRemoveImbueMonsterDeck;
+
+  /// No description provided for @cmdChangeName.
+  ///
+  /// In en, this message translates to:
+  /// **'Change character name'**
+  String get cmdChangeName;
+
+  /// No description provided for @cmdAddBless.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a Bless'**
+  String get cmdAddBless;
+
+  /// No description provided for @cmdRemoveBless.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove a Bless'**
+  String get cmdRemoveBless;
+
+  /// No description provided for @cmdAddCurse.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a Curse'**
+  String get cmdAddCurse;
+
+  /// No description provided for @cmdRemoveCurse.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove a Curse'**
+  String get cmdRemoveCurse;
+
+  /// No description provided for @cmdAddEmpower.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Empower'**
+  String get cmdAddEmpower;
+
+  /// No description provided for @cmdRemoveEmpower.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove Empower'**
+  String get cmdRemoveEmpower;
+
+  /// No description provided for @cmdAddEnfeeble.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Enfeeble'**
+  String get cmdAddEnfeeble;
+
+  /// No description provided for @cmdRemoveEnfeeble.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove Enfeeble'**
+  String get cmdRemoveEnfeeble;
+
+  /// No description provided for @cmdIncreaseMaxHealth.
+  ///
+  /// In en, this message translates to:
+  /// **'Increase {owner}\'s max health'**
+  String cmdIncreaseMaxHealth(String owner);
+
+  /// No description provided for @cmdDecreaseMaxHealth.
+  ///
+  /// In en, this message translates to:
+  /// **'Decrease {owner}\'s max health'**
+  String cmdDecreaseMaxHealth(String owner);
+
+  /// No description provided for @cmdChangeStat.
+  ///
+  /// In en, this message translates to:
+  /// **'Change stat'**
+  String get cmdChangeStat;
+
+  /// No description provided for @cmdIncreaseXp.
+  ///
+  /// In en, this message translates to:
+  /// **'Increase {figure}\'s xp by {amount}'**
+  String cmdIncreaseXp(String figure, int amount);
+
+  /// No description provided for @cmdDecreaseXp.
+  ///
+  /// In en, this message translates to:
+  /// **'Decrease {figure}\'s xp by {amount}'**
+  String cmdDecreaseXp(String figure, int amount);
+
+  /// No description provided for @cmdClearUnlockedClasses.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear unlocked classes'**
+  String get cmdClearUnlockedClasses;
+
+  /// No description provided for @cmdDonateSanctuary.
+  ///
+  /// In en, this message translates to:
+  /// **'{character} donate to sanctuary'**
+  String cmdDonateSanctuary(String character);
+
+  /// No description provided for @cmdRemoveSanctuaryDonation.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove {character}\'s donation'**
+  String cmdRemoveSanctuaryDonation(String character);
+
+  /// No description provided for @cmdDrawExtraAbilityCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Draw extra ability card'**
+  String get cmdDrawExtraAbilityCard;
+
+  /// No description provided for @cmdDraw.
+  ///
+  /// In en, this message translates to:
+  /// **'Draw'**
+  String get cmdDraw;
+
+  /// No description provided for @cmdDrawLootCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Draw loot card'**
+  String get cmdDrawLootCard;
+
+  /// No description provided for @cmdDrawModifierCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Draw {name} modifier card'**
+  String cmdDrawModifierCard(String name);
+
+  /// No description provided for @cmdRemoveLootEnhancement.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove Loot Enhancement'**
+  String get cmdRemoveLootEnhancement;
+
+  /// No description provided for @cmdAddLootEnhancement.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Loot Enhancement'**
+  String get cmdAddLootEnhancement;
+
+  /// No description provided for @cmdHideAllyDeck.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide Ally Deck'**
+  String get cmdHideAllyDeck;
+
+  /// No description provided for @cmdShowAllyDeck.
+  ///
+  /// In en, this message translates to:
+  /// **'Show Ally Deck'**
+  String get cmdShowAllyDeck;
+
+  /// No description provided for @cmdIceWraithTurnNormal.
+  ///
+  /// In en, this message translates to:
+  /// **'Ice Wraith turn normal'**
+  String get cmdIceWraithTurnNormal;
+
+  /// No description provided for @cmdIceWraithTurnElite.
+  ///
+  /// In en, this message translates to:
+  /// **'Ice Wraith turn elite'**
+  String get cmdIceWraithTurnElite;
+
+  /// No description provided for @cmdImbueElement.
+  ///
+  /// In en, this message translates to:
+  /// **'Imbue element {element}'**
+  String cmdImbueElement(String element);
+
+  /// No description provided for @cmdUseElement.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Element {element}'**
+  String cmdUseElement(String element);
+
+  /// No description provided for @cmdLoadCharacter.
+  ///
+  /// In en, this message translates to:
+  /// **'Load saved character: {name}'**
+  String cmdLoadCharacter(String name);
+
+  /// No description provided for @cmdLoadGame.
+  ///
+  /// In en, this message translates to:
+  /// **'Load saved game: {name}'**
+  String cmdLoadGame(String name);
+
+  /// No description provided for @cmdNextRound.
+  ///
+  /// In en, this message translates to:
+  /// **'Next Round'**
+  String get cmdNextRound;
+
+  /// No description provided for @cmdRemoveAmdCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove AMD card'**
+  String get cmdRemoveAmdCard;
+
+  /// No description provided for @cmdRemoveCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove {deck} card nr {nr}'**
+  String cmdRemoveCard(String deck, int nr);
+
+  /// No description provided for @cmdRemoveAllCharacters.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove all characters'**
+  String get cmdRemoveAllCharacters;
+
+  /// No description provided for @cmdRemoveCharacter.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove {id}'**
+  String cmdRemoveCharacter(String id);
+
+  /// No description provided for @cmdRemoveAllMonsters.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove all monsters'**
+  String get cmdRemoveAllMonsters;
+
+  /// No description provided for @cmdRemoveMonster.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove {name}'**
+  String cmdRemoveMonster(String name);
+
+  /// No description provided for @cmdReorderAbilityCards.
+  ///
+  /// In en, this message translates to:
+  /// **'Reorder Ability Cards'**
+  String get cmdReorderAbilityCards;
+
+  /// No description provided for @cmdReorderList.
+  ///
+  /// In en, this message translates to:
+  /// **'Reorder List'**
+  String get cmdReorderList;
+
+  /// No description provided for @cmdReorderModifierCards.
+  ///
+  /// In en, this message translates to:
+  /// **'Reorder Modifier Cards'**
+  String get cmdReorderModifierCards;
+
+  /// No description provided for @cmdReturnLootCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Return loot card'**
+  String get cmdReturnLootCard;
+
+  /// No description provided for @cmdReturnModifierCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Return modifier card to top'**
+  String get cmdReturnModifierCard;
+
+  /// No description provided for @cmdReturnRemovedAmdCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Return removed AMD card'**
+  String get cmdReturnRemovedAmdCard;
+
+  /// No description provided for @cmdNoAllyDeckInOgGloom.
+  ///
+  /// In en, this message translates to:
+  /// **'No ally deck in 1st edition Gloomhaven campaigns'**
+  String get cmdNoAllyDeckInOgGloom;
+
+  /// No description provided for @cmdUseAllyDeckInOgGloom.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Ally Deck in 1st edition Gloomhaven Campaigns'**
+  String get cmdUseAllyDeckInOgGloom;
+
+  /// No description provided for @cmdMarkAsSummon.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark {owner} as summon'**
+  String cmdMarkAsSummon(String owner);
+
+  /// No description provided for @cmdRemoveSummonMark.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove {owner}\'s summon mark'**
+  String cmdRemoveSummonMark(String owner);
+
+  /// No description provided for @cmdAutoLevelOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn automatic level update on'**
+  String get cmdAutoLevelOn;
+
+  /// No description provided for @cmdAutoLevelOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn automatic level update off'**
+  String get cmdAutoLevelOff;
+
+  /// No description provided for @cmdSetCampaign.
+  ///
+  /// In en, this message translates to:
+  /// **'Set {campaign} campaign'**
+  String cmdSetCampaign(String campaign);
+
+  /// No description provided for @cmdSetCharacterLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Set {character}\'s Level'**
+  String cmdSetCharacterLevel(String character);
+
+  /// No description provided for @cmdSetDifficulty.
+  ///
+  /// In en, this message translates to:
+  /// **'Set difficulty level to {difficulty}'**
+  String cmdSetDifficulty(String difficulty);
+
+  /// No description provided for @cmdSetInitiative.
+  ///
+  /// In en, this message translates to:
+  /// **'Set initiative of {character}'**
+  String cmdSetInitiative(String character);
+
+  /// No description provided for @cmdSetMonsterLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Set {monster}\'s level'**
+  String cmdSetMonsterLevel(String monster);
+
+  /// No description provided for @cmdSetLootOwner.
+  ///
+  /// In en, this message translates to:
+  /// **'Set loot card owner'**
+  String get cmdSetLootOwner;
+
+  /// No description provided for @cmdSetScenario.
+  ///
+  /// In en, this message translates to:
+  /// **'Set Scenario'**
+  String get cmdSetScenario;
+
+  /// No description provided for @cmdSetSoloOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Set solo level recommendation on'**
+  String get cmdSetSoloOn;
+
+  /// No description provided for @cmdSetSoloOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Set solo level recommendation off'**
+  String get cmdSetSoloOff;
+
+  /// No description provided for @cmdExtraAbilityShuffle.
+  ///
+  /// In en, this message translates to:
+  /// **'Extra ability deck shuffle'**
+  String get cmdExtraAbilityShuffle;
+
+  /// No description provided for @cmdExtraAmdShuffle.
+  ///
+  /// In en, this message translates to:
+  /// **'Extra AMD deck shuffle'**
+  String get cmdExtraAmdShuffle;
+
+  /// No description provided for @cmdDrawnAbilityShuffle.
+  ///
+  /// In en, this message translates to:
+  /// **'Drawn ability deck shuffle'**
+  String get cmdDrawnAbilityShuffle;
+
+  /// No description provided for @cmdDontTrackStandees.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t track standees'**
+  String get cmdDontTrackStandees;
+
+  /// No description provided for @cmdTrackStandees.
+  ///
+  /// In en, this message translates to:
+  /// **'Track standees'**
+  String get cmdTrackStandees;
+
+  /// No description provided for @cmdTurnDone.
+  ///
+  /// In en, this message translates to:
+  /// **'{id}\'s turn done'**
+  String cmdTurnDone(String id);
+
+  /// No description provided for @cmdAddPerk.
+  ///
+  /// In en, this message translates to:
+  /// **'Add \'{character}\' Perk {index}'**
+  String cmdAddPerk(String character, int index);
+
+  /// No description provided for @cmdRemovePerk.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove \'{character}\' Perk {index}'**
+  String cmdRemovePerk(String character, int index);
+
+  /// No description provided for @cmdUnlock.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock {id}'**
+  String cmdUnlock(String id);
+
+  /// No description provided for @cmdLock.
+  ///
+  /// In en, this message translates to:
+  /// **'Lock {id}'**
+  String cmdLock(String id);
+
+  /// No description provided for @cmdSetLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Set Level'**
+  String get cmdSetLevel;
+
+  /// No description provided for @cmdAddSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Section'**
+  String get cmdAddSection;
+
+  /// No description provided for @cmdAddStandee.
+  ///
+  /// In en, this message translates to:
+  /// **'Add {name} {nr}'**
+  String cmdAddStandee(String name, int nr);
+
+  /// No description provided for @cmdDrawMonsterModifierCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Draw monster modifier card'**
+  String get cmdDrawMonsterModifierCard;
+
+  /// No description provided for @cmdIncreaseHealth.
+  ///
+  /// In en, this message translates to:
+  /// **'Increase {figure}\'s health by {amount}'**
+  String cmdIncreaseHealth(String figure, int amount);
+
+  /// No description provided for @cmdKill.
+  ///
+  /// In en, this message translates to:
+  /// **'Kill {owner}'**
+  String cmdKill(String owner);
+
+  /// No description provided for @cmdDecreaseHealth.
+  ///
+  /// In en, this message translates to:
+  /// **'Decrease {owner}\'s health by {amount}'**
+  String cmdDecreaseHealth(String owner, int amount);
+
+  /// No description provided for @cmdUseFhPerks.
+  ///
+  /// In en, this message translates to:
+  /// **'{character} use Frosthaven Perks'**
+  String cmdUseFhPerks(String character);
+
+  /// No description provided for @cmdDontUseFhPerks.
+  ///
+  /// In en, this message translates to:
+  /// **'{character} don\'t use Frosthaven Perks'**
+  String cmdDontUseFhPerks(String character);
+
+  /// No description provided for @cmdRemoveNoCharacters.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove no characters'**
+  String get cmdRemoveNoCharacters;
+
+  /// No description provided for @cmdRemoveNoMonsters.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove no monsters'**
+  String get cmdRemoveNoMonsters;
 }
 
 class _AppLocalizationsDelegate

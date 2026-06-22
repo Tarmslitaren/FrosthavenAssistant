@@ -1,4 +1,5 @@
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class AMDRemoveImbueCommand extends Command {
   final GameState _gameState;
@@ -14,6 +15,6 @@ class AMDRemoveImbueCommand extends Command {
 
   @override
   String describe() {
-    return "Remove Imbuement";
+    return commandL10n.cmdRemoveImbueMonsterDeck;
   }
 }

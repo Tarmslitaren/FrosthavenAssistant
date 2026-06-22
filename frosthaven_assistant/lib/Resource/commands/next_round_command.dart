@@ -7,6 +7,7 @@ import '../game_data.dart';
 import '../game_methods.dart';
 import '../settings.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class NextRoundCommand extends Command {
   final GameState _gameState;
@@ -108,7 +109,7 @@ class NextRoundCommand extends Command {
 
   @override
   String describe() {
-    return "Next Round";
+    return commandL10n.cmdNextRound;
   }
 
   void _handleTimedSpawns(SpecialRule rule) {

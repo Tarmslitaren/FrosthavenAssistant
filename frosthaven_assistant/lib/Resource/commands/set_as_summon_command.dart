@@ -1,5 +1,6 @@
 import '../game_methods.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class SetAsSummonCommand extends Command {
   final bool summoned;
@@ -27,8 +28,8 @@ class SetAsSummonCommand extends Command {
   @override
   String describe() {
     if (summoned) {
-      return "Mark $ownerId as summon";
+      return commandL10n.cmdMarkAsSummon(ownerId ?? '');
     }
-    return "Remove $ownerId's summon mark";
+    return commandL10n.cmdRemoveSummonMark(ownerId ?? '');
   }
 }

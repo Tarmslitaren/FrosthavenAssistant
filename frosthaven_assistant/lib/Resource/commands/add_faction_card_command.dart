@@ -1,5 +1,6 @@
 import '../game_methods.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class AddFactionCardCommand extends Command {
   final String characterId;
@@ -24,7 +25,7 @@ class AddFactionCardCommand extends Command {
   @override
   String describe() {
     return add
-        ? "$characterId add faction card"
-        : "$characterId remove faction card";
+        ? commandL10n.cmdAddFactionCard(characterId)
+        : commandL10n.cmdRemoveFactionCard(characterId);
   }
 }

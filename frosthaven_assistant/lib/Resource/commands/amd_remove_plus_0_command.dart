@@ -1,5 +1,6 @@
 import '../game_methods.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class AmdRemovePlus0Command extends Command {
   final String name;
@@ -21,6 +22,6 @@ class AmdRemovePlus0Command extends Command {
 
   @override
   String describe() {
-    return remove ? "Remove plus zero" : "Add back plus zero";
+    return remove ? commandL10n.cmdRemovePlusZero : commandL10n.cmdAddBackPlusZero;
   }
 }

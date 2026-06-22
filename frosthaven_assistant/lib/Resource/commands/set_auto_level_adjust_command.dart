@@ -1,4 +1,5 @@
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class SetAutoLevelAdjustCommand extends Command {
   SetAutoLevelAdjustCommand(this.on, {required GameState gameState})
@@ -16,7 +17,7 @@ class SetAutoLevelAdjustCommand extends Command {
   @override
   String describe() {
     return on
-        ? "turn automatic level updated on"
-        : "turn automatic level updated off";
+        ? commandL10n.cmdAutoLevelOn
+        : commandL10n.cmdAutoLevelOff;
   }
 }

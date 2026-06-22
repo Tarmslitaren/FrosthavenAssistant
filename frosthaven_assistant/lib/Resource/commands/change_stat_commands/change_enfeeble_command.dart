@@ -1,6 +1,7 @@
 import '../../game_methods.dart';
 import '../../state/game_state.dart';
 import 'change_stat_command.dart';
+import '../command_l10n.dart';
 
 class ChangeEnfeebleCommand extends ChangeStatCommand {
   ModifierDeck? deck;
@@ -35,8 +36,8 @@ class ChangeEnfeebleCommand extends ChangeStatCommand {
   @override
   String describe() {
     if (change > 0) {
-      return "Add Enfeeble";
+      return commandL10n.cmdAddEnfeeble;
     }
-    return "Remove Enfeeble";
+    return commandL10n.cmdRemoveEnfeeble;
   }
 }

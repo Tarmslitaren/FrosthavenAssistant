@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class ChangeNameCommand extends Command {
   ChangeNameCommand(this.name, this.characterId, {required GameState gameState})
@@ -21,6 +22,6 @@ class ChangeNameCommand extends Command {
 
   @override
   String describe() {
-    return "change character name";
+    return commandL10n.cmdChangeName;
   }
 }

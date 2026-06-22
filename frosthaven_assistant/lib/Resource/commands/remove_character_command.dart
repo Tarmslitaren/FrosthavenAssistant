@@ -1,5 +1,6 @@
 import '../game_methods.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class RemoveCharacterCommand extends Command {
   final List<Character> names;
@@ -19,11 +20,11 @@ class RemoveCharacterCommand extends Command {
   @override
   String describe() {
     if (names.length > 1) {
-      return "Remove all characters";
+      return commandL10n.cmdRemoveAllCharacters;
     }
     if(names.isNotEmpty) {
-      return "Remove ${names.first.id}";
+      return commandL10n.cmdRemoveCharacter(names.first.id);
     }
-    return "Remove no characters";
+    return commandL10n.cmdRemoveNoCharacters;
   }
 }

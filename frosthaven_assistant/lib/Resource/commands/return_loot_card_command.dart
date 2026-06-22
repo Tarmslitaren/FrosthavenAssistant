@@ -1,4 +1,5 @@
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
+import 'command_l10n.dart';
 
 class ReturnLootCardCommand extends Command {
   final bool top;
@@ -14,6 +15,6 @@ class ReturnLootCardCommand extends Command {
 
   @override
   String describe() {
-    return "Return loot card";
+    return commandL10n.cmdReturnLootCard;
   }
 }

@@ -1,5 +1,6 @@
 import '../settings.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class TrackStandeesCommand extends Command {
   final GameState _gameState;
@@ -20,9 +21,9 @@ class TrackStandeesCommand extends Command {
   @override
   String describe() {
     if (!track) {
-      return "Don't track standees";
+      return commandL10n.cmdDontTrackStandees;
     }
-    return "Track Standees";
+    return commandL10n.cmdTrackStandees;
   }
 
   void _handleNoStandeesSettingChange() {

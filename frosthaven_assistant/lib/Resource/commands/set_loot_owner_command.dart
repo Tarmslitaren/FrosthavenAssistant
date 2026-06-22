@@ -1,4 +1,5 @@
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class SetLootOwnerCommand extends Command {
   final String ownerId;
@@ -13,6 +14,6 @@ class SetLootOwnerCommand extends Command {
 
   @override
   String describe() {
-    return "Set loot card owner";
+    return commandL10n.cmdSetLootOwner;
   }
 }

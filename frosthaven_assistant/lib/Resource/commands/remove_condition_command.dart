@@ -1,6 +1,7 @@
 import '../enums.dart';
 import '../game_methods.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class RemoveConditionCommand extends Command {
   final Condition condition;
@@ -39,6 +40,6 @@ class RemoveConditionCommand extends Command {
 
   @override
   String describe() {
-    return "Remove condition: ${condition.getName()}";
+    return commandL10n.cmdRemoveCondition(condition.getName());
   }
 }

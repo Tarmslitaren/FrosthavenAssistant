@@ -1,5 +1,6 @@
 import '../game_methods.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class ReorderModifierListCommand extends Command {
   final int newIndex;
@@ -19,6 +20,6 @@ class ReorderModifierListCommand extends Command {
 
   @override
   String describe() {
-    return "Reorder Modifier Cards";
+    return commandL10n.cmdReorderModifierCards;
   }
 }

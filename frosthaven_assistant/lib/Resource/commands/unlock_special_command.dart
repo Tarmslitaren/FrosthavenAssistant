@@ -1,4 +1,5 @@
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class UnlockSpecialCommand extends Command {
   final GameState _gameState;
@@ -24,8 +25,8 @@ class UnlockSpecialCommand extends Command {
   @override
   String describe() {
     if (_unlock) {
-      return "Unlock $_id";
+      return commandL10n.cmdUnlock(_id);
     }
-    return "clear unlocked: $_id";
+    return commandL10n.cmdLock(_id);
   }
 }

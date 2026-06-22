@@ -1,5 +1,6 @@
 import '../game_methods.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class RemoveAMDCardCommand extends Command {
   final int index;
@@ -25,6 +26,6 @@ class RemoveAMDCardCommand extends Command {
 
   @override
   String describe() {
-    return "Remove amd card";
+    return commandL10n.cmdRemoveAmdCard;
   }
 }

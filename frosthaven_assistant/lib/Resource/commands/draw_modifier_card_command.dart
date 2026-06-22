@@ -1,6 +1,7 @@
 import '../game_event.dart';
 import '../game_methods.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class DrawModifierCardCommand extends Command {
   final String name;
@@ -18,9 +19,9 @@ class DrawModifierCardCommand extends Command {
   @override
   String describe() {
     if (name.isNotEmpty) {
-      return "Draw $name modifier card";
+      return commandL10n.cmdDrawModifierCard(name);
     }
-    return "Draw monster modifier card";
+    return commandL10n.cmdDrawMonsterModifierCard;
   }
 
   @override

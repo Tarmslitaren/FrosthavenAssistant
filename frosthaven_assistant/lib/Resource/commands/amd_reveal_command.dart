@@ -1,6 +1,7 @@
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class AMDRevealCommand extends Command {
   final int amount;
@@ -19,6 +20,6 @@ class AMDRevealCommand extends Command {
 
   @override
   String describe() {
-    return "Reveal $amount modifier cards";
+    return commandL10n.cmdRevealModifierCards(amount);
   }
 }

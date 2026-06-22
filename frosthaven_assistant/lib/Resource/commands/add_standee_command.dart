@@ -1,6 +1,7 @@
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../enums.dart';
+import 'command_l10n.dart';
 
 class AddStandeeCommand extends Command {
   final int nr;
@@ -35,7 +36,7 @@ class AddStandeeCommand extends Command {
     final sum = summon;
     String name = sum == null ? ownerId : sum.name;
 
-    return "Add $name $nr";
+    return commandL10n.cmdAddStandee(name, nr);
   }
 }
 

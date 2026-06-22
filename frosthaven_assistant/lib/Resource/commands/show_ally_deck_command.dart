@@ -1,4 +1,5 @@
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class ShowAllyDeckCommand extends Command {
   ShowAllyDeckCommand();
@@ -10,6 +11,6 @@ class ShowAllyDeckCommand extends Command {
 
   @override
   String describe() {
-    return "Show Ally Deck";
+    return commandL10n.cmdShowAllyDeck;
   }
 }

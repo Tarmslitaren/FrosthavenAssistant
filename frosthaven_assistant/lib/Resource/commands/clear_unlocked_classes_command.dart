@@ -1,4 +1,5 @@
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class ClearUnlockedClassesCommand extends Command {
   ClearUnlockedClassesCommand();
@@ -10,6 +11,6 @@ class ClearUnlockedClassesCommand extends Command {
 
   @override
   String describe() {
-    return "clear unlocked classes";
+    return commandL10n.cmdClearUnlockedClasses;
   }
 }

@@ -1,4 +1,5 @@
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class AddLootCardCommand extends Command {
   AddLootCardCommand(this.resourceType, {required GameState gameState})
@@ -13,6 +14,6 @@ class AddLootCardCommand extends Command {
 
   @override
   String describe() {
-    return "Add $resourceType Loot Card";
+    return commandL10n.cmdAddLootCard(resourceType);
   }
 }

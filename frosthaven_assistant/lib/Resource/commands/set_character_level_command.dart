@@ -1,4 +1,5 @@
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class SetCharacterLevelCommand extends Command {
   final int level;
@@ -13,6 +14,6 @@ class SetCharacterLevelCommand extends Command {
 
   @override
   String describe() {
-    return "Set $characterId's Level";
+    return commandL10n.cmdSetCharacterLevel(characterId);
   }
 }

@@ -1,6 +1,7 @@
 import '../../game_methods.dart';
 import '../../state/game_state.dart';
 import 'change_stat_command.dart';
+import '../command_l10n.dart';
 
 class ChangeXPCommand extends ChangeStatCommand {
   ChangeXPCommand(super.change, super.figureId, super.ownerId,
@@ -16,8 +17,8 @@ class ChangeXPCommand extends ChangeStatCommand {
   @override
   String describe() {
     if (change > 0) {
-      return "Increase $figureId's xp by $change";
+      return commandL10n.cmdIncreaseXp(figureId, change);
     }
-    return "Decrease $figureId's xp by ${change.abs()}";
+    return commandL10n.cmdDecreaseXp(figureId, change.abs());
   }
 }

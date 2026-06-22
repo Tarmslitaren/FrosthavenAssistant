@@ -1,5 +1,6 @@
 import '../game_event.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class TurnDoneCommand extends Command {
   int index = 0;
@@ -28,6 +29,6 @@ class TurnDoneCommand extends Command {
 
   @override
   String describe() {
-    return "$id's turn done";
+    return commandL10n.cmdTurnDone(id);
   }
 }

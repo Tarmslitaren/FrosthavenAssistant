@@ -1,5 +1,6 @@
 import '../game_methods.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class AddCharacterCommand extends Command {
   final String _id;
@@ -41,6 +42,6 @@ class AddCharacterCommand extends Command {
 
   @override
   String describe() {
-    return "Add $_id";
+    return commandL10n.cmdAddCharacter(_id);
   }
 }

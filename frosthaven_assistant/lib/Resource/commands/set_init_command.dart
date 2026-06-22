@@ -1,4 +1,5 @@
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class SetInitCommand extends Command {
   final GameState _gameState;
@@ -20,6 +21,6 @@ class SetInitCommand extends Command {
 
   @override
   String describe() {
-    return "Set initiative of $_characterId";
+    return commandL10n.cmdSetInitiative(_characterId);
   }
 }

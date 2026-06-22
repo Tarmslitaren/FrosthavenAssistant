@@ -1,5 +1,6 @@
 import '../game_methods.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class AddCSPartyCardCommand extends Command {
   final String characterId;
@@ -18,6 +19,6 @@ class AddCSPartyCardCommand extends Command {
 
   @override
   String describe() {
-    return "$characterId add party card $type";
+    return commandL10n.cmdAddPartyCard(characterId, type.toString());
   }
 }

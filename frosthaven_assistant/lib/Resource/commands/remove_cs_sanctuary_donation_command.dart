@@ -1,5 +1,6 @@
 import '../game_methods.dart';
 import '../state/game_state.dart';
+import 'command_l10n.dart';
 
 class RemoveCSSanctuaryDonationCommand extends Command {
   final String characterId;
@@ -17,6 +18,6 @@ class RemoveCSSanctuaryDonationCommand extends Command {
 
   @override
   String describe() {
-    return "remove $characterId's donation";
+    return commandL10n.cmdRemoveSanctuaryDonation(characterId);
   }
 }

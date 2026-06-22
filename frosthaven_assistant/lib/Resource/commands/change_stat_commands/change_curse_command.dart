@@ -1,6 +1,7 @@
 import '../../game_methods.dart';
 import '../../state/game_state.dart';
 import 'change_stat_command.dart';
+import '../command_l10n.dart';
 
 class ChangeCurseCommand extends ChangeStatCommand {
   ChangeCurseCommand(super.change, super.figureId, super.ownerId,
@@ -34,8 +35,8 @@ class ChangeCurseCommand extends ChangeStatCommand {
   @override
   String describe() {
     if (change > 0) {
-      return "Add a Curse";
+      return commandL10n.cmdAddCurse;
     }
-    return "Remove a Curse";
+    return commandL10n.cmdRemoveCurse;
   }
 }
