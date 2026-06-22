@@ -66,6 +66,7 @@
   "networkServerIpHint": "server ip address",
   "networkPortHint": "port",
 
+  "settingsLanguage": "Language:",
   "settingsDarkMode": "Dark mode",
   "settingsSoftNumpad": "Soft numpad for input",
   "settingsNoInit": "Don't ask for initiative",

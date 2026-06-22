@@ -114,6 +114,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get networkPortHint => 'port';
 
   @override
+  String get settingsLanguage => 'Language:';
+
+  @override
   String get settingsDarkMode => 'Dark mode';
 
   @override

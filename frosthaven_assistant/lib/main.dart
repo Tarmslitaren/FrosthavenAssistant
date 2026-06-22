@@ -141,23 +141,26 @@ class MyApp extends StatelessWidget {
       loading.value = false;
     }
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      debugShowMaterialGrid: false,
-      checkerboardOffscreenLayers: false,
-      showPerformanceOverlay: false,
-      title: title,
-      theme: ThemeSwitcher.of(context).themeData,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: const [Locale('en')],
-      locale: Locale(getIt<Settings>().locale.value),
-      builder: (context, child) {
-        if (child == null) {
-          return const SizedBox.shrink();
-        }
-        return ExcludeSemantics(child: GlobalHotkeys(child: child));
-      },
-      home: const MyHomePage(title: title),
+    return ValueListenableBuilder<String>(
+      valueListenable: getIt<Settings>().locale,
+      builder: (context, locale, _) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        debugShowMaterialGrid: false,
+        checkerboardOffscreenLayers: false,
+        showPerformanceOverlay: false,
+        title: title,
+        theme: ThemeSwitcher.of(context).themeData,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: const [Locale('en')],
+        locale: Locale(locale),
+        builder: (context, child) {
+          if (child == null) {
+            return const SizedBox.shrink();
+          }
+          return ExcludeSemantics(child: GlobalHotkeys(child: child));
+        },
+        home: const MyHomePage(title: title),
+      ),
     );
   }
 }

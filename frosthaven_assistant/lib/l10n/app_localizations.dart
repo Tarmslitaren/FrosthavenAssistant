@@ -280,6 +280,12 @@ abstract class AppLocalizations {
   /// **'port'**
   String get networkPortHint;
 
+  /// No description provided for @settingsLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Language:'**
+  String get settingsLanguage;
+
   /// No description provided for @settingsDarkMode.
   ///
   /// In en, this message translates to:

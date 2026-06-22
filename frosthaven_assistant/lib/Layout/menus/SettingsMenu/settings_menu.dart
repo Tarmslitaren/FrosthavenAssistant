@@ -19,6 +19,7 @@ import '../../../l10n/app_localizations.dart';
 import '../../../services/network/client.dart';
 import '../../../services/network/network.dart';
 import '../../../services/service_locator.dart';
+import '../../../services/translation_service.dart';
 import 'settings_checkbox.dart';
 import 'settings_network_section.dart';
 
@@ -30,6 +31,11 @@ class SettingsMenu extends StatefulWidget {
   static const double _kBarScaleMin = 0.8;
   static const double _kLabelPaddingLeft = 16.0;
   static const double _kLabelPaddingTop = 10.0;
+
+  // Maps locale code → native display name. Extend when adding translations.
+  static const Map<String, String> _kLocales = {
+    'en': 'English',
+  };
 
   const SettingsMenu(
       {super.key, this.gameState, this.network, this.client, this.settings});
@@ -63,6 +69,34 @@ class SettingsMenuState extends State<SettingsMenu> {
         child: Column(
           children: [
             Text(l10n.menuSettings, style: kTitleStyle),
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: SettingsMenu._kLabelPaddingLeft,
+                  top: SettingsMenu._kLabelPaddingTop),
+              child: Row(
+                children: [
+                  Text(l10n.settingsLanguage),
+                  const SizedBox(width: 8),
+                  DropdownButton<String>(
+                    value: settings.locale.value,
+                    items: SettingsMenu._kLocales.entries
+                        .map((e) => DropdownMenuItem<String>(
+                              value: e.key,
+                              child: Text(e.value),
+                            ))
+                        .toList(),
+                    onChanged: (String? newLocale) {
+                      if (newLocale == null) return;
+                      setState(() {
+                        settings.locale.value = newLocale;
+                      });
+                      getIt<TranslationService>().load(newLocale);
+                      settings.saveToDisk();
+                    },
+                  ),
+                ],
+              ),
+            ),
             SettingsCheckbox(
                 title: l10n.settingsDarkMode,
                 notifier: settings.darkMode,
