@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/widgets/scrollable_menu_card.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 import '../../../services/service_locator.dart';
 import 'coin_rows_section.dart';
@@ -47,7 +48,7 @@ class LootCardEnhancementMenu extends StatelessWidget {
       maxWidth: kMenuNarrowWidth,
       child: Column(
         children: [
-          const Text("Loot Card Enhancements", style: kTitleStyle),
+          Text(AppLocalizations.of(context)!.lootCardEnhancements, style: kTitleStyle),
           MaterialSection(
             type: "hide",
             gameState: _gameState,

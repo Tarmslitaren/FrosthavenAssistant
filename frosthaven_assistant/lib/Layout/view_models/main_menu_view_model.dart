@@ -58,35 +58,23 @@ class MainMenuViewModel {
         _gameState.commandDescriptions.length - 1;
   }
 
-  String get undoText {
-    final clientState = _settings.client.value;
+  String? get undoDescription {
+    if (_settings.client.value == ClientState.connected) return null;
     final index = _gameState.commandIndex.value;
     final descriptions = _gameState.commandDescriptions;
-    String text = "Undo";
-    if (clientState != ClientState.connected &&
-        index >= 0 &&
-        descriptions.length > index) {
-      text += ": ${descriptions[index]}";
-    }
-    return text;
+    if (index >= 0 && descriptions.length > index) return descriptions[index];
+    return null;
   }
 
-  String get redoText {
-    final clientState = _settings.client.value;
+  String? get redoDescription {
+    if (_settings.client.value == ClientState.connected) return null;
     final index = _gameState.commandIndex.value;
     final descriptions = _gameState.commandDescriptions;
-    String text = "Redo";
-    if (clientState != ClientState.connected &&
-        index < descriptions.length - 1) {
-      text += ": ${descriptions[index + 1]}";
-    }
-    return text;
+    if (index < descriptions.length - 1) return descriptions[index + 1];
+    return null;
   }
 
-  String get addSectionText =>
-      _gameState.scenario.value == "#Random Dungeon"
-          ? 'Add Random Dungeon Card'
-          : 'Add Section';
+  bool get isRandomDungeon => _gameState.scenario.value == '#Random Dungeon';
 
   bool get showLootDeckMenu =>
       _gameState.currentCampaign.value == "Frosthaven";
@@ -107,12 +95,6 @@ class MainMenuViewModel {
 
   bool get isConnecting =>
       _settings.client.value == ClientState.connecting;
-
-  String connectionText(String ip) {
-    if (isConnected) return "Connected as Client";
-    if (isConnecting) return "Connecting...";
-    return "Connect as Client ($ip)";
-  }
 
   String get lastKnownConnection => _settings.lastKnownConnection;
 

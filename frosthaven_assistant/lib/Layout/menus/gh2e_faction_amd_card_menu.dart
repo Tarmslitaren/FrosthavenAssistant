@@ -8,6 +8,7 @@ import '../../Resource/color_matrices.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/ui_utils.dart';
+import '../../l10n/app_localizations.dart';
 import '../../services/service_locator.dart';
 
 class GH2eFactionAMDCardMenu extends StatefulWidget {
@@ -103,7 +104,7 @@ class GH2eFactionAMDCardMenuState extends State<GH2eFactionAMDCardMenu> {
                   height: addedCard == null ? _kSpacerNoCard : _kSpacerWithCard,
                 ),
                 if (addedCard == null)
-                  Text("Tap Card to add to your deck",
+                  Text(AppLocalizations.of(context)!.tapCardToAddToDeck,
                       style: getTitleTextStyle(1)),
                 if (addedCard != null)
                   TextButton(
@@ -118,7 +119,8 @@ class GH2eFactionAMDCardMenuState extends State<GH2eFactionAMDCardMenu> {
                           addedCard = null;
                         });
                       },
-                      child: const Text("Remove card from your deck?",
+                      child: Text(
+                          AppLocalizations.of(context)!.removeCardFromDeckQuestion,
                           textAlign: TextAlign.center,
                           style: kButtonLabelStyle)),
                 const SizedBox(

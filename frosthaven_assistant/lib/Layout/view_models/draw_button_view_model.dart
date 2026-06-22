@@ -22,10 +22,7 @@ class DrawButtonViewModel {
   ValueListenable<int> get totalRounds => _gameState.totalRounds;
 
   // Derived state
-  String get buttonText =>
-      _gameState.roundState.value == RoundState.chooseInitiative
-          ? "Draw"
-          : " Next Round";
+  bool get isDrawPhase => _gameState.roundState.value == RoundState.chooseInitiative;
 
   String get roundText {
     final r = _gameState.round.value;

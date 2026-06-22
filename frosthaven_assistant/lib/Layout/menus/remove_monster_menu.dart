@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/widgets/menu_card.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 import '../../Resource/commands/remove_monster_command.dart';
 import '../../Resource/game_methods.dart';
@@ -43,7 +44,8 @@ class RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
               height: 20,
             ),
             ListTile(
-              title: const Text("Remove All", style: kTitleStyle),
+              title: Text(AppLocalizations.of(context)!.removeAll,
+                  style: kTitleStyle),
               onTap: () {
                 if (GameMethods.getCurrentMonsters(gameState: _gameState).isNotEmpty) {
                   _gameState.action(RemoveMonsterCommand(currentMonsters,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/commands/reorder_modifier_list_command.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 import '../../Layout/widgets/modal_background.dart';
 import '../../Resource/app_constants.dart';
@@ -66,7 +67,8 @@ class SendToBottomMenu extends StatelessWidget {
                   );
                   Navigator.pop(context);
                 },
-                child: const Text("Send to Bottom", style: kButtonLabelStyle),
+                child: Text(AppLocalizations.of(context)!.sendToBottom,
+                    style: kButtonLabelStyle),
               ),
               const SizedBox(height: kMenuTopPadding),
               TextButton(
@@ -76,8 +78,8 @@ class SendToBottomMenu extends StatelessWidget {
                   );
                   Navigator.pop(context);
                 },
-                child: const Text(
-                  "Shuffle un-drawn Cards",
+                child: Text(
+                  AppLocalizations.of(context)!.shuffleUndrawnCards,
                   style: kButtonLabelStyle,
                 ),
               ),
@@ -95,8 +97,8 @@ class SendToBottomMenu extends StatelessWidget {
 
                   Navigator.pop(context);
                 },
-                child: const Text(
-                  "Remove card?",
+                child: Text(
+                  AppLocalizations.of(context)!.removeCardQuestion,
                   textAlign: TextAlign.center,
                   style: kButtonLabelStyle,
                 ),

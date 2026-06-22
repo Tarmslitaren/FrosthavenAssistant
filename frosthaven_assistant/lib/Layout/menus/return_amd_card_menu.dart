@@ -6,6 +6,7 @@ import '../../Resource/app_constants.dart';
 import '../../Resource/commands/return_removed_amd_card_command.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/state/game_state.dart';
+import '../../l10n/app_localizations.dart';
 import '../../services/service_locator.dart';
 
 class ReturnAMDCardMenu extends StatelessWidget {
@@ -59,8 +60,8 @@ class ReturnAMDCardMenu extends StatelessWidget {
                   );
                   Navigator.pop(context);
                 },
-                child: const Text(
-                  "Return card to discard pile",
+                child: Text(
+                  AppLocalizations.of(context)!.returnToDiscardPile,
                   textAlign: TextAlign.center,
                   style: kButtonLabelStyle,
                 ),
@@ -78,8 +79,8 @@ class ReturnAMDCardMenu extends StatelessWidget {
                   );
                   Navigator.pop(context);
                 },
-                child: const Text(
-                  "Return card to draw pile",
+                child: Text(
+                  AppLocalizations.of(context)!.returnToDrawPile,
                   textAlign: TextAlign.center,
                   style: kButtonLabelStyle,
                 ),

@@ -1,6 +1,8 @@
 import 'dart:math';
 import 'dart:ui' show ImageFilter;
 
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
@@ -128,7 +130,7 @@ class LootCardFront extends StatelessWidget {
                             repeatForever: true,
                             animatedTexts: [
                               ColorizeAnimatedText(
-                                "Enhanced: ${card.enhanced.toString()}",
+                                AppLocalizations.of(context)!.enhancedLevel(card.enhanced.toString()),
                                 speed: const Duration(
                                     milliseconds:
                                         LootCardWidget._kAnimationSpeedMs),
@@ -149,7 +151,7 @@ class LootCardFront extends StatelessWidget {
                               ),
                             ],
                           ))
-                        : Text("Enhanced: ${card.enhanced.toString()}",
+                        : Text(AppLocalizations.of(context)!.enhancedLevel(card.enhanced.toString()),
                             style: TextStyle(
                               color: Colors.white,
                               fontSize:

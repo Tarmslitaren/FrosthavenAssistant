@@ -6,6 +6,7 @@ import 'package:frosthaven_assistant/Resource/game_data.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 import 'modifier_draw_animation_widget.dart';
 import 'modifier_slide_animation_widget.dart';
@@ -227,7 +228,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                               },
                                               child: Center(
                                                   child: Text(
-                                                "Shuffle\n& Draw",
+                                                AppLocalizations.of(context)!.shuffleAndDraw,
                                                 style: textStyle,
                                                 textAlign: TextAlign.center,
                                               )),

@@ -15,6 +15,7 @@ import 'package:window_manager/window_manager.dart';
 
 import 'Resource/game_data.dart';
 import 'Resource/theme_switcher.dart';
+import 'l10n/app_localizations.dart';
 import 'services/translation_service.dart';
 
 // SocketExceptions caused by normal TCP connection lifecycle events (client
@@ -147,6 +148,9 @@ class MyApp extends StatelessWidget {
       showPerformanceOverlay: false,
       title: title,
       theme: ThemeSwitcher.of(context).themeData,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: const [Locale('en')],
+      locale: Locale(getIt<Settings>().locale.value),
       builder: (context, child) {
         if (child == null) {
           return const SizedBox.shrink();

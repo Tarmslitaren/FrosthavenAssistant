@@ -26,15 +26,15 @@ void main() {
   DrawButtonViewModel makeVm() =>
       DrawButtonViewModel(gameState: getIt<GameState>(), settings: getIt());
 
-  group('DrawButtonViewModel.buttonText', () {
-    test('returns "Draw" in chooseInitiative state', () {
-      expect(makeVm().buttonText, 'Draw');
+  group('DrawButtonViewModel.isDrawPhase', () {
+    test('returns true in chooseInitiative state', () {
+      expect(makeVm().isDrawPhase, isTrue);
     });
 
-    test('returns " Next Round" in playTurns state', () {
+    test('returns false in playTurns state', () {
       (getIt<GameState>().roundState as ValueNotifier<RoundState>).value =
           RoundState.playTurns;
-      expect(makeVm().buttonText, ' Next Round');
+      expect(makeVm().isDrawPhase, isFalse);
     });
   });
 

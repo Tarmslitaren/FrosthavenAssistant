@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/LootCardEnhancementMenu/loot_card_enhancement_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/character_loot_menu.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_special_loot_card_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/return_loot_card_command.dart';
 
@@ -205,8 +206,8 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                         right: 0,
                         bottom: 0,
                         child: TextButton(
-                            child: const Text(
-                              'Close',
+                            child: Text(
+                              AppLocalizations.of(context)!.close,
                               style: kButtonLabelStyle,
                             ),
                             onPressed: () {

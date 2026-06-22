@@ -11,6 +11,7 @@ import 'package:frosthaven_assistant/Layout/menus/remove_character_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_monster_menu.dart';
 import 'package:frosthaven_assistant/Layout/view_models/main_menu_view_model.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 import 'package:frosthaven_assistant/services/network/client.dart';
 import 'package:frosthaven_assistant/main.dart' show appVersion;
 import 'package:url_launcher/url_launcher.dart';
@@ -54,6 +55,7 @@ class MainMenu extends StatelessWidget {
       child: ValueListenableBuilder<int>(
         valueListenable: vm.commandIndex,
         builder: (context, value, child) {
+          final l10n = AppLocalizations.of(context)!;
           return ListView(
             padding: EdgeInsets.zero,
             children: [
@@ -72,20 +74,24 @@ class MainMenu extends StatelessWidget {
                     Positioned(
                       right: 6,
                       bottom: 0,
-                      child: Text("Version $appVersion"),
+                      child: Text(l10n.versionLabel(appVersion)),
                     ),
                   ],
                 ),
               ),
               ListTile(
-                title: Text(vm.undoText),
+                title: Text(vm.undoDescription != null
+                    ? l10n.undoWithDescription(vm.undoDescription!)
+                    : l10n.undo),
                 enabled: vm.undoEnabled,
                 onTap: () {
                   vm.undo();
                 },
               ),
               ListTile(
-                title: Text(vm.redoText),
+                title: Text(vm.redoDescription != null
+                    ? l10n.redoWithDescription(vm.redoDescription!)
+                    : l10n.redo),
                 enabled: vm.redoEnabled,
                 onTap: () {
                   vm.redo();
@@ -93,14 +99,16 @@ class MainMenu extends StatelessWidget {
               ),
               const Divider(),
               ListTile(
-                title: const Text('Set Scenario'),
+                title: Text(l10n.menuSetScenario),
                 onTap: () {
                   Navigator.pop(context);
                   openDialog(context, const SelectScenarioMenu());
                 },
               ),
               ListTile(
-                title: Text(vm.addSectionText),
+                title: Text(vm.isRandomDungeon
+                    ? l10n.menuAddRandomDungeonCard
+                    : l10n.menuAddSection),
                 enabled: true,
                 onTap: () {
                   Navigator.pop(context);
@@ -109,21 +117,21 @@ class MainMenu extends StatelessWidget {
               ),
               const Divider(),
               ListTile(
-                title: const Text('Add Character'),
+                title: Text(l10n.menuAddCharacter),
                 onTap: () {
                   Navigator.pop(context);
                   openDialog(context, const AddCharacterMenu());
                 },
               ),
               ListTile(
-                title: const Text('Remove Characters'),
+                title: Text(l10n.menuRemoveCharacters),
                 onTap: () {
                   Navigator.pop(context);
                   openDialog(context, const RemoveCharacterMenu());
                 },
               ),
               ListTile(
-                title: const Text('Set Level'),
+                title: Text(l10n.menuSetLevel),
                 onTap: () {
                   Navigator.pop(context);
                   openDialog(context, const SetLevelMenu());
@@ -131,7 +139,7 @@ class MainMenu extends StatelessWidget {
               ),
               if (vm.showLootDeckMenu)
                 ListTile(
-                  title: const Text('Loot Deck Menu'),
+                  title: Text(l10n.menuLootDeck),
                   onTap: () {
                     Navigator.pop(context);
                     openDialog(context, const LootCardsMenu());
@@ -139,14 +147,14 @@ class MainMenu extends StatelessWidget {
                 ),
               const Divider(),
               ListTile(
-                title: const Text('Add Monsters'),
+                title: Text(l10n.menuAddMonsters),
                 onTap: () {
                   Navigator.pop(context);
                   openDialog(context, const AddMonsterMenu());
                 },
               ),
               ListTile(
-                title: const Text('Remove Monsters'),
+                title: Text(l10n.menuRemoveMonsters),
                 onTap: () {
                   Navigator.pop(context);
                   openDialog(context, const RemoveMonsterMenu());
@@ -154,7 +162,7 @@ class MainMenu extends StatelessWidget {
               ),
               if (vm.showShowAllyDeck)
                 ListTile(
-                  title: const Text('Show Ally Attack Modifier Deck'),
+                  title: Text(l10n.menuShowAllyDeck),
                   onTap: () {
                     Navigator.pop(context);
                     vm.showAllyDeck();
@@ -162,7 +170,7 @@ class MainMenu extends StatelessWidget {
                 ),
               if (vm.showHideAllyDeck)
                 ListTile(
-                  title: const Text('Hide Ally Attack Modifier Deck'),
+                  title: Text(l10n.menuHideAllyDeck),
                   onTap: () {
                     Navigator.pop(context);
                     vm.hideAllyDeck();
@@ -170,7 +178,7 @@ class MainMenu extends StatelessWidget {
                 ),
               const Divider(),
               ListTile(
-                title: const Text('Settings'),
+                title: Text(l10n.menuSettings),
                 onTap: () {
                   Navigator.pop(context);
                   openDialog(context, const SettingsMenu());
@@ -181,9 +189,15 @@ class MainMenu extends StatelessWidget {
                 ValueListenableBuilder<ClientState>(
                   valueListenable: vm.clientState,
                   builder: (context, value, child) {
+                    final l10n = AppLocalizations.of(context)!;
                     return CheckboxListTile(
                       enabled: !vm.isServer && !vm.isConnecting,
-                      title: Text(vm.connectionText(vm.lastKnownConnection)),
+                      title: Text(vm.isConnected
+                          ? l10n.connectedAsClient
+                          : vm.isConnecting
+                              ? l10n.connecting
+                              : l10n.connectAsClientWithIp(
+                                  vm.lastKnownConnection)),
                       value: vm.isConnected,
                       onChanged: (bool? value) {
                         vm.toggleClientConnection();
@@ -197,13 +211,12 @@ class MainMenu extends StatelessWidget {
                   return ValueListenableBuilder<String>(
                     valueListenable: vm.wifiIPv6,
                     builder: (context, value, child) {
+                      final l10n = AppLocalizations.of(context)!;
                       final ip = "(${vm.wifiIPv6.value})";
                       return CheckboxListTile(
-                        title: Text(
-                          vm.isServer
-                              ? "Stop Server $ip"
-                              : 'Start Host Server $ip',
-                        ),
+                        title: Text(vm.isServer
+                            ? l10n.stopServerWithIp(ip)
+                            : l10n.startHostServerWithIp(ip)),
                         value: vm.isServer,
                         onChanged: (bool? value) {
                           vm.toggleServer();
@@ -215,7 +228,7 @@ class MainMenu extends StatelessWidget {
               ),
               const Divider(),
               ListTile(
-                title: const Text('Documentation'),
+                title: Text(l10n.menuDocumentation),
                 onTap: () {
                   final Uri toLaunch = Uri(
                     scheme: 'https',
@@ -230,7 +243,7 @@ class MainMenu extends StatelessWidget {
               ),
               if (!Platform.isIOS)
                 ListTile(
-                  title: const Text('Donate'),
+                  title: Text(l10n.menuDonate),
                   onTap: () {
                     final Uri toLaunch = Uri(
                       scheme: 'https',
@@ -243,7 +256,7 @@ class MainMenu extends StatelessWidget {
                 ),
               Platform.isMacOS || Platform.isLinux || Platform.isWindows
                   ? ListTile(
-                      title: const Text('Exit'),
+                      title: Text(l10n.menuExit),
                       enabled: true,
                       onTap: () {
                         Navigator.pop(context);

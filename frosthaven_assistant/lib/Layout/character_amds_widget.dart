@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 import '../Resource/enums.dart';
 import '../Resource/settings.dart';
@@ -135,7 +136,7 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
           const duration = Duration(milliseconds: 500);
           final barScale = _vm.barScale;
           final offsets = _getOffsets(characterAmount);
-          const text = "Character Decks";
+          final text = AppLocalizations.of(context)!.characterDecks;
 
           return RepaintBoundary(
               child: TweenAnimationBuilder<Offset>(
@@ -191,7 +192,7 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
                                 }
                               })
                             },
-                        child: const Text(text)),
+                        child: Text(text)),
                     RepaintBoundary(
                         child: AnimatedOpacity(
                             opacity:

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/save_character_modal_menu.dart';
 import 'package:frosthaven_assistant/Layout/widgets/menu_card.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
@@ -55,10 +56,10 @@ class SaveCharacterMenuState extends State<SaveCharacterMenu> {
                 height: _kHeaderHeight,
                 margin:
                     const EdgeInsets.symmetric(horizontal: _kHeaderPadding),
-                child: Text('Load, Save or Delete Characters.',
+                child: Text(AppLocalizations.of(context)!.loadSaveDeleteCharacters,
                     style: getTitleTextStyle(1, forceBlack: true))),
-            const Text(
-              "Add new Save:",
+            Text(
+              AppLocalizations.of(context)!.addNewSaveLabel,
               style: kHeadingStyle,
             ),
             Wrap(
@@ -95,8 +96,8 @@ class SaveCharacterMenuState extends State<SaveCharacterMenu> {
                           "assets/images/class-icons/${item.id}.png")),
               ],
             ),
-            const Text(
-              "Load Character:",
+            Text(
+              AppLocalizations.of(context)!.loadCharacter,
               style: kHeadingStyle,
             ),
             Expanded(

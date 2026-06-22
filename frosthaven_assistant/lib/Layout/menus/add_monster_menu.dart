@@ -3,6 +3,7 @@ import 'package:frosthaven_assistant/Layout/widgets/filtered_list_view.dart';
 import 'package:frosthaven_assistant/Layout/widgets/menu_card.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 import '../../Resource/commands/add_monster_command.dart';
 import '../../Resource/game_data.dart';
@@ -137,8 +138,8 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
 
   List<DropdownMenuItem<String>> buildEditionDroopDownMenuItems() {
     List<DropdownMenuItem<String>> retVal = [];
-    retVal.add(const DropdownMenuItem<String>(
-        value: "All", child: Text("All Campaigns")));
+    retVal.add(DropdownMenuItem<String>(
+        value: "All", child: Text(AppLocalizations.of(context)!.allCampaigns)));
 
     for (String item in _gameData.editions) {
       if (item != "na") {
@@ -160,7 +161,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
         child: Column(
           children: [
             Row(children: [
-              const Text("      Show monsters from:   "),
+              Text(AppLocalizations.of(context)!.showMonstersFrom),
               DropdownButtonHideUnderline(
                   child: DropdownButton(
                       value: _currentCampaign,
@@ -174,7 +175,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                       }))
             ]),
             CheckboxListTile(
-                title: const Text("Show Bosses"),
+                title: Text(AppLocalizations.of(context)!.showBosses),
                 value: _showBoss,
                 onChanged: (bool? value) {
                   setState(() {
@@ -183,7 +184,8 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                   });
                 }),
             CheckboxListTile(
-                title: const Text("Show Scenario Special Monsters"),
+                title: Text(
+                    AppLocalizations.of(context)!.showScenarioSpecialMonsters),
                 value: _showSpecial,
                 onChanged: (bool? value) {
                   setState(() {
@@ -192,7 +194,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                   });
                 }),
             CheckboxListTile(
-                title: const Text("Add as Ally"),
+                title: Text(AppLocalizations.of(context)!.addAsAlly),
                 value: _addAsAlly,
                 onChanged: (bool? value) {
                   setState(() {
@@ -204,8 +206,9 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                   horizontal: AddMonsterMenu._kSearchMarginH),
               child: TextField(
                 onChanged: (value) => _runFilter(value),
-                decoration: const InputDecoration(
-                    labelText: 'Add Monster', suffixIcon: Icon(Icons.search)),
+                decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.addMonsterLabel,
+                    suffixIcon: const Icon(Icons.search)),
               ),
             ),
             const SizedBox(

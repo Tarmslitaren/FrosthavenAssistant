@@ -4,6 +4,7 @@ import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart'
 import 'package:frosthaven_assistant/Layout/widgets/filtered_list_view.dart';
 import 'package:frosthaven_assistant/Layout/widgets/menu_card.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 import '../../Model/character_class.dart';
 import '../../Resource/commands/add_character_command.dart';
@@ -206,7 +207,8 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
               //open remove card menu
               openDialog(context, SaveCharacterMenu());
             },
-            child: Text("Load or Save Characters", style: kTitleStyle),
+            child: Text(AppLocalizations.of(context)!.loadOrSaveCharacters,
+                style: kTitleStyle),
           ),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 10),

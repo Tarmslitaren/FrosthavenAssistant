@@ -18,20 +18,6 @@ class SetLevelMenuViewModel {
 
   bool get showLegend => figure == null;
 
-  String get title {
-    if (monster != null) {
-      String n = getIt<TranslationService>().t(monster!.type.display);
-      if (n.endsWith("y")) {
-        n = "${n.substring(0, n.length - 1)}ie";
-      }
-      return "Set $n's level";
-    }
-    if (isSummon) {
-      return "Set ${getIt<TranslationService>().t((figure as MonsterInstance).name)}'s max health";
-    }
-    return "Set Scenario Level";
-  }
-
   String get name {
     if (monster != null) return getIt<TranslationService>().t(monster!.type.display);
     if (figure is MonsterInstance) return (figure as MonsterInstance).name;

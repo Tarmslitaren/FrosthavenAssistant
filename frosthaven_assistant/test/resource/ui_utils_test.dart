@@ -1,10 +1,22 @@
 // ignore_for_file: avoid-late-keyword, no-empty-block, no-magic-number
 
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 import '../command/test_helpers.dart';
+
+Widget _l10nApp(Widget home) => MaterialApp(
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [Locale('en')],
+      home: home,
+    );
 
 void main() {
   setUpAll(() async {
@@ -96,14 +108,12 @@ void main() {
   group('dialog and toast widget functions', () {
     testWidgets('openDialogOld opens a dialog without throwing',
         (tester) async {
-      await tester.pumpWidget(MaterialApp(
-        home: Builder(
-          builder: (context) => TextButton(
-            onPressed: () => openDialogOld(context, const Text('old dialog')),
-            child: const Text('tap'),
-          ),
+      await tester.pumpWidget(_l10nApp(Builder(
+        builder: (context) => TextButton(
+          onPressed: () => openDialogOld(context, const Text('old dialog')),
+          child: const Text('tap'),
         ),
-      ));
+      )));
       await tester.tap(find.text('tap'));
       await tester.pumpAndSettle();
       expect(find.text('old dialog'), findsOneWidget);
@@ -111,43 +121,37 @@ void main() {
 
     testWidgets('createToastContent returns a GestureDetector', (tester) async {
       late Widget toast;
-      await tester.pumpWidget(MaterialApp(
-        home: Builder(
-          builder: (context) {
-            toast = createToastContent(context, 'some toast text');
-            return const SizedBox();
-          },
-        ),
-      ));
+      await tester.pumpWidget(_l10nApp(Builder(
+        builder: (context) {
+          toast = createToastContent(context, 'some toast text');
+          return const SizedBox();
+        },
+      )));
       expect(toast, isA<GestureDetector>());
     });
 
     testWidgets('showToast does not throw when context is mounted',
         (tester) async {
-      await tester.pumpWidget(MaterialApp(
-        home: Scaffold(
-          body: Builder(
-            builder: (context) => TextButton(
-              onPressed: () => showToast(context, 'test toast'),
-              child: const Text('tap'),
-            ),
+      await tester.pumpWidget(_l10nApp(Scaffold(
+        body: Builder(
+          builder: (context) => TextButton(
+            onPressed: () => showToast(context, 'test toast'),
+            child: const Text('tap'),
           ),
         ),
-      ));
+      )));
       await tester.tap(find.text('tap'));
       await tester.pump();
       expect(find.text('tap'), findsOneWidget);
     });
 
     testWidgets('rebuildAllChildren does not throw', (tester) async {
-      await tester.pumpWidget(MaterialApp(
-        home: Builder(
-          builder: (context) => TextButton(
-            onPressed: () => rebuildAllChildren(context),
-            child: const Text('tap'),
-          ),
+      await tester.pumpWidget(_l10nApp(Builder(
+        builder: (context) => TextButton(
+          onPressed: () => rebuildAllChildren(context),
+          child: const Text('tap'),
         ),
-      ));
+      )));
       await tester.tap(find.text('tap'));
       await tester.pump();
       expect(find.text('tap'), findsOneWidget);
@@ -156,50 +160,44 @@ void main() {
     testWidgets('defaultBuildDraggableFeedback builds a widget',
         (tester) async {
       late Widget feedback;
-      await tester.pumpWidget(MaterialApp(
-        home: Builder(
-          builder: (context) {
-            feedback = defaultBuildDraggableFeedback(
-              context,
-              const BoxConstraints(),
-              const Text('child'),
-            );
-            return const SizedBox();
-          },
-        ),
-      ));
+      await tester.pumpWidget(_l10nApp(Builder(
+        builder: (context) {
+          feedback = defaultBuildDraggableFeedback(
+            context,
+            const BoxConstraints(),
+            const Text('child'),
+          );
+          return const SizedBox();
+        },
+      )));
       expect(feedback, isNotNull);
     });
 
     testWidgets('showToastSticky does not throw when context is mounted',
         (tester) async {
-      await tester.pumpWidget(MaterialApp(
-        home: Scaffold(
-          body: Builder(
-            builder: (context) => TextButton(
-              onPressed: () => showToastSticky(context, 'sticky toast'),
-              child: const Text('tap'),
-            ),
+      await tester.pumpWidget(_l10nApp(Scaffold(
+        body: Builder(
+          builder: (context) => TextButton(
+            onPressed: () => showToastSticky(context, 'sticky toast'),
+            child: const Text('tap'),
           ),
         ),
-      ));
+      )));
       await tester.tap(find.text('tap'));
       await tester.pump();
       expect(find.text('tap'), findsOneWidget);
     });
 
     testWidgets('showErrorToastStickyWithRetry does not throw', (tester) async {
-      await tester.pumpWidget(MaterialApp(
-        home: Scaffold(
-          body: Builder(
-            builder: (context) => TextButton(
-              onPressed: () =>
-                  showErrorToastStickyWithRetry(context, 'error msg', () {}),
-              child: const Text('tap'),
-            ),
+      await tester.pumpWidget(_l10nApp(Scaffold(
+        body: Builder(
+          builder: (context) => TextButton(
+            onPressed: () =>
+                showErrorToastStickyWithRetry(context, 'error msg', () {}),
+            child: const Text('tap'),
           ),
         ),
-      ));
+      )));
       await tester.tap(find.text('tap'));
       await tester.pump();
       expect(find.text('tap'), findsOneWidget);
@@ -208,15 +206,13 @@ void main() {
     testWidgets(
         'openDialogWithDismissOption with dismissible=false opens dialog',
         (tester) async {
-      await tester.pumpWidget(MaterialApp(
-        home: Builder(
-          builder: (context) => TextButton(
-            onPressed: () => openDialogWithDismissOption(
-                context, const Text('non-dismissible'), false),
-            child: const Text('tap'),
-          ),
+      await tester.pumpWidget(_l10nApp(Builder(
+        builder: (context) => TextButton(
+          onPressed: () => openDialogWithDismissOption(
+              context, const Text('non-dismissible'), false),
+          child: const Text('tap'),
         ),
-      ));
+      )));
       await tester.tap(find.text('tap'));
       await tester.pumpAndSettle();
       expect(find.text('non-dismissible'), findsOneWidget);

@@ -7,6 +7,7 @@ import '../../Resource/commands/remove_amd_card_command.dart';
 import '../../Resource/commands/return_modifier_card_command.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/state/game_state.dart';
+import '../../l10n/app_localizations.dart';
 import '../../services/service_locator.dart';
 
 class RemoveAMDCardMenu extends StatelessWidget {
@@ -60,8 +61,8 @@ class RemoveAMDCardMenu extends StatelessWidget {
 
                   Navigator.pop(context);
                 },
-                child: const Text(
-                  "Remove card?",
+                child: Text(
+                  AppLocalizations.of(context)!.removeCardQuestion,
                   textAlign: TextAlign.center,
                   style: kButtonLabelStyle,
                 ),
@@ -76,8 +77,8 @@ class RemoveAMDCardMenu extends StatelessWidget {
                     Navigator.pop(context);
                   }
                 },
-                child: const Text(
-                  "Return top card",
+                child: Text(
+                  AppLocalizations.of(context)!.returnTopCard,
                   textAlign: TextAlign.center,
                   style: kButtonLabelStyle,
                 ),

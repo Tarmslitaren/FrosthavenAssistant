@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_amd_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/send_to_bottom_menu.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 import 'package:frosthaven_assistant/Resource/commands/reorder_modifier_list_command.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:reorderables/reorderables.dart';
@@ -195,8 +196,8 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                         right: 0,
                         bottom: 0,
                         child: TextButton(
-                            child: const Text(
-                              'Close',
+                            child: Text(
+                              AppLocalizations.of(context)!.close,
                               style: kButtonLabelStyle,
                             ),
                             onPressed: () {

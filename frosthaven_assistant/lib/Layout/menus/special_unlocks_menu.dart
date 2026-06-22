@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/widgets/menu_card.dart';
 import 'package:frosthaven_assistant/Resource/commands/unlock_special_command.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 import '../../Resource/app_constants.dart';
 import '../../Resource/settings.dart';
@@ -43,7 +44,7 @@ class SpecialUnlocksMenu extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 10),
-              child: Text('Special Unlocks',
+              child: Text(AppLocalizations.of(context)!.specialUnlocks,
                   style: getTitleTextStyle(1, forceBlack: true)),
             ),
             const SizedBox(

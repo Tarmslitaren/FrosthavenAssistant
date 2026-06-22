@@ -3,6 +3,7 @@ import 'package:frosthaven_assistant/Layout/widgets/filtered_list_view.dart';
 import 'package:frosthaven_assistant/Layout/widgets/menu_card.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_campaign_command.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 import '../../../Resource/commands/set_scenario_command.dart';
 import '../../../Resource/game_data.dart';
@@ -229,7 +230,8 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
           children: [
             const SizedBox(height: kMenuTopPadding),
             Column(children: [
-              const Text("Set Scenario", style: kTitleStyle),
+              Text(AppLocalizations.of(context)!.menuSetScenario,
+                  style: kTitleStyle),
               ExpansionTile(
                 key: UniqueKey(),
                 title: Text(
@@ -267,9 +269,9 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                             gameState: _gameState));
                       }
                     },
-                    decoration: const InputDecoration(
-                        labelText: 'Set Scenario',
-                        suffixIcon: Icon(Icons.search)),
+                    decoration: InputDecoration(
+                        labelText: AppLocalizations.of(context)!.menuSetScenario,
+                        suffixIcon: const Icon(Icons.search)),
                   )),
             ),
             const SizedBox(height: kMenuTopPadding),

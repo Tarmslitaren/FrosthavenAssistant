@@ -15,6 +15,7 @@ import '../../../Resource/enums.dart';
 import '../../../Resource/scaling.dart';
 import '../../../Resource/settings.dart';
 import '../../../Resource/ui_utils.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../services/network/client.dart';
 import '../../../services/network/network.dart';
 import '../../../services/service_locator.dart';
@@ -55,42 +56,43 @@ class SettingsMenuState extends State<SettingsMenu> {
         SettingsMenu._kBarWidthBase * SettingsMenu._kBarWidthMultiplier;
     double maxBarScale = screenWidth / referenceMinBarWidth;
 
+    final l10n = AppLocalizations.of(context)!;
     return ScrollableMenuCard(
         maxWidth: kMenuNarrowWidth,
         onClose: settings.saveToDisk,
         child: Column(
           children: [
-            const Text("Settings", style: kTitleStyle),
+            Text(l10n.menuSettings, style: kTitleStyle),
             SettingsCheckbox(
-                title: "Dark mode",
+                title: l10n.settingsDarkMode,
                 notifier: settings.darkMode,
                 onChanged: (v) {
                   settings.darkMode.value = v;
                   settings.saveToDisk();
                 }),
             SettingsCheckbox(
-                title: "Soft numpad for input",
+                title: l10n.settingsSoftNumpad,
                 notifier: settings.softNumpadInput,
                 onChanged: (v) {
                   settings.softNumpadInput.value = v;
                   settings.saveToDisk();
                 }),
             SettingsCheckbox(
-                title: "Don't ask for initiative",
+                title: l10n.settingsNoInit,
                 notifier: settings.noInit,
                 onChanged: (v) {
                   settings.noInit.value = v;
                   settings.saveToDisk();
                 }),
             SettingsCheckbox(
-                title: "Expire Conditions",
+                title: l10n.settingsExpireConditions,
                 notifier: settings.expireConditions,
                 onChanged: (v) {
                   settings.expireConditions.value = v;
                   settings.saveToDisk();
                 }),
             SettingsCheckbox(
-                title: "Don't track Standees",
+                title: l10n.settingsNoStandees,
                 notifier: settings.noStandees,
                 onChanged: (v) {
                   _gameState.action(TrackStandeesCommand(!v,
@@ -98,7 +100,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                   settings.saveToDisk();
                 }),
             SettingsCheckbox(
-                title: "Auto Add Standees",
+                title: l10n.settingsAutoAddStandees,
                 notifier: settings.autoAddStandees,
                 onChanged: (v) {
                   settings.autoAddStandees.value = v;
@@ -106,7 +108,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                   _gameState.updateList.notify();
                 }),
             SettingsCheckbox(
-                title: "Auto Add Timed Spawns",
+                title: l10n.settingsAutoAddSpawns,
                 notifier: settings.autoAddSpawns,
                 onChanged: (v) {
                   settings.autoAddSpawns.value = v;
@@ -114,14 +116,14 @@ class SettingsMenuState extends State<SettingsMenu> {
                   _gameState.updateList.notify();
                 }),
             SettingsCheckbox(
-                title: "Random Standees",
+                title: l10n.settingsRandomStandees,
                 notifier: settings.randomStandees,
                 onChanged: (v) {
                   settings.randomStandees.value = v;
                   settings.saveToDisk();
                 }),
             SettingsCheckbox(
-                title: "No Calculations",
+                title: l10n.settingsNoCalculations,
                 notifier: settings.noCalculation,
                 onChanged: (v) {
                   settings.noCalculation.value = v;
@@ -129,7 +131,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                   _gameState.updateAllUI();
                 }),
             SettingsCheckbox(
-                title: "Hide Loot Deck",
+                title: l10n.settingsHideLootDeck,
                 notifier: settings.hideLootDeck,
                 onChanged: (v) {
                   settings.hideLootDeck.value = v;
@@ -137,7 +139,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                   _gameState.updateAllUI();
                 }),
             SettingsCheckbox(
-                title: "Stat card text shimmers",
+                title: l10n.settingsShimmer,
                 notifier: settings.shimmer,
                 onChanged: (v) {
                   settings.shimmer.value = v;
@@ -145,8 +147,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                   _gameState.updateAllUI();
                 }),
             SettingsCheckbox(
-                title:
-                    "Use Frosthaven Hazardous Terrain Calculation in OG Gloomhaven",
+                title: l10n.settingsFhHazTerrainCalc,
                 notifier: settings.fhHazTerrainCalcInOGGloom,
                 onChanged: (v) {
                   settings.fhHazTerrainCalcInOGGloom.value = v;
@@ -154,7 +155,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                   _gameState.updateAllUI();
                 }),
             SettingsCheckbox(
-                title: "Use Ally Attack Modifier Deck in OG Gloomhaven",
+                title: l10n.settingsAllyDeckOGGloom,
                 notifier: _gameState.allyDeckInOGGloom,
                 onChanged: (v) {
                   _gameState.action(
@@ -162,7 +163,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                   _gameState.updateAllUI();
                 }),
             SettingsCheckbox(
-                title: "Show Scenario names in list",
+                title: l10n.settingsShowScenarioNames,
                 notifier: settings.showScenarioNames,
                 onChanged: (v) {
                   settings.showScenarioNames.value = v;
@@ -170,14 +171,14 @@ class SettingsMenuState extends State<SettingsMenu> {
                   _gameState.updateAllUI();
                 }),
             SettingsCheckbox(
-                title: "Show Battle Goal Reminder",
+                title: l10n.settingsShowBattleGoalReminder,
                 notifier: settings.showBattleGoalReminder,
                 onChanged: (v) {
                   settings.showBattleGoalReminder.value = v;
                   settings.saveToDisk();
                 }),
             SettingsCheckbox(
-                title: "Show Custom Content",
+                title: l10n.settingsShowCustomContent,
                 notifier: settings.showCustomContent,
                 onChanged: (v) {
                   settings.showCustomContent.value = v;
@@ -185,7 +186,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                   _gameState.updateAllUI();
                 }),
             SettingsCheckbox(
-                title: "Show Sections in Main Screen",
+                title: l10n.settingsShowSections,
                 notifier: settings.showSectionsInMainView,
                 onChanged: (v) {
                   settings.showSectionsInMainView.value = v;
@@ -193,7 +194,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                   _gameState.updateAllUI();
                 }),
             SettingsCheckbox(
-                title: "Show Round Special Rule Reminders",
+                title: l10n.settingsShowReminders,
                 notifier: settings.showReminders,
                 onChanged: (v) {
                   settings.showReminders.value = v;
@@ -201,7 +202,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                   _gameState.updateAllUI();
                 }),
             SettingsCheckbox(
-                title: "Show Attack Modifier Decks",
+                title: l10n.settingsShowAmdDeck,
                 notifier: settings.showAmdDeck,
                 onChanged: (v) {
                   settings.showAmdDeck.value = v;
@@ -210,7 +211,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                   _gameState.updateAllUI();
                 }),
             SettingsCheckbox(
-                title: "Show character Attack Modifier Decks",
+                title: l10n.settingsShowCharacterAmd,
                 notifier: settings.showCharacterAMD,
                 onChanged: (v) {
                   settings.showCharacterAMD.value = v;
@@ -219,7 +220,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                   _gameState.updateAllUI();
                 }),
             SettingsCheckbox(
-                title: "Enable heath wheel: drag left-right to change health",
+                title: l10n.settingsHealthWheel,
                 notifier: settings.enableHeathWheel,
                 onChanged: (v) {
                   settings.enableHeathWheel.value = v;
@@ -228,7 +229,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                 }),
             if (!Platform.isIOS)
               SettingsCheckbox(
-                  title: "Fullscreen",
+                  title: l10n.settingsFullscreen,
                   notifier: settings.fullScreen,
                   onChanged: (v) {
                     settings.setFullscreen(v);
@@ -240,7 +241,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                   left: SettingsMenu._kLabelPaddingLeft,
                   top: SettingsMenu._kLabelPaddingTop),
               alignment: Alignment.bottomLeft,
-              child: const Text("Main List Scaling:"),
+              child: Text(l10n.settingsMainListScaling),
             ),
             Slider(
               min: SettingsMenu._kScaleMin,
@@ -260,7 +261,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                   left: SettingsMenu._kLabelPaddingLeft,
                   top: SettingsMenu._kLabelPaddingTop),
               alignment: Alignment.bottomLeft,
-              child: const Text("App Bar Scaling:"),
+              child: Text(l10n.settingsAppBarScaling),
             ),
             Slider(
               min: min(SettingsMenu._kBarScaleMin, maxBarScale),
@@ -273,7 +274,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                 });
               },
             ),
-            const Text("Style:", style: kTitleStyle),
+            Text(l10n.settingsStyleLabel, style: kTitleStyle),
             RadioGroup<Style>(
               groupValue: settings.style.value,
               onChanged: (value) {
@@ -290,34 +291,34 @@ class SettingsMenuState extends State<SettingsMenu> {
                   Row(
                     children: [
                       Radio<Style>(value: Style.frosthaven),
-                      const Text('Frosthaven'),
+                      Text(l10n.styleFrosthaven),
                     ],
                   ),
                   Row(
                     children: [
                       Radio<Style>(value: Style.original),
-                      const Text('Original'),
+                      Text(l10n.styleOriginal),
                     ],
                   ),
                 ],
               ),
             ),
             ListTile(
-                title: const Text("Clear unlocked characters and stuff"),
+                title: Text(l10n.settingsClearUnlocked),
                 onTap: () {
                   setState(() {
                     _gameState.action(ClearUnlockedClassesCommand());
                   });
                 }),
             ListTile(
-                title: const Text("Unlock specials"),
+                title: Text(l10n.settingsUnlockSpecials),
                 onTap: () {
                   openDialog(context, SpecialUnlocksMenu());
                 }),
             SettingsNetworkSection(
                 settings: settings, network: _network, client: _client),
             ListTile(
-                title: const Text("Load/Save State"),
+                title: Text(l10n.settingsLoadSaveState),
                 onTap: () {
                   openDialog(context, const SaveMenu());
                 }),

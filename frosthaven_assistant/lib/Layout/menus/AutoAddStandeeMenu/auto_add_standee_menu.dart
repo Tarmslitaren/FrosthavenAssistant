@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 import '../../../Model/room.dart';
 import '../../../Resource/app_constants.dart';
@@ -192,8 +193,8 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
           if (startCommandIndex > _gameState.commandIndex.value) {
             _scheduleClose();
             return TextButton(
-                child: const Text(
-                  'Close',
+                child: Text(
+                  AppLocalizations.of(context)!.close,
                   style: kButtonLabelStyle,
                 ),
                 onPressed: () {
@@ -221,8 +222,8 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
           if (monster == null) {
             _scheduleClose();
             return TextButton(
-                child: const Text(
-                  'Close',
+                child: Text(
+                  AppLocalizations.of(context)!.close,
                   style: kButtonLabelStyle,
                 ),
                 onPressed: () {

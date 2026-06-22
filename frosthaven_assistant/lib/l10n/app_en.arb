@@ -1,0 +1,171 @@
+{
+  "@@locale": "en",
+
+  "menuSetScenario": "Set Scenario",
+  "menuAddCharacter": "Add Character",
+  "menuRemoveCharacters": "Remove Characters",
+  "menuSetLevel": "Set Level",
+  "menuLootDeck": "Loot Deck Menu",
+  "menuAddMonsters": "Add Monsters",
+  "menuRemoveMonsters": "Remove Monsters",
+  "menuShowAllyDeck": "Show Ally Attack Modifier Deck",
+  "menuHideAllyDeck": "Hide Ally Attack Modifier Deck",
+  "menuSettings": "Settings",
+  "menuDocumentation": "Documentation",
+  "menuDonate": "Donate",
+  "menuExit": "Exit",
+  "menuAddSection": "Add Section",
+  "menuAddRandomDungeonCard": "Add Random Dungeon Card",
+
+  "undo": "Undo",
+  "undoWithDescription": "Undo: {description}",
+  "@undoWithDescription": {
+    "placeholders": {
+      "description": { "type": "String" }
+    }
+  },
+  "redo": "Redo",
+  "redoWithDescription": "Redo: {description}",
+  "@redoWithDescription": {
+    "placeholders": {
+      "description": { "type": "String" }
+    }
+  },
+
+  "versionLabel": "Version {version}",
+  "@versionLabel": {
+    "placeholders": {
+      "version": { "type": "String" }
+    }
+  },
+
+  "connectedAsClient": "Connected as Client",
+  "connecting": "Connecting...",
+  "connectAsClientWithIp": "Connect as Client ({ip})",
+  "@connectAsClientWithIp": {
+    "placeholders": {
+      "ip": { "type": "String" }
+    }
+  },
+  "connectAsClientLabel": "Connect as Client",
+  "stopServerWithIp": "Stop Server {ip}",
+  "@stopServerWithIp": {
+    "placeholders": {
+      "ip": { "type": "String" }
+    }
+  },
+  "startHostServerWithIp": "Start Host Server {ip}",
+  "@startHostServerWithIp": {
+    "placeholders": {
+      "ip": { "type": "String" }
+    }
+  },
+  "stopServerButton": "Stop Server",
+  "startHostServerButton": "Start Host Server",
+  "networkConnectLocal": "Connect devices on local wifi:",
+  "networkServerIpHint": "server ip address",
+  "networkPortHint": "port",
+
+  "settingsDarkMode": "Dark mode",
+  "settingsSoftNumpad": "Soft numpad for input",
+  "settingsNoInit": "Don't ask for initiative",
+  "settingsExpireConditions": "Expire Conditions",
+  "settingsNoStandees": "Don't track Standees",
+  "settingsAutoAddStandees": "Auto Add Standees",
+  "settingsAutoAddSpawns": "Auto Add Timed Spawns",
+  "settingsRandomStandees": "Random Standees",
+  "settingsNoCalculations": "No Calculations",
+  "settingsHideLootDeck": "Hide Loot Deck",
+  "settingsShimmer": "Stat card text shimmers",
+  "settingsFhHazTerrainCalc": "Use Frosthaven Hazardous Terrain Calculation in OG Gloomhaven",
+  "settingsAllyDeckOGGloom": "Use Ally Attack Modifier Deck in OG Gloomhaven",
+  "settingsShowScenarioNames": "Show Scenario names in list",
+  "settingsShowBattleGoalReminder": "Show Battle Goal Reminder",
+  "settingsShowCustomContent": "Show Custom Content",
+  "settingsShowSections": "Show Sections in Main Screen",
+  "settingsShowReminders": "Show Round Special Rule Reminders",
+  "settingsShowAmdDeck": "Show Attack Modifier Decks",
+  "settingsShowCharacterAmd": "Show character Attack Modifier Decks",
+  "settingsHealthWheel": "Enable heath wheel: drag left-right to change health",
+  "settingsFullscreen": "Fullscreen",
+  "settingsMainListScaling": "Main List Scaling:",
+  "settingsAppBarScaling": "App Bar Scaling:",
+  "settingsStyleLabel": "Style:",
+  "styleFrosthaven": "Frosthaven",
+  "styleOriginal": "Original",
+  "settingsClearUnlocked": "Clear unlocked characters and stuff",
+  "settingsUnlockSpecials": "Unlock specials",
+  "settingsLoadSaveState": "Load/Save State",
+
+  "noResultsFound": "No results found",
+  "close": "Close",
+  "retry": "RETRY",
+  "specialUnlocks": "Special Unlocks",
+  "loadSaveDeleteCharacters": "Load, Save or Delete Characters.",
+  "loadAddDeleteSaves": "Load, Add or Delete save states.",
+  "addNewSave": "Add new Save",
+  "addNewSaveLabel": "Add new Save:",
+  "loadButton": "Load",
+  "saveButton": "Save",
+  "deleteButton": "Delete",
+  "setSaveName": "Set save name:",
+  "loadOrSaveCharacters": "Load or Save Characters",
+  "loadCharacter": "Load Character:",
+  "removeAll": "Remove All",
+  "removeCardQuestion": "Remove card?",
+  "sendToBottom": "Send to Bottom",
+  "shuffleUndrawnCards": "Shuffle un-drawn Cards",
+  "returnToDiscardPile": "Return card to discard pile",
+  "returnToDrawPile": "Return card to draw pile",
+  "addExtraLootCard": "Add Extra Loot Card",
+  "addStandeeNr": "Add Standee Nr",
+  "summonedLabel": "Summoned:",
+  "characterDecks": "Character Decks",
+  "shuffleAndDraw": "Shuffle\n& Draw",
+  "draw": "Draw",
+  "nextRound": " Next Round",
+  "returnTopCard": "Return top card",
+  "removeCardWithDetails": "Remove {title}\n(card nr: {nr})",
+  "@removeCardWithDetails": {
+    "placeholders": {
+      "title": { "type": "String" },
+      "nr": { "type": "int" }
+    }
+  },
+  "tapCardToAddToDeck": "Tap Card to add to your deck",
+  "removeCardFromDeckQuestion": "Remove card from your deck?",
+  "changeName": "Change name:",
+  "showBosses": "Show Bosses",
+  "showScenarioSpecialMonsters": "Show Scenario Special Monsters",
+  "addAsAlly": "Add as Ally",
+  "addMonsterLabel": "Add Monster",
+  "allCampaigns": "All Campaigns",
+  "showMonstersFrom": "      Show monsters from:   ",
+
+  "setMonsterLevel": "Set {name}'s level",
+  "@setMonsterLevel": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "setSummonHealth": "Set {name}'s max health",
+  "@setSummonHealth": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "setScenarioLevel": "Set Scenario Level",
+
+  "enhancedLevel": "Enhanced: {level}",
+  "@enhancedLevel": {
+    "placeholders": {
+      "level": { "type": "String" }
+    }
+  },
+  "soloLabel": "Solo:",
+  "automaticScenarioLevel": "Automatic Scenario Level:",
+  "difficultyLabel": "Difficulty:",
+  "lootCardEnhancements": "Loot Card Enhancements",
+  "addPerks": "Add Perks",
+  "useFrosthavenPerks": "Use Frosthaven Perks"
+}

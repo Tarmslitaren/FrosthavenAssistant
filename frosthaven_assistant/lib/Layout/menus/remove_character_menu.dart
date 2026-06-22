@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/widgets/menu_card.dart';
 import 'package:frosthaven_assistant/Layout/menus/save_character_menu.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 import '../../Model/character_class.dart';
 import '../../Resource/commands/remove_character_command.dart';
@@ -69,12 +70,12 @@ class RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
                 openDialog(context, SaveCharacterMenu());
               },
               child: Text(
-                "Load or Save Characters",
+                AppLocalizations.of(context)!.loadOrSaveCharacters,
                 style: kTitleStyle,
               ),
             ),
             ListTile(
-              title: const Text("Remove All", style: kTitleStyle),
+              title: Text(AppLocalizations.of(context)!.removeAll, style: kTitleStyle),
               onTap: () {
                 //todo: ask if wanna save
                 _gameState.action(RemoveCharacterCommand(currentCharacters,

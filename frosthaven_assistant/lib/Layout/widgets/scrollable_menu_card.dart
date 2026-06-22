@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 class ScrollableMenuCard extends StatelessWidget {
   static const double _kTopSpacing = 20;
@@ -43,7 +44,8 @@ class ScrollableMenuCard extends StatelessWidget {
               right: 0,
               bottom: 0,
               child: TextButton(
-                child: const Text('Close', style: kButtonLabelStyle),
+                child: Text(AppLocalizations.of(context)!.close,
+                    style: kButtonLabelStyle),
                 onPressed: () {
                   Navigator.pop(context);
                   onClose?.call();

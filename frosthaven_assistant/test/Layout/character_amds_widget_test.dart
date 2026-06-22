@@ -1,6 +1,7 @@
 // ignore_for_file: no-magic-number
 
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/ModifierDeckWidget/modifier_deck_widget.dart';
 import 'package:frosthaven_assistant/Layout/character_amds_widget.dart';
@@ -10,6 +11,7 @@ import 'package:frosthaven_assistant/Resource/commands/remove_character_command.
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../command/test_helpers.dart';
@@ -29,7 +31,15 @@ void main() {
     addTearDown(() => FlutterError.onError = originalOnError);
     FlutterError.onError = ignoreOverflowErrors;
     await tester.pumpWidget(
-      const MaterialApp(home: Scaffold(body: CharacterAmdsWidget())),
+      MaterialApp(
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        supportedLocales: const [Locale('en')],
+        home: const Scaffold(body: CharacterAmdsWidget()),
+      ),
     );
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 600));

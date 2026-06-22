@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/widgets/scrollable_menu_card.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 import '../../Resource/commands/add_loot_card_command.dart';
 import '../../services/service_locator.dart';
@@ -20,8 +21,8 @@ class AddLootCardMenu extends StatelessWidget {
     return ScrollableMenuCard(
       maxWidth: kMenuNarrowWidth,
       child: Column(children: [
-        const Text(
-          "Add Extra Loot Card",
+        Text(
+          AppLocalizations.of(context)!.addExtraLootCard,
           style: kTitleStyle,
         ),
         //TODO: only show what can be added?

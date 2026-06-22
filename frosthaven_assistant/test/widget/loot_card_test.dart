@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/loot_card_widget.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 import '../command/test_helpers.dart';
 
 // ignore_for_file: no-magic-number
+
+Widget _l10nApp(Widget home) => MaterialApp(
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [Locale('en')],
+      home: home,
+    );
 
 void main() {
   setUpAll(() async {
@@ -37,11 +49,7 @@ void main() {
       final originalOnError = FlutterError.onError;
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: LootCardFront(card: card, scale: 1.0),
-          ),
-        ),
+        _l10nApp(Scaffold(body: LootCardFront(card: card, scale: 1.0))),
       );
       FlutterError.onError = originalOnError;
       expect(find.byType(Image), findsAtLeast(1));
@@ -52,11 +60,7 @@ void main() {
       final originalOnError = FlutterError.onError;
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: LootCardFront(card: card, scale: 1.0),
-          ),
-        ),
+        _l10nApp(Scaffold(body: LootCardFront(card: card, scale: 1.0))),
       );
       FlutterError.onError = originalOnError;
       // materiel type with baseValue.one should show +1
@@ -69,11 +73,7 @@ void main() {
       final originalOnError = FlutterError.onError;
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: LootCardFront(card: card, scale: 1.0),
-          ),
-        ),
+        _l10nApp(Scaffold(body: LootCardFront(card: card, scale: 1.0))),
       );
       FlutterError.onError = originalOnError;
       // No value text for other type with no enhancement
@@ -86,11 +86,7 @@ void main() {
       final originalOnError = FlutterError.onError;
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: LootCardFront(card: card, scale: 1.0),
-          ),
-        ),
+        _l10nApp(Scaffold(body: LootCardFront(card: card, scale: 1.0))),
       );
       FlutterError.onError = originalOnError;
       expect(find.textContaining('Enhanced'), findsOneWidget);
@@ -102,11 +98,7 @@ void main() {
       final originalOnError = FlutterError.onError;
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: LootCardFront(card: card, scale: 1.0),
-          ),
-        ),
+        _l10nApp(Scaffold(body: LootCardFront(card: card, scale: 1.0))),
       );
       FlutterError.onError = originalOnError;
       expect(find.text('1418'), findsOneWidget);
@@ -118,11 +110,7 @@ void main() {
       final originalOnError = FlutterError.onError;
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: LootCardFront(card: card, scale: 1.0),
-          ),
-        ),
+        _l10nApp(Scaffold(body: LootCardFront(card: card, scale: 1.0))),
       );
       FlutterError.onError = originalOnError;
       expect(find.text('1419'), findsOneWidget);
@@ -134,11 +122,7 @@ void main() {
       final originalOnError = FlutterError.onError;
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: LootCardFront(card: card, scale: 1.0),
-          ),
-        ),
+        _l10nApp(Scaffold(body: LootCardFront(card: card, scale: 1.0))),
       );
       FlutterError.onError = originalOnError;
       // Owner image should be rendered (Image widgets exist)
@@ -151,11 +135,7 @@ void main() {
       final originalOnError = FlutterError.onError;
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: LootCardFront(card: card, scale: 1.0),
-          ),
-        ),
+        _l10nApp(Scaffold(body: LootCardFront(card: card, scale: 1.0))),
       );
       FlutterError.onError = originalOnError;
       // The owner icon's drop-shadow layer is a Transform.translate wrapping
@@ -171,11 +151,7 @@ void main() {
       final originalOnError = FlutterError.onError;
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: LootCardFront(card: card, scale: 1.0),
-          ),
-        ),
+        _l10nApp(Scaffold(body: LootCardFront(card: card, scale: 1.0))),
       );
       FlutterError.onError = originalOnError;
       // No owner → no shadow layer
@@ -188,11 +164,7 @@ void main() {
       final originalOnError = FlutterError.onError;
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: LootCardRear(scale: 1.0),
-          ),
-        ),
+        _l10nApp(Scaffold(body: LootCardRear(scale: 1.0))),
       );
       FlutterError.onError = originalOnError;
       expect(find.byType(Image), findsOneWidget);
@@ -206,11 +178,7 @@ void main() {
       final originalOnError = FlutterError.onError;
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: LootCardWidget(card: card, revealed: true),
-          ),
-        ),
+        _l10nApp(Scaffold(body: LootCardWidget(card: card, revealed: true))),
       );
       FlutterError.onError = originalOnError;
       // Front has a Stack widget
@@ -223,11 +191,7 @@ void main() {
       final originalOnError = FlutterError.onError;
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: LootCardWidget(card: card, revealed: false),
-          ),
-        ),
+        _l10nApp(Scaffold(body: LootCardWidget(card: card, revealed: false))),
       );
       FlutterError.onError = originalOnError;
       expect(find.byType(ClipRRect), findsOneWidget);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 class MenuCard extends StatelessWidget {
   static const double _kDefaultMaxWidth = 400;
@@ -29,8 +30,8 @@ class MenuCard extends StatelessWidget {
             right: 0,
             bottom: 0,
             child: TextButton(
-              child: const Text(
-                'Close',
+              child: Text(
+                AppLocalizations.of(context)!.close,
                 style: kButtonLabelStyle,
               ),
               onPressed: () {

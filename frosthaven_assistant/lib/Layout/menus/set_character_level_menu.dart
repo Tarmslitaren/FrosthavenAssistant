@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_name_command.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 import '../../Layout/widgets/modal_background.dart';
 import '../../Resource/commands/change_stat_commands/change_max_health_command.dart';
@@ -131,7 +132,8 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                     ownerId: widget.character.id,
                     scale: scale)
               ]),
-              Text("Change name:", style: getTitleTextStyle(scale)),
+              Text(AppLocalizations.of(context)!.changeName,
+                  style: getTitleTextStyle(scale)),
               SizedBox(
                   width: _kNameFieldWidth,
                   child: TextField(

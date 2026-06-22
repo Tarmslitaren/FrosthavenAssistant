@@ -4,6 +4,7 @@ import 'package:frosthaven_assistant/Layout/widgets/filtered_list_view.dart';
 import 'package:frosthaven_assistant/Layout/widgets/menu_card.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 import '../../Resource/commands/set_scenario_command.dart';
 import '../../Resource/game_data.dart';
@@ -137,8 +138,8 @@ class AddSectionMenuState extends State<AddSectionMenu> {
                 decoration: InputDecoration(
                     labelText:
                         _gameState.scenario.value == "#Random Dungeon"
-                            ? 'Add Random Dungeon Card'
-                            : 'Add Section',
+                            ? AppLocalizations.of(context)!.menuAddRandomDungeonCard
+                            : AppLocalizations.of(context)!.menuAddSection,
                     suffixIcon: const Icon(Icons.search)),
               ),
             ),

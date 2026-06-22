@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/widgets/standee_nr_button.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 import '../../Layout/widgets/modal_background.dart';
 import '../../Resource/commands/add_standee_command.dart';
@@ -87,7 +88,8 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(height: kMenuTopPadding * scale),
-                    Text("Add Standee Nr", style: getTitleTextStyle(scale)),
+                    Text(AppLocalizations.of(context)!.addStandeeNr,
+                        style: getTitleTextStyle(scale)),
                     ...List.generate(
                       (nrOfStandees + AddStandeeMenu._kRow1Max - 1) ~/
                           AddStandeeMenu._kRow1Max,
@@ -127,7 +129,8 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
                       ),
                     ),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      Text("Summoned:", style: getSmallTextStyle(scale)),
+                      Text(AppLocalizations.of(context)!.summonedLabel,
+                          style: getSmallTextStyle(scale)),
                       Checkbox(
                         checkColor: Colors.black,
                         activeColor: Colors.grey.shade200,

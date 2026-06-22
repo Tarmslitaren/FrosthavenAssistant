@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/widgets/menu_card.dart';
 import 'package:frosthaven_assistant/Layout/menus/save_modal_menu.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
@@ -65,7 +66,7 @@ class SaveMenuState extends State<SaveMenu> {
             Container(
                 height: _kTitleHeight,
                 margin: const EdgeInsets.symmetric(horizontal: 10),
-                child: Text('Load, Add or Delete save states.',
+                child: Text(AppLocalizations.of(context)!.loadAddDeleteSaves,
                     style: getTitleTextStyle(1, forceBlack: true))),
             Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -82,7 +83,7 @@ class SaveMenuState extends State<SaveMenu> {
                       SaveModalMenu(
                           saveName: getSuggestedSaveName(), saveOnly: true));
                 },
-                child: const Text("Add new Save")),
+                child: Text(AppLocalizations.of(context)!.addNewSave)),
             Expanded(
               child: Scrollbar(
                   controller: _scrollController,

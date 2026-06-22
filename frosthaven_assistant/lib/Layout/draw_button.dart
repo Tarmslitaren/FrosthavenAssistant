@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 import '../Resource/app_constants.dart';
 import '../Resource/enums.dart';
@@ -118,7 +119,9 @@ class DrawButtonState extends State<DrawButton> {
                                 alignment: Alignment.center),
                             onPressed: locked ? null : _onPressed,
                             child: Text(
-                              _vm.buttonText,
+                              _vm.isDrawPhase
+                                  ? AppLocalizations.of(context)!.draw
+                                  : AppLocalizations.of(context)!.nextRound,
                               style: getWhiteShadowStyle(
                                   kFontSizeBody * scaling, shadow,
                                   height: _kTextHeight),

@@ -3,9 +3,12 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/game_data.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:json_diff/json_diff.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -70,6 +73,16 @@ void checkNoSideEffects(
     //}
   }
 }
+
+Widget testApp(Widget home) => MaterialApp(
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [Locale('en')],
+      home: home,
+    );
 
 void ignoreOverflowErrors(
   FlutterErrorDetails details, {

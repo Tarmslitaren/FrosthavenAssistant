@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 class FilteredListView<T> extends StatefulWidget {
   const FilteredListView({
@@ -27,8 +28,9 @@ class _FilteredListViewState<T> extends State<FilteredListView<T>> {
   @override
   Widget build(BuildContext context) {
     if (widget.items.isEmpty) {
-      return const Expanded(
-        child: Text('No results found', style: kHeadingStyle),
+      return Expanded(
+        child: Text(AppLocalizations.of(context)!.noResultsFound,
+            style: kHeadingStyle),
       );
     }
     return Expanded(

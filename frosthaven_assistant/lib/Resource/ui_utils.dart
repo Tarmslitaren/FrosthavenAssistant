@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 import '../services/service_locator.dart';
 import 'state/game_state.dart';
@@ -246,8 +247,8 @@ Future<void> showErrorToastStickyWithRetry(
                   retry();
                   ScaffoldMessenger.of(context).hideCurrentSnackBar();
                 },
-                child: const Text("RETRY",
-                    style: TextStyle(
+                child: Text(AppLocalizations.of(context)!.retry,
+                    style: const TextStyle(
                         fontFamily: "markazi",
                         fontSize: kFontSizeToast,
                         color: Colors.white,

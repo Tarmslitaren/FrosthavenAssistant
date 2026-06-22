@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/return_amd_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/ModifierCardWidget/modifier_card_front.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 import 'package:frosthaven_assistant/Layout/ModifierCardWidget/modifier_card_rear.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 
@@ -136,8 +137,8 @@ class RemovedModifierCardMenuState extends State<RemovedModifierCardMenu> {
                         right: 0,
                         bottom: 0,
                         child: TextButton(
-                            child: const Text(
-                              'Close',
+                            child: Text(
+                              AppLocalizations.of(context)!.close,
                               style: kButtonLabelStyle,
                             ),
                             onPressed: () {

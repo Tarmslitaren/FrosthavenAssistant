@@ -3,6 +3,7 @@ import 'package:frosthaven_assistant/Layout/widgets/scrollable_menu_card.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/use_fh_perks_command.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 import '../../../services/service_locator.dart';
 import 'perk_list_tile.dart';
@@ -36,13 +37,14 @@ class PerksMenu extends StatelessWidget {
             hasFHPerkSet && character.characterState.useFHPerks.value;
         final perks = useFHPerks ? perksFH : character.characterClass.perks;
 
+        final l10n = AppLocalizations.of(context)!;
         List<Widget> tiles = [];
-        tiles.add(Text("Add Perks", style: kTitleStyle));
+        tiles.add(Text(l10n.addPerks, style: kTitleStyle));
 
         if (hasFHPerkSet) {
           tiles.add(
             CheckboxListTile(
-              title: Text("Use Frosthaven Perks", style: kBodyStyle),
+              title: Text(l10n.useFrosthavenPerks, style: kBodyStyle),
               value: useFHPerks,
               onChanged: (on) {
                 //setState(() {

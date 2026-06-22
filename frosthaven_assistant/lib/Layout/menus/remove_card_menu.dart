@@ -8,6 +8,7 @@ import '../../Layout/view_models/remove_card_menu_view_model.dart';
 import '../../Layout/widgets/modal_background.dart';
 import '../../Resource/app_constants.dart';
 import '../../Resource/state/game_state.dart';
+import '../../l10n/app_localizations.dart';
 import '../../services/service_locator.dart';
 
 class RemoveCardMenu extends StatelessWidget {
@@ -40,8 +41,11 @@ class RemoveCardMenu extends StatelessWidget {
                     .action(RemoveCardCommand(card, gameState: _gameState));
                 Navigator.pop(context);
               },
-              child: Text("Remove ${card.title}\n(card nr: ${card.nr})",
-                  textAlign: TextAlign.center, style: kButtonLabelStyle)),
+              child: Text(
+                  AppLocalizations.of(context)!
+                      .removeCardWithDetails(card.title, card.nr),
+                  textAlign: TextAlign.center,
+                  style: kButtonLabelStyle)),
           const SizedBox(height: 10),
           if (vm.isInDrawPile)
             TextButton(
@@ -51,7 +55,8 @@ class RemoveCardMenu extends StatelessWidget {
                       gameState: _gameState));
                   Navigator.pop(context);
                 },
-                child: const Text("Send to Bottom", style: kButtonLabelStyle)),
+                child: Text(AppLocalizations.of(context)!.sendToBottom,
+                    style: kButtonLabelStyle)),
           if (vm.isInDrawPile) const SizedBox(height: 10),
           if (vm.isInDrawPile)
             TextButton(
@@ -59,7 +64,7 @@ class RemoveCardMenu extends StatelessWidget {
                   _gameState.action(ShuffleDrawnAbilityCardCommand(card.deck));
                   Navigator.pop(context);
                 },
-                child: const Text("Shuffle un-drawn Cards",
+                child: Text(AppLocalizations.of(context)!.shuffleUndrawnCards,
                     style: kButtonLabelStyle)),
         ]));
   }

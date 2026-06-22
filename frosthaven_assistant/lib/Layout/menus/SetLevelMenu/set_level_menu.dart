@@ -8,6 +8,7 @@ import 'package:frosthaven_assistant/Resource/commands/set_solo_command.dart';
 import '../../../Resource/settings.dart';
 import '../../../Resource/state/game_state.dart';
 import '../../../Resource/ui_utils.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../services/service_locator.dart';
 import '../../view_models/set_level_menu_view_model.dart';
 import '../../widgets/modal_background.dart';
@@ -46,6 +47,17 @@ class SetLevelMenu extends StatelessWidget {
   GameState get _gameState => gameState ?? getIt<GameState>();
   Settings get _settings => settings ?? getIt<Settings>();
 
+  String _buildTitle(BuildContext context, SetLevelMenuViewModel vm) {
+    final l10n = AppLocalizations.of(context)!;
+    if (vm.monster != null) {
+      String n = vm.name;
+      if (n.endsWith('y')) n = '${n.substring(0, n.length - 1)}ie';
+      return l10n.setMonsterLevel(n);
+    }
+    if (vm.isSummon) return l10n.setSummonHealth(vm.name);
+    return l10n.setScenarioLevel;
+  }
+
   @override
   Widget build(BuildContext context) {
     final vm = SetLevelMenuViewModel(
@@ -53,6 +65,7 @@ class SetLevelMenu extends StatelessWidget {
       figure: figure,
       characterId: characterId,
     );
+    final l10n = AppLocalizations.of(context)!;
 
     final bool darkMode = _settings.darkMode.value;
     final double scale = getModalMenuScale(context);
@@ -69,7 +82,7 @@ class SetLevelMenu extends StatelessWidget {
               SizedBox(
                 height: kMenuTopPadding * scale,
               ),
-              Text(vm.title, style: getTitleTextStyle(scale)),
+              Text(_buildTitle(context, vm), style: getTitleTextStyle(scale)),
               if (!vm.isSummon)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -98,7 +111,7 @@ class SetLevelMenu extends StatelessWidget {
                 ),
               if (figure == null)
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text("Solo:", style: getSmallTextStyle(scale)),
+                  Text(l10n.soloLabel, style: getSmallTextStyle(scale)),
                   ValueListenableBuilder<bool>(
                       valueListenable: _gameState.solo,
                       builder: (context, value, child) {
@@ -117,7 +130,7 @@ class SetLevelMenu extends StatelessWidget {
                 ]),
               if (figure == null)
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text("Automatic Scenario Level:",
+                  Text(l10n.automaticScenarioLevel,
                       style: getSmallTextStyle(scale)),
                   ValueListenableBuilder<bool>(
                       valueListenable: _gameState.autoScenarioLevel,
@@ -138,7 +151,7 @@ class SetLevelMenu extends StatelessWidget {
                 ]),
               if (figure == null)
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text("Difficulty:", style: getSmallTextStyle(scale)),
+                  Text(l10n.difficultyLabel, style: getSmallTextStyle(scale)),
                   ...List.generate(
                     SetLevelMenu._kDifficultyCount,
                     (i) => DifficultyButton(

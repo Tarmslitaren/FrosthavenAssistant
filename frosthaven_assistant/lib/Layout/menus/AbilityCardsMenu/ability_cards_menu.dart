@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_card_menu.dart';
 import 'package:frosthaven_assistant/Model/monster_ability.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 import 'package:frosthaven_assistant/Resource/commands/activate_monster_type_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_ability_card_command.dart';
 import 'package:reorderables/reorderables.dart';
@@ -268,8 +269,8 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
                         right: 0,
                         bottom: 0,
                         child: TextButton(
-                            child: const Text(
-                              'Close',
+                            child: Text(
+                              AppLocalizations.of(context)!.close,
                               style: kButtonLabelStyle,
                             ),
                             onPressed: () {

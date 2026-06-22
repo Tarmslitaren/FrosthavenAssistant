@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../Resource/app_constants.dart';
 import '../../../Resource/settings.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../services/network/client.dart';
 import '../../../services/network/network.dart';
 
@@ -50,19 +51,20 @@ class SettingsNetworkSectionState extends State<SettingsNetworkSection> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text("Connect devices on local wifi:"),
+        Text(AppLocalizations.of(context)!.networkConnectLocal),
         ValueListenableBuilder<ClientState>(
             valueListenable: widget.settings.client,
             builder: (context, value, child) {
+              final l10n = AppLocalizations.of(context)!;
               bool connected = false;
               final clientState = widget.settings.client.value;
-              String connectionText = "Connect as Client";
+              String connectionText = l10n.connectAsClientLabel;
               if (clientState == ClientState.connected) {
                 connected = true;
-                connectionText = "Connected as Client";
+                connectionText = l10n.connectedAsClient;
               }
               if (clientState == ClientState.connecting) {
-                connectionText = "Connecting...";
+                connectionText = l10n.connecting;
               }
               return CheckboxListTile(
                   enabled: !widget.settings.server.value &&
@@ -94,9 +96,9 @@ class SettingsNetworkSectionState extends State<SettingsNetworkSection> {
           width: SettingsNetworkSection._kInputWidth,
           child: TextField(
             controller: _serverTextController,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               counterText: "",
-              helperText: "server ip address",
+              helperText: AppLocalizations.of(context)!.networkServerIpHint,
             ),
           ),
         ),
@@ -107,9 +109,9 @@ class SettingsNetworkSectionState extends State<SettingsNetworkSection> {
           child: TextField(
             keyboardType: TextInputType.number,
             controller: _portTextController,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               counterText: "",
-              helperText: "port",
+              helperText: AppLocalizations.of(context)!.networkPortHint,
             ),
             maxLength: SettingsNetworkSection._kPortMaxLength,
           ),
@@ -117,10 +119,11 @@ class SettingsNetworkSectionState extends State<SettingsNetworkSection> {
         ValueListenableBuilder<bool>(
             valueListenable: widget.settings.server,
             builder: (context, value, child) {
+              final l10n = AppLocalizations.of(context)!;
               return CheckboxListTile(
                   title: Text(widget.settings.server.value
-                      ? "Stop Server"
-                      : "Start Host Server"),
+                      ? l10n.stopServerButton
+                      : l10n.startHostServerButton),
                   value: widget.settings.server.value,
                   onChanged: (bool? value) {
                     if (!widget.settings.server.value) {
@@ -163,9 +166,9 @@ class SettingsNetworkSectionState extends State<SettingsNetworkSection> {
           child: TextField(
             controller: _portTextController,
             keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               counterText: "",
-              helperText: "port",
+              helperText: AppLocalizations.of(context)!.networkPortHint,
             ),
             maxLength: SettingsNetworkSection._kPortMaxLength,
           ),

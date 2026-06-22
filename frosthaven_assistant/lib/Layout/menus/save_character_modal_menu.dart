@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
+import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 import '../../Layout/widgets/modal_background.dart';
 import '../../Resource/settings.dart';
@@ -100,7 +101,8 @@ class SaveCharacterModalMenuState extends State<SaveCharacterModalMenu> {
                           Navigator.pop(context);
                           Navigator.pop(context);
                         },
-                        child: Text("Load", style: getButtonTextStyle(scale)),
+                        child: Text(AppLocalizations.of(context)!.loadButton,
+                            style: getButtonTextStyle(scale)),
                       ),
                     SizedBox(
                       width: _kButtonSpacing * scale,
@@ -113,7 +115,8 @@ class SaveCharacterModalMenuState extends State<SaveCharacterModalMenu> {
                           _settings.saveCharacterState(_newSaveName, character);
                           Navigator.pop(context);
                         },
-                        child: Text("Save", style: getButtonTextStyle(scale)),
+                        child: Text(AppLocalizations.of(context)!.saveButton,
+                            style: getButtonTextStyle(scale)),
                       ),
                     SizedBox(
                       width: _kButtonSpacing * scale,
@@ -125,13 +128,14 @@ class SaveCharacterModalMenuState extends State<SaveCharacterModalMenu> {
                           _settings.deleteCharacterSave(widget.saveId);
                           Navigator.pop(context);
                         },
-                        child: Text("Delete", style: getButtonTextStyle(scale)),
+                        child: Text(AppLocalizations.of(context)!.deleteButton,
+                            style: getButtonTextStyle(scale)),
                       )
                   ]),
               SizedBox(
                 height: _kNameSpacing * scale,
               ),
-              Text("Set save name:", style: getTitleTextStyle(scale)),
+              Text(AppLocalizations.of(context)!.setSaveName, style: getTitleTextStyle(scale)),
               SizedBox(
                   width: _kNameFieldWidth,
                   child: TextField(
