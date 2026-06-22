@@ -109,6 +109,11 @@ Future<void> main() async {
   );
 }
 
+Locale _parseLocale(String code) {
+  final parts = code.split('_');
+  return parts.length == 2 ? Locale(parts[0], parts[1]) : Locale(parts[0]);
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -151,8 +156,19 @@ class MyApp extends StatelessWidget {
         title: title,
         theme: ThemeSwitcher.of(context).themeData,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: const [Locale('en'), Locale('de')],
-        locale: Locale(locale),
+        supportedLocales: const [
+          Locale('en'),
+          Locale('de'),
+          Locale('fr'),
+          Locale('es'),
+          Locale('pl'),
+          Locale('ko'),
+          Locale('ru'),
+          Locale('zh'),
+          Locale('zh', 'Hant'),
+          Locale('th'),
+        ],
+        locale: _parseLocale(locale),
         builder: (context, child) {
           if (child == null) {
             return const SizedBox.shrink();

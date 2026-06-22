@@ -36,6 +36,14 @@ class SettingsMenu extends StatefulWidget {
   static const Map<String, String> _kLocales = {
     'en': 'English',
     'de': 'Deutsch',
+    'fr': 'Français',
+    'es': 'Español',
+    'pl': 'Polski',
+    'ko': '한국어',
+    'ru': 'Русский',
+    'zh': '中文',
+    'zh_Hant': '中文 (繁體)',
+    'th': 'ภาษาไทย',
   };
 
   const SettingsMenu(
