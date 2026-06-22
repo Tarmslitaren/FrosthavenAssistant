@@ -1,0 +1,172 @@
+{
+  "@@locale": "sv",
+
+  "menuSetScenario": "Välj scenario",
+  "menuAddCharacter": "Lägg till karaktär",
+  "menuRemoveCharacters": "Ta bort karaktärer",
+  "menuSetLevel": "Sätt nivå",
+  "menuLootDeck": "Plundringslek",
+  "menuAddMonsters": "Lägg till monster",
+  "menuRemoveMonsters": "Ta bort monster",
+  "menuShowAllyDeck": "Visa allierades anfallsmodifikationsdeck",
+  "menuHideAllyDeck": "Dölj allierades anfallsmodifikationsdeck",
+  "menuSettings": "Inställningar",
+  "menuDocumentation": "Dokumentation",
+  "menuDonate": "Donera",
+  "menuExit": "Avsluta",
+  "menuAddSection": "Lägg till sektion",
+  "menuAddRandomDungeonCard": "Lägg till slumpmässigt fängelsekortet",
+
+  "undo": "Ångra",
+  "undoWithDescription": "Ångra: {description}",
+  "@undoWithDescription": {
+    "placeholders": {
+      "description": { "type": "String" }
+    }
+  },
+  "redo": "Gör om",
+  "redoWithDescription": "Gör om: {description}",
+  "@redoWithDescription": {
+    "placeholders": {
+      "description": { "type": "String" }
+    }
+  },
+
+  "versionLabel": "Version {version}",
+  "@versionLabel": {
+    "placeholders": {
+      "version": { "type": "String" }
+    }
+  },
+
+  "connectedAsClient": "Ansluten som klient",
+  "connecting": "Ansluter...",
+  "connectAsClientWithIp": "Anslut som klient ({ip})",
+  "@connectAsClientWithIp": {
+    "placeholders": {
+      "ip": { "type": "String" }
+    }
+  },
+  "connectAsClientLabel": "Anslut som klient",
+  "stopServerWithIp": "Stoppa server {ip}",
+  "@stopServerWithIp": {
+    "placeholders": {
+      "ip": { "type": "String" }
+    }
+  },
+  "startHostServerWithIp": "Starta värdserver {ip}",
+  "@startHostServerWithIp": {
+    "placeholders": {
+      "ip": { "type": "String" }
+    }
+  },
+  "stopServerButton": "Stoppa server",
+  "startHostServerButton": "Starta värdserver",
+  "networkConnectLocal": "Anslut enheter via lokalt wifi:",
+  "networkServerIpHint": "serverns ip-adress",
+  "networkPortHint": "port",
+
+  "settingsLanguage": "Språk:",
+  "settingsDarkMode": "Mörkt läge",
+  "settingsSoftNumpad": "Mjukt siffertangentbord",
+  "settingsNoInit": "Fråga inte om initiativ",
+  "settingsExpireConditions": "Förfalla tillstånd",
+  "settingsNoStandees": "Spåra inte figurer",
+  "settingsAutoAddStandees": "Lägg automatiskt till figurer",
+  "settingsAutoAddSpawns": "Lägg automatiskt till tidsstyrda spawns",
+  "settingsRandomStandees": "Slumpmässiga figurer",
+  "settingsNoCalculations": "Inga beräkningar",
+  "settingsHideLootDeck": "Dölj plundringslek",
+  "settingsShimmer": "Skimmer på statistikkorttext",
+  "settingsFhHazTerrainCalc": "Använd FH-regler för farlig terräng i OG Gloomhaven",
+  "settingsAllyDeckOGGloom": "Använd allierades AMD i OG Gloomhaven",
+  "settingsShowScenarioNames": "Visa scenarionamn i listan",
+  "settingsShowBattleGoalReminder": "Visa påminnelse om stridsmål",
+  "settingsShowCustomContent": "Visa anpassat innehåll",
+  "settingsShowSections": "Visa sektioner på huvudskärmen",
+  "settingsShowReminders": "Visa påminnelser för speciella regler",
+  "settingsShowAmdDeck": "Visa anfallsmodifikationsdeck",
+  "settingsShowCharacterAmd": "Visa karaktärers anfallsmodifikationsdeck",
+  "settingsHealthWheel": "Aktivera hälsohjul: dra vänster/höger för att ändra hälsa",
+  "settingsFullscreen": "Helskärm",
+  "settingsMainListScaling": "Skalning av huvudlista:",
+  "settingsAppBarScaling": "Skalning av appfält:",
+  "settingsStyleLabel": "Stil:",
+  "styleFrosthaven": "Frosthaven",
+  "styleOriginal": "Original",
+  "settingsClearUnlocked": "Rensa upplåsta karaktärer",
+  "settingsUnlockSpecials": "Lås upp specials",
+  "settingsLoadSaveState": "Ladda/Spara tillstånd",
+
+  "noResultsFound": "Inga resultat hittades",
+  "close": "Stäng",
+  "retry": "FÖRSÖK IGEN",
+  "specialUnlocks": "Speciella upplåsningar",
+  "loadSaveDeleteCharacters": "Ladda, spara eller radera karaktärer.",
+  "loadAddDeleteSaves": "Ladda, lägg till eller radera sparade tillstånd.",
+  "addNewSave": "Ny sparning",
+  "addNewSaveLabel": "Ny sparning:",
+  "loadButton": "Ladda",
+  "saveButton": "Spara",
+  "deleteButton": "Radera",
+  "setSaveName": "Ange sparnamn:",
+  "loadOrSaveCharacters": "Ladda eller spara karaktärer",
+  "loadCharacter": "Ladda karaktär:",
+  "removeAll": "Ta bort alla",
+  "removeCardQuestion": "Ta bort kortet?",
+  "sendToBottom": "Skicka till botten",
+  "shuffleUndrawnCards": "Blanda odragen stack",
+  "returnToDiscardPile": "Lägg tillbaka till avkastningshögen",
+  "returnToDrawPile": "Lägg tillbaka till dragstapeln",
+  "addExtraLootCard": "Lägg till extra plundringskort",
+  "addStandeeNr": "Lägg till figurnummer",
+  "summonedLabel": "Framkallad:",
+  "characterDecks": "Karaktärsdeck",
+  "shuffleAndDraw": "Blanda\n& Dra",
+  "draw": "Dra",
+  "nextRound": " Nästa omgång",
+  "returnTopCard": "Lägg tillbaka toppkortet",
+  "removeCardWithDetails": "Ta bort {title}\n(kortnr: {nr})",
+  "@removeCardWithDetails": {
+    "placeholders": {
+      "title": { "type": "String" },
+      "nr": { "type": "int" }
+    }
+  },
+  "tapCardToAddToDeck": "Tryck för att lägga till i ditt deck",
+  "removeCardFromDeckQuestion": "Ta bort kort från ditt deck?",
+  "changeName": "Ändra namn:",
+  "showBosses": "Visa bossar",
+  "showScenarioSpecialMonsters": "Visa speciella scenariomonster",
+  "addAsAlly": "Lägg till som allierad",
+  "addMonsterLabel": "Lägg till monster",
+  "allCampaigns": "Alla kampanjer",
+  "showMonstersFrom": "      Visa monster från:   ",
+
+  "setMonsterLevel": "Sätt {name}s nivå",
+  "@setMonsterLevel": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "setSummonHealth": "Sätt {name}s max-hälsa",
+  "@setSummonHealth": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "setScenarioLevel": "Sätt scenarionivå",
+
+  "enhancedLevel": "Förbättrad: {level}",
+  "@enhancedLevel": {
+    "placeholders": {
+      "level": { "type": "String" }
+    }
+  },
+  "soloLabel": "Solo:",
+  "automaticScenarioLevel": "Automatisk scenarionivå:",
+  "difficultyLabel": "Svårighetsgrad:",
+  "lootCardEnhancements": "Förbättringar av plundringskort",
+  "addPerks": "Lägg till förmåner",
+  "useFrosthavenPerks": "Använd Frosthaven-förmåner"
+}
