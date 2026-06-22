@@ -9,1019 +9,1018 @@ class AppLocalizationsTh extends AppLocalizations {
   AppLocalizationsTh([String locale = 'th']) : super(locale);
 
   @override
-  String get menuSetScenario => 'Set Scenario';
+  String get menuSetScenario => 'ตั้งค่าฉาก';
 
   @override
-  String get menuAddCharacter => 'Add Character';
+  String get menuAddCharacter => 'เพิ่มตัวละคร';
 
   @override
-  String get menuRemoveCharacters => 'Remove Characters';
+  String get menuRemoveCharacters => 'นำตัวละครออก';
 
   @override
-  String get menuSetLevel => 'Set Level';
+  String get menuSetLevel => 'ตั้งค่าระดับ';
 
   @override
-  String get menuLootDeck => 'Loot Deck Menu';
+  String get menuLootDeck => 'เมนูสำรับการปล้นสะดม';
 
   @override
-  String get menuAddMonsters => 'Add Monsters';
+  String get menuAddMonsters => 'เพิ่มมอนสเตอร์';
 
   @override
-  String get menuRemoveMonsters => 'Remove Monsters';
+  String get menuRemoveMonsters => 'นำมอนสเตอร์ออก';
 
   @override
-  String get menuShowAllyDeck => 'Show Ally Attack Modifier Deck';
+  String get menuShowAllyDeck => 'แสดงสำรับตัวปรับแต่งพันธมิตร';
 
   @override
-  String get menuHideAllyDeck => 'Hide Ally Attack Modifier Deck';
+  String get menuHideAllyDeck => 'ซ่อนสำรับตัวปรับแต่งพันธมิตร';
 
   @override
-  String get menuSettings => 'Settings';
+  String get menuSettings => 'การตั้งค่า';
 
   @override
-  String get menuDocumentation => 'Documentation';
+  String get menuDocumentation => 'เอกสาร';
 
   @override
-  String get menuDonate => 'Donate';
+  String get menuDonate => 'บริจาค';
 
   @override
-  String get menuExit => 'Exit';
+  String get menuExit => 'ออก';
 
   @override
-  String get menuAddSection => 'Add Section';
+  String get menuAddSection => 'เพิ่มส่วน';
 
   @override
-  String get menuAddRandomDungeonCard => 'Add Random Dungeon Card';
+  String get menuAddRandomDungeonCard => 'เพิ่มการ์ดดันเจี้ยนแบบสุ่ม';
 
   @override
-  String get undo => 'Undo';
+  String get undo => 'เลิกทำ';
 
   @override
   String undoWithDescription(String description) {
-    return 'Undo: $description';
+    return 'เลิกทำ: $description';
   }
 
   @override
-  String get redo => 'Redo';
+  String get redo => 'ทำซ้ำ';
 
   @override
   String redoWithDescription(String description) {
-    return 'Redo: $description';
+    return 'ทำซ้ำ: $description';
   }
 
   @override
   String versionLabel(String version) {
-    return 'Version $version';
+    return 'เวอร์ชัน $version';
   }
 
   @override
-  String get connectedAsClient => 'Connected as Client';
+  String get connectedAsClient => 'เชื่อมต่อในฐานะไคลเอนต์แล้ว';
 
   @override
-  String get connecting => 'Connecting...';
+  String get connecting => 'กำลังเชื่อมต่อ…';
 
   @override
   String connectAsClientWithIp(String ip) {
-    return 'Connect as Client ($ip)';
+    return 'เชื่อมต่อในฐานะไคลเอนต์ ($ip)';
   }
 
   @override
-  String get connectAsClientLabel => 'Connect as Client';
+  String get connectAsClientLabel => 'เชื่อมต่อในฐานะไคลเอนต์';
 
   @override
   String stopServerWithIp(String ip) {
-    return 'Stop Server $ip';
+    return 'หยุดเซิร์ฟเวอร์ $ip';
   }
 
   @override
   String startHostServerWithIp(String ip) {
-    return 'Start Host Server $ip';
+    return 'เริ่มเซิร์ฟเวอร์ $ip';
   }
 
   @override
-  String get stopServerButton => 'Stop Server';
+  String get stopServerButton => 'หยุดเซิร์ฟเวอร์';
 
   @override
-  String get startHostServerButton => 'Start Host Server';
+  String get startHostServerButton => 'เริ่มเซิร์ฟเวอร์โฮสต์';
 
   @override
-  String get networkConnectLocal => 'Connect devices on local wifi:';
+  String get networkConnectLocal => 'เชื่อมต่ออุปกรณ์ผ่าน Wi-Fi ท้องถิ่น:';
 
   @override
-  String get networkServerIpHint => 'server ip address';
+  String get networkServerIpHint => 'ที่อยู่ IP เซิร์ฟเวอร์';
 
   @override
-  String get networkPortHint => 'port';
+  String get networkPortHint => 'พอร์ต';
 
   @override
-  String get settingsLanguage => 'Language:';
+  String get settingsLanguage => 'ภาษา:';
 
   @override
-  String get settingsDarkMode => 'Dark mode';
+  String get settingsDarkMode => 'โหมดมืด';
 
   @override
-  String get settingsSoftNumpad => 'Soft numpad for input';
+  String get settingsSoftNumpad => 'แป้นตัวเลขซอฟต์แวร์';
 
   @override
-  String get settingsNoInit => 'Don\'t ask for initiative';
+  String get settingsNoInit => 'ไม่ถามค่าริเริ่ม';
 
   @override
-  String get settingsExpireConditions => 'Expire Conditions';
+  String get settingsExpireConditions => 'หมดอายุสถานะ';
 
   @override
-  String get settingsNoStandees => 'Don\'t track Standees';
+  String get settingsNoStandees => 'ไม่ติดตามตัวยืน';
 
   @override
-  String get settingsAutoAddStandees => 'Auto Add Standees';
+  String get settingsAutoAddStandees => 'เพิ่มตัวยืนอัตโนมัติ';
 
   @override
-  String get settingsAutoAddSpawns => 'Auto Add Timed Spawns';
+  String get settingsAutoAddSpawns => 'เพิ่มการเรียกอัตโนมัติ';
 
   @override
-  String get settingsRandomStandees => 'Random Standees';
+  String get settingsRandomStandees => 'ตัวยืนแบบสุ่ม';
 
   @override
-  String get settingsNoCalculations => 'No Calculations';
+  String get settingsNoCalculations => 'ไม่คำนวณอัตโนมัติ';
 
   @override
-  String get settingsHideLootDeck => 'Hide Loot Deck';
+  String get settingsHideLootDeck => 'ซ่อนสำรับการปล้นสะดม';
 
   @override
-  String get settingsShimmer => 'Stat card text shimmers';
+  String get settingsShimmer => 'ข้อความระยิบระยับบนการ์ดสถิติ';
 
   @override
   String get settingsFhHazTerrainCalc =>
-      'Use Frosthaven Hazardous Terrain Calculation in OG Gloomhaven';
+      'คำนวณพื้นที่อันตราย Frosthaven ใน Gloomhaven ดั้งเดิม';
 
   @override
   String get settingsAllyDeckOGGloom =>
-      'Use Ally Attack Modifier Deck in OG Gloomhaven';
+      'สำรับตัวปรับแต่งพันธมิตรใน Gloomhaven ดั้งเดิม';
 
   @override
-  String get settingsShowScenarioNames => 'Show Scenario names in list';
+  String get settingsShowScenarioNames => 'แสดงชื่อฉาก';
 
   @override
-  String get settingsShowBattleGoalReminder => 'Show Battle Goal Reminder';
+  String get settingsShowBattleGoalReminder => 'แสดงตัวเตือนเป้าหมายการต่อสู้';
 
   @override
-  String get settingsShowCustomContent => 'Show Custom Content';
+  String get settingsShowCustomContent => 'แสดงเนื้อหาที่กำหนดเอง';
 
   @override
-  String get settingsShowSections => 'Show Sections in Main Screen';
+  String get settingsShowSections => 'แสดงส่วนในหน้าจอหลัก';
 
   @override
-  String get settingsShowReminders => 'Show Round Special Rule Reminders';
+  String get settingsShowReminders => 'แสดงตัวเตือนกฎพิเศษ';
 
   @override
-  String get settingsShowAmdDeck => 'Show Attack Modifier Decks';
+  String get settingsShowAmdDeck => 'แสดงสำรับตัวปรับแต่งการโจมตี';
 
   @override
-  String get settingsShowCharacterAmd => 'Show character Attack Modifier Decks';
+  String get settingsShowCharacterAmd => 'แสดงสำรับตัวปรับแต่งของตัวละคร';
 
   @override
-  String get settingsHealthWheel =>
-      'Enable heath wheel: drag left-right to change health';
+  String get settingsHealthWheel => 'วงล้อ HP: ลากซ้าย-ขวาเพื่อเปลี่ยน';
 
   @override
-  String get settingsFullscreen => 'Fullscreen';
+  String get settingsFullscreen => 'เต็มหน้าจอ';
 
   @override
-  String get settingsMainListScaling => 'Main List Scaling:';
+  String get settingsMainListScaling => 'ขนาดรายการหลัก:';
 
   @override
-  String get settingsAppBarScaling => 'App Bar Scaling:';
+  String get settingsAppBarScaling => 'ขนาดแถบแอป:';
 
   @override
-  String get settingsStyleLabel => 'Style:';
+  String get settingsStyleLabel => 'สไตล์:';
 
   @override
   String get styleFrosthaven => 'Frosthaven';
 
   @override
-  String get styleOriginal => 'Original';
+  String get styleOriginal => 'ดั้งเดิม';
 
   @override
-  String get settingsClearUnlocked => 'Clear unlocked characters and stuff';
+  String get settingsClearUnlocked => 'ล้างตัวละครและเนื้อหาที่ปลดล็อก';
 
   @override
-  String get settingsUnlockSpecials => 'Unlock specials';
+  String get settingsUnlockSpecials => 'ปลดล็อกพิเศษ';
 
   @override
-  String get settingsLoadSaveState => 'Load/Save State';
+  String get settingsLoadSaveState => 'โหลด/บันทึกสถานะ';
 
   @override
-  String get noResultsFound => 'No results found';
+  String get noResultsFound => 'ไม่พบผลลัพธ์';
 
   @override
-  String get close => 'Close';
+  String get close => 'ปิด';
 
   @override
-  String get retry => 'RETRY';
+  String get retry => 'ลองใหม่';
 
   @override
-  String get specialUnlocks => 'Special Unlocks';
+  String get specialUnlocks => 'การปลดล็อกพิเศษ';
 
   @override
-  String get loadSaveDeleteCharacters => 'Load, Save or Delete Characters.';
+  String get loadSaveDeleteCharacters => 'โหลด บันทึก หรือลบตัวละคร';
 
   @override
-  String get loadAddDeleteSaves => 'Load, Add or Delete save states.';
+  String get loadAddDeleteSaves => 'โหลด เพิ่ม หรือลบการบันทึก';
 
   @override
-  String get addNewSave => 'Add new Save';
+  String get addNewSave => 'บันทึกใหม่';
 
   @override
-  String get addNewSaveLabel => 'Add new Save:';
+  String get addNewSaveLabel => 'บันทึกใหม่:';
 
   @override
-  String get loadButton => 'Load';
+  String get loadButton => 'โหลด';
 
   @override
-  String get saveButton => 'Save';
+  String get saveButton => 'บันทึก';
 
   @override
-  String get deleteButton => 'Delete';
+  String get deleteButton => 'ลบ';
 
   @override
-  String get setSaveName => 'Set save name:';
+  String get setSaveName => 'ชื่อการบันทึก:';
 
   @override
-  String get loadOrSaveCharacters => 'Load or Save Characters';
+  String get loadOrSaveCharacters => 'โหลดหรือบันทึกตัวละคร';
 
   @override
-  String get loadCharacter => 'Load Character:';
+  String get loadCharacter => 'โหลดตัวละคร:';
 
   @override
-  String get removeAll => 'Remove All';
+  String get removeAll => 'นำออกทั้งหมด';
 
   @override
-  String get removeCardQuestion => 'Remove card?';
+  String get removeCardQuestion => 'นำการ์ดออก?';
 
   @override
-  String get sendToBottom => 'Send to Bottom';
+  String get sendToBottom => 'ส่งไปด้านล่าง';
 
   @override
-  String get shuffleUndrawnCards => 'Shuffle un-drawn Cards';
+  String get shuffleUndrawnCards => 'สับการ์ดที่ยังไม่ได้จั่ว';
 
   @override
-  String get returnToDiscardPile => 'Return card to discard pile';
+  String get returnToDiscardPile => 'คืนสู่กองทิ้ง';
 
   @override
-  String get returnToDrawPile => 'Return card to draw pile';
+  String get returnToDrawPile => 'คืนสู่สำรับ';
 
   @override
-  String get addExtraLootCard => 'Add Extra Loot Card';
+  String get addExtraLootCard => 'เพิ่มการ์ดการปล้นสะดมพิเศษ';
 
   @override
-  String get addStandeeNr => 'Add Standee Nr';
+  String get addStandeeNr => 'เพิ่มตัวยืนหมายเลข';
 
   @override
-  String get summonedLabel => 'Summoned:';
+  String get summonedLabel => 'ที่ถูกเรียก:';
 
   @override
-  String get characterDecks => 'Character Decks';
+  String get characterDecks => 'สำรับตัวละคร';
 
   @override
-  String get shuffleAndDraw => 'Shuffle\n& Draw';
+  String get shuffleAndDraw => 'สับ\nและจั่ว';
 
   @override
-  String get draw => 'Draw';
+  String get draw => 'จั่ว';
 
   @override
-  String get nextRound => ' Next Round';
+  String get nextRound => ' รอบถัดไป';
 
   @override
-  String get returnTopCard => 'Return top card';
+  String get returnTopCard => 'คืนการ์ดด้านบน';
 
   @override
   String removeCardWithDetails(String title, int nr) {
-    return 'Remove $title\n(card nr: $nr)';
+    return 'นำ $title ออก\n(การ์ดหมายเลข: $nr)';
   }
 
   @override
-  String get tapCardToAddToDeck => 'Tap Card to add to your deck';
+  String get tapCardToAddToDeck => 'แตะการ์ดเพื่อเพิ่มในสำรับ';
 
   @override
-  String get removeCardFromDeckQuestion => 'Remove card from your deck?';
+  String get removeCardFromDeckQuestion => 'นำการ์ดออกจากสำรับ?';
 
   @override
-  String get changeName => 'Change name:';
+  String get changeName => 'เปลี่ยนชื่อ:';
 
   @override
-  String get showBosses => 'Show Bosses';
+  String get showBosses => 'แสดงบอส';
 
   @override
-  String get showScenarioSpecialMonsters => 'Show Scenario Special Monsters';
+  String get showScenarioSpecialMonsters => 'แสดงมอนสเตอร์พิเศษของฉาก';
 
   @override
-  String get addAsAlly => 'Add as Ally';
+  String get addAsAlly => 'เพิ่มเป็นพันธมิตร';
 
   @override
-  String get addMonsterLabel => 'Add Monster';
+  String get addMonsterLabel => 'เพิ่มมอนสเตอร์';
 
   @override
-  String get allCampaigns => 'All Campaigns';
+  String get allCampaigns => 'แคมเปญทั้งหมด';
 
   @override
-  String get showMonstersFrom => '      Show monsters from:   ';
+  String get showMonstersFrom => '      แสดงมอนสเตอร์จาก:   ';
 
   @override
   String setMonsterLevel(String name) {
-    return 'Set $name\'s level';
+    return 'ระดับ $name';
   }
 
   @override
   String setSummonHealth(String name) {
-    return 'Set $name\'s max health';
+    return 'HP สูงสุด $name';
   }
 
   @override
-  String get setScenarioLevel => 'Set Scenario Level';
+  String get setScenarioLevel => 'ระดับฉาก';
 
   @override
   String enhancedLevel(String level) {
-    return 'Enhanced: $level';
+    return 'เสริมแล้ว: $level';
   }
 
   @override
-  String get soloLabel => 'Solo:';
+  String get soloLabel => 'เดี่ยว:';
 
   @override
-  String get automaticScenarioLevel => 'Automatic Scenario Level:';
+  String get automaticScenarioLevel => 'ระดับฉากอัตโนมัติ:';
 
   @override
-  String get difficultyLabel => 'Difficulty:';
+  String get difficultyLabel => 'ความยาก:';
 
   @override
-  String get lootCardEnhancements => 'Loot Card Enhancements';
+  String get lootCardEnhancements => 'การเสริมการ์ดการปล้นสะดม';
 
   @override
-  String get addPerks => 'Add Perks';
+  String get addPerks => 'เพิ่มสิทธิพิเศษ';
 
   @override
-  String get useFrosthavenPerks => 'Use Frosthaven Perks';
+  String get useFrosthavenPerks => 'ใช้สิทธิพิเศษ Frosthaven';
 
   @override
   String currentCampaign(String campaign) {
-    return 'Current Campaign: $campaign';
+    return 'แคมเปญปัจจุบัน: $campaign';
   }
 
   @override
-  String get addCharacterHint =>
-      'Add Character (type name for hidden character classes)';
+  String get addCharacterHint => 'เพิ่มตัวละคร (พิมพ์ชื่อสำหรับคลาสที่ซ่อน)';
 
   @override
-  String get trapDamage => 'trap damage';
+  String get trapDamage => 'ความเสียหายกับดัก';
 
   @override
-  String get hazardousTerrainDamage => 'hazardous terrain damage';
+  String get hazardousTerrainDamage => 'ความเสียหายพื้นที่อันตราย';
 
   @override
-  String get experienceAdded => 'experience added';
+  String get experienceAdded => 'เพิ่มประสบการณ์';
 
   @override
-  String get goldCoinValue => 'gold coin value';
+  String get goldCoinValue => 'มูลค่าเหรียญทอง';
 
   @override
-  String get levelLegendLabel => 'level';
+  String get levelLegendLabel => 'ระดับ';
 
   @override
   String get saveStateNote =>
-      'Please note that the app automatically saves your progress after every action. These are for backups or multiple campaigns.';
+      'แอปบันทึกอัตโนมัติหลังทุกการกระทำ การบันทึกเหล่านี้ใช้สำหรับสำรองข้อมูลหรือหลายแคมเปญ';
 
   @override
   String clientConnectedTo(String address) {
-    return 'Client Connected to: $address';
+    return 'ไคลเอนต์เชื่อมต่อกับ: $address';
   }
 
   @override
   String clientError(String error) {
-    return 'Client error: $error';
+    return 'ข้อผิดพลาดไคลเอนต์: $error';
   }
 
   @override
   String clientListenError(String error) {
-    return 'Client listen error: $error';
+    return 'ข้อผิดพลาดการฟังไคลเอนต์: $error';
   }
 
   @override
-  String get lostConnectionToServer => 'Lost connection to server';
+  String get lostConnectionToServer => 'ขาดการเชื่อมต่อกับเซิร์ฟเวอร์';
 
   @override
-  String get stateMismatch => 'Your state was not up to date, try again.';
+  String get stateMismatch => 'สถานะของคุณไม่ทันสมัย กรุณาลองใหม่';
 
   @override
-  String get serverUnresponsive => 'Server unresponsive. Client disconnected.';
+  String get serverUnresponsive =>
+      'เซิร์ฟเวอร์ไม่ตอบสนอง ตัดการเชื่อมต่อไคลเอนต์';
 
   @override
-  String get clientDisconnected => 'client disconnected';
+  String get clientDisconnected => 'ตัดการเชื่อมต่อไคลเอนต์';
 
   @override
-  String get serverOffline => 'Server Offline';
+  String get serverOffline => 'เซิร์ฟเวอร์ออฟไลน์';
 
   @override
-  String get clientLeft => 'Client left.';
+  String get clientLeft => 'ไคลเอนต์ออกไปแล้ว';
 
   @override
   String get clientTooOld =>
-      'Old client attempted to connect. Please update the app.';
+      'ไคลเอนต์เวอร์ชันเก่าพยายามเชื่อมต่อ กรุณาอัปเดตแอป';
 
   @override
   String networkConnection(String status) {
-    return 'Network connection: $status';
+    return 'การเชื่อมต่อเครือข่าย: $status';
   }
 
   @override
-  String get failedToGetWifiIp => 'Failed to get IP address';
+  String get failedToGetWifiIp => 'ไม่สามารถรับที่อยู่ IP ได้';
 
   @override
-  String get badOmen => 'Bad Omen';
+  String get badOmen => 'ลางร้าย';
 
   @override
   String badOmensLeft(int count) {
-    return 'Bad Omens Left: $count';
+    return 'ลางร้ายที่เหลือ: $count';
   }
 
   @override
-  String get corrosiveSpew => 'Corrosive Spew';
+  String get corrosiveSpew => 'การพ่นสารกัดกร่อน';
 
   @override
-  String get empowersOnTop => 'Empowers on top';
+  String get empowersOnTop => 'การเสริมพลังอยู่ด้านบน';
 
   @override
   String addMinusOneCard(int count) {
-    return 'Add -1 card (added: $count)';
+    return 'เพิ่มการ์ด -1 (เพิ่มแล้ว: $count)';
   }
 
   @override
-  String get removeMinusOneCard => 'Remove -1 card';
+  String get removeMinusOneCard => 'นำการ์ด -1 ออก';
 
   @override
-  String get removeMinusTwoCard => 'Remove -2 card';
+  String get removeMinusTwoCard => 'นำการ์ด -2 ออก';
 
   @override
-  String get minusTwoCardRemoved => '-2 card removed';
+  String get minusTwoCardRemoved => 'นำการ์ด -2 ออกแล้ว';
 
   @override
-  String get removePlusZeroCard => 'Remove +0 card';
+  String get removePlusZeroCard => 'นำการ์ด +0 ออก';
 
   @override
-  String get plusZeroCardRemoved => '+0 card removed';
+  String get plusZeroCardRemoved => 'นำการ์ด +0 ออกแล้ว';
 
   @override
-  String get removeImbue => 'Remove Imbue';
+  String get removeImbue => 'นำการซึมซับออก';
 
   @override
-  String get imbue => 'Imbue';
+  String get imbue => 'ซึมซับ';
 
   @override
-  String get advancedImbue => 'Advanced Imbue';
+  String get advancedImbue => 'การซึมซับขั้นสูง';
 
   @override
-  String get removeHailPerk => 'Remove Hail Perk';
+  String get removeHailPerk => 'นำสิทธิพิเศษลูกเห็บออก';
 
   @override
-  String get addHailPerk => 'Add Hail Perk';
+  String get addHailPerk => 'เพิ่มสิทธิพิเศษลูกเห็บ';
 
   @override
-  String get removeCassandraPerk => 'Remove\nCassandra Perk';
+  String get removeCassandraPerk => 'นำ\nสิทธิพิเศษแคสแซนดราออก';
 
   @override
-  String get addCassandraPerk => 'Add\nCassandra Perk';
+  String get addCassandraPerk => 'เพิ่ม\nสิทธิพิเศษแคสแซนดรา';
 
   @override
-  String get dontSaveRevealedCards => 'Don\'t Save\nRevealed Cards';
+  String get dontSaveRevealedCards => 'ไม่บันทึก\nการ์ดที่เปิดเผย';
 
   @override
-  String get saveRevealedCards => 'Save\nRevealed Cards';
+  String get saveRevealedCards => 'บันทึก\nการ์ดที่เปิดเผย';
 
   @override
   String removedCountLabel(int count) {
-    return 'Removed: $count';
+    return 'นำออกแล้ว: $count';
   }
 
   @override
-  String get removeDonation => 'Remove\nDonation';
+  String get removeDonation => 'นำ\nการบริจาคออก';
 
   @override
-  String get donateSanctuary => 'Donate to\nSanctuary';
+  String get donateSanctuary => 'บริจาคให้\nศาลเจ้า';
 
   @override
-  String get removePartyCard => 'Remove\nParty Card:';
+  String get removePartyCard => 'นำ\nการ์ดกลุ่มออก:';
 
   @override
-  String get addPartyCard => 'Add Party\nCard:';
+  String get addPartyCard => 'เพิ่ม\nการ์ดกลุ่ม:';
 
   @override
-  String get perks => 'Perks';
+  String get perks => 'สิทธิพิเศษ';
 
   @override
-  String get revealCards => 'Reveal\ncards:';
+  String get revealCards => 'เปิดเผย\nการ์ด:';
 
   @override
-  String get revealAll => 'All';
+  String get revealAll => 'ทั้งหมด';
 
   @override
-  String get drawExtraCard => 'Draw extra card';
+  String get drawExtraCard => 'จั่วการ์ดพิเศษ';
 
   @override
-  String get extraShuffle => 'Extra Shuffle';
+  String get extraShuffle => 'สับพิเศษ';
 
   @override
-  String get inactivateMonster => 'Inactivate\nMonster';
+  String get inactivateMonster => 'ปิดใช้งาน\nมอนสเตอร์';
 
   @override
-  String get activateMonster => 'Activate\nMonster';
+  String get activateMonster => 'เปิดใช้งาน\nมอนสเตอร์';
 
   @override
   String addEliteStandees(int count, String name) {
-    return 'Add $count Elite $name';
+    return 'เพิ่ม $name ชั้นยอด $count ตัว';
   }
 
   @override
   String addNormalStandees(int count, String name) {
-    return 'Add $count Normal $name';
+    return 'เพิ่ม $name ธรรมดา $count ตัว';
   }
 
   @override
-  String get characterLoot => 'Character loot';
+  String get characterLoot => 'การปล้นสะดมของตัวละคร';
 
   @override
   String addSpecialCard(int nr) {
-    return 'Add card $nr';
+    return 'เพิ่มการ์ด $nr';
   }
 
   @override
   String removeSpecialCard(int nr) {
-    return 'Remove card $nr';
+    return 'นำการ์ด $nr ออก';
   }
 
   @override
-  String get enhanceCards => 'Enhance cards';
+  String get enhanceCards => 'เสริมการ์ด';
 
   @override
-  String get addLootCard => 'Add Card';
+  String get addLootCard => 'เพิ่มการ์ด';
 
   @override
-  String get returnToTop => 'Return to Top';
+  String get returnToTop => 'คืนสู่ด้านบน';
 
   @override
-  String get returnToBottom => 'Return to Bottom';
+  String get returnToBottom => 'คืนสู่ด้านล่าง';
 
   @override
   String characterLootTitle(String name) {
-    return '$name\'s loot:';
+    return 'การปล้นสะดมของ $name:';
   }
 
   @override
-  String get setLootOwner => 'Set Loot Owner:';
+  String get setLootOwner => 'เจ้าของการปล้นสะดม:';
 
   @override
-  String get lootNameCoin => 'coin';
+  String get lootNameCoin => 'เหรียญ';
 
   @override
-  String get lootNameHide => 'hide';
+  String get lootNameHide => 'หนัง';
 
   @override
-  String get lootNameLumber => 'lumber';
+  String get lootNameLumber => 'ไม้';
 
   @override
-  String get lootNameMetal => 'metal';
+  String get lootNameMetal => 'โลหะ';
 
   @override
-  String get lootNameArrowvine => 'arrowvine';
+  String get lootNameArrowvine => 'เถาลูกศร';
 
   @override
-  String get lootNameAxenut => 'axenut';
+  String get lootNameAxenut => 'ถั่วขวาน';
 
   @override
-  String get lootNameCorpsecap => 'corpsecap';
+  String get lootNameCorpsecap => 'เห็ดศพ';
 
   @override
-  String get lootNameFlamefruit => 'flamefruit';
+  String get lootNameFlamefruit => 'ผลไม้เปลวเพลิง';
 
   @override
-  String get lootNameRockroot => 'rockroot';
+  String get lootNameRockroot => 'รากหิน';
 
   @override
-  String get lootNameSnowthistle => 'snowthistle';
+  String get lootNameSnowthistle => 'หนามหิมะ';
 
   @override
-  String get lootAmount2For2 => '2 for 2 characters';
+  String get lootAmount2For2 => '2 สำหรับ 2 ผู้เล่น';
 
   @override
-  String get lootAmount2For23 => '2 for 2-3 characters';
+  String get lootAmount2For23 => '2 สำหรับ 2-3 ผู้เล่น';
 
   @override
   String cmdActivateMonster(String name) {
-    return 'Activate $name';
+    return 'เปิดใช้งาน $name';
   }
 
   @override
   String cmdDeactivateMonster(String name) {
-    return 'Deactivate $name';
+    return 'ปิดใช้งาน $name';
   }
 
   @override
   String cmdAddCharacter(String id) {
-    return 'Add $id';
+    return 'เพิ่ม $id';
   }
 
   @override
   String cmdAddCondition(String condition) {
-    return 'Add condition: $condition';
+    return 'เพิ่มสถานะ: $condition';
   }
 
   @override
   String cmdRemoveCondition(String condition) {
-    return 'Remove condition: $condition';
+    return 'นำสถานะออก: $condition';
   }
 
   @override
   String cmdAddPartyCard(String character, String type) {
-    return '$character add party card $type';
+    return '$character เพิ่มการ์ดกลุ่ม $type';
   }
 
   @override
   String cmdRemovePartyCard(String character) {
-    return '$character remove party card';
+    return '$character นำการ์ดกลุ่มออก';
   }
 
   @override
   String cmdAddFactionCard(String character) {
-    return '$character add faction card';
+    return '$character เพิ่มการ์ดฝ่าย';
   }
 
   @override
   String cmdRemoveFactionCard(String character) {
-    return '$character remove faction card';
+    return '$character นำการ์ดฝ่ายออก';
   }
 
   @override
   String cmdAddLootCard(String type) {
-    return 'Add $type Loot Card';
+    return 'เพิ่มการ์ดการปล้นสะดม $type';
   }
 
   @override
   String cmdAddMonster(String name) {
-    return 'Add $name';
+    return 'เพิ่ม $name';
   }
 
   @override
   String cmdAddSpecialLootCard(int nr) {
-    return 'Add Special loot card $nr';
+    return 'เพิ่มการ์ดการปล้นสะดมพิเศษ $nr';
   }
 
   @override
   String cmdRemoveSpecialLootCard(int nr) {
-    return 'Remove Special loot card $nr';
+    return 'นำการ์ดการปล้นสะดมพิเศษ $nr ออก';
   }
 
   @override
-  String get cmdAddMinusOne => 'Add minus one';
+  String get cmdAddMinusOne => 'เพิ่มลบหนึ่ง';
 
   @override
-  String get cmdRemoveMinusOne => 'Remove minus one';
+  String get cmdRemoveMinusOne => 'นำลบหนึ่งออก';
 
   @override
-  String get cmdRemoveMinusTwo => 'Remove minus two';
+  String get cmdRemoveMinusTwo => 'นำลบสองออก';
 
   @override
-  String get cmdAddBackMinusTwo => 'Add back minus two';
+  String get cmdAddBackMinusTwo => 'คืนลบสอง';
 
   @override
-  String get cmdRemovePlusZero => 'Remove plus zero';
+  String get cmdRemovePlusZero => 'นำบวกศูนย์ออก';
 
   @override
-  String get cmdAddBackPlusZero => 'Add back plus zero';
+  String get cmdAddBackPlusZero => 'คืนบวกศูนย์';
 
   @override
   String cmdRevealModifierCards(int count) {
-    return 'Reveal $count modifier cards';
+    return 'เปิดเผยการ์ดปรับแต่ง $count ใบ';
   }
 
   @override
   String cmdCassandraLeaveRevealed(String deck) {
-    return 'Leave revealed cards on top of $deck deck';
+    return 'ทิ้งการ์ดที่เปิดเผยไว้บนสำรับ $deck';
   }
 
   @override
   String cmdCassandraSpecialOff(String deck) {
-    return 'Cassandra Special turned off for $deck deck';
+    return 'ปิดพิเศษแคสแซนดราสำหรับสำรับ $deck';
   }
 
   @override
-  String get cmdImbueMonsterDeck => 'Imbue Monster Deck';
+  String get cmdImbueMonsterDeck => 'ซึมซับสำรับมอนสเตอร์';
 
   @override
-  String get cmdAdvancedImbueMonsterDeck => 'Advanced Imbue Monster Deck';
+  String get cmdAdvancedImbueMonsterDeck => 'การซึมซับขั้นสูงของสำรับมอนสเตอร์';
 
   @override
-  String get cmdRemoveImbueMonsterDeck => 'Remove Imbuement';
+  String get cmdRemoveImbueMonsterDeck => 'นำการซึมซับออก';
 
   @override
-  String get cmdChangeName => 'Change character name';
+  String get cmdChangeName => 'เปลี่ยนชื่อตัวละคร';
 
   @override
-  String get cmdAddBless => 'Add a Bless';
+  String get cmdAddBless => 'เพิ่มพร';
 
   @override
-  String get cmdRemoveBless => 'Remove a Bless';
+  String get cmdRemoveBless => 'นำพรออก';
 
   @override
-  String get cmdAddCurse => 'Add a Curse';
+  String get cmdAddCurse => 'เพิ่มคำสาป';
 
   @override
-  String get cmdRemoveCurse => 'Remove a Curse';
+  String get cmdRemoveCurse => 'นำคำสาปออก';
 
   @override
-  String get cmdAddEmpower => 'Add Empower';
+  String get cmdAddEmpower => 'เพิ่มการเสริมพลัง';
 
   @override
-  String get cmdRemoveEmpower => 'Remove Empower';
+  String get cmdRemoveEmpower => 'นำการเสริมพลังออก';
 
   @override
-  String get cmdAddEnfeeble => 'Add Enfeeble';
+  String get cmdAddEnfeeble => 'เพิ่มการอ่อนแอ';
 
   @override
-  String get cmdRemoveEnfeeble => 'Remove Enfeeble';
+  String get cmdRemoveEnfeeble => 'นำการอ่อนแอออก';
 
   @override
   String cmdIncreaseMaxHealth(String owner) {
-    return 'Increase $owner\'s max health';
+    return 'เพิ่ม HP สูงสุดของ $owner';
   }
 
   @override
   String cmdDecreaseMaxHealth(String owner) {
-    return 'Decrease $owner\'s max health';
+    return 'ลด HP สูงสุดของ $owner';
   }
 
   @override
-  String get cmdChangeStat => 'Change stat';
+  String get cmdChangeStat => 'เปลี่ยนสถิติ';
 
   @override
   String cmdIncreaseXp(String figure, int amount) {
-    return 'Increase $figure\'s xp by $amount';
+    return 'เพิ่ม XP ของ $figure $amount';
   }
 
   @override
   String cmdDecreaseXp(String figure, int amount) {
-    return 'Decrease $figure\'s xp by $amount';
+    return 'ลด XP ของ $figure $amount';
   }
 
   @override
-  String get cmdClearUnlockedClasses => 'Clear unlocked classes';
+  String get cmdClearUnlockedClasses => 'ล้างคลาสที่ปลดล็อก';
 
   @override
   String cmdDonateSanctuary(String character) {
-    return '$character donate to sanctuary';
+    return '$character บริจาคให้ศาลเจ้า';
   }
 
   @override
   String cmdRemoveSanctuaryDonation(String character) {
-    return 'Remove $character\'s donation';
+    return 'นำการบริจาคของ $character ออก';
   }
 
   @override
-  String get cmdDrawExtraAbilityCard => 'Draw extra ability card';
+  String get cmdDrawExtraAbilityCard => 'จั่วการ์ดความสามารถพิเศษ';
 
   @override
-  String get cmdDraw => 'Draw';
+  String get cmdDraw => 'จั่ว';
 
   @override
-  String get cmdDrawLootCard => 'Draw loot card';
+  String get cmdDrawLootCard => 'จั่วการ์ดการปล้นสะดม';
 
   @override
   String cmdDrawModifierCard(String name) {
-    return 'Draw $name modifier card';
+    return 'จั่วการ์ดปรับแต่ง $name';
   }
 
   @override
-  String get cmdRemoveLootEnhancement => 'Remove Loot Enhancement';
+  String get cmdRemoveLootEnhancement => 'นำการเสริมการปล้นสะดมออก';
 
   @override
-  String get cmdAddLootEnhancement => 'Add Loot Enhancement';
+  String get cmdAddLootEnhancement => 'เพิ่มการเสริมการปล้นสะดม';
 
   @override
-  String get cmdHideAllyDeck => 'Hide Ally Deck';
+  String get cmdHideAllyDeck => 'ซ่อนสำรับพันธมิตร';
 
   @override
-  String get cmdShowAllyDeck => 'Show Ally Deck';
+  String get cmdShowAllyDeck => 'แสดงสำรับพันธมิตร';
 
   @override
-  String get cmdIceWraithTurnNormal => 'Ice Wraith turn normal';
+  String get cmdIceWraithTurnNormal => 'ผีน้ำแข็งเปลี่ยนเป็นธรรมดา';
 
   @override
-  String get cmdIceWraithTurnElite => 'Ice Wraith turn elite';
+  String get cmdIceWraithTurnElite => 'ผีน้ำแข็งเปลี่ยนเป็นชั้นยอด';
 
   @override
   String cmdImbueElement(String element) {
-    return 'Imbue element $element';
+    return 'ซึมซับธาตุ $element';
   }
 
   @override
   String cmdUseElement(String element) {
-    return 'Use Element $element';
+    return 'ใช้ธาตุ $element';
   }
 
   @override
   String cmdLoadCharacter(String name) {
-    return 'Load saved character: $name';
+    return 'โหลดตัวละครที่บันทึกไว้: $name';
   }
 
   @override
   String cmdLoadGame(String name) {
-    return 'Load saved game: $name';
+    return 'โหลดเกมที่บันทึกไว้: $name';
   }
 
   @override
-  String get cmdNextRound => 'Next Round';
+  String get cmdNextRound => 'รอบถัดไป';
 
   @override
-  String get cmdRemoveAmdCard => 'Remove AMD card';
+  String get cmdRemoveAmdCard => 'นำการ์ด AMD ออก';
 
   @override
   String cmdRemoveCard(String deck, int nr) {
-    return 'Remove $deck card nr $nr';
+    return 'นำการ์ด $deck หมายเลข $nr ออก';
   }
 
   @override
-  String get cmdRemoveAllCharacters => 'Remove all characters';
+  String get cmdRemoveAllCharacters => 'นำตัวละครทั้งหมดออก';
 
   @override
   String cmdRemoveCharacter(String id) {
-    return 'Remove $id';
+    return 'นำ $id ออก';
   }
 
   @override
-  String get cmdRemoveAllMonsters => 'Remove all monsters';
+  String get cmdRemoveAllMonsters => 'นำมอนสเตอร์ทั้งหมดออก';
 
   @override
   String cmdRemoveMonster(String name) {
-    return 'Remove $name';
+    return 'นำ $name ออก';
   }
 
   @override
-  String get cmdReorderAbilityCards => 'Reorder Ability Cards';
+  String get cmdReorderAbilityCards => 'จัดเรียงการ์ดความสามารถใหม่';
 
   @override
-  String get cmdReorderList => 'Reorder List';
+  String get cmdReorderList => 'จัดเรียงรายการใหม่';
 
   @override
-  String get cmdReorderModifierCards => 'Reorder Modifier Cards';
+  String get cmdReorderModifierCards => 'จัดเรียงการ์ดปรับแต่งใหม่';
 
   @override
-  String get cmdReturnLootCard => 'Return loot card';
+  String get cmdReturnLootCard => 'คืนการ์ดการปล้นสะดม';
 
   @override
-  String get cmdReturnModifierCard => 'Return modifier card to top';
+  String get cmdReturnModifierCard => 'คืนการ์ดปรับแต่งขึ้นด้านบน';
 
   @override
-  String get cmdReturnRemovedAmdCard => 'Return removed AMD card';
+  String get cmdReturnRemovedAmdCard => 'คืนการ์ด AMD ที่นำออก';
 
   @override
   String get cmdNoAllyDeckInOgGloom =>
-      'No ally deck in 1st edition Gloomhaven campaigns';
+      'ไม่มีสำรับพันธมิตรใน Gloomhaven ดั้งเดิม';
 
   @override
   String get cmdUseAllyDeckInOgGloom =>
-      'Use Ally Deck in 1st edition Gloomhaven Campaigns';
+      'ใช้สำรับพันธมิตรใน Gloomhaven ดั้งเดิม';
 
   @override
   String cmdMarkAsSummon(String owner) {
-    return 'Mark $owner as summon';
+    return 'ทำเครื่องหมาย $owner เป็นสิ่งที่ถูกเรียก';
   }
 
   @override
   String cmdRemoveSummonMark(String owner) {
-    return 'Remove $owner\'s summon mark';
+    return 'นำเครื่องหมายการเรียกของ $owner ออก';
   }
 
   @override
-  String get cmdAutoLevelOn => 'Turn automatic level update on';
+  String get cmdAutoLevelOn => 'เปิดใช้งานการอัปเดตระดับอัตโนมัติ';
 
   @override
-  String get cmdAutoLevelOff => 'Turn automatic level update off';
+  String get cmdAutoLevelOff => 'ปิดใช้งานการอัปเดตระดับอัตโนมัติ';
 
   @override
   String cmdSetCampaign(String campaign) {
-    return 'Set $campaign campaign';
+    return 'ตั้งค่าแคมเปญ $campaign';
   }
 
   @override
   String cmdSetCharacterLevel(String character) {
-    return 'Set $character\'s Level';
+    return 'ตั้งค่าระดับ $character';
   }
 
   @override
   String cmdSetDifficulty(String difficulty) {
-    return 'Set difficulty level to $difficulty';
+    return 'ตั้งค่าความยาก $difficulty';
   }
 
   @override
   String cmdSetInitiative(String character) {
-    return 'Set initiative of $character';
+    return 'ตั้งค่าค่าริเริ่ม $character';
   }
 
   @override
   String cmdSetMonsterLevel(String monster) {
-    return 'Set $monster\'s level';
+    return 'ตั้งค่าระดับ $monster';
   }
 
   @override
-  String get cmdSetLootOwner => 'Set loot card owner';
+  String get cmdSetLootOwner => 'ตั้งค่าเจ้าของการปล้นสะดม';
 
   @override
-  String get cmdSetScenario => 'Set Scenario';
+  String get cmdSetScenario => 'ตั้งค่าฉาก';
 
   @override
-  String get cmdSetSoloOn => 'Set solo level recommendation on';
+  String get cmdSetSoloOn => 'เปิดใช้งานคำแนะนำระดับโซโล';
 
   @override
-  String get cmdSetSoloOff => 'Set solo level recommendation off';
+  String get cmdSetSoloOff => 'ปิดใช้งานคำแนะนำระดับโซโล';
 
   @override
-  String get cmdExtraAbilityShuffle => 'Extra ability deck shuffle';
+  String get cmdExtraAbilityShuffle => 'สับสำรับความสามารถพิเศษ';
 
   @override
-  String get cmdExtraAmdShuffle => 'Extra AMD deck shuffle';
+  String get cmdExtraAmdShuffle => 'สับสำรับ AMD พิเศษ';
 
   @override
-  String get cmdDrawnAbilityShuffle => 'Drawn ability deck shuffle';
+  String get cmdDrawnAbilityShuffle => 'สับสำรับความสามารถที่จั่ว';
 
   @override
-  String get cmdDontTrackStandees => 'Don\'t track standees';
+  String get cmdDontTrackStandees => 'ไม่ติดตามตัวยืน';
 
   @override
-  String get cmdTrackStandees => 'Track standees';
+  String get cmdTrackStandees => 'ติดตามตัวยืน';
 
   @override
   String cmdTurnDone(String id) {
-    return '$id\'s turn done';
+    return 'เทิร์น $id เสร็จสิ้น';
   }
 
   @override
   String cmdAddPerk(String character, int index) {
-    return 'Add \'$character\' Perk $index';
+    return 'เพิ่มสิทธิพิเศษ $index ของ \'$character\'';
   }
 
   @override
   String cmdRemovePerk(String character, int index) {
-    return 'Remove \'$character\' Perk $index';
+    return 'นำสิทธิพิเศษ $index ของ \'$character\' ออก';
   }
 
   @override
   String cmdUnlock(String id) {
-    return 'Unlock $id';
+    return 'ปลดล็อก $id';
   }
 
   @override
   String cmdLock(String id) {
-    return 'Lock $id';
+    return 'ล็อก $id';
   }
 
   @override
-  String get cmdSetLevel => 'Set Level';
+  String get cmdSetLevel => 'ตั้งค่าระดับ';
 
   @override
-  String get cmdAddSection => 'Add Section';
+  String get cmdAddSection => 'เพิ่มส่วน';
 
   @override
   String cmdAddStandee(String name, int nr) {
-    return 'Add $name $nr';
+    return 'เพิ่ม $name $nr';
   }
 
   @override
-  String get cmdDrawMonsterModifierCard => 'Draw monster modifier card';
+  String get cmdDrawMonsterModifierCard => 'จั่วการ์ดปรับแต่งมอนสเตอร์';
 
   @override
   String cmdIncreaseHealth(String figure, int amount) {
-    return 'Increase $figure\'s health by $amount';
+    return 'เพิ่ม HP ของ $figure $amount';
   }
 
   @override
   String cmdKill(String owner) {
-    return 'Kill $owner';
+    return 'กำจัด $owner';
   }
 
   @override
   String cmdDecreaseHealth(String owner, int amount) {
-    return 'Decrease $owner\'s health by $amount';
+    return 'ลด HP ของ $owner $amount';
   }
 
   @override
   String cmdUseFhPerks(String character) {
-    return '$character use Frosthaven Perks';
+    return '$character ใช้สิทธิพิเศษ Frosthaven';
   }
 
   @override
   String cmdDontUseFhPerks(String character) {
-    return '$character don\'t use Frosthaven Perks';
+    return '$character ไม่ใช้สิทธิพิเศษ Frosthaven';
   }
 
   @override
-  String get cmdRemoveNoCharacters => 'Remove no characters';
+  String get cmdRemoveNoCharacters => 'ไม่ได้นำตัวละครออก';
 
   @override
-  String get cmdRemoveNoMonsters => 'Remove no monsters';
+  String get cmdRemoveNoMonsters => 'ไม่ได้นำมอนสเตอร์ออก';
 }

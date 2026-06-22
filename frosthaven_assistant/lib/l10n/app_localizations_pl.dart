@@ -9,1019 +9,1023 @@ class AppLocalizationsPl extends AppLocalizations {
   AppLocalizationsPl([String locale = 'pl']) : super(locale);
 
   @override
-  String get menuSetScenario => 'Set Scenario';
+  String get menuSetScenario => 'Ustaw scenariusz';
 
   @override
-  String get menuAddCharacter => 'Add Character';
+  String get menuAddCharacter => 'Dodaj postać';
 
   @override
-  String get menuRemoveCharacters => 'Remove Characters';
+  String get menuRemoveCharacters => 'Usuń postacie';
 
   @override
-  String get menuSetLevel => 'Set Level';
+  String get menuSetLevel => 'Ustaw poziom';
 
   @override
-  String get menuLootDeck => 'Loot Deck Menu';
+  String get menuLootDeck => 'Menu talii łupów';
 
   @override
-  String get menuAddMonsters => 'Add Monsters';
+  String get menuAddMonsters => 'Dodaj potwory';
 
   @override
-  String get menuRemoveMonsters => 'Remove Monsters';
+  String get menuRemoveMonsters => 'Usuń potwory';
 
   @override
-  String get menuShowAllyDeck => 'Show Ally Attack Modifier Deck';
+  String get menuShowAllyDeck => 'Pokaż talię modyfikatorów sojusznika';
 
   @override
-  String get menuHideAllyDeck => 'Hide Ally Attack Modifier Deck';
+  String get menuHideAllyDeck => 'Ukryj talię modyfikatorów sojusznika';
 
   @override
-  String get menuSettings => 'Settings';
+  String get menuSettings => 'Ustawienia';
 
   @override
-  String get menuDocumentation => 'Documentation';
+  String get menuDocumentation => 'Dokumentacja';
 
   @override
-  String get menuDonate => 'Donate';
+  String get menuDonate => 'Przekaż darowiznę';
 
   @override
-  String get menuExit => 'Exit';
+  String get menuExit => 'Wyjdź';
 
   @override
-  String get menuAddSection => 'Add Section';
+  String get menuAddSection => 'Dodaj sekcję';
 
   @override
-  String get menuAddRandomDungeonCard => 'Add Random Dungeon Card';
+  String get menuAddRandomDungeonCard => 'Dodaj losową kartę lochu';
 
   @override
-  String get undo => 'Undo';
+  String get undo => 'Cofnij';
 
   @override
   String undoWithDescription(String description) {
-    return 'Undo: $description';
+    return 'Cofnij: $description';
   }
 
   @override
-  String get redo => 'Redo';
+  String get redo => 'Ponów';
 
   @override
   String redoWithDescription(String description) {
-    return 'Redo: $description';
+    return 'Ponów: $description';
   }
 
   @override
   String versionLabel(String version) {
-    return 'Version $version';
+    return 'Wersja $version';
   }
 
   @override
-  String get connectedAsClient => 'Connected as Client';
+  String get connectedAsClient => 'Połączono jako klient';
 
   @override
-  String get connecting => 'Connecting...';
+  String get connecting => 'Łączenie…';
 
   @override
   String connectAsClientWithIp(String ip) {
-    return 'Connect as Client ($ip)';
+    return 'Połącz jako klient ($ip)';
   }
 
   @override
-  String get connectAsClientLabel => 'Connect as Client';
+  String get connectAsClientLabel => 'Połącz jako klient';
 
   @override
   String stopServerWithIp(String ip) {
-    return 'Stop Server $ip';
+    return 'Zatrzymaj serwer $ip';
   }
 
   @override
   String startHostServerWithIp(String ip) {
-    return 'Start Host Server $ip';
+    return 'Uruchom serwer $ip';
   }
 
   @override
-  String get stopServerButton => 'Stop Server';
+  String get stopServerButton => 'Zatrzymaj serwer';
 
   @override
-  String get startHostServerButton => 'Start Host Server';
+  String get startHostServerButton => 'Uruchom serwer hosta';
 
   @override
-  String get networkConnectLocal => 'Connect devices on local wifi:';
+  String get networkConnectLocal =>
+      'Połącz urządzenia przez lokalną sieć Wi-Fi:';
 
   @override
-  String get networkServerIpHint => 'server ip address';
+  String get networkServerIpHint => 'adres IP serwera';
 
   @override
   String get networkPortHint => 'port';
 
   @override
-  String get settingsLanguage => 'Language:';
+  String get settingsLanguage => 'Język:';
 
   @override
-  String get settingsDarkMode => 'Dark mode';
+  String get settingsDarkMode => 'Tryb ciemny';
 
   @override
-  String get settingsSoftNumpad => 'Soft numpad for input';
+  String get settingsSoftNumpad => 'Programowa klawiatura numeryczna';
 
   @override
-  String get settingsNoInit => 'Don\'t ask for initiative';
+  String get settingsNoInit => 'Nie pytaj o inicjatywę';
 
   @override
-  String get settingsExpireConditions => 'Expire Conditions';
+  String get settingsExpireConditions => 'Wygasanie stanów';
 
   @override
-  String get settingsNoStandees => 'Don\'t track Standees';
+  String get settingsNoStandees => 'Nie śledź pionków';
 
   @override
-  String get settingsAutoAddStandees => 'Auto Add Standees';
+  String get settingsAutoAddStandees => 'Automatycznie dodawaj pionki';
 
   @override
-  String get settingsAutoAddSpawns => 'Auto Add Timed Spawns';
+  String get settingsAutoAddSpawns => 'Automatycznie dodawaj przywoływanych';
 
   @override
-  String get settingsRandomStandees => 'Random Standees';
+  String get settingsRandomStandees => 'Losowe pionki';
 
   @override
-  String get settingsNoCalculations => 'No Calculations';
+  String get settingsNoCalculations => 'Bez obliczeń';
 
   @override
-  String get settingsHideLootDeck => 'Hide Loot Deck';
+  String get settingsHideLootDeck => 'Ukryj talię łupów';
 
   @override
-  String get settingsShimmer => 'Stat card text shimmers';
+  String get settingsShimmer => 'Migotanie tekstu na kartach statystyk';
 
   @override
   String get settingsFhHazTerrainCalc =>
-      'Use Frosthaven Hazardous Terrain Calculation in OG Gloomhaven';
+      'Obliczenia niebezp. terenu z Frosthaven w orig. Gloomhaven';
 
   @override
   String get settingsAllyDeckOGGloom =>
-      'Use Ally Attack Modifier Deck in OG Gloomhaven';
+      'Talia modyfikatorów sojusznika w orig. Gloomhaven';
 
   @override
-  String get settingsShowScenarioNames => 'Show Scenario names in list';
+  String get settingsShowScenarioNames => 'Pokaż nazwy scenariuszy';
 
   @override
-  String get settingsShowBattleGoalReminder => 'Show Battle Goal Reminder';
+  String get settingsShowBattleGoalReminder =>
+      'Pokaż przypomnienie o celu bitewnym';
 
   @override
-  String get settingsShowCustomContent => 'Show Custom Content';
+  String get settingsShowCustomContent => 'Pokaż zawartość niestandardową';
 
   @override
-  String get settingsShowSections => 'Show Sections in Main Screen';
+  String get settingsShowSections => 'Pokaż sekcje na głównym ekranie';
 
   @override
-  String get settingsShowReminders => 'Show Round Special Rule Reminders';
+  String get settingsShowReminders => 'Pokaż przypomnienia specjalnych zasad';
 
   @override
-  String get settingsShowAmdDeck => 'Show Attack Modifier Decks';
+  String get settingsShowAmdDeck => 'Pokaż talie modyfikatorów ataku';
 
   @override
-  String get settingsShowCharacterAmd => 'Show character Attack Modifier Decks';
+  String get settingsShowCharacterAmd => 'Pokaż talie modyfikatorów postaci';
 
   @override
   String get settingsHealthWheel =>
-      'Enable heath wheel: drag left-right to change health';
+      'Koło życia: przeciągnij lewo-prawo by zmienić';
 
   @override
-  String get settingsFullscreen => 'Fullscreen';
+  String get settingsFullscreen => 'Pełny ekran';
 
   @override
-  String get settingsMainListScaling => 'Main List Scaling:';
+  String get settingsMainListScaling => 'Skalowanie listy głównej:';
 
   @override
-  String get settingsAppBarScaling => 'App Bar Scaling:';
+  String get settingsAppBarScaling => 'Skalowanie paska aplikacji:';
 
   @override
-  String get settingsStyleLabel => 'Style:';
+  String get settingsStyleLabel => 'Styl:';
 
   @override
   String get styleFrosthaven => 'Frosthaven';
 
   @override
-  String get styleOriginal => 'Original';
+  String get styleOriginal => 'Oryginalny';
 
   @override
-  String get settingsClearUnlocked => 'Clear unlocked characters and stuff';
+  String get settingsClearUnlocked =>
+      'Wyczyść odblokowane postacie i zawartość';
 
   @override
-  String get settingsUnlockSpecials => 'Unlock specials';
+  String get settingsUnlockSpecials => 'Odblokuj specjalne';
 
   @override
-  String get settingsLoadSaveState => 'Load/Save State';
+  String get settingsLoadSaveState => 'Wczytaj/Zapisz stan';
 
   @override
-  String get noResultsFound => 'No results found';
+  String get noResultsFound => 'Brak wyników';
 
   @override
-  String get close => 'Close';
+  String get close => 'Zamknij';
 
   @override
-  String get retry => 'RETRY';
+  String get retry => 'PONÓW';
 
   @override
-  String get specialUnlocks => 'Special Unlocks';
+  String get specialUnlocks => 'Specjalne odblokowania';
 
   @override
-  String get loadSaveDeleteCharacters => 'Load, Save or Delete Characters.';
+  String get loadSaveDeleteCharacters => 'Wczytaj, zapisz lub usuń postacie.';
 
   @override
-  String get loadAddDeleteSaves => 'Load, Add or Delete save states.';
+  String get loadAddDeleteSaves => 'Wczytaj, dodaj lub usuń zapisane stany.';
 
   @override
-  String get addNewSave => 'Add new Save';
+  String get addNewSave => 'Nowy zapis';
 
   @override
-  String get addNewSaveLabel => 'Add new Save:';
+  String get addNewSaveLabel => 'Nowy zapis:';
 
   @override
-  String get loadButton => 'Load';
+  String get loadButton => 'Wczytaj';
 
   @override
-  String get saveButton => 'Save';
+  String get saveButton => 'Zapisz';
 
   @override
-  String get deleteButton => 'Delete';
+  String get deleteButton => 'Usuń';
 
   @override
-  String get setSaveName => 'Set save name:';
+  String get setSaveName => 'Nazwa zapisu:';
 
   @override
-  String get loadOrSaveCharacters => 'Load or Save Characters';
+  String get loadOrSaveCharacters => 'Wczytaj lub zapisz postacie';
 
   @override
-  String get loadCharacter => 'Load Character:';
+  String get loadCharacter => 'Wczytaj postać:';
 
   @override
-  String get removeAll => 'Remove All';
+  String get removeAll => 'Usuń wszystko';
 
   @override
-  String get removeCardQuestion => 'Remove card?';
+  String get removeCardQuestion => 'Usunąć kartę?';
 
   @override
-  String get sendToBottom => 'Send to Bottom';
+  String get sendToBottom => 'Wyślij na dół';
 
   @override
-  String get shuffleUndrawnCards => 'Shuffle un-drawn Cards';
+  String get shuffleUndrawnCards => 'Przetasuj niedobrane karty';
 
   @override
-  String get returnToDiscardPile => 'Return card to discard pile';
+  String get returnToDiscardPile => 'Zwróć na stos odrzuconych';
 
   @override
-  String get returnToDrawPile => 'Return card to draw pile';
+  String get returnToDrawPile => 'Zwróć do talii';
 
   @override
-  String get addExtraLootCard => 'Add Extra Loot Card';
+  String get addExtraLootCard => 'Dodaj dodatkową kartę łupów';
 
   @override
-  String get addStandeeNr => 'Add Standee Nr';
+  String get addStandeeNr => 'Dodaj pionek nr';
 
   @override
-  String get summonedLabel => 'Summoned:';
+  String get summonedLabel => 'Przywołani:';
 
   @override
-  String get characterDecks => 'Character Decks';
+  String get characterDecks => 'Talie postaci';
 
   @override
-  String get shuffleAndDraw => 'Shuffle\n& Draw';
+  String get shuffleAndDraw => 'Tasuj\ni dobierz';
 
   @override
-  String get draw => 'Draw';
+  String get draw => 'Dobierz';
 
   @override
-  String get nextRound => ' Next Round';
+  String get nextRound => ' Następna runda';
 
   @override
-  String get returnTopCard => 'Return top card';
+  String get returnTopCard => 'Zwróć górną kartę';
 
   @override
   String removeCardWithDetails(String title, int nr) {
-    return 'Remove $title\n(card nr: $nr)';
+    return 'Usuń $title\n(karta nr: $nr)';
   }
 
   @override
-  String get tapCardToAddToDeck => 'Tap Card to add to your deck';
+  String get tapCardToAddToDeck => 'Dotknij kartę, aby dodać do talii';
 
   @override
-  String get removeCardFromDeckQuestion => 'Remove card from your deck?';
+  String get removeCardFromDeckQuestion => 'Usunąć kartę z talii?';
 
   @override
-  String get changeName => 'Change name:';
+  String get changeName => 'Zmień nazwę:';
 
   @override
-  String get showBosses => 'Show Bosses';
+  String get showBosses => 'Pokaż bossów';
 
   @override
-  String get showScenarioSpecialMonsters => 'Show Scenario Special Monsters';
+  String get showScenarioSpecialMonsters =>
+      'Pokaż specjalne potwory scenariusza';
 
   @override
-  String get addAsAlly => 'Add as Ally';
+  String get addAsAlly => 'Dodaj jako sojusznika';
 
   @override
-  String get addMonsterLabel => 'Add Monster';
+  String get addMonsterLabel => 'Dodaj potwora';
 
   @override
-  String get allCampaigns => 'All Campaigns';
+  String get allCampaigns => 'Wszystkie kampanie';
 
   @override
-  String get showMonstersFrom => '      Show monsters from:   ';
+  String get showMonstersFrom => '      Pokaż potwory z:   ';
 
   @override
   String setMonsterLevel(String name) {
-    return 'Set $name\'s level';
+    return 'Poziom $name';
   }
 
   @override
   String setSummonHealth(String name) {
-    return 'Set $name\'s max health';
+    return 'Maks. życie $name';
   }
 
   @override
-  String get setScenarioLevel => 'Set Scenario Level';
+  String get setScenarioLevel => 'Poziom scenariusza';
 
   @override
   String enhancedLevel(String level) {
-    return 'Enhanced: $level';
+    return 'Ulepszone: $level';
   }
 
   @override
   String get soloLabel => 'Solo:';
 
   @override
-  String get automaticScenarioLevel => 'Automatic Scenario Level:';
+  String get automaticScenarioLevel => 'Automatyczny poziom scenariusza:';
 
   @override
-  String get difficultyLabel => 'Difficulty:';
+  String get difficultyLabel => 'Trudność:';
 
   @override
-  String get lootCardEnhancements => 'Loot Card Enhancements';
+  String get lootCardEnhancements => 'Ulepszenia kart łupów';
 
   @override
-  String get addPerks => 'Add Perks';
+  String get addPerks => 'Dodaj atuty';
 
   @override
-  String get useFrosthavenPerks => 'Use Frosthaven Perks';
+  String get useFrosthavenPerks => 'Atuty Frosthaven';
 
   @override
   String currentCampaign(String campaign) {
-    return 'Current Campaign: $campaign';
+    return 'Aktualna kampania: $campaign';
   }
 
   @override
-  String get addCharacterHint =>
-      'Add Character (type name for hidden character classes)';
+  String get addCharacterHint => 'Dodaj postać (wpisz nazwę dla ukrytych klas)';
 
   @override
-  String get trapDamage => 'trap damage';
+  String get trapDamage => 'obrażenia od pułapki';
 
   @override
-  String get hazardousTerrainDamage => 'hazardous terrain damage';
+  String get hazardousTerrainDamage => 'obrażenia od niebezpiecznego terenu';
 
   @override
-  String get experienceAdded => 'experience added';
+  String get experienceAdded => 'dodane doświadczenie';
 
   @override
-  String get goldCoinValue => 'gold coin value';
+  String get goldCoinValue => 'wartość złotej monety';
 
   @override
-  String get levelLegendLabel => 'level';
+  String get levelLegendLabel => 'poziom';
 
   @override
   String get saveStateNote =>
-      'Please note that the app automatically saves your progress after every action. These are for backups or multiple campaigns.';
+      'Aplikacja zapisuje postępy po każdej akcji. Te zapisy służą jako kopie zapasowe lub dla wielu kampanii.';
 
   @override
   String clientConnectedTo(String address) {
-    return 'Client Connected to: $address';
+    return 'Klient połączony z: $address';
   }
 
   @override
   String clientError(String error) {
-    return 'Client error: $error';
+    return 'Błąd klienta: $error';
   }
 
   @override
   String clientListenError(String error) {
-    return 'Client listen error: $error';
+    return 'Błąd nasłuchiwania klienta: $error';
   }
 
   @override
-  String get lostConnectionToServer => 'Lost connection to server';
+  String get lostConnectionToServer => 'Utracono połączenie z serwerem';
 
   @override
-  String get stateMismatch => 'Your state was not up to date, try again.';
+  String get stateMismatch => 'Twój stan był nieaktualny, spróbuj ponownie.';
 
   @override
-  String get serverUnresponsive => 'Server unresponsive. Client disconnected.';
+  String get serverUnresponsive => 'Serwer nie odpowiada. Klient rozłączony.';
 
   @override
-  String get clientDisconnected => 'client disconnected';
+  String get clientDisconnected => 'klient rozłączony';
 
   @override
-  String get serverOffline => 'Server Offline';
+  String get serverOffline => 'Serwer offline';
 
   @override
-  String get clientLeft => 'Client left.';
+  String get clientLeft => 'Klient wyszedł.';
 
   @override
   String get clientTooOld =>
-      'Old client attempted to connect. Please update the app.';
+      'Stary klient próbował się połączyć. Zaktualizuj aplikację.';
 
   @override
   String networkConnection(String status) {
-    return 'Network connection: $status';
+    return 'Połączenie sieciowe: $status';
   }
 
   @override
-  String get failedToGetWifiIp => 'Failed to get IP address';
+  String get failedToGetWifiIp => 'Nie udało się uzyskać adresu IP';
 
   @override
-  String get badOmen => 'Bad Omen';
+  String get badOmen => 'Zły omen';
 
   @override
   String badOmensLeft(int count) {
-    return 'Bad Omens Left: $count';
+    return 'Pozostałe złe omeny: $count';
   }
 
   @override
-  String get corrosiveSpew => 'Corrosive Spew';
+  String get corrosiveSpew => 'Żrący wyrzut';
 
   @override
-  String get empowersOnTop => 'Empowers on top';
+  String get empowersOnTop => 'Wzmocnienia na górze';
 
   @override
   String addMinusOneCard(int count) {
-    return 'Add -1 card (added: $count)';
+    return 'Dodaj kartę -1 (dodane: $count)';
   }
 
   @override
-  String get removeMinusOneCard => 'Remove -1 card';
+  String get removeMinusOneCard => 'Usuń kartę -1';
 
   @override
-  String get removeMinusTwoCard => 'Remove -2 card';
+  String get removeMinusTwoCard => 'Usuń kartę -2';
 
   @override
-  String get minusTwoCardRemoved => '-2 card removed';
+  String get minusTwoCardRemoved => 'Karta -2 usunięta';
 
   @override
-  String get removePlusZeroCard => 'Remove +0 card';
+  String get removePlusZeroCard => 'Usuń kartę +0';
 
   @override
-  String get plusZeroCardRemoved => '+0 card removed';
+  String get plusZeroCardRemoved => 'Karta +0 usunięta';
 
   @override
-  String get removeImbue => 'Remove Imbue';
+  String get removeImbue => 'Usuń nasycenie';
 
   @override
-  String get imbue => 'Imbue';
+  String get imbue => 'Nasyć';
 
   @override
-  String get advancedImbue => 'Advanced Imbue';
+  String get advancedImbue => 'Zaawansowane nasycenie';
 
   @override
-  String get removeHailPerk => 'Remove Hail Perk';
+  String get removeHailPerk => 'Usuń atut Grad';
 
   @override
-  String get addHailPerk => 'Add Hail Perk';
+  String get addHailPerk => 'Dodaj atut Grad';
 
   @override
-  String get removeCassandraPerk => 'Remove\nCassandra Perk';
+  String get removeCassandraPerk => 'Usuń\natut Cassandry';
 
   @override
-  String get addCassandraPerk => 'Add\nCassandra Perk';
+  String get addCassandraPerk => 'Dodaj\natut Cassandry';
 
   @override
-  String get dontSaveRevealedCards => 'Don\'t Save\nRevealed Cards';
+  String get dontSaveRevealedCards => 'Nie zachowuj\nodsłoniętych kart';
 
   @override
-  String get saveRevealedCards => 'Save\nRevealed Cards';
+  String get saveRevealedCards => 'Zachowaj\nodsłonięte karty';
 
   @override
   String removedCountLabel(int count) {
-    return 'Removed: $count';
+    return 'Usunięte: $count';
   }
 
   @override
-  String get removeDonation => 'Remove\nDonation';
+  String get removeDonation => 'Usuń\ndarowiznę';
 
   @override
-  String get donateSanctuary => 'Donate to\nSanctuary';
+  String get donateSanctuary => 'Przekaż do\nsanktuarium';
 
   @override
-  String get removePartyCard => 'Remove\nParty Card:';
+  String get removePartyCard => 'Usuń\nkartę grupy:';
 
   @override
-  String get addPartyCard => 'Add Party\nCard:';
+  String get addPartyCard => 'Dodaj\nkartę grupy:';
 
   @override
-  String get perks => 'Perks';
+  String get perks => 'Atuty';
 
   @override
-  String get revealCards => 'Reveal\ncards:';
+  String get revealCards => 'Odsłoń\nkarty:';
 
   @override
-  String get revealAll => 'All';
+  String get revealAll => 'Wszystkie';
 
   @override
-  String get drawExtraCard => 'Draw extra card';
+  String get drawExtraCard => 'Dobierz dodatkową kartę';
 
   @override
-  String get extraShuffle => 'Extra Shuffle';
+  String get extraShuffle => 'Dodatkowe tasowanie';
 
   @override
-  String get inactivateMonster => 'Inactivate\nMonster';
+  String get inactivateMonster => 'Dezaktywuj\npotwora';
 
   @override
-  String get activateMonster => 'Activate\nMonster';
+  String get activateMonster => 'Aktywuj\npotwora';
 
   @override
   String addEliteStandees(int count, String name) {
-    return 'Add $count Elite $name';
+    return 'Dodaj $count elitarnych $name';
   }
 
   @override
   String addNormalStandees(int count, String name) {
-    return 'Add $count Normal $name';
+    return 'Dodaj $count zwykłych $name';
   }
 
   @override
-  String get characterLoot => 'Character loot';
+  String get characterLoot => 'Łup postaci';
 
   @override
   String addSpecialCard(int nr) {
-    return 'Add card $nr';
+    return 'Dodaj kartę $nr';
   }
 
   @override
   String removeSpecialCard(int nr) {
-    return 'Remove card $nr';
+    return 'Usuń kartę $nr';
   }
 
   @override
-  String get enhanceCards => 'Enhance cards';
+  String get enhanceCards => 'Ulepsz karty';
 
   @override
-  String get addLootCard => 'Add Card';
+  String get addLootCard => 'Dodaj kartę';
 
   @override
-  String get returnToTop => 'Return to Top';
+  String get returnToTop => 'Wróć na górę';
 
   @override
-  String get returnToBottom => 'Return to Bottom';
+  String get returnToBottom => 'Wróć na dół';
 
   @override
   String characterLootTitle(String name) {
-    return '$name\'s loot:';
+    return 'Łup $name:';
   }
 
   @override
-  String get setLootOwner => 'Set Loot Owner:';
+  String get setLootOwner => 'Właściciel łupu:';
 
   @override
-  String get lootNameCoin => 'coin';
+  String get lootNameCoin => 'moneta';
 
   @override
-  String get lootNameHide => 'hide';
+  String get lootNameHide => 'skóra';
 
   @override
-  String get lootNameLumber => 'lumber';
+  String get lootNameLumber => 'drewno';
 
   @override
   String get lootNameMetal => 'metal';
 
   @override
-  String get lootNameArrowvine => 'arrowvine';
+  String get lootNameArrowvine => 'strzałowiec';
 
   @override
-  String get lootNameAxenut => 'axenut';
+  String get lootNameAxenut => 'siekierorzech';
 
   @override
-  String get lootNameCorpsecap => 'corpsecap';
+  String get lootNameCorpsecap => 'trupielnik';
 
   @override
-  String get lootNameFlamefruit => 'flamefruit';
+  String get lootNameFlamefruit => 'ognioowoc';
 
   @override
-  String get lootNameRockroot => 'rockroot';
+  String get lootNameRockroot => 'skalniak';
 
   @override
-  String get lootNameSnowthistle => 'snowthistle';
+  String get lootNameSnowthistle => 'śnieżny oset';
 
   @override
-  String get lootAmount2For2 => '2 for 2 characters';
+  String get lootAmount2For2 => '2 dla 2 graczy';
 
   @override
-  String get lootAmount2For23 => '2 for 2-3 characters';
+  String get lootAmount2For23 => '2 dla 2-3 graczy';
 
   @override
   String cmdActivateMonster(String name) {
-    return 'Activate $name';
+    return 'Aktywuj $name';
   }
 
   @override
   String cmdDeactivateMonster(String name) {
-    return 'Deactivate $name';
+    return 'Dezaktywuj $name';
   }
 
   @override
   String cmdAddCharacter(String id) {
-    return 'Add $id';
+    return 'Dodaj $id';
   }
 
   @override
   String cmdAddCondition(String condition) {
-    return 'Add condition: $condition';
+    return 'Dodaj stan: $condition';
   }
 
   @override
   String cmdRemoveCondition(String condition) {
-    return 'Remove condition: $condition';
+    return 'Usuń stan: $condition';
   }
 
   @override
   String cmdAddPartyCard(String character, String type) {
-    return '$character add party card $type';
+    return '$character dodaj kartę grupy $type';
   }
 
   @override
   String cmdRemovePartyCard(String character) {
-    return '$character remove party card';
+    return '$character usuń kartę grupy';
   }
 
   @override
   String cmdAddFactionCard(String character) {
-    return '$character add faction card';
+    return '$character dodaj kartę frakcji';
   }
 
   @override
   String cmdRemoveFactionCard(String character) {
-    return '$character remove faction card';
+    return '$character usuń kartę frakcji';
   }
 
   @override
   String cmdAddLootCard(String type) {
-    return 'Add $type Loot Card';
+    return 'Dodaj kartę łupów $type';
   }
 
   @override
   String cmdAddMonster(String name) {
-    return 'Add $name';
+    return 'Dodaj $name';
   }
 
   @override
   String cmdAddSpecialLootCard(int nr) {
-    return 'Add Special loot card $nr';
+    return 'Dodaj specjalną kartę łupów $nr';
   }
 
   @override
   String cmdRemoveSpecialLootCard(int nr) {
-    return 'Remove Special loot card $nr';
+    return 'Usuń specjalną kartę łupów $nr';
   }
 
   @override
-  String get cmdAddMinusOne => 'Add minus one';
+  String get cmdAddMinusOne => 'Dodaj minus jeden';
 
   @override
-  String get cmdRemoveMinusOne => 'Remove minus one';
+  String get cmdRemoveMinusOne => 'Usuń minus jeden';
 
   @override
-  String get cmdRemoveMinusTwo => 'Remove minus two';
+  String get cmdRemoveMinusTwo => 'Usuń minus dwa';
 
   @override
-  String get cmdAddBackMinusTwo => 'Add back minus two';
+  String get cmdAddBackMinusTwo => 'Przywróć minus dwa';
 
   @override
-  String get cmdRemovePlusZero => 'Remove plus zero';
+  String get cmdRemovePlusZero => 'Usuń plus zero';
 
   @override
-  String get cmdAddBackPlusZero => 'Add back plus zero';
+  String get cmdAddBackPlusZero => 'Przywróć plus zero';
 
   @override
   String cmdRevealModifierCards(int count) {
-    return 'Reveal $count modifier cards';
+    return 'Odsłoń $count kart modyfikatorów';
   }
 
   @override
   String cmdCassandraLeaveRevealed(String deck) {
-    return 'Leave revealed cards on top of $deck deck';
+    return 'Zostaw odsłonięte karty na talii $deck';
   }
 
   @override
   String cmdCassandraSpecialOff(String deck) {
-    return 'Cassandra Special turned off for $deck deck';
+    return 'Specjał Cassandry wyłączony dla talii $deck';
   }
 
   @override
-  String get cmdImbueMonsterDeck => 'Imbue Monster Deck';
+  String get cmdImbueMonsterDeck => 'Nasyć talię potworów';
 
   @override
-  String get cmdAdvancedImbueMonsterDeck => 'Advanced Imbue Monster Deck';
+  String get cmdAdvancedImbueMonsterDeck =>
+      'Zaawansowane nasycenie talii potworów';
 
   @override
-  String get cmdRemoveImbueMonsterDeck => 'Remove Imbuement';
+  String get cmdRemoveImbueMonsterDeck => 'Usuń nasycenie';
 
   @override
-  String get cmdChangeName => 'Change character name';
+  String get cmdChangeName => 'Zmień nazwę postaci';
 
   @override
-  String get cmdAddBless => 'Add a Bless';
+  String get cmdAddBless => 'Dodaj błogosławieństwo';
 
   @override
-  String get cmdRemoveBless => 'Remove a Bless';
+  String get cmdRemoveBless => 'Usuń błogosławieństwo';
 
   @override
-  String get cmdAddCurse => 'Add a Curse';
+  String get cmdAddCurse => 'Dodaj klątwę';
 
   @override
-  String get cmdRemoveCurse => 'Remove a Curse';
+  String get cmdRemoveCurse => 'Usuń klątwę';
 
   @override
-  String get cmdAddEmpower => 'Add Empower';
+  String get cmdAddEmpower => 'Dodaj wzmocnienie';
 
   @override
-  String get cmdRemoveEmpower => 'Remove Empower';
+  String get cmdRemoveEmpower => 'Usuń wzmocnienie';
 
   @override
-  String get cmdAddEnfeeble => 'Add Enfeeble';
+  String get cmdAddEnfeeble => 'Dodaj osłabienie';
 
   @override
-  String get cmdRemoveEnfeeble => 'Remove Enfeeble';
+  String get cmdRemoveEnfeeble => 'Usuń osłabienie';
 
   @override
   String cmdIncreaseMaxHealth(String owner) {
-    return 'Increase $owner\'s max health';
+    return 'Zwiększ maks. życie $owner';
   }
 
   @override
   String cmdDecreaseMaxHealth(String owner) {
-    return 'Decrease $owner\'s max health';
+    return 'Zmniejsz maks. życie $owner';
   }
 
   @override
-  String get cmdChangeStat => 'Change stat';
+  String get cmdChangeStat => 'Zmień statystykę';
 
   @override
   String cmdIncreaseXp(String figure, int amount) {
-    return 'Increase $figure\'s xp by $amount';
+    return 'Zwiększ PD $figure o $amount';
   }
 
   @override
   String cmdDecreaseXp(String figure, int amount) {
-    return 'Decrease $figure\'s xp by $amount';
+    return 'Zmniejsz PD $figure o $amount';
   }
 
   @override
-  String get cmdClearUnlockedClasses => 'Clear unlocked classes';
+  String get cmdClearUnlockedClasses => 'Wyczyść odblokowane klasy';
 
   @override
   String cmdDonateSanctuary(String character) {
-    return '$character donate to sanctuary';
+    return '$character przekazuje do sanktuarium';
   }
 
   @override
   String cmdRemoveSanctuaryDonation(String character) {
-    return 'Remove $character\'s donation';
+    return 'Usuń darowiznę $character';
   }
 
   @override
-  String get cmdDrawExtraAbilityCard => 'Draw extra ability card';
+  String get cmdDrawExtraAbilityCard => 'Dobierz dodatkową kartę zdolności';
 
   @override
-  String get cmdDraw => 'Draw';
+  String get cmdDraw => 'Dobierz';
 
   @override
-  String get cmdDrawLootCard => 'Draw loot card';
+  String get cmdDrawLootCard => 'Dobierz kartę łupów';
 
   @override
   String cmdDrawModifierCard(String name) {
-    return 'Draw $name modifier card';
+    return 'Dobierz kartę modyfikatora $name';
   }
 
   @override
-  String get cmdRemoveLootEnhancement => 'Remove Loot Enhancement';
+  String get cmdRemoveLootEnhancement => 'Usuń ulepszenie łupów';
 
   @override
-  String get cmdAddLootEnhancement => 'Add Loot Enhancement';
+  String get cmdAddLootEnhancement => 'Dodaj ulepszenie łupów';
 
   @override
-  String get cmdHideAllyDeck => 'Hide Ally Deck';
+  String get cmdHideAllyDeck => 'Ukryj talię sojusznika';
 
   @override
-  String get cmdShowAllyDeck => 'Show Ally Deck';
+  String get cmdShowAllyDeck => 'Pokaż talię sojusznika';
 
   @override
-  String get cmdIceWraithTurnNormal => 'Ice Wraith turn normal';
+  String get cmdIceWraithTurnNormal => 'Lodowy zjaw staje się zwykły';
 
   @override
-  String get cmdIceWraithTurnElite => 'Ice Wraith turn elite';
+  String get cmdIceWraithTurnElite => 'Lodowy zjaw staje się elitarny';
 
   @override
   String cmdImbueElement(String element) {
-    return 'Imbue element $element';
+    return 'Nasyć żywioł $element';
   }
 
   @override
   String cmdUseElement(String element) {
-    return 'Use Element $element';
+    return 'Użyj żywiołu $element';
   }
 
   @override
   String cmdLoadCharacter(String name) {
-    return 'Load saved character: $name';
+    return 'Wczytaj zapisaną postać: $name';
   }
 
   @override
   String cmdLoadGame(String name) {
-    return 'Load saved game: $name';
+    return 'Wczytaj zapisaną grę: $name';
   }
 
   @override
-  String get cmdNextRound => 'Next Round';
+  String get cmdNextRound => 'Następna runda';
 
   @override
-  String get cmdRemoveAmdCard => 'Remove AMD card';
+  String get cmdRemoveAmdCard => 'Usuń kartę AMD';
 
   @override
   String cmdRemoveCard(String deck, int nr) {
-    return 'Remove $deck card nr $nr';
+    return 'Usuń kartę $deck nr $nr';
   }
 
   @override
-  String get cmdRemoveAllCharacters => 'Remove all characters';
+  String get cmdRemoveAllCharacters => 'Usuń wszystkie postacie';
 
   @override
   String cmdRemoveCharacter(String id) {
-    return 'Remove $id';
+    return 'Usuń $id';
   }
 
   @override
-  String get cmdRemoveAllMonsters => 'Remove all monsters';
+  String get cmdRemoveAllMonsters => 'Usuń wszystkie potwory';
 
   @override
   String cmdRemoveMonster(String name) {
-    return 'Remove $name';
+    return 'Usuń $name';
   }
 
   @override
-  String get cmdReorderAbilityCards => 'Reorder Ability Cards';
+  String get cmdReorderAbilityCards => 'Zmień kolejność kart zdolności';
 
   @override
-  String get cmdReorderList => 'Reorder List';
+  String get cmdReorderList => 'Zmień kolejność listy';
 
   @override
-  String get cmdReorderModifierCards => 'Reorder Modifier Cards';
+  String get cmdReorderModifierCards => 'Zmień kolejność kart modyfikatorów';
 
   @override
-  String get cmdReturnLootCard => 'Return loot card';
+  String get cmdReturnLootCard => 'Zwróć kartę łupów';
 
   @override
-  String get cmdReturnModifierCard => 'Return modifier card to top';
+  String get cmdReturnModifierCard => 'Zwróć kartę modyfikatora na górę';
 
   @override
-  String get cmdReturnRemovedAmdCard => 'Return removed AMD card';
+  String get cmdReturnRemovedAmdCard => 'Zwróć usuniętą kartę AMD';
 
   @override
   String get cmdNoAllyDeckInOgGloom =>
-      'No ally deck in 1st edition Gloomhaven campaigns';
+      'Brak talii sojusznika w orig. Gloomhaven';
 
   @override
   String get cmdUseAllyDeckInOgGloom =>
-      'Use Ally Deck in 1st edition Gloomhaven Campaigns';
+      'Użyj talii sojusznika w orig. Gloomhaven';
 
   @override
   String cmdMarkAsSummon(String owner) {
-    return 'Mark $owner as summon';
+    return 'Oznacz $owner jako przywołanego';
   }
 
   @override
   String cmdRemoveSummonMark(String owner) {
-    return 'Remove $owner\'s summon mark';
+    return 'Usuń oznaczenie przywołania $owner';
   }
 
   @override
-  String get cmdAutoLevelOn => 'Turn automatic level update on';
+  String get cmdAutoLevelOn => 'Włącz automatyczną aktualizację poziomu';
 
   @override
-  String get cmdAutoLevelOff => 'Turn automatic level update off';
+  String get cmdAutoLevelOff => 'Wyłącz automatyczną aktualizację poziomu';
 
   @override
   String cmdSetCampaign(String campaign) {
-    return 'Set $campaign campaign';
+    return 'Ustaw kampanię $campaign';
   }
 
   @override
   String cmdSetCharacterLevel(String character) {
-    return 'Set $character\'s Level';
+    return 'Ustaw poziom $character';
   }
 
   @override
   String cmdSetDifficulty(String difficulty) {
-    return 'Set difficulty level to $difficulty';
+    return 'Ustaw trudność na $difficulty';
   }
 
   @override
   String cmdSetInitiative(String character) {
-    return 'Set initiative of $character';
+    return 'Ustaw inicjatywę $character';
   }
 
   @override
   String cmdSetMonsterLevel(String monster) {
-    return 'Set $monster\'s level';
+    return 'Ustaw poziom $monster';
   }
 
   @override
-  String get cmdSetLootOwner => 'Set loot card owner';
+  String get cmdSetLootOwner => 'Ustaw właściciela łupu';
 
   @override
-  String get cmdSetScenario => 'Set Scenario';
+  String get cmdSetScenario => 'Ustaw scenariusz';
 
   @override
-  String get cmdSetSoloOn => 'Set solo level recommendation on';
+  String get cmdSetSoloOn => 'Włącz rekomendację poziomu solo';
 
   @override
-  String get cmdSetSoloOff => 'Set solo level recommendation off';
+  String get cmdSetSoloOff => 'Wyłącz rekomendację poziomu solo';
 
   @override
-  String get cmdExtraAbilityShuffle => 'Extra ability deck shuffle';
+  String get cmdExtraAbilityShuffle => 'Dodatkowe tasowanie talii zdolności';
 
   @override
-  String get cmdExtraAmdShuffle => 'Extra AMD deck shuffle';
+  String get cmdExtraAmdShuffle => 'Dodatkowe tasowanie talii AMD';
 
   @override
-  String get cmdDrawnAbilityShuffle => 'Drawn ability deck shuffle';
+  String get cmdDrawnAbilityShuffle => 'Tasowanie dobranej talii zdolności';
 
   @override
-  String get cmdDontTrackStandees => 'Don\'t track standees';
+  String get cmdDontTrackStandees => 'Nie śledź pionków';
 
   @override
-  String get cmdTrackStandees => 'Track standees';
+  String get cmdTrackStandees => 'Śledź pionki';
 
   @override
   String cmdTurnDone(String id) {
-    return '$id\'s turn done';
+    return 'Tura $id zakończona';
   }
 
   @override
   String cmdAddPerk(String character, int index) {
-    return 'Add \'$character\' Perk $index';
+    return 'Dodaj atut $index postaci \'$character\'';
   }
 
   @override
   String cmdRemovePerk(String character, int index) {
-    return 'Remove \'$character\' Perk $index';
+    return 'Usuń atut $index postaci \'$character\'';
   }
 
   @override
   String cmdUnlock(String id) {
-    return 'Unlock $id';
+    return 'Odblokuj $id';
   }
 
   @override
   String cmdLock(String id) {
-    return 'Lock $id';
+    return 'Zablokuj $id';
   }
 
   @override
-  String get cmdSetLevel => 'Set Level';
+  String get cmdSetLevel => 'Ustaw poziom';
 
   @override
-  String get cmdAddSection => 'Add Section';
+  String get cmdAddSection => 'Dodaj sekcję';
 
   @override
   String cmdAddStandee(String name, int nr) {
-    return 'Add $name $nr';
+    return 'Dodaj $name $nr';
   }
 
   @override
-  String get cmdDrawMonsterModifierCard => 'Draw monster modifier card';
+  String get cmdDrawMonsterModifierCard => 'Dobierz kartę modyfikatora potwora';
 
   @override
   String cmdIncreaseHealth(String figure, int amount) {
-    return 'Increase $figure\'s health by $amount';
+    return 'Zwiększ życie $figure o $amount';
   }
 
   @override
   String cmdKill(String owner) {
-    return 'Kill $owner';
+    return 'Zabij $owner';
   }
 
   @override
   String cmdDecreaseHealth(String owner, int amount) {
-    return 'Decrease $owner\'s health by $amount';
+    return 'Zmniejsz życie $owner o $amount';
   }
 
   @override
   String cmdUseFhPerks(String character) {
-    return '$character use Frosthaven Perks';
+    return '$character używa atutów Frosthaven';
   }
 
   @override
   String cmdDontUseFhPerks(String character) {
-    return '$character don\'t use Frosthaven Perks';
+    return '$character nie używa atutów Frosthaven';
   }
 
   @override
-  String get cmdRemoveNoCharacters => 'Remove no characters';
+  String get cmdRemoveNoCharacters => 'Nie usunięto postaci';
 
   @override
-  String get cmdRemoveNoMonsters => 'Remove no monsters';
+  String get cmdRemoveNoMonsters => 'Nie usunięto potworów';
 }
