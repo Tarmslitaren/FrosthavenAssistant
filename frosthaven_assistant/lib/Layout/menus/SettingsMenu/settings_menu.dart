@@ -35,7 +35,7 @@ class SettingsMenu extends StatefulWidget {
   // Maps locale code → native display name. Extend when adding translations.
   static const Map<String, String> _kLocales = {
     'en': 'English',
-    'sv': 'Svenska',
+    'de': 'Deutsch',
   };
 
   const SettingsMenu(

@@ -151,7 +151,7 @@ class MyApp extends StatelessWidget {
         title: title,
         theme: ThemeSwitcher.of(context).themeData,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: const [Locale('en'), Locale('sv')],
+        supportedLocales: const [Locale('en'), Locale('de')],
         locale: Locale(locale),
         builder: (context, child) {
           if (child == null) {

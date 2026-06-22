@@ -1,0 +1,219 @@
+{
+  "@@locale": "de",
+
+  "menuSetScenario": "Szenario festlegen",
+  "menuAddCharacter": "Charakter hinzufügen",
+  "menuRemoveCharacters": "Charaktere entfernen",
+  "menuSetLevel": "Stufe festlegen",
+  "menuLootDeck": "Plünderungsstapel",
+  "menuAddMonsters": "Monster hinzufügen",
+  "menuRemoveMonsters": "Monster entfernen",
+  "menuShowAllyDeck": "Verbündeten-Angriffs­modifikationsstapel anzeigen",
+  "menuHideAllyDeck": "Verbündeten-Angriffs­modifikationsstapel ausblenden",
+  "menuSettings": "Einstellungen",
+  "menuDocumentation": "Dokumentation",
+  "menuDonate": "Spenden",
+  "menuExit": "Beenden",
+  "menuAddSection": "Abschnitt hinzufügen",
+  "menuAddRandomDungeonCard": "Zufällige Verließkarte hinzufügen",
+
+  "undo": "Rückgängig",
+  "undoWithDescription": "Rückgängig: {description}",
+  "@undoWithDescription": {
+    "placeholders": {
+      "description": { "type": "String" }
+    }
+  },
+  "redo": "Wiederholen",
+  "redoWithDescription": "Wiederholen: {description}",
+  "@redoWithDescription": {
+    "placeholders": {
+      "description": { "type": "String" }
+    }
+  },
+
+  "versionLabel": "Version {version}",
+  "@versionLabel": {
+    "placeholders": {
+      "version": { "type": "String" }
+    }
+  },
+
+  "connectedAsClient": "Als Client verbunden",
+  "connecting": "Verbinde...",
+  "connectAsClientWithIp": "Als Client verbinden ({ip})",
+  "@connectAsClientWithIp": {
+    "placeholders": {
+      "ip": { "type": "String" }
+    }
+  },
+  "connectAsClientLabel": "Als Client verbinden",
+  "stopServerWithIp": "Server stoppen {ip}",
+  "@stopServerWithIp": {
+    "placeholders": {
+      "ip": { "type": "String" }
+    }
+  },
+  "startHostServerWithIp": "Host-Server starten {ip}",
+  "@startHostServerWithIp": {
+    "placeholders": {
+      "ip": { "type": "String" }
+    }
+  },
+  "stopServerButton": "Server stoppen",
+  "startHostServerButton": "Host-Server starten",
+  "networkConnectLocal": "Geräte im lokalen WLAN verbinden:",
+  "networkServerIpHint": "Server-IP-Adresse",
+  "networkPortHint": "Port",
+
+  "settingsLanguage": "Sprache:",
+  "settingsDarkMode": "Dunkelmodus",
+  "settingsSoftNumpad": "Soft-Nummernblock für Eingabe",
+  "settingsNoInit": "Nicht nach Initiative fragen",
+  "settingsExpireConditions": "Zustände ablaufen lassen",
+  "settingsNoStandees": "Figuren nicht verfolgen",
+  "settingsAutoAddStandees": "Figuren automatisch hinzufügen",
+  "settingsAutoAddSpawns": "Zeitgesteuerte Spawns automatisch hinzufügen",
+  "settingsRandomStandees": "Zufällige Figuren",
+  "settingsNoCalculations": "Keine Berechnungen",
+  "settingsHideLootDeck": "Plünderungsstapel ausblenden",
+  "settingsShimmer": "Statuskartentext schimmern lassen",
+  "settingsFhHazTerrainCalc": "Frosthaven-Gefahrengeländeberechnung in OG Gloomhaven verwenden",
+  "settingsAllyDeckOGGloom": "Verbündeten-Angriffsmodifikationsstapel in OG Gloomhaven verwenden",
+  "settingsShowScenarioNames": "Szenarionamen in der Liste anzeigen",
+  "settingsShowBattleGoalReminder": "Kampfziel-Erinnerung anzeigen",
+  "settingsShowCustomContent": "Benutzerdefinierte Inhalte anzeigen",
+  "settingsShowSections": "Abschnitte auf dem Hauptbildschirm anzeigen",
+  "settingsShowReminders": "Erinnerungen für spezielle Rundenregeln anzeigen",
+  "settingsShowAmdDeck": "Angriffsmodifikationsstapel anzeigen",
+  "settingsShowCharacterAmd": "Charakter-Angriffsmodifikationsstapel anzeigen",
+  "settingsHealthWheel": "Lebensrad aktivieren: Links-rechts ziehen zum Ändern",
+  "settingsFullscreen": "Vollbild",
+  "settingsMainListScaling": "Hauptlisten-Skalierung:",
+  "settingsAppBarScaling": "App-Leisten-Skalierung:",
+  "settingsStyleLabel": "Stil:",
+  "styleFrosthaven": "Frosthaven",
+  "styleOriginal": "Original",
+  "settingsClearUnlocked": "Freigeschaltete Charaktere und Inhalte zurücksetzen",
+  "settingsUnlockSpecials": "Speziales freischalten",
+  "settingsLoadSaveState": "Spielstand laden/speichern",
+
+  "noResultsFound": "Keine Ergebnisse gefunden",
+  "close": "Schließen",
+  "retry": "WIEDERHOLEN",
+  "specialUnlocks": "Spezielle Freischaltungen",
+  "loadSaveDeleteCharacters": "Charaktere laden, speichern oder löschen.",
+  "loadAddDeleteSaves": "Spielstände laden, hinzufügen oder löschen.",
+  "addNewSave": "Neuen Spielstand hinzufügen",
+  "addNewSaveLabel": "Neuen Spielstand hinzufügen:",
+  "loadButton": "Laden",
+  "saveButton": "Speichern",
+  "deleteButton": "Löschen",
+  "setSaveName": "Speichername festlegen:",
+  "loadOrSaveCharacters": "Charaktere laden oder speichern",
+  "loadCharacter": "Charakter laden:",
+  "removeAll": "Alle entfernen",
+  "removeCardQuestion": "Karte entfernen?",
+  "sendToBottom": "Nach unten senden",
+  "shuffleUndrawnCards": "Nicht gezogene Karten mischen",
+  "returnToDiscardPile": "Auf den Ablagestapel zurücklegen",
+  "returnToDrawPile": "Auf den Zugstapel zurücklegen",
+  "addExtraLootCard": "Zusätzliche Plünderungskarte hinzufügen",
+  "addStandeeNr": "Figurennummer hinzufügen",
+  "summonedLabel": "Herbeigerufen:",
+  "characterDecks": "Charakterstapel",
+  "shuffleAndDraw": "Mischen\n& Ziehen",
+  "draw": "Ziehen",
+  "nextRound": " Nächste Runde",
+  "returnTopCard": "Oberste Karte zurücklegen",
+  "removeCardWithDetails": "{title} entfernen\n(Karten-Nr.: {nr})",
+  "@removeCardWithDetails": {
+    "placeholders": {
+      "title": { "type": "String" },
+      "nr": { "type": "int" }
+    }
+  },
+  "tapCardToAddToDeck": "Karte antippen, um sie zum Stapel hinzuzufügen",
+  "removeCardFromDeckQuestion": "Karte aus dem Stapel entfernen?",
+  "changeName": "Namen ändern:",
+  "showBosses": "Bosse anzeigen",
+  "showScenarioSpecialMonsters": "Spezielle Szenariomonster anzeigen",
+  "addAsAlly": "Als Verbündeten hinzufügen",
+  "addMonsterLabel": "Monster hinzufügen",
+  "allCampaigns": "Alle Kampagnen",
+  "showMonstersFrom": "      Monster anzeigen von:   ",
+
+  "setMonsterLevel": "Stufe von {name} festlegen",
+  "@setMonsterLevel": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "setSummonHealth": "Maximale Lebenspunkte von {name} festlegen",
+  "@setSummonHealth": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "setScenarioLevel": "Szenariostufe festlegen",
+
+  "enhancedLevel": "Verbessert: {level}",
+  "@enhancedLevel": {
+    "placeholders": {
+      "level": { "type": "String" }
+    }
+  },
+  "soloLabel": "Solo:",
+  "automaticScenarioLevel": "Automatische Szenariostufe:",
+  "difficultyLabel": "Schwierigkeitsgrad:",
+  "lootCardEnhancements": "Plünderungskarten-Verbesserungen",
+  "addPerks": "Vorteile hinzufügen",
+  "useFrosthavenPerks": "Frosthaven-Vorteile verwenden",
+
+  "currentCampaign": "Aktuelle Kampagne: {campaign}",
+  "@currentCampaign": {
+    "placeholders": {
+      "campaign": { "type": "String" }
+    }
+  },
+  "addCharacterHint": "Charakter hinzufügen (Namen eingeben für versteckte Charakterklassen)",
+  "trapDamage": "Fallenschaden",
+  "hazardousTerrainDamage": "Gefahrengeländeschaden",
+  "experienceAdded": "Erfahrung hinzugefügt",
+  "goldCoinValue": "Goldmünzwert",
+  "levelLegendLabel": "Stufe",
+  "saveStateNote": "Bitte beachten: Die App speichert deinen Fortschritt automatisch nach jeder Aktion. Diese Spielstände sind für Sicherheitskopien oder mehrere Kampagnen.",
+
+  "clientConnectedTo": "Client verbunden mit: {address}",
+  "@clientConnectedTo": {
+    "placeholders": {
+      "address": { "type": "String" }
+    }
+  },
+  "clientError": "Client-Fehler: {error}",
+  "@clientError": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "clientListenError": "Client-Empfangsfehler: {error}",
+  "@clientListenError": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "lostConnectionToServer": "Verbindung zum Server verloren",
+  "stateMismatch": "Dein Spielstand war nicht aktuell, bitte erneut versuchen.",
+  "serverUnresponsive": "Server antwortet nicht. Client getrennt.",
+  "clientDisconnected": "Client getrennt",
+  "serverOffline": "Server offline",
+  "clientLeft": "Client hat die Verbindung getrennt.",
+  "clientTooOld": "Ein veralteter Client hat versucht, sich zu verbinden. Bitte die App aktualisieren.",
+  "networkConnection": "Netzwerkverbindung: {status}",
+  "@networkConnection": {
+    "placeholders": {
+      "status": { "type": "String" }
+    }
+  },
+  "failedToGetWifiIp": "IP-Adresse konnte nicht ermittelt werden"
+}
