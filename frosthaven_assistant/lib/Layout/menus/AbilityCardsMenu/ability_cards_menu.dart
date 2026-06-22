@@ -107,10 +107,9 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
   }
 
   Widget buildRevealButton(int nrOfButtons, int nr) {
-    String text = "All";
-    if (nr < nrOfButtons) {
-      text = nr.toString();
-    }
+    final String text = nr < nrOfButtons
+        ? nr.toString()
+        : AppLocalizations.of(context)!.revealAll;
 
     return SizedBox(
         width: _kBarSize,
@@ -197,8 +196,8 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
                                     runSpacing: 0,
                                     spacing: 0,
                                     children: [
-                                      const Text(
-                                        "  Reveal\n    cards:",
+                                      Text(
+                                        AppLocalizations.of(context)!.revealCards,
                                       ),
                                       ...List.generate(
                                         min(drawPile.length,
@@ -212,8 +211,8 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
                                               DrawAbilityCardCommand(
                                                   widget.monsterData.id));
                                         },
-                                        child: const Text(
-                                          "Draw extra card",
+                                        child: Text(
+                                          AppLocalizations.of(context)!.drawExtraCard,
                                         ),
                                       ),
                                       TextButton(
@@ -223,8 +222,8 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
                                                   widget.monsterData.id));
                                           markAsOpen(0);
                                         },
-                                        child: const Text(
-                                          "Extra Shuffle",
+                                        child: Text(
+                                          AppLocalizations.of(context)!.extraShuffle,
                                         ),
                                       ),
                                       TextButton(
@@ -237,8 +236,8 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
                                         },
                                         child: Text(
                                           widget.monsterData.isActive
-                                              ? "Inactivate\nMonster"
-                                              : "Activate\nMonster",
+                                              ? AppLocalizations.of(context)!.inactivateMonster
+                                              : AppLocalizations.of(context)!.activateMonster,
                                         ),
                                       ),
                                     ])),

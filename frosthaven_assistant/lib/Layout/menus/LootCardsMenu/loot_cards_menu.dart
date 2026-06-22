@@ -77,6 +77,7 @@ class LootCardsMenuState extends State<LootCardsMenu> {
     return ValueListenableBuilder<int>(
         valueListenable: _gameState.commandIndex,
         builder: (context, value, child) {
+          final l10n = AppLocalizations.of(context)!;
           final discardPile = _gameState.lootDeck.discardPileContents.toList();
 
           return Container(
@@ -107,7 +108,7 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                                         openDialog(
                                             context, const CharacterLootMenu());
                                       },
-                                      child: const Text("Character loot"),
+                                      child: Text(l10n.characterLoot),
                                     ),
                                     TextButton(
                                       onPressed: () {
@@ -127,8 +128,8 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                                       },
                                       child: Text(
                                           _gameState.lootDeck.hasCard1418
-                                              ? "Remove card $_kCard1418"
-                                              : "Add card $_kCard1418"),
+                                              ? l10n.removeSpecialCard(_kCard1418)
+                                              : l10n.addSpecialCard(_kCard1418)),
                                     ),
                                     TextButton(
                                       onPressed: () {
@@ -148,22 +149,22 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                                       },
                                       child: Text(
                                           _gameState.lootDeck.hasCard1419
-                                              ? "Remove card $_kCard1419"
-                                              : "Add card $_kCard1419"),
+                                              ? l10n.removeSpecialCard(_kCard1419)
+                                              : l10n.addSpecialCard(_kCard1419)),
                                     ),
                                     TextButton(
                                       onPressed: () {
                                         openDialog(context,
                                             const LootCardEnhancementMenu());
                                       },
-                                      child: const Text("Enhance cards"),
+                                      child: Text(l10n.enhanceCards),
                                     ),
                                     TextButton(
                                       onPressed: () {
                                         openDialog(
                                             context, const AddLootCardMenu());
                                       },
-                                      child: const Text("Add Card"),
+                                      child: Text(l10n.addLootCard),
                                     ),
                                     if (_gameState
                                         .lootDeck.discardPileIsNotEmpty)
@@ -173,7 +174,7 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                                               ReturnLootCardCommand(true,
                                                   gameState: _gameState));
                                         },
-                                        child: const Text("Return to Top"),
+                                        child: Text(l10n.returnToTop),
                                       ),
                                     if (_gameState
                                         .lootDeck.discardPileIsNotEmpty)
@@ -183,7 +184,7 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                                               ReturnLootCardCommand(false,
                                                   gameState: _gameState));
                                         },
-                                        child: const Text("Return to Bottom"),
+                                        child: Text(l10n.returnToBottom),
                                       ),
                                   ],
                                 ),

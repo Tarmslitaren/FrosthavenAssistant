@@ -7,6 +7,7 @@ import '../../Layout/widgets/modal_background.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
+import '../../l10n/app_localizations.dart';
 import '../../services/service_locator.dart';
 import '../../services/translation_service.dart';
 
@@ -41,7 +42,7 @@ class SetLootOwnerMenu extends StatelessWidget {
             height: kMenuTopPadding,
           ),
           Text(
-            "Set Loot Owner:",
+            AppLocalizations.of(context)!.setLootOwner,
             style: getTitleTextStyle(1),
           ),
           ...List.generate(

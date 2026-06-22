@@ -24,6 +24,7 @@ import '../../../Resource/commands/remove_cs_sanctuary_donation_command.dart';
 import '../../../Resource/settings.dart';
 import '../../../Resource/state/game_state.dart';
 import '../../../Resource/ui_utils.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../counter_button.dart';
 import '../../view_models/modifier_deck_header_view_model.dart';
 import '../PerksMenu/perks_menu.dart';
@@ -61,6 +62,7 @@ class ModifierDeckHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final screenWidth = MediaQuery.of(context).size.width;
     final vm = ModifierDeckHeaderViewModel(
       deck: deck,
@@ -103,24 +105,24 @@ class ModifierDeckHeader extends StatelessWidget {
                     BadOmenCommand(name == "allies", gameState: gameState),
                   );
                 },
-                child: const Text("Bad Omen"),
+                child: Text(l10n.badOmen),
               ),
-          if (badOmen > 0) Text("BadOmensLeft: $badOmen", style: textStyle),
+          if (badOmen > 0) Text(l10n.badOmensLeft(badOmen), style: textStyle),
           if (name == "Ruinmaw" && !corrosiveSpew)
             TextButton(
               onPressed: () {
                 gameState.action(CorrosiveSpewCommand(gameState: gameState));
               },
-              child: const Text("Corrosive Spew"),
+              child: Text(l10n.corrosiveSpew),
             ),
-          if (corrosiveSpew) Text(" Empowers on top", style: textStyle),
+          if (corrosiveSpew) Text(l10n.empowersOnTop, style: textStyle),
           TextButton(
             onPressed: () {
               gameState.action(
                 AmdAddMinusOneCommand(name, gameState: gameState),
               );
             },
-            child: Text("Add -1 card (added : ${deck.addedMinusOnes.value})"),
+            child: Text(l10n.addMinusOneCard(deck.addedMinusOnes.value)),
           ),
           TextButton(
             onPressed: () {
@@ -130,7 +132,7 @@ class ModifierDeckHeader extends StatelessWidget {
                 );
               }
             },
-            child: const Text("Remove -1 card"),
+            child: Text(l10n.removeMinusOneCard),
           ),
           if (!vm.isCharacter)
             TextButton(
@@ -143,7 +145,7 @@ class ModifierDeckHeader extends StatelessWidget {
                 );
               },
               child: Text(
-                deck.hasMinus2() ? "Remove -2 card" : "-2 card removed",
+                deck.hasMinus2() ? l10n.removeMinusTwoCard : l10n.minusTwoCardRemoved,
               ),
             ),
           if (vm.isCharacter && (vm.hasPlus0Card || deck.hasCard("plus0")))
@@ -158,7 +160,7 @@ class ModifierDeckHeader extends StatelessWidget {
                 );
               },
               child: Text(
-                vm.hasPlus0Card ? "Remove +0 card" : "+0 card removed",
+                vm.hasPlus0Card ? l10n.removePlusZeroCard : l10n.plusZeroCardRemoved,
               ),
             ),
           if (vm.monsterDeck)
@@ -170,14 +172,14 @@ class ModifierDeckHeader extends StatelessWidget {
                   gameState.action(AMDImbue1Command(gameState: gameState));
                 }
               },
-              child: Text(imbuement > 0 ? "Remove Imbue" : "Imbue"),
+              child: Text(imbuement > 0 ? l10n.removeImbue : l10n.imbue),
             ),
           if (imbuement != _kAdvancedImbuementLevel && vm.monsterDeck)
             TextButton(
               onPressed: () {
                 gameState.action(AMDImbue2Command(gameState: gameState));
               },
-              child: const Text("Advanced Imbue"),
+              child: Text(l10n.advancedImbue),
             ),
           if (name.isEmpty && vm.characterHail != null)
             TextButton(
@@ -185,7 +187,7 @@ class ModifierDeckHeader extends StatelessWidget {
                 gameState.action(AddPerkCommand("Hail", _kHailPerkIndex));
               },
               child: Text(
-                vm.hasHailPerk ? "Remove Hail Perk" : "Add Hail Perk",
+                vm.hasHailPerk ? l10n.removeHailPerk : l10n.addHailPerk,
               ),
             ),
           if (vm.characterCassandra != null && !settings.showCharacterAMD.value)
@@ -197,8 +199,8 @@ class ModifierDeckHeader extends StatelessWidget {
               },
               child: Text(
                 vm.hasCassandraPerk
-                    ? "Remove\nCassandra Perk"
-                    : "Add\nCassandra Perk",
+                    ? l10n.removeCassandraPerk
+                    : l10n.addCassandraPerk,
               ),
             ),
           if (vm.hasCassandraPerk)
@@ -214,8 +216,8 @@ class ModifierDeckHeader extends StatelessWidget {
               },
               child: Text(
                 deck.cassandraSpecial.value
-                    ? "Don't Save \nRevealed Cards"
-                    : "Save\nRevealed Cards",
+                    ? l10n.dontSaveRevealedCards
+                    : l10n.saveRevealedCards,
               ),
             ),
           if (removedPile.isNotEmpty)
@@ -223,7 +225,7 @@ class ModifierDeckHeader extends StatelessWidget {
               onPressed: () {
                 openDialog(context, RemovedModifierCardMenu(name: name));
               },
-              child: Text("Removed: ${removedPile.length}"),
+              child: Text(l10n.removedCountLabel(removedPile.length)),
             ),
           if (vm.isCSCampaign && vm.isCharacter)
             TextButton(
@@ -240,7 +242,7 @@ class ModifierDeckHeader extends StatelessWidget {
                       );
               },
               child: Text(
-                vm.donatedCS ? "Remove\nDonation" : "Donate to\nSanctuary",
+                vm.donatedCS ? l10n.removeDonation : l10n.donateSanctuary,
               ),
             ),
           if (vm.isCSCampaign && vm.isCharacter)
@@ -251,12 +253,12 @@ class ModifierDeckHeader extends StatelessWidget {
                         RemoveCSPartyCardCommand(name, gameState: gameState),
                       );
                     },
-                    child: const Text("Remove\nParty Card:"),
+                    child: Text(l10n.removePartyCard),
                   )
                 : Wrap(
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
-                      const Text("Add Party\n Card:"),
+                      Text(l10n.addPartyCard),
                       ...List.generate(
                         _kPartyButtonCount,
                         (i) => ModifierDeckPartyButton(
@@ -473,9 +475,9 @@ class ModifierDeckHeader extends StatelessWidget {
               onPressed: () {
                 openDialog(context, PerksMenu(character: vm.character!));
               },
-              child: const Text("Perks"),
+              child: Text(l10n.perks),
             ),
-          const Text("   Reveal\n    cards:"),
+          Text(l10n.revealCards),
           ...List.generate(
             min(drawPile.length + 1, maxRevealButtonNr + 1),
             (i) => ModifierDeckRevealButton(

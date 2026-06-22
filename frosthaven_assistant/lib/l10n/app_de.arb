@@ -215,5 +215,102 @@
       "status": { "type": "String" }
     }
   },
-  "failedToGetWifiIp": "IP-Adresse konnte nicht ermittelt werden"
+  "failedToGetWifiIp": "IP-Adresse konnte nicht ermittelt werden",
+
+  "badOmen": "Böses Omen",
+  "badOmensLeft": "Böse Omen übrig: {count}",
+  "@badOmensLeft": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "corrosiveSpew": "Ätzender Ausstoß",
+  "empowersOnTop": "Stärkt oben auf",
+  "addMinusOneCard": "-1-Karte hinzufügen (hinzugefügt: {count})",
+  "@addMinusOneCard": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "removeMinusOneCard": "-1-Karte entfernen",
+  "removeMinusTwoCard": "-2-Karte entfernen",
+  "minusTwoCardRemoved": "-2-Karte entfernt",
+  "removePlusZeroCard": "+0-Karte entfernen",
+  "plusZeroCardRemoved": "+0-Karte entfernt",
+  "removeImbue": "Einbettung entfernen",
+  "imbue": "Einbetten",
+  "advancedImbue": "Erweiterte Einbettung",
+  "removeHailPerk": "Hagel-Vorteil entfernen",
+  "addHailPerk": "Hagel-Vorteil hinzufügen",
+  "removeCassandraPerk": "Kassandra-\nVorteil entfernen",
+  "addCassandraPerk": "Kassandra-\nVorteil hinzufügen",
+  "dontSaveRevealedCards": "Aufgedeckte\nKarten nicht speichern",
+  "saveRevealedCards": "Aufgedeckte\nKarten speichern",
+  "removedCountLabel": "Entfernt: {count}",
+  "@removedCountLabel": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "removeDonation": "Spende\nentfernen",
+  "donateSanctuary": "An Heiligtum\nspenden",
+  "removePartyCard": "Gruppenkarte\nentfernen:",
+  "addPartyCard": "Gruppenkarte\nhinzufügen:",
+  "perks": "Vorteile",
+  "revealCards": "Karten\naufdecken:",
+  "revealAll": "Alle",
+  "drawExtraCard": "Zusätzliche Karte ziehen",
+  "extraShuffle": "Zusätzlich mischen",
+  "inactivateMonster": "Monster\ndeaktivieren",
+  "activateMonster": "Monster\naktivieren",
+  "addEliteStandees": "{count} Elite {name} hinzufügen",
+  "@addEliteStandees": {
+    "placeholders": {
+      "count": { "type": "int" },
+      "name": { "type": "String" }
+    }
+  },
+  "addNormalStandees": "{count} Normale {name} hinzufügen",
+  "@addNormalStandees": {
+    "placeholders": {
+      "count": { "type": "int" },
+      "name": { "type": "String" }
+    }
+  },
+  "characterLoot": "Charakterausbeute",
+  "addSpecialCard": "Karte {nr} hinzufügen",
+  "@addSpecialCard": {
+    "placeholders": {
+      "nr": { "type": "int" }
+    }
+  },
+  "removeSpecialCard": "Karte {nr} entfernen",
+  "@removeSpecialCard": {
+    "placeholders": {
+      "nr": { "type": "int" }
+    }
+  },
+  "enhanceCards": "Karten verbessern",
+  "addLootCard": "Karte hinzufügen",
+  "returnToTop": "Nach oben zurücklegen",
+  "returnToBottom": "Nach unten zurücklegen",
+  "characterLootTitle": "Ausbeute von {name}:",
+  "@characterLootTitle": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "setLootOwner": "Besitzer festlegen:",
+  "lootNameCoin": "Münze",
+  "lootNameHide": "Fell",
+  "lootNameLumber": "Holz",
+  "lootNameMetal": "Metall",
+  "lootNameArrowvine": "Pfeilranke",
+  "lootNameAxenut": "Axtmuss",
+  "lootNameCorpsecap": "Leichenpilz",
+  "lootNameFlamefruit": "Flammenfrucht",
+  "lootNameRockroot": "Felswurzel",
+  "lootNameSnowthistle": "Schneendistel",
+  "lootAmount2For2": "2 für 2 Spieler",
+  "lootAmount2For23": "2 für 2-3 Spieler"
 }

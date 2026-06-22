@@ -4,6 +4,7 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import '../../../Layout/widgets/standee_nr_button.dart';
 import '../../../Resource/enums.dart';
 import '../../../Resource/ui_utils.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../services/service_locator.dart';
 import '../../../services/translation_service.dart';
 
@@ -36,25 +37,13 @@ class StandeeButtonGrid extends StatelessWidget {
   final void Function(int nr, Monster monster, MonsterType type, bool elite,
       bool isOut, int nrOfElite, int nrOfNormal) onStandeePress;
 
-  String _pluralize(String text) {
-    if (text.endsWith("s")) {
-      return text;
-    }
-    if (text.endsWith("y")) {
-      return "${text.substring(0, text.length - 1)}ies";
-    }
-    return "${text}s";
-  }
-
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final displayName = getIt<TranslationService>().t(monster.type.display);
-    String text = elite
-        ? "Add $nrLeft Elite $displayName"
-        : "Add $nrLeft Normal $displayName";
-    if (nrLeft > 1) {
-      text = _pluralize(text);
-    }
+    final text = elite
+        ? l10n.addEliteStandees(nrLeft, displayName)
+        : l10n.addNormalStandees(nrLeft, displayName);
 
     final rows = <Widget>[];
     for (int start = 1; start <= nrOfStandees; start += _kButtonRowSize) {

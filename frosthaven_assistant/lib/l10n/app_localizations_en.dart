@@ -433,4 +433,182 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get failedToGetWifiIp => 'Failed to get IP address';
+
+  @override
+  String get badOmen => 'Bad Omen';
+
+  @override
+  String badOmensLeft(int count) {
+    return 'Bad Omens Left: $count';
+  }
+
+  @override
+  String get corrosiveSpew => 'Corrosive Spew';
+
+  @override
+  String get empowersOnTop => 'Empowers on top';
+
+  @override
+  String addMinusOneCard(int count) {
+    return 'Add -1 card (added: $count)';
+  }
+
+  @override
+  String get removeMinusOneCard => 'Remove -1 card';
+
+  @override
+  String get removeMinusTwoCard => 'Remove -2 card';
+
+  @override
+  String get minusTwoCardRemoved => '-2 card removed';
+
+  @override
+  String get removePlusZeroCard => 'Remove +0 card';
+
+  @override
+  String get plusZeroCardRemoved => '+0 card removed';
+
+  @override
+  String get removeImbue => 'Remove Imbue';
+
+  @override
+  String get imbue => 'Imbue';
+
+  @override
+  String get advancedImbue => 'Advanced Imbue';
+
+  @override
+  String get removeHailPerk => 'Remove Hail Perk';
+
+  @override
+  String get addHailPerk => 'Add Hail Perk';
+
+  @override
+  String get removeCassandraPerk => 'Remove\nCassandra Perk';
+
+  @override
+  String get addCassandraPerk => 'Add\nCassandra Perk';
+
+  @override
+  String get dontSaveRevealedCards => 'Don\'t Save\nRevealed Cards';
+
+  @override
+  String get saveRevealedCards => 'Save\nRevealed Cards';
+
+  @override
+  String removedCountLabel(int count) {
+    return 'Removed: $count';
+  }
+
+  @override
+  String get removeDonation => 'Remove\nDonation';
+
+  @override
+  String get donateSanctuary => 'Donate to\nSanctuary';
+
+  @override
+  String get removePartyCard => 'Remove\nParty Card:';
+
+  @override
+  String get addPartyCard => 'Add Party\nCard:';
+
+  @override
+  String get perks => 'Perks';
+
+  @override
+  String get revealCards => 'Reveal\ncards:';
+
+  @override
+  String get revealAll => 'All';
+
+  @override
+  String get drawExtraCard => 'Draw extra card';
+
+  @override
+  String get extraShuffle => 'Extra Shuffle';
+
+  @override
+  String get inactivateMonster => 'Inactivate\nMonster';
+
+  @override
+  String get activateMonster => 'Activate\nMonster';
+
+  @override
+  String addEliteStandees(int count, String name) {
+    return 'Add $count Elite $name';
+  }
+
+  @override
+  String addNormalStandees(int count, String name) {
+    return 'Add $count Normal $name';
+  }
+
+  @override
+  String get characterLoot => 'Character loot';
+
+  @override
+  String addSpecialCard(int nr) {
+    return 'Add card $nr';
+  }
+
+  @override
+  String removeSpecialCard(int nr) {
+    return 'Remove card $nr';
+  }
+
+  @override
+  String get enhanceCards => 'Enhance cards';
+
+  @override
+  String get addLootCard => 'Add Card';
+
+  @override
+  String get returnToTop => 'Return to Top';
+
+  @override
+  String get returnToBottom => 'Return to Bottom';
+
+  @override
+  String characterLootTitle(String name) {
+    return '$name\'s loot:';
+  }
+
+  @override
+  String get setLootOwner => 'Set Loot Owner:';
+
+  @override
+  String get lootNameCoin => 'coin';
+
+  @override
+  String get lootNameHide => 'hide';
+
+  @override
+  String get lootNameLumber => 'lumber';
+
+  @override
+  String get lootNameMetal => 'metal';
+
+  @override
+  String get lootNameArrowvine => 'arrowvine';
+
+  @override
+  String get lootNameAxenut => 'axenut';
+
+  @override
+  String get lootNameCorpsecap => 'corpsecap';
+
+  @override
+  String get lootNameFlamefruit => 'flamefruit';
+
+  @override
+  String get lootNameRockroot => 'rockroot';
+
+  @override
+  String get lootNameSnowthistle => 'snowthistle';
+
+  @override
+  String get lootAmount2For2 => '2 for 2 characters';
+
+  @override
+  String get lootAmount2For23 => '2 for 2-3 characters';
 }

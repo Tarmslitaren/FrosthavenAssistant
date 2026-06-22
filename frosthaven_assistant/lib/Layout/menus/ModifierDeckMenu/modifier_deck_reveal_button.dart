@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../Resource/commands/amd_reveal_command.dart';
 import '../../../Resource/state/game_state.dart';
+import '../../../l10n/app_localizations.dart';
 
 class ModifierDeckRevealButton extends StatelessWidget {
   static const double _kRevealButtonWidth = 32.0;
@@ -21,7 +22,9 @@ class ModifierDeckRevealButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final text = nr < nrOfButtons ? nr.toString() : "All";
+    final text = nr < nrOfButtons
+        ? nr.toString()
+        : AppLocalizations.of(context)!.revealAll;
     return SizedBox(
         width: _kRevealButtonWidth,
         child: TextButton(

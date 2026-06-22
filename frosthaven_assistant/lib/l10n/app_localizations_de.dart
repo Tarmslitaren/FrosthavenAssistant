@@ -445,4 +445,182 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get failedToGetWifiIp => 'IP-Adresse konnte nicht ermittelt werden';
+
+  @override
+  String get badOmen => 'Böses Omen';
+
+  @override
+  String badOmensLeft(int count) {
+    return 'Böse Omen übrig: $count';
+  }
+
+  @override
+  String get corrosiveSpew => 'Ätzender Ausstoß';
+
+  @override
+  String get empowersOnTop => 'Stärkt oben auf';
+
+  @override
+  String addMinusOneCard(int count) {
+    return '-1-Karte hinzufügen (hinzugefügt: $count)';
+  }
+
+  @override
+  String get removeMinusOneCard => '-1-Karte entfernen';
+
+  @override
+  String get removeMinusTwoCard => '-2-Karte entfernen';
+
+  @override
+  String get minusTwoCardRemoved => '-2-Karte entfernt';
+
+  @override
+  String get removePlusZeroCard => '+0-Karte entfernen';
+
+  @override
+  String get plusZeroCardRemoved => '+0-Karte entfernt';
+
+  @override
+  String get removeImbue => 'Einbettung entfernen';
+
+  @override
+  String get imbue => 'Einbetten';
+
+  @override
+  String get advancedImbue => 'Erweiterte Einbettung';
+
+  @override
+  String get removeHailPerk => 'Hagel-Vorteil entfernen';
+
+  @override
+  String get addHailPerk => 'Hagel-Vorteil hinzufügen';
+
+  @override
+  String get removeCassandraPerk => 'Kassandra-\nVorteil entfernen';
+
+  @override
+  String get addCassandraPerk => 'Kassandra-\nVorteil hinzufügen';
+
+  @override
+  String get dontSaveRevealedCards => 'Aufgedeckte\nKarten nicht speichern';
+
+  @override
+  String get saveRevealedCards => 'Aufgedeckte\nKarten speichern';
+
+  @override
+  String removedCountLabel(int count) {
+    return 'Entfernt: $count';
+  }
+
+  @override
+  String get removeDonation => 'Spende\nentfernen';
+
+  @override
+  String get donateSanctuary => 'An Heiligtum\nspenden';
+
+  @override
+  String get removePartyCard => 'Gruppenkarte\nentfernen:';
+
+  @override
+  String get addPartyCard => 'Gruppenkarte\nhinzufügen:';
+
+  @override
+  String get perks => 'Vorteile';
+
+  @override
+  String get revealCards => 'Karten\naufdecken:';
+
+  @override
+  String get revealAll => 'Alle';
+
+  @override
+  String get drawExtraCard => 'Zusätzliche Karte ziehen';
+
+  @override
+  String get extraShuffle => 'Zusätzlich mischen';
+
+  @override
+  String get inactivateMonster => 'Monster\ndeaktivieren';
+
+  @override
+  String get activateMonster => 'Monster\naktivieren';
+
+  @override
+  String addEliteStandees(int count, String name) {
+    return '$count Elite $name hinzufügen';
+  }
+
+  @override
+  String addNormalStandees(int count, String name) {
+    return '$count Normale $name hinzufügen';
+  }
+
+  @override
+  String get characterLoot => 'Charakterausbeute';
+
+  @override
+  String addSpecialCard(int nr) {
+    return 'Karte $nr hinzufügen';
+  }
+
+  @override
+  String removeSpecialCard(int nr) {
+    return 'Karte $nr entfernen';
+  }
+
+  @override
+  String get enhanceCards => 'Karten verbessern';
+
+  @override
+  String get addLootCard => 'Karte hinzufügen';
+
+  @override
+  String get returnToTop => 'Nach oben zurücklegen';
+
+  @override
+  String get returnToBottom => 'Nach unten zurücklegen';
+
+  @override
+  String characterLootTitle(String name) {
+    return 'Ausbeute von $name:';
+  }
+
+  @override
+  String get setLootOwner => 'Besitzer festlegen:';
+
+  @override
+  String get lootNameCoin => 'Münze';
+
+  @override
+  String get lootNameHide => 'Fell';
+
+  @override
+  String get lootNameLumber => 'Holz';
+
+  @override
+  String get lootNameMetal => 'Metall';
+
+  @override
+  String get lootNameArrowvine => 'Pfeilranke';
+
+  @override
+  String get lootNameAxenut => 'Axtmuss';
+
+  @override
+  String get lootNameCorpsecap => 'Leichenpilz';
+
+  @override
+  String get lootNameFlamefruit => 'Flammenfrucht';
+
+  @override
+  String get lootNameRockroot => 'Felswurzel';
+
+  @override
+  String get lootNameSnowthistle => 'Schneendistel';
+
+  @override
+  String get lootAmount2For2 => '2 für 2 Spieler';
+
+  @override
+  String get lootAmount2For23 => '2 für 2-3 Spieler';
 }

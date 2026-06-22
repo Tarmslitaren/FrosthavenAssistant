@@ -215,5 +215,102 @@
       "status": { "type": "String" }
     }
   },
-  "failedToGetWifiIp": "Failed to get IP address"
+  "failedToGetWifiIp": "Failed to get IP address",
+
+  "badOmen": "Bad Omen",
+  "badOmensLeft": "Bad Omens Left: {count}",
+  "@badOmensLeft": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "corrosiveSpew": "Corrosive Spew",
+  "empowersOnTop": "Empowers on top",
+  "addMinusOneCard": "Add -1 card (added: {count})",
+  "@addMinusOneCard": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "removeMinusOneCard": "Remove -1 card",
+  "removeMinusTwoCard": "Remove -2 card",
+  "minusTwoCardRemoved": "-2 card removed",
+  "removePlusZeroCard": "Remove +0 card",
+  "plusZeroCardRemoved": "+0 card removed",
+  "removeImbue": "Remove Imbue",
+  "imbue": "Imbue",
+  "advancedImbue": "Advanced Imbue",
+  "removeHailPerk": "Remove Hail Perk",
+  "addHailPerk": "Add Hail Perk",
+  "removeCassandraPerk": "Remove\nCassandra Perk",
+  "addCassandraPerk": "Add\nCassandra Perk",
+  "dontSaveRevealedCards": "Don't Save\nRevealed Cards",
+  "saveRevealedCards": "Save\nRevealed Cards",
+  "removedCountLabel": "Removed: {count}",
+  "@removedCountLabel": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "removeDonation": "Remove\nDonation",
+  "donateSanctuary": "Donate to\nSanctuary",
+  "removePartyCard": "Remove\nParty Card:",
+  "addPartyCard": "Add Party\nCard:",
+  "perks": "Perks",
+  "revealCards": "Reveal\ncards:",
+  "revealAll": "All",
+  "drawExtraCard": "Draw extra card",
+  "extraShuffle": "Extra Shuffle",
+  "inactivateMonster": "Inactivate\nMonster",
+  "activateMonster": "Activate\nMonster",
+  "addEliteStandees": "Add {count} Elite {name}",
+  "@addEliteStandees": {
+    "placeholders": {
+      "count": { "type": "int" },
+      "name": { "type": "String" }
+    }
+  },
+  "addNormalStandees": "Add {count} Normal {name}",
+  "@addNormalStandees": {
+    "placeholders": {
+      "count": { "type": "int" },
+      "name": { "type": "String" }
+    }
+  },
+  "characterLoot": "Character loot",
+  "addSpecialCard": "Add card {nr}",
+  "@addSpecialCard": {
+    "placeholders": {
+      "nr": { "type": "int" }
+    }
+  },
+  "removeSpecialCard": "Remove card {nr}",
+  "@removeSpecialCard": {
+    "placeholders": {
+      "nr": { "type": "int" }
+    }
+  },
+  "enhanceCards": "Enhance cards",
+  "addLootCard": "Add Card",
+  "returnToTop": "Return to Top",
+  "returnToBottom": "Return to Bottom",
+  "characterLootTitle": "{name}'s loot:",
+  "@characterLootTitle": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "setLootOwner": "Set Loot Owner:",
+  "lootNameCoin": "coin",
+  "lootNameHide": "hide",
+  "lootNameLumber": "lumber",
+  "lootNameMetal": "metal",
+  "lootNameArrowvine": "arrowvine",
+  "lootNameAxenut": "axenut",
+  "lootNameCorpsecap": "corpsecap",
+  "lootNameFlamefruit": "flamefruit",
+  "lootNameRockroot": "rockroot",
+  "lootNameSnowthistle": "snowthistle",
+  "lootAmount2For2": "2 for 2 characters",
+  "lootAmount2For23": "2 for 2-3 characters"
 }

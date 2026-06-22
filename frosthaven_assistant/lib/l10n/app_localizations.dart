@@ -877,6 +877,330 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to get IP address'**
   String get failedToGetWifiIp;
+
+  /// No description provided for @badOmen.
+  ///
+  /// In en, this message translates to:
+  /// **'Bad Omen'**
+  String get badOmen;
+
+  /// No description provided for @badOmensLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'Bad Omens Left: {count}'**
+  String badOmensLeft(int count);
+
+  /// No description provided for @corrosiveSpew.
+  ///
+  /// In en, this message translates to:
+  /// **'Corrosive Spew'**
+  String get corrosiveSpew;
+
+  /// No description provided for @empowersOnTop.
+  ///
+  /// In en, this message translates to:
+  /// **'Empowers on top'**
+  String get empowersOnTop;
+
+  /// No description provided for @addMinusOneCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Add -1 card (added: {count})'**
+  String addMinusOneCard(int count);
+
+  /// No description provided for @removeMinusOneCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove -1 card'**
+  String get removeMinusOneCard;
+
+  /// No description provided for @removeMinusTwoCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove -2 card'**
+  String get removeMinusTwoCard;
+
+  /// No description provided for @minusTwoCardRemoved.
+  ///
+  /// In en, this message translates to:
+  /// **'-2 card removed'**
+  String get minusTwoCardRemoved;
+
+  /// No description provided for @removePlusZeroCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove +0 card'**
+  String get removePlusZeroCard;
+
+  /// No description provided for @plusZeroCardRemoved.
+  ///
+  /// In en, this message translates to:
+  /// **'+0 card removed'**
+  String get plusZeroCardRemoved;
+
+  /// No description provided for @removeImbue.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove Imbue'**
+  String get removeImbue;
+
+  /// No description provided for @imbue.
+  ///
+  /// In en, this message translates to:
+  /// **'Imbue'**
+  String get imbue;
+
+  /// No description provided for @advancedImbue.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced Imbue'**
+  String get advancedImbue;
+
+  /// No description provided for @removeHailPerk.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove Hail Perk'**
+  String get removeHailPerk;
+
+  /// No description provided for @addHailPerk.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Hail Perk'**
+  String get addHailPerk;
+
+  /// No description provided for @removeCassandraPerk.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove\nCassandra Perk'**
+  String get removeCassandraPerk;
+
+  /// No description provided for @addCassandraPerk.
+  ///
+  /// In en, this message translates to:
+  /// **'Add\nCassandra Perk'**
+  String get addCassandraPerk;
+
+  /// No description provided for @dontSaveRevealedCards.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t Save\nRevealed Cards'**
+  String get dontSaveRevealedCards;
+
+  /// No description provided for @saveRevealedCards.
+  ///
+  /// In en, this message translates to:
+  /// **'Save\nRevealed Cards'**
+  String get saveRevealedCards;
+
+  /// No description provided for @removedCountLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Removed: {count}'**
+  String removedCountLabel(int count);
+
+  /// No description provided for @removeDonation.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove\nDonation'**
+  String get removeDonation;
+
+  /// No description provided for @donateSanctuary.
+  ///
+  /// In en, this message translates to:
+  /// **'Donate to\nSanctuary'**
+  String get donateSanctuary;
+
+  /// No description provided for @removePartyCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove\nParty Card:'**
+  String get removePartyCard;
+
+  /// No description provided for @addPartyCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Party\nCard:'**
+  String get addPartyCard;
+
+  /// No description provided for @perks.
+  ///
+  /// In en, this message translates to:
+  /// **'Perks'**
+  String get perks;
+
+  /// No description provided for @revealCards.
+  ///
+  /// In en, this message translates to:
+  /// **'Reveal\ncards:'**
+  String get revealCards;
+
+  /// No description provided for @revealAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get revealAll;
+
+  /// No description provided for @drawExtraCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Draw extra card'**
+  String get drawExtraCard;
+
+  /// No description provided for @extraShuffle.
+  ///
+  /// In en, this message translates to:
+  /// **'Extra Shuffle'**
+  String get extraShuffle;
+
+  /// No description provided for @inactivateMonster.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactivate\nMonster'**
+  String get inactivateMonster;
+
+  /// No description provided for @activateMonster.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate\nMonster'**
+  String get activateMonster;
+
+  /// No description provided for @addEliteStandees.
+  ///
+  /// In en, this message translates to:
+  /// **'Add {count} Elite {name}'**
+  String addEliteStandees(int count, String name);
+
+  /// No description provided for @addNormalStandees.
+  ///
+  /// In en, this message translates to:
+  /// **'Add {count} Normal {name}'**
+  String addNormalStandees(int count, String name);
+
+  /// No description provided for @characterLoot.
+  ///
+  /// In en, this message translates to:
+  /// **'Character loot'**
+  String get characterLoot;
+
+  /// No description provided for @addSpecialCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Add card {nr}'**
+  String addSpecialCard(int nr);
+
+  /// No description provided for @removeSpecialCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove card {nr}'**
+  String removeSpecialCard(int nr);
+
+  /// No description provided for @enhanceCards.
+  ///
+  /// In en, this message translates to:
+  /// **'Enhance cards'**
+  String get enhanceCards;
+
+  /// No description provided for @addLootCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Card'**
+  String get addLootCard;
+
+  /// No description provided for @returnToTop.
+  ///
+  /// In en, this message translates to:
+  /// **'Return to Top'**
+  String get returnToTop;
+
+  /// No description provided for @returnToBottom.
+  ///
+  /// In en, this message translates to:
+  /// **'Return to Bottom'**
+  String get returnToBottom;
+
+  /// No description provided for @characterLootTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{name}\'s loot:'**
+  String characterLootTitle(String name);
+
+  /// No description provided for @setLootOwner.
+  ///
+  /// In en, this message translates to:
+  /// **'Set Loot Owner:'**
+  String get setLootOwner;
+
+  /// No description provided for @lootNameCoin.
+  ///
+  /// In en, this message translates to:
+  /// **'coin'**
+  String get lootNameCoin;
+
+  /// No description provided for @lootNameHide.
+  ///
+  /// In en, this message translates to:
+  /// **'hide'**
+  String get lootNameHide;
+
+  /// No description provided for @lootNameLumber.
+  ///
+  /// In en, this message translates to:
+  /// **'lumber'**
+  String get lootNameLumber;
+
+  /// No description provided for @lootNameMetal.
+  ///
+  /// In en, this message translates to:
+  /// **'metal'**
+  String get lootNameMetal;
+
+  /// No description provided for @lootNameArrowvine.
+  ///
+  /// In en, this message translates to:
+  /// **'arrowvine'**
+  String get lootNameArrowvine;
+
+  /// No description provided for @lootNameAxenut.
+  ///
+  /// In en, this message translates to:
+  /// **'axenut'**
+  String get lootNameAxenut;
+
+  /// No description provided for @lootNameCorpsecap.
+  ///
+  /// In en, this message translates to:
+  /// **'corpsecap'**
+  String get lootNameCorpsecap;
+
+  /// No description provided for @lootNameFlamefruit.
+  ///
+  /// In en, this message translates to:
+  /// **'flamefruit'**
+  String get lootNameFlamefruit;
+
+  /// No description provided for @lootNameRockroot.
+  ///
+  /// In en, this message translates to:
+  /// **'rockroot'**
+  String get lootNameRockroot;
+
+  /// No description provided for @lootNameSnowthistle.
+  ///
+  /// In en, this message translates to:
+  /// **'snowthistle'**
+  String get lootNameSnowthistle;
+
+  /// No description provided for @lootAmount2For2.
+  ///
+  /// In en, this message translates to:
+  /// **'2 for 2 characters'**
+  String get lootAmount2For2;
+
+  /// No description provided for @lootAmount2For23.
+  ///
+  /// In en, this message translates to:
+  /// **'2 for 2-3 characters'**
+  String get lootAmount2For23;
 }
 
 class _AppLocalizationsDelegate

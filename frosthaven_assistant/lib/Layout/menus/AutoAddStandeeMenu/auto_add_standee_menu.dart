@@ -316,7 +316,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                           Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text("Summoned:",
+                                Text(AppLocalizations.of(context)!.summonedLabel,
                                     style: getSmallTextStyle(scale)),
                                 Checkbox(
                                   checkColor: Colors.black,

@@ -4,6 +4,7 @@ import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../../Resource/game_methods.dart';
+import '../../l10n/app_localizations.dart';
 import '../../services/service_locator.dart';
 import '../../services/translation_service.dart';
 
@@ -90,7 +91,7 @@ class _CharacterLootWidget extends StatelessWidget {
               ),
               const SizedBox(width: _kCharIconSpacing),
               Text(
-                "$characterName's loot:",
+                AppLocalizations.of(context)!.characterLootTitle(characterName),
                 style: kTitleStyle,
               )
             ]),
@@ -111,6 +112,21 @@ class _LootListTile extends StatelessWidget {
   final String lootName;
   final String characterId;
   final GameState gameState;
+
+  static String _lootDisplayName(AppLocalizations l10n, String type) =>
+      switch (type) {
+        'coin' => l10n.lootNameCoin,
+        'hide' => l10n.lootNameHide,
+        'lumber' => l10n.lootNameLumber,
+        'metal' => l10n.lootNameMetal,
+        'arrowvine' => l10n.lootNameArrowvine,
+        'axenut' => l10n.lootNameAxenut,
+        'corpsecap' => l10n.lootNameCorpsecap,
+        'flamefruit' => l10n.lootNameFlamefruit,
+        'rockroot' => l10n.lootNameRockroot,
+        'snowthistle' => l10n.lootNameSnowthistle,
+        _ => type,
+      };
 
   static const double _kContentPaddingLeft = 14.0;
   static const double _kHorizontalTitleGap = 6.0;
@@ -159,7 +175,7 @@ class _LootListTile extends StatelessWidget {
           image: AssetImage("assets/images/loot/${lootName}_icon.png"),
         ),
         title: Text(
-          lootName,
+          _lootDisplayName(AppLocalizations.of(context)!, lootName),
           overflow: TextOverflow.visible,
           maxLines: 1,
         ),

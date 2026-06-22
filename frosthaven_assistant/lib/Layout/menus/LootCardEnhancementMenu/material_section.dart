@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
+import '../../../l10n/app_localizations.dart';
 import 'loot_card_row.dart';
 import 'loot_type_header.dart';
 
@@ -23,6 +24,7 @@ class MaterialSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       LootTypeHeader(type: type, amount: "1"),
       LootCardRow(
@@ -32,7 +34,7 @@ class MaterialSection extends StatelessWidget {
           gameState: gameState,
           getCard: getCard),
       const Divider(),
-      LootTypeHeader(type: type, amount: "2 for 2 characters"),
+      LootTypeHeader(type: type, amount: l10n.lootAmount2For2),
       LootCardRow(
           type: type,
           start: _kMaterial2x2Start,
@@ -40,7 +42,7 @@ class MaterialSection extends StatelessWidget {
           gameState: gameState,
           getCard: getCard),
       const Divider(),
-      LootTypeHeader(type: type, amount: "2 for 2-3 characters"),
+      LootTypeHeader(type: type, amount: l10n.lootAmount2For23),
       LootCardRow(
           type: type,
           start: _kMaterial2x3Start,
