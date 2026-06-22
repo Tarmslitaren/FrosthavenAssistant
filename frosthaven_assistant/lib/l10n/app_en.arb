@@ -168,5 +168,52 @@
   "difficultyLabel": "Difficulty:",
   "lootCardEnhancements": "Loot Card Enhancements",
   "addPerks": "Add Perks",
-  "useFrosthavenPerks": "Use Frosthaven Perks"
+  "useFrosthavenPerks": "Use Frosthaven Perks",
+
+  "currentCampaign": "Current Campaign: {campaign}",
+  "@currentCampaign": {
+    "placeholders": {
+      "campaign": { "type": "String" }
+    }
+  },
+  "addCharacterHint": "Add Character (type name for hidden character classes)",
+  "trapDamage": "trap damage",
+  "hazardousTerrainDamage": "hazardous terrain damage",
+  "experienceAdded": "experience added",
+  "goldCoinValue": "gold coin value",
+  "levelLegendLabel": "level",
+  "saveStateNote": "Please note that the app automatically saves your progress after every action. These are for backups or multiple campaigns.",
+
+  "clientConnectedTo": "Client Connected to: {address}",
+  "@clientConnectedTo": {
+    "placeholders": {
+      "address": { "type": "String" }
+    }
+  },
+  "clientError": "Client error: {error}",
+  "@clientError": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "clientListenError": "Client listen error: {error}",
+  "@clientListenError": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "lostConnectionToServer": "Lost connection to server",
+  "stateMismatch": "Your state was not up to date, try again.",
+  "serverUnresponsive": "Server unresponsive. Client disconnected.",
+  "clientDisconnected": "client disconnected",
+  "serverOffline": "Server Offline",
+  "clientLeft": "Client left.",
+  "clientTooOld": "Old client attempted to connect. Please update the app.",
+  "networkConnection": "Network connection: {status}",
+  "@networkConnection": {
+    "placeholders": {
+      "status": { "type": "String" }
+    }
+  },
+  "failedToGetWifiIp": "Failed to get IP address"
 }

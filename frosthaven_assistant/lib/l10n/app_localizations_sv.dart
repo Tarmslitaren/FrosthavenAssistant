@@ -291,7 +291,7 @@ class AppLocalizationsSv extends AppLocalizations {
   String get draw => 'Dra';
 
   @override
-  String get nextRound => ' Nästa omgång';
+  String get nextRound => ' Nästa runda';
 
   @override
   String get returnTopCard => 'Lägg tillbaka toppkortet';
@@ -363,4 +363,78 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get useFrosthavenPerks => 'Använd Frosthaven-förmåner';
+
+  @override
+  String currentCampaign(String campaign) {
+    return 'Nuvarande kampanj: $campaign';
+  }
+
+  @override
+  String get addCharacterHint =>
+      'Lägg till karaktär (skriv namn för dolda karaktärsklasser)';
+
+  @override
+  String get trapDamage => 'fällskada';
+
+  @override
+  String get hazardousTerrainDamage => 'skada av farlig terräng';
+
+  @override
+  String get experienceAdded => 'erfarenhet lagd till';
+
+  @override
+  String get goldCoinValue => 'guldmyntvärde';
+
+  @override
+  String get levelLegendLabel => 'nivå';
+
+  @override
+  String get saveStateNote =>
+      'Observera att appen automatiskt sparar ditt framsteg efter varje åtgärd. Dessa är för säkerhetskopior eller flera kampanjer.';
+
+  @override
+  String clientConnectedTo(String address) {
+    return 'Klient ansluten till: $address';
+  }
+
+  @override
+  String clientError(String error) {
+    return 'Klientfel: $error';
+  }
+
+  @override
+  String clientListenError(String error) {
+    return 'Klientlyssnarfel: $error';
+  }
+
+  @override
+  String get lostConnectionToServer => 'Förlorade anslutningen till servern';
+
+  @override
+  String get stateMismatch =>
+      'Ditt tillstånd var inte uppdaterat, försök igen.';
+
+  @override
+  String get serverUnresponsive => 'Servern svarar inte. Klient frånkopplad.';
+
+  @override
+  String get clientDisconnected => 'klient frånkopplad';
+
+  @override
+  String get serverOffline => 'Server offline';
+
+  @override
+  String get clientLeft => 'Klient lämnade.';
+
+  @override
+  String get clientTooOld =>
+      'En gammal klient försökte ansluta. Uppdatera appen.';
+
+  @override
+  String networkConnection(String status) {
+    return 'Nätverksanslutning: $status';
+  }
+
+  @override
+  String get failedToGetWifiIp => 'Kunde inte hämta IP-adress';
 }

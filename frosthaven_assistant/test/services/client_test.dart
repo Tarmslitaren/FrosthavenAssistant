@@ -43,6 +43,9 @@ List<String> _log = [];
 void main() {
   setUpAll(() {
     when(_settings.lastKnownPort).thenReturn('0000');
+    when(_settings.locale).thenReturn(ValueNotifier<String>('en'));
+    when(_network.networkMessage).thenReturn(ValueNotifier<String>(''));
+    when(_network.networkMessageIsError).thenReturn(ValueNotifier<bool>(false));
     _getIt.registerFactory<Connection>(() => _connection);
     _getIt.registerFactory<GameState>(() => _gameState);
     _getIt.registerFactory<Communication>(() => _communication);

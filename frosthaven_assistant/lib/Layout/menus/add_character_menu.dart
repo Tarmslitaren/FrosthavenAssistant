@@ -214,10 +214,9 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
             margin: const EdgeInsets.symmetric(horizontal: 10),
             child: TextField(
               onChanged: (value) => _runFilter(value),
-              decoration: const InputDecoration(
-                labelText:
-                    'Add Character (type name for hidden character classes)',
-                suffixIcon: Icon(Icons.search),
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.addCharacterHint,
+                suffixIcon: const Icon(Icons.search),
               ),
             ),
           ),

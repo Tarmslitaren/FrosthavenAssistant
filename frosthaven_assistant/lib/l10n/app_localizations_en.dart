@@ -360,4 +360,77 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get useFrosthavenPerks => 'Use Frosthaven Perks';
+
+  @override
+  String currentCampaign(String campaign) {
+    return 'Current Campaign: $campaign';
+  }
+
+  @override
+  String get addCharacterHint =>
+      'Add Character (type name for hidden character classes)';
+
+  @override
+  String get trapDamage => 'trap damage';
+
+  @override
+  String get hazardousTerrainDamage => 'hazardous terrain damage';
+
+  @override
+  String get experienceAdded => 'experience added';
+
+  @override
+  String get goldCoinValue => 'gold coin value';
+
+  @override
+  String get levelLegendLabel => 'level';
+
+  @override
+  String get saveStateNote =>
+      'Please note that the app automatically saves your progress after every action. These are for backups or multiple campaigns.';
+
+  @override
+  String clientConnectedTo(String address) {
+    return 'Client Connected to: $address';
+  }
+
+  @override
+  String clientError(String error) {
+    return 'Client error: $error';
+  }
+
+  @override
+  String clientListenError(String error) {
+    return 'Client listen error: $error';
+  }
+
+  @override
+  String get lostConnectionToServer => 'Lost connection to server';
+
+  @override
+  String get stateMismatch => 'Your state was not up to date, try again.';
+
+  @override
+  String get serverUnresponsive => 'Server unresponsive. Client disconnected.';
+
+  @override
+  String get clientDisconnected => 'client disconnected';
+
+  @override
+  String get serverOffline => 'Server Offline';
+
+  @override
+  String get clientLeft => 'Client left.';
+
+  @override
+  String get clientTooOld =>
+      'Old client attempted to connect. Please update the app.';
+
+  @override
+  String networkConnection(String status) {
+    return 'Network connection: $status';
+  }
+
+  @override
+  String get failedToGetWifiIp => 'Failed to get IP address';
 }

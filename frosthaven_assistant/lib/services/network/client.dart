@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert' show utf8;
 import 'dart:io';
+import 'dart:ui' show Locale;
 
 import 'package:flutter/foundation.dart';
 import 'package:frosthaven_assistant/services/network/communication.dart';
@@ -10,6 +11,7 @@ import 'package:frosthaven_assistant_server/game_server.dart';
 import '../../Resource/game_event.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
+import '../../l10n/app_localizations.dart';
 import '../service_locator.dart';
 import 'connection.dart';
 
@@ -21,6 +23,15 @@ class Client {
   final Connection _connection;
   final Network _network;
   final Settings _settings;
+
+  AppLocalizations get _l10n {
+    final code = _settings.locale.value;
+    try {
+      return lookupAppLocalizations(Locale(code));
+    } catch (_) {
+      return lookupAppLocalizations(const Locale('en'));
+    }
+  }
 
   Client({
     GameState? gameState,
@@ -34,6 +45,11 @@ class Client {
        _network = network ?? getIt<Network>(),
        _settings = settings ?? getIt<Settings>();
 
+  void _setNetworkMessage(String msg, {bool isError = false}) {
+    _network.networkMessageIsError.value = isError;
+    _network.networkMessage.value = msg;
+  }
+
   Future<void> connect(String address) async {
     _serverResponsive = true;
     try {
@@ -43,11 +59,11 @@ class Client {
       runZonedGuarded(
         () {
           _settings.client.value = ClientState.connected;
-          String info =
-              'Client Connected to: ${socket.remoteAddress.address}:${socket.remotePort}';
+          String info = _l10n.clientConnectedTo(
+              '${socket.remoteAddress.address}:${socket.remotePort}');
           debugPrint(info);
           _gameState.clearLocalCommands();
-          _network.networkMessage.value = info;
+          _setNetworkMessage(info);
           if (Platform.isAndroid || Platform.isIOS) {
             _settings.connectClientOnStartup = true;
           }
@@ -58,12 +74,12 @@ class Client {
         },
         (error, stack) {
           debugPrint('Client zone error: $error\n$stack');
-          _network.networkMessage.value = 'Client error: $error';
+          _setNetworkMessage(_l10n.clientError(error.toString()), isError: true);
         },
       );
     } catch (error) {
       debugPrint("client error: $error");
-      _network.networkMessage.value = "client error: $error";
+      _setNetworkMessage(_l10n.clientError(error.toString()), isError: true);
       _settings.client.value = ClientState.disconnected;
       _settings.connectClientOnStartup = false;
       _settings.saveToDisk();
@@ -85,7 +101,7 @@ class Client {
           _sendPing();
         } else {
           _pinging = false;
-          disconnect("Server unresponsive. Client disconnected.");
+          disconnect(_l10n.serverUnresponsive);
         }
       });
     }
@@ -98,8 +114,7 @@ class Client {
     } catch (error) {
       debugPrint(error.toString());
       //_socket?.destroy();
-      _network.networkMessage.value =
-          'Client listen error: ${error.toString()}';
+      _setNetworkMessage(_l10n.clientListenError(error.toString()), isError: true);
       //_cleanup();
     }
   }
@@ -107,7 +122,9 @@ class Client {
   void onListenDone() {
     debugPrint('Lost connection to server.');
     if (_serverResponsive) {
-      _network.networkMessage.value += " Lost connection to server";
+      _setNetworkMessage(
+          '${_network.networkMessage.value} ${_l10n.lostConnectionToServer}',
+          isError: true);
     }
     _connection.removeAll();
     _cleanup();
@@ -115,7 +132,7 @@ class Client {
 
   void onListenError(Object error) {
     debugPrint('Client error: ${error.toString()}');
-    _network.networkMessage.value = "client error: ${error.toString()}";
+    _setNetworkMessage(_l10n.clientError(error.toString()), isError: true);
   }
 
   void onListenData(Uint8List data) {
@@ -142,8 +159,7 @@ class Client {
   void _handleContent(String message) {
     if (message.startsWith("Mismatch:")) {
       message = message.substring("Mismatch:".length);
-      _network.networkMessage.value =
-          "Your state was not up to date, try again.";
+      _setNetworkMessage(_l10n.stateMismatch);
     }
 
     final StateEnvelope? envelope = StateEnvelope.tryDecode(message);
@@ -162,7 +178,7 @@ class Client {
         () => _gameState.save(),
       );
     } else if (message.startsWith("Error")) {
-      _network.networkMessage.value = message;
+      _setNetworkMessage(message, isError: true);
       disconnect(message);
     } else if (message.startsWith("ping")) {
       _send("pong");
@@ -176,10 +192,10 @@ class Client {
   }
 
   void disconnect(String? message) {
-    message ??= "client disconnected";
+    message ??= _l10n.clientDisconnected;
     if (_connection.established()) {
       debugPrint(message);
-      _network.networkMessage.value = message;
+      _setNetworkMessage(message, isError: true);
       _connection.removeAll();
       _settings.connectClientOnStartup = false;
       _settings.saveToDisk();

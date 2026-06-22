@@ -235,7 +235,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
               ExpansionTile(
                 key: UniqueKey(),
                 title: Text(
-                    "Current Campaign: ${_gameState.currentCampaign.value}"),
+                    AppLocalizations.of(context)!.currentCampaign(_gameState.currentCampaign.value)),
                 children: buildCampaignButtons(),
               ),
             ]),

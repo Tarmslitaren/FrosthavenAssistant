@@ -141,8 +141,9 @@ void main() {
       final before = settings.randomStandees.value;
       await pumpMenu(tester);
 
-      await tester
-          .tap(find.widgetWithText(CheckboxListTile, 'Random Standees'));
+      final finder = find.widgetWithText(CheckboxListTile, 'Random Standees');
+      await tester.ensureVisible(finder);
+      await tester.tap(finder);
       await tester.pump();
 
       expect(settings.randomStandees.value, !before);

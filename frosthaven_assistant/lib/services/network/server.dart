@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
+import 'dart:ui' show Locale;
 
 import 'package:flutter/foundation.dart';
 import 'package:frosthaven_assistant/Resource/game_event.dart';
@@ -8,6 +9,7 @@ import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant_server/game_server.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../service_locator.dart';
 import 'communication.dart';
 import 'connection.dart';
@@ -30,6 +32,14 @@ class Server extends GameServer {
         _settingsOverride = settings;
 
   Settings get _settings => _settingsOverride ?? getIt<Settings>();
+  AppLocalizations get _l10n {
+    final code = _settings.locale.value;
+    try {
+      return lookupAppLocalizations(Locale(code));
+    } catch (_) {
+      return lookupAppLocalizations(const Locale('en'));
+    }
+  }
 
   @override
   bool get serverEnabled {
@@ -134,7 +144,20 @@ class Server extends GameServer {
 
   @override
   void setNetworkMessage(String data) {
-    getIt<Network>().networkMessage.value = data;
+    // Translate known static messages; leave dynamic ones (IPs, errors) as-is.
+    final bool isError = data.toLowerCase().contains('error') ||
+        data.toLowerCase().contains('offline') ||
+        data.toLowerCase().contains('mismatch') ||
+        data.toLowerCase().contains('outdated');
+    final String translated = switch (data) {
+      'Server Offline' => _l10n.serverOffline,
+      'Client left.' => _l10n.clientLeft,
+      "Old client attempted to connect. Please update the app." =>
+        _l10n.clientTooOld,
+      _ => data,
+    };
+    getIt<Network>().networkMessageIsError.value = isError;
+    getIt<Network>().networkMessage.value = translated;
   }
 
   @override

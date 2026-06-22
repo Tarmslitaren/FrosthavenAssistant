@@ -29,10 +29,7 @@ class NetworkUI extends StatelessWidget {
           Future.delayed(const Duration(milliseconds: 200), () {
             String message = _network.networkMessage.value;
             if (message != "") {
-              if (context.mounted &&
-                  (message.toLowerCase().contains("error") ||
-                      message.toLowerCase().contains("disconnected") ||
-                      message.toLowerCase().contains("lost"))) {
+              if (context.mounted && _network.networkMessageIsError.value) {
                 showErrorToastStickyWithRetry(
                     context, _network.networkMessage.value, () {
                   if (_settings.client.value != ClientState.connected &&
@@ -47,6 +44,7 @@ class NetworkUI extends StatelessWidget {
                   showToast(context, _network.networkMessage.value);
                 }
               }
+              _network.networkMessageIsError.value = false;
               _network.networkMessage.value = "";
             }
           });

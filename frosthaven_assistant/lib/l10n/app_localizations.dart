@@ -757,6 +757,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Use Frosthaven Perks'**
   String get useFrosthavenPerks;
+
+  /// No description provided for @currentCampaign.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Campaign: {campaign}'**
+  String currentCampaign(String campaign);
+
+  /// No description provided for @addCharacterHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Character (type name for hidden character classes)'**
+  String get addCharacterHint;
+
+  /// No description provided for @trapDamage.
+  ///
+  /// In en, this message translates to:
+  /// **'trap damage'**
+  String get trapDamage;
+
+  /// No description provided for @hazardousTerrainDamage.
+  ///
+  /// In en, this message translates to:
+  /// **'hazardous terrain damage'**
+  String get hazardousTerrainDamage;
+
+  /// No description provided for @experienceAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'experience added'**
+  String get experienceAdded;
+
+  /// No description provided for @goldCoinValue.
+  ///
+  /// In en, this message translates to:
+  /// **'gold coin value'**
+  String get goldCoinValue;
+
+  /// No description provided for @levelLegendLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'level'**
+  String get levelLegendLabel;
+
+  /// No description provided for @saveStateNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Please note that the app automatically saves your progress after every action. These are for backups or multiple campaigns.'**
+  String get saveStateNote;
+
+  /// No description provided for @clientConnectedTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Client Connected to: {address}'**
+  String clientConnectedTo(String address);
+
+  /// No description provided for @clientError.
+  ///
+  /// In en, this message translates to:
+  /// **'Client error: {error}'**
+  String clientError(String error);
+
+  /// No description provided for @clientListenError.
+  ///
+  /// In en, this message translates to:
+  /// **'Client listen error: {error}'**
+  String clientListenError(String error);
+
+  /// No description provided for @lostConnectionToServer.
+  ///
+  /// In en, this message translates to:
+  /// **'Lost connection to server'**
+  String get lostConnectionToServer;
+
+  /// No description provided for @stateMismatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Your state was not up to date, try again.'**
+  String get stateMismatch;
+
+  /// No description provided for @serverUnresponsive.
+  ///
+  /// In en, this message translates to:
+  /// **'Server unresponsive. Client disconnected.'**
+  String get serverUnresponsive;
+
+  /// No description provided for @clientDisconnected.
+  ///
+  /// In en, this message translates to:
+  /// **'client disconnected'**
+  String get clientDisconnected;
+
+  /// No description provided for @serverOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'Server Offline'**
+  String get serverOffline;
+
+  /// No description provided for @clientLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'Client left.'**
+  String get clientLeft;
+
+  /// No description provided for @clientTooOld.
+  ///
+  /// In en, this message translates to:
+  /// **'Old client attempted to connect. Please update the app.'**
+  String get clientTooOld;
+
+  /// No description provided for @networkConnection.
+  ///
+  /// In en, this message translates to:
+  /// **'Network connection: {status}'**
+  String networkConnection(String status);
+
+  /// No description provided for @failedToGetWifiIp.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to get IP address'**
+  String get failedToGetWifiIp;
 }
 
 class _AppLocalizationsDelegate

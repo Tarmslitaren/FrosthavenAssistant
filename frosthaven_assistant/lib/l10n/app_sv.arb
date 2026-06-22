@@ -124,7 +124,7 @@
   "characterDecks": "Karaktärsdeck",
   "shuffleAndDraw": "Blanda\n& Dra",
   "draw": "Dra",
-  "nextRound": " Nästa omgång",
+  "nextRound": " Nästa runda",
   "returnTopCard": "Lägg tillbaka toppkortet",
   "removeCardWithDetails": "Ta bort {title}\n(kortnr: {nr})",
   "@removeCardWithDetails": {
@@ -168,5 +168,52 @@
   "difficultyLabel": "Svårighetsgrad:",
   "lootCardEnhancements": "Förbättringar av plundringskort",
   "addPerks": "Lägg till förmåner",
-  "useFrosthavenPerks": "Använd Frosthaven-förmåner"
+  "useFrosthavenPerks": "Använd Frosthaven-förmåner",
+
+  "currentCampaign": "Nuvarande kampanj: {campaign}",
+  "@currentCampaign": {
+    "placeholders": {
+      "campaign": { "type": "String" }
+    }
+  },
+  "addCharacterHint": "Lägg till karaktär (skriv namn för dolda karaktärsklasser)",
+  "trapDamage": "fällskada",
+  "hazardousTerrainDamage": "skada av farlig terräng",
+  "experienceAdded": "erfarenhet lagd till",
+  "goldCoinValue": "guldmyntvärde",
+  "levelLegendLabel": "nivå",
+  "saveStateNote": "Observera att appen automatiskt sparar ditt framsteg efter varje åtgärd. Dessa är för säkerhetskopior eller flera kampanjer.",
+
+  "clientConnectedTo": "Klient ansluten till: {address}",
+  "@clientConnectedTo": {
+    "placeholders": {
+      "address": { "type": "String" }
+    }
+  },
+  "clientError": "Klientfel: {error}",
+  "@clientError": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "clientListenError": "Klientlyssnarfel: {error}",
+  "@clientListenError": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "lostConnectionToServer": "Förlorade anslutningen till servern",
+  "stateMismatch": "Ditt tillstånd var inte uppdaterat, försök igen.",
+  "serverUnresponsive": "Servern svarar inte. Klient frånkopplad.",
+  "clientDisconnected": "klient frånkopplad",
+  "serverOffline": "Server offline",
+  "clientLeft": "Klient lämnade.",
+  "clientTooOld": "En gammal klient försökte ansluta. Uppdatera appen.",
+  "networkConnection": "Nätverksanslutning: {status}",
+  "@networkConnection": {
+    "placeholders": {
+      "status": { "type": "String" }
+    }
+  },
+  "failedToGetWifiIp": "Kunde inte hämta IP-adress"
 }

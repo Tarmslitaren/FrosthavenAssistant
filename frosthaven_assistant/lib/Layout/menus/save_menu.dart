@@ -70,9 +70,7 @@ class SaveMenuState extends State<SaveMenu> {
                     style: getTitleTextStyle(1, forceBlack: true))),
             Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10),
-                child: const Text(
-                  'Please note that the app automatically saves your progress after every action. These are for backups or multiple campaigns.',
-                )),
+                child: Text(AppLocalizations.of(context)!.saveStateNote)),
             const SizedBox(
               height: 20,
             ),

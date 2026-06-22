@@ -182,27 +182,27 @@ class SetLevelMenu extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     LevelLegend(
-                        name: "trap damage",
+                        name: l10n.trapDamage,
                         gfx: "assets/images/psd/traps-fh.png",
                         value: ": ${vm.trapValue}",
                         scale: scale),
                     LevelLegend(
-                        name: "hazardous terrain damage",
+                        name: l10n.hazardousTerrainDamage,
                         gfx: "assets/images/psd/hazard-fh.png",
                         value: ": ${vm.hazardValue}",
                         scale: scale),
                     LevelLegend(
-                        name: "experience added",
+                        name: l10n.experienceAdded,
                         gfx: "assets/images/psd/xp.png",
                         value: ": +${vm.xpValue}",
                         scale: scale),
                     LevelLegend(
-                        name: "gold coin value",
+                        name: l10n.goldCoinValue,
                         gfx: "assets/images/psd/coins-fh.png",
                         value: ": x${vm.coinValue}",
                         scale: scale),
                     LevelLegend(
-                        name: "level",
+                        name: l10n.levelLegendLabel,
                         gfx: "assets/images/psd/level.png",
                         value: ": ${_gameState.level.value}",
                         scale: scale),
