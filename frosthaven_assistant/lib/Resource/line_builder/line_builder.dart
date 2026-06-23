@@ -8,6 +8,8 @@ import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 import '../game_methods.dart';
 import '../state/game_state.dart';
+import '../../services/service_locator.dart';
+import '../../services/translation_service.dart';
 
 class LineBuilder {
   static const bool debugColors = false;
@@ -527,6 +529,8 @@ class LineBuilder {
                 if (frosthavenStyle) {
                   iconTokenText = null;
                 } else if (iconTokenText != null) {
+                  iconTokenText =
+                      getIt<TranslationService>().t(iconTokenText);
                   //TODO: add animation on other texts too? and need to animate icons as well then for FH style
                   bool shouldAnimate = animate &&
                       monster != null &&
