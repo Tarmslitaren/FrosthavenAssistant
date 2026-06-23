@@ -71,7 +71,7 @@ void main() {
         character.id,
         gameState: getIt<GameState>(),
       );
-      expect(command.describe(), "remove ${character.id}'s donation");
+      expect(command.describe(), "Remove ${character.id}'s donation");
     });
   });
 }

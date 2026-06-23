@@ -46,7 +46,7 @@ void main() {
       final command = ClearUnlockedClassesCommand();
 
       // Act & Assert
-      expect(command.describe(), 'clear unlocked classes');
+      expect(command.describe(), 'Clear unlocked classes');
     });
   });
 }

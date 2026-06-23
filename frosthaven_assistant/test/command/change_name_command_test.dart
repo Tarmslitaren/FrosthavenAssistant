@@ -52,7 +52,7 @@ void main() {
       );
 
       // Act & Assert
-      expect(command.describe(), 'change character name');
+      expect(command.describe(), 'Change character name');
     });
   });
 }

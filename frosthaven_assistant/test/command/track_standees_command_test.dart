@@ -50,7 +50,7 @@ void main() {
     });
 
     test('describe returns correct string when track is true', () {
-      expect(TrackStandeesCommand(true, gameState: getIt<GameState>(), settings: getIt<Settings>()).describe(), 'Track Standees');
+      expect(TrackStandeesCommand(true, gameState: getIt<GameState>(), settings: getIt<Settings>()).describe(), 'Track standees');
     });
   });
 }

@@ -36,7 +36,7 @@ void main() {
         name: '',
         gameState: getIt<GameState>(),
       );
-      expect(command.describe(), 'Remove amd card');
+      expect(command.describe(), 'Remove AMD card');
     });
   });
 
@@ -69,7 +69,7 @@ void main() {
         name: '',
         gameState: getIt<GameState>(),
       );
-      expect(command.describe(), 'Return removed amd card');
+      expect(command.describe(), 'Return removed AMD card');
     });
   });
 }

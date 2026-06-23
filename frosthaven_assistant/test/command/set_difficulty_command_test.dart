@@ -29,7 +29,7 @@ void main() {
 
     test('describe should include difficulty level', () {
       final command = SetDifficultyCommand(3, gameState: getIt<GameState>());
-      expect(command.describe(), 'set difficulty level to 3');
+      expect(command.describe(), 'Set difficulty level to 3');
     });
   });
 }

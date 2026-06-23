@@ -66,7 +66,7 @@ void main() {
 
       // Act & Assert
       // The describe method has a bug: it says "Remove" when it should say "Add".
-      expect(command.describe(), "Remove '${character.id}' Perk no: 0");
+      expect(command.describe(), "Remove '${character.id}' Perk 0");
     });
 
     test('describe should return "Add" when removing a perk (due to bug)', () {
@@ -78,7 +78,7 @@ void main() {
 
       // Act & Assert
       // The describe method has a bug: it says "Add" when it should say "Remove".
-      expect(command.describe(), "Add '${character.id}' Perk no: 0");
+      expect(command.describe(), "Add '${character.id}' Perk 0");
     });
   });
 }

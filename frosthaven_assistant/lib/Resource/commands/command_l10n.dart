@@ -10,8 +10,8 @@ Locale _parseLocale(String code) {
 }
 
 AppLocalizations get commandL10n {
-  final code = getIt<Settings>().locale.value;
   try {
+    final code = getIt<Settings>().locale.value;
     return lookupAppLocalizations(_parseLocale(code));
   } catch (_) {
     return lookupAppLocalizations(const Locale('en'));

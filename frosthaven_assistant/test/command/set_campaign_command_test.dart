@@ -27,7 +27,7 @@ void main() {
 
     test('describe should return correct string', () {
       final command = SetCampaignCommand('Frosthaven');
-      expect(command.describe(), 'set Frosthaven campaign');
+      expect(command.describe(), 'Set Frosthaven campaign');
     });
   });
 }

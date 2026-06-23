@@ -28,12 +28,12 @@ void main() {
 
     test('describe should return solo recommendation string when true', () {
       final command = SetSoloCommand(true);
-      expect(command.describe(), 'set solo level recommendation');
+      expect(command.describe(), 'Set solo level recommendation on');
     });
 
     test('describe should return regular recommendation string when false', () {
       final command = SetSoloCommand(false);
-      expect(command.describe(), 'set regular level recommendation');
+      expect(command.describe(), 'Set solo level recommendation off');
     });
   });
 }
