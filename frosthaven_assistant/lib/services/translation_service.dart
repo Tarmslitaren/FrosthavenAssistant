@@ -7,7 +7,7 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:get_it/get_it.dart';
 
 class TranslationService extends ChangeNotifier {
-  Map<String, String> _translations = {}; 
+  Map<String, String> _translations = {};
 
   // Returns the translated string, or the English key if no translation exists.
   String t(String key) => _translations[key] ?? key;
