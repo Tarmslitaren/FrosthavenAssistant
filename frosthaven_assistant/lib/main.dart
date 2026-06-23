@@ -70,7 +70,7 @@ Future<void> main() async {
     await windowManager.ensureInitialized();
     windowManager.setTitle(title);
     windowManager.setMinimumSize(const Size(minScreenWidth, minScreenHeight));
-    windowManager.setMaximumSize(Size.infinite);
+    windowManager.setResizable(true);
   }
 
   FlutterError.onError = (details) {
