@@ -2,9 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:frosthaven_assistant/Resource/state/game_state.dart';
+import 'package:frosthaven_assistant/services/service_locator.dart';
+import 'package:get_it/get_it.dart';
 
 class TranslationService extends ChangeNotifier {
-  Map<String, String> _translations = {};
+  Map<String, String> _translations = {}; 
 
   // Returns the translated string, or the English key if no translation exists.
   String t(String key) => _translations[key] ?? key;
@@ -13,6 +16,7 @@ class TranslationService extends ChangeNotifier {
     if (locale == 'en') {
       _translations = {};
       notifyListeners();
+      getIt<GameState>().updateAllUI();
       return;
     }
     try {
@@ -41,5 +45,6 @@ class TranslationService extends ChangeNotifier {
       _translations = {};
     }
     notifyListeners();
+    getIt<GameState>().updateAllUI();
   }
 }
