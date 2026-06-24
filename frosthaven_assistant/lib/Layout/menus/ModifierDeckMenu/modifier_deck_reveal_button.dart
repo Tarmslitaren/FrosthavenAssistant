@@ -20,34 +20,33 @@ class ModifierDeckRevealButton extends StatelessWidget {
   final GameState gameState;
   final String name;
 
-  static const _kAllButtonStyle = ButtonStyle(
-    minimumSize: WidgetStatePropertyAll(Size.zero),
-    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-    padding: WidgetStatePropertyAll(
-        EdgeInsets.symmetric(horizontal: 8, vertical: 4)),
-  );
-
   @override
   Widget build(BuildContext context) {
     final isAll = nr >= nrOfButtons;
     final text = isAll ? AppLocalizations.of(context)!.revealAll : nr.toString();
-    return isAll
-        ? TextButton(
-            style: _kAllButtonStyle,
-            onPressed: () {
-              gameState.action(
-                  AMDRevealCommand(amount: nr, name: name, gameState: gameState));
-            },
-            child: Text(text),
-          )
-        : SizedBox(
-            width: _kRevealButtonWidth,
-            child: TextButton(
-              child: Text(text),
-              onPressed: () {
-                gameState.action(
-                    AMDRevealCommand(amount: nr, name: name, gameState: gameState));
-              },
-            ));
+    if (isAll) {
+      return TextButton(
+        style: TextButton.styleFrom(
+          minimumSize: Size.zero,
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        ),
+        onPressed: () {
+          gameState.action(
+              AMDRevealCommand(amount: nr, name: name, gameState: gameState));
+        },
+        child: Text(text, softWrap: false),
+      );
+    }
+    return SizedBox(
+      width: _kRevealButtonWidth,
+      child: TextButton(
+        child: Text(text),
+        onPressed: () {
+          gameState.action(
+              AMDRevealCommand(amount: nr, name: name, gameState: gameState));
+        },
+      ),
+    );
   }
 }
