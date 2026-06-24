@@ -22,17 +22,17 @@ class ModifierDeckRevealButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final text = nr < nrOfButtons
-        ? nr.toString()
-        : AppLocalizations.of(context)!.revealAll;
-    return SizedBox(
-        width: _kRevealButtonWidth,
-        child: TextButton(
-          child: Text(text),
-          onPressed: () {
-            gameState.action(
-                AMDRevealCommand(amount: nr, name: name, gameState: gameState));
-          },
-        ));
+    final isAll = nr >= nrOfButtons;
+    final text = isAll ? AppLocalizations.of(context)!.revealAll : nr.toString();
+    final button = TextButton(
+      child: Text(text),
+      onPressed: () {
+        gameState.action(
+            AMDRevealCommand(amount: nr, name: name, gameState: gameState));
+      },
+    );
+    return isAll
+        ? button
+        : SizedBox(width: _kRevealButtonWidth, child: button);
   }
 }

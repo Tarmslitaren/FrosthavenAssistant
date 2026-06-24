@@ -118,14 +118,16 @@ class DrawButtonState extends State<DrawButton> {
                                     right: _kButtonPadding * scaling),
                                 alignment: Alignment.center),
                             onPressed: locked ? null : _onPressed,
-                            child: Text(
-                              _vm.isDrawPhase
-                                  ? AppLocalizations.of(context)!.draw
-                                  : AppLocalizations.of(context)!.nextRound,
-                              style: getWhiteShadowStyle(
-                                  kFontSizeBody * scaling, shadow,
-                                  height: _kTextHeight),
-                            ))));
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                _vm.isDrawPhase
+                                    ? AppLocalizations.of(context)!.draw
+                                    : AppLocalizations.of(context)!.nextRound,
+                                style: getWhiteShadowStyle(
+                                    kFontSizeBody * scaling, shadow,
+                                    height: _kTextHeight),
+                              )))));
               },
             )
           ]));
