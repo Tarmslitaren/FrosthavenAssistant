@@ -153,6 +153,12 @@ void main() {
       expect(find.byType(MonsterAbilityCardFront), findsNothing,
           reason:
               'Expected no front-face cards after network sync reset to clean state');
+
+      // Dismiss the dialog explicitly so ReorderableColumn and its overlay
+      // clean up while the widget tree is still active, preventing teardown-
+      // time "deactivated widget ancestor" errors on Linux CI.
+      await tester.tap(find.text('Close'));
+      await tester.pumpAndSettle();
     });
   });
 }

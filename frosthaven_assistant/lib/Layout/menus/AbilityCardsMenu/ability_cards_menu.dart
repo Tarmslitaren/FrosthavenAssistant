@@ -42,7 +42,7 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
   final List<MonsterAbilityCardModel> revealedList = [];
 
   void _onDrawPileVersionChanged() {
-    setState(() => revealedList.clear());
+    if (mounted) setState(() => revealedList.clear());
   }
 
   @override
