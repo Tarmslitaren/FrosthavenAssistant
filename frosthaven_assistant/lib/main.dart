@@ -100,9 +100,7 @@ Future<void> main() async {
 
   await SentryFlutter.init(
     (options) {
-      options.dsn = kReleaseMode
-          ? const String.fromEnvironment('SENTRY_DSN')
-          : '';
+      options.dsn = const String.fromEnvironment('SENTRY_DSN');
     },
     appRunner: () =>
         runApp(ThemeSwitcherWidget(initialTheme: theme, child: const MyApp())),

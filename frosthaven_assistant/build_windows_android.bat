@@ -10,11 +10,11 @@ for /f "tokens=2" %%v in ('findstr /b "version:" pubspec.yaml') do set VERSION_F
 for /f "tokens=1 delims=+" %%v in ("%VERSION_FULL%") do set VERSION=%%v
 
 echo =^> Building Windows...
-flutter build windows --dart-define-from-file=dart_defines.json
+call flutter build windows --dart-define-from-file=dart_defines.json
 if errorlevel 1 goto :error
 
 echo =^> Building Android APK...
-flutter build apk --dart-define-from-file=dart_defines.json
+call flutter build apk --dart-define-from-file=dart_defines.json
 if errorlevel 1 goto :error
 
 echo =^> Zipping Windows release...
