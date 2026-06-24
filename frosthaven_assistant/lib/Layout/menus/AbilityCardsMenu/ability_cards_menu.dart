@@ -107,17 +107,27 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
   }
 
   Widget buildRevealButton(int nrOfButtons, int nr) {
-    final String text = nr < nrOfButtons
-        ? nr.toString()
-        : AppLocalizations.of(context)!.revealAll;
+    final bool isAll = nr >= nrOfButtons;
+    final String text = isAll
+        ? AppLocalizations.of(context)!.revealAll
+        : nr.toString();
 
+    if (isAll) {
+      return TextButton(
+        style: TextButton.styleFrom(
+          minimumSize: Size.zero,
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        ),
+        onPressed: () => markAsOpen(nr),
+        child: Text(text, softWrap: false),
+      );
+    }
     return SizedBox(
         width: _kBarSize,
         child: TextButton(
           child: Text(text),
-          onPressed: () {
-            markAsOpen(nr);
-          },
+          onPressed: () => markAsOpen(nr),
         ));
   }
 
