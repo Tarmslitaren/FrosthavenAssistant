@@ -16,6 +16,7 @@ import 'package:window_manager/window_manager.dart';
 import 'Resource/game_data.dart';
 import 'Resource/theme_switcher.dart';
 import 'l10n/app_localizations.dart';
+import 'services/linux_font_loader.dart';
 import 'services/translation_service.dart';
 
 // SocketExceptions caused by normal TCP connection lifecycle events (client
@@ -65,6 +66,8 @@ Future<void> main() async {
 
   const minScreenWidth = 400.0;
   const minScreenHeight = 600.0;
+
+  await loadLinuxFonts();
 
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await windowManager.ensureInitialized();

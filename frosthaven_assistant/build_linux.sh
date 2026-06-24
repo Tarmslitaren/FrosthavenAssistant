@@ -14,6 +14,9 @@ VERSION=$(grep '^version:' pubspec.yaml | sed 's/version: //' | cut -d'+' -f1)
 echo "==> Building Linux..."
 flutter build linux --dart-define-from-file=dart_defines.json
 
+echo "==> Copying Linux fonts..."
+cp -r linux_fonts/. "build/linux/x64/release/bundle/data/fonts/"
+
 echo "==> Zipping Linux bundle..."
 LINUX_ZIP="X-Haven Assistant $VERSION Linux.zip"
 rm -f "$LINUX_ZIP"
