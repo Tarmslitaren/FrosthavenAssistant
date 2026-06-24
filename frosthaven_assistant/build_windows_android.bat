@@ -14,7 +14,7 @@ call flutter build windows --dart-define-from-file=dart_defines.json
 if errorlevel 1 goto :error
 
 echo =^> Building Android APK...
-call flutter build apk --dart-define-from-file=dart_defines.json
+call flutter build appbundle --dart-define-from-file=dart_defines.json
 if errorlevel 1 goto :error
 
 echo =^> Zipping Windows release...
