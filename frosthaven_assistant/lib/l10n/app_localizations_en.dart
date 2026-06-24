@@ -288,7 +288,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get draw => 'Draw';
 
   @override
-  String get nextRound => ' Next Round';
+  String get nextRound => ' Next\nRound';
 
   @override
   String get returnTopCard => 'Return top card';

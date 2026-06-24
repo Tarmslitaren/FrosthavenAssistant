@@ -293,7 +293,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get draw => 'Взять';
 
   @override
-  String get nextRound => ' Следующий раунд';
+  String get nextRound => ' Следующий\nраунд';
 
   @override
   String get returnTopCard => 'Вернуть верхнюю карту';

@@ -285,7 +285,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get draw => '뽑기';
 
   @override
-  String get nextRound => ' 다음 라운드';
+  String get nextRound => ' 다음\n라운드';
 
   @override
   String get returnTopCard => '맨 위 카드 반환';

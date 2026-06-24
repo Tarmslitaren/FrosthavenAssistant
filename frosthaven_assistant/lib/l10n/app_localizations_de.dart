@@ -297,7 +297,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get draw => 'Ziehen';
 
   @override
-  String get nextRound => ' Nächste Runde';
+  String get nextRound => ' Nächste\nRunde';
 
   @override
   String get returnTopCard => 'Oberste Karte zurücklegen';

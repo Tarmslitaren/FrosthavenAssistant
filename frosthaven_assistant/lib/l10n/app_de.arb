@@ -124,7 +124,7 @@
   "characterDecks": "Charakterstapel",
   "shuffleAndDraw": "Mischen\n& Ziehen",
   "draw": "Ziehen",
-  "nextRound": " Nächste Runde",
+  "nextRound": " Nächste\nRunde",
   "returnTopCard": "Oberste Karte zurücklegen",
   "removeCardWithDetails": "{title} entfernen\n(Karten-Nr.: {nr})",
   "@removeCardWithDetails": {

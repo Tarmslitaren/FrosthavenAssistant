@@ -88,7 +88,7 @@
   "characterDecks": "Колоды персонажей",
   "shuffleAndDraw": "Перемешать\nи взять",
   "draw": "Взять",
-  "nextRound": " Следующий раунд",
+  "nextRound": " Следующий\nраунд",
   "returnTopCard": "Вернуть верхнюю карту",
   "removeCardWithDetails": "Убрать {title}\n(карта №: {nr})",
   "tapCardToAddToDeck": "Нажмите карту, чтобы добавить в колоду",

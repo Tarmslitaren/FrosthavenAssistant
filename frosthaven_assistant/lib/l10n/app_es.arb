@@ -88,7 +88,7 @@
   "characterDecks": "Mazos de personajes",
   "shuffleAndDraw": "Barajar\ny robar",
   "draw": "Robar",
-  "nextRound": " Siguiente ronda",
+  "nextRound": " Siguiente\nronda",
   "returnTopCard": "Devolver carta superior",
   "removeCardWithDetails": "Retirar {title}\n(carta n.º: {nr})",
   "tapCardToAddToDeck": "Toca una carta para añadirla al mazo",

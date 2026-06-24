@@ -295,7 +295,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get draw => 'Robar';
 
   @override
-  String get nextRound => ' Siguiente ronda';
+  String get nextRound => ' Siguiente\nronda';
 
   @override
   String get returnTopCard => 'Devolver carta superior';

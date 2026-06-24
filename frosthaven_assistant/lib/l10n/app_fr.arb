@@ -88,7 +88,7 @@
   "characterDecks": "Decks des personnages",
   "shuffleAndDraw": "Mélanger\net piocher",
   "draw": "Piocher",
-  "nextRound": " Tour suivant",
+  "nextRound": " Tour\nsuivant",
   "returnTopCard": "Remettre la carte du dessus",
   "removeCardWithDetails": "Retirer {title}\n(carte n° : {nr})",
   "tapCardToAddToDeck": "Appuyer sur une carte pour l'ajouter au deck",

@@ -124,7 +124,7 @@
   "characterDecks": "Character Decks",
   "shuffleAndDraw": "Shuffle\n& Draw",
   "draw": "Draw",
-  "nextRound": " Next Round",
+  "nextRound": " Next\nRound",
   "returnTopCard": "Return top card",
   "removeCardWithDetails": "Remove {title}\n(card nr: {nr})",
   "@removeCardWithDetails": {

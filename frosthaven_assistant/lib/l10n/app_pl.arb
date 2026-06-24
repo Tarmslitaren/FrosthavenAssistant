@@ -88,7 +88,7 @@
   "characterDecks": "Talie postaci",
   "shuffleAndDraw": "Tasuj\ni dobierz",
   "draw": "Dobierz",
-  "nextRound": " Następna runda",
+  "nextRound": " Następna\nrunda",
   "returnTopCard": "Zwróć górną kartę",
   "removeCardWithDetails": "Usuń {title}\n(karta nr: {nr})",
   "tapCardToAddToDeck": "Dotknij kartę, aby dodać do talii",

@@ -88,7 +88,7 @@
   "characterDecks": "캐릭터 덱",
   "shuffleAndDraw": "섞기\n및 뽑기",
   "draw": "뽑기",
-  "nextRound": " 다음 라운드",
+  "nextRound": " 다음\n라운드",
   "returnTopCard": "맨 위 카드 반환",
   "removeCardWithDetails": "{title} 제거\n(카드 번호: {nr})",
   "tapCardToAddToDeck": "카드를 탭하여 덱에 추가",

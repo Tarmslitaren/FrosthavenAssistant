@@ -644,7 +644,7 @@ abstract class AppLocalizations {
   /// No description provided for @nextRound.
   ///
   /// In en, this message translates to:
-  /// **' Next Round'**
+  /// **' Next\nRound'**
   String get nextRound;
 
   /// No description provided for @returnTopCard.
