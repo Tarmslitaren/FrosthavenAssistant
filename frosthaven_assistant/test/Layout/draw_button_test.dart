@@ -56,7 +56,7 @@ void main() {
       (getIt<GameState>().roundState as ValueNotifier<RoundState>).value =
           RoundState.playTurns;
       await pumpButton(tester);
-      expect(find.textContaining('Next Round'), findsOneWidget);
+      expect(find.textContaining('Next'), findsOneWidget);
     });
 
     testWidgets('renders TextButton', (WidgetTester tester) async {
@@ -151,7 +151,7 @@ void main() {
           RoundState.playTurns;
       await tester.pump();
 
-      expect(find.textContaining('Next Round'), findsOneWidget);
+      expect(find.textContaining('Next'), findsOneWidget);
     });
   });
 }

@@ -27,12 +27,14 @@ class BottomBarLevelWidgetViewModel {
 
   String get formattedScenarioName {
     final s = _gameState.scenario.value;
-    if (_gameState.currentCampaign.value == "Solo") {
-      if (s.contains(':')) {
-        return getIt<TranslationService>().t(s.split(':')[1]);
-      }
+    final key = (_gameState.currentCampaign.value == "Solo" && s.contains(':'))
+        ? s.split(':')[1]
+        : s;
+    try {
+      return getIt<TranslationService>().t(key);
+    } catch (_) {
+      return key;
     }
-    return getIt<TranslationService>().t(s);
   }
 
   TextStyle textStyle(double scaling) {
