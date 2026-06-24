@@ -6,6 +6,7 @@ import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
+import 'package:frosthaven_assistant/services/translation_service.dart';
 
 class BottomBarLevelWidgetViewModel {
   static const double _kFontSize = 14.0;
@@ -28,10 +29,10 @@ class BottomBarLevelWidgetViewModel {
     final s = _gameState.scenario.value;
     if (_gameState.currentCampaign.value == "Solo") {
       if (s.contains(':')) {
-        return s.split(':')[1];
+        return getIt<TranslationService>().t(s.split(':')[1]);
       }
     }
-    return s;
+    return getIt<TranslationService>().t(s);
   }
 
   TextStyle textStyle(double scaling) {
