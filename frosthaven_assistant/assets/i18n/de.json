@@ -2330,7 +2330,8 @@
     "1st Printing issue: Please check the official errata for an important campaign feature, relating to events.": "1. Druck: Bitte die offizielle Errata für ein wichtiges Kampagnenmerkmal bezüglich Ereignissen prüfen.",
     "1st Printing errata: Monsters on tiles 2-D and 10-B should not be set up at the start of the scenario. Except the City Archers next to the wall tiles.": "1. Druck Errata: Monster auf Plättchen 2-D und 10-B werden nicht zu Szenariobeginn aufgestellt. Ausnahme: Stadtschützen neben den Mauerplättchen.",
     "Enemies do not act (not added in app) until door 1 is opened.": "Feinde handeln nicht (nicht in der App hinzugefügt), bis Tür 1 geöffnet wird.",
-    "1st printing Errata: The Gloom considers all Null modifier cards he draws to be +0 instead.": "1. Druck Errata: Das Grauen behandelt alle Null-Modifikatorkarten, die es zieht, stattdessen als +0."
+    "1st printing Errata: The Gloom considers all Null modifier cards he draws to be +0 instead.": "1. Druck Errata: Das Grauen behandelt alle Null-Modifikatorkarten, die es zieht, stattdessen als +0.",
+    "Remember to choose your Battle Goals.": "Denkt daran eure Kampfziele zu wählen."
   },
   "tokens": {
     "Attack": "Angriff",

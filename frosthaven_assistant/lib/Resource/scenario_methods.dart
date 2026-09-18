@@ -146,7 +146,7 @@ class ScenarioMethods {
       if (sectionData != null) {
         monsters = sectionData.monsters;
         specialRules = sectionData.specialRules.toList();
-        initMessage = sectionData.initMessage;
+        initMessage = getIt<TranslationService>().t(sectionData.initMessage);
         final monsterStandees = sectionData.monsterStandees;
         roomMonsterData =
             monsterStandees != null ? monsterStandees.toList() : [];
@@ -154,7 +154,8 @@ class ScenarioMethods {
     } else {
       if ((settings ?? getIt<Settings>()).showBattleGoalReminder.value &&
           gs.currentCampaign.value != "Buttons and Bugs") {
-        initMessage += "Remember to choose your Battle Goals.";
+        initMessage += getIt<TranslationService>()
+            .t("Remember to choose your Battle Goals.");
       }
       if (scenario != "custom") {
         final scenarioData =
@@ -162,10 +163,12 @@ class ScenarioMethods {
         if (scenarioData != null) {
           monsters = scenarioData.monsters;
           specialRules = scenarioData.specialRules.toList();
+          final scenarioInitMessage =
+              getIt<TranslationService>().t(scenarioData.initMessage);
           initMessage +=
-              initMessage.isNotEmpty && scenarioData.initMessage.isNotEmpty
-                  ? "\n\n${scenarioData.initMessage}"
-                  : scenarioData.initMessage;
+              initMessage.isNotEmpty && scenarioInitMessage.isNotEmpty
+                  ? "\n\n$scenarioInitMessage"
+                  : scenarioInitMessage;
           final monsterStandees = scenarioData.monsterStandees;
           roomMonsterData =
               monsterStandees != null ? monsterStandees.toList() : [];

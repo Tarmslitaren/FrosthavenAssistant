@@ -7,6 +7,7 @@ import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/l10n/app_localizations.dart';
 
 import '../services/service_locator.dart';
+import '../services/translation_service.dart';
 import 'state/game_state.dart';
 
 void openDialogOld(BuildContext context, Widget widget) {
@@ -262,12 +263,27 @@ bool hasGHVersion(String name) {
 
 const TextStyle toastTextStyle =
     TextStyle(fontFamily: "markazi", fontSize: kFontSizeToast);
+
+String _translateToastText(String text) {
+  if (!getIt.isRegistered<TranslationService>()) return text;
+  final ts = getIt<TranslationService>();
+  return text.split('\n').map((line) {
+    final trimmed = line.trim();
+    if (trimmed.isEmpty) return line;
+    final translated = ts.t(trimmed);
+    if (translated != trimmed) {
+      return line.replaceFirst(trimmed, translated);
+    }
+    return line;
+  }).join('\n');
+}
+
 GestureDetector createToastContent(BuildContext context, String text) { // ignore: avoid-returning-widgets, top-level utility function for toast content
   return GestureDetector(
     onTap: () {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
     },
-    child: Text(text, style: toastTextStyle),
+    child: Text(_translateToastText(text), style: toastTextStyle),
   );
 }
 
