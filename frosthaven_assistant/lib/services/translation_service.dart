@@ -2,16 +2,35 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 class TranslationService extends ChangeNotifier {
   Map<String, String> _translations = {};
+  String _currentLocale = 'en';
+
+  String get currentLocale => _currentLocale;
 
   // Returns the translated string, or the English key if no translation exists.
-  String t(String key) => _translations[key] ?? key;
+  String t(String key) {
+    final translation = _translations[key];
+    if (translation != null) return translation;
+
+    final activeLocale = getIt.isRegistered<Settings>()
+        ? getIt<Settings>().locale.value
+        : _currentLocale;
+
+    if (activeLocale == 'de') {
+      if (key == 'Remember to choose your Battle Goals.') {
+        return 'Denkt daran eure Kampfziele zu wählen.';
+      }
+    }
+    return key;
+  }
 
   Future<void> load(String locale) async {
+    _currentLocale = locale;
     if (locale == 'en') {
       _translations = {};
       notifyListeners();
