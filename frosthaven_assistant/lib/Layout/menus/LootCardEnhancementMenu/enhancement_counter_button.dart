@@ -11,10 +11,17 @@ const double _kValuePaddingV = 4.0;
 const double _kValueBorderRadius = 1.0;
 
 class EnhancementCounterButton extends StatelessWidget {
-  const EnhancementCounterButton(
-      {super.key, required this.card, required this.gameState});
+  const EnhancementCounterButton({
+    super.key,
+    required this.type,
+    required this.index,
+    required this.getCard,
+    required this.gameState,
+  });
 
-  final LootCard card;
+  final String type;
+  final int index;
+  final LootCard? Function(String, int) getCard;
   final GameState gameState;
 
   @override
@@ -22,6 +29,10 @@ class EnhancementCounterButton extends StatelessWidget {
     return ValueListenableBuilder<int>(
         valueListenable: gameState.commandIndex,
         builder: (context, _, child) {
+          final card = getCard(type, index);
+          if (card == null) {
+            return const SizedBox.shrink();
+          }
           return Container(
             padding: const EdgeInsets.all(_kCounterPadding),
             decoration: BoxDecoration(

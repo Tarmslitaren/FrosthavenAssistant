@@ -70,5 +70,49 @@ void main() {
       // SingleChildScrollView builds all children including Close at the bottom
       expect(find.text('Close'), findsOneWidget);
     });
+
+    testWidgets('tapping + updates the enhancement counter immediately',
+        (WidgetTester tester) async {
+      final gameState = getIt<GameState>();
+      await pumpMenu(tester);
+      expect(find.text('0'), findsWidgets);
+
+      await tester.tap(find.byIcon(Icons.add).first);
+      await tester.pumpAndSettle();
+
+      expect(find.text('1'), findsOneWidget);
+      gameState.undo();
+    });
+
+    testWidgets('tapping - decrements the enhancement counter',
+        (WidgetTester tester) async {
+      final gameState = getIt<GameState>();
+      await pumpMenu(tester);
+
+      await tester.tap(find.byIcon(Icons.add).first);
+      await tester.pumpAndSettle();
+      expect(find.text('1'), findsOneWidget);
+
+      await tester.tap(find.byIcon(Icons.remove).first);
+      await tester.pumpAndSettle();
+
+      expect(find.text('1'), findsNothing);
+      expect(find.text('0'), findsWidgets);
+      gameState.undo();
+      gameState.undo();
+    });
+
+    testWidgets('tapping + on a second counter updates only that counter',
+        (WidgetTester tester) async {
+      final gameState = getIt<GameState>();
+      await pumpMenu(tester);
+
+      await tester.tap(find.byIcon(Icons.add).at(1));
+      await tester.pumpAndSettle();
+
+      expect(find.text('1'), findsOneWidget);
+      expect(find.text('0'), findsWidgets);
+      gameState.undo();
+    });
   });
 }

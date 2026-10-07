@@ -26,7 +26,10 @@ class LootCardRow extends StatelessWidget {
       children: List.generate(
         count,
         (i) => EnhancementCounterButton(
-            card: getCard(type, start + i)!, gameState: gameState),
+            type: type,
+            index: start + i,
+            getCard: getCard,
+            gameState: gameState),
       ),
     );
   }
